@@ -22,9 +22,9 @@ namespace {
 using namespace dnvgl::extfem;
 using namespace dnvgl::extfem::__base;
 
-outline::outline(void) {}
+outline::outline() {}
 
-outline::~outline(void) {}
+outline::~outline() {}
 
 std::ostream &outline::operator<<(std::ostream &os) {
     return this->put(os);
@@ -34,11 +34,11 @@ std::ostream &operator<<(std::ostream &os, outline const &val) {
     return val.put(os);
 }
 
-std::string dnvgl::extfem::version(void) {
+std::string dnvgl::extfem::version() {
     return "ExtFEMIO, Ver. " ExtFEMIO_VERSION;
 }
 
-std::string dnvgl::extfem::build_data(void) {
+std::string dnvgl::extfem::build_data() {
     return __DATE__ ", " __TIME__;
 }
 

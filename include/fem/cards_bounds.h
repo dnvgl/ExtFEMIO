@@ -32,15 +32,15 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_FIXNO;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_OPT;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_TRANO;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_A;
 
                 public:
@@ -48,7 +48,7 @@ namespace dnvgl {
                     enum class n_opt {
                         INVALID = -1,
                         FIXATION = 1, SPRING = 2,
-                        FIXATION_END = 3, SPRING_END = 4}_opt;
+                        FIXATION_END = 3, SPRING_END = 4};
 
 /** Fixation number to a node.
 
@@ -104,22 +104,22 @@ namespace dnvgl {
 
                     belfix(std::vector<std::string> const&, size_t const);
 
-                    belfix(void);
+                    belfix();
 
                     belfix(long const FIXNO, n_opt const OPT, long const TRANO,
                            std::vector<double> const &A);
 
-                    dnvgl::extfem::fem::cards::types const
-                    card_type(void) const;
+                    types
+                    card_type() const override;
 
-                    std::string pos_string(void) const;
+                    std::string pos_string() const;
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
+                    std::ostream &put(std::ostream&) const override;
 
-                    virtual void read(
-                        std::vector<std::string> const&, size_t const);
+                    void read(
+                        std::vector<std::string> const&, size_t const) override;
                 };
 
 /// `BEUSLO`: Elements with Surface Loads
@@ -148,27 +148,27 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_LLC;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_LOTYP;
-                    dnvgl::extfem::fem::types::entry_type<bool>
+                    fem::types::entry_type<bool>
                     static const _form_COMPLX;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_LAYER;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_ELNO;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NDOF;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_INTNO;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_SIDE;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_RLOAD;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_ILOAD;
 
 
@@ -258,7 +258,7 @@ namespace dnvgl {
 */
                     std::vector<double> ILOADi;
 
-                    beuslo(void);
+                    beuslo();
 
                     beuslo(std::vector<std::string> const&, size_t const);
 
@@ -286,15 +286,15 @@ namespace dnvgl {
                            std::vector<double> const &RLOAD,
                            std::vector<double> const &ILOAD = {});
 
-                    dnvgl::extfem::fem::cards::types const
-                    card_type(void) const;
+                    types
+                    card_type() const override;
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
+                    std::ostream &put(std::ostream&) const override;
 
-                    virtual void read(
-                        const std::vector<std::string>&, size_t const);
+                    void read(
+                        const std::vector<std::string>&, size_t const) override;
                 };
 
 /// `BLDEP`: Nodes with Linear Dependence
@@ -336,21 +336,21 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NODENO;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_CNOD;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NDDOF;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NDEP;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_DEPDOF;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_INDEPDOF;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_b;
 
                 public:
@@ -383,7 +383,7 @@ namespace dnvgl {
 
                     bldep(std::vector<std::string> const&, size_t const);
 
-                    bldep(void);
+                    bldep();
 
                     bldep(long const NODENO, long const CNOD, long const NDDOF,
                           long const NDEP, std::vector<long> const &DEPDOF,
@@ -400,15 +400,15 @@ namespace dnvgl {
                           std::vector<long> const &INDEPDOF,
                           std::vector<double> const &b);
 
-                    dnvgl::extfem::fem::cards::types const
-                    card_type(void) const;
+                    types
+                    card_type() const override;
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
+                    std::ostream &put(std::ostream&) const override;
 
-                    virtual void read(
-                        std::vector<std::string> const&, size_t const);
+                    void read(
+                        std::vector<std::string> const&, size_t const) override;
                 };
 
 /// `BNBCD`: Nodes with Boundary Conditions
@@ -463,18 +463,18 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NODENO;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NDOF;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_FIX;
 
-                    fix_key const fix_key_conv(long const) const;
-                    fix_key const fix_key_conv(bool const) const;
-                    long const fix_key_conv(fix_key const) const;
+                    static fix_key fix_key_conv(long const);
+                    static fix_key fix_key_conv(bool const);
+                    static long fix_key_conv(fix_key const);
 
                 public:
 
@@ -491,7 +491,7 @@ namespace dnvgl {
 
                     bnbcd(std::vector<std::string> const&, size_t const);
 
-                    bnbcd(void);
+                    bnbcd();
 
                     bnbcd(long const NODENO, long const NDOF,
                           std::vector<fix_key> const &FIX);
@@ -509,37 +509,37 @@ namespace dnvgl {
                           bool const FIX3, bool const FIX4,
                           bool const FIX5, bool const FIX6);
 
-                    using __base::card::operator();
+                    using card::operator();
 
-                    __base::card const &operator()(
+                    card const &operator()(
                         long const NODENO,
                         long const NDOF,
                         std::vector<fix_key> const &FIX);
 
-                    __base::card const &operator()(
+                    card const &operator()(
                         long const NODENO,
                         std::vector<fix_key> const &FIX);
 
-                    __base::card const &operator()(
+                    card const &operator()(
                         long const NODENO,
                         fix_key const FIX1, fix_key const FIX2,
                         fix_key const FIX3, fix_key const FIX4,
                         fix_key const FIX5, fix_key const FIX6);
 
-                    __base::card const &operator()(
+                    card const &operator()(
                         long const NODENO,
                         bool const FIX1, bool const FIX2,
                         bool const FIX3, bool const FIX4,
                         bool const FIX5, bool const FIX6);
 
-                    dnvgl::extfem::fem::cards::types const
-                    card_type(void) const;
+                    types
+                    card_type() const override;
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
+                    std::ostream &put(std::ostream&) const override;
 
-                    virtual void read(std::vector<std::string> const&, size_t const);
+                    void read(std::vector<std::string> const&, size_t const) override;
                 };
 
 /// `BNDISPL`: Nodes with Prescribed Displacements and Accelerations
@@ -569,21 +569,21 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_LLC;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_DTYPE;
-                    dnvgl::extfem::fem::types::entry_type<bool>
+                    fem::types::entry_type<bool>
                     static const _form_COMPLX;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NODENO;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NDOF;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_RDISP;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_IDISP;
 
                 public:
@@ -622,7 +622,7 @@ namespace dnvgl {
 
                     bndispl(std::vector<std::string> const&, size_t const);
 
-                    bndispl(void);
+                    bndispl();
 
                     bndispl(long const LLC, long const DTYPE, bool const COMPLX,
                             long const NODENO, long const NDOF,
@@ -641,15 +641,15 @@ namespace dnvgl {
                             std::vector<double> const &RDISP,
                             std::vector<double> const &IDISP={});
 
-                    dnvgl::extfem::fem::cards::types const
-                    card_type(void) const;
+                    types
+                    card_type() const override;
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
+                    std::ostream &put(std::ostream&) const override;
 
-                    virtual void read(
-                        std::vector<std::string> const&, size_t const);
+                    void read(
+                        std::vector<std::string> const&, size_t const) override;
                 };
 
 /// `BNLOAD`: Nodes with Loads
@@ -676,21 +676,21 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_LLC;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_LOTYP;
-                    dnvgl::extfem::fem::types::entry_type<bool>
+                    fem::types::entry_type<bool>
                     static const _form_COMPLX;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NODENO;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NDOF;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_RLOAD;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_ILOAD;
 
                 public:
@@ -732,7 +732,7 @@ namespace dnvgl {
 
                     bnload(std::vector<std::string> const&, size_t const);
 
-                    bnload(void);
+                    bnload();
 
                     bnload(long const LLC, long const LOTYP, bool const COMPLX,
                            long const NODENO, long const NDOF,
@@ -751,15 +751,15 @@ namespace dnvgl {
                            std::vector<double> const &RLOAD,
                            std::vector<double> const &ILOAD={});
 
-                    dnvgl::extfem::fem::cards::types const
-                    card_type(void) const;
+                    types
+                    card_type() const override;
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
+                    std::ostream &put(std::ostream&) const override;
 
-                    virtual void read(
-                        std::vector<std::string> const&, size_t const);
+                    void read(
+                        std::vector<std::string> const&, size_t const) override;
                 };
 
 /// `BSELL`: Subelement Load Description
@@ -774,16 +774,17 @@ namespace dnvgl {
 */
                 class bsell : public __base::card {
 
+                private:
+                
+                    fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::card static const head;
-
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_LC;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_SUBNO;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_LLC;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_FACT;
 
                 public:
@@ -803,28 +804,28 @@ namespace dnvgl {
 
                     bsell(std::vector<std::string> const&, size_t const);
 
-                    bsell(void);
+                    bsell();
 
                     bsell(long const LC, long const SUBNO,
                           std::vector<long> const &LLC,
                           std::vector<double> const &FACT);
 
-                    using __base::card::operator();
+                    using card::operator();
 
-                    __base::card const &operator()(
+                    card const &operator()(
                         long const LC, long const SUBNO,
                         std::vector<long> const &LLC,
                         std::vector<double> const &FACT);
 
-                    dnvgl::extfem::fem::cards::types const
-                    card_type(void) const;
+                    types
+                    card_type() const override;
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
+                    std::ostream &put(std::ostream&) const override;
 
-                    virtual void read(
-                        const std::vector<std::string>&, size_t const);
+                    void read(
+                        const std::vector<std::string>&, size_t const) override;
                 };
             }
         }

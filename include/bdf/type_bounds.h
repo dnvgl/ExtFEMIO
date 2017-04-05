@@ -96,7 +96,7 @@ namespace dnvgl {
                   got_default();
                };
 
-               _Ty get_default(void) const {
+               _Ty get_default() const {
                   if (!has_default())
                      throw errors::types_error("** ERROR **: No default value avaliable.");
                   return this->default_val;
@@ -107,7 +107,7 @@ namespace dnvgl {
                           (!has_max() || val <= this->max_val));
                };
 
-               bool does_allow_empty(void) const {
+               bool does_allow_empty() const {
                   return allow_empty;
                };
             };
@@ -125,15 +125,15 @@ namespace dnvgl {
                bound() {}
 
                bound(std::set<std::string> allowed) :
-                  __base::type_bound(), allowed(allowed) {}
+                  type_bound(), allowed(allowed) {}
 
                bound(std::set<std::string> allowed, std::string default_val) :
-                  __base::type_bound(), allowed(allowed), default_val(default_val) {
+                  type_bound(), allowed(allowed), default_val(default_val) {
                   got_default();
                }
 
                bound(std::string default_val) :
-                  __base::type_bound(),
+                  type_bound(),
                   default_val(default_val) {
                   got_default();
                }
@@ -144,7 +144,7 @@ namespace dnvgl {
                   return !(allowed.find(probe) == allowed.end());
                }
 
-               std::string get_default(void) const {
+               std::string get_default() const {
                   if (!has_default())
                      throw errors::types_error("** ERROR **: No default value avaliable.");
                   return this->default_val;

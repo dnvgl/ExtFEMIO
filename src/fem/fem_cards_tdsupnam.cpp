@@ -25,7 +25,6 @@ namespace {
 
 #include "fem/cards.h"
 #include "fem/types.h"
-#include "extfem_misc.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
@@ -38,9 +37,9 @@ using namespace std;
 using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
-using namespace dnvgl::extfem::fem::cards;
+using namespace cards;
 
-fem::types::card const tdsupnam::head("TDSUPNAM");
+card const tdsupnam::head("TDSUPNAM");
 
 entry_type<long> const tdsupnam::_form_NFIELD("NFIELD");
 entry_type<long> const tdsupnam::_form_IHREF("IHREF");
@@ -50,7 +49,7 @@ entry_type<std::string> const tdsupnam::_form_SUP_NAME("SUP_NAME");
 entry_type<std::string> const tdsupnam::_form_CONT("CONT");
 
 tdsupnam::tdsupnam(vector<std::string> const &inp, size_t const len) {
-    read(inp, len);
+    tdsupnam::read(inp, len);
 }
 
 void tdsupnam::read(vector<std::string> const &inp, size_t const len) {
@@ -91,7 +90,7 @@ void tdsupnam::read(vector<std::string> const &inp, size_t const len) {
     }
 }
 
-tdsupnam::tdsupnam(void) :
+tdsupnam::tdsupnam() :
         tdsupnam(-1, 0, 0, 0, {}, {}) {}
 
 tdsupnam::tdsupnam(long const NFIELD, long const IHREF, long const CODNAM,
@@ -114,12 +113,12 @@ tdsupnam::tdsupnam(long const IHREF, std::string const &SUP_NAME,
         SUP_NAME(SUP_NAME), CONT(CONT) {
 
     nlnam = true;
-    ncnam = (long)SUP_NAME.size();
+    ncnam = long(SUP_NAME.size());
     CODNAM = 100 + ncnam;
-    nltxt = (long)CONT.size();
+    nltxt = long(CONT.size());
     nctxt = 0;
     for (auto &p : CONT)
-        nctxt = max(nctxt, (long)p.size());
+        nctxt = max(nctxt, long(p.size()));
     for (auto &p : this->CONT)
         p.resize(nctxt, ' ');
     CODTXT = (100 * nltxt) + nctxt;
@@ -148,20 +147,20 @@ tdsupnam::tdsupnam(long const IHREF, std::string const &SUP_NAME) :
     nctxt = 0;
 }
 
-fem::cards::types const tdsupnam::card_type(void) const {
+cards::types tdsupnam::card_type() const {
     return types::TDSUPNAM;
 }
 
 ostream &tdsupnam::put(ostream& os) const {
     if (NFIELD == -1) return os;
-    os << tdsupnam::head.format()
+    os << head.format()
        << _form_NFIELD.format(NFIELD) << _form_IHREF.format(IHREF)
        << _form_CODNAM.format(CODNAM) << _form_CODTXT.format(CODTXT) << endl;
     if (nlnam)
-        os << dnvgl::extfem::fem::types::card().format()
+        os << fem::types::card().format()
            << _form_SUP_NAME.format(SUP_NAME, ncnam+8) <<endl;
     for (auto p : CONT)
-        os << dnvgl::extfem::fem::types::card().format()
+        os << fem::types::card().format()
            << _form_CONT.format(p, nctxt+8) << endl;
     return os;
 }

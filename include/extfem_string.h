@@ -15,9 +15,6 @@
 #define _EXTFEM_STRING_H_
 
 #include <string>
-#include <algorithm>
-
-#include "extfem_misc.h"
 
 namespace dnvgl {
     namespace extfem {
@@ -25,12 +22,12 @@ namespace dnvgl {
 
             class string : public std::string {
             public:
-                string(void);
-                string(const std::string& in);
+                string();
+                explicit string(const std::string& in);
                 string(size_t, char);
 
 // http://stackoverflow.com/questions/1798112/removing-leading-and-trailing-spaces-from-a-string
-                string trim(const std::string &whitespace = " \t");
+                string trim(const std::string &whitespace = " \t") const;
 
                 string upper();
 

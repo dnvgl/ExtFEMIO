@@ -9,6 +9,7 @@
 #include "StdAfx.h"
 
 #include "extfem_misc.h"
+#include "bdf/cards_elements.h"
 
 // ID:
 namespace {
@@ -27,13 +28,13 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 namespace {
-    static const long cl1 = 1;
+    const long cl1 = 1;
 }
 
 using namespace dnvgl::extfem::bdf;
 
-using dnvgl::extfem::bdf::types::entry_type;
-using namespace dnvgl::extfem::bdf::cards;
+using types::entry_type;
+using namespace cards;
 
 // const entry_type<long> crod::form_EID(
 //    "EID", bdf::type_bounds::bound<long>(&cl1));
@@ -42,8 +43,12 @@ const entry_type<long> crod::form_G1("G1");
 const entry_type<long> crod::form_G2("G2");
 
 crod::crod(std::list<std::string> const &inp) :
-__base::element(inp) {
-    this->read(inp);
+element(inp) {
+    this->crod::read(inp);
+}
+
+cards::types crod::card_type() const {
+    return types::CROD;
 }
 
 void crod::read(std::list<std::string> const &inp) {
@@ -70,10 +75,13 @@ void crod::read(std::list<std::string> const &inp) {
     }
 }
 
+__base::card const& crod::operator()(long const* EID, long const* PID, long const* G1, long const* G2) const {
+    throw std::not_implemented(__FILE__, __LINE__);
+}
+
 void crod::collect_outdata(
     std::list<std::unique_ptr<format_entry> > &res) const {
-    throw errors::error("CROD", "can't write CROD.");
-    return;
+    throw std::not_implemented(__FILE__, __LINE__, "can't write CROD.");
 }
 
 // Local Variables:

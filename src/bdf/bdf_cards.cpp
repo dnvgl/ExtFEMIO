@@ -10,6 +10,8 @@
 #include "StdAfx.h"
 
 #include "extfem_misc.h"
+#include "bdf/cards_elements.h"
+#include "bdf/cards_loads.h"
 
 // ID:
 namespace {
@@ -172,9 +174,9 @@ void const (*cards::error_report)(std::string const &) = &_stderr_report;
 
 cards::__base::card::card(std::list<std::string> const &inp) {}
 
-cards::__base::card::card(void) {}
+cards::__base::card::card() {}
 
-cards::__base::card::~card(void) {}
+cards::__base::card::~card() {}
 
 bdf::types::empty cards::__base::card::empty = bdf::types::empty();
 
@@ -187,7 +189,7 @@ cards::__base::card const &cards::__base::card::operator() (
 }
 
 std::string cards::__base::card::format_outlist(
-    std::list<std::unique_ptr<format_entry> > const &en) const {
+    std::list<std::unique_ptr<format_entry> > const &en) {
 
     unsigned long i = 0;
     std::ostringstream res("");
@@ -231,48 +233,48 @@ void cards::__base::card::card_split(
     bool first = true;
 
     for (auto pos=inp.begin(); pos!=inp.end(); ++pos) {
-        head = dnvgl::extfem::string::string(pos->substr(0, 8)).trim();
+        head = string::string(pos->substr(0, 8)).trim();
         // Free Field Format
         if (head.find(',') != std::string::npos) {
             if (first) {
-                res.push_back(dnvgl::extfem::string::string(
+                res.push_back(string::string(
                                   head.substr(0, head.find(','))).trim("*"));
             }
-            auto tmp(dnvgl::extfem::string::string(*pos).trim(" \t\n"));
-            tmp = tmp.substr(tmp.find(',')+1);
+            auto tmp(string::string(*pos).trim(" \t\n"));
+            tmp = string::string(tmp.substr(tmp.find(',') + 1));
 
             auto tail(tmp.substr(tmp.rfind(',')+1));
 
             while (tail.length() == 0 ||
                    free_form_cont.find(tail.at(0)) != free_form_cont.end()) {
                 if (tail.length() != 0)
-                    tmp = tmp.substr(0, tmp.rfind(',')+1);
+                    tmp = string::string(tmp.substr(0, tmp.rfind(',') + 1));
                 ++pos;
-                tmp.append(extfem::string::string(
+                tmp.append(string::string(
                                pos->substr(pos->find(',')+1)).trim(" \t\n"));
                 tail = tmp.substr(tmp.rfind(',')+1);
             }
             while (tmp.find(',') != std::string::npos) {
                 res.push_back(
-                    extfem::string::string(
+                    string::string(
                         tmp.substr(0, tmp.find(','))).trim(" \n\t"));
-                tmp = tmp.substr(tmp.find(',')+1);
+                tmp = string::string(tmp.substr(tmp.find(',') + 1));
             }
             res.push_back(tmp);
             first = false;
             // Long Field Format
         } else {
             if (first) {
-                res.push_back(extfem::string::string(head).trim("\t\n*"));
+                res.push_back(string::string(head).trim("\t\n*"));
             }
             if (head.length() > 0 && head.back() == '*') {
                 std::string tmp(pos->length() > 8 ? pos->substr(8) : "");
                 tmp.resize(64, ' ');
                 if (++pos != inp.end()) {
                     if (pos->length() > 8)
-                        tmp += extfem::string::string((pos)->substr(8)).trim("\t\n");
+                        tmp += string::string((pos)->substr(8)).trim("\t\n");
                 } else {
-                    pos--;
+                    --pos;
                     std::ostringstream msg(
                         "Long Field Format: Missing continuation line for record:\n",
                         std::ostringstream::ate);
@@ -282,7 +284,7 @@ void cards::__base::card::card_split(
                 tmp.resize(128, ' ');
                 for (int i=0; i<8; ++i) {
                     res.push_back(
-                        extfem::string::string(tmp.substr(i*16, 16)).trim(" \t\n"));
+                        string::string(tmp.substr(i*16, 16)).trim(" \t\n"));
                 }
                 // Short Field Format
             } else {
@@ -290,7 +292,7 @@ void cards::__base::card::card_split(
                 tmp.resize(80, ' ');
                 tmp = tmp.substr(8);
                 for (int i=0; i<8; ++i) {
-                    res.push_back(extfem::string::string(tmp.substr(i*8, 8)).trim(" \t\n"));
+                    res.push_back(string::string(tmp.substr(i*8, 8)).trim(" \t\n"));
                 }
             }
             first = false;
@@ -312,204 +314,203 @@ std::ostream &cards::__base::card::put(std::ostream &os) const {
 
 void cards::dispatch(
     std::list<std::string> const &inp,
-    std::unique_ptr<cards::__base::card> &res) {
+    std::unique_ptr<__base::card> &res) {
 
     res = nullptr;
 
     if (inp.empty()) {
-        res = std::make_unique<bdf::cards::unknown>(inp);
+        res = std::make_unique<unknown>(inp);
         return;
     }
 
     try {
         switch (cardtype_map.at(inp.front())) {
-        case cards::types::GRID:
-            res = std::make_unique<bdf::cards::grid>(inp);
+        case types::GRID:
+            res = std::make_unique<grid>(inp);
             break;
-        case cards::types::CTRIA3:
-            res = std::make_unique<bdf::cards::ctria3>(inp);
+        case types::CTRIA3:
+            res = std::make_unique<ctria3>(inp);
             break;
-        case cards::types::CQUAD4:
-            res = std::make_unique<bdf::cards::cquad4>(inp);
+        case types::CQUAD4:
+            res = std::make_unique<cquad4>(inp);
             break;
-        case cards::types::CBEAM:
-            res = std::make_unique<bdf::cards::cbeam>(inp);
+        case types::CBEAM:
+            res = std::make_unique<cbeam>(inp);
             break;
-        case cards::types::CBAR:
-            res = std::make_unique<bdf::cards::cbar>(inp);
+        case types::CBAR:
+            res = std::make_unique<cbar>(inp);
             break;
-        case cards::types::CROD:
-            res = std::make_unique<bdf::cards::crod>(inp);
+        case types::CROD:
+            res = std::make_unique<crod>(inp);
             break;
-        case cards::types::PSHELL:
-            res = std::make_unique<bdf::cards::pshell>(inp);
+        case types::PSHELL:
+            res = std::make_unique<pshell>(inp);
             break;
-        case cards::types::PBEAM:
-            res = std::make_unique<bdf::cards::pbeam>(inp);
+        case types::PBEAM:
+            res = std::make_unique<pbeam>(inp);
             break;
-        case cards::types::PBEAML:
-            res = std::make_unique<bdf::cards::pbeaml>(inp);
+        case types::PBEAML:
+            res = std::make_unique<pbeaml>(inp);
             break;
-        case cards::types::PBAR:
-            res = std::make_unique<bdf::cards::pbar>(inp);
+        case types::PBAR:
+            res = std::make_unique<pbar>(inp);
             break;
-        case cards::types::PBARL:
-            res = std::make_unique<bdf::cards::pbarl>(inp);
+        case types::PBARL:
+            res = std::make_unique<pbarl>(inp);
             break;
-        case cards::types::PROD:
-            res = std::make_unique<bdf::cards::prod>(inp);
+        case types::PROD:
+            res = std::make_unique<prod>(inp);
             break;
-        case cards::types::MAT1:
-            res = std::make_unique<bdf::cards::mat1>(inp);
+        case types::MAT1:
+            res = std::make_unique<mat1>(inp);
             break;
-        case cards::types::MAT2:
-            res = std::make_unique<bdf::cards::mat2>(inp);
+        case types::MAT2:
+            res = std::make_unique<mat2>(inp);
             break;
-        case cards::types::ENDDATA:
-            res = std::make_unique<bdf::cards::enddata>(inp);
+        case types::ENDDATA:
+            res = std::make_unique<enddata>(inp);
             break;
-        case cards::types::FORCE:
-            res = std::make_unique<bdf::cards::force>(inp);
+        case types::FORCE:
+            res = std::make_unique<force>(inp);
             break;
-        case cards::types::MOMENT:
-            res = std::make_unique<bdf::cards::moment>(inp);
+        case types::MOMENT:
+            res = std::make_unique<moment>(inp);
             break;
-        case cards::types::CMASS2:
-            res = std::make_unique<bdf::cards::cmass2>(inp);
+        case types::CMASS2:
+            res = std::make_unique<cmass2>(inp);
             break;
-        case cards::types::CMASS4:
-            res = std::make_unique<bdf::cards::cmass4>(inp);
+        case types::CMASS4:
+            res = std::make_unique<cmass4>(inp);
             break;
-        case cards::types::GRAV:
-            res = std::make_unique<bdf::cards::grav>(inp);
+        case types::GRAV:
+            res = std::make_unique<grav>(inp);
             break;
-        case cards::types::LOAD:
-            res = std::make_unique<bdf::cards::load>(inp);
+        case types::LOAD:
+            res = std::make_unique<load>(inp);
             break;
-        case cards::types::PARAM:
-            res = std::make_unique<bdf::cards::param>(inp);
+        case types::PARAM:
+            res = std::make_unique<param>(inp);
             break;
             /// Elements only supported to allow counting.
-        case cards::types::CAABSF:
-        case cards::types::CAERO1:
-        case cards::types::CAERO2:
-        case cards::types::CAERO3:
-        case cards::types::CAERO4:
-        case cards::types::CAERO5:
-        case cards::types::CAXIF2:
-        case cards::types::CAXIF3:
-        case cards::types::CAXIF4:
-        case cards::types::CBEND:
-        case cards::types::CBUSH1D:
-        case cards::types::CBUSH:
-        case cards::types::CBUTT:
-        case cards::types::CCONEAX:
-        case cards::types::CCRSFIL:
-        case cards::types::CDAMP1:
-        case cards::types::CDAMP1D:
-        case cards::types::CDAMP2:
-        case cards::types::CDAMP2D:
-        case cards::types::CDAMP3:
-        case cards::types::CDAMP4:
-        case cards::types::CDAMP5:
-        case cards::types::CDUM1:
-        case cards::types::CDUM2:
-        case cards::types::CDUM3:
-        case cards::types::CDUM4:
-        case cards::types::CDUM5:
-        case cards::types::CDUM6:
-        case cards::types::CDUM7:
-        case cards::types::CDUM8:
-        case cards::types::CDUM9:
-        case cards::types::CELAS1:
-        case cards::types::CELAS1D:
-        case cards::types::CELAS2:
-        case cards::types::CELAS2D:
-        case cards::types::CELAS3:
-        case cards::types::CELAS4:
-        case cards::types::CFILLET:
-        case cards::types::CFLUID2:
-        case cards::types::CFLUID3:
-        case cards::types::CFLUID4:
-        case cards::types::CGAP:
-        case cards::types::CHACAB:
-        case cards::types::CHACBR:
-        case cards::types::CHBDYE:
-        case cards::types::CHBDYG:
-        case cards::types::CHBDYP:
-        case cards::types::CHEXA:
-        case cards::types::CMASS1:
-        case cards::types::CMASS3:
-        case cards::types::COMBWLD:
-        case cards::types::CONM1:
-        case cards::types::CONM2:
-        case cards::types::CONROD:
-        case cards::types::CPENTA:
-        case cards::types::CQUAD8:
-        case cards::types::CQUAD:
-        case cards::types::CQUADR:
-        case cards::types::CQUADX:
-        case cards::types::CRAC2D:
-        case cards::types::CRAC3D:
-        case cards::types::CSHEAR:
-        case cards::types::CSLOT3:
-        case cards::types::CSLOT4:
-        case cards::types::CSPOT:
-        case cards::types::CTETRA:
-        case cards::types::CTRIA6:
-        case cards::types::CTRIAR:
-        case cards::types::CTRIAX6:
-        case cards::types::CTRIAX:
-        case cards::types::CTUBE:
-        case cards::types::CVISC:
-        case cards::types::ELEMENT:
-        case cards::types::GENEL:
-        case cards::types::GMINTC:
-        case cards::types::GMINTS:
-        case cards::types::PLOTEL:
-        case cards::types::RBAR1:
-        case cards::types::RBAR:
-        case cards::types::RBE1:
-        case cards::types::RBE2:
-        case cards::types::RBE3:
-        case cards::types::RBE3D:
-        case cards::types::RJOINT:
-        case cards::types::RROD:
-        case cards::types::RSPLINE:
-        case cards::types::RSSCON:
-        case cards::types::RTRPLT1:
-        case cards::types::RTRPLT:
-        case cards::types::SPLINE1:
-        case cards::types::SPLINE2:
-        case cards::types::SPLINE3:
-        case cards::types::SPLINE4:
-        case cards::types::SPLINE5:
-            res = std::make_unique<bdf::cards::__base::element>(inp);
+        case types::CAABSF:
+        case types::CAERO1:
+        case types::CAERO2:
+        case types::CAERO3:
+        case types::CAERO4:
+        case types::CAERO5:
+        case types::CAXIF2:
+        case types::CAXIF3:
+        case types::CAXIF4:
+        case types::CBEND:
+        case types::CBUSH1D:
+        case types::CBUSH:
+        case types::CBUTT:
+        case types::CCONEAX:
+        case types::CCRSFIL:
+        case types::CDAMP1:
+        case types::CDAMP1D:
+        case types::CDAMP2:
+        case types::CDAMP2D:
+        case types::CDAMP3:
+        case types::CDAMP4:
+        case types::CDAMP5:
+        case types::CDUM1:
+        case types::CDUM2:
+        case types::CDUM3:
+        case types::CDUM4:
+        case types::CDUM5:
+        case types::CDUM6:
+        case types::CDUM7:
+        case types::CDUM8:
+        case types::CDUM9:
+        case types::CELAS1:
+        case types::CELAS1D:
+        case types::CELAS2:
+        case types::CELAS2D:
+        case types::CELAS3:
+        case types::CELAS4:
+        case types::CFILLET:
+        case types::CFLUID2:
+        case types::CFLUID3:
+        case types::CFLUID4:
+        case types::CGAP:
+        case types::CHACAB:
+        case types::CHACBR:
+        case types::CHBDYE:
+        case types::CHBDYG:
+        case types::CHBDYP:
+        case types::CHEXA:
+        case types::CMASS1:
+        case types::CMASS3:
+        case types::COMBWLD:
+        case types::CONM1:
+        case types::CONM2:
+        case types::CONROD:
+        case types::CPENTA:
+        case types::CQUAD8:
+        case types::CQUAD:
+        case types::CQUADR:
+        case types::CQUADX:
+        case types::CRAC2D:
+        case types::CRAC3D:
+        case types::CSHEAR:
+        case types::CSLOT3:
+        case types::CSLOT4:
+        case types::CSPOT:
+        case types::CTETRA:
+        case types::CTRIA6:
+        case types::CTRIAR:
+        case types::CTRIAX6:
+        case types::CTRIAX:
+        case types::CTUBE:
+        case types::CVISC:
+        case types::ELEMENT:
+        case types::GENEL:
+        case types::GMINTC:
+        case types::GMINTS:
+        case types::PLOTEL:
+        case types::RBAR1:
+        case types::RBAR:
+        case types::RBE1:
+        case types::RBE2:
+        case types::RBE3:
+        case types::RBE3D:
+        case types::RJOINT:
+        case types::RROD:
+        case types::RSPLINE:
+        case types::RSSCON:
+        case types::RTRPLT1:
+        case types::RTRPLT:
+        case types::SPLINE1:
+        case types::SPLINE2:
+        case types::SPLINE3:
+        case types::SPLINE4:
+        case types::SPLINE5:
+            res = std::make_unique<__base::element>(inp);
             break;
             /// These are not real card types, they can't be returned
-        case cards::types::UNKNOWN:
-        case cards::types::BEAM_PROP:
-        case cards::types::BAR_PROP:
-        case cards::types::BEAM_BASE:
-        case cards::types::CAXIFi:
-            res = std::make_unique<bdf::cards::unknown>(inp);
+        case types::UNKNOWN:
+        case types::BEAM_PROP:
+        case types::BAR_PROP:
+        case types::BEAM_BASE:
+        case types::CAXIFi:
+            res = std::make_unique<unknown>(inp);
         }
     } catch (std::out_of_range) {
-        res = std::make_unique<bdf::cards::unknown>(inp);
+        res = std::make_unique<unknown>(inp);
     }
 }
 
 unknown::unknown(std::list<std::string> const &inp) :
         card(inp), content(inp) {};
 
-cards::types const unknown::card_type(void) const {
+cards::types unknown::card_type() const {
     return types::UNKNOWN;
 }
 
 void unknown::collect_outdata(
     std::list<std::unique_ptr<format_entry> > &res) const {
     throw errors::error("UNKNOWN", "can't write UNKNOWN.");
-    return;
 }
 
 void unknown::read(std::list<std::string> const &inp) {

@@ -16,8 +16,6 @@ namespace {
         "@(#) $Id$";
 }
 
-#include <memory>
-#include <algorithm>
 #include <cassert>
 
 #include "fem/cards.h"
@@ -34,9 +32,9 @@ using namespace std;
 using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
-using namespace dnvgl::extfem::fem::cards;
+using namespace cards;
 
-const fem::types::card geccen::head("GECCEN");
+const card geccen::head("GECCEN");
 
 
 // const entry_type<long> geccen::_form_ECCNO("ECCNO");
@@ -44,13 +42,13 @@ const entry_type<double> geccen::_form_EX("EX");
 const entry_type<double> geccen::_form_EY("EY");
 const entry_type<double> geccen::_form_EZ("EZ");
 
-geccen::geccen(void) : geccen(-1, 0., 0., 0.) {}
+geccen::geccen() : geccen(-1, 0., 0., 0.) {}
 
 geccen::geccen(geccen const *that) :
         geccen(that->ECCNO, that->EX, that->EY, that->EZ) {}
 
 geccen::geccen(const vector<std::string> &inp, size_t const len) {
-    read(inp, len);
+    geccen::read(inp, len);
 }
 
 void geccen::read(const vector<std::string> &inp, size_t const len) {
@@ -70,12 +68,13 @@ geccen::geccen(
     double const EX, double const EY, double const EZ) :
         eccno(ECCNO), EX(EX), EY(EY), EZ(EZ) {}
 
-const dnvgl::extfem::fem::cards::types
-geccen::card_type(void) const {return types::GECCEN;}
+cards::types geccen::card_type() const {
+    return types::GECCEN;
+}
 
 ostream &geccen::put(ostream& os) const {
     if (ECCNO == -1) return os;
-    os << geccen::head.format()
+    os << head.format()
        << _form_ECCNO.format(ECCNO)
        << _form_EX.format(EX)
        << _form_EY.format(EY)

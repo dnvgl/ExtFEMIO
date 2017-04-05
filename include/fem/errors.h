@@ -14,8 +14,6 @@
 
 #include <string>
 
-#include "extfem_misc.h"
-
 #if defined(_MSC_VER) & _MSC_VER < 1900
 #define _EXTFEMIO_NOEXCEPT
 #else
@@ -35,7 +33,7 @@ namespace dnvgl {
                     std::string name;
                     std::string err_class;
 
-                    std::string get_msg(void) const;
+                    std::string get_msg() const;
 
                 public:
 
@@ -47,7 +45,7 @@ namespace dnvgl {
                         const std::string&, const std::string &msg,
                         const std::string &err_class);
 
-                    virtual char const *what(void) const _EXTFEMIO_NOEXCEPT;
+                    char const *what() const override _EXTFEMIO_NOEXCEPT;
                 };
 
                 class types_error : public error {

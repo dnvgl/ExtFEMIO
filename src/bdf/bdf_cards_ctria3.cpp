@@ -9,6 +9,7 @@
 #include "StdAfx.h"
 
 #include "extfem_misc.h"
+#include "bdf/cards_elements.h"
 
 // ID:
 namespace {
@@ -28,12 +29,12 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 using namespace dnvgl::extfem::bdf;
-using dnvgl::extfem::bdf::types::entry_type;
-using namespace dnvgl::extfem::bdf::cards;
+using types::entry_type;
+using namespace cards;
 
 ctria3::ctria3(std::list<std::string> const &inp) :
-__base::shell(inp) {
-    this->read(inp);
+shell(inp) {
+    this->ctria3::read(inp);
 }
 
 void ctria3::read(std::list<std::string> const &inp) {
@@ -110,15 +111,13 @@ void ctria3::read(std::list<std::string> const &inp) {
     }
 }
 
-const dnvgl::extfem::bdf::cards::types
-ctria3::card_type(void) const {
+cards::types ctria3::card_type() const {
     return types::CTRIA3;
 }
 
 void ctria3::collect_outdata(
     std::list<std::unique_ptr<format_entry> >&) const {
-    throw errors::error("CTRIA3", "can't write CTRIA3.");
-    return;
+    throw std::not_implemented(__FILE__, __LINE__, "can't write CTRIA3.");
 }
 
 // Local Variables:

@@ -17,7 +17,6 @@ namespace {
 }
 
 #include <memory>
-#include <algorithm>
 
 #include "fem/cards.h"
 #include "fem/types.h"
@@ -33,16 +32,16 @@ using namespace std;
 using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
-using namespace dnvgl::extfem::fem::cards;
+using namespace cards;
 
-fem::types::card const hsuptran::head("HSUPTRAN");
+card const hsuptran::head("HSUPTRAN");
 
 entry_type<long> const hsuptran::_form_NFIELD("NFIELD");
 entry_type<long> const hsuptran::_form_ITREF("ITREF");
 entry_type<double> const hsuptran::_form_T("T");
 
 hsuptran::hsuptran(const vector<std::string> &inp, size_t const len) {
-    read(inp, len);
+    hsuptran::read(inp, len);
 }
 
 void hsuptran::read(const vector<std::string> &inp, size_t const len) {
@@ -70,7 +69,7 @@ void hsuptran::read(const vector<std::string> &inp, size_t const len) {
     T[3][3] = _form_T(inp.at(18));
 }
 
-hsuptran::hsuptran(void) :
+hsuptran::hsuptran() :
         hsuptran(-1, 0, nullptr) {}
 
 
@@ -109,26 +108,25 @@ hsuptran::hsuptran(
                 this->T[i][j] = T[i][j];
 }
 
-const dnvgl::extfem::fem::cards::types
-hsuptran::card_type(void) const {
+cards::types hsuptran::card_type() const {
     return types::HSUPTRAN;
 }
 
 ostream &hsuptran::put(ostream& os) const {
     if (NFIELD == -1) return os;
-    os << hsuptran::head.format()
+    os << head.format()
        << _form_NFIELD.format(NFIELD) << _form_ITREF.format(ITREF)
        << _form_T.format(T[0][0]) << _form_T.format(T[0][1]) << endl
-       << dnvgl::extfem::fem::types::card().format()
+       << fem::types::card().format()
        << _form_T.format(T[0][2]) << _form_T.format(T[0][3])
        << _form_T.format(T[1][0]) << _form_T.format(T[1][1]) << endl
-       << dnvgl::extfem::fem::types::card().format()
+       << fem::types::card().format()
        << _form_T.format(T[1][2]) << _form_T.format(T[1][3])
        << _form_T.format(T[2][0]) << _form_T.format(T[2][1]) << endl
-       << dnvgl::extfem::fem::types::card().format()
+       << fem::types::card().format()
        << _form_T.format(T[2][2]) << _form_T.format(T[2][3])
        << _form_T.format(T[3][0]) << _form_T.format(T[3][1]) << endl
-       << dnvgl::extfem::fem::types::card().format()
+       << fem::types::card().format()
        << _form_T.format(T[3][2]) << _form_T.format(T[3][3]) << endl;
     return os;
 }

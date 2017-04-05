@@ -16,16 +16,10 @@
 
 #include <cmath>
 #include <complex>
-#include <cstdlib>
 #include <iomanip>
-#include <iostream>
-#include <limits>
 #include <list>
-#include <memory>
-#include <set>
 #include <sstream>
 #include <string>
-#include <typeinfo>
 
 #ifdef __GNUC__
 #include "config.h"
@@ -98,9 +92,9 @@ namespace dnvgl {
 
                     base(const std::string&);
 
-                    virtual ~base(void);
+                    virtual ~base();
 
-                    virtual bdf_types type(void) const = 0;
+                    virtual bdf_types type() const = 0;
 
                     template <class _Ty1, class _Ty2>
                     friend inline bool ::operator> (
@@ -124,9 +118,9 @@ namespace dnvgl {
 
                     imbue_helper(const std::locale &loc);
 
-                    bdf_types type(void) const;
+                    bdf_types type() const override;
 
-                    std::string format(const void*) const;
+                    std::string format(const void*) const override;
                 };
 
                 class card : public base {
@@ -134,22 +128,20 @@ namespace dnvgl {
 
                     card(const std::string &name);
 
-                    bdf_types type(void) const;
+                    bdf_types type() const override;
 
-                    std::string format(const void*) const;
-                    std::string format() const;
+                    std::string format(const void*) const override;
                 };
 
                 class empty : public base {
 
                 public:
 
-                    empty(void);
+                    empty();
 
-                    bdf_types type(void) const;
+                    bdf_types type() const override;
 
-                    std::string format(const void*) const;
-                    std::string format() const;
+                    std::string format(const void*) const override;
                 };
 
                 inline bool operator== (
@@ -211,45 +203,39 @@ namespace dnvgl {
                         is_value = true;
                         this->value = *value;
                     }
-                };
+                }
 
                 template <> inline
                 entry_value<std::list<int> >::entry_value(
                     const entry_value<std::list<int> > &val) :
-                        value(val.value), is_value(val.is_value) {};
+                    value(val.value), is_value(val.is_value) {};
 
                 template <> inline
                 entry_value<std::list<int> >::entry_value(
                     const std::list<int> &value, const bool &is_value) :
-                        value(value), is_value(is_value) {
-                };
+                    value(value), is_value(is_value) {
+                }
 
                 template <> inline
-                entry_value<std::list<int> >::entry_value(const std::list<int> *value) {
-                    if (!value) {
-                        this->is_value = false;
-                    } else {
-                        is_value = true;
+                    entry_value<std::list<int> >::entry_value(const std::list<int> *value) : is_value(value != nullptr) {
+                    if (value)
                         copy(value->begin(), value->end(),
-                             back_inserter(this->value));
-                    }
-                };
+                        back_inserter(this->value));
+
+                }
 
                 template <> inline
                 void entry_value<std::list<int> >::push_back(const long &inp) {
                     this->value.push_back(inp);
-                };
+                }
 
                 template <> inline
-                entry_value<std::string>::entry_value(const std::string *value) {
-                    if (!value) {
-                        this->is_value = false;
-                        this->value = "";
-                    } else {
-                        this->is_value = true;
+                    entry_value<std::string>::entry_value(const std::string *value) : is_value(value != nullptr) {
+                    if (is_value)
                         this->value = *value;
-                    }
-                };
+                    else
+                        this->value = "";
+                }
 
                 template <class _Ty>
                 class entry_type : public base { };
@@ -277,7 +263,7 @@ namespace dnvgl {
                 public:
 
                     entry_type(const std::string &name) :
-                            bdf::types::base(name), bounds(0) {};
+                            bdf::types::base(name), bounds(nullptr) {};
 
                     entry_type(
                         const std::string &name,
@@ -291,7 +277,7 @@ namespace dnvgl {
                         return val;
                     };
 
-                    bdf_types type() const { return _type; };
+                    bdf_types type() const override { return _type; };
 
                     void set_value(
                         dnvgl::extfem::bdf::types::entry_value<long> &val,
@@ -330,17 +316,17 @@ namespace dnvgl {
                             throw errors::int_error(name, msg.str());
                         }
                         return;
-                    };
+                    }
 
-                    std::string format(const void *v) const {
+                    std::string format(const void *v) const override {
                         if (!v)
                             return dnvgl::extfem::bdf::types::
                                 empty().format(nullptr);
                         else {
-                            entry_value<long> val((long*)v);
+                            entry_value<long> val(static_cast<long const*>(v));
                             return this->format(val);
                         }
-                    };
+                    }
 
                     std::string format(const entry_value<long> &inp) const {
                         std::ostringstream outp;
@@ -429,7 +415,7 @@ namespace dnvgl {
                         const bdf::type_bounds::bound<double> &bounds) :
                             bdf::types::base(name), bounds(bounds) {};
 
-                    bdf_types inline type() const { return _type; };
+                    bdf_types inline type() const override { return _type; };
 
                     // Convert string to float
                     void set_value(
@@ -462,7 +448,7 @@ namespace dnvgl {
 #endif
 
                             if (regex_search(sval, m, float_exp_re))
-                                sval = m[1].str() + "E" + m[2].str();
+                                sval = string::string(m[1].str() + "E" + m[2].str());
 
                             if (regex_match(sval, float_lead_dot)) {
                                 auto pos = sval.find('.');
@@ -487,12 +473,12 @@ namespace dnvgl {
                         return val;
                     }
 
-                    std::string inline format(const void *v) const {
+                    std::string inline format(const void *v) const override {
                         if (!v)
                             return dnvgl::extfem::bdf::types::
                                 empty().format(nullptr);
                         else {
-                            double val(*((entry_value<double>*)v));
+                            double val(*(static_cast<entry_value<double> const*>(v)));
                             return this->format(val);
                         }
                     }
@@ -618,7 +604,7 @@ namespace dnvgl {
                         auto sval = extfem::string::string(inp).trim();
 
                         if (sval.length() == 0)
-                            sval = bounds.get_default();
+                            sval = string::string(bounds.get_default());
 
                         if (!bounds.is_allowed(sval))
                             throw errors::str_error(
@@ -628,7 +614,7 @@ namespace dnvgl {
                         return entry_value<std::string>(sval, true);
                     };
 
-                    bdf_types inline type() const { return _type; }
+                    bdf_types inline type() const override { return _type; }
 
                     void set_value(
                         entry_value<std::string> &val,
@@ -640,12 +626,12 @@ namespace dnvgl {
                         entry_value<std::string> &,
                         const std::string *inp) const ;
 
-                    std::string format(const void *v) const {
+                    std::string format(const void *v) const override {
                         if (!v)
                             return dnvgl::extfem::bdf::types::
                                 empty().format(nullptr);
                         else {
-                            entry_value<std::string> val((std::string*)v);
+                            entry_value<std::string> val(static_cast<std::string const*>(v));
                             return this->format(val);
                         }
                     }
@@ -662,15 +648,15 @@ namespace dnvgl {
                         case out_form_type::LONG:
                             outp << std::setiosflags(std::ios_base::left)
                                  << std::setfill(' ')
-                                 << std::setw(16) << (std::string)inp;
+                                 << std::setw(16) << static_cast<std::string>(inp);
                             break;
                         case out_form_type::SHORT:
                             outp << std::setiosflags(std::ios_base::left)
                                  << std::setfill(' ')
-                                 << std::setw(8) << (std::string)inp;
+                                 << std::setw(8) << static_cast<std::string>(inp);
                             break;
                         case out_form_type::FREE:
-                            outp << (std::string)inp;
+                            outp << static_cast<std::string>(inp);
                             break;
                         }
                         std::string out(outp.str());
@@ -679,7 +665,7 @@ namespace dnvgl {
                             std::ostringstream msg(
                                 "output string for value ",
                                 std::ostringstream::ate);
-                            msg << (std::string)inp
+                            msg << static_cast<std::string>(inp)
                                 << " of incorrect size, got length of "
                                 << out.size()
                                 << " instead of allowed length of "
@@ -726,7 +712,7 @@ namespace dnvgl {
                         return val;
                     };
 
-                    bdf_types type() const {return _type;};
+                    bdf_types type() const override {return _type;};
 
                     void set_value(
                         entry_value<std::list<int> > &val,
@@ -741,18 +727,18 @@ namespace dnvgl {
                         }
                         val.is_value = true;
                         for (auto pos = sval.begin(); pos != sval.end(); ++pos)
-                            val.value.push_back((int)(*pos - '0'));
+                            val.value.push_back(int(*pos - '0'));
 
                         return;
                     };
 
-                    std::string format(const void *inp) const {
+                    std::string format(const void *inp) const override {
                         if (!inp)
                             return dnvgl::extfem::bdf::types::
                                 empty().format(nullptr);
                         else {
                             entry_value<std::list<int> > val(
-                                (std::list<int>*)inp);
+                                static_cast<std::list<int> const*>(inp));
                             return this->format(val);
                         }
                     };
@@ -826,7 +812,7 @@ namespace dnvgl {
                         std::complex<double>> &bounds) :
                             bdf::types::base(name), bounds(bounds) {};
 
-                    bdf_types inline type() const { return _type; };
+                    bdf_types inline type() const override { return _type; };
 
                     // Convert string to float
                     void set_value(
@@ -866,7 +852,7 @@ namespace dnvgl {
 #endif
 
                             if (regex_search(sval1, m, float_exp_re))
-                                sval1 = m[1].str() + "E" + m[2].str();
+                                sval1 = string::string(m[1].str() + "E" + m[2].str());
                             if (regex_match(sval1, float_lead_dot)) {
                                 auto pos = sval1.find('.');
                                 sval1.insert(pos, 1, '0');
@@ -877,7 +863,7 @@ namespace dnvgl {
 
                             if (sval2.length() > 0) {
                                 if (regex_search(sval2, m, float_exp_re))
-                                    sval2 = m[1].str() + "E" + m[2].str();
+                                    sval2 = string::string(m[1].str() + "E" + m[2].str());
                                 if (regex_match(sval2, float_lead_dot)) {
                                     auto pos = sval2.find('.');
                                     sval2.insert(pos, 1, '0');
@@ -901,13 +887,13 @@ namespace dnvgl {
                         return val;
                     }
 
-                    std::string inline format(const void *v) const {
+                    std::string inline format(const void *v) const override {
                         if (!v)
                             return (bdf::types::empty().format(nullptr) +
                                     bdf::types::empty().format(nullptr));
                         else {
                             entry_value<std::complex<double>> val(
-                                *(std::complex<double>*)v);
+                                *static_cast<std::complex<double> const*>(v));
                             return this->format(val);
                         }
                     }

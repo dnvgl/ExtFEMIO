@@ -178,7 +178,7 @@ TEST_CASE("BDF double types output.", "[bdf_types]") {
         CHECK(obj.format(nullptr) == "        ");
     }
 
-    SECTION("SHORT (void)") {
+    SECTION("SHORT ()") {
         double *lval = new double(1.);
         bdf::types::base::out_form = bdf::types::out_form_type::SHORT;
         CHECK(*lval == 1.);

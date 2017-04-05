@@ -16,7 +16,6 @@ namespace {
         "@(#) $Id$";
 }
 
-#include <cstdlib>
 #include <memory>
 
 #include "bdf/cards.h"
@@ -29,13 +28,13 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 namespace {
-    static const double cd0 = 0., cd1 = 1.;
+    const double cd0 = 0., cd1 = 1.;
 }
 
 using namespace dnvgl::extfem;
-using namespace dnvgl::extfem::bdf::cards;
+using namespace bdf::cards;
 
-using dnvgl::extfem::bdf::types::entry_type;
+using bdf::types::entry_type;
 
 const entry_type<std::string> pbeaml::form_GROUP(
     "GROUP", bdf::type_bounds::bound<std::string>("MSCBML0"));
@@ -59,13 +58,13 @@ const entry_type<double> pbeaml::form_X_XB(
 
 pbeaml::pbeaml(const std::list<std::string> &inp) :
 beam_prop(inp) {
-    this->read(inp);
+    this->pbeaml::read(inp);
 }
 
 void pbeaml::read(std::list<std::string> const & inp) {
 
-    size_t dim_num = 0;
-    size_t i, j = 0;
+    size_t dim_num;
+    size_t i, j{0};
 
     auto pos = inp.begin();
 
@@ -168,15 +167,13 @@ clean_SO:
 end:;
 }
 
-const dnvgl::extfem::bdf::cards::types
-pbeaml::card_type(void) const {
+types pbeaml::card_type() const {
     return types::PBEAML;
 };
 
 void pbeaml::collect_outdata(
     std::list<std::unique_ptr<format_entry> > &res) const {
-    throw errors::error("PBEAML", "can't write PBEAML.");
-    return;
+    throw std::not_implemented(__FILE__, __LINE__, "can't write PBEAML.");
 }
 
 // Local Variables:

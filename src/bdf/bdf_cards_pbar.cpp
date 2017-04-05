@@ -16,7 +16,6 @@ namespace {
         "@(#) $Id$";
 }
 
-#include <cstdlib>
 #include <memory>
 
 #include "bdf/cards.h"
@@ -29,12 +28,12 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 namespace {
-    double static const cd0 = 0.;
+    double const cd0 = 0.;
 }
 
 using namespace dnvgl::extfem;
-using namespace dnvgl::extfem::bdf::cards;
-using dnvgl::extfem::bdf::types::entry_type;;
+using namespace bdf::cards;
+using bdf::types::entry_type;;
 
 entry_type<double> const pbar::form_A(
     "A", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
@@ -80,7 +79,7 @@ entry_type<double> const pbar::form_I12(
 
 pbar::pbar(std::list<std::string> const &inp) :
 bar_prop(inp) {
-    this->read(inp);
+    this->pbar::read(inp);
 }
 
 void pbar::read(std::list<std::string> const &inp) {
@@ -164,15 +163,13 @@ void pbar::read(std::list<std::string> const &inp) {
     }
 }
 
-dnvgl::extfem::bdf::cards::types const
-pbar::card_type(void) const {
+types pbar::card_type() const {
     return types::PBAR;
 };
 
 void pbar::collect_outdata(
     std::list<std::unique_ptr<format_entry> > &res) const {
-    throw errors::error("PBAR", "can't write PBAR.");
-    return;
+    throw std::not_implemented(__FILE__, __LINE__, "can't write PBAR.");
 }
 
 // Local Variables:

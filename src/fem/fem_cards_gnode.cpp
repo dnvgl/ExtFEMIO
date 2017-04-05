@@ -36,7 +36,7 @@ using namespace cards;
 using namespace types;
 
 
-fem::types::card const gnode::head("GNODE");
+card const gnode::head("GNODE");
 
 entry_type<long> const gnode::_form_NODEX("NODEX");
 entry_type<long> const gnode::_form_NODENO("NODENO");
@@ -44,10 +44,10 @@ entry_type<long> const gnode::_form_NDOF("NDOF");
 entry_type<vector<int> > const gnode::_form_ODOF("ODOF");
 
 gnode::gnode(const vector<std::string> &inp, size_t const len) {
-    read(inp, len);
+    gnode::read(inp, len);
 }
 
-gnode::~gnode(void) {
+gnode::~gnode() {
     ODOF.clear();
 }
 
@@ -62,7 +62,7 @@ void gnode::read(const vector<std::string> &inp, size_t const len) {
     _form_ODOF(ODOF, inp.at(4));
 }
 
-gnode::gnode(void) :
+gnode::gnode() :
         gnode(-1, 0, {}) {}
 
 gnode::gnode(
@@ -78,14 +78,13 @@ gnode::gnode(
     long const NODEX, long const NODENO, vector<int> const &ODOF) :
         gnode(NODEX, NODENO, static_cast<long>(ODOF.size()), ODOF) {}
 
-dnvgl::extfem::fem::cards::types const
-gnode::card_type(void) const {
+cards::types gnode::card_type() const {
     return types::GNODE;
 }
 
 ostream &gnode::put(ostream& os) const {
     if (NODEX == -1) return os;
-    os << gnode::head.format()
+    os << head.format()
        << _form_NODEX.format(NODEX) << _form_NODENO.format(NODENO)
        << _form_NDOF.format(NDOF) << _form_ODOF.format(this->ODOF) << endl;
 

@@ -9,6 +9,7 @@
 #include "StdAfx.h"
 
 #include "extfem_misc.h"
+#include "bdf/cards_loads.h"
 
 // ID:
 namespace {
@@ -30,7 +31,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 using namespace std;
-using namespace std::rel_ops;
+using namespace rel_ops;
 
 namespace {
    long static const cl1 = 1;
@@ -44,18 +45,18 @@ using bdf::types::entry_type;
 using bdf::types::entry_value;
 
 entry_type<long> const load::form_SID(
-    "SID", bdf::type_bounds::bound<long>(&cl1));
+    "SID", type_bounds::bound<long>(&cl1));
 entry_type<double> const load::form_S("S");
 entry_type<double> const load::form_Si("Si");
 entry_type<long> const load::form_Li(
-    "Li", bdf::type_bounds::bound<long>(&cl1));
+    "Li", type_bounds::bound<long>(&cl1));
 
 load::load() :
 SID(nullptr), S(nullptr), Si(), Li() {}
 
 load::load(list<std::string> const &inp) :
 card(inp) {
-    this->read(inp);
+    this->load::read(inp);
 }
 
 load::load(long const *SID, double const *S,
@@ -85,8 +86,8 @@ cards::__base::card const &load::operator() (
 
 bdf::types::card load::head = bdf::types::card("LOAD");
 
-cards::types const load::card_type(void) const {
-    return cards::types::LOAD;
+cards::types load::card_type() const {
+    return types::LOAD;
 }
 
 void load::read(list<std::string> const &inp) {
@@ -119,7 +120,7 @@ void load::collect_outdata(
 
     if (static_cast<long>(SID) <= 0) return;
 
-    res.push_back(unique_ptr<format_entry>(format(load::head)));
+    res.push_back(unique_ptr<format_entry>(format(head)));
 
     res.push_back(unique_ptr<format_entry>(format<long>(form_SID, SID)));
     res.push_back(unique_ptr<format_entry>(format<double>(form_S, S)));

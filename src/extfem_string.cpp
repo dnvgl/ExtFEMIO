@@ -8,6 +8,7 @@
 */
 #include "StdAfx.h"
 
+#include "extfem_string.h"
 #include "extfem_misc.h"
 
 // ID:
@@ -15,8 +16,6 @@ namespace {
     const char cID_extfem_string[] _EXTFEMIO_UNUSED
         = "@(#) $Id$";
 }
-
-#include "extfem_string.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
@@ -26,7 +25,7 @@ static char THIS_FILE[] = __FILE__;
 
 using namespace dnvgl::extfem::string;
 
-string::string(void) :
+string::string() :
         std::string() {}
 
 string::string(const std::string& in) :
@@ -36,7 +35,7 @@ string::string(size_t num, char in) :
         std::string(num, in) {}
 
 /// http://stackoverflow.com/questions/1798112/removing-leading-and-trailing-spaces-from-a-string
-string string::trim(const std::string &whitespace) {
+string string::trim(const std::string &whitespace) const {
     const auto strBegin = this->find_first_not_of(whitespace);
     if (strBegin == std::string::npos)
         return string(""); // no content
@@ -44,7 +43,7 @@ string string::trim(const std::string &whitespace) {
     const auto strEnd = this->find_last_not_of(whitespace);
     const auto strRange = strEnd - strBegin + 1;
 
-    return this->substr(strBegin, strRange);
+    return string(this->substr(strBegin, strRange));
 }
 
 string string::upper() {

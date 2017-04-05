@@ -62,25 +62,25 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NFIELD;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_IHREF;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_ISELTY;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_INDSEL;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_ISLEVL;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_ITREF;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_IHPREF;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NSUB;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_IHSREF;
 
                 public:
@@ -122,7 +122,7 @@ namespace dnvgl {
 
                     hierarch(std::vector<std::string> const&, size_t const);
 
-                    hierarch(void);
+                    hierarch();
 
                     hierarch(
                         long const NFIELD, long const IHREF, long const ISELTY,
@@ -135,15 +135,15 @@ namespace dnvgl {
                         long const INDSEL, long const ISLEVL, long const ITREF,
                         long const IHPREF, std::vector<long> const &IHSREF);
 
-                    dnvgl::extfem::fem::cards::types const
-                    card_type(void) const;
+                    types 
+                    card_type() const override;
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
+                    std::ostream &put(std::ostream&) const override;
 
-                    virtual void read(
-                        const std::vector<std::string>&, size_t const);
+                    void read(
+                        const std::vector<std::string>&, size_t const) override;
                 };
 
 /// `HSUPSTAT`: Superelement Statistical Information
@@ -166,25 +166,25 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NFIELD;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_ISELTY;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NIDOF;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NRDOF;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NBAND;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NELT;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_LINDEP;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_RELOADC;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_COMPLC;
 
                 public:
@@ -222,7 +222,7 @@ namespace dnvgl {
 
                     hsupstat(std::vector<std::string> const&, size_t const);
 
-                    hsupstat(void);
+                    hsupstat();
 
                     hsupstat(
                         long const NFIELD, long const ISELTY, long const NIDOF,
@@ -230,15 +230,15 @@ namespace dnvgl {
                         long const LINDEP, long const RELOADC,
                         long const COMPLC);
 
-                    dnvgl::extfem::fem::cards::types const
-                    card_type(void) const;
+                    types
+                    card_type() const override;
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
+                    std::ostream &put(std::ostream&) const override;
 
-                    virtual void read(
-                        const std::vector<std::string>&, size_t const);
+                    void read(
+                        const std::vector<std::string>&, size_t const) override;
                 };
 
 /// `HSUPTRAN`: Superelement Transformations
@@ -263,13 +263,13 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NFIELD;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_ITREF;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_T;
 
                 public:
@@ -336,7 +336,7 @@ namespace dnvgl {
 
                     hsuptran(std::vector<std::string> const&, size_t const);
 
-                    hsuptran(void);
+                    hsuptran();
 
                     hsuptran(
                         long const NFIELD, long const ITREF, double const T11,
@@ -349,15 +349,15 @@ namespace dnvgl {
                     hsuptran(
                         long const NFIELD, long const ITREF,
                         double const T[4][4]);
-                    dnvgl::extfem::fem::cards::types const
-                    card_type(void) const;
+                    types
+                    card_type() const override;
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
+                    std::ostream &put(std::ostream&) const override;
 
-                    virtual void read(
-                        const std::vector<std::string>&, size_t const);
+                    void read(
+                        const std::vector<std::string>&, size_t const) override;
                 };
             }
         }

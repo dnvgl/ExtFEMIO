@@ -17,7 +17,6 @@ namespace {
 }
 
 #include <memory>
-#include <algorithm>
 
 #include "fem/cards.h"
 #include "fem/types.h"
@@ -33,16 +32,16 @@ using namespace std;
 using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
-using namespace dnvgl::extfem::fem::cards;
+using namespace cards;
 
-fem::types::card const mgsprng::head("MGSPRNG");
+card const mgsprng::head("MGSPRNG");
 
 entry_type<long> const mgsprng::_form_MATNO("MATNO");
 entry_type<long> const mgsprng::_form_NDOF("NDOF");
 entry_type<double> const mgsprng::_form_K("K");
 
 mgsprng::mgsprng(vector<std::string> const &inp, size_t const len) {
-    read(inp, len);
+    mgsprng::read(inp, len);
 }
 
 void mgsprng::read(vector<std::string> const &inp, size_t const len) {
@@ -65,7 +64,7 @@ void mgsprng::read(vector<std::string> const &inp, size_t const len) {
     }
 }
 
-mgsprng::mgsprng(void) :
+mgsprng::mgsprng() :
         mgsprng(-1, 0, {}) {}
 
 mgsprng::mgsprng(long const MATNO, long const NDOF,
@@ -73,21 +72,21 @@ mgsprng::mgsprng(long const MATNO, long const NDOF,
         card(), MATNO(MATNO), NDOF(NDOF), K(K) {}
 
 mgsprng::mgsprng(long const MATNO, vector<vector<double> > const &K) :
-        card(), MATNO(MATNO), NDOF((long)K.size()), K(K) {}
+        card(), MATNO(MATNO), NDOF(long(K.size())), K(K) {}
 
-fem::cards::types const mgsprng::card_type(void) const {
+cards::types mgsprng::card_type() const {
     return types::MGSPRNG;
 }
 
 ostream &mgsprng::put(ostream& os) const {
     if (MATNO == -1) return os;
-    os << mgsprng::head.format()
+    os << head.format()
        << _form_MATNO.format(MATNO) << _form_NDOF.format(NDOF);
     long cnt = 1;
     for (size_t i = 0; i < static_cast<size_t>(NDOF); i++) {
         for (size_t j = i; j < static_cast<size_t>(NDOF); j++) {
             if (!(++cnt % 4))
-                os << endl << dnvgl::extfem::fem::types::card().format();
+                os << endl << fem::types::card().format();
             os << _form_K.format(K[i][j]);
         }
     }

@@ -39,7 +39,7 @@ using namespace fem;
 using namespace types;
 using namespace cards;
 
-fem::types::card const text::head("TEXT");
+card const text::head("TEXT");
 
 entry_type<long> const text::_form_TYPE("TYPE");
 entry_type<long> const text::_form_SUBTYPE("SUBTYPE");
@@ -48,7 +48,7 @@ entry_type<long> const text::_form_NBYTE("NBYTE");
 entry_type<std::string> const text::_form_CONT("CONT");
 
 text::text(vector<std::string> const &inp, size_t const len) {
-    read(inp, len);
+    text::read(inp, len);
 }
 
 void text::read(vector<std::string> const &inp, size_t const len) {
@@ -69,7 +69,7 @@ void text::read(vector<std::string> const &inp, size_t const len) {
     }
 }
 
-text::text(void) :
+text::text() :
         text(-1, 0, 0, 0, {}) {}
 
 text::text(long const TYPE, long const SUBTYPE, long const NRECS,
@@ -88,7 +88,7 @@ text::text(long const TYPE, long const SUBTYPE,
     NRECS = static_cast<long>(this->CONT.size());
     NBYTE = 0;
     for (auto &p : this->CONT)
-        NBYTE = max(NBYTE, (long)p.size());
+        NBYTE = max(NBYTE, long(p.size()));
     for (auto &p : this->CONT)
         p.resize(NBYTE, ' ');
     NBYTE += 8;
@@ -115,24 +115,24 @@ cards::__base::card const &text::operator() (
     NRECS = static_cast<long>(this->CONT.size());
     NBYTE = 0;
     for (auto &p : this->CONT)
-        NBYTE = max(NBYTE, (long)p.size());
+        NBYTE = max(NBYTE, long(p.size()));
     for (auto &p : this->CONT)
         p.resize(NBYTE, ' ');
     NBYTE += 8;
     return *this;
 }
 
-cards::types const text::card_type(void) const {
+cards::types text::card_type() const {
     return types::TEXT;
 }
 
 ostream &text::put(ostream& os) const {
     if (TYPE == -1) return os;
-    os << text::head.format()
+    os << head.format()
        << _form_TYPE.format(TYPE) << _form_SUBTYPE.format(SUBTYPE)
        << _form_NRECS.format(NRECS) << _form_NBYTE.format(NBYTE) << endl;
     for (auto p : CONT)
-        os << dnvgl::extfem::fem::types::card().format()
+        os << fem::types::card().format()
            << _form_CONT.format(p, NBYTE) << endl;
     return os;
 }

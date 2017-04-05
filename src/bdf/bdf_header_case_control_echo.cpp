@@ -25,23 +25,23 @@ using namespace std;
 
 using namespace dnvgl::extfem::bdf::header::case_control;
 
-echo::echo(std::list<echo::describer*> const &_oper) {
+echo::echo(list<describer*> const &_oper) {
     if (_oper.size() > 0)
         for (const auto &p : _oper)
             oper.push_back(p);
     else
-        oper.push_back(new echo::none());
+        oper.push_back(new none());
 }
 
-echo::~echo(void) {
-    for (const auto &p : oper)
+echo::~echo() {
+    for (auto &p : oper)
         delete p;
     oper.clear();
 }
 
-std::ostream &echo::put(std::ostream &os) const {
+ostream &echo::put(ostream &os) const {
     os << "ECHO = ";
-    bool first = true;
+    auto first = true;
     for (auto &p : this->oper) {
         if (first)
             first = false;
@@ -49,27 +49,25 @@ std::ostream &echo::put(std::ostream &os) const {
             os << ", ";
         os << p->str();
     }
-    return os << std::endl;
+    return os << endl;
 }
 
 echo::describer::describer() {}
 
-echo::describer::~describer() {}
-
 echo::unsort::unsort() {}
 
-std::string const echo::unsort::str() const {
+string echo::unsort::str() const {
     return "UNSORT";
 }
 
 echo::sort::sort(
-    std::list<echo::sort::cdni_entry> const &cdni) :
+    list<cdni_entry> const &cdni) :
         describer(), cdni(cdni) {}
 
-std::string const echo::sort::str(void) const {
-    std::list<echo::sort::cdni_entry> l_cdni(cdni);
-    std::ostringstream res(
-        "SORT(", std::ostringstream::ate);
+string echo::sort::str() const {
+    auto l_cdni(cdni);
+    ostringstream res(
+        "SORT(", ostringstream::ate);
     res << l_cdni.front().str();
     l_cdni.pop_front();
     for (auto p : l_cdni)
@@ -78,7 +76,7 @@ std::string const echo::sort::str(void) const {
     return res.str();
 }
 
-echo::sort::~sort(void) {
+echo::sort::~sort() {
     cdni.clear();
 }
 
@@ -86,9 +84,9 @@ echo::sort::cdni_entry::cdni_entry(
     std::string const &name, bool const except) :
         name(name), except(except) {}
 
-echo::sort::cdni_entry::~cdni_entry(void) {}
+echo::sort::cdni_entry::~cdni_entry() {}
 
-std::string const echo::sort::cdni_entry::str(void) const {
+string echo::sort::cdni_entry::str() const {
     std::string res("");
     if (except)
         res += "EXCEPT ";
@@ -97,22 +95,22 @@ std::string const echo::sort::cdni_entry::str(void) const {
 
 echo::both::both() {}
 
-std::string const echo::both::str(void) const {
+string echo::both::str() const {
     return "BOTH";
 }
 
 echo::none::none() {}
 
-std::string const echo::none::str(void) const {
+string echo::none::str() const {
     return "NONE";
 }
 
-echo::punch::punch(std::list<option_type> const &options) :
+echo::punch::punch(list<option_type> const &options) :
         options(options) {}
 
-std::string const echo::punch::str(void) const {
-    std::ostringstream res(
-        "PUNCH", std::ostringstream::ate);
+string echo::punch::str() const {
+    ostringstream res(
+        "PUNCH", ostringstream::ate);
     if (options.size() > 0) {
         res << "(";
         bool first = true;
@@ -122,13 +120,13 @@ std::string const echo::punch::str(void) const {
                 first = false;
             }
             switch (p) {
-            case echo::punch::option_type::SORT:
+            case option_type::SORT:
                 res << "SORT";
                 break;
-            case echo::punch::option_type::BOTH:
+            case option_type::BOTH:
                 res << "BOTH";
                 break;
-            case echo::punch::option_type::NEWBULK:
+            case option_type::NEWBULK:
                 res << "NEWBULK";
             }
         }
@@ -139,7 +137,7 @@ std::string const echo::punch::str(void) const {
 
 echo::file::file() {}
 
-std::string const echo::file::str(void) const {
+string echo::file::str() const {
     return "FILE";
 }
 

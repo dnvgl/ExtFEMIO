@@ -34,9 +34,9 @@ static char THIS_FILE[] = __FILE__;
 using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
-using namespace dnvgl::extfem::fem::cards;
+using namespace cards;
 
-fem::types::card const date::head("DATE");
+card const date::head("DATE");
 
 entry_type<long> const date::_form_TYPE("TYPE");
 entry_type<long> const date::_form_SUBTYPE("SUBTYPE");
@@ -45,7 +45,7 @@ entry_type<long> const date::_form_NBYTE("NBYTE");
 entry_type<std::string> const date::_form_CONT("CONT");
 
 date::date(std::vector<std::string> const &inp, size_t const len) {
-    read(inp, len);
+    date::read(inp, len);
 }
 
 void date::read(std::vector<std::string> const &inp, size_t const len) {
@@ -86,24 +86,25 @@ date::date(long const TYPE, long const SUBTYPE,
     NRECS = static_cast<long>(this->CONT.size());
     NBYTE = 0;
     for (auto &p : this->CONT)
-        NBYTE = std::max(NBYTE, (long)p.size());
+        NBYTE = std::max(NBYTE, long(p.size()));
     for (auto &p : this->CONT)
         p.resize(NBYTE, ' ');
     NBYTE += 8;
 }
 
-const cards::types
-date::card_type(void) const { return types::DATE; };
+cards::types date::card_type() const {
+    return types::DATE;
+};
 
 std::ostream &date::put(std::ostream& os) const {
     if (TYPE == -1) return os;
-    os << date::head.format()
+    os << head.format()
        << _form_TYPE.format(TYPE)
        << _form_SUBTYPE.format(SUBTYPE)
        << _form_NRECS.format(NRECS)
        << _form_NBYTE.format(NBYTE) << std::endl;
     for (auto p : CONT)
-        os << dnvgl::extfem::fem::types::card().format()
+        os << fem::types::card().format()
            << _form_CONT.format(p, NBYTE)
            << std::endl;
     return os;

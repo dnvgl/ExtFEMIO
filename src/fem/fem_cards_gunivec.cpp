@@ -17,7 +17,6 @@ namespace {
 }
 
 #include <memory>
-#include <algorithm>
 
 #include "fem/cards.h"
 #include "fem/types.h"
@@ -33,9 +32,9 @@ using namespace std;
 using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
-using namespace dnvgl::extfem::fem::cards;
+using namespace cards;
 
-fem::types::card const gunivec::head("GUNIVEC");
+card const gunivec::head("GUNIVEC");
 
 // entry_type<long> const gunivec::_form_TRANSNO("TRANSNO");
 entry_type<double> const gunivec::_form_UNIX("UNIX");
@@ -43,22 +42,22 @@ entry_type<double> const gunivec::_form_UNIY("UNIY");
 entry_type<double> const gunivec::_form_UNIZ("UNIZ");
 
 gunivec::gunivec(const vector<std::string> &inp, size_t const len) :
-        __base::transno(inp, len) {
-    read(inp, len);
+        transno(inp, len) {
+    gunivec::read(inp, len);
 }
 
-gunivec::gunivec(void) :
+gunivec::gunivec() :
         gunivec(-1, 0., 0., 0.) {}
 
 gunivec::gunivec(
     long const TRANSNO,
     double const UNIX, double const UNIY, double const UNIZ) :
-        __base::transno(TRANSNO),
+        transno(TRANSNO),
         UNIX(UNIX), UNIY(UNIY), UNIZ(UNIZ) {}
 
 gunivec::gunivec(
     double const UNIX, double const UNIY, double const UNIZ) :
-        __base::transno(0),
+        transno(0),
         UNIX(UNIX), UNIY(UNIY), UNIZ(UNIZ) {}
 
 cards::__base::card const &gunivec::operator() (
@@ -80,7 +79,7 @@ cards::__base::card const &gunivec::operator() (
     return *this;
 }
 
-fem::cards::types const gunivec::card_type(void) const {
+cards::types gunivec::card_type() const {
     return types::GUNIVEC;
 }
 
@@ -97,7 +96,7 @@ void gunivec::read(const vector<std::string> &inp, size_t const len) {
 
 ostream &gunivec::put(ostream& os) const {
     if (TRANSNO == -1) return os;
-    os << gunivec::head.format()
+    os << head.format()
        << _form_TRANSNO.format(TRANSNO) << _form_UNIX.format(UNIX)
        << _form_UNIY.format(UNIY) << _form_UNIZ.format(UNIZ) << endl;
     return os;

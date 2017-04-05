@@ -49,7 +49,7 @@ using namespace std;
 #endif
 
 using namespace dnvgl::extfem::fem;
-using namespace dnvgl::extfem::fem::types;
+using namespace types;
 
 regex const entry_type<double>::float_re(
     "([[:space:]]*[[:space:]+-]?"
@@ -59,12 +59,12 @@ regex const entry_type<double>::float_re(
 fem_types const entry_type<double>::_type = fem_types::Float;
 
 entry_type<double>::entry_type(std::string const &name) :
-        __base::b_type(name), bounds() {}
+        b_type(name), bounds() {}
 
 entry_type<double>::entry_type(
     std::string const &name,
     type_bounds::bound<double> const &bounds) :
-        types::__base::b_type(name), bounds(bounds) {}
+        b_type(name), bounds(bounds) {}
 
 double entry_type<double>::operator() (std::string const &inp) const {
     double value;
@@ -92,21 +92,21 @@ double entry_type<double>::operator() (std::string const &inp) const {
     return value;
 }
 
-fem_types entry_type<double>::type(void) const {return _type;};
+fem_types entry_type<double>::type() const {return _type;};
 
-std::string entry_type<double>::format(double const &inp) const {
+string entry_type<double>::format(double const &inp) const {
 
-    std::ostringstream res;
-    res.imbue(std::locale::classic());
+    ostringstream res;
+    res.imbue(locale::classic());
 
 #ifdef _MSC_VER
     // std::set output to two digit exponetial format.
     unsigned int ext_exp_format = _set_output_format(_TWO_DIGIT_EXPONENT);
 #endif
 
-    res.setf(std::ios_base::showpos);
-    res.setf(std::ios_base::scientific, std::ios::floatfield);
-    res.setf(std::ios_base::adjustfield, std::ios::left);
+    res.setf(ios_base::showpos);
+    res.setf(ios_base::scientific, ios::floatfield);
+    res.setf(ios_base::adjustfield, ios::left);
 
     res.precision(9);
     res.width(16);
@@ -115,7 +115,7 @@ std::string entry_type<double>::format(double const &inp) const {
     res << inp;
     std::string out(res.str());
     if (out.size() != 16) {
-        std::ostringstream msg("output string for value ", std::ostringstream::ate);
+        ostringstream msg("output string for value ", ostringstream::ate);
         msg << inp << " of incorrect size, got length of " << out.size()
             << " instead of allowed length of 16.";
         throw errors::output_error(name, msg.str());

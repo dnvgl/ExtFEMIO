@@ -17,7 +17,6 @@ namespace {
 }
 
 #include <memory>
-#include <algorithm>
 
 #include "fem/cards.h"
 #include "fem/types.h"
@@ -35,7 +34,7 @@ using namespace fem;
 using namespace types;
 using namespace cards;
 
-fem::types::card const bsell::head("BSELL");
+card const bsell::head("BSELL");
 
 entry_type<long> const bsell::_form_LC("LC");
 entry_type<long> const bsell::_form_SUBNO("SUBNO");
@@ -43,7 +42,7 @@ entry_type<long> const bsell::_form_LLC("LLC");
 entry_type<double> const bsell::_form_FACT("FACT");
 
 bsell::bsell(vector<std::string> const &inp, size_t const len) {
-    read(inp, len);
+    bsell::read(inp, len);
 }
 
 void bsell::read(vector<std::string> const &inp, size_t const len) {
@@ -67,7 +66,7 @@ void bsell::read(vector<std::string> const &inp, size_t const len) {
     }
 }
 
-bsell::bsell(void) :
+bsell::bsell() :
         bsell(-1, 0, {}, {}) {}
 
 bsell::bsell(
@@ -85,17 +84,17 @@ cards::__base::card const &bsell::operator()(
     return *this;
 }
 
-fem::cards::types const bsell::card_type(void) const {
+cards::types bsell::card_type() const {
     return types::BSELL;
 }
 
 ostream &bsell::put(ostream& os) const {
     if (LC == -1) return os;
-    os << bsell::head.format()
+    os << head.format()
        << _form_LC.format(LC) << _form_SUBNO.format(SUBNO)
        << empty.format() << empty.format() << endl;
     for (size_t i{0}; i < LLC.size(); i += 2) {
-        os << dnvgl::extfem::fem::types::card().format()
+        os << fem::types::card().format()
            << _form_LLC.format(LLC.at(i)) << _form_FACT.format(FACT.at(i));
         if (i+1 < LLC.size())
             os << _form_LLC.format(LLC.at(i+1))

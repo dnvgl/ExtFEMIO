@@ -19,12 +19,8 @@ namespace {
 
 #include "fem/cards.h"
 
-#include "fem/cards.h"
-
 #include <memory>
-#include <algorithm>
 
-#include "fem/cards.h"
 #include "fem/types.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
@@ -36,40 +32,40 @@ static char THIS_FILE[] = __FILE__;
 using namespace std;
 
 using namespace dnvgl::extfem;
-using namespace dnvgl::extfem::fem;
-using namespace dnvgl::extfem::fem::types;
+using namespace fem;
+using namespace types;
 
-using namespace dnvgl::extfem::fem::cards;
+using namespace cards;
 
-fem::types::card const gchan::head("GCHAN");
+card const gchan::head("GCHAN");
 
-fem::types::entry_type<double> const gchan::_form_HZ("HZ");
-fem::types::entry_type<double> const gchan::_form_TY("TY");
-fem::types::entry_type<double> const gchan::_form_BY("BY");
-fem::types::entry_type<double> const gchan::_form_TZ("TZ");
-fem::types::entry_type<double> const gchan::_form_SFY("SFY");
-fem::types::entry_type<double> const gchan::_form_SFZ("SFZ");
-fem::types::entry_type<long> const gchan::_form_K("K");
-fem::types::entry_type<long> const gchan::_form_NLOBY("NLOBY");
-fem::types::entry_type<long> const gchan::_form_NLOBZ("NLOBZ");
+entry_type<double> const gchan::_form_HZ("HZ");
+entry_type<double> const gchan::_form_TY("TY");
+entry_type<double> const gchan::_form_BY("BY");
+entry_type<double> const gchan::_form_TZ("TZ");
+entry_type<double> const gchan::_form_SFY("SFY");
+entry_type<double> const gchan::_form_SFZ("SFZ");
+entry_type<long> const gchan::_form_K("K");
+entry_type<long> const gchan::_form_NLOBY("NLOBY");
+entry_type<long> const gchan::_form_NLOBZ("NLOBZ");
 
-gchan::gchan(void) :
+gchan::gchan() :
         gchan(-1, 0., 0., 0., 0., 0., 0., 0) {}
 
 gchan::gchan(vector<std::string> const &inp, size_t const len) :
-        __base::beam_prop(inp, len, false) {
-    read(inp, len);
+        beam_prop(inp, len, false) {
+    gchan::read(inp, len);
 }
 
 gchan::gchan(long const GEONO,
              double const HZ, double const TY, double const BY,
              double const TZ, double const SFY, double const SFZ,
              long const K, long const NLOBY, long const NLOBZ) :
-        __base::beam_prop(GEONO),
+        beam_prop(GEONO),
         HZ{HZ}, TY{TY}, BY{BY}, TZ {TZ}, SFY{SFY}, SFZ{SFZ}, K{K},
         NLOBY{NLOBY}, NLOBZ{NLOBZ} {}
 
-fem::cards::types const gchan::card_type(void) const {
+cards::types gchan::card_type() const {
     return types::GCHAN;
 }
 
@@ -93,7 +89,7 @@ cards::__base::card const &gchan::operator() (
 
 ostream &gchan::put(ostream &os) const {
     if (GEONO == -1) return os;
-    os << gchan::head.format()
+    os << head.format()
        << _form_GEONO.format(GEONO) << _form_HZ.format(HZ)
        << _form_TY.format(TY) << _form_BY.format(BY) << endl
        << fem::types::card("").format()

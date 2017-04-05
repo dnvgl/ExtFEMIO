@@ -116,7 +116,7 @@ TEST_CASE("BDF int types output.", "[bdf_types]") {
         CHECK(obj.format(nullptr) == "        ");
     }
 
-    SECTION("SHORT (void)") {
+    SECTION("SHORT ()") {
         long lval = 1;
         bdf::types::base::out_form = bdf::types::out_form_type::SHORT;
         CHECK(obj.format(&lval).size() == 8);

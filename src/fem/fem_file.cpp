@@ -33,7 +33,7 @@ using namespace std;
 
 using namespace dnvgl::extfem::fem::input;
 
-fem_file::fem_file(std::istream &inp) :
+fem_file::fem_file(istream &inp) :
    cur_line(""), data(inp), last_comment("") {
 }
 
@@ -41,7 +41,7 @@ fem_file::fem_file(std::istream &inp) :
 size_t fem_file::get(vector<std::string> &res) {
     size_t i{0};
     while (cur_line.size() == 0)
-        std::getline(data, cur_line);
+        getline(data, cur_line);
     do {
         // if line not empty and not comment line add line to result std::set.
         if (cur_line.length() > 0)
@@ -53,18 +53,21 @@ size_t fem_file::get(vector<std::string> &res) {
         ++i;
         // if not EOF, read next line
         // loop while no next card starts and file has still content.
-    } while (std::getline(this->data, this->cur_line) &&
+    } while (getline(this->data, this->cur_line) &&
              (i == 0 || cur_line[0] == ' '));
     return i;
 }
 
-// Return size of input FEM file.
-std::streampos fem_file::size(void) {
+/**
+ * \brief Return size of input FEM file.
+ * \return size of current fem file
+ */
+streampos fem_file::size() const {
     // save current position in file
     auto cur_pos = data.tellg();
 
     // jump to end of file
-    data.seekg(0, std::ios::end);
+    data.seekg(0, ios::end);
     // determine position if file as file size
     auto fileSize = data.tellg();
 
@@ -74,12 +77,19 @@ std::streampos fem_file::size(void) {
     return fileSize;
 }
 
-// Return position in input FEM file.
-std::streampos fem_file::pos(void) {
+/**
+ * \brief Return position in input FEM file.
+ * \return current stream position
+ */
+streampos fem_file::pos() const {
     return data.tellg();
 }
 
-bool fem_file::eof(void) {
+/**
+ * \brief Check for EOF on data.
+ * \return is eof of data reached?
+ */
+bool fem_file::eof() const {
     return data.eof();
 }
 

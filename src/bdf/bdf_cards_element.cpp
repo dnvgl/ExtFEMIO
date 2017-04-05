@@ -9,6 +9,7 @@
 #include "StdAfx.h"
 
 #include "extfem_misc.h"
+#include "bdf/cards_elements.h"
 
 // ID:
 namespace {
@@ -16,8 +17,6 @@ namespace {
         "@(#) $Id$";
 }
 
-#include <sstream>
-#include <functional>
 #include <memory>
 
 #include "bdf/cards.h"
@@ -31,16 +30,16 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 using namespace dnvgl::extfem;
-using namespace dnvgl::extfem::bdf;
+using namespace bdf;
 
-using dnvgl::extfem::bdf::types::entry_type;
-using namespace dnvgl::extfem::bdf::type_bounds;
+using types::entry_type;
+using namespace type_bounds;
 
-using namespace dnvgl::extfem::bdf::cards;
-using namespace dnvgl::extfem::bdf::cards::__base;
+using namespace cards;
+using namespace cards::__base;
 
 namespace {
-    static const long cl1 = 1;
+    const long cl1 = 1;
 }
 
 bdf::types::card element::head = bdf::types::card("CBAR");
@@ -49,15 +48,14 @@ const entry_type<long> element::form_EID("EID", bound<long>(&cl1));
 
 element::element(std::list<std::string> const &inp) :
 card(inp) {
-    this->read(inp);
+    this->element::read(inp);
 }
 
 element::element(long const *EID) : card(), EID(EID) {}
 
 void element::collect_outdata(
     std::list<std::unique_ptr<format_entry> >&) const {
-    throw errors::error("ELEMENT", "can't write write generic ELEMENT.");
-    return;
+    throw std::not_implemented(__FILE__, __LINE__, "can't write write generic ELEMENT.");
 }
 
 void element::read(std::list<std::string> const &inp) {
@@ -71,8 +69,7 @@ void element::read(std::list<std::string> const &inp) {
     form_EID.set_value(EID, *(pos++));
 }
 
-const dnvgl::extfem::bdf::cards::types
-element::card_type(void) const {
+cards::types element::card_type() const {
     return types::ELEMENT;
 }
 

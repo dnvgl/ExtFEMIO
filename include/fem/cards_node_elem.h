@@ -35,21 +35,21 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_HZ;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_BT;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_BB;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_SFY;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_SFZ;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NLOBY;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NLOBZ;
 
                 public:
@@ -93,7 +93,7 @@ namespace dnvgl {
                     long NLOBZ;
 
                     gbarm(std::vector<std::string> const&, size_t const);
-                    gbarm(void);
+                    gbarm();
                     gbarm(long const GEONO,
                           double const HZ, double const BT, double const BB,
                           double const SFY, double const SFZ,
@@ -106,21 +106,21 @@ namespace dnvgl {
                           double const HZ, double const BT, double const BB) :
                             gbarm(GEONO, HZ, BT, BB, 1., 1., 0, 0) {};
 
-                    virtual fem::cards::types const card_type(void) const;
+                    types card_type() const override;
 
-                    using __base::beam_prop::operator();
-                    __base::card const &operator() (
+                    using beam_prop::operator();
+                    card const &operator() (
                         long const GEONO,
                         double const HZ, double const BT, double const BB,
                         double const SFY, double const SFZ,
                         long const NLOBY, long const NLOBZ);
-                    __base::card const &operator() (
+                    card const &operator() (
                         long const GEONO,
                         double const HZ, double const BT, double const BB,
                         double const SFY, double const SFZ) {
                         return (*this)(GEONO, HZ, BT, BB, SFY, SFZ, 0, 0);
                     };
-                    __base::card const inline &operator() (
+                    card const inline &operator() (
                         long const GEONO,
                         double const HZ, double const BT, double const BB) {
                         return (*this)(GEONO, HZ, BT, BB, 1., 1., 0, 0);
@@ -128,10 +128,10 @@ namespace dnvgl {
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
+                    std::ostream &put(std::ostream&) const override;
 
-                    virtual void read(
-                        std::vector<std::string> const&, size_t const);
+                    void read(
+                        std::vector<std::string> const&, size_t const) override;
                 };
 
 /// `GBEAMG`: General Beam Element Data
@@ -154,35 +154,35 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_AREA;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_IX;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_IY;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_IZ;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_IYZ;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_WXMIN;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_WYMIN;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_WZMIN;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_SHARY;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_SHARZ;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_SHCENY;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_SHCENZ;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_SY;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_SZ;
 
                 public:
@@ -235,7 +235,7 @@ namespace dnvgl {
 
                     gbeamg(std::vector<std::string> const&, size_t const);
 
-                    gbeamg(void);
+                    gbeamg();
 
                     gbeamg(
                         long const GEONO,
@@ -252,10 +252,10 @@ namespace dnvgl {
 
                     gbeamg(double const AREA);
 
-                    virtual fem::cards::types const card_type(void) const;
+                    types card_type() const override;
 
-                    using __base::beam_prop::operator();
-                    __base::card const &operator()(
+                    using beam_prop::operator();
+                    card const &operator()(
                         long const GEONO,
                         double const AREA,
                         double const IX, double const IY, double const IZ,
@@ -265,16 +265,16 @@ namespace dnvgl {
                         double const SHARY, double const SHARZ,
                         double const SHCENY, double const SHCENZ,
                         double const SY, double const SZ);
-                    __base::card const &operator()(
+                    card const &operator()(
                         long const GEONO, double const AREA);
-                    __base::card const &operator()(double const AREA);
+                    card const &operator()(double const AREA);
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
+                    std::ostream &put(std::ostream&) const override;
 
-                    virtual void read(
-                        std::vector<std::string> const&, size_t const);
+                    void read(
+                        std::vector<std::string> const&, size_t const) override;
                 };
 
 /// `GBOX`: Cross Section Type Box Beam
@@ -295,25 +295,25 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_HZ;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_TY;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_TB;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_TT;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_BY;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_SFY;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_SFZ;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NLOBY;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NLOBZ;
 
                 public:
@@ -365,7 +365,7 @@ namespace dnvgl {
 /** Number of integration points in each vertical wall (web) of beam (optional) */
                     long NLOBZ;
 
-                    gbox(void);
+                    gbox();
                     gbox(std::vector<std::string> const&, size_t const);
                     gbox(long const GEONO,
                          double const HZ, double const TY, double const TB,
@@ -382,23 +382,23 @@ namespace dnvgl {
                          double const TT, double const BY) :
                             gbox(GEONO, HZ, TY, TB, TT, BY, 1., 1., 0, 0) {};
 
-                    virtual cards::types const card_type(void) const;
+                    types card_type() const override;
 
-                    using __base::beam_prop::operator();
-                    __base::card const &operator() (
+                    using beam_prop::operator();
+                    card const &operator() (
                         long const GEONO,
                         double const HZ, double const TY, double const TB,
                         double const TT, double const BY,
                         double const SFY, double const SFZ,
                         long const NLOBY, long const NLOBZ);
-                    __base::card const inline &operator() (
+                    card const inline &operator() (
                         long const GEONO,
                         double const HZ, double const TY, double const TB,
                         double const TT, double const BY,
                         double const SFY, double const SFZ) {
                         return (*this)(GEONO, HZ, TY, TB, TT, BY, SFY, SFZ, 0, 0);
                     };
-                    __base::card const inline &operator() (
+                    card const inline &operator() (
                         long const GEONO,
                         double const HZ, double const TY, double const TB,
                         double const TT, double const BY) {
@@ -407,9 +407,9 @@ namespace dnvgl {
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
-                    virtual void read(
-                        std::vector<std::string> const&, size_t const);
+                    std::ostream &put(std::ostream&) const override;
+                    void read(
+                        std::vector<std::string> const&, size_t const) override;
                 };
 
 /// `GCHAN`: Cross Section Type Channel Beam
@@ -431,25 +431,25 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_HZ;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_TY;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_BY;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_TZ;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_SFY;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_SFZ;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_K;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NLOBY;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NLOBZ;
 
                 public:
@@ -502,7 +502,7 @@ namespace dnvgl {
 /// Number of integration points in beam web (optional)
                     long NLOBZ;
 
-                    gchan(void);
+                    gchan();
                     gchan(std::vector<std::string> const&, size_t const);
                     gchan(long const GEONO,
                           double const HZ, double const TY, double const BY,
@@ -518,22 +518,22 @@ namespace dnvgl {
                           double const TZ, long const K) :
                             gchan(GEONO, HZ, TY, BY, TZ, 1., 1., K, 0, 0) {};
 
-                    virtual fem::cards::types const card_type(void) const;
+                    types card_type() const override;
 
-                    using __base::beam_prop::operator();
-                    __base::card const &operator() (
+                    using beam_prop::operator();
+                    card const &operator() (
                         long const GEONO,
                         double const HZ, double const TY, double const BY,
                         double const TZ, double const SFY, double const SFZ,
                         long const K, long const NLOBY, long const NLOBZ);
-                    __base::card const inline &operator() (
+                    card const inline &operator() (
                         long const GEONO,
                         double const HZ, double const TY, double const BY,
                         double const TZ, double const SFY, double const SFZ,
                         long const K) {
                         return (*this)(GEONO, HZ, TY, BY, TZ, SFY, SFZ, K, 0, 0);
                     };
-                    __base::card const inline &operator() (
+                    card const inline &operator() (
                         long const GEONO,
                         double const HZ, double const TY, double const BY,
                         double const TZ, long const K) {
@@ -541,9 +541,9 @@ namespace dnvgl {
                     };
 
                 protected:
-                    virtual std::ostream &put(std::ostream&) const;
-                    virtual void read(
-                        std::vector<std::string> const&, size_t const);
+                    std::ostream &put(std::ostream&) const override;
+                    void read(
+                        std::vector<std::string> const&, size_t const) override;
                 };
 
 /// `GCHANR`: Cross Section Type Channel Beam with Inside Curvature
@@ -565,27 +565,27 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_HZ;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_TY;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_BY;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_TZ;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_SFY;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_SFZ;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_K;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_R;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NLOBY;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NLOBZ;
 
                 public:
@@ -638,7 +638,7 @@ namespace dnvgl {
 /// Number of integration points in beam web (optional)
                     long NLOBZ;
 
-                    gchanr(void);
+                    gchanr();
                     gchanr(std::vector<std::string> const&, size_t const);
                     gchanr(long const GEONO,
                            double const HZ, double const TY, double const BY,
@@ -654,31 +654,31 @@ namespace dnvgl {
                            double const HZ, double const TY, double const BY,
                            double const TZ, long const K, double const R) :
         gchanr(GEONO, HZ, TY, BY, TZ, 1., 1., K, R, 0, 0) {};
-                    virtual const cards::types card_type(void) const;
-                    using __base::beam_prop::operator();
-                    __base::card const &operator() (
+                    types card_type() const override;
+                    using beam_prop::operator();
+                    card const &operator() (
                         long const GEONO,
                         double const HZ, double const TY, double const BY,
                         double const TZ, double const SFY, double const SFZ,
                         long const K, double const R,
                         long const NLOBY, long const NLOBZ);
-                    __base::card const inline &operator() (
+                    card const inline &operator() (
                         long const GEONO,
                         double const HZ, double const TY, double const BY,
                         double const TZ, double const SFY, double const SFZ,
                         long const K, double const R) {
                         return (*this)(GEONO, HZ, TY, BY, TZ, SFY, SFZ, K, R, 0, 0);
                     };
-                    __base::card const inline &operator() (
+                    card const inline &operator() (
                         long const GEONO,
                         double const HZ, double const TY, double const BY,
                         double const TZ, long const K, double const R) {
                         return (*this)(GEONO, HZ, TY, BY, TZ, 1., 1., K, R, 0, 0);
                     };
                 protected:
-                    virtual std::ostream &put(std::ostream&) const;
-                    virtual void read(
-                        std::vector<std::string> const&, size_t const);
+                    std::ostream &put(std::ostream&) const override;
+                    void read(
+                        std::vector<std::string> const&, size_t const) override;
                 };
 
 /// `GCOORD`: Nodal Coordinates
@@ -693,15 +693,15 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NODENO;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_XCOORD;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_YCOORD;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_ZCOORD;
 
                 public:
@@ -719,27 +719,27 @@ namespace dnvgl {
  */
                     double ZCOORD;
 
-                    gcoord(void);
+                    gcoord();
                     gcoord(std::vector<std::string> const&, size_t const);
                     gcoord(
                         long const NODENO,
                         double const XCOORD, double const YCOORD,
                         double const ZCOORD);
 
-                    virtual fem::cards::types const card_type(void) const;
+                    types card_type() const override;
 
-                    using __base::card::operator();
-                    __base::card const &operator()(
+                    using card::operator();
+                    card const &operator()(
                         long const NODENO,
                         double const XCOORD, double const YCOORD,
                         double const ZCOORD);
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
+                    std::ostream &put(std::ostream&) const override;
 
-                    virtual void read(
-                        std::vector<std::string> const&, size_t const);
+                    void read(
+                        std::vector<std::string> const&, size_t const) override;
                 };
 
 /// `GDOBO`: Section Type Double Bottom
@@ -761,25 +761,25 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_HZ;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_TY;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_BY;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_TT;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_TB;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_SFY;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_SFZ;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NLOBY;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NLOBZ;
 
                 public:
@@ -825,7 +825,7 @@ namespace dnvgl {
                     long NLOBZ;
 
 
-                    gdobo(void);
+                    gdobo();
                     gdobo(std::vector<std::string> const&, size_t const);
                     gdobo(long const GEONO,
                           double const HZ, double const TY, double const BY,
@@ -842,16 +842,16 @@ namespace dnvgl {
                           double const TT, double const TB) :
                             gdobo(GEONO, HZ, TY, BY, TT, TB, 1., 1., 0, 0) {};
 
-                    virtual fem::cards::types const card_type(void) const;
+                    types card_type() const override;
 
-                    using __base::beam_prop::operator();
-                    __base::card const &operator() (
+                    using beam_prop::operator();
+                    card const &operator() (
                         long const GEONO,
                         double const HZ, double const TY, double const BY,
                         double const TT, double const TB,
                         double const SFY, double const SFZ,
                         long const NLOBY, long const NLOBZ);
-                    __base::card const inline &operator() (
+                    card const inline &operator() (
                         long const GEONO,
                         double const HZ, double const TY, double const BY,
                         double const TT, double const TB,
@@ -859,7 +859,7 @@ namespace dnvgl {
                         return (*this)(GEONO, HZ, TY, BY, TT, TB, SFY, SFZ,
                                        0, 0);
                     };
-                    __base::card const &operator() (
+                    card const &operator() (
                         long const GEONO,
                         double const HZ, double const TY, double const BY,
                         double const TT, double const TB) {
@@ -867,9 +867,9 @@ namespace dnvgl {
                     };
 
                 protected:
-                    virtual std::ostream &put(std::ostream&) const;
-                    virtual void read(
-                        std::vector<std::string> const&, size_t const);
+                    std::ostream &put(std::ostream&) const override;
+                    void read(
+                        std::vector<std::string> const&, size_t const) override;
                 };
 
 /// `GECC`: Eccentricities
@@ -890,17 +890,17 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
                     // dnvgl::extfem::fem::types::entry_type<long>
                     // static const _form_ECCNO;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_IOPT;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_EX;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_EY;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_EZ;
 
                 public:
@@ -931,7 +931,7 @@ namespace dnvgl {
 */
                     double EZ;
 
-                    gecc(void);
+                    gecc();
                     gecc(std::vector<std::string> const&, size_t const);
                     gecc(long const ECCNO, ecc_opt IOPT,
                          double const EX, double const EY, double const EZ);
@@ -954,46 +954,46 @@ namespace dnvgl {
                             gecc(that->ECCNO, that->IOPT,
                                  that->EX, that->EY, that->EZ) {};
 
-                    virtual fem::cards::types const card_type(void) const;
+                    types card_type() const override;
 
-                    using __base::card::operator();
-                    __base::card const &operator() (
+                    using card::operator();
+                    card const &operator() (
                         long const ECCNO, ecc_opt IOPT,
                         double const EX, double const EY, double const EZ);
-                    __base::card const &operator() (
+                    card const &operator() (
                         long const ECCNO,
                         double const EX, double const EY, double const EZ) {
                         return (*this)(ECCNO, ecc_opt::XYZ, EX, EY, EZ);
                     };
-                    __base::card const &operator() (
+                    card const &operator() (
                         long const ECCNO, std::vector<double> const &pos) {
                         return (*this)(
                             ECCNO, ecc_opt::XYZ,
                             pos.at(0), pos.at(1), pos.at(2));
                     };
-                    __base::card const &operator() (
+                    card const &operator() (
                         double const EX, double const EY, double const EZ) {
                         return (*this)(0, ecc_opt::XYZ, EX, EY, EZ);
                     };
-                    __base::card const &operator() (
+                    card const &operator() (
                         std::vector<double> const &pos) {
                         return (*this)(
                             0, ecc_opt::XYZ, pos.at(0), pos.at(1), pos.at(2));
                     };
-                    __base::card const &operator() (
+                    card const &operator() (
                         long const ECCNO, double const EZ) {
                         return (*this)(ECCNO, ecc_opt::Z_ONLY, 0., 0., EZ);
                     };
-                    __base::card const &operator() (double const EZ) {
+                    card const &operator() (double const EZ) {
                         return (*this)(0, ecc_opt::Z_ONLY, 0., 0., EZ);
                     };
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
+                    std::ostream &put(std::ostream&) const override;
 
-                    virtual void read(
-                        std::vector<std::string> const&, size_t const);
+                    void read(
+                        std::vector<std::string> const&, size_t const) override;
                 };
 
 /// `GECCEN`: Eccentricities
@@ -1008,15 +1008,15 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
                     // dnvgl::extfem::fem::types::entry_type<long>
                     // static const _form_ECCNO;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_EX;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_EY;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_EZ;
 
                 public:
@@ -1039,7 +1039,7 @@ namespace dnvgl {
 */
                     double EZ;
 
-                    geccen(void);
+                    geccen();
                     geccen(std::vector<std::string> const&, size_t const);
                     geccen(long const ECCNO,
                            double const EX, double const EY, double const EZ);
@@ -1051,25 +1051,25 @@ namespace dnvgl {
                             geccen(0, pos.at(0), pos.at(1), pos.at(2)) {};
                     geccen(geccen const*);
 
-                    virtual fem::cards::types const card_type(void) const;
+                    types card_type() const override;
 
-                    using __base::card::operator();
-                    __base::card const &operator() (
+                    using card::operator();
+                    card const &operator() (
                         long const ECCNO,
                         double const EX, double const EY, double const EZ);
-                    __base::card const &operator() (
+                    card const &operator() (
                         long const ECCNO, std::vector<double> const &pos);
-                    __base::card const &operator() (
+                    card const &operator() (
                         double const EX, double const EY, double const EZ);
-                    __base::card const &operator() (
+                    card const &operator() (
                         std::vector<double> const &pos);
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
+                    std::ostream &put(std::ostream&) const override;
 
-                    virtual void read(
-                        std::vector<std::string> const&, size_t const);
+                    void read(
+                        std::vector<std::string> const&, size_t const) override;
                 };
 
 /// `GELMNT1`: Element Data Definition
@@ -1086,21 +1086,21 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_ELNOX;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_ELNO;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_ELTYP;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_ELTYAD;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NODIN;
 
                     std::unordered_map<
-                        long, dnvgl::extfem::fem::elements::el_types>
+                        long, elements::el_types>
                     static const eltyp_map;
 
                 public:
@@ -1117,7 +1117,7 @@ namespace dnvgl {
     stiffness, mass, damping matrices a.s.o. See the AMATRIX record
     for more information.
 */
-                    dnvgl::extfem::fem::elements::el_types ELTYP;
+                    elements::el_types ELTYP;
 /** Additional information related to element type.
 
       - For membrane elements used to specify plane stress / plane
@@ -1155,35 +1155,35 @@ namespace dnvgl {
 */
                     std::vector<long> NODIN;
 
-                    gelmnt1(void);
+                    gelmnt1();
                     gelmnt1(std::vector<std::string> const&, size_t const);
                     gelmnt1(long const ELNOX, long const ELNO,
-                            dnvgl::extfem::fem::elements::el_types const &ELTYP,
+                            elements::el_types const &ELTYP,
                             long const ELTYAD,
                             std::vector<long> const &NODIN);
                     gelmnt1(long const ELNOX, long const ELNO,
-                            dnvgl::extfem::fem::elements::el_types const &ELTYP,
+                            elements::el_types const &ELTYP,
                             std::vector<long> const &NODIN);
 
-                    virtual fem::cards::types const card_type(void) const;
+                    types card_type() const override;
 
-                    using __base::card::operator();
-                    __base::card const &operator()(
+                    using card::operator();
+                    card const &operator()(
                         long const ELNOX, long const ELNO,
-                        dnvgl::extfem::fem::elements::el_types const &ELTYP,
+                        elements::el_types const &ELTYP,
                         long const ELTYAD,
                         std::vector<long> const &NODIN);
-                    __base::card const &operator()(
+                    card const &operator()(
                         long const ELNOX, long const ELNO,
-                        dnvgl::extfem::fem::elements::el_types const &ELTYP,
+                        elements::el_types const &ELTYP,
                         std::vector<long> const &NODIN);
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
+                    std::ostream &put(std::ostream&) const override;
 
-                    virtual void read(
-                        std::vector<std::string> const&, size_t const);
+                    void read(
+                        std::vector<std::string> const&, size_t const) override;
                 };
 
 /// `GELREF1`: Reference to Element Data
@@ -1212,39 +1212,39 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_ELNO;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_MATNO;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_ADDNO;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_INTNO;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_MINTNO;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_STRANO;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_STRENO;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_STREPONO;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_GEONO_OPT;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_FIXNO_OPT;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_ECCNO_OPT;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_TRANSNO_OPT;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_GEONO;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_FIXNO;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_ECCNO;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_TRANSNO;
 
                 public:
@@ -1349,7 +1349,7 @@ namespace dnvgl {
 */
                     std::vector<long> TRANSNO;
 
-                    gelref1(void);
+                    gelref1();
                     gelref1(std::vector<std::string> const&, size_t const);
                     gelref1(long const ELNO, long const MATNO,
                             long const ADDNO, long const INTNO,
@@ -1362,10 +1362,10 @@ namespace dnvgl {
                             std::vector<long> const &ECCNO={},
                             std::vector<long> const &TRANSNO={});
 
-                    virtual fem::cards::types const card_type(void) const;
+                    types card_type() const override;
 
-                    using __base::card::operator();
-                    __base::card const &operator()(
+                    using card::operator();
+                    card const &operator()(
                         long const ELNO, long const MATNO,
                         long const ADDNO, long const INTNO,
                         long const MINTNO, long const STRANO,
@@ -1379,10 +1379,10 @@ namespace dnvgl {
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
+                    std::ostream &put(std::ostream&) const override;
 
-                    virtual void read(
-                        std::vector<std::string> const&, size_t const);
+                    void read(
+                        std::vector<std::string> const&, size_t const) override;
                 };
 
 /// `GELTH`: Thickness of Two-dimensional Elements
@@ -1397,13 +1397,13 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
                     // dnvgl::extfem::fem::types::entry_type<long>
                     // static const _form_GEONO;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_TH;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NINT;
 
                 public:
@@ -1418,27 +1418,27 @@ namespace dnvgl {
  */
                     long NINT;
 
-                    gelth(void);
+                    gelth();
                     gelth(std::vector<std::string> const&, size_t const);
                     gelth(long const GEONO, double const TH,
                           long const NINT=0);
                     gelth(double const TH, long const NINT=0);
 
-                    virtual fem::cards::types const card_type(void) const;
+                    types card_type() const override;
 
-                    using __base::geoprop::operator();
-                    __base::card const &operator()(
+                    using geoprop::operator();
+                    card const &operator()(
                         long const GEONO, double const TH,
                         long const NINT=0);
-                    __base::card const &operator()(
+                    card const &operator()(
                         double const TH, long const NINT=0);
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
+                    std::ostream &put(std::ostream&) const override;
 
-                    virtual void read(
-                        std::vector<std::string> const&, size_t const);
+                    void read(
+                        std::vector<std::string> const&, size_t const) override;
                 };
 
 /// `GIORH`: Cross Section Type I or H Beam
@@ -1458,29 +1458,29 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_HZ;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_TY;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_BT;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_TT;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_BB;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_TB;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_SFY;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_SFZ;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NLOBYT;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NLOBYB;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NLOBZ;
 
                 public:
@@ -1533,7 +1533,7 @@ namespace dnvgl {
  */
                     long NLOBZ;
 
-                    giorh(void);
+                    giorh();
                     giorh(std::vector<std::string> const&, size_t const);
                     giorh(long const GEONO,
                           double const HZ, double const TY, double const BT,
@@ -1553,17 +1553,17 @@ namespace dnvgl {
                             giorh(GEONO, HZ, TY, BT, TT, BB, TB, 1., 1.,
                                   0, 0, 0) {};
 
-                    virtual fem::cards::types const card_type(void) const;
+                    types card_type() const override;
 
-                    using __base::beam_prop::operator();
-                    __base::card const &operator() (
+                    using beam_prop::operator();
+                    card const &operator() (
                         long const GEONO,
                         double const HZ, double const TY, double const BT,
                         double const TT, double const BB, double const TB,
                         double const SFY, double const SFZ,
                         long const NLOBYT, long const NLOBYB,
                         long const NLOBZ);
-                    __base::card const inline &operator() (
+                    card const inline &operator() (
                         long const GEONO,
                         double const HZ, double const TY, double const BT,
                         double const TT, double const BB, double const TB,
@@ -1571,7 +1571,7 @@ namespace dnvgl {
                         return (*this)(GEONO, HZ, TY, BT, TT, BB, TB, SFY, SFZ,
                                        0, 0, 0);
                     };
-                    __base::card const inline &operator() (
+                    card const inline &operator() (
                         long const GEONO,
                         double const HZ, double const TY, double const BT,
                         double const TT, double const BB, double const TB) {
@@ -1581,10 +1581,10 @@ namespace dnvgl {
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
+                    std::ostream &put(std::ostream&) const override;
 
-                    virtual void read(
-                        std::vector<std::string> const&, size_t const);
+                    void read(
+                        std::vector<std::string> const&, size_t const) override;
                 };
 
 /// `GIORHR`: Cross Section Type I or H Beam with Inside Curvature
@@ -1605,33 +1605,33 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_HZ;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_TY;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_BT;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_TT;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_BB;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_TB;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_SFY;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_SFZ;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_RT;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_RB;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NLOBYT;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NLOBYB;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NLOBZ;
 
                 public:
@@ -1683,7 +1683,7 @@ namespace dnvgl {
 /// Number of integration points in beam web (optional)
                     long NLOBZ;
 
-                    giorhr(void);
+                    giorhr();
                     giorhr(std::vector<std::string> const&, size_t const);
                     giorhr(long const GEONO,
                            double const HZ, double const TY, double const BT,
@@ -1706,17 +1706,17 @@ namespace dnvgl {
                             giorhr(GEONO, HZ, TY, BT, TT, BB, TB, 1., 1.,
                                    RT, RB, 0, 0, 0) {};
 
-                    virtual const cards::types card_type(void) const;
+                    types card_type() const override;
 
-                    using __base::beam_prop::operator();
-                    __base::card const &operator() (
+                    using beam_prop::operator();
+                    card const &operator() (
                         long const GEONO,
                         double const HZ, double const TY, double const BT,
                         double const TT, double const BB, double const TB,
                         double const SFY, double const SFZ,
                         double RT, double RB,
                         long const NLOBYT, long const NLOBYB, long const NLOBZ);
-                    __base::card const inline &operator() (
+                    card const inline &operator() (
                         long const GEONO,
                         double const HZ, double const TY, double const BT,
                         double const TT, double const BB, double const TB,
@@ -1725,7 +1725,7 @@ namespace dnvgl {
                         return (*this)(GEONO, HZ, TY, BT, TT, BB, TB, SFY, SFZ,
                                        RT, RB, 0, 0, 0);
                     };
-                    __base::card const inline &operator() (
+                    card const inline &operator() (
                         long const GEONO,
                         double const HZ, double const TY, double const BT,
                         double const TT, double const BB, double const TB,
@@ -1735,9 +1735,9 @@ namespace dnvgl {
                     };
 
                 protected:
-                    virtual std::ostream &put(std::ostream&) const;
-                    virtual void read(
-                        std::vector<std::string> const&, size_t const);
+                    std::ostream &put(std::ostream&) const override;
+                    void read(
+                        std::vector<std::string> const&, size_t const) override;
                 };
 
 /// `GLSEC`: Cross Section Type I or H Beam
@@ -1757,25 +1757,25 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_HZ;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_TY;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_BY;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_TZ;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_SFY;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_SFZ;
-                    dnvgl::extfem::fem::types::entry_type<bool>
+                    fem::types::entry_type<bool>
                     static const _form_K;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NLOBY;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NLOBZ;
 
                 public:
@@ -1828,7 +1828,7 @@ namespace dnvgl {
  */
                     long NLOBZ;
 
-                    glsec(void);
+                    glsec();
                     glsec(std::vector<std::string> const&, size_t const);
                     glsec(long const GEONO,
                           double const HZ, double const TY, double const BY,
@@ -1848,17 +1848,17 @@ namespace dnvgl {
                           bool const K) :
                             glsec(GEONO, HZ, TY, BY, TZ, 1., 1., K, 0, 0) {};
 
-                    virtual fem::cards::types const card_type(void) const;
+                    types card_type() const override;
 
-                    using __base::beam_prop::operator();
-                    __base::card const &operator() (
+                    using beam_prop::operator();
+                    card const &operator() (
                         long const GEONO,
                         double const HZ, double const TY, double const BY,
                         double const TZ,
                         double const SFY, double const SFZ,
                         bool const K,
                         long const NLOBY, long const NLOBZ);
-                    __base::card const inline &operator() (
+                    card const inline &operator() (
                         long const GEONO,
                         double const HZ, double const TY, double const BY,
                         double const TZ,
@@ -1867,7 +1867,7 @@ namespace dnvgl {
                         return (*this)(GEONO, HZ, TY, BY, TZ, SFY, SFZ, K,
                                        0, 0);
                     };
-                    __base::card const inline &operator() (
+                    card const inline &operator() (
                         long const GEONO,
                         double const HZ, double const TY, double const BY,
                         double const TZ,
@@ -1877,10 +1877,10 @@ namespace dnvgl {
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
+                    std::ostream &put(std::ostream&) const override;
 
-                    virtual void read(
-                        std::vector<std::string> const&, size_t const);
+                    void read(
+                        std::vector<std::string> const&, size_t const) override;
                 };
 
 /// `GLSECR`: Cross Section Type I or H Beam with Inside Curvature
@@ -1900,27 +1900,27 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_HZ;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_TY;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_BY;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_TZ;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_SFY;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_SFZ;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_K;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_R;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NLOBY;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NLOBZ;
 
                 public:
@@ -1975,7 +1975,7 @@ namespace dnvgl {
 /// Number of integration points in beam web (optional)
                     long NLOBZ;
 
-                    glsecr(void);
+                    glsecr();
                     glsecr(std::vector<std::string> const&, size_t const);
                     glsecr(long const GEONO,
                            double const HZ, double const TY,
@@ -1997,17 +1997,17 @@ namespace dnvgl {
                             glsecr(GEONO, HZ, TY, BY, TZ, 1., 1., K, R,
                                    0, 0) {};
 
-                    virtual const cards::types card_type(void) const;
+                    types card_type() const override;
 
-                    using __base::beam_prop::operator();
-                    __base::card const &operator() (
+                    using beam_prop::operator();
+                    card const &operator() (
                         long const GEONO,
                         double const HZ, double const TY,
                         double const BY, double const TZ,
                         double const SFY, double const SFZ,
                         long const K, double const R,
                         long const NLOBY, long const NLOBZ);
-                    __base::card const inline &operator() (
+                    card const inline &operator() (
                         long const GEONO,
                         double const HZ, double const TY,
                         double const BY, double const TZ,
@@ -2016,7 +2016,7 @@ namespace dnvgl {
                         return (*this)(GEONO, HZ, TY, BY, TZ, SFY, SFZ, K, R,
                                        0, 0);
                     };
-                    __base::card const inline &operator() (
+                    card const inline &operator() (
                         long const GEONO,
                         double const HZ, double const TY,
                         double const BY, double const TZ,
@@ -2026,9 +2026,9 @@ namespace dnvgl {
                     };
 
                 protected:
-                    virtual std::ostream &put(std::ostream&) const;
-                    virtual void read(
-                        std::vector<std::string> const&, size_t const);
+                    std::ostream &put(std::ostream&) const override;
+                    void read(
+                        std::vector<std::string> const&, size_t const) override;
                 };
 
 
@@ -2054,15 +2054,15 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NODEX;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NODENO;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NDOF;
-                    dnvgl::extfem::fem::types::entry_type<std::vector<int> >
+                    fem::types::entry_type<std::vector<int> >
                     static const _form_ODOF;
 
                 public:
@@ -2082,30 +2082,30 @@ namespace dnvgl {
  */
                     std::vector<int> ODOF;
 
-                    gnode(void);
+                    gnode();
                     gnode(std::vector<std::string> const&, size_t const);
                     gnode(long const NODEX, long const NODENO,
                           long const NDOF, std::vector<int> const &ODOF);
                     gnode(long const NODEX, long const NODENO,
                           std::vector<int> const &ODOF);
-                    ~gnode(void);
+                    ~gnode();
 
-                    virtual fem::cards::types const card_type(void) const;
+                    types card_type() const override;
 
-                    using __base::card::operator();
-                    __base::card const &operator()(
+                    using card::operator();
+                    card const &operator()(
                         long const NODEX, long const NODENO,
                         long const NDOF, std::vector<int> const &ODOF);
-                    __base::card const &operator()(
+                    card const &operator()(
                         long const NODEX, long const NODENO,
                         std::vector<int> const &ODOF);
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
+                    std::ostream &put(std::ostream&) const override;
 
-                    virtual void read(
-                        std::vector<std::string> const&, size_t const);
+                    void read(
+                        std::vector<std::string> const&, size_t const) override;
                 };
 
 /// `GPIPE`: Cross Section Type Tube
@@ -2124,21 +2124,21 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_DI;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_DY;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_T;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_SFY;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_SFZ;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NCIR;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NRAD;
 
                 public:
@@ -2180,7 +2180,7 @@ namespace dnvgl {
  */
                     long NRAD;
 
-                    gpipe(void);
+                    gpipe();
                     gpipe(std::vector<std::string> const&, size_t const);
                     gpipe(long const GEONO,
                           double const DI, double const DY, double const T,
@@ -2194,21 +2194,21 @@ namespace dnvgl {
                           double const DI, double const DY, double const T) :
                             gpipe(GEONO, DI, DY, T, 1., 1., 0, 0) {};
 
-                    virtual fem::cards::types const card_type(void) const;
+                    types card_type() const override;
 
-                    using __base::beam_prop::operator();
-                    __base::card const &operator() (
+                    using beam_prop::operator();
+                    card const &operator() (
                         long const GEONO,
                         double const DI, double const DY, double const T,
                         double const SFY, double const SFZ,
                         long const NDIR, long const NRAD);
-                    __base::card const inline &operator() (
+                    card const inline &operator() (
                         long const GEONO,
                         double const DI, double const DY, double const T,
                         double const SFY, double const SFZ) {
                         return (*this)(GEONO, DI, DY, T, SFY, SFZ, 0, 0);
                     };
-                    __base::card const inline &operator() (
+                    card const inline &operator() (
                         long const GEONO,
                         double const DI, double const DY, double const T) {
                         return (*this)(GEONO, DI, DY, T, 1., 1., 0, 0);
@@ -2216,10 +2216,10 @@ namespace dnvgl {
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
+                    std::ostream &put(std::ostream&) const override;
 
-                    virtual void read(
-                        std::vector<std::string> const&, size_t const);
+                    void read(
+                        std::vector<std::string> const&, size_t const) override;
                 };
 
 /// `GSETMEMB`: set(group) of Nodes or Elements(Members)
@@ -2279,19 +2279,19 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NFIELD;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_ISREF;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_INDEX;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_ISTYPE;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_ISORIG;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_IRMEMB;
 
                     std::unordered_map<long, types> static const types_map;
@@ -2349,7 +2349,7 @@ namespace dnvgl {
 */
                     std::vector<long> IRMEMB;
 
-                    gsetmemb(void);
+                    gsetmemb();
                     gsetmemb(std::vector<std::string> const&, size_t const);
                     gsetmemb(long const NFIELD, long const ISREF,
                              long const INDEX, types const ISTYPE,
@@ -2365,20 +2365,20 @@ namespace dnvgl {
                              origins const ISORIG,
                              std::vector<long> const &IRMEMB={});
 
-                    virtual fem::cards::types const card_type(void) const;
+                    cards::types card_type() const override;
 
-                    using __base::card::operator();
-                    __base::card const &operator() (
+                    using card::operator();
+                    card const &operator() (
                         long const NFIELD, long const ISREF, long const INDEX,
                         types const ISTYPE, origins const ISORIG,
                         std::vector<long> const &IRMEMB={});
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
+                    std::ostream &put(std::ostream&) const override;
 
-                    virtual void read(
-                        std::vector<std::string> const&, size_t const);
+                    void read(
+                        std::vector<std::string> const&, size_t const) override;
                 };
 
 /// `GTONP`: Cross Section Type I or H Beam with Inside Curvature
@@ -2398,29 +2398,29 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_HZ;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_TY;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_BT;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_TT;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_BP;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_TP;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_SFY;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_SFZ;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NLOBYT;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NLOBYB;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NLOBZ;
 
                 public:
@@ -2470,7 +2470,7 @@ namespace dnvgl {
 /// Number of integration points in beam web (optional)
                     long NLOBZ;
 
-                    gtonp(void);
+                    gtonp();
                     gtonp(std::vector<std::string> const&, size_t const);
                     gtonp(long const GEONO,
                           double HZ, double TY, double BT, double TT,
@@ -2489,16 +2489,16 @@ namespace dnvgl {
                             gtonp(GEONO, HZ, TY, BT, TT, BP, TP, 1., 1.,
                                   0, 0, 0) {};
 
-                    virtual const cards::types card_type(void) const;
+                    types card_type() const override;
 
-                    using __base::beam_prop::operator();
-                    __base::card const &operator() (
+                    using beam_prop::operator();
+                    card const &operator() (
                         long GEONO,
                         double HZ, double TY, double BT, double TT, double BP,
                         double TP,
                         double SFY, double SFZ,
                         long NLOBYT, long NLOBYB, long NLOBZ);
-                    __base::card const inline &operator() (
+                    card const inline &operator() (
                         long GEONO,
                         double HZ, double TY, double BT, double TT, double BP,
                         double TP,
@@ -2506,7 +2506,7 @@ namespace dnvgl {
                         return (*this)(GEONO, HZ, TY, BT, TT, BP, TP, SFY, SFZ,
                                        0, 0, 0);
                     };
-                    __base::card const inline &operator() (
+                    card const inline &operator() (
                         long GEONO,
                         double HZ, double TY, double BT, double TT, double BP,
                         double TP) {
@@ -2515,9 +2515,9 @@ namespace dnvgl {
                     };
 
                 protected:
-                    virtual std::ostream &put(std::ostream&) const;
-                    virtual void read(
-                        std::vector<std::string> const&, size_t const);
+                    std::ostream &put(std::ostream&) const override;
+                    void read(
+                        std::vector<std::string> const&, size_t const) override;
                 };
 
 /// `GUNIVEC`: Specification of Local Element Coordinate System
@@ -2538,15 +2538,15 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
                     // dnvgl::extfem::fem::types::entry_type<long>
                     // static const _form_TRANSNO;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_UNIX;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_UNIY;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_UNIZ;
 
                 public:
@@ -2571,31 +2571,31 @@ namespace dnvgl {
                     double UNIZ;
 
                     gunivec(std::vector<std::string> const&, size_t const);
-                    gunivec(void);
+                    gunivec();
                     gunivec(long const TRANSNO,
                             double const UNIX, double const UNIY,
                             double const UNIZ);
                     gunivec(double const UNIX, double const UNIY,
                             double const UNIZ);
 
-                    virtual cards::types const card_type(void) const;
+                    types card_type() const override;
 
-                    using __base::transno::operator();
-                    __base::card const &operator() (
+                    using transno::operator();
+                    card const &operator() (
                         long const TRANSNO, double const UNIX,
                         double const UNIY, double const UNIZ);
-                    __base::card const &operator() (
+                    card const &operator() (
                         double const UNIX, double const UNIY,
                         double const UNIZ);
 
-                    void reset(void);
+                    void reset();
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
+                    std::ostream &put(std::ostream&) const override;
 
-                    virtual void read(
-                        std::vector<std::string> const&, size_t const);
+                    void read(
+                        std::vector<std::string> const&, size_t const) override;
                 };
 
 /// `GUSYI`: Cross Section Type Unsymmetrical I-Beam
@@ -2616,33 +2616,33 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_HZ;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_TY;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_BT;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_B1;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_TT;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_BB;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_B2;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_TB;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_SFY;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_SFZ;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NLOBYT;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NLOBYB;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NLOBZ;
 
 
@@ -2702,7 +2702,7 @@ namespace dnvgl {
  */
                     long NLOBZ;
 
-                    gusyi(void);
+                    gusyi();
                     gusyi(std::vector<std::string> const&, size_t const);
                     gusyi(long const GEONO,
                           double const HZ, double const TY, double const BT,
@@ -2724,10 +2724,10 @@ namespace dnvgl {
                             gusyi(GEONO, HZ, TY, BT, B1, TT, BB, B2, TB,
                                   1., 1., 0, 0, 0) {};
 
-                    virtual fem::cards::types const card_type(void) const;
+                    types card_type() const override;
 
-                    using __base::beam_prop::operator();
-                    __base::card const &operator() (
+                    using beam_prop::operator();
+                    card const &operator() (
                         long const GEONO,
                         double const HZ, double const TY,
                         double const BT, double const B1, double const TT,
@@ -2735,7 +2735,7 @@ namespace dnvgl {
                         double const SFY, double const SFZ,
                         long const NLOBYT, long const NLOBYB,
                         long const NLOBZ);
-                    __base::card const inline &operator() (
+                    card const inline &operator() (
                         long const GEONO,
                         double const HZ, double const TY,
                         double const BT, double const B1, double const TT,
@@ -2744,7 +2744,7 @@ namespace dnvgl {
                         return (*this)(GEONO, HZ, TY, BT, B1, TT, BB, B2, TB,
                                        SFY, SFZ, 0, 0, 0);
                     };
-                    __base::card const inline &operator() (
+                    card const inline &operator() (
                         long const GEONO,
                         double const HZ, double const TY,
                         double const BT, double const B1, double const TT,
@@ -2755,10 +2755,10 @@ namespace dnvgl {
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
+                    std::ostream &put(std::ostream&) const override;
 
-                    virtual void read(
-                        std::vector<std::string> const&, size_t const);
+                    void read(
+                        std::vector<std::string> const&, size_t const) override;
                 };
             }
         }

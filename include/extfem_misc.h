@@ -13,7 +13,6 @@
 #define _EXTFEM_MISC_H_
 
 #include <sstream>
-#include <cstring>
 
 #if defined(_MSC_VER) & _MSC_VER < 1900
 #define _EXTFEMIO_NOEXCEPT
@@ -30,29 +29,29 @@
 
 namespace std {
 
-    class not_implemented : public std::exception {
+    class not_implemented : public exception {
 
     public:
 
         // Construct with given error message:
         not_implemented(
             const char *fname="", const size_t &line=0,
-            const char *error = "Functionality not yet implemented!") {
-            std::ostringstream msg("", std::ostringstream::ate);
-            if (line != 0 && std::strlen(fname) > 0)
+            const char *error="Functionality not yet implemented!") {
+            ostringstream msg("", ostringstream::ate);
+            if (line != 0 && strlen(fname) > 0)
                 msg << fname << ":" << line << ":";
             msg << "Functionality not yet implemented!";
             errorMessage = msg.str();
         }
 
         // Provided for compatibility with std::exception.
-        const char *what() const _EXTFEMIO_NOEXCEPT {
+        const char *what() const override _EXTFEMIO_NOEXCEPT {
             return errorMessage.c_str();
         }
 
     private:
 
-        std::string errorMessage;
+        string errorMessage;
     };
 }
 
@@ -70,8 +69,8 @@ namespace dnvgl {
         namespace __base {
             class outline {
             protected:
-                outline(void);
-                virtual ~outline(void);
+                outline();
+                virtual ~outline();
             public:
                 std::ostream &operator<<(std::ostream&);
                 friend std::ostream &::operator<<(
@@ -80,8 +79,8 @@ namespace dnvgl {
                 virtual std::ostream &put(std::ostream&) const = 0;
             };
         }
-        std::string version(void);
-        std::string build_data(void);
+        std::string version();
+        std::string build_data();
     }
 }
 

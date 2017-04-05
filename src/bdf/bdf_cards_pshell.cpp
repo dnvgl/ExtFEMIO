@@ -28,14 +28,14 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 namespace {
-    static const long cl1 = 1, cl_1 = -1;
-    static const double cd0 = 0., cd1 = 1., cd833 = .833333;
+    const long cl1 = 1, cl_1 = -1;
+    const double cd0 = 0., cd1 = 1., cd833 = .833333;
 }
 
 using namespace dnvgl::extfem;
-using namespace dnvgl::extfem::bdf::cards;
+using namespace bdf::cards;
 
-using dnvgl::extfem::bdf::types::entry_type;
+using bdf::types::entry_type;
 
 const entry_type<long> pshell::form_PID(
     "PID", bdf::type_bounds::bound<long>(&cl1));
@@ -71,7 +71,7 @@ const entry_type<long> pshell::form_MID4(
 
 pshell::pshell(const std::list<std::string> &inp) :
 card(inp) {
-    this->read(inp);
+    this->pshell::read(inp);
 }
 
 void pshell::read(const std::list<std::string> &inp) {
@@ -119,15 +119,13 @@ void pshell::read(const std::list<std::string> &inp) {
     }
 }
 
-const dnvgl::extfem::bdf::cards::types
-pshell::card_type(void) const {
+types pshell::card_type() const {
     return types::PSHELL;
 };
 
 void pshell::collect_outdata(
     std::list<std::unique_ptr<format_entry> > &res) const {
-    throw errors::error("PSHELL", "can't write PSHELL.");
-    return;
+    throw std::not_implemented(__FILE__, __LINE__, "can't write PSHELL.");
 }
 
 // Local Variables:

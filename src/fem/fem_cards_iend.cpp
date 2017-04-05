@@ -32,14 +32,14 @@ using namespace std;
 using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
-using namespace dnvgl::extfem::fem::cards;
+using namespace cards;
 
-fem::types::card const iend::head("IEND");
+card const iend::head("IEND");
 
 entry_type<long> const iend::_form_CONT("SLEVEL");
 
 iend::iend(vector<std::string> const &inp, size_t const len) {
-    read(inp, len);
+    iend::read(inp, len);
 }
 
 void iend::read(vector<std::string> const &inp, size_t const len) {
@@ -53,19 +53,19 @@ void iend::read(vector<std::string> const &inp, size_t const len) {
     CONT = _form_CONT(inp.at(1));
 }
 
-iend::iend(void) : iend(-1) {}
+iend::iend() : iend(-1) {}
 
 iend::iend(long const CONT) : CONT(CONT) {}
 
-const fem::cards::types iend::card_type(void) const {
+cards::types iend::card_type() const {
     return types::IEND;
 }
 
 ostream &iend::put(ostream& os) const {
     if (CONT == -1) return os;
-    os << iend::head.format()
-       << _form_CONT.format(CONT) << iend::empty.format()
-       << iend::empty.format() << iend::empty.format() << endl;
+    os << head.format()
+       << _form_CONT.format(CONT) << empty.format()
+       << empty.format() << empty.format() << endl;
 
     return os;
 }

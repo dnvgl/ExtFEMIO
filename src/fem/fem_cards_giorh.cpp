@@ -17,7 +17,6 @@ namespace {
 }
 
 #include <memory>
-#include <algorithm>
 
 #include "fem/cards.h"
 #include "fem/types.h"
@@ -31,11 +30,11 @@ static char THIS_FILE[] = __FILE__;
 using namespace std;
 
 using namespace dnvgl::extfem;
-using namespace dnvgl::extfem::fem;
-using namespace dnvgl::extfem::fem::cards;
-using namespace dnvgl::extfem::fem::types;
+using namespace fem;
+using namespace cards;
+using namespace types;
 
-fem::types::card const giorh::head("GIORH");
+card const giorh::head("GIORH");
 
 entry_type<double> const giorh::_form_HZ("HZ");
 entry_type<double> const giorh::_form_TY("TY");
@@ -51,8 +50,8 @@ entry_type<long> const giorh::_form_NLOBZ("NLOBZ");
 
 
 giorh::giorh(vector<std::string> const &inp, size_t const len) :
-        __base::beam_prop(inp, len, false) {
-    read(inp, len);
+        beam_prop(inp, len, false) {
+    giorh::read(inp, len);
 }
 
 void giorh::read(vector<std::string> const &inp, size_t const len) {
@@ -84,8 +83,8 @@ void giorh::read(vector<std::string> const &inp, size_t const len) {
         NLOBZ = {0};
 }
 
-giorh::giorh(void) :
-        __base::beam_prop(),
+giorh::giorh() :
+        beam_prop(),
         HZ(), TY(), BT(), TT(), BB(), TB(), SFY(), SFZ(),
         NLOBYT(), NLOBYB(), NLOBZ() {}
 
@@ -95,7 +94,7 @@ giorh::giorh(long const GEONO, double const HZ,
              double const TB,
              double const SFY, double const SFZ,
              long const NLOBYT, long const NLOBYB, long const NLOBZ) :
-        __base::beam_prop(GEONO, false),
+        beam_prop(GEONO, false),
         HZ(HZ), TY(TY), BT(BT), TT(TT), BB(BB), TB(TB),
         SFY(SFY), SFZ(SFZ),
         NLOBYT(NLOBYT), NLOBYB(NLOBYB), NLOBZ(NLOBZ) {}
@@ -120,18 +119,19 @@ cards::__base::card const &giorh::operator() (
     return *this;
 }
 
-dnvgl::extfem::fem::cards::types const
-giorh::card_type(void) const {return types::GIORH;}
+cards::types giorh::card_type() const {
+    return types::GIORH;
+}
 
 ostream &giorh::put(ostream& os) const {
     if (GEONO == -1) return os;
-    os << giorh::head.format()
+    os << head.format()
        << _form_GEONO.format(GEONO) << _form_HZ.format(HZ)
        << _form_TY.format(TY) << _form_BT.format(BT)
-       << endl << dnvgl::extfem::fem::types::card().format()
+       << endl << fem::types::card().format()
        << _form_TT.format(TT) << _form_BB.format(BB)
        << _form_TB.format(TB) << _form_SFY.format(SFY)
-       << endl << dnvgl::extfem::fem::types::card().format()
+       << endl << fem::types::card().format()
        << _form_SFZ.format(SFZ);
     if ((NLOBYT || NLOBYB || NLOBZ))
         os << _form_NLOBYT.format(NLOBYT) << _form_NLOBYB.format(NLOBYB)

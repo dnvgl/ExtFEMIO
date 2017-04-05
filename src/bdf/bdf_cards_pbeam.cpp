@@ -16,7 +16,6 @@ namespace {
         "@(#) $Id$";
 }
 
-#include <cstdlib>
 #include <memory>
 
 #include "bdf/cards.h"
@@ -35,13 +34,13 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 namespace {
-    static const double cd0 = 0., cd1 = 1.;
+    const double cd0 = 0., cd1 = 1.;
 }
 
 using namespace dnvgl::extfem;
-using namespace dnvgl::extfem::bdf::cards;
+using namespace bdf::cards;
 
-using dnvgl::extfem::bdf::types::entry_type;
+using bdf::types::entry_type;
 
 const entry_type<double> pbeam::form_A("A");
 const entry_type<double> pbeam::form_I1("I1");
@@ -70,7 +69,7 @@ const entry_type<double> pbeam::form_F2(
     "F2", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 // fields that might appear more than once
 namespace {
-    static const size_t SO_len = 3;
+    const size_t SO_len = 3;
     const char* SO_init[SO_len] = {"YES", "YESA", "NO"};
     const std::set<std::string> SO_set(SO_init, SO_init + SO_len);
 }
@@ -120,7 +119,7 @@ const entry_type<double> pbeam::form_N2_B(
 
 pbeam::pbeam(std::list<std::string> const &inp) :
 beam_prop(inp) {
-    this->read(inp);
+    this->pbeam::read(inp);
 }
 
 void pbeam::read(std::list<std::string> const &inp) {
@@ -165,6 +164,8 @@ void pbeam::read(std::list<std::string> const &inp) {
 
     if (block_cnt > 1) {
         switch (block_rem) {
+        default:
+            throw errors::parse_error("PBEAM", "Illegal number of entries.");
         case 16:
             form_N2_B.set_value(N2_B, *(pos++));
         case 15:
@@ -203,6 +204,8 @@ void pbeam::read(std::list<std::string> const &inp) {
 
     for (size_t i = block_cnt; i > 2; --i) {
         switch (block_rem) {
+        default:
+            throw errors::parse_error("PBEAM", "Illegal number of entries.");
         case 16:
             _F2.push_front(form_F2(*(pos++)));
         case 15:
@@ -265,50 +268,48 @@ void pbeam::read(std::list<std::string> const &inp) {
         throw errors::parse_error("PBEAM", "Illegal number of entries.");
     }
     if (_J.size() == 0)
-        _J.push_front(dnvgl::extfem::bdf::types::entry_value<double>());
-    SO.resize(_SO.size(), entry_value<std::string>(""));
-    std::copy(_SO.begin(), _SO.end(), SO.begin());
+        _J.push_front(bdf::types::entry_value<double>());
+    SO.resize(_SO.size(), bdf::types::entry_value<std::string>(""));
+    copy(_SO.begin(), _SO.end(), SO.begin());
     X_XB.resize(_X_XB.size());
-    std::copy(_X_XB.begin(), _X_XB.end(), X_XB.begin());
+    copy(_X_XB.begin(), _X_XB.end(), X_XB.begin());
     A.resize(_A.size());
-    std::copy(_A.begin(), _A.end(), A.begin());
+    copy(_A.begin(), _A.end(), A.begin());
     I1.resize(_I1.size());
-    std::copy(_I1.begin(), _I1.end(), I1.begin());
+    copy(_I1.begin(), _I1.end(), I1.begin());
     I2.resize(_I2.size());
-    std::copy(_I2.begin(), _I2.end(), I2.begin());
+    copy(_I2.begin(), _I2.end(), I2.begin());
     I12.resize(_I12.size());
-    std::copy(_I12.begin(), _I12.end(), I12.begin());
+    copy(_I12.begin(), _I12.end(), I12.begin());
     J.resize(_J.size());
-    std::copy(_J.begin(), _J.end(), J.begin());
+    copy(_J.begin(), _J.end(), J.begin());
     NSM.resize(_NSM.size());
-    std::copy(_NSM.begin(), _NSM.end(), NSM.begin());
+    copy(_NSM.begin(), _NSM.end(), NSM.begin());
     C1.resize(_C1.size());
-    std::copy(_C1.begin(), _C1.end(), C1.begin());
+    copy(_C1.begin(), _C1.end(), C1.begin());
     C2.resize(_C2.size());
-    std::copy(_C2.begin(), _C2.end(), C2.begin());
+    copy(_C2.begin(), _C2.end(), C2.begin());
     D1.resize(_D1.size());
-    std::copy(_D1.begin(), _D1.end(), D1.begin());
+    copy(_D1.begin(), _D1.end(), D1.begin());
     D2.resize(_D2.size());
-    std::copy(_D2.begin(), _D2.end(), D2.begin());
+    copy(_D2.begin(), _D2.end(), D2.begin());
     E1.resize(_E1.size());
-    std::copy(_E1.begin(), _E1.end(), E1.begin());
+    copy(_E1.begin(), _E1.end(), E1.begin());
     E2.resize(_E2.size());
-    std::copy(_E2.begin(), _E2.end(), E2.begin());
+    copy(_E2.begin(), _E2.end(), E2.begin());
     F1.resize(_F1.size());
-    std::copy(_F1.begin(), _F1.end(), F1.begin());
+    copy(_F1.begin(), _F1.end(), F1.begin());
     F2.resize(_F2.size());
-    std::copy(_F2.begin(), _F2.end(), F2.begin());
+    copy(_F2.begin(), _F2.end(), F2.begin());
 }
 
-const dnvgl::extfem::bdf::cards::types
-pbeam::card_type(void) const {
+types pbeam::card_type() const {
     return types::PBEAM;
 };
 
 void pbeam::collect_outdata(
     std::list<std::unique_ptr<format_entry> > &res) const {
-    throw errors::error("PBEAM", "can't write PBEAM.");
-    return;
+    throw std::not_implemented(__FILE__, __LINE__, "can't write PBEAM.");
 }
 
 // Local Variables:

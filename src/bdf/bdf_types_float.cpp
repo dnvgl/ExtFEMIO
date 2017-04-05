@@ -45,7 +45,7 @@ using namespace boost;
 using namespace boost::regex_constants;
 #else
 using namespace std;
-using namespace std::regex_constants;
+using namespace regex_constants;
 #endif
 
 const regex dnvgl::extfem::bdf::types::float_exp_re(

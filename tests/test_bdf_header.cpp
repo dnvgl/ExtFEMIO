@@ -17,22 +17,20 @@ namespace {
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
 
-#include <limits>
-
 // This tells Catch to provide a main() - only do this in one cpp file
 #define CATCH_CONFIG_MAIN
 
-#include <iostream>
 #include <deque>
 
 #include <my_c++14.h>
 
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "bdf/header.h"
-#include "bdf/errors.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
@@ -179,7 +177,7 @@ namespace ExportBDF{
         std::list<std::unique_ptr<dnvgl::extfem::bdf::header::__base::entry> > entries;
     public:
         BDF_Header(std::string const&);
-        ~BDF_Header(void);
+        ~BDF_Header();
         void add_LC(long const &lc_num, long const &id, std::string const &title);
         std::ostream const &operator<<(std::ostream&) const;
         friend std::ostream&
@@ -199,7 +197,7 @@ namespace ExportBDF{
                     new case_control::echo::none}));
     }
 
-    BDF_Header::~BDF_Header(void) {
+    BDF_Header::~BDF_Header() {
         entries.clear();
     }
 

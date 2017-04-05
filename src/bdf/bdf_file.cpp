@@ -18,10 +18,7 @@ namespace {
 
 #include "bdf/file.h"
 
-#include <iostream>
-#include <iterator>
 #include <list>
-#include <algorithm>
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
@@ -40,7 +37,7 @@ cur_line(""), data(inp), last_comment("") {}
 void bdf_file::get(std::list<std::string> &res) {
     res.clear();
     while (cur_line.length() == 0)
-        std::getline(data, cur_line);
+        getline(data, cur_line);
     do {
         // if line not empty and not comment line add line to result std::set.
         if (cur_line.length() > 0) {
@@ -52,17 +49,17 @@ void bdf_file::get(std::list<std::string> &res) {
         }
         // if not EOF, read next line
         // loop while no next card starts and file has still content.
-    } while (std::getline(this->data, this->cur_line) &&
+    } while (getline(this->data, this->cur_line) &&
              (res.size() == 0 ||
              cont_chars.find(cur_line[0]) != cont_chars.end()));
 }
 
-bool bdf_file::eof(void) {
+bool bdf_file::eof() const {
     return data.eof();
 }
 
 // Return size of input BDF file.
-std::streampos bdf_file::size(void) {
+std::streampos bdf_file::size() const {
     // save current position in file
     auto cur_pos = data.tellg();
 
@@ -78,7 +75,7 @@ std::streampos bdf_file::size(void) {
 }
 
 // Return position in input BDF file.
-std::streampos bdf_file::pos(void) {
+std::streampos bdf_file::pos() const {
     return data.tellg();
 }
 

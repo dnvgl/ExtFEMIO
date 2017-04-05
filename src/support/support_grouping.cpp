@@ -25,7 +25,7 @@ using namespace std;
 using namespace dnvgl::extfem::support;
 using namespace dnvgl::extfem::support::GroupInfo;
 
-elem_info::elem_info(void) :
+elem_info::elem_info() :
         elem_info(-1, 0, "", "", "", 0.) {}
 
 elem_info::elem_info(long const &id) :

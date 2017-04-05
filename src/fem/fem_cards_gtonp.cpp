@@ -32,12 +32,12 @@ static char THIS_FILE[] = __FILE__;
 using namespace std;
 
 using namespace dnvgl::extfem;
-using namespace dnvgl::extfem::fem;
-using namespace dnvgl::extfem::fem::types;
+using namespace fem;
+using namespace types;
 
-using namespace dnvgl::extfem::fem::cards;
+using namespace cards;
 
-fem::types::card const gtonp::head("GTONP");
+card const gtonp::head("GTONP");
 
 entry_type<double> const gtonp::_form_HZ("HZ");
 entry_type<double> const gtonp::_form_TY("TY");
@@ -52,7 +52,7 @@ entry_type<long> const gtonp::_form_NLOBYB("NLOBYB");
 entry_type<long> const gtonp::_form_NLOBZ("NLOBZ");
 
 gtonp::gtonp(const vector<std::string> &inp, size_t const len) :
-        __base::beam_prop(inp, len, false) {
+        beam_prop(inp, len, false) {
     read(inp, len);
 }
 
@@ -84,7 +84,7 @@ void gtonp::read(const vector<std::string> &inp, size_t const len) {
         NLOBZ = {0};
 }
 
-gtonp::gtonp(void) :
+gtonp::gtonp() :
         gtonp(-1, 0., 0., 0., 0., 0., 0., 0., 0.) {}
 
 gtonp::gtonp(
@@ -93,7 +93,7 @@ gtonp::gtonp(
     double const BP, double const TP,
     double const SFY, double const SFZ,
     long const NLOBYT, long const NLOBYB, long const NLOBZ) :
-        __base::beam_prop(GEONO, false),
+        beam_prop(GEONO, false),
         HZ(HZ), TY(TY), BT(BT), TT(TT), BP(BP), TP(TP),
         SFY(SFY), SFZ(SFZ),
         NLOBYT(NLOBYT), NLOBYB(NLOBYB), NLOBZ(NLOBZ) {}
@@ -119,20 +119,20 @@ cards::__base::card const &gtonp::operator() (
     return *this;
 }
 
-dnvgl::extfem::fem::cards::types const
-gtonp::card_type(void) const {
+cards::types
+gtonp::card_type() const {
     return types::GTONP;
 }
 
 ostream &gtonp::put(ostream& os) const {
     if (GEONO == -1) return os;
-    os << gtonp::head.format()
+    os << head.format()
        << _form_GEONO.format(GEONO) << _form_HZ.format(HZ)
        << _form_TY.format(TY) << _form_BT.format(BT) << endl
-       << dnvgl::extfem::fem::types::card().format()
+       << fem::types::card().format()
        << _form_TT.format(TT) << _form_BP.format(BP)
        << _form_TP.format(TP) << _form_SFY.format(SFY) << endl
-       << dnvgl::extfem::fem::types::card().format()
+       << fem::types::card().format()
        << _form_SFZ.format(SFZ);
     if ((NLOBYT || NLOBYB || NLOBZ))
         os << _form_NLOBYT.format(NLOBYT) << _form_NLOBYB.format(NLOBYB)

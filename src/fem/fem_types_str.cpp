@@ -33,22 +33,22 @@ using namespace std;
 using namespace dnvgl::extfem::fem::type_bounds;
 using namespace dnvgl::extfem::fem::types;
 
-fem_types const entry_type<std::string>::_type = fem_types::Str;
+fem_types const entry_type<string>::_type = fem_types::Str;
 
-entry_type<std::string>::entry_type(const std::string &name) :
-        __base::b_type(name), bounds() {}
+entry_type<string>::entry_type(const std::string &name) :
+        b_type(name), bounds() {}
 
-entry_type<std::string>::entry_type(
+entry_type<string>::entry_type(
     const std::string &name,
     const bound<std::string> &bounds) :
-        __base::b_type(name), bounds(bounds) {}
+        b_type(name), bounds(bounds) {}
 
-std::string
-entry_type<std::string>::operator() (
+string
+entry_type<string>::operator() (
     const std::string &inp1, const std::string &inp2,
     const std::string &inp3, const std::string &inp4) const {
 
-    extfem::string::string static sval;
+    string::string static sval;
 
     sval.assign(72, ' ');
 
@@ -61,19 +61,19 @@ entry_type<std::string>::operator() (
     return res;
 }
 
-std::string entry_type<std::string>::format(
+string entry_type<string>::format(
     const std::string &inp, const size_t &len) const {
 
-    std::ostringstream res;
+    ostringstream res;
 
-    res.setf(std::ios_base::left, std::ios_base::adjustfield);
+    res.setf(ios_base::left, ios_base::adjustfield);
     res.fill(' ');
     res.width(len);
 
     res << inp;
     std::string out(res.str());
     if (out.size() > len) {
-        std::ostringstream msg("output string for value ", std::ostringstream::ate);
+        ostringstream msg("output string for value ", ostringstream::ate);
         msg << inp << " of incorrect size, got length of " << out.size()
             << " instead of allowed length of " << len << ".";
         throw errors::int_error(name, msg.str());

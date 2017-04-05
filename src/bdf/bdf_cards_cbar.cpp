@@ -8,6 +8,7 @@
 */
 #include "StdAfx.h"
 #include "extfem_misc.h"
+#include "bdf/cards_elements.h"
 
 // ID:
 namespace {
@@ -15,8 +16,6 @@ namespace {
         "@(#) $Id$";
 }
 
-#include <sstream>
-#include <functional>
 #include <memory>
 
 #include "bdf/cards.h"
@@ -41,9 +40,10 @@ using namespace type_bounds;
 using namespace cards;
 
 using bdf::types::entry_type;
+
 namespace {
-   long static const cl1 = 1;
-   double static const cd0 = 0.;
+   long const cl1 = 1;
+   double const cd0 = 0.;
 }
 
 bdf::types::card cbar::head = bdf::types::card("CBAR");
@@ -79,7 +79,7 @@ entry_type<double> const cbar::form_W3B(
 
 cbar::cbar(list<std::string> const &inp) :
 element(inp) {
-    this->read(inp);
+    this->cbar::read(inp);
 }
 
 cbar::cbar(
@@ -116,8 +116,8 @@ cbar::cbar(
     W1A(W1A), W2A(W2A), W3A(W3A),
     W1B(W1B), W2B(W2B), W3B(W3B) {}
 
-cards::types const cbar::card_type(void) const {
-    return cards::types::CBAR;
+cards::types cbar::card_type() const {
+    return types::CBAR;
 }
 
 void cbar::read(list<std::string> const &inp) {
@@ -172,9 +172,17 @@ void cbar::read(list<std::string> const &inp) {
     }
 }
 
+cards::__base::card const& cbar::operator()(long const* EID, long const* PID, long const* GA, long const* GB, long const* G0, std::string const* OFFT, list<int> const* PA, list<int> const* PB, double const* W1A, double const* W2A, double const* W3A, double const* W1B, double const* W2B, double const* W3B) const {
+    throw not_implemented(__FILE__, __LINE__);
+}
+
+cards::__base::card const& cbar::operator()(long const* EID, long const* PID, long const* GA, long const* GB, double const* X1, double const* X2, double const* X3, std::string const* OFFT, list<int> const* PA, list<int> const* PB, double const* W1A, double const* W2A, double const* W3A, double const* W1B, double const* W2B, double const* W3B) const {
+    throw not_implemented(__FILE__, __LINE__);
+}
+
 void cbar::collect_outdata(
     list<unique_ptr<format_entry> > &res) const {
-    res.push_back(unique_ptr<format_entry>(format(cbar::head)));
+    res.push_back(unique_ptr<format_entry>(format(head)));
 
     res.push_back(unique_ptr<format_entry>(format<long>(form_EID, EID)));
     res.push_back(unique_ptr<format_entry>(format<long>(form_PID, PID)));
@@ -182,10 +190,10 @@ void cbar::collect_outdata(
     res.push_back(unique_ptr<format_entry>(format<long>(form_GB, GB)));
     if (choose_dir_code == CHOOSE_DIR_CODE::has_DCODE) {
         res.push_back(unique_ptr<format_entry>(format<long>(form_G0, G0)));
-        if ((bool)OFFT || (bool)PA || (bool)PB || (bool)W1A || (bool)W2A ||
-            (bool)W3A || (bool)W1B || (bool)W2B || (bool)W3B) {
-            res.push_back(unique_ptr<format_entry>(format(cbar::empty)));
-            res.push_back(unique_ptr<format_entry>(format(cbar::empty)));
+        if (bool(OFFT) || bool(PA) || bool(PB) || bool(W1A) || bool(W2A) ||
+            bool(W3A) || bool(W1B) || bool(W2B) || bool(W3B)) {
+            res.push_back(unique_ptr<format_entry>(format(empty)));
+            res.push_back(unique_ptr<format_entry>(format(empty)));
         }
     } else {
         res.push_back(unique_ptr<format_entry>(format<double>(form_X1, X1)));
@@ -193,39 +201,39 @@ void cbar::collect_outdata(
         res.push_back(unique_ptr<format_entry>(format<double>(form_X3, X3)));
     }
 
-    if ((bool)OFFT || (bool)PA || (bool)PB || (bool)W1A || (bool)W2A ||
-        (bool)W3A || (bool)W1B || (bool)W2B || (bool)W3B)
+    if (bool(OFFT) || bool(PA) || bool(PB) || bool(W1A) || bool(W2A) ||
+        bool(W3A) || bool(W1B) || bool(W2B) || bool(W3B))
         res.push_back(
             unique_ptr<format_entry>(format<std::string>(form_OFFT, OFFT)));
     else goto cont;
 
-    if ((bool)PA || (bool)PB || (bool)W1A || (bool)W2A || (bool)W3A ||
-        (bool)W1B || (bool)W2B || (bool)W3B)
+    if (bool(PA) || bool(PB) || bool(W1A) || bool(W2A) || bool(W3A) ||
+        bool(W1B) || bool(W2B) || bool(W3B))
         res.push_back(
             unique_ptr<format_entry>(format<list<int> >(form_PA, PA)));
     else goto cont;
-    if ((bool)PB || (bool)W1A || (bool)W2A || (bool)W3A || (bool)W1B ||
-        (bool)W2B || (bool)W3B)
+    if (bool(PB) || bool(W1A) || bool(W2A) || bool(W3A) || bool(W1B) ||
+        bool(W2B) || bool(W3B))
         res.push_back(
             unique_ptr<format_entry>(format<list<int> >(form_PB, PB)));
     else goto cont;
-    if ((bool)W1A || (bool)W2A || (bool)W3A || (bool)W1B || (bool)W2B ||
-        (bool)W3B)
+    if (bool(W1A) || bool(W2A) || bool(W3A) || bool(W1B) || bool(W2B) ||
+        bool(W3B))
         res.push_back(unique_ptr<format_entry>(format<double>(form_W1A, W1A)));
     else goto cont;
-    if ((bool)W2A || (bool)W3A || (bool)W1B || (bool)W2B || (bool)W3B)
+    if (bool(W2A) || bool(W3A) || bool(W1B) || bool(W2B) || bool(W3B))
         res.push_back(unique_ptr<format_entry>(format<double>(form_W2A, W2A)));
     else goto cont;
-    if ((bool)W3A || (bool)W1B || (bool)W2B || (bool)W3B)
+    if (bool(W3A) || bool(W1B) || bool(W2B) || bool(W3B))
         res.push_back(unique_ptr<format_entry>(format<double>(form_W3A, W3A)));
     else goto cont;
-    if ((bool)W1B || (bool)W2B || (bool)W3B)
+    if (bool(W1B) || bool(W2B) || bool(W3B))
         res.push_back(unique_ptr<format_entry>(format<double>(form_W1B, W1B)));
     else goto cont;
-    if ((bool)W2B || (bool)W3B)
+    if (bool(W2B) || bool(W3B))
         res.push_back(unique_ptr<format_entry>(format<double>(form_W2B, W2B)));
     else goto cont;
-    if ((bool)W3B)
+    if (bool(W3B))
         res.push_back(unique_ptr<format_entry>(format<double>(form_W3B, W3B)));
 cont:
     return;

@@ -17,7 +17,6 @@ namespace {
 }
 
 #include <memory>
-#include <algorithm>
 
 #include "fem/cards.h"
 #include "fem/types.h"
@@ -31,12 +30,12 @@ static char THIS_FILE[] = __FILE__;
 using namespace std;
 
 using namespace dnvgl::extfem;
-using namespace dnvgl::extfem::fem;
-using namespace dnvgl::extfem::fem::types;
+using namespace fem;
+using namespace types;
 
-using namespace dnvgl::extfem::fem::cards;
+using namespace cards;
 
-fem::types::card const misosel::head("MISOSEL");
+card const misosel::head("MISOSEL");
 
 // entry_type<long> const misosel::_form_MATNO("MATNO");
 entry_type<double> const misosel::_form_YOUNG("YOUNG");
@@ -49,7 +48,7 @@ entry_type<double> const misosel::_form_YIELD("YIELD");
 
 misosel::misosel(vector<std::string> const &inp, size_t const len) :
         material(inp, len) {
-    read(inp, len);
+    misosel::read(inp, len);
 }
 
 void misosel::read(vector<std::string> const &inp, size_t const len) {
@@ -74,20 +73,20 @@ void misosel::read(vector<std::string> const &inp, size_t const len) {
     else
         YIELD = {0.};}
 
-misosel::misosel(void) :
+misosel::misosel() :
         misosel(-1, 0., 0., 0., 0., 0.) {}
 
 misosel::misosel(long const MATNO, double const YOUNG,
                  double const POISS, double const RHO,
                  double const DAMP, double const ALPHA,
                  double const DUMMY/*=0.*/, double const YIELD/*=0.*/) :
-        __base::material(MATNO), YOUNG(YOUNG), POISS(POISS),
+        material(MATNO), YOUNG(YOUNG), POISS(POISS),
         RHO(RHO), DAMP(DAMP), ALPHA(ALPHA), DUMMY(DUMMY),
         YIELD(YIELD) {}
 
 cards::__base::card const &misosel::operator() (
     vector<std::string> const &inp, size_t const len) {
-    __base::material::read(inp, len);
+    material::read(inp, len);
     read(inp, len);
     return *this;
 }
@@ -107,16 +106,16 @@ cards::__base::card const &misosel::operator() (
     return *this;
 }
 
-fem::cards::types const misosel::card_type(void) const {
+cards::types misosel::card_type() const {
     return types::MISOSEL;
 }
 
 ostream &misosel::put(ostream& os) const {
     if (MATNO == -1) return os;
-    os << misosel::head.format()
+    os << head.format()
        << _form_MATNO.format(MATNO) << _form_YOUNG.format(YOUNG)
        << _form_POISS.format(POISS) << _form_RHO.format(RHO) << endl
-       << dnvgl::extfem::fem::types::card().format()
+       << fem::types::card().format()
        << _form_DAMP.format(DAMP) << _form_ALPHA.format(ALPHA);
     if ((DUMMY || YIELD))
         os << _form_DUMMY.format(DUMMY) << _form_YIELD.format(YIELD);

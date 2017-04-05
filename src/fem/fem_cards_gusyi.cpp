@@ -17,7 +17,6 @@ namespace {
 }
 
 #include <memory>
-#include <algorithm>
 
 #include "fem/cards.h"
 #include "fem/types.h"
@@ -31,12 +30,12 @@ static char THIS_FILE[] = __FILE__;
 using namespace std;
 
 using namespace dnvgl::extfem;
-using namespace dnvgl::extfem::fem;
-using namespace dnvgl::extfem::fem::types;
+using namespace fem;
+using namespace types;
 
-using namespace dnvgl::extfem::fem::cards;
+using namespace cards;
 
-fem::types::card const gusyi::head("GUSYI");
+card const gusyi::head("GUSYI");
 
 entry_type<double> const gusyi::_form_HZ("HZ");
 entry_type<double> const gusyi::_form_TY("TY");
@@ -53,8 +52,8 @@ entry_type<long> const gusyi::_form_NLOBYB("NLOBYB");
 entry_type<long> const gusyi::_form_NLOBZ("NLOBZ");
 
 gusyi::gusyi(const vector<std::string> &inp, size_t const len) :
-        __base::beam_prop(inp, len, false) {
-    read(inp, len);
+        beam_prop(inp, len, false) {
+    gusyi::read(inp, len);
 }
 
 void gusyi::read(const vector<std::string> &inp, size_t const len) {
@@ -87,7 +86,7 @@ void gusyi::read(const vector<std::string> &inp, size_t const len) {
         NLOBZ = {0};
 }
 
-gusyi::gusyi(void) :
+gusyi::gusyi() :
         gusyi(-1, 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.) {}
 
 gusyi::gusyi(
@@ -97,7 +96,7 @@ gusyi::gusyi(
     double const BB, double const B2, double const TB,
     double const SFY, double const SFZ,
     long const NLOBYT, long const NLOBYB, long const NLOBZ) :
-        __base::beam_prop(GEONO, false),
+        beam_prop(GEONO, false),
         HZ(HZ), TY(TY),
         BT(BT), B1(B1), TT(TT),
         BB(BB), B2(B2),TB(TB),
@@ -128,25 +127,23 @@ cards::__base::card const &gusyi::operator() (
     return *this;
 }
 
-dnvgl::extfem::fem::cards::types const
-gusyi::card_type(void) const {
+cards::types gusyi::card_type() const {
     return types::GUSYI;
 }
 
 ostream &gusyi::put(ostream& os) const {
     if (GEONO == -1) return os;
-    os << gusyi::head.format()
+    os << head.format()
        << _form_GEONO.format(GEONO) << _form_HZ.format(HZ)
        << _form_TY.format(TY) << _form_BT.format(BT) << endl
-       << dnvgl::extfem::fem::types::card().format()
+       << fem::types::card().format()
        << _form_B1.format(B1) << _form_TT.format(TT)
        << _form_BB.format(BB) << _form_B2.format(B2) << endl
-       << dnvgl::extfem::fem::types::card().format()
+       << fem::types::card().format()
        << _form_TB.format(TB) << _form_SFY.format(SFY)
        << _form_SFZ.format(SFZ);
     if ((NLOBYT || NLOBYB || NLOBZ))
-        os << _form_NLOBYT.format(NLOBYT) << endl << dnvgl
-            ::extfem::fem::types::card().format()
+        os << _form_NLOBYT.format(NLOBYT) << endl << fem::types::card().format()
            << _form_NLOBYB.format(NLOBYB)
            << _form_NLOBZ.format(NLOBZ);
     os << endl;

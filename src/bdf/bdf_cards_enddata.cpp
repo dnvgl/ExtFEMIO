@@ -18,7 +18,6 @@ namespace {
 
 #include "bdf/cards.h"
 
-#include <cstdlib>
 #include <memory>
 
 #if defined(__AFX_H__) && defined(_DEBUG)
@@ -30,14 +29,14 @@ static char THIS_FILE[] = __FILE__;
 using namespace std;
 
 using namespace dnvgl::extfem;
-using namespace dnvgl::extfem::bdf::cards;
+using namespace bdf::cards;
 
 enddata::enddata(list<std::string> const &inp) :
-__base::card(inp) {}
+card(inp) {}
 
-enddata::enddata(void) : __base::card() {}
+enddata::enddata() : card() {}
 
-const types enddata::card_type(void) const {
+types enddata::card_type() const {
     return types::ENDDATA;
 }
 
@@ -47,7 +46,7 @@ bdf::types::card enddata::head = bdf::types::card("ENDDATA");
 
 void enddata::collect_outdata(
     list<unique_ptr<format_entry> > &res) const {
-    res.push_back(unique_ptr<format_entry>(format(enddata::head)));
+    res.push_back(unique_ptr<format_entry>(format(head)));
     return;
 }
 

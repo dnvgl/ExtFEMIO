@@ -21,7 +21,6 @@ namespace {
 #endif
 
 #include "bdf/types.h"
-#include "bdf/errors.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW

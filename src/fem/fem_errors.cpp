@@ -17,8 +17,6 @@ namespace {
         "@(#) $Id$";
 }
 
-#include <string>
-
 #include "fem/errors.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
@@ -40,13 +38,13 @@ error::error(
     const std::string &err_class) :
         msg(msg), name(name), err_class(err_class) {};
 
-std::string error::get_msg(void) const {
+string error::get_msg() const {
     if (name.length())
         return err_class + ":" + name + ":" + msg;
     return err_class + ":" + msg;
 }
 
-const char *error::what(void) const _EXTFEMIO_NOEXCEPT {
+const char *error::what() const _EXTFEMIO_NOEXCEPT {
     return (this->get_msg() + "\n").c_str();
 }
 

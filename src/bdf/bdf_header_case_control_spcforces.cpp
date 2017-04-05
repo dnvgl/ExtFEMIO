@@ -33,7 +33,7 @@ spcforces::spcforces(
 
 spcforces::spcforces(
     std::list<describer*> const &describers, long const &res) :
-    spcforces(describers, spcforces::restype::n, res) {}
+    spcforces(describers, restype::n, res) {}
 
 std::ostream &spcforces::put(std::ostream &os) const {
     os << "SPCFORCES";
@@ -50,73 +50,73 @@ std::ostream &spcforces::put(std::ostream &os) const {
         os << ")";
     }
     switch (this->res) {
-    case spcforces::restype::n:
+    case restype::n:
         os << " = " << this->res_n;
         break;
-    case spcforces::restype::ALL:
+    case restype::ALL:
         os << " = ALL";
         break;
-    case spcforces::restype::NONE:
+    case restype::NONE:
         os << " = NONE";
         break;
     }
     return os << std::endl;
 }
 
-spcforces::describer::describer(void) {}
+spcforces::describer::describer() {}
 
-spcforces::print::print(void) {}
-std::string const spcforces::print::str(void) const {
+spcforces::print::print() {}
+std::string spcforces::print::str() const {
     return "PRINT";
 }
 
-spcforces::nozprint::nozprint(void) {}
-std::string const spcforces::nozprint::str(void) const {
+spcforces::nozprint::nozprint() {}
+std::string spcforces::nozprint::str() const {
     return "NOZPRINT";
 }
 
-spcforces::sort2::sort2(void) {}
-std::string const spcforces::sort2::str(void) const {
+spcforces::sort2::sort2() {}
+std::string spcforces::sort2::str() const {
     return "SORT2";
 }
 
-spcforces::punch::punch(void) {}
-std::string const spcforces::punch::str(void) const {
+spcforces::punch::punch() {}
+std::string spcforces::punch::str() const {
     return "PUNCH";
 }
 
-spcforces::imag::imag(void) {}
-std::string const spcforces::imag::str(void) const {
+spcforces::imag::imag() {}
+std::string spcforces::imag::str() const {
     return "IMAG";
 }
 
-spcforces::phase::phase(void) {}
-std::string const spcforces::phase::str(void) const {
+spcforces::phase::phase() {}
+std::string spcforces::phase::str() const {
     return "PHASE";
 }
 
-spcforces::psdf::psdf(void) {}
-std::string const spcforces::psdf::str(void) const {
+spcforces::psdf::psdf() {}
+std::string spcforces::psdf::str() const {
     return "PSDF";
 }
 
-spcforces::crms::crms(void) {}
-std::string const spcforces::crms::str(void) const {
+spcforces::crms::crms() {}
+std::string spcforces::crms::str() const {
     return "CRMS";
 }
 
-spcforces::rpunch::rpunch(void) {}
-std::string const spcforces::rpunch::str(void) const {
+spcforces::rpunch::rpunch() {}
+std::string spcforces::rpunch::str() const {
     return "RPUNCH";
 }
 
-spcforces::rall::rall(void) {}
-std::string const spcforces::rall::str(void) const {
+spcforces::rall::rall() {}
+std::string spcforces::rall::str() const {
     return "RALL";
 }
 
-spcforces::norprint::norprint(void) {}
-std::string const spcforces::norprint::str(void) const {
+spcforces::norprint::norprint() {}
+std::string spcforces::norprint::str() const {
     return "NORPRINT";
 }
 

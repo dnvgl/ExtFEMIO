@@ -19,12 +19,8 @@ namespace {
 
 #include "fem/cards.h"
 
-#include "fem/cards.h"
-
 #include <memory>
-#include <algorithm>
 
-#include "fem/cards.h"
 #include "fem/types.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
@@ -36,12 +32,12 @@ static char THIS_FILE[] = __FILE__;
 using namespace std;
 
 using namespace dnvgl::extfem;
-using namespace dnvgl::extfem::fem;
-using namespace dnvgl::extfem::fem::types;
+using namespace fem;
+using namespace types;
 
-using namespace dnvgl::extfem::fem::cards;
+using namespace cards;
 
-fem::types::card const gchanr::head("GCHANR");
+card const gchanr::head("GCHANR");
 
 entry_type<double> const gchanr::_form_HZ("HZ");
 entry_type<double> const gchanr::_form_TY("TY");
@@ -54,12 +50,12 @@ entry_type<double> const gchanr::_form_R("R");
 entry_type<long> const gchanr::_form_NLOBY("NLOBY");
 entry_type<long> const gchanr::_form_NLOBZ("NLOBZ");
 
-gchanr::gchanr(void) :
+gchanr::gchanr() :
         gchanr(-1, 0., 0., 0., 0., 0., 0., 0, 0.) {}
 
 gchanr::gchanr(vector<std::string> const &inp, size_t const len) :
-        __base::beam_prop(inp, len, false) {
-    read(inp, len);
+        beam_prop(inp, len, false) {
+    gchanr::read(inp, len);
 }
 
 gchanr::gchanr(long const GEONO,
@@ -67,11 +63,11 @@ gchanr::gchanr(long const GEONO,
              double const TZ, double const SFY, double const SFZ,
                long const K, double const R,
                long const NLOBY/*=0*/, long const NLOBZ/*=0*/) :
-        __base::beam_prop(GEONO),
+        beam_prop(GEONO),
         HZ{HZ}, TY{TY}, BY{BY}, TZ {TZ}, SFY{SFY}, SFZ{SFZ}, K{K}, R{R},
         NLOBY{NLOBY}, NLOBZ{NLOBZ} {}
 
-fem::cards::types const gchanr::card_type(void) const {
+cards::types gchanr::card_type() const {
     return types::GCHANR;
 }
 
@@ -97,7 +93,7 @@ cards::__base::card const &gchanr::operator() (
 
 ostream &gchanr::put(ostream &os) const {
     if (GEONO == -1) return os;
-    os << gchanr::head.format()
+    os << head.format()
        << _form_GEONO.format(GEONO) << _form_HZ.format(HZ)
        << _form_TY.format(TY) << _form_BY.format(BY) << endl
        << fem::types::card("").format()

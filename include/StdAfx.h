@@ -12,9 +12,9 @@
 // or project specific include files that are used frequently,
 // but are changed infrequently
 
-#ifdef _MSC_VER
-
 #pragma once
+
+#ifdef _MSC_VER
 
 #ifdef _X64
    #define NTDDI_VERSION    NTDDI_WIN7SP4

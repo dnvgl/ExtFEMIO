@@ -81,7 +81,7 @@ TEST_CASE("BDF list of int types output.", "[bdf_types]") {
         CHECK(obj.format(nullptr) == "        ");
     }
 
-    SECTION("SHORT (void)") {
+    SECTION("SHORT ()") {
         std::list<int> llval(lval.value);
         bdf::types::base::out_form = bdf::types::out_form_type::SHORT;
         CHECK(obj.format(&llval).size() == 8);

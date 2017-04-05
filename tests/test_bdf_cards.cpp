@@ -17,21 +17,20 @@ namespace {
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
 
-#include <limits>
-
 // This tells Catch to provide a main() - only do this in one cpp file
 #define CATCH_CONFIG_MAIN
 
-#include <iostream>
 #include <list>
 
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "bdf/cards.h"
 #include "bdf/file.h"
-#include "bdf/errors.h"
+#include "bdf/cards_elements.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
@@ -63,36 +62,36 @@ TEST_CASE("BDF file reader.", "[bdf_cards]" ) {
 
 
     {
-        std::list<std::string> ref({
+        std::list<std::string> ref1({
                 "MAT1    1       2.305+6 80000.0 0.3     7.850-6" });
         probe.get(l);
         CAPTURE( l.front() );
-        CHECK(l == ref);
+        CHECK(l == ref1);
     }
 
     {
-        std::list<std::string> ref({
+        std::list<std::string> ref1({
                 "MAT1    4       2.305+6 80000.0 0.3     7.850-6" });
         probe.get(l);
         CAPTURE( l.front() );
-        CHECK(l == ref);
+        CHECK(l == ref1);
     }
 
     {
-        std::list<std::string> ref({
+        std::list<std::string> ref1({
                 "PBEAML  104010  4               L     ",
                     "           63.0   340.0    35.0    14.0" });
         probe.get(l);
         CAPTURE( l.front() );
-        CHECK(l == ref);
+        CHECK(l == ref1);
     }
 
     {
-        std::list<std::string> ref({
+        std::list<std::string> ref1({
                 "PBEAM   4000001 3       1.046+4 9.369+7 1.694+6 6.856+6 1.316+6" });
         probe.get(l);
         CAPTURE( l.front() );
-        CHECK(l == ref);
+        CHECK(l == ref1);
     }
 }
 

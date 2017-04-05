@@ -24,21 +24,21 @@ displacement::displacement(
 std::list<describer*> const &_describers, restype const &res, long const &n) :
 res(res), res_n(n) {
     for (auto p : _describers)
-        describers.push_back(std::unique_ptr<displacement::describer>(p));
+        describers.push_back(std::unique_ptr<describer>(p));
 }
 
 displacement::displacement(
     std::list<describer*> const &describers, restype const &res) :
-    displacement::displacement(describers, res, 0) {}
+    displacement(describers, res, 0) {}
 
 displacement::displacement(
     std::list<describer*> const &describers, long const &res) :
-    displacement::displacement(describers, displacement::restype::n, res) {}
+    displacement(describers, restype::n, res) {}
 
 std::ostream &displacement::put(std::ostream &os) const {
     os << "DISPLACEMENT";
     if (this->describers.size() > 0) {
-        bool first = true;
+        auto first = true;
         for (auto &p : this->describers) {
             if (first) {
                 os << "(";
@@ -50,13 +50,13 @@ std::ostream &displacement::put(std::ostream &os) const {
         os << ")";
     }
     switch (this->res) {
-    case displacement::restype::n:
+    case restype::n:
         os << " = " << this->res_n;
         break;
-    case displacement::restype::ALL:
+    case restype::ALL:
         os << " = ALL";
         break;
-    case displacement::restype::NONE:
+    case restype::NONE:
         os << " = NONE";
         break;
     }
@@ -66,88 +66,88 @@ std::ostream &displacement::put(std::ostream &os) const {
 displacement::describer::describer() {}
 
 displacement::sort1::sort1() {}
-std::string const displacement::sort1::str(void) const {
+std::string displacement::sort1::str() const {
     return "SORT1";
 }
 
 displacement::sort2::sort2() {}
-std::string const displacement::sort2::str(void) const {
+std::string displacement::sort2::str() const {
     return "SORT2";
 }
 
 displacement::print::print() {}
-std::string const displacement::print::str(void) const {
+std::string displacement::print::str() const {
     return "PRINT";
 }
 
 displacement::punch::punch() {}
-std::string const displacement::punch::str(void) const {
+std::string displacement::punch::str() const {
     return "PUNCH";
 }
 
 displacement::plot::plot() {}
-std::string const displacement::plot::str(void) const {
+std::string displacement::plot::str() const {
     return "PLOT";
 }
 
 displacement::real::real() {}
-std::string const displacement::real::str(void) const {
+std::string displacement::real::str() const {
     return "REAL";
 }
 
 displacement::imag::imag() {}
-std::string const displacement::imag::str(void) const {
+std::string displacement::imag::str() const {
     return "IMAG";
 }
 
 displacement::phase::phase() {}
-std::string const displacement::phase::str(void) const {
+std::string displacement::phase::str() const {
     return "PHASE";
 }
 
 displacement::psdf::psdf() {}
-std::string const displacement::psdf::str(void) const {
+std::string displacement::psdf::str() const {
     return "PSDF";
 }
 
 displacement::atoc::atoc() {}
-std::string const displacement::atoc::str(void) const {
+std::string displacement::atoc::str() const {
     return "ATOC";
 }
 
 displacement::crms::crms() {}
-std::string const displacement::crms::str(void) const {
+std::string displacement::crms::str() const {
     return "CRMS";
 }
 
 displacement::rall::rall() {}
-std::string const displacement::rall::str(void) const {
+std::string displacement::rall::str() const {
     return "RALL";
 }
 
 displacement::rprint::rprint() {}
-std::string const displacement::rprint::str(void) const {
+std::string displacement::rprint::str() const {
     return "RPRINT";
 }
 
 displacement::noprint::noprint() {}
-std::string const displacement::noprint::str(void) const {
+std::string displacement::noprint::str() const {
     return "NOPRINT";
 }
 
 displacement::rpunch::rpunch() {}
-std::string const displacement::rpunch::str(void) const {
+std::string displacement::rpunch::str() const {
     return "rpunch";
 }
 
 displacement::cid::cid() {}
-std::string const displacement::cid::str(void) const {
+std::string displacement::cid::str() const {
     return "CID";
 }
 
 displacement::tm::tm(double &value) :
 value(value) {}
-std::string const displacement::tm::str(void) const {
+std::string displacement::tm::str() const {
     std::ostringstream res(
         "TM = ", std::ostringstream::ate);
     res << value;
@@ -156,7 +156,7 @@ std::string const displacement::tm::str(void) const {
 
 displacement::t1::t1(double &value) :
 value(value) {}
-std::string const displacement::t1::str(void) const {
+std::string displacement::t1::str() const {
     std::ostringstream res(
         "T1 = ", std::ostringstream::ate);
     res << value;
@@ -165,7 +165,7 @@ std::string const displacement::t1::str(void) const {
 
 displacement::t2::t2(double &value) :
 value(value) {}
-std::string const displacement::t2::str(void) const {
+std::string displacement::t2::str() const {
     std::ostringstream res(
         "T2 = ", std::ostringstream::ate);
     res << value;
@@ -174,7 +174,7 @@ std::string const displacement::t2::str(void) const {
 
 displacement::t3::t3(double &value) :
 value(value) {}
-std::string const displacement::t3::str(void) const {
+std::string displacement::t3::str() const {
     std::ostringstream res(
         "T3 = ", std::ostringstream::ate);
     res << value;
@@ -183,7 +183,7 @@ std::string const displacement::t3::str(void) const {
 
 displacement::rm::rm(double &value) :
 value(value) {}
-std::string const displacement::rm::str(void) const {
+std::string displacement::rm::str() const {
     std::ostringstream res(
         "RM = ", std::ostringstream::ate);
     res << value;
@@ -192,7 +192,7 @@ std::string const displacement::rm::str(void) const {
 
 displacement::r1::r1(double &value) :
 value(value) {}
-std::string const displacement::r1::str(void) const {
+std::string displacement::r1::str() const {
     std::ostringstream res(
         "R1 = ", std::ostringstream::ate);
     res << value;
@@ -201,7 +201,7 @@ std::string const displacement::r1::str(void) const {
 
 displacement::r2::r2(double &value) :
 value(value) {}
-std::string const displacement::r2::str(void) const {
+std::string displacement::r2::str() const {
     std::ostringstream res(
         "R2 = ", std::ostringstream::ate);
     res << value;
@@ -210,7 +210,7 @@ std::string const displacement::r2::str(void) const {
 
 displacement::r3::r3(double &value) :
 value(value) {}
-std::string const displacement::r3::str(void) const {
+std::string displacement::r3::str() const {
     std::ostringstream res(
         "R3 = ", std::ostringstream::ate);
     res << value;
@@ -218,7 +218,7 @@ std::string const displacement::r3::str(void) const {
 }
 
 displacement::f::f(double &value) : value(value) {}
-std::string const displacement::f::str(void) const {
+std::string displacement::f::str() const {
     std::ostringstream res(
         "F = ", std::ostringstream::ate);
     res << value;

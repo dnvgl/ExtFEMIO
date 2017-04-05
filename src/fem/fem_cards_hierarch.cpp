@@ -17,7 +17,6 @@ namespace {
 }
 
 #include <memory>
-#include <algorithm>
 
 #include "fem/cards.h"
 #include "fem/types.h"
@@ -34,9 +33,9 @@ using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
 
-using namespace dnvgl::extfem::fem::cards;
+using namespace cards;
 
-fem::types::card const hierarch::head("HIERARCH");
+card const hierarch::head("HIERARCH");
 
 entry_type<long> const hierarch::_form_NFIELD("NFIELD");
 entry_type<long> const hierarch::_form_IHREF("IHREF");
@@ -49,7 +48,7 @@ entry_type<long> const hierarch::_form_NSUB("NSUB");
 entry_type<long> const hierarch::_form_IHSREF("IHSREF");
 
 hierarch::hierarch(vector<std::string> const &inp, size_t const len) {
-    read(inp, len);
+    hierarch::read(inp, len);
 }
 
 void hierarch::read(vector<std::string> const &inp, size_t const len) {
@@ -69,7 +68,7 @@ void hierarch::read(vector<std::string> const &inp, size_t const len) {
         IHSREFi.push_back(_form_IHSREF(inp.at(9 + i)));
 }
 
-hierarch::hierarch(void) :
+hierarch::hierarch() :
         hierarch(-1, 0, 0, 0, 0, 0, 0, {}) {}
 
 hierarch::hierarch(
@@ -79,8 +78,8 @@ hierarch::hierarch(
         card(), NFIELD(NFIELD), IHREF(IHREF), ISELTY(ISELTY), INDSEL(INDSEL),
         ISLEVL(ISLEVL), ITREF(ITREF), IHPREF(IHPREF), NSUB(NSUB),
         IHSREFi(IHSREF) {
-    if (this->IHSREFi.size() != (size_t)this->NSUB)
-        throw dnvgl::extfem::fem::errors::usage_error(
+    if (this->IHSREFi.size() != size_t(this->NSUB))
+        throw errors::usage_error(
             "HIERARCH", "IHSREF not of size NSUB");
 }
 
@@ -94,21 +93,21 @@ hierarch::hierarch(
     this->NSUB = long(this->IHSREFi.size());
 }
 
-cards::types const hierarch::card_type(void) const {
+cards::types hierarch::card_type() const {
     return types::HIERARCH;
 }
 
 ostream &hierarch::put(ostream& os) const {
     if (NFIELD == -1) return os;
-    os << hierarch::head.format()
+    os << head.format()
        << _form_NFIELD.format(NFIELD) << _form_IHREF.format(IHREF)
        << _form_ISELTY.format(ISELTY) << _form_INDSEL.format(INDSEL) << endl
-       << dnvgl::extfem::fem::types::card().format()
+       << fem::types::card().format()
        << _form_ISLEVL.format(ISLEVL) << _form_ITREF.format(ITREF)
        << _form_IHPREF.format(IHPREF) << _form_NSUB.format(NSUB);
     for (int i = 0; i<NSUB; i++) {
         if (!(i % 4))
-            os << endl << dnvgl::extfem::fem::types::card().format();
+            os << endl << fem::types::card().format();
         os << _form_IHSREF.format(IHSREFi[i]);
     }
     os << endl;

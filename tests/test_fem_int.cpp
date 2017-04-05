@@ -129,7 +129,7 @@ TEST_CASE("FEM int types output.", "[fem_types]" ) {
       CHECK(obj.format(lval) == "-1.000000000e+00");
    }
 
-   SECTION("Output (void)") {
+   SECTION("Output ()") {
       long lval(1);
       CHECK(lval == 1);
       CHECK(obj.format(lval).size() == 16);

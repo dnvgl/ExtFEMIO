@@ -23,7 +23,6 @@ namespace {
 #endif
 
 #include "bdf/types.h"
-#include "bdf/errors.h"
 
 #ifdef HAVE_BOOST_REGEX_HPP
 using boost::regex;

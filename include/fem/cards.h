@@ -15,7 +15,6 @@
 #define _FEM_CARDS_H_
 
 #include <vector>
-#include <string>
 #include <unordered_set>
 #include <unordered_map>
 #include <utility>
@@ -24,10 +23,11 @@
 #include "extfem_misc.h"
 
 #include <my_c++14.h>
+#include "types.h"
 
+#ifdef __GNUC__
 #include "config.h"
-
-#include "fem/types.h"
+#endif
 
 namespace dnvgl {
     namespace extfem {
@@ -42,8 +42,6 @@ namespace dnvgl {
         }
     }
 }
-
-#include "fem/elements.h"
 
 namespace dnvgl {
     namespace extfem {
@@ -161,9 +159,9 @@ namespace dnvgl {
 
                     protected:
 
-                        dnvgl::extfem::fem::types::empty static const empty;
+                        fem::types::empty static const empty;
 
-                        dnvgl::extfem::fem::types::card static const head;
+                        fem::types::card static const head;
 
                     public:
 
@@ -172,18 +170,18 @@ namespace dnvgl {
                             std::vector<std::string>&);
 
                         card(std::vector<std::string> const&, size_t const);
-                        card(void);
+                        card();
 
-                        virtual ~card(void);
+                        virtual ~card();
 
                         virtual void read(
                             std::vector<std::string> const&, size_t const) = 0;
 
-                        virtual __base::card const &operator() (
+                        virtual card const &operator() (
                             std::vector<std::string> const&, size_t const);
 
-                        virtual dnvgl::extfem::fem::cards::types const
-                        card_type(void) const = 0;
+                        virtual types
+                        card_type() const = 0;
                     };
 
 /// Base class for geometric properties.
@@ -197,18 +195,18 @@ namespace dnvgl {
 
                         void set_geono(long const GEONO=0);
 
-                        dnvgl::extfem::fem::types::entry_type<long>
+                        fem::types::entry_type<long>
                         static const _form_GEONO;
 
-                        geoprop(void);
+                        geoprop();
                         geoprop(long const GEONO);
                         geoprop(std::vector<std::string> const&, size_t const);
 
-                        virtual void read(
-                            std::vector<std::string> const&, size_t const);
+                        void read(
+                            std::vector<std::string> const&, size_t const) override;
 
-                        virtual __base::card const &operator() (
-                            std::vector<std::string> const&, size_t const);
+                        card const &operator() (
+                            std::vector<std::string> const&, size_t const) override;
 
                     public:
 
@@ -218,10 +216,10 @@ namespace dnvgl {
 */
                         long GEONO;
 
-                        static void reset_geono(void);
+                        static void reset_geono();
 
-                        virtual dnvgl::extfem::fem::cards::types const
-                        card_type(void) const = 0;
+                        virtual types
+                        card_type() const override = 0;
                     };
 
 /// Base class for cards describing transformed coordinate systems
@@ -236,17 +234,17 @@ namespace dnvgl {
 
                         void set_transno(long const TRANSNO=0);
 
-                        dnvgl::extfem::fem::types::entry_type<long>
+                        fem::types::entry_type<long>
                         static const _form_TRANSNO;
 
-                        transno(void);
+                        transno();
                         transno(long const TRANSNO);
                         transno(std::vector<std::string> const&, size_t const);
 
-                        virtual void read(
-                            std::vector<std::string> const&, size_t const);
+                        void read(
+                            std::vector<std::string> const&, size_t const) override;
 
-                        using __base::card::operator();
+                        using card::operator();
 
                     public:
 
@@ -256,10 +254,10 @@ namespace dnvgl {
 */
                         long TRANSNO;
 
-                        static void reset_transno(void);
+                        static void reset_transno();
 
-                        virtual dnvgl::extfem::fem::cards::types const
-                        card_type(void) const = 0;
+                        virtual types
+                        card_type() const override = 0;
                     };
 
 /// Base class for cards describing eccentrities (GECC, GECCEN).
@@ -273,17 +271,17 @@ namespace dnvgl {
 
                         void set_eccno(long const ECCNO=0);
 
-                        dnvgl::extfem::fem::types::entry_type<long>
+                        fem::types::entry_type<long>
                         static const _form_ECCNO;
 
-                        eccno(void);
+                        eccno();
                         eccno(long const ECCNO);
                         eccno(std::vector<std::string> const&, size_t const);
 
-                        virtual void read(
-                            std::vector<std::string> const&, size_t const);
+                        void read(
+                            std::vector<std::string> const&, size_t const) override;
 
-                        using __base::card::operator();
+                        using card::operator();
 
                     public:
 
@@ -291,10 +289,10 @@ namespace dnvgl {
  */
                         long ECCNO;
 
-                        static void reset_eccno(void);
+                        static void reset_eccno();
 
-                        virtual dnvgl::extfem::fem::cards::types const
-                        card_type(void) const = 0;
+                        virtual types
+                        card_type() const override = 0;
                     };
 
 /// Base class for FEM beam property describing classes.
@@ -307,7 +305,7 @@ namespace dnvgl {
 
                     protected:
 
-                        beam_prop(void);
+                        beam_prop();
                         beam_prop(long const GEONO, bool const=false);
                         beam_prop(
                             std::vector<std::string> const&, size_t const);
@@ -326,29 +324,29 @@ namespace dnvgl {
 
                     public:
 
-                        static void reset_geono(void);
+                        static void reset_geono();
 
-                        virtual dnvgl::extfem::fem::cards::types const
-                        card_type(void) const = 0;
+                        virtual types
+                        card_type() const override = 0;
                     };
 
 /// Base class for material cards.
                     class material : public card {
                     protected:
 
-                        dnvgl::extfem::fem::types::entry_type<long>
+                        fem::types::entry_type<long>
                         static const _form_MATNO;
 
-                        material(void);
+                        material();
                         material(long const MATNO);
                         material(
                             std::vector<std::string> const&, size_t const);
 
-                        virtual void read(
-                            std::vector<std::string> const&, size_t const);
+                        void read(
+                            std::vector<std::string> const&, size_t const) override;
 
-                        virtual __base::card const &operator() (
-                            std::vector<std::string> const&, size_t const);
+                        card const &operator() (
+                            std::vector<std::string> const&, size_t const) override;
 
                     public:
 
@@ -357,8 +355,8 @@ namespace dnvgl {
 */
                         long MATNO;
 
-                        virtual dnvgl::extfem::fem::cards::types const
-                        card_type(void) const = 0;
+                        virtual types
+                        card_type() const override = 0;
 
                     };
                 }
@@ -369,17 +367,17 @@ namespace dnvgl {
 
                     unknown(std::vector<std::string> const&, size_t const);
 
-                    dnvgl::extfem::fem::cards::types const
-                    card_type(void) const;
+                    types
+                    card_type() const override;
 
                     std::vector<std::string> content;
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
+                    std::ostream &put(std::ostream&) const override;
 
-                    virtual void read(
-                        std::vector<std::string> const&, size_t const);
+                    void read(
+                        std::vector<std::string> const&, size_t const) override;
                 };
             }
         }

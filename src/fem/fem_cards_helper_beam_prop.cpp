@@ -21,8 +21,8 @@ namespace {
 using namespace std;
 
 using namespace dnvgl::extfem;
-using namespace dnvgl::extfem::fem;
-using namespace dnvgl::extfem::fem::cards;
+using namespace fem;
+using namespace cards;
 
 unordered_set<long> cards::__base::beam_prop::used_gbeamg;
 unordered_set<long> cards::__base::beam_prop::used_cross_desc;
@@ -45,7 +45,7 @@ cards::__base::beam_prop::beam_prop(
     set_geono(GEONO, is_gbeamg);
 }
 
-void cards::__base::beam_prop::reset_geono(void) {
+void cards::__base::beam_prop::reset_geono() {
     used_gbeamg.clear();
     used_cross_desc.clear();
 }
@@ -53,10 +53,10 @@ void cards::__base::beam_prop::reset_geono(void) {
 void cards::__base::beam_prop::set_geono(
     long const GEONO/*=0*/, bool const is_gbeamg/*=false*/) {
     if (GEONO < 0) {
-        return cards::__base::geoprop::set_geono(GEONO);
+        return geoprop::set_geono(GEONO);
     }
     if (GEONO == 0) {
-        cards::__base::geoprop::set_geono(GEONO);
+        geoprop::set_geono(GEONO);
         if (is_gbeamg)
             used_gbeamg.insert(GEONO);
         else
@@ -67,14 +67,14 @@ void cards::__base::beam_prop::set_geono(
         if (used_cross_desc.count(GEONO)){
             this->GEONO = GEONO;
         } else {
-            cards::__base::geoprop::set_geono(GEONO);
+            geoprop::set_geono(GEONO);
         }
         used_gbeamg.insert(GEONO);
     } else {
         if (used_gbeamg.count(GEONO)){
             this->GEONO = GEONO;
         } else {
-            cards::__base::geoprop::set_geono(GEONO);
+            geoprop::set_geono(GEONO);
         }
         used_cross_desc.insert(GEONO);;
     }

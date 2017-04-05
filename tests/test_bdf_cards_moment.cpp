@@ -8,6 +8,7 @@
    */
 
 #include "extfem_misc.h"
+#include "bdf/cards_loads.h"
 
 // ID:
 namespace {
@@ -19,14 +20,7 @@ namespace {
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
 
-#include <limits>
-
 #include <catch.hpp>
-
-#include "config.h"
-
-#include "bdf/cards.h"
-#include "bdf/errors.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW

@@ -16,8 +16,6 @@ namespace {
         "@(#) $Id$";
 }
 
-#include <memory>
-#include <algorithm>
 #include <cassert>
 
 #include "fem/cards.h"
@@ -33,9 +31,9 @@ using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
 
-using namespace dnvgl::extfem::fem::cards;
+using namespace cards;
 
-const fem::types::card bndispl::head("BNDISPL");
+const card bndispl::head("BNDISPL");
 
 const entry_type<long> bndispl::_form_LLC("LLC");
 const entry_type<long> bndispl::_form_DTYPE("DTYPE");
@@ -46,7 +44,7 @@ const entry_type<double> bndispl::_form_RDISP("RDISP");
 const entry_type<double> bndispl::_form_IDISP("IDISP");
 
 bndispl::bndispl(const std::vector<std::string> &inp, size_t const len) {
-    read(inp, len);
+    bndispl::read(inp, len);
 }
 
 void bndispl::read(const std::vector<std::string> &inp, size_t const len) {
@@ -67,7 +65,7 @@ void bndispl::read(const std::vector<std::string> &inp, size_t const len) {
             IDISP.push_back(_form_IDISP(inp.at(7 + NDOF + i)));
 }
 
-bndispl::bndispl(void) :
+bndispl::bndispl() :
         bndispl(-1, 0, false, 0, {}) {}
 
 bndispl::bndispl(const long LLC,
@@ -88,7 +86,7 @@ bndispl::bndispl(const long LLC,
                  const long NODENO,
                  const std::vector<double> &RDISP,
                  const std::vector<double> &IDISP) :
-        bndispl(LLC, DTYPE, COMPLX, NODENO, (long)RDISP.size(),
+        bndispl(LLC, DTYPE, COMPLX, NODENO, long(RDISP.size()),
                 RDISP, IDISP) {}
 
 bndispl::bndispl(const long LLC,
@@ -106,33 +104,33 @@ bndispl::bndispl(const long LLC,
                  const long NODENO,
                  const std::vector<double> &RDISP,
                  const std::vector<double> &IDISP) :
-        bndispl(LLC, DTYPE, NODENO, (long)RDISP.size(),
+        bndispl(LLC, DTYPE, NODENO, long(RDISP.size()),
                 RDISP, IDISP) {}
 
-const dnvgl::extfem::fem::cards::types
-bndispl::card_type(void) const {return types::BNDISPL;}
+cards::types
+bndispl::card_type() const {return types::BNDISPL;}
 
 std::ostream &bndispl::put(std::ostream& os) const {
     if (this->LLC == -1) return os;
-    os << bndispl::head.format()
+    os << head.format()
        << this->_form_LLC.format(this->LLC)
        << this->_form_DTYPE.format(this->DTYPE)
        << this->_form_COMPLX.format(this->COMPLX)
        << this->empty.format() << std::endl
-       << dnvgl::extfem::fem::types::card().format()
+       << fem::types::card().format()
        << this->_form_NODENO.format(this->NODENO)
        << this->_form_NDOF.format(this->NDOF);
     long cnt{2};
     for (long i = 0; i < this->NDOF; i++) {
         if (!(cnt++ % 4))
-            os << std::endl << dnvgl::extfem::fem::types::card().format();
+            os << std::endl << fem::types::card().format();
         os << this->_form_RDISP.format(this->RDISP.at(i));
     }
     if (this->COMPLX) {
         assert(this->IDISP.size() == static_cast<size_t>(this->NDOF));
         for (long i = 0; i < this->NDOF; i++) {
             if (!(cnt++ % 4))
-                os << std::endl << dnvgl::extfem::fem::types::card().format();
+                os << std::endl << fem::types::card().format();
             os << this->_form_IDISP.format(this->IDISP.at(i));
         }
     }

@@ -7,6 +7,7 @@
    Detailed description
 */
 #include "extfem_string.h"
+#include "extfem_misc.h"
 
 // ID:
 namespace {
@@ -18,13 +19,7 @@ namespace {
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
 
-#include <limits>
-
 #include <catch.hpp>
-
-#include "config.h"
-
-#include "fem/cards.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW

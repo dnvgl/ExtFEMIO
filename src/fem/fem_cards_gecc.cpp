@@ -34,9 +34,9 @@ using namespace std;
 using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
-using namespace dnvgl::extfem::fem::cards;
+using namespace cards;
 
-const fem::types::card gecc::head("GECC");
+const card gecc::head("GECC");
 
 
 // const entry_type<long> gecc::_form_ECCNO("ECCNO");
@@ -45,7 +45,7 @@ const entry_type<double> gecc::_form_EX("EX");
 const entry_type<double> gecc::_form_EY("EY");
 const entry_type<double> gecc::_form_EZ("EZ");
 
-gecc::gecc(void) : gecc(-1, gecc::ecc_opt::UNDEF_TYPE, 0., 0., 0.) {}
+gecc::gecc(void) : gecc(-1, ecc_opt::UNDEF_TYPE, 0., 0., 0.) {}
 
 gecc::gecc(const vector<std::string> &inp, size_t const len) {
     read(inp, len);
@@ -60,15 +60,15 @@ void gecc::read(const vector<std::string> &inp, size_t const len) {
     // ECCNO = _form_ECCNO(inp.at(1));
     long tmp = _form_IOPT(inp.at(2));
     switch (tmp) {
-    case 1: IOPT = gecc::ecc_opt::Z_ONLY; break;
-    case 2: IOPT = gecc::ecc_opt::XYZ; break;
-    default: IOPT = gecc::ecc_opt::UNDEF_TYPE; break;
+    case 1: IOPT = ecc_opt::Z_ONLY; break;
+    case 2: IOPT = ecc_opt::XYZ; break;
+    default: IOPT = ecc_opt::UNDEF_TYPE; break;
     }
-    if (IOPT == gecc::ecc_opt::Z_ONLY) {
+    if (IOPT == ecc_opt::Z_ONLY) {
         EX = {0.};
         EY = {0};
         EZ = _form_EZ(inp.at(3));
-    } else if (IOPT == gecc::ecc_opt::XYZ) {
+    } else if (IOPT == ecc_opt::XYZ) {
         if (len < 6)
             throw errors::parse_error(
                 "GECC", "Illegal number of entries.");
@@ -79,21 +79,21 @@ void gecc::read(const vector<std::string> &inp, size_t const len) {
 }
 
 gecc::gecc(
-    long const ECCNO, gecc::ecc_opt IOPT, 
+    long const ECCNO, ecc_opt IOPT, 
     double const EX, double const EY, double const EZ) :
     eccno(ECCNO), IOPT(IOPT), EX(EX), EY(EY), EZ(EZ) {}
 
-const dnvgl::extfem::fem::cards::types
+cards::types
 gecc::card_type(void) const {return types::GECC;}
 
 ostream &gecc::put(ostream& os) const {
     if (ECCNO == -1) return os;
-    os << gecc::head.format()
+    os << head.format()
        << _form_ECCNO.format(ECCNO)
        << _form_IOPT.format(static_cast<long>(IOPT));
-    if (IOPT == gecc::ecc_opt::Z_ONLY) {
+    if (IOPT == ecc_opt::Z_ONLY) {
         os << _form_EZ.format(EZ);
-    } else if (IOPT == gecc::ecc_opt::XYZ)
+    } else if (IOPT == ecc_opt::XYZ)
         os << _form_EX.format(EX) << _form_EY.format(EY) << endl
            << fem::types::card().format() << _form_EZ.format(EZ);
     return os << endl;

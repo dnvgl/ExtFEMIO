@@ -17,7 +17,6 @@ namespace {
 }
 
 #include <memory>
-#include <algorithm>
 
 #include "fem/cards.h"
 #include "fem/types.h"
@@ -31,9 +30,9 @@ static char THIS_FILE[] = __FILE__;
 using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
-using namespace dnvgl::extfem::fem::cards;
+using namespace cards;
 
-const fem::types::card bnload::head("BNLOAD");
+const card bnload::head("BNLOAD");
 
 const entry_type<long> bnload::_form_LLC("LLC");
 const entry_type<long> bnload::_form_LOTYP("LOTYP");
@@ -44,7 +43,7 @@ const entry_type<double> bnload::_form_RLOAD("RLOAD");
 const entry_type<double> bnload::_form_ILOAD("ILOAD");
 
 bnload::bnload(const std::vector<std::string> &inp, size_t const len) {
-    read(inp, len);
+    bnload::read(inp, len);
 }
 
 void bnload::read(const std::vector<std::string> &inp, size_t const len) {
@@ -65,7 +64,7 @@ void bnload::read(const std::vector<std::string> &inp, size_t const len) {
             ILOAD.push_back(_form_ILOAD(inp.at(7 + NDOF + i)));
 }
 
-bnload::bnload(void) :
+bnload::bnload() :
         bnload(-1, 0, 0, {}) {}
 
 bnload::bnload(long const LLC,
@@ -86,7 +85,7 @@ bnload::bnload(long const LLC,
                std::vector<double> const &RLOAD,
                std::vector<double> const &ILOAD):
         card(), LLC(LLC), LOTYP(LOTYP), COMPLX(COMPLX),
-        NODENO(NODENO), NDOF((long)RLOAD.size()),
+        NODENO(NODENO), NDOF(long(RLOAD.size())),
         RLOAD(RLOAD), ILOAD(ILOAD) {}
 
 bnload::bnload(long const LLC,
@@ -108,32 +107,33 @@ bnload::bnload(long const LLC,
                std::vector<double> const &ILOAD) :
         card(), LLC(LLC), LOTYP(LOTYP),
         COMPLX(ILOAD.size() > 0),
-        NODENO(NODENO), NDOF((long)RLOAD.size()),
+        NODENO(NODENO), NDOF(long(RLOAD.size())),
         RLOAD(RLOAD), ILOAD(ILOAD) {}
 
-const dnvgl::extfem::fem::cards::types
-bnload::card_type(void) const {return types::BNLOAD;}
+cards::types bnload::card_type() const {
+    return types::BNLOAD;
+}
 
 std::ostream &bnload::put(std::ostream& os) const {
     if (this->LLC == -1) return os;
-    os << bnload::head.format()
+    os << head.format()
        << this->_form_LLC.format(this->LLC)
        << this->_form_LOTYP.format(this->LOTYP)
        << this->_form_COMPLX.format(this->COMPLX)
        << this->empty.format() << std::endl
-       << dnvgl::extfem::fem::types::card().format()
+       << fem::types::card().format()
        << this->_form_NODENO.format(this->NODENO)
        << this->_form_NDOF.format(this->NDOF);
     long cnt = 2;
     for (long i = 0; i < this->NDOF; i++) {
         if (!(cnt++ % 4))
-            os << std::endl << dnvgl::extfem::fem::types::card().format();
+            os << std::endl << fem::types::card().format();
         os << this->_form_RLOAD.format(this->RLOAD.at(i));
     }
     if (this->COMPLX)
         for (long i = 0; i < this->NDOF; i++) {
             if (!(cnt++ % 4))
-                os << std::endl << dnvgl::extfem::fem::types::card().format();
+                os << std::endl << fem::types::card().format();
             os << this->_form_ILOAD.format(this->ILOAD.at(i));
         }
     os << std::endl;

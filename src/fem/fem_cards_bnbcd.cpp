@@ -21,7 +21,6 @@ namespace {
 #endif // FIX
 
 #include <memory>
-#include <algorithm>
 
 #include "fem/cards.h"
 #include "fem/types.h"
@@ -38,14 +37,14 @@ using namespace cards;
 using namespace types;
 
 
-const fem::types::card bnbcd::head("BNBCD");
+const card bnbcd::head("BNBCD");
 
 const entry_type<long> bnbcd::_form_NODENO("NODENO");
 const entry_type<long> bnbcd::_form_NDOF("NDOF");
 const entry_type<long> bnbcd::_form_FIX("FIX");
 
 bnbcd::bnbcd(std::vector<std::string> const &inp, size_t const len) {
-    read(inp, len);
+    bnbcd::read(inp, len);
 }
 
 void bnbcd::read(std::vector<std::string> const &inp, size_t const len) {
@@ -60,7 +59,7 @@ void bnbcd::read(std::vector<std::string> const &inp, size_t const len) {
         FIX.push_back(fix_key_conv(_form_FIX(inp.at(i + 3))));
 }
 
-bnbcd::bnbcd(void) :
+bnbcd::bnbcd() :
         bnbcd(-1, {}) {}
 
 bnbcd::bnbcd(long const NODENO,
@@ -71,7 +70,7 @@ bnbcd::bnbcd(long const NODENO,
 bnbcd::bnbcd(
     long const NODENO,
     std::vector<fix_key> const &FIX) :
-        bnbcd(NODENO, (long)FIX.size(), FIX) {}
+        bnbcd(NODENO, long(FIX.size()), FIX) {}
 
 bnbcd::bnbcd(long const NODENO,
              fix_key const FIX1, fix_key const FIX2, fix_key const FIX3,
@@ -86,18 +85,19 @@ bnbcd::bnbcd(long const NODENO,
                     fix_key_conv(FIX1), fix_key_conv(FIX2), fix_key_conv(FIX3),
                     fix_key_conv(FIX4), fix_key_conv(FIX5), fix_key_conv(FIX6)})) {}
 
-const dnvgl::extfem::fem::cards::types
-bnbcd::card_type(void) const {return types::BNBCD;}
+cards::types bnbcd::card_type() const {
+    return types::BNBCD;
+}
 
 std::ostream &bnbcd::put(std::ostream& os) const {
     if (NODENO == -1) return os;
-    os << bnbcd::head.format()
+    os << head.format()
        << _form_NODENO.format(NODENO)
        << _form_NDOF.format(NDOF);
     long cnt(2);
     for (size_t i{0}; i < static_cast<size_t>(NDOF); i++) {
         if (!(cnt++ % 4))
-            os << std::endl << dnvgl::extfem::fem::types::card().format();
+            os << std::endl << fem::types::card().format();
         os << _form_FIX.format(fix_key_conv(FIX.at(i)));
     }
     os << std::endl;
@@ -117,7 +117,7 @@ cards::__base::card const &bnbcd::operator() (
 cards::__base::card const &bnbcd::operator() (
     long const NODENO,
     std::vector<fix_key> const &FIX) {
-    return (*this)(NODENO, (long)FIX.size(), FIX);
+    return (*this)(NODENO, long(FIX.size()), FIX);
 }
 
 cards::__base::card const &bnbcd::operator() (
@@ -137,30 +137,30 @@ cards::__base::card const &bnbcd::operator() (
                 fix_key_conv(FIX4), fix_key_conv(FIX5), fix_key_conv(FIX6)}));
 }
 
-bnbcd::fix_key const bnbcd::fix_key_conv(long const inp) const {
+bnbcd::fix_key bnbcd::fix_key_conv(long const inp) {
     if (0 <= inp && inp <= 4)
-        return bnbcd::fix_key(inp);
+        return fix_key(inp);
     else
-        return bnbcd::fix_key::INVALID;
+        return fix_key::INVALID;
 }
 
-bnbcd::fix_key const bnbcd::fix_key_conv(bool const inp) const {
-    return inp ? bnbcd::fix_key::DISPL_FIX : bnbcd::fix_key::FREE;
+bnbcd::fix_key bnbcd::fix_key_conv(bool const inp) {
+    return inp ? fix_key::DISPL_FIX : fix_key::FREE;
 }
 
-long const bnbcd::fix_key_conv(bnbcd::fix_key const inp) const {
+long bnbcd::fix_key_conv(fix_key const inp) {
     switch (inp) {
-    case bnbcd::fix_key::FREE:
+    case fix_key::FREE:
         return 0;
-    case bnbcd::fix_key::DISPL_FIX:
+    case fix_key::DISPL_FIX:
         return 1;
-    case bnbcd::fix_key::PRESCRIBED:
+    case fix_key::PRESCRIBED:
         return 2;
-    case bnbcd::fix_key::LINDEP:
+    case fix_key::LINDEP:
         return 3;
-    case bnbcd::fix_key::RETAINED:
+    case fix_key::RETAINED:
         return 4;
-    case bnbcd::fix_key::INVALID:
+    case fix_key::INVALID:
         break;
     }
     return -1;

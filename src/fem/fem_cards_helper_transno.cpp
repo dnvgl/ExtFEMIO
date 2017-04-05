@@ -21,8 +21,8 @@ namespace {
 using namespace std;
 
 using namespace dnvgl::extfem;
-using namespace dnvgl::extfem::fem;
-using namespace dnvgl::extfem::fem::cards;
+using namespace fem;
+using namespace cards;
 
 fem::types::entry_type<long> const
 cards::__base::transno::_form_TRANSNO("TRANSNO");
@@ -54,7 +54,7 @@ void cards::__base::transno::set_transno(long const TRANSNO/*=0*/) {
     this->TRANSNO = TRANSNO;
 }
 
-cards::__base::transno::transno(void) :
+cards::__base::transno::transno() :
         card(), TRANSNO(-1) {}
 
 cards::__base::transno::transno(long const TRANSNO) :
@@ -83,7 +83,7 @@ void cards::__base::transno::read(
 //     return *this;
 // }
 
-void cards::__base::transno::reset_transno(void) {
+void cards::__base::transno::reset_transno() {
     transno_maxset = 0;
     used_transno.clear();
 }

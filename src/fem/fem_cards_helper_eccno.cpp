@@ -21,8 +21,8 @@ namespace {
 using namespace std;
 
 using namespace dnvgl::extfem;
-using namespace dnvgl::extfem::fem;
-using namespace dnvgl::extfem::fem::cards;
+using namespace fem;
+using namespace cards;
 
 fem::types::entry_type<long> const
 cards::__base::eccno::_form_ECCNO("ECCNO");

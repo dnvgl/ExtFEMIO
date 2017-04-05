@@ -19,10 +19,11 @@ namespace {
 #include <iomanip>
 #include <locale>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "bdf/types.h"
-#include "extfem_string.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
@@ -30,13 +31,14 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace dnvgl::extfem::bdf::types;
+using namespace dnvgl::extfem;
+using namespace bdf::types;
 
 std::istringstream base::conv;
 
 base::base(const std::string &name) : name(name) {};
 
-base::~base(void) {}
+base::~base() {}
 
 out_form_type base::out_form = out_form_type::SHORT;
 
@@ -44,7 +46,7 @@ imbue_helper::imbue_helper(const std::locale &loc) : base("") {
     conv.imbue(loc);
 }
 
-bdf_types imbue_helper::type(void) const {
+bdf_types imbue_helper::type() const {
     return bdf_types::None;
 }
 
@@ -54,7 +56,7 @@ std::string imbue_helper::format(const void*) const {
 
 card::card(const std::string &name) : base(name) {}
 
-bdf_types card::type(void) const {
+bdf_types card::type() const {
     return bdf_types::None;
 }
 
@@ -64,14 +66,14 @@ static imbue_helper _imbue_helper(std::locale::classic());
 std::string card::format(const void* d) const {
     std::ostringstream outp;
 
-    outp << std::resetiosflags(std::ios::adjustfield);
+    outp << resetiosflags(std::ios::adjustfield);
     switch (out_form) {
     case out_form_type::LONG:
-        outp << std::setiosflags(std::ios::left) << std::setfill(' ')
+        outp << setiosflags(std::ios::left) << std::setfill(' ')
             << std::setw(8) << (name + "*");
         break;
     case out_form_type::SHORT:
-        outp << std::setiosflags(std::ios_base::left) << std::setfill(' ')
+        outp << setiosflags(std::ios_base::left) << std::setfill(' ')
             << std::setw(8) << name;
         break;
     case out_form_type::FREE:
@@ -82,9 +84,9 @@ std::string card::format(const void* d) const {
     return outp.str();
 }
 
-empty::empty(void) : base("<empty>") {}
+empty::empty() : base("<empty>") {}
 
-bdf_types empty::type(void) const {
+bdf_types empty::type() const {
     return bdf_types::None;
 };
 
@@ -100,10 +102,6 @@ std::string empty::format(const void* d) const {
         break;
     }
     return outp.str();
-}
-
-std::string empty::format() const {
-    return this->format(nullptr);
 }
 
 // Local Variables:

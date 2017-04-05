@@ -18,7 +18,6 @@ namespace {
 }
 
 #include <memory>
-#include <algorithm>
 
 #include "fem/cards.h"
 #include "fem/types.h"
@@ -34,9 +33,9 @@ using namespace std;
 using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
-using namespace dnvgl::extfem::fem::cards;
+using namespace cards;
 
-fem::types::card const gelmnt2::head("GELMNT2");
+card const gelmnt2::head("GELMNT2");
 
 entry_type<long> const gelmnt2::_form_SUBNO("SUBNO");
 entry_type<long> const gelmnt2::_form_SLEVEL("SLEVEL");
@@ -47,7 +46,7 @@ entry_type<long> const gelmnt2::_form_NNOD("NNOD");
 entry_type<long> const gelmnt2::_form_NOD("NOD");
 
 gelmnt2::gelmnt2(const vector<std::string> &inp, size_t const len) {
-    read(inp, len);
+    gelmnt2::read(inp, len);
 }
 
 void gelmnt2::read(const vector<std::string> &inp, size_t const len) {
@@ -74,7 +73,7 @@ void gelmnt2::read(const vector<std::string> &inp, size_t const len) {
         NOD.push_back(_form_NOD(inp.at(18 + i)));
 }
 
-gelmnt2::gelmnt2(void) :
+gelmnt2::gelmnt2() :
         gelmnt2(-1, 0, 0, 0, nullptr, 0, {}) {}
 
 gelmnt2::gelmnt2(
@@ -82,8 +81,8 @@ gelmnt2::gelmnt2(
     const double T[4][4], long const NNOD, const vector<long> &NOD) :
         card(), SUBNO(SUBNO), SLEVEL(SLEVEL), STYPE(STYPE),
         ADDNO(ADDNO), NNOD(NNOD), NOD(NOD) {
-    if (this->NOD.size() != (size_t)this->NNOD)
-        throw dnvgl::extfem::fem::errors::usage_error(
+    if (this->NOD.size() != size_t(this->NNOD))
+        throw errors::usage_error(
             "GELMNT2", "NOD not of size NNOD");
     if (T)
         for (int i=0; i<4; i++)
@@ -105,8 +104,8 @@ gelmnt2::gelmnt2(
     long const NNOD, vector<long> const &NOD) :
         card(), SUBNO(SUBNO), SLEVEL(SLEVEL), STYPE(STYPE),
         ADDNO(ADDNO), NNOD(NNOD), NOD(NOD) {
-    if (this->NOD.size() != (size_t)this->NNOD)
-        throw dnvgl::extfem::fem::errors::usage_error(
+    if (this->NOD.size() != size_t(this->NNOD))
+        throw errors::usage_error(
             "GELREF2","NOD not of size NNOD");
     T[0][0] = T11;
     T[1][0] = T21;
@@ -153,31 +152,30 @@ gelmnt2::gelmnt2(
     T[3][3] = 1.;
 }
 
-dnvgl::extfem::fem::cards::types const
-gelmnt2::card_type(void) const {
+cards::types gelmnt2::card_type() const {
     return types::GELMNT2;
 }
 
 ostream &gelmnt2::put(ostream& os) const {
     if (SUBNO == -1) return os;
-    os << gelmnt2::head.format()
+    os << head.format()
        << _form_SUBNO.format(SUBNO) << _form_SLEVEL.format(SLEVEL)
        << _form_STYPE.format(STYPE) << _form_ADDNO.format(ADDNO) << endl
-       << dnvgl::extfem::fem::types::card().format()
+       << fem::types::card().format()
        << _form_T.format(T[0][0]) << _form_T.format(T[1][0])
        << _form_T.format(T[2][0]) << _form_T.format(T[0][1]) << endl
-       << dnvgl::extfem::fem::types::card().format()
+       << fem::types::card().format()
        << _form_T.format(T[1][1]) << _form_T.format(T[2][1])
        << _form_T.format(T[0][2]) << _form_T.format(T[1][2]) << endl
-       << dnvgl::extfem::fem::types::card().format()
+       << fem::types::card().format()
        << _form_T.format(T[2][2]) << _form_T.format(T[0][3])
        << _form_T.format(T[1][3]) << _form_T.format(T[2][3]) << endl
-       << dnvgl::extfem::fem::types::card().format()
+       << fem::types::card().format()
        << _form_NNOD.format(NNOD);
     size_t num = 1;
     for (int i = 0; i<NNOD; i++) {
         if (!(num++ % 4))
-            os << endl << dnvgl::extfem::fem::types::card().format();
+            os << endl << fem::types::card().format();
         os << _form_NOD.format(NOD[i]);
     }
     return os << endl;

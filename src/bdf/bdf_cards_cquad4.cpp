@@ -9,6 +9,7 @@
 #include "StdAfx.h"
 
 #include "extfem_misc.h"
+#include "bdf/cards_elements.h"
 
 // ID:
 namespace {
@@ -29,13 +30,13 @@ static char THIS_FILE[] = __FILE__;
 
 using namespace dnvgl::extfem::bdf;
 
-using dnvgl::extfem::bdf::types::entry_type;
+using types::entry_type;
 
 using namespace cards;
 
 cquad4::cquad4(const std::list<std::string> &inp) :
-__base::shell(inp) {
-    this->read(inp);
+shell(inp) {
+    this->cquad4::read(inp);
 }
 
 void cquad4::read(const std::list<std::string> &inp) {
@@ -109,8 +110,7 @@ void cquad4::read(const std::list<std::string> &inp) {
     }
 }
             
-const dnvgl::extfem::bdf::cards::types
-cquad4::card_type(void) const {
+cards::types cquad4::card_type() const {
     return types::CQUAD4;
 }
 

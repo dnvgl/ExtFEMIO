@@ -21,20 +21,20 @@ namespace {
 using namespace std;
 
 using namespace dnvgl::extfem;
-using namespace dnvgl::extfem::fem;
-using namespace dnvgl::extfem::fem::cards;
+using namespace fem;
+using namespace cards;
 
 unknown::unknown(vector<std::string> const &inp, size_t const len) :
         content(inp.begin(), inp.begin()+len) {
-    read(inp, len);
+    unknown::read(inp, len);
 };
 
-cards::types const
-unknown::card_type(void) const { return cards::types::UNKNOWN; }
+cards::types unknown::card_type() const {
+    return types::UNKNOWN;
+}
 
 ostream &unknown::put(ostream &os) const {
     throw errors::error("can't write UNKNOWN.");
-    return os;
 }
 
 void unknown::read(const vector<std::string> &inp, size_t const len) {}

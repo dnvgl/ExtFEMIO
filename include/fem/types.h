@@ -75,9 +75,9 @@ namespace dnvgl {
 
                         b_type(std::string const&);
 
-                        virtual ~b_type(void) {};
+                        virtual ~b_type() {};
 
-                        virtual fem_types type(void) const = 0;
+                        virtual fem_types type() const = 0;
 
                     };
 
@@ -88,9 +88,9 @@ namespace dnvgl {
 
                         imbue_helper(std::locale const &loc);
 
-                        virtual fem_types type(void) const;
+                        fem_types type() const override;
 
-                        std::string format(void const*) const;
+                        static std::string format(void const*);
                     };
 
                 }
@@ -100,22 +100,22 @@ namespace dnvgl {
 
                     card(std::string const &name);
 
-                    card(void);
+                    card();
 
-                    virtual fem_types type(void) const {return fem_types::None;};
+                    fem_types type() const override {return fem_types::None;};
 
-                    std::string format(void) const;
+                    std::string format() const;
                 };
 
                 class empty : public __base::b_type {
 
                 public:
 
-                    empty(void);
+                    empty();
 
-                    virtual fem_types type(void) const;
+                    fem_types type() const override;
 
-                    std::string format(void) const;
+                    static std::string format();
                 };
 
                 template <class _Ty>
@@ -133,7 +133,7 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::type_bounds::bound<long> bounds;
+                    type_bounds::bound<long> bounds;
 
                 protected:
 
@@ -151,12 +151,12 @@ namespace dnvgl {
 
                     entry_type(
                         std::string const &name,
-                        fem::type_bounds::bound<long> const &bounds);
+                        type_bounds::bound<long> const &bounds);
 
 /// Convert string to long
                     long operator() (std::string const &inp) const;
 
-                    virtual fem_types type(void) const;
+                    fem_types type() const override;
 
                     std::string format(long const &inp) const;
                 };
@@ -167,7 +167,7 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::type_bounds::bound<bool> bounds;
+                    type_bounds::bound<bool> bounds;
 
                 protected:
 
@@ -185,9 +185,9 @@ namespace dnvgl {
 
                     bool operator() (std::string const &inp) const;
 
-                    virtual fem_types type(void) const;
+                    fem_types type() const override;
 
-                    std::string format(bool const &inp) const;
+                    static std::string format(bool const &inp);
                 };
 
                 template <>
@@ -197,7 +197,7 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::type_bounds::bound<double> bounds;
+                    type_bounds::bound<double> bounds;
 
                 protected:
 
@@ -215,12 +215,12 @@ namespace dnvgl {
 
                     entry_type(
                         std::string const &name,
-                        fem::type_bounds::bound<double> const &bounds);
+                        type_bounds::bound<double> const &bounds);
 
                     /// Convert string to double
                     double operator() (std::string const &inp) const;
 
-                    virtual fem_types type(void) const;
+                    fem_types type() const override;
 
                     std::string format(double const &inp) const;
                 };
@@ -232,7 +232,7 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::type_bounds::bound<std::string> bounds;
+                    type_bounds::bound<std::string> bounds;
 
                 protected:
 
@@ -244,13 +244,13 @@ namespace dnvgl {
 
                     entry_type(
                         std::string const&,
-                        dnvgl::extfem::fem::type_bounds::bound<std::string> const&);
+                        type_bounds::bound<std::string> const&);
 
                     std::string operator() (
                         std::string const&, std::string const&,
                         std::string const&, std::string const&) const;
 
-                    virtual fem_types type(void) const {
+                    fem_types type() const override {
                         return _type;
                     }
 
@@ -280,7 +280,7 @@ namespace dnvgl {
                     void operator() (
                         std::vector<int> &value, std::string const &inp) const;
 
-                    fem_types type(void) const;
+                    fem_types type() const override;
 
                     std::string format(
                         std::vector<int> const &inp) const;

@@ -9,6 +9,7 @@
 #include "StdAfx.h"
 
 #include "extfem_misc.h"
+#include "bdf/cards_loads.h"
 
 // ID:
 namespace {
@@ -29,8 +30,8 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 namespace {
-   long static const cl0 = 0;
-   long static const cl1 = 1;
+   long const cl0 = 0;
+   long const cl1 = 1;
 }
 
 using namespace std;
@@ -43,18 +44,18 @@ using namespace bdf;
 using namespace cards;
 
 entry_type<long> const grav::form_SID(
-    "SID", bdf::type_bounds::bound<long>(&cl1));
+    "SID", type_bounds::bound<long>(&cl1));
 entry_type<long> const grav::form_CID(
-    "CID", bdf::type_bounds::bound<long>(&cl0));
+    "CID", type_bounds::bound<long>(&cl0));
 entry_type<double> const grav::form_A("A");
 entry_type<double> const grav::form_Ni("Ni");
 entry_type<long> const grav::form_MB(
     "MB",
-    bdf::type_bounds::bound<long>(nullptr, nullptr, &cl0));
+    type_bounds::bound<long>(nullptr, nullptr, &cl0));
 
 grav::grav(list<std::string> const &inp) :
 card(inp) {
-    this->read(inp);
+    this->grav::read(inp);
 }
 
 grav::grav() :
@@ -145,14 +146,14 @@ invalid:
 end:;
 }
 
-cards::types const grav::card_type(void) const {
+cards::types grav::card_type() const {
     return types::GRAV;
 }
 
 void grav::collect_outdata(
     list<unique_ptr<format_entry> > &res) const {
     if (static_cast<long>(SID) <= 0) return;
-    res.push_back(unique_ptr<format_entry>(format(grav::head)));
+    res.push_back(unique_ptr<format_entry>(format(head)));
 
     res.push_back(unique_ptr<format_entry>(format<long>(form_SID, SID)));
     res.push_back(unique_ptr<format_entry>(format<long>(form_CID, CID)));

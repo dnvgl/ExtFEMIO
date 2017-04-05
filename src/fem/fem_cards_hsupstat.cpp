@@ -17,7 +17,6 @@ namespace {
 }
 
 #include <memory>
-#include <algorithm>
 
 #include "fem/cards.h"
 #include "fem/types.h"
@@ -33,9 +32,9 @@ using namespace std;
 using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
-using namespace dnvgl::extfem::fem::cards;
+using namespace cards;
 
-fem::types::card const hsupstat::head("HSUPSTAT");
+card const hsupstat::head("HSUPSTAT");
 
 entry_type<long> const hsupstat::_form_NFIELD("NFIELD");
 entry_type<long> const hsupstat::_form_ISELTY("ISELTY");
@@ -48,7 +47,7 @@ entry_type<long> const hsupstat::_form_RELOADC("RELOADC");
 entry_type<long> const hsupstat::_form_COMPLC("COMPLC");
 
 hsupstat::hsupstat(const vector<std::string> &inp, size_t const len) {
-    read(inp, len);
+    hsupstat::read(inp, len);
 }
 
 void hsupstat::read(const vector<std::string> &inp, size_t const len) {
@@ -67,7 +66,7 @@ void hsupstat::read(const vector<std::string> &inp, size_t const len) {
     COMPLC = _form_COMPLC(inp.at(9));
 }
 
-hsupstat::hsupstat(void) :
+hsupstat::hsupstat() :
         hsupstat(-1, 0, 0, 0, 0, 0, 0, 0, 0) {}
 
 hsupstat::hsupstat(long const NFIELD, long const ISELTY, long const NIDOF,
@@ -77,19 +76,19 @@ hsupstat::hsupstat(long const NFIELD, long const ISELTY, long const NIDOF,
         NBAND(NBAND), NELT(NELT), LINDEP(LINDEP), RELOADC(RELOADC),
         COMPLC(COMPLC) {}
 
-fem::cards::types const hsupstat::card_type(void) const {
+cards::types hsupstat::card_type() const {
     return types::HSUPSTAT;
 }
 
 ostream &hsupstat::put(ostream& os) const {
     if (NFIELD == -1) return os;
-    os << hsupstat::head.format()
+    os << head.format()
        << _form_NFIELD.format(NFIELD) << _form_ISELTY.format(ISELTY)
        << _form_NIDOF.format(NIDOF) << _form_NRDOF.format(NRDOF) << endl
-       << dnvgl::extfem::fem::types::card().format()
+       << fem::types::card().format()
        << _form_NBAND.format(NBAND) << _form_NELT.format(NELT)
        << _form_LINDEP.format(LINDEP) << _form_RELOADC.format(RELOADC) << endl
-       << dnvgl::extfem::fem::types::card().format()
+       << fem::types::card().format()
        << _form_COMPLC.format(COMPLC) << endl;
     return os;
 }

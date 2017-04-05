@@ -18,7 +18,6 @@ namespace {
 }
 
 #include <memory>
-#include <algorithm>
 
 #include "fem/cards.h"
 #include "fem/types.h"
@@ -34,9 +33,9 @@ using namespace std;
 using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
-using namespace dnvgl::extfem::fem::cards;
+using namespace cards;
 
-fem::types::card const morsmel::head("MORSMEL");
+card const morsmel::head("MORSMEL");
 
 // entry_type<long> const morsmel::_form_MATNO("MATNO");
 entry_type<double> const morsmel::_form_Q1("Q1");
@@ -57,8 +56,8 @@ entry_type<double> const morsmel::_form_ALPHA1("ALPHA1");
 entry_type<double> const morsmel::_form_ALPHA2("ALPHA2");
 
 morsmel::morsmel(vector<std::string> const &inp, size_t const len) :
-        __base::material(inp, len) {
-    read(inp, len);
+        material(inp, len) {
+    morsmel::read(inp, len);
 }
 
 void morsmel::read(vector<std::string> const &inp, size_t const len) {
@@ -84,7 +83,7 @@ void morsmel::read(vector<std::string> const &inp, size_t const len) {
     ALPHA2 = _form_ALPHA2(inp.at(17));
 }
 
-morsmel::morsmel(void) :
+morsmel::morsmel() :
         morsmel(-1, 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
                 0., 0., 0., 0., 0.) {}
 
@@ -96,7 +95,7 @@ morsmel::morsmel(long const MATNO,
                  double const PS1, double const PS2,
                  double const DAMP1, double const DAMP2,
                  double const ALPHA1, double const ALPHA2) :
-        __base::material(MATNO), Q1(Q1), Q2(Q2), Q3(Q3),
+        material(MATNO), Q1(Q1), Q2(Q2), Q3(Q3),
     RHO(RHO),
     D11(D11), D21(D21), D22(D22), D31(D31), D32(D32),
     D33(D33),
@@ -104,32 +103,32 @@ morsmel::morsmel(long const MATNO,
     DAMP1(DAMP1), DAMP2(DAMP2),
     ALPHA1(ALPHA1), ALPHA2(ALPHA2) {}
 
-fem::cards::__base::card const &morsmel::operator() (
+cards::__base::card const &morsmel::operator() (
     vector<std::string> const &inp, size_t const len) {
-    __base::material::read(inp, len);
+    material::read(inp, len);
     read(inp, len);
     return *this;
 }
 
-fem::cards::types const morsmel::card_type(void) const {
+cards::types morsmel::card_type() const {
     return types::MORSMEL;
 }
 
 ostream &morsmel::put(ostream& os) const {
     if (MATNO == -1) return os;
-    os << morsmel::head.format()
+    os << head.format()
        << _form_MATNO.format(MATNO) << _form_Q1.format(Q1)
        << _form_Q2.format(Q2) << _form_Q3.format(Q3) << endl
-       << dnvgl::extfem::fem::types::card().format()
+       << fem::types::card().format()
        << _form_RHO.format(RHO) << _form_D11.format(D11)
        << _form_D21.format(D21) << _form_D22.format(D22) << endl
-       << dnvgl::extfem::fem::types::card().format()
+       << fem::types::card().format()
        << _form_D31.format(D31) << _form_D32.format(D32)
        << _form_D33.format(D33) << _form_PS1.format(PS1) << endl
-       << dnvgl::extfem::fem::types::card().format()
+       << fem::types::card().format()
        << _form_PS2.format(PS2) << _form_DAMP1.format(DAMP1)
        << _form_DAMP2.format(DAMP2) << _form_ALPHA1.format(ALPHA1) << endl
-       << dnvgl::extfem::fem::types::card().format()
+       << fem::types::card().format()
        << _form_ALPHA2.format(ALPHA2) << endl;
     return os;
 }

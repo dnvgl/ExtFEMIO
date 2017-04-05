@@ -37,13 +37,13 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_MATNO;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NDOF;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_K;
 
                 public:
@@ -65,7 +65,7 @@ namespace dnvgl {
 
                     mgsprng(std::vector<std::string> const&, size_t const);
 
-                    mgsprng(void);
+                    mgsprng();
 
                     mgsprng(long const MATNO,
                             long const NDOF,
@@ -74,15 +74,15 @@ namespace dnvgl {
                     mgsprng(long const MATNO,
                             std::vector<std::vector<double> > const &K);
 
-                    dnvgl::extfem::fem::cards::types const
-                    card_type(void) const;
+                    types
+                    card_type() const override;
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
+                    std::ostream &put(std::ostream&) const override;
 
-                    virtual void read(
-                        std::vector<std::string> const&, size_t const);
+                    void read(
+                        std::vector<std::string> const&, size_t const) override;
                 };
 
 /// `MISOSEL`: Isotropy, Linear Elastic Structural Analysis
@@ -98,23 +98,23 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
                     // dnvgl::extfem::fem::types::entry_type<long>
                     // static const _form_MATNO;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_YOUNG;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_POISS;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_RHO;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_DAMP;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_ALPHA;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_DUMMY;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_YIELD;
 
                 public:
@@ -146,7 +146,7 @@ namespace dnvgl {
 
                     misosel(std::vector<std::string> const&, size_t const);
 
-                    misosel(void);
+                    misosel();
 
                     misosel(long const MATNO,
                             double const YOUNG,
@@ -159,10 +159,10 @@ namespace dnvgl {
 
                     using material::operator();
 
-                    virtual __base::card const &operator() (
-                        std::vector<std::string> const&, size_t const);
+                    card const &operator() (
+                        std::vector<std::string> const&, size_t const) override;
 
-                    __base::card const &operator()(
+                    card const &operator()(
                         long const MATNO,
                         double const YOUNG,
                         double const POISS,
@@ -172,15 +172,15 @@ namespace dnvgl {
                         double const DUMMY=0.,
                         double const YIELD=0.);
 
-                    dnvgl::extfem::fem::cards::types const
-                    card_type(void) const;
+                    types
+                    card_type() const override;
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
+                    std::ostream &put(std::ostream&) const override;
 
-                    virtual void read(
-                        std::vector<std::string> const&, size_t const);
+                    void read(
+                        std::vector<std::string> const&, size_t const) override;
                 };
 
 /// `MORSMEL`: Anisotropy, Linear Elastic Structural Analysis,
@@ -202,41 +202,41 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
                     // dnvgl::extfem::fem::types::entry_type<long>
                     // static const _form_MATNO;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_Q1;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_Q2;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_Q3;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_RHO;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_D11;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_D21;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_D22;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_D31;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_D32;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_D33;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_PS1;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_PS2;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_DAMP1;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_DAMP2;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_ALPHA1;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_ALPHA2;
 
                 public:
@@ -317,7 +317,7 @@ namespace dnvgl {
 
                     morsmel(std::vector<std::string> const&, size_t const);
 
-                    morsmel(void);
+                    morsmel();
 
                     morsmel(long const MATNO,
                             double const Q1,
@@ -337,18 +337,18 @@ namespace dnvgl {
                             double const ALPHA1,
                             double const ALPHA2);
 
-                    virtual __base::card const &operator() (
-                        std::vector<std::string> const&, size_t const);
+                    card const &operator() (
+                        std::vector<std::string> const&, size_t const) override;
 
-                    dnvgl::extfem::fem::cards::types const
-                    card_type(void) const;
+                    types
+                    card_type() const override;
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
+                    std::ostream &put(std::ostream&) const override;
 
-                    virtual void read(
-                        std::vector<std::string> const&, size_t const);
+                    void read(
+                        std::vector<std::string> const&, size_t const) override;
                 };
             }
         }

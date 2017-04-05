@@ -25,7 +25,6 @@ namespace {
 
 #include "fem/cards.h"
 #include "fem/types.h"
-#include "extfem_misc.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
@@ -38,9 +37,9 @@ using namespace std;
 using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
-using namespace dnvgl::extfem::fem::cards;
+using namespace cards;
 
-fem::types::card const tdsetnam::head("TDSETNAM");
+card const tdsetnam::head("TDSETNAM");
 
 entry_type<long> const tdsetnam::_form_NFIELD("NFIELD");
 entry_type<long> const tdsetnam::_form_ISREF("ISREF");
@@ -50,7 +49,7 @@ entry_type<std::string> const tdsetnam::_form_SET_NAME("SET_NAME");
 entry_type<std::string> const tdsetnam::_form_CONT("CONT");
 
 tdsetnam::tdsetnam(vector<std::string> const &inp, size_t const len) {
-    read(inp, len);
+    tdsetnam::read(inp, len);
 }
 
 void tdsetnam::read(vector<std::string> const &inp, size_t const len) {
@@ -91,7 +90,7 @@ void tdsetnam::read(vector<std::string> const &inp, size_t const len) {
     }
 }
 
-tdsetnam::tdsetnam(void) :
+tdsetnam::tdsetnam() :
         tdsetnam(-1, 0, 0, 0, "", {}) {}
 
 tdsetnam::tdsetnam(long const NFIELD, long const ISREF, long const CODNAM,
@@ -113,12 +112,12 @@ tdsetnam::tdsetnam(long const ISREF, std::string const &SET_NAME,
         card(), NFIELD(4), ISREF(ISREF), SET_NAME(SET_NAME), CONT(CONT) {
 
     nlnam = true;
-    ncnam = (long)SET_NAME.size();
+    ncnam = long(SET_NAME.size());
     CODNAM = 100 + ncnam;
-    nltxt = (long)CONT.size();
+    nltxt = long(CONT.size());
     nctxt = 0;
     for (auto &p : CONT)
-        nctxt = max(nctxt, (long)p.size());
+        nctxt = max(nctxt, long(p.size()));
     for (auto &p : this->CONT)
         p.resize(nctxt, ' ');
     CODTXT = (100 * nltxt) + nctxt;
@@ -139,26 +138,26 @@ tdsetnam::tdsetnam(long const ISREF, std::string const &SET_NAME) :
         card() , NFIELD(4), ISREF(ISREF), CODTXT(0), SET_NAME(SET_NAME),
         CONT() {
     nlnam = true;
-    ncnam = (long)SET_NAME.size();
+    ncnam = long(SET_NAME.size());
     CODNAM = 100 + ncnam;
     nltxt = 0;
     nctxt = 0;
 }
 
-fem::cards::types const tdsetnam::card_type(void) const {
+cards::types tdsetnam::card_type() const {
     return types::TDSETNAM;
 };
 
 ostream &tdsetnam::put(ostream& os) const {
     if (NFIELD == -1) return os;
-    os << tdsetnam::head.format()
+    os << head.format()
        << _form_NFIELD.format(NFIELD) << _form_ISREF.format(ISREF)
        << _form_CODNAM.format(CODNAM) << _form_CODTXT.format(CODTXT) << endl;
     if (nlnam)
-        os << dnvgl::extfem::fem::types::card().format()
+        os << fem::types::card().format()
            << _form_SET_NAME.format(SET_NAME, ncnam+8) << endl;
     for (auto p : CONT)
-        os << dnvgl::extfem::fem::types::card().format()
+        os << fem::types::card().format()
            << _form_CONT.format(p, nctxt+8) << endl;
     return os;
 }

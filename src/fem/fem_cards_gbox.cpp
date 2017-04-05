@@ -20,9 +20,7 @@ namespace {
 #include "fem/cards.h"
 
 #include <memory>
-#include <algorithm>
 
-#include "fem/cards.h"
 #include "fem/types.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
@@ -34,12 +32,12 @@ static char THIS_FILE[] = __FILE__;
 using namespace std;
 
 using namespace dnvgl::extfem;
-using namespace dnvgl::extfem::fem;
-using namespace dnvgl::extfem::fem::types;
+using namespace fem;
+using namespace types;
 
-using namespace dnvgl::extfem::fem::cards;
+using namespace cards;
 
-fem::types::card const gbox::head("GBOX");
+card const gbox::head("GBOX");
 
 entry_type<double> const gbox::_form_HZ("HZ");
 entry_type<double> const gbox::_form_TY("TY");
@@ -53,12 +51,12 @@ entry_type<long> const gbox::_form_NLOBZ("NLOBZ");
 
 
 
-gbox::gbox(void) :
+gbox::gbox() :
         gbox(-1, 0., 0., 0., 0., 0., 0., 0.) {}
 
 gbox::gbox(vector<std::string> const &inp, size_t const len) :
-        __base::beam_prop(inp, len, false) {
-    read(inp, len);
+        beam_prop(inp, len, false) {
+    gbox::read(inp, len);
 }
 
 gbox::gbox(long const GEONO,
@@ -66,11 +64,11 @@ gbox::gbox(long const GEONO,
            double const TT, double const BY,
            double const SFY, double const SFZ,
            long const NLOBY, long const NLOBZ) :
-        __base::beam_prop(GEONO),
+        beam_prop(GEONO),
         HZ{HZ}, TY{TY}, TB{TB}, TT{TT}, BY{BY}, SFY{SFY}, SFZ{SFZ},
         NLOBY{NLOBY}, NLOBZ{NLOBZ} {}
 
-cards::types const gbox::card_type(void) const {
+cards::types gbox::card_type() const {
     return types::GBOX;
 }
 
@@ -95,7 +93,7 @@ cards::__base::card const &gbox::operator() (
 
 ostream &gbox::put(ostream &os) const {
     if (GEONO == -1) return os;
-    os << gbox::head.format()
+    os << head.format()
        << _form_GEONO.format(GEONO) << _form_HZ.format(HZ)
        << _form_TY.format(TY) << _form_TB.format(TB) << endl
        << fem::types::card("").format()

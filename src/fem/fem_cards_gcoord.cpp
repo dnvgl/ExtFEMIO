@@ -36,7 +36,7 @@ using namespace fem;
 using namespace cards;
 using namespace types;
 
-const fem::types::card gcoord::head("GCOORD");
+const card gcoord::head("GCOORD");
 
 const entry_type<long> gcoord::_form_NODENO("NODENO");
 const entry_type<double> gcoord::_form_XCOORD("XCOORD");
@@ -58,7 +58,7 @@ void gcoord::read(const vector<std::string> &inp, size_t const len) {
     ZCOORD = _form_ZCOORD(inp.at(4));
 }
 
-gcoord::gcoord(void) :
+gcoord::gcoord() :
         gcoord(-1, 0., 0., 0.) {}
 
 gcoord::gcoord(
@@ -67,17 +67,17 @@ gcoord::gcoord(
         NODENO(NODENO),
         XCOORD(XCOORD), YCOORD(YCOORD), ZCOORD(ZCOORD) {}
 
-const dnvgl::extfem::fem::cards::types
-gcoord::card_type(void) const {return types::GCOORD;}
+ cards::types
+gcoord::card_type() const {return types::GCOORD;}
 
-std::ostream &gcoord::put(std::ostream& os) const {
+ostream &gcoord::put(ostream& os) const {
     if (NODENO == -1) return os;
-    os << gcoord::head.format()
+    os << head.format()
        << _form_NODENO.format(NODENO)
        << _form_XCOORD.format(XCOORD)
        << _form_YCOORD.format(YCOORD)
        << _form_ZCOORD.format(ZCOORD);
-    return os << std::endl;
+    return os << endl;
 }
 
 cards::__base::card const &gcoord::operator() (

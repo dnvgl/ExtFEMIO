@@ -19,12 +19,8 @@ namespace {
 
 #include "fem/cards.h"
 
-#include "fem/cards.h"
-
 #include <memory>
-#include <algorithm>
 
-#include "fem/cards.h"
 #include "fem/types.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
@@ -36,29 +32,29 @@ static char THIS_FILE[] = __FILE__;
 using namespace std;
 
 using namespace dnvgl::extfem;
-using namespace dnvgl::extfem::fem;
-using namespace dnvgl::extfem::fem::types;
+using namespace fem;
+using namespace types;
 
-using namespace dnvgl::extfem::fem::cards;
+using namespace cards;
 
-fem::types::card const gdobo::head("GDOBO");
+card const gdobo::head("GDOBO");
 
-fem::types::entry_type<double> const gdobo::_form_HZ("HZ");
-fem::types::entry_type<double> const gdobo::_form_TY("TY");
-fem::types::entry_type<double> const gdobo::_form_BY("BY");
-fem::types::entry_type<double> const gdobo::_form_TT("TT");
-fem::types::entry_type<double> const gdobo::_form_TB("TB");
-fem::types::entry_type<double> const gdobo::_form_SFY("SFY");
-fem::types::entry_type<double> const gdobo::_form_SFZ("SFZ");
-fem::types::entry_type<long> const gdobo::_form_NLOBY("NLOBY");
-fem::types::entry_type<long> const gdobo::_form_NLOBZ("NLOBZ");
+entry_type<double> const gdobo::_form_HZ("HZ");
+entry_type<double> const gdobo::_form_TY("TY");
+entry_type<double> const gdobo::_form_BY("BY");
+entry_type<double> const gdobo::_form_TT("TT");
+entry_type<double> const gdobo::_form_TB("TB");
+entry_type<double> const gdobo::_form_SFY("SFY");
+entry_type<double> const gdobo::_form_SFZ("SFZ");
+entry_type<long> const gdobo::_form_NLOBY("NLOBY");
+entry_type<long> const gdobo::_form_NLOBZ("NLOBZ");
 
-gdobo::gdobo(void) :
+gdobo::gdobo() :
         gdobo(-1, 0., 0., 0., 0., 0., 0., 0.) {}
 
 gdobo::gdobo(vector<std::string> const &inp, size_t const len) :
-        __base::beam_prop(inp, len, false) {
-    read(inp, len);
+        beam_prop(inp, len, false) {
+    gdobo::read(inp, len);
 }
 
 gdobo::gdobo(long const GEONO,
@@ -66,11 +62,11 @@ gdobo::gdobo(long const GEONO,
              double const TT, double const TB,
              double const SFY, double const SFZ,
              long const NLOBY, long const NLOBZ) :
-        __base::beam_prop(GEONO),
+        beam_prop(GEONO),
         HZ{HZ}, TY{TY}, BY{BY}, TT{TT}, TB{TB}, SFY{SFY}, SFZ{SFZ},
         NLOBY{NLOBY}, NLOBZ{NLOBZ} {}
 
-fem::cards::types const gdobo::card_type(void) const {
+cards::types gdobo::card_type() const {
     return types::GDOBO;
 }
 
@@ -95,7 +91,7 @@ cards::__base::card const &gdobo::operator() (
 
 ostream &gdobo::put(ostream &os) const {
     if (GEONO == -1) return os;
-    os << gdobo::head.format()
+    os << head.format()
        << _form_GEONO.format(GEONO) << _form_HZ.format(HZ)
        << _form_TY.format(TY) << _form_BY.format(BY) << endl
        << fem::types::card("").format()

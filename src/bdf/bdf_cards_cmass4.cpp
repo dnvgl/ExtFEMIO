@@ -10,6 +10,7 @@
 #include "StdAfx.h"
 
 #include "extfem_misc.h"
+#include "bdf/cards_loads.h"
 
 // ID:
 namespace {
@@ -30,8 +31,8 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 namespace {
-    long static const cl0 = 0;
-    long static const cl1 = 1;
+    long const cl0 = 0;
+    long const cl1 = 1;
 }
 
 using namespace std;
@@ -49,20 +50,20 @@ entry_type<double> const cmass4::form_M("M");
 entry_type<long> const cmass4::form_S1("S1");
 entry_type<long> const cmass4::form_S2("S2");
 
-cmass4::cmass4(void) :
+cmass4::cmass4() :
 element(nullptr),
 M(nullptr), S1(nullptr), S2(nullptr) {}
 
 cmass4::cmass4(list<std::string> const &inp) :
 element(inp) {
-    this->read(inp);
+    this->cmass4::read(inp);
 }
 
 cmass4::cmass4(long const *EID, double const *M,
                long const *S1, long const *S2/*=nullptr*/) :
                element(EID),
                M(M), S1(S1), S2(S2) {
-    if (((long)this->EID < 1l) || ((long)this->EID > 100000000l))
+    if (long(this->EID) < 1l || long(this->EID) > 100000000l)
         throw errors::error("CMASS4", "EID not in valid range");
 }
 
@@ -101,7 +102,7 @@ invalid:
 end:;
 }
 
-cards::types const cmass4::card_type(void) const {
+cards::types cmass4::card_type() const {
     return types::CMASS4;
 }
 
@@ -111,7 +112,7 @@ void cmass4::collect_outdata(
     if (static_cast<long>(EID) <= 0)
         return;
 
-    res.push_back(unique_ptr<format_entry>(format(cmass4::head)));
+    res.push_back(unique_ptr<format_entry>(format(head)));
 
     res.push_back(unique_ptr<format_entry>(format<long>(form_EID, EID)));
     res.push_back(unique_ptr<format_entry>(format<double>(form_M, M)));

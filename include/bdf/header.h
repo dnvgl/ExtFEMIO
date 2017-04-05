@@ -1,5 +1,5 @@
 /**
-   \file header.h
+   \file bdf/header.h
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
    \brief classes for defining NASTAN header
@@ -13,8 +13,6 @@
 #ifndef _HEADER_H_
 #define _HEADER_H_
 
-#include <iostream>
-#include <sstream>
 #include <list>
 #include <memory>
 
@@ -27,7 +25,8 @@ namespace dnvgl {
                 namespace __base {
                     class entry : public extfem::__base::outline {
                     public:
-                        entry(void);
+                        entry();
+                        virtual ~entry();
                     };
                 }
 
@@ -144,12 +143,13 @@ namespace dnvgl {
 /// Nonlinear static and transient analysis
                             NONLIN  =400};
                         sol_no_type sol_no;
-                        sol(sol_no_type const &sol_no=sol_no_type::SESTATIC);
-                        sol(long const&);
+                        explicit sol(sol_no_type const &sol_no=sol_no_type::SESTATIC);
+                        explicit sol(long const&);
 
                     private:
 
-                        std::ostream &put(std::ostream&) const;
+                        std::ostream &put(std::ostream&) const override;
+
                         class sol_no_type_conv {
                         public:
                             static sol_no_type from_long(long const&);
@@ -174,9 +174,9 @@ namespace dnvgl {
 */
                     class cend : public __base::entry {
                     public:
-                        cend(void);
+                        cend();
                     private:
-                        std::ostream &put(std::ostream&) const;
+                        std::ostream &put(std::ostream&) const override;
                     };
                 };
 
@@ -206,10 +206,10 @@ namespace dnvgl {
 */
                     class title : public __base::entry {
                     public:
+                        explicit title(std::string const&);
                         std::string name;
-                        title(std::string const&);
                     private:
-                        std::ostream &put(std::ostream&) const;
+                        std::ostream &put(std::ostream&) const override;
                     };
 
 /**
@@ -277,10 +277,10 @@ namespace dnvgl {
                     public:
                         class describer {
                         protected:
-                            describer(void);
+                            describer();
                         public:
-                            virtual ~describer(void);
-                            virtual std::string const str(void) const = 0;
+                            virtual ~describer() = default;
+                            virtual std::string str() const = 0;
                         };
 
 /** The unsorted Bulk Data will be printed. If `SORT` is not also
@@ -288,8 +288,9 @@ namespace dnvgl {
 */
                         class unsort : public describer {
                         public:
-                            unsort(void);
-                            virtual std::string const str(void) const;
+                            unsort();
+                            ~unsort() override = default;
+                            std::string str() const override;
                         };
 
 /** The sorted (arranged in alphanumeric order) Bulk Data will be
@@ -315,21 +316,19 @@ namespace dnvgl {
    Exclude cdni Bulk Data entries from sorted
    echo printout. See Remark 6.
 */
-                                cdni_entry(
+                                explicit cdni_entry(
                                     std::string const &name, bool const except=false);
-
-                                virtual ~cdni_entry(void);
-
-                                virtual std::string const str(void) const;
+                                virtual ~cdni_entry();
+                                std::string str() const;
                             };
 
                         private:
                             std::list<cdni_entry> cdni;
 
                         public:
-                            sort(std::list<cdni_entry> const &);
-                            virtual ~sort(void);
-                            virtual std::string const str(void) const;
+                            explicit sort(std::list<cdni_entry> const &);
+                            ~sort() override;
+                            std::string str() const override;
                         };
 
 /** Both sorted and unsorted Bulk Data will be printed. This is
@@ -337,15 +336,17 @@ namespace dnvgl {
 */
                         class both : public describer {
                         public:
-                            both(void);
-                            virtual std::string const str(void) const;
+                            both();
+                            ~both() override = default;
+                            std::string str() const override;
                         };
 
 /// Neither sorted nor unsorted Bulk Data will be printed.
                         class none : public describer {
                         public:
-                            none(void);
-                            virtual std::string const str(void) const;
+                            none();
+                            ~none() override = default;
+                            std::string str() const override;
                         };
 
 /// The entire Bulk Data will be written to the punch file.
@@ -363,8 +364,9 @@ namespace dnvgl {
                             std::list<option_type> options;
 
                         public:
-                            punch(std::list<option_type> const &options={});
-                            virtual std::string const str(void) const;
+                            explicit punch(std::list<option_type> const &options={});
+                            ~punch() override = default;
+                            std::string str() const override;
                         };
 
 /** The entire Bulk Data Echo will be written to the separate file
@@ -373,18 +375,19 @@ namespace dnvgl {
 */
                         class file : public describer {
                         public:
-                            file(void);
-                            virtual std::string const str(void) const;
+                            file();
+                            ~file() override = default;
+                            std::string str() const override;
                         };
 
-                    private:
+                    protected:
                         std::list<describer*> oper;
 
                     public:
-                        echo(std::list<describer*> const &oper={});
-                        virtual ~echo();
+                        explicit echo(std::list<describer*> const &oper={});
+                        ~echo() override;
                     private:
-                        std::ostream &put(std::ostream&) const;
+                        std::ostream &put(std::ostream&) const override;
                     };
 
 /**
@@ -526,9 +529,10 @@ namespace dnvgl {
                     public:
                         class describer {
                         protected:
-                            describer(void);
+                            describer();
                         public:
-                            virtual std::string const str(void) const = 0;
+                            virtual ~describer() = default;
+                            virtual std::string str() const = 0;
                         };
 
 /** Output will be presented as a tabular listing of grid points for
@@ -537,8 +541,9 @@ namespace dnvgl {
 */
                         class sort1 : public describer {
                         public:
-                            sort1(void);
-                            virtual std::string const str(void) const;
+                            sort1();
+                            ~sort1() override = default;
+                            std::string str() const override;
                         };
 
 /** Output will be presented as a tabular listing of load, frequency
@@ -546,29 +551,33 @@ namespace dnvgl {
 */
                         class sort2 : public describer {
                         public:
-                            sort2(void);
-                            virtual std::string const str(void) const;
+                            sort2();
+                            ~sort2() override = default;
+                            std::string str() const override;
                         };
 
 /// The printer will be the output medium.
                         class print : public describer {
                         public:
-                            print(void);
-                            virtual std::string const str(void) const;
+                            print();
+                            ~print() override = default;
+                            std::string str() const override;
                         };
 
 /// The punch file will be the output medium.
                         class punch : public describer {
                         public:
-                            punch(void);
-                            virtual std::string const str(void) const;
+                            punch();
+                            ~punch() override = default;
+                            std::string str() const override;
                         };
 
 /// Generates, but does not print, displacement data.
                         class plot : public describer {
                         public:
-                            plot(void);
-                            virtual std::string const str(void) const;
+                            plot();
+                            ~plot() override = default;
+                            std::string str() const override;
                         };
 
 /** Requests rectangular format (real and imaginary) of complex
@@ -576,8 +585,9 @@ namespace dnvgl {
 */
                         class real : public describer {
                         public:
-                            real(void);
-                            virtual std::string const str(void) const;
+                            real();
+                            ~real() override = default;
+                            std::string str() const override;
                         };
 
 /** Requests rectangular format (real and imaginary) of complex
@@ -585,8 +595,9 @@ namespace dnvgl {
 */
                         class imag : public describer {
                         public:
-                            imag(void);
-                            virtual std::string const str(void) const;
+                            imag();
+                            ~imag() override = default;
+                            std::string str() const override;
                         };
 
 /** Requests polar format (magnitude and phase) of complex output.
@@ -594,8 +605,9 @@ namespace dnvgl {
 */
                         class phase : public describer {
                         public:
-                            phase(void);
-                            virtual std::string const str(void) const;
+                            phase();
+                            ~phase() override = default;
+                            std::string str() const override;
                         };
 
 /** Requests the power spectral density function be calculated for
@@ -605,8 +617,9 @@ namespace dnvgl {
 */
                         class psdf : public describer {
                         public:
-                            psdf(void);
-                            virtual std::string const str(void) const;
+                            psdf();
+                            ~psdf() override = default;
+                            std::string str() const override;
                         };
 
 /** Requests the autocorrelation function be calculated for random
@@ -616,8 +629,9 @@ namespace dnvgl {
 */
                         class atoc : public describer {
                         public:
-                            atoc(void);
-                            virtual std::string const str(void) const;
+                            atoc();
+                            ~atoc() override = default;
+                            std::string str() const override;
                         };
 
 /** Requests the cumulative root mean square function be calculated
@@ -627,8 +641,9 @@ namespace dnvgl {
 */
                         class crms : public describer {
                         public:
-                            crms(void);
-                            virtual std::string const str(void) const;
+                            crms();
+                            ~crms() override = default;
+                            std::string str() const override;
                         };
 
 /** Request all of `PSDF`, `ATOC` and `CRMS` be calculated for random
@@ -638,30 +653,34 @@ namespace dnvgl {
 */
                         class rall : public describer {
                         public:
-                            rall(void);
-                            virtual std::string const str(void) const;
+                            rall();
+                            ~rall() override = default;
+                            std::string str() const override;
                         };
 
 /// Writes random analysis results in the print file (Default)
                         class rprint : public describer {
                         public:
-                            rprint(void);
-                            virtual std::string const str(void) const;
+                            rprint();
+                            ~rprint() override = default;
+                            std::string str() const override;
                         };
 
 /// Disables the writing of random analysis results in the print file.
                         class noprint : public describer {
                         public:
-                            noprint(void);
-                            virtual std::string const str(void) const;
+                            noprint();
+                            ~noprint() override = default;
+                            std::string str() const override;
                         };
 
 
 /// Writes random analysis results in the punch file.
                         class rpunch : public describer {
                         public:
-                            rpunch(void);
-                            virtual std::string const str(void) const;
+                            rpunch();
+                            ~rpunch() override = default;
+                            std::string str() const override;
                         };
 
 /** Request to print output coordinate system ID in printed output
@@ -669,8 +688,9 @@ namespace dnvgl {
 */
                         class cid : public describer {
                         public:
-                            cid(void);
-                            virtual std::string const str(void) const;
+                            cid();
+                            ~cid() override = default;
+                            std::string str() const override;
                         };
 
 /// Translational Magnitude Filter
@@ -678,8 +698,9 @@ namespace dnvgl {
                         private:
                             double value;
                         public:
-                            tm(double &);
-                            virtual std::string const str(void) const;
+                            explicit tm(double &);
+                            ~tm() override = default;
+                            std::string str() const override;
                         };
 
 /// Translational Component Filters
@@ -687,8 +708,9 @@ namespace dnvgl {
                         private:
                             double value;
                         public:
-                            t1(double &);
-                            virtual std::string const str(void) const;
+                            explicit t1(double &);
+                            ~t1() override = default;
+                            std::string str() const override;
                         };
 
 /// Translational Component Filters
@@ -696,8 +718,9 @@ namespace dnvgl {
                         private:
                             double value;
                         public:
-                            t2(double &);
-                            virtual std::string const str(void) const;
+                            explicit t2(double &);
+                            ~t2() override = default;
+                            std::string str() const override;
                         };
 
 /// Translational Component Filters
@@ -705,8 +728,9 @@ namespace dnvgl {
                         private:
                             double value;
                         public:
-                            t3(double &);
-                            virtual std::string const str(void) const;
+                            explicit t3(double &);
+                            ~t3() override = default;
+                            std::string str() const override;
                         };
 
 /// Rotational Magnitude Filters
@@ -714,8 +738,9 @@ namespace dnvgl {
                         private:
                             double value;
                         public:
-                            rm(double &);
-                            virtual std::string const str(void) const;
+                            explicit rm(double &);
+                            ~rm() override = default;
+                            std::string str() const override;
                         };
 
 /// Rotational Component Filters
@@ -723,8 +748,9 @@ namespace dnvgl {
                         private:
                             double value;
                         public:
-                            r1(double &);
-                            virtual std::string const str(void) const;
+                            explicit r1(double &);
+                            ~r1() override = default;
+                            std::string str() const override;
                         };
 
 /// Rotational Component Filters
@@ -732,8 +758,9 @@ namespace dnvgl {
                         private:
                             double value;
                         public:
-                            r2(double &);
-                            virtual std::string const str(void) const;
+                            explicit r2(double &);
+                            ~r2() override  = default;
+                            std::string str() const override;
                         };
 
 /// Rotational Component Filters
@@ -741,8 +768,9 @@ namespace dnvgl {
                         private:
                             double value;
                         public:
-                            r3(double &);
-                            virtual std::string const str(void) const;
+                            explicit r3(double &);
+                            ~r3() override = default;
+                            std::string str() const override;
                         };
 
 /// Filter value (Real > 0.0)
@@ -750,8 +778,9 @@ namespace dnvgl {
                         private:
                             double value;
                         public:
-                            f(double &);
-                            virtual std::string const str(void) const;
+                            explicit f(double &);
+                            ~f() override = default;
+                            std::string str() const override;
                         };
 
                         enum class restype{
@@ -773,7 +802,7 @@ namespace dnvgl {
                         displacement(std::list<describer*> const &, restype const &res=restype::NONE);
                         displacement(std::list<describer*> const &, long const &);
                     private:
-                        std::ostream &put(std::ostream&) const;
+                        std::ostream &put(std::ostream&) const override;
                     };
 
 /**
@@ -890,9 +919,10 @@ SPCFORCES(PRINT, RALL, NORPRINT)=ALL
                     public:
                         class describer {
                         protected:
-                            describer(void);
+                            describer();
                         public:
-                            virtual std::string const str(void) const = 0;
+                            virtual ~describer() = default;
+                            virtual std::string str() const = 0;
                         };
 
 /** Output will be presented as a tabular listing of grid points for
@@ -901,8 +931,8 @@ SPCFORCES(PRINT, RALL, NORPRINT)=ALL
 */
                         class sort1 : public describer {
                         public:
-                            sort1(void);
-                            virtual std::string const str(void) const;
+                            sort1();
+                            std::string str() const override;
                         };
 
 /** Output will be presented as a tabular listing of frequency or time
@@ -910,44 +940,44 @@ SPCFORCES(PRINT, RALL, NORPRINT)=ALL
 */
                         class sort2 : public describer {
                         public:
-                            sort2(void);
-                            virtual std::string const str(void) const;
+                            sort2();
+                            std::string str() const override;
                         };
 
 /// The printer will be the output medium.
                         class print : public describer {
                         public:
-                            print(void);
-                            virtual std::string const str(void) const;
+                            print();
+                            std::string str() const override;
                         };
 
 /// The punch file will be the output medium.
                         class punch : public describer {
                         public:
-                            punch(void);
-                            virtual std::string const str(void) const;
+                            punch();
+                            std::string str() const override;
                         };
 /// Generates, but does not print, single-point forces of constraint.
                         class plot : public describer {
                         public:
-                            plot(void);
-                            virtual std::string const str(void) const;
+                            plot();
+                            std::string str() const override;
                         };
 /** Requests rectangular format (real and imaginary) of complex
     output. Use of either `REAL` or `IMAG` yields the same output.
 */
                         class real : public describer {
                         public:
-                            real(void);
-                            virtual std::string const str(void) const;
+                            real();
+                            std::string str() const override;
                         };
 /** Requests rectangular format (real and imaginary) of complex
     output. Use of either `REAL` or `IMAG` yields the same output.
 */
                         class imag : public describer {
                         public:
-                            imag(void);
-                            virtual std::string const str(void) const;
+                            imag();
+                            std::string str() const override;
                         };
 
 /** Requests polar format (magnitude and phase) of
@@ -955,8 +985,8 @@ SPCFORCES(PRINT, RALL, NORPRINT)=ALL
 */
                         class phase : public describer {
                         public:
-                            phase(void);
-                            virtual std::string const str(void) const;
+                            phase();
+                            std::string str() const override;
                         };
 
 /** Print only non-zero SPCForces appearing in `SORT2` output. This
@@ -964,8 +994,8 @@ SPCFORCES(PRINT, RALL, NORPRINT)=ALL
 */
                         class nozprint : public describer {
                         public:
-                            nozprint(void);
-                            virtual std::string const str(void) const;
+                            nozprint();
+                            std::string str() const override;
                         };
 
 /** Requests the power spectral density function be calculated and
@@ -975,8 +1005,8 @@ SPCFORCES(PRINT, RALL, NORPRINT)=ALL
 */
                         class psdf : public describer {
                         public:
-                            psdf(void);
-                            virtual std::string const str(void) const;
+                            psdf();
+                            std::string str() const override;
                         };
 
 /** Requests the autocorrelation function be calculated and stored in
@@ -986,8 +1016,8 @@ SPCFORCES(PRINT, RALL, NORPRINT)=ALL
 */
                         class atoc : public describer {
                         public:
-                            atoc(void);
-                            virtual std::string const str(void) const;
+                            atoc();
+                            std::string str() const override;
                         };
 
 /** Requests the cumulative root mean square function be calculated
@@ -997,8 +1027,8 @@ SPCFORCES(PRINT, RALL, NORPRINT)=ALL
 */
                         class crms : public describer {
                         public:
-                            crms(void);
-                            virtual std::string const str(void) const;
+                            crms();
+                            std::string str() const override;
                         };
 
 /** Requests all of `PSDF`, `ATOC` and `CRMS` be calculated for random
@@ -1007,37 +1037,37 @@ SPCFORCES(PRINT, RALL, NORPRINT)=ALL
 */
                         class rall : public describer {
                         public:
-                            rall(void);
-                            virtual std::string const str(void) const;
+                            rall();
+                            std::string str() const override;
                         };
 
 /// Writes random analysis results in the print file. (Default)
                         class rprint : public describer {
                         public:
-                            rprint(void);
-                            virtual std::string const str(void) const;
+                            rprint();
+                            std::string str() const override;
                         };
 
 /// Disables the writing of random analysis results in the print file.
                         class norprint : public describer {
                         public:
-                            norprint(void);
-                            virtual std::string const str(void) const;
+                            norprint();
+                            std::string str() const override;
                         };
 
 /// Writes random analysis results in the punch file.
                         class rpunch : public describer {
                         public:
-                            rpunch(void);
-                            virtual std::string const str(void) const;
+                            rpunch();
+                            std::string str() const override;
                         };
 /** Request to print output coordinate system ID in printed output
     file, `F06` file.
 */
                         class cid : public describer {
                         public:
-                            cid(void);
-                            virtual std::string const str(void) const;
+                            cid();
+                            std::string str() const override;
                         };
                         enum class restype{
 /** Single-point forces of constraint for all points will be output.
@@ -1061,7 +1091,7 @@ SPCFORCES(PRINT, RALL, NORPRINT)=ALL
                         spcforces(std::list<describer*> const &, restype const &res=restype::NONE);
                         spcforces(std::list<describer*> const &, long const &res);
                     private:
-                        std::ostream &put(std::ostream&) const;
+                        std::ostream &put(std::ostream&) const override;
                     };
 
 /** # `STRESS`: Element Stress Output Request
@@ -1174,9 +1204,10 @@ Remarks:
                     public:
                         class describer {
                         protected:
-                            describer(void);
+                            describer();
                         public:
-                            virtual std::string const str(void) const = 0;
+                            virtual ~describer() = default;
+                            virtual std::string str() const = 0;
                         };
 
 /** Output will be presented as a tabular listing of elements for each
@@ -1185,8 +1216,8 @@ Remarks:
 */
                         class sort1 : public describer {
                         public:
-                            sort1(void);
-                            virtual std::string const str(void) const;
+                            sort1();
+                            std::string str() const override;
                         };
 
 /** Output will be presented as a tabular listing of frequency or time
@@ -1194,29 +1225,29 @@ Remarks:
 */
                         class sort2 : public describer {
                         public:
-                            sort2(void);
-                            virtual std::string const str(void) const;
+                            sort2();
+                            std::string str() const override;
                         };
 
 /// The printer will be the output medium.
                         class print : public describer {
                         public:
-                            print(void);
-                            virtual std::string const str(void) const;
+                            print();
+                            std::string str() const override;
                         };
 
 /// The punch file will be the output medium.
                         class punch : public describer {
                         public:
-                            punch(void);
-                            virtual std::string const str(void) const;
+                            punch();
+                            std::string str() const override;
                         };
 
 /// Generates stresses for requested set but no printer output.
                         class plot : public describer {
                         public:
-                            plot(void);
-                            virtual std::string const str(void) const;
+                            plot();
+                            std::string str() const override;
                         };
 
 /** Requests rectangular format (real and imaginary) of complex
@@ -1224,8 +1255,8 @@ Remarks:
 */
                         class real : public describer {
                         public:
-                            real(void);
-                            virtual std::string const str(void) const;
+                            real();
+                            std::string str() const override;
                         };
 
 /** Requests rectangular format (real and imaginary) of complex
@@ -1233,8 +1264,8 @@ Remarks:
 */
                         class imag : public describer {
                         public:
-                            imag(void);
-                            virtual std::string const str(void) const;
+                            imag();
+                            std::string str() const override;
                         };
 
 /** Requests polar format (magnitude and phase) of complex output.
@@ -1242,8 +1273,8 @@ Remarks:
 */
                         class phase : public describer {
                         public:
-                            phase(void);
-                            virtual std::string const str(void) const;
+                            phase();
+                            std::string str() const override;
                         };
 
 /** Requests the power spectral density function be calculated and
@@ -1253,8 +1284,8 @@ Remarks:
     */
                         class psdf : public describer {
                         public:
-                            psdf(void);
-                            virtual std::string const str(void) const;
+                            psdf();
+                            std::string str() const override;
                         };
 
 /** Requests the autocorrelation function be calculated and stored in
@@ -1264,8 +1295,8 @@ Remarks:
 */
                         class atoc : public describer {
                         public:
-                            atoc(void);
-                            virtual std::string const str(void) const;
+                            atoc();
+                            std::string str() const override;
                         };
 
 /** Requests the cumulative root mean square function be calculated
@@ -1275,8 +1306,8 @@ Remarks:
 */
                         class crms : public describer {
                         public:
-                            crms(void);
-                            virtual std::string const str(void) const;
+                            crms();
+                            std::string str() const override;
                         };
 
 /** Requests all of `PSDF`, `ATOC`, and `CRMS` be calculated for
@@ -1285,15 +1316,15 @@ Remarks:
 */
                         class rall : public describer {
                         public:
-                            rall(void);
-                            virtual std::string const str(void) const;
+                            rall();
+                            std::string str() const override;
                         };
 
 /// Requests von Mises stress.
                         class vonmises : public describer {
                         public:
-                            vonmises(void);
-                            virtual std::string const str(void) const;
+                            vonmises();
+                            std::string str() const override;
                         };
 
 /** Requests maximum shear in the plane for shell elements and
@@ -1301,8 +1332,8 @@ Remarks:
 */
                         class maxs : public describer {
                         public:
-                            maxs(void);
-                            virtual std::string const str(void) const;
+                            maxs();
+                            std::string str() const override;
                         };
 
 /** Requests maximum shear in the plane for shell elements and
@@ -1310,8 +1341,8 @@ Remarks:
 */
                         class shear : public describer {
                         public:
-                            shear(void);
-                            virtual std::string const str(void) const;
+                            shear();
+                            std::string str() const override;
                         };
 
 /** Requests `CQUAD4`, `QUADR` and `TRIAR` element stresses at the
@@ -1320,8 +1351,8 @@ Remarks:
 */
                         class center : public describer {
                         public:
-                            center(void);
-                            virtual std::string const str(void) const;
+                            center();
+                            std::string str() const override;
                         };
 
 /** Requests `CQUAD4` element stresses at the center and grid points
@@ -1329,8 +1360,8 @@ using strain gage approach with cubic bending correction.
 */
                         class cubic : public describer {
                         public:
-                            cubic(void);
-                            virtual std::string const str(void) const;
+                            cubic();
+                            std::string str() const override;
                         };
 
 /** Requests `CQUAD4` element stresses at center and grid points using
@@ -1338,8 +1369,8 @@ using strain gage approach with cubic bending correction.
 */
                         class sgage : public describer {
                         public:
-                            sgage(void);
-                            virtual std::string const str(void) const;
+                            sgage();
+                            std::string str() const override;
                         };
 
 /** Requests `CQUAD4`, `QUADR`, amd `TRIAR` element stresses at center
@@ -1347,8 +1378,8 @@ using strain gage approach with cubic bending correction.
 */
                         class corner : public describer {
                         public:
-                            corner(void);
-                            virtual std::string const str(void) const;
+                            corner();
+                            std::string str() const override;
                         };
 
 /** Requests `CQUAD4`, `QUADR`, amd `TRIAR` element stresses at center
@@ -1356,29 +1387,29 @@ using strain gage approach with cubic bending correction.
 */
                         class bilin : public describer {
                         public:
-                            bilin(void);
-                            virtual std::string const str(void) const;
+                            bilin();
+                            std::string str() const override;
                         };
 
 /// Writes random analysis results in the print file. (Default)
                         class rprint : public describer {
                         public:
-                            rprint(void);
-                            virtual std::string const str(void) const;
+                            rprint();
+                            std::string str() const override;
                         };
 
 /// Disables the writing of random analysis results in the print file.
                         class norprint : public describer {
                         public:
-                            norprint(void);
-                            virtual std::string const str(void) const;
+                            norprint();
+                            std::string str() const override;
                         };
 
 /// Writes random analysis results in the punch file.
                         class rpunch : public describer {
                         public:
-                            rpunch(void);
-                            virtual std::string const str(void) const;
+                            rpunch();
+                            std::string str() const override;
                         };
 
                     public:
@@ -1401,7 +1432,7 @@ using strain gage approach with cubic bending correction.
                         stress(std::list<describer*> const &, restype const &res=restype::NONE);
                         stress(std::list<describer*> const &, long const &);
                     private:
-                        std::ostream &put(std::ostream&) const;
+                        std::ostream &put(std::ostream&) const override;
                     };
 
 /**
@@ -1452,7 +1483,7 @@ LOAD=15
                     public:
                         load(long const &);
                     private:
-                        std::ostream &put(std::ostream&) const;
+                        std::ostream &put(std::ostream&) const override;
                     };
 
 
@@ -1498,7 +1529,7 @@ Any character string.
                     public:
                         subtitle(std::string const &);
                     private:
-                        std::ostream &put(std::ostream&) const;
+                        std::ostream &put(std::ostream&) const override;
                     };
 
 /**
@@ -1543,10 +1574,10 @@ SUBCASE=101
 
                     public:
 
-                        subcase(void);
+                        subcase();
                         subcase(long const &);
                     private:
-                        std::ostream &put(std::ostream&) const;
+                        std::ostream &put(std::ostream&) const override;
                     };
 
 /** # `BEGIN BULK`: Case Control and Bulk Data Delimiter
@@ -1615,9 +1646,9 @@ Superelement identification number. (Integer>0)
 */
                     class begin_bulk : public __base::entry {
                     public:
-                        begin_bulk(void);
+                        begin_bulk();
                     private:
-                        std::ostream &put(std::ostream&) const;
+                        std::ostream &put(std::ostream&) const override;
                     };
 
                 };

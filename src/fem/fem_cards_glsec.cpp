@@ -17,7 +17,6 @@ namespace {
 }
 
 #include <memory>
-#include <algorithm>
 
 #include "fem/cards.h"
 #include "fem/types.h"
@@ -33,9 +32,9 @@ using namespace std;
 using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
-using namespace dnvgl::extfem::fem::cards;
+using namespace cards;
 
-fem::types::card const glsec::head("GLSEC");
+card const glsec::head("GLSEC");
 
 entry_type<double> const glsec::_form_HZ("HZ");
 entry_type<double> const glsec::_form_TY("TY");
@@ -48,8 +47,8 @@ entry_type<long> const glsec::_form_NLOBY("NLOBY");
 entry_type<long> const glsec::_form_NLOBZ("NLOBZ");
 
 glsec::glsec(vector<std::string> const &inp, size_t const len) :
-        __base::beam_prop(inp, len, false) {
-    read(inp, len);
+        beam_prop(inp, len, false) {
+    glsec::read(inp, len);
 }
 
 void glsec::read(vector<std::string> const &inp, size_t const len) {
@@ -74,7 +73,7 @@ void glsec::read(vector<std::string> const &inp, size_t const len) {
         NLOBZ = {0};
 }
 
-glsec::glsec(void) :
+glsec::glsec() :
         glsec(-1, 0., 0., 0., 0., 0., 0., false) {}
 
 glsec::glsec(long const GEONO, double const HZ,
@@ -82,7 +81,7 @@ glsec::glsec(long const GEONO, double const HZ,
              double const TZ, double const SFY,
              double const SFZ, bool const K,
              long const NLOBY, long const NLOBZ) :
-        __base::beam_prop(GEONO, false),
+        beam_prop(GEONO, false),
         HZ(HZ), TY(TY), BY(BY), TZ(TZ),
         SFY(SFY), SFZ(SFZ),
         K(K), NLOBY(NLOBY), NLOBZ(NLOBZ) {}
@@ -106,20 +105,21 @@ cards::__base::card const &glsec::operator() (
     return *this;
 }
 
-dnvgl::extfem::fem::cards::types const
-glsec::card_type(void) const {return types::GLSEC;}
+cards::types glsec::card_type() const {
+    return types::GLSEC;
+}
 
 ostream &glsec::put(ostream& os) const {
     if (GEONO == -1) return os;
-    os << glsec::head.format()
+    os << head.format()
        << _form_GEONO.format(GEONO) << _form_HZ.format(HZ)
        << _form_TY.format(TY) << _form_BY.format(BY) << endl
-       << dnvgl::extfem::fem::types::card().format()
+       << fem::types::card().format()
        << _form_TZ.format(TZ) << _form_SFY.format(SFY)
        << _form_SFZ.format(SFZ) << _form_K.format(K) << endl;
     if (!(NLOBY || NLOBZ))
         return os;
-    os << dnvgl::extfem::fem::types::card().format()
+    os << fem::types::card().format()
        << _form_NLOBY.format(NLOBY) << _form_NLOBZ.format(NLOBZ) << endl;
     return os;
 }

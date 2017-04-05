@@ -10,6 +10,7 @@
 #include "StdAfx.h"
 
 #include "extfem_misc.h"
+#include "bdf/cards_elements.h"
 
 // ID:
 namespace {
@@ -34,9 +35,9 @@ namespace {
 
 using namespace dnvgl::extfem::bdf;
 
-using dnvgl::extfem::bdf::types::entry_type;
-using namespace dnvgl::extfem::bdf::type_bounds;
-using namespace dnvgl::extfem::bdf::cards;
+using types::entry_type;
+using namespace type_bounds;
+using namespace cards;
 
 // const entry_type<long> cbeam::form_EID(
 //    "EID", bound<long>(&lc1));
@@ -73,8 +74,12 @@ const entry_type<long> cbeam::form_SB(
     "SB", bound<long>(&lc1, nullptr, nullptr, true)); // minval=1, default=None)
 
 cbeam::cbeam(std::list<std::string> const &inp) :
-__base::element(inp) {
-    this->read(inp);
+element(inp) {
+    this->cbeam::read(inp);
+}
+
+cards::types cbeam::card_type() const {
+    return types::CBEAM;
 }
 
 void cbeam::read(std::list<std::string> const &inp) {
@@ -95,17 +100,17 @@ void cbeam::read(std::list<std::string> const &inp) {
 
     switch (inp.size() - 1) {
     case 24:
-        pos++;
+        ++pos;
     case 23:
-        pos++;
+        ++pos;
     case 22:
-        pos++;
+        ++pos;
     case 21:
-        pos++;
+        ++pos;
     case 20:
-        pos++;
+        ++pos;
     case 19:
-        pos++;
+        ++pos;
     case 18:
         form_SB.set_value(SB, *(pos++));
     case 17:
@@ -183,7 +188,6 @@ void cbeam::read(std::list<std::string> const &inp) {
 void cbeam::collect_outdata(
     std::list<std::unique_ptr<format_entry> > &res) const {
     throw errors::error("CBEAM", "can't write CBEAM.");
-    return;
 }
 
 // Local Variables:

@@ -17,7 +17,6 @@ namespace {
 }
 
 #include <list>
-#include <string>
 #include <memory>
 
 #include "bdf/cards.h"
@@ -31,13 +30,13 @@ static char THIS_FILE[] = __FILE__;
 
 
 namespace {
-   static const long cl0 = 0, cl1 = 1, cl_1 = -1, cl_2 = -2;
-   static const long cl1e8 = 100000000;
-   static const double cd0 = 0.;
+   const long cl0 = 0, cl1 = 1, cl_1 = -1, cl_2 = -2;
+   const long cl1e8 = 100000000;
+   const double cd0 = 0.;
 }
 
 using namespace dnvgl::extfem;
-using namespace dnvgl::extfem::bdf::cards;
+using namespace bdf::cards;
 
 const bdf::types::entry_type<long> grid::form_ID(
     "ID", bdf::type_bounds::bound<long>(&cl1, &cl1e8));
@@ -57,7 +56,7 @@ const bdf::types::entry_type<long> grid::form_SEID(
 
 grid::grid(std::list<std::string> const &inp) :
 card(inp) {
-    this->read(inp);
+    this->grid::read(inp);
 }
 
 grid::grid(long &ID, long &CP, double &X1, double &X2, double &X3) :
@@ -65,8 +64,7 @@ card(),
 ID(ID), CP(CP), X1(X1), X2(X2), X3(X3),
 CD(), PS(), SEID() {}
 
-const dnvgl::extfem::bdf::cards::types
-grid::card_type(void) const {
+types grid::card_type() const {
     return types::GRID;
 }
 

@@ -16,10 +16,7 @@ namespace {
         "@(#) $Id$";
 }
 
-#include "config.h"
-
 #include "fem/types.h"
-#include "extfem_string.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
@@ -40,17 +37,17 @@ __base::imbue_helper::imbue_helper(std::locale const &loc) : b_type("") {
     conv.imbue(loc);
 }
 
-fem_types __base::imbue_helper::type(void) const {
+fem_types __base::imbue_helper::type() const {
     return fem_types::None;
 }
 
-std::string __base::imbue_helper::format(void const*) const {
+std::string __base::imbue_helper::format(void const*) {
     return "";
 }
 
-card::card(std::string const &name) : __base::b_type(name) {}
+card::card(std::string const &name) : b_type(name) {}
 
-card::card(void) : __base::b_type("") {}
+card::card() : b_type("") {}
 
 std::string card::format() const {
     std::ostringstream res;
@@ -61,11 +58,11 @@ std::string card::format() const {
     return res.str();
 }
 
-empty::empty(void) : __base::b_type("") {}
+empty::empty() : b_type("") {}
 
-fem_types empty::type(void) const {return fem_types::None;}
+fem_types empty::type() const {return fem_types::None;}
 
-std::string empty::format() const {
+std::string empty::format() {
     std::ostringstream res;
     res.fill(' ');
     res.width(16);

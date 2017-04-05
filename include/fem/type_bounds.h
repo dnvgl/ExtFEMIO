@@ -91,9 +91,9 @@ namespace dnvgl {
                         got_default();
                     };
 
-                    _Ty get_default(void) const {
+                    _Ty get_default() const {
                         if (!has_default())
-                            throw dnvgl::extfem::fem::errors::types_error("** ERROR **: No default value avaliable.");
+                            throw errors::types_error("** ERROR **: No default value avaliable.");
                         return this->default_val;
                     };
 
@@ -107,7 +107,7 @@ namespace dnvgl {
                                 (!has_max() || val <= this->max_val));
                     };
 
-                    bool does_allow_empty(void) const {
+                    bool does_allow_empty() const {
                         return allow_empty;
                     };
                 };
@@ -143,9 +143,9 @@ namespace dnvgl {
                     };
 
 
-                    std::string get_default(void) const {
+                    std::string get_default() const {
                         if (!has_default())
-                            throw dnvgl::extfem::fem::errors::types_error("** ERROR **: No default value avaliable.");
+                            throw errors::types_error("** ERROR **: No default value avaliable.");
                         return this->default_val;
                     };
                 };
@@ -164,9 +164,9 @@ namespace dnvgl {
                         got_default();
                     }
 
-                    bool get_default(void) const {
+                    bool get_default() const {
                         if (!has_default())
-                            throw dnvgl::extfem::fem::errors::types_error(
+                            throw errors::types_error(
                                 "** ERROR **: No default value avaliable.");
                         return this->default_val;
                     };

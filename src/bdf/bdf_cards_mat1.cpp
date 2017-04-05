@@ -17,7 +17,6 @@ namespace {
 }
 
 #include <list>
-#include <string>
 #include <memory>
 
 #include "bdf/cards.h"
@@ -31,15 +30,15 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 namespace {
-    static const long cl0 = 0, cl1 = 1;
-    static const double cd0 = 0., cd05 = 0.5, cd_1 = -1.;
+    const long cl0 = 0, cl1 = 1;
+    const double cd0 = 0., cd05 = 0.5, cd_1 = -1.;
 }
 
 using namespace dnvgl::extfem::bdf;
-using dnvgl::extfem::bdf::types::entry_type;
-using namespace dnvgl::extfem::bdf::type_bounds;
+using types::entry_type;
+using namespace type_bounds;
 
-using namespace dnvgl::extfem::bdf::cards;
+using namespace cards;
 
 const entry_type<double> mat1::form_E(
     "E", bound<double>(&cd0, nullptr, nullptr, true));
@@ -47,8 +46,8 @@ const entry_type<double> mat1::form_NU(
     "NU", bound<double>(&cd_1, &cd05, nullptr, true));
 
 mat1::mat1(std::list<std::string> const &inp) :
-__base::mat(inp) {
-    this->read(inp);
+mat(inp) {
+    this->mat1::read(inp);
 }
 
 void mat1::read(std::list<std::string> const &inp) {
@@ -103,45 +102,43 @@ void mat1::read(std::list<std::string> const &inp) {
         throw errors::parse_error("MAT1", "Illegal number of entries.");
     }
 
-    if ((bool)A && !(bool)TREF) form_TREF.set_value(TREF, "");
+    if (bool(A) && !bool(TREF)) form_TREF.set_value(TREF, "");
 
     // remark 2
-    if (!((bool)E || (bool)G))
+    if (!(bool(E) || bool(G)))
         throw errors::parse_error(
         "MAT1", "Either G or E has to be given.");
-    if (!(bool)NU) {
-        if (!(bool)E) {
+    if (!bool(NU)) {
+        if (!bool(E)) {
             NU.value = 0.;
             NU.is_value = true;
             E.value = 0.;
             E.is_value = true;
-        } else if (!(bool)G) {
+        } else if (!bool(G)) {
             NU.value = 0.;
             NU.is_value = true;
             G.value = 0.;
             G.is_value = true;
         } else {
-            NU.value = ((double)E / 2. / (double)G) - 1.;
+            NU.value = (double(E) / 2. / double(G)) - 1.;
             NU.is_value = true;
         }
-    } else if (!(bool)E) {
-        E.value = 2. * (1 + (double)NU) * (double)G;
+    } else if (!bool(E)) {
+        E.value = 2. * (1 + double(NU)) * double(G);
         E.is_value = true;
-    } else if (!(bool)G) {
-        G.value = (double)E / (2. * (1 + (double)NU));
+    } else if (!bool(G)) {
+        G.value = double(E) / (2. * (1 + double(NU)));
         G.is_value = true;
     }
 }
 
-const dnvgl::extfem::bdf::cards::types
-mat1::card_type(void) const {
+cards::types mat1::card_type() const {
     return types::MAT1;
 };
 
 void mat1::collect_outdata(
     std::list<std::unique_ptr<format_entry> > &res) const {
-    throw errors::error("MAT1", "can't write MAT1.");
-    return;
+    throw std::not_implemented(__FILE__, __LINE__, "can't write MAT1.");
 }
 
 // Local Variables:

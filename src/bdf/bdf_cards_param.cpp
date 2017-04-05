@@ -22,7 +22,7 @@ namespace {
 using namespace std;
 
 using namespace dnvgl::extfem;
-using namespace dnvgl::extfem::bdf::cards;
+using namespace bdf::cards;
 
 bdf::types::card param::head = bdf::types::card("PARAM");
 
@@ -32,10 +32,11 @@ const bdf::types::entry_type<double> param::form_RVAL("RVAL");
 const bdf::types::entry_type<std::string> param::form_CVAL("CVAL");
 const bdf::types::entry_type<complex<double> > param::form_CPLXVAL("CPLXVAL");
 
-param::param() : card(), IVAL(), RVAL(), CVAL(), CPLXVAL() {}
+param::param() : card(), value_type(), IVAL(), RVAL(), CVAL(), CPLXVAL() {
+}
 
 param::param(std::string const &n) : param() {
-    N = extfem::string::string(n).upper();
+    N = string::string(n).upper();
 }
 
 param::param(std::string const &n, long const &ival) :
@@ -66,10 +67,10 @@ param(n) {
 
 param::param(list<std::string> const &inp) :
 card(inp) {
-    this->read(inp);
+    this->param::read(inp);
 }
 
-const dnvgl::extfem::bdf::cards::types param::card_type(void) const {
+types param::card_type() const {
     return types::PARAM;
 }
 
@@ -79,13 +80,13 @@ void param::read(list<std::string> const &inp) {
     const bdf::types::entry_type<double> form_V_R("double_val");
     const bdf::types::entry_type<std::string> form_V_C("char val");
 
-    bdf::types::entry_value<double> V2;
-
     std::string tmp("");
 
     auto pos = inp.rbegin();
 
     switch (inp.size() - 1) {
+    default:
+        throw errors::parse_error("PARAM", "invalid number of arguments.");
     case 8:
         ++pos;
     case 7:
@@ -124,7 +125,7 @@ void param::read(list<std::string> const &inp) {
 void param::collect_outdata(
     list<unique_ptr<format_entry> > &res) const {
 
-    res.push_back(unique_ptr<format_entry>(format(param::head)));
+    res.push_back(unique_ptr<format_entry>(format(head)));
 
     res.push_back(unique_ptr<format_entry>(format<std::string>(form_N, N)));
 

@@ -25,7 +25,6 @@ namespace {
 
 #include "fem/cards.h"
 #include "fem/types.h"
-#include "extfem_misc.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
@@ -40,7 +39,7 @@ using namespace fem;
 using namespace types;
 using namespace cards;
 
-fem::types::card const tdload::head("TDLOAD");
+card const tdload::head("TDLOAD");
 
 entry_type<long> const tdload::_form_NFIELD("NFIELD");
 entry_type<long> const tdload::_form_ILREF("ILREF");
@@ -51,7 +50,7 @@ entry_type<std::string> const tdload::_form_SET_NAME(
 entry_type<std::string> const tdload::_form_CONT("CONT");
 
 tdload::tdload(vector<std::string> const &inp, size_t const len) {
-    read(inp, len);
+    tdload::read(inp, len);
 }
 
 void tdload::read(vector<std::string> const &inp, size_t const len) {
@@ -92,7 +91,7 @@ void tdload::read(vector<std::string> const &inp, size_t const len) {
     }
 }
 
-tdload::tdload(void) :
+tdload::tdload() :
         tdload(0, -1, 0, {}) {}
 
 tdload::tdload(long const NFIELD, long const ILREF, long const CODNAM,
@@ -115,13 +114,13 @@ tdload::tdload(long const ILREF, std::string const &SET_NAME,
         SET_NAME(SET_NAME), CONT(CONT) {
 
     nlnam = true;
-    ncnam = (long)SET_NAME.size();
+    ncnam = long(SET_NAME.size());
     CODNAM = 100 + ncnam;
-    nltxt = (long)CONT.size();
+    nltxt = long(CONT.size());
     nctxt = 0;
     if (CONT.size()>0) {
         for (auto &p : CONT)
-            nctxt = max(nctxt, (long)p.size());
+            nctxt = max(nctxt, long(p.size()));
         for (auto &p : this->CONT)
             p.resize(nctxt, ' ');
     }
@@ -154,13 +153,13 @@ cards::__base::card const &tdload::operator() (
     long const ILREF, std::string const &SET_NAME,
     vector<std::string> const &CONT/*={}*/) {
     nlnam = true;
-    ncnam = (long)SET_NAME.size();
+    ncnam = long(SET_NAME.size());
     CODNAM = 100 + ncnam;
-    nltxt = (long)CONT.size();
+    nltxt = long(CONT.size());
     nctxt = 0;
     if (CONT.size()>0) {
         for (auto &p : CONT)
-            nctxt = max(nctxt, (long)p.size());
+            nctxt = max(nctxt, long(p.size()));
         for (auto &p : this->CONT)
             p.resize(nctxt, ' ');
     }
@@ -174,19 +173,20 @@ cards::__base::card const &tdload::operator() (
     return (*this)(NFIELD, ILREF, CODNAM, 0, SET_NAME, {});
 }
 
-dnvgl::extfem::fem::cards::types const
-tdload::card_type(void) const { return types::TDLOAD; };
+cards::types tdload::card_type() const {
+    return types::TDLOAD;
+};
 
 ostream &tdload::put(ostream& os) const {
     if (ILREF == -1) return os;
-    os << tdload::head.format()
+    os << head.format()
        << _form_NFIELD.format(NFIELD) << _form_ILREF.format(ILREF)
        << _form_CODNAM.format(CODNAM) << _form_CODTXT.format(CODTXT) << endl;
     if (nlnam)
-        os << dnvgl::extfem::fem::types::card().format()
+        os << fem::types::card().format()
            << _form_SET_NAME.format(SET_NAME, ncnam+8) << endl;
     for (auto p : CONT)
-        os << dnvgl::extfem::fem::types::card().format()
+        os << fem::types::card().format()
            << _form_CONT.format(p, nctxt+8) << endl;
     return os;
 }

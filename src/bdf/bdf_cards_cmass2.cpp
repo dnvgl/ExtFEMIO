@@ -10,6 +10,7 @@
 #include "StdAfx.h"
 
 #include "extfem_misc.h"
+#include "bdf/cards_loads.h"
 
 // ID:
 namespace {
@@ -30,9 +31,9 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 namespace {
-   long static const cl1 = 1;
-   long static const cl0 = 0;
-   double static const cd0 = 0.;
+   long const cl1 = 1;
+   long const cl0 = 0;
+   double const cd0 = 0.;
 }
 
 using namespace std;
@@ -41,6 +42,7 @@ using namespace dnvgl::extfem;
 using namespace bdf;
 using namespace type_bounds;
 using namespace cards;
+using namespace cards::__base;
 
 using bdf::types::entry_type;
 
@@ -54,14 +56,14 @@ entry_type<long> const cmass2::form_G2(
    "G2", bound<long>(nullptr, nullptr, nullptr, true));
 entry_type<list<int> > const cmass2::form_C2("C2");
 
-cmass2::cmass2(void) :
+cmass2::cmass2() :
    element(nullptr),
    M(nullptr), G1(nullptr), C1(nullptr),
    G2(nullptr), C2(nullptr) {}
 
 cmass2::cmass2(list<std::string> const &inp) :
 element(inp) {
-    this->read(inp);
+    this->cmass2::read(inp);
 }
 
 cmass2::cmass2(long const *EID, double const *M,
@@ -69,7 +71,7 @@ cmass2::cmass2(long const *EID, double const *M,
                long const *G2/*=nullptr*/, list<int> const *C2/*=nullptr*/) :
                element(EID),
                M(M), G1(G1), C1(C1), G2(G2), C2(C2) {
-    if (((long)this->EID < 1l) || ((long)this->EID > 100000000l))
+    if (long(this->EID) < 1l || long(this->EID) > 100000000l)
         throw errors::error("CMASS2", "EID not in valid range");
     if (this->G1 && this->C1.value.size() == 0)
         throw errors::error("CMASS2", "G1 requires C1 value");
@@ -77,7 +79,7 @@ cmass2::cmass2(long const *EID, double const *M,
         throw errors::error("CMASS2", "G2 requires C2 value");
 }
 
-cards::__base::card const &cmass2::operator() (
+card const &cmass2::operator() (
     long const *EID, double const *M,
     long const *G1, list<int> const *C1,
     long const *G2/*=nullptr*/, list<int> const *C2/*=nullptr*/) {
@@ -127,7 +129,7 @@ invalid:
 end:;
 }
 
-bdf::cards::types const cmass2::card_type(void) const {
+cards::types cmass2::card_type() const {
     return types::CMASS2;
 }
 
@@ -136,7 +138,7 @@ void cmass2::collect_outdata(
 
     if (!EID) return;
 
-    res.push_back(unique_ptr<format_entry>(format(cmass2::head)));
+    res.push_back(unique_ptr<format_entry>(format(head)));
 
     res.push_back(unique_ptr<format_entry>(format<long>(form_EID, EID)));
     res.push_back(unique_ptr<format_entry>(format<double>(form_M, M)));

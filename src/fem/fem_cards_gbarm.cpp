@@ -18,7 +18,6 @@ namespace {
 }
 
 #include <memory>
-#include <algorithm>
 
 #include "fem/cards.h"
 #include "fem/types.h"
@@ -32,11 +31,11 @@ static char THIS_FILE[] = __FILE__;
 using namespace std;
 
 using namespace dnvgl::extfem;
-using namespace dnvgl::extfem::fem;
-using namespace dnvgl::extfem::fem::cards;
-using namespace dnvgl::extfem::fem::types;
+using namespace fem;
+using namespace cards;
+using namespace types;
 
-fem::types::card const gbarm::head("GBARM");
+card const gbarm::head("GBARM");
 
 entry_type<double> const gbarm::_form_HZ("HZ");
 entry_type<double> const gbarm::_form_BT("BT");
@@ -47,8 +46,8 @@ entry_type<long> const gbarm::_form_NLOBY("NLOBY");
 entry_type<long> const gbarm::_form_NLOBZ("NLOBZ");
 
 gbarm::gbarm(vector<std::string> const &inp, size_t const len)  :
-        __base::beam_prop(inp, len, false) {
-    read(inp, len);
+        beam_prop(inp, len, false) {
+    gbarm::read(inp, len);
 }
 
 void gbarm::read(vector<std::string> const &inp, size_t const len) {
@@ -74,7 +73,7 @@ void gbarm::read(vector<std::string> const &inp, size_t const len) {
         NLOBZ = {0};
 }
 
-gbarm::gbarm(void) :
+gbarm::gbarm() :
         gbarm(-1, 0, 0, 0, 0, 0, 0, 0) {}
 
 gbarm::gbarm(
@@ -82,7 +81,7 @@ gbarm::gbarm(
     double const HZ, double const BT, double const BB,
     double const SFY, double const SFZ,
     long const NLOBY, long const NLOBZ) :
-        __base::beam_prop(GEONO), HZ(HZ), BT(BT), BB(BB),
+        beam_prop(GEONO), HZ(HZ), BT(BT), BB(BB),
         SFY(SFY), SFZ(SFZ), NLOBY(NLOBY), NLOBZ(NLOBZ) {}
 
 cards::__base::card const &gbarm::operator() (
@@ -101,12 +100,13 @@ cards::__base::card const &gbarm::operator() (
     return *this;
 }
 
-const dnvgl::extfem::fem::cards::types
-gbarm::card_type(void) const {return types::GBARM;}
+cards::types gbarm::card_type() const {
+    return types::GBARM;
+}
 
 ostream &gbarm::put(ostream& os) const {
     if (GEONO == -1) return os;
-    os << gbarm::head.format()
+    os << head.format()
        << _form_GEONO.format(GEONO) << _form_HZ.format(HZ)
        << _form_BT.format(BT) << _form_BB.format(BB) << endl
        << fem::types::card("").format()

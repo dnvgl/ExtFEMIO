@@ -40,7 +40,7 @@ namespace dnvgl {
 
                std::string last_comment;
 
-               bool eof(void);
+               bool eof() const;
 
                fem_file(std::istream&);
 
@@ -48,11 +48,11 @@ namespace dnvgl {
 
                /// actual byte position (hopefully no fem > 2Gybte will be
                /// readin ...)
-               std::streampos size(void);
+               std::streampos size() const;
 
                /// actual byte position (hopefully no fem > 2Gybte will be
                /// readin ...)
-               std::streampos pos(void);
+               std::streampos pos() const;
             };
          }
       }

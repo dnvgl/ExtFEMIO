@@ -19,7 +19,6 @@ namespace {
 #include "bdf/cards.h"
 #include "bdf/errors.h"
 
-#include <cstdlib>
 #include <memory>
 
 #if defined(__AFX_H__) && defined(_DEBUG)
@@ -29,14 +28,14 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 namespace {
-    static const long cl1 = 1;
-    static const double cd0 = 0.;
+    const long cl1 = 1;
+    const double cd0 = 0.;
 }
 
 using namespace dnvgl::extfem;
-using namespace dnvgl::extfem::bdf::cards;
+using namespace bdf::cards;
 
-using dnvgl::extfem::bdf::types::entry_type;
+using bdf::types::entry_type;
 
 const entry_type<long> prod::form_PID(
     "PID", bdf::type_bounds::bound<long>(&cl1));
@@ -54,7 +53,7 @@ const entry_type<double> prod::form_NSM(
 
 prod::prod(std::list<std::string> const &inp) :
 card(inp) {
-    this->read(inp);
+    this->prod::read(inp);
 }
 
 void prod::read(std::list<std::string> const &inp) {
@@ -89,15 +88,13 @@ void prod::read(std::list<std::string> const &inp) {
     if (!C.is_value) form_C.set_value(C, "");
 }
 
-const dnvgl::extfem::bdf::cards::types
-prod::card_type(void) const {
+types prod::card_type() const {
     return types::PROD;
 }
 
 void prod::collect_outdata(
     std::list<std::unique_ptr<format_entry> > &res) const {
-    throw errors::error("PROD", "can't write PROD.");
-    return;
+    throw std::not_implemented(__FILE__, __LINE__, "can't write PROD.");
 }
 
 // Local Variables:

@@ -40,7 +40,7 @@ regex const entry_type<bool>::bool_re(
     );
 
 entry_type<bool>::entry_type(std::string const &name) :
-        fem::types::__base::b_type(name), bounds() {}
+        b_type(name), bounds() {}
 
 bool entry_type<bool>::operator() (std::string const &inp) const {
     double value;
@@ -69,9 +69,9 @@ bool entry_type<bool>::operator() (std::string const &inp) const {
     }
 }
 
-fem_types entry_type<bool>::type(void) const { return _type; }
+fem_types entry_type<bool>::type() const { return _type; }
 
-std::string entry_type<bool>::format(bool const &inp) const {
+string entry_type<bool>::format(bool const &inp) {
     if (inp) return "           +1.00";
     else return "           +0.00";
 }

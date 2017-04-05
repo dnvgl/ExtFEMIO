@@ -32,13 +32,13 @@ error::error(
     const std::string &err_class) :
         msg(msg), name(name), err_class(err_class) {};
 
-std::string error::get_msg(void) const {
+std::string error::get_msg() const {
     if (name.length())
         return err_class + ":" + name + ":" + msg;
     return err_class + ":" + msg;
 }
 
-std::string error::operator() (void) const {
+std::string error::operator() () const {
     return this->get_msg() + "\n";
 }
 

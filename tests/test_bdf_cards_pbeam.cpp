@@ -8,6 +8,7 @@
 */
 
 #include "extfem_misc.h"
+#include "fem/types.h"
 
 // ID:
 namespace {
@@ -17,14 +18,13 @@ namespace {
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
 
-#include <limits>
-
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "bdf/cards.h"
-#include "bdf/errors.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
@@ -216,8 +216,8 @@ TEST_CASE("BDF PBEAM definitions.", "[bdf_PBEAM]") {
         REQUIRE(probe.E2 == std::vector<double>({0., 0.}));
         REQUIRE(probe.F1 == std::vector<double>({0., 0.}));
         REQUIRE(probe.F2 == std::vector<double>({0., 0.}));
-        std::vector<entry_value<std::string> > ref(1);
-        entry_type<std::string> tmp("tmp");
+        std::vector<dnvgl::extfem::bdf::types::entry_value<std::string> > ref(1);
+        dnvgl::extfem::bdf::types::entry_type<std::string> tmp("tmp");
         tmp.set_value(ref.front(), "YES");
         REQUIRE(probe.SO == ref);
         REQUIRE(probe.X_XB == std::vector<double>({1.}));

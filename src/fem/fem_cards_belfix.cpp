@@ -18,7 +18,6 @@ namespace {
 }
 
 #include <memory>
-#include <algorithm>
 
 #include "fem/cards.h"
 #include "fem/types.h"
@@ -33,27 +32,27 @@ static char THIS_FILE[] = __FILE__;
 using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
-using namespace dnvgl::extfem::fem::cards;
+using namespace cards;
 
 namespace {
     long m_one(-1)/*, one(1), two(2)*/;
 }
 
-const fem::types::card belfix::head("BELFIX");
+const card belfix::head("BELFIX");
 
-const fem::types::entry_type<long> belfix::_form_FIXNO("FIXNO");
-const fem::types::entry_type<long> belfix::_form_OPT(
+const entry_type<long> belfix::_form_FIXNO("FIXNO");
+const entry_type<long> belfix::_form_OPT(
     "OPT", type_bounds::bound<long>(/* &one, &two */));
-const fem::types::entry_type<long> belfix::_form_TRANO(
+const entry_type<long> belfix::_form_TRANO(
     "TRANO", type_bounds::bound<long>(&m_one));
-const fem::types::entry_type<double> belfix::_form_A("A");
+const entry_type<double> belfix::_form_A("A");
 
 belfix::belfix() :
-belfix(-1, belfix::n_opt::INVALID, 0,
+belfix(-1, n_opt::INVALID, 0,
 {0., 0., 0., 0., 0., 0.}) {}
 
 belfix::belfix(const std::vector<std::string> &inp, size_t const len) {
-    read(inp, len);
+    belfix::read(inp, len);
 }
 
 void belfix::read(const std::vector<std::string> &inp, size_t const len) {
@@ -91,14 +90,13 @@ belfix::belfix(long const FIXNO,
                std::vector<double> const &A) :
                card(), FIXNO(FIXNO), OPT(OPT), TRANO(TRANO), A(A) {}
 
-const dnvgl::extfem::fem::cards::types
-belfix::card_type(void) const {
+cards::types belfix::card_type() const {
     return types::BELFIX;
 }
 
 std::ostream &belfix::put(std::ostream &os) const {
-    if (OPT == belfix::n_opt::INVALID) return os;
-    os << belfix::head.format()
+    if (OPT == n_opt::INVALID) return os;
+    os << head.format()
         << _form_FIXNO.format(FIXNO)
         << _form_OPT.format(static_cast<long>(OPT))
         << _form_TRANO.format(TRANO)
@@ -114,7 +112,7 @@ std::ostream &belfix::put(std::ostream &os) const {
     return os << std::endl;;
 }
 
-std::string belfix::pos_string(void) const {
+std::string belfix::pos_string() const {
     std::ostringstream res;
     if (OPT != n_opt::FIXATION)
         throw errors::types_error(

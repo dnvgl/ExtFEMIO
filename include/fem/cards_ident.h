@@ -53,17 +53,17 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_TYPE;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_SUBTYPE;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NRECS;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NBYTE;
-                    dnvgl::extfem::fem::types::entry_type<std::string>
+                    fem::types::entry_type<std::string>
                     static const _form_CONT;
 
                 public:
@@ -99,7 +99,7 @@ namespace dnvgl {
 
                     date(std::vector<std::string> const&, size_t const);
 
-                    date(void);
+                    date();
 
                     date(
                         long const TYPE, long const SUBTYPE,
@@ -110,15 +110,15 @@ namespace dnvgl {
                         long const TYPE, long const SUBTYPE,
                         std::vector<std::string> const &CONT);
 
-                    dnvgl::extfem::fem::cards::types const
-                    card_type(void) const;
+                    types
+                    card_type() const override;
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
+                    std::ostream &put(std::ostream&) const override;
 
-                    virtual void read(
-                        std::vector<std::string> const&, size_t const);
+                    void read(
+                        std::vector<std::string> const&, size_t const) override;
                 };
 
 /// `IDENT`: Identification of Superelements
@@ -133,13 +133,13 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_SLEVEL;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_SELTYP;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_SELMOD;
 
                 public:
@@ -166,21 +166,21 @@ namespace dnvgl {
 
                     ident(std::vector<std::string> const&, size_t const);
 
-                    ident(void);
+                    ident();
 
                     ident(
                         long const SLEVEL, long const SELTYP,
                         mod_type const SELMOD);
 
-                    dnvgl::extfem::fem::cards::types const
-                    card_type(void) const;
+                    types
+                    card_type() const override;
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
+                    std::ostream &put(std::ostream&) const override;
 
-                    virtual void read(
-                        std::vector<std::string> const&, size_t const);
+                    void read(
+                        std::vector<std::string> const&, size_t const) override;
                 };
 
 /// `IEND`: End of a Superelement
@@ -197,9 +197,9 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_CONT;
 
                 public:
@@ -217,19 +217,19 @@ namespace dnvgl {
 
                     iend(std::vector<std::string> const&, size_t const);
 
-                    iend(void);
+                    iend();
 
-                    iend(long const CONT);
+                    explicit iend(long const CONT);
 
-                    dnvgl::extfem::fem::cards::types const
-                    card_type(void) const;
+                    types
+                    card_type() const override;
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
+                    std::ostream &put(std::ostream&) const override;
 
-                    virtual void read(
-                        std::vector<std::string> const&, size_t const);
+                    void read(
+                        std::vector<std::string> const&, size_t const) override;
                 };
 
 /// `TDSETNAM`: Name and Description of a set(group)
@@ -251,19 +251,19 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NFIELD;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_ISREF;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_CODNAM;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_CODTXT;
-                    dnvgl::extfem::fem::types::entry_type<std::string>
+                    fem::types::entry_type<std::string>
                     static const _form_SET_NAME;
-                    dnvgl::extfem::fem::types::entry_type<std::string>
+                    fem::types::entry_type<std::string>
                     static const _form_CONT;
 
                     bool nlnam;
@@ -338,7 +338,7 @@ namespace dnvgl {
 
                     tdsetnam(std::vector<std::string> const&, size_t const);
 
-                    tdsetnam(void);
+                    tdsetnam();
 
                     tdsetnam(long const NFIELD,
                              long const ISREF,
@@ -359,15 +359,15 @@ namespace dnvgl {
                     tdsetnam(long const ISREF,
                              std::string const &SET_NAME);
 
-                    dnvgl::extfem::fem::cards::types const
-                    card_type(void) const;
+                    types
+                    card_type() const override;
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
+                    std::ostream &put(std::ostream&) const override;
 
-                    virtual void read(
-                        std::vector<std::string> const&, size_t const);
+                    void read(
+                        std::vector<std::string> const&, size_t const) override;
                 };
 
 /// `TDSUPNAM`: Name and Description of a Super-Element
@@ -389,19 +389,19 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NFIELD;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_IHREF;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_CODNAM;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_CODTXT;
-                    dnvgl::extfem::fem::types::entry_type<std::string>
+                    fem::types::entry_type<std::string>
                     static const _form_SUP_NAME;
-                    dnvgl::extfem::fem::types::entry_type<std::string>
+                    fem::types::entry_type<std::string>
                     static const _form_CONT;
 
                     bool nlnam;
@@ -481,7 +481,7 @@ namespace dnvgl {
 
                     tdsupnam(std::vector<std::string> const&, size_t const);
 
-                    tdsupnam(void);
+                    tdsupnam();
 
                     tdsupnam(long const NFIELD,
                              long const IHREF,
@@ -502,15 +502,15 @@ namespace dnvgl {
                     tdsupnam(long const IHREF,
                              std::string const &SUP_NAME);
 
-                    dnvgl::extfem::fem::cards::types const
-                    card_type(void) const;
+                    types
+                    card_type() const override;
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
+                    std::ostream &put(std::ostream&) const override;
 
-                    virtual void read(
-                        std::vector<std::string> const&, size_t const);
+                    void read(
+                        std::vector<std::string> const&, size_t const) override;
                 };
 
 /// `TEXT`: User supplied Text
@@ -530,17 +530,17 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_TYPE;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_SUBTYPE;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NRECS;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NBYTE;
-                    dnvgl::extfem::fem::types::entry_type<std::string>
+                    fem::types::entry_type<std::string>
                     static const _form_CONT;
 
                 public:
@@ -578,7 +578,7 @@ namespace dnvgl {
 
                     text(std::vector<std::string> const&, size_t const);
 
-                    text(void);
+                    text();
 
                     text(long const TYPE, long const SUBTYPE,
                          long const NRECS, long const NBYTE,
@@ -587,26 +587,26 @@ namespace dnvgl {
                     text(long const TYPE, long const SUBTYPE,
                          std::vector<std::string> const &CONT);
 
-                    using __base::card::operator();
+                    using card::operator();
 
-                    __base::card const &operator()(
+                    card const &operator()(
                         long const TYPE, long const SUBTYPE,
                         long const NRECS, long const NBYTE,
                         std::vector<std::string> const &CONT);
 
-                    __base::card const &operator()(
+                    card const &operator()(
                         long const TYPE, long const SUBTYPE,
                         std::vector<std::string> const &CONT);
 
-                    dnvgl::extfem::fem::cards::types const
-                    card_type(void) const;
+                    types
+                    card_type() const override;
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
+                    std::ostream &put(std::ostream&) const override;
 
-                    virtual void read(
-                        std::vector<std::string> const&, size_t const);
+                    void read(
+                        std::vector<std::string> const&, size_t const) override;
                 };
 
             /// `TDLOAD`: Name of Load
@@ -624,19 +624,19 @@ namespace dnvgl {
 */
                 class tdload : public __base::card {
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NFIELD;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_ILREF;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_CODNAM;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_CODTXT;
-                    dnvgl::extfem::fem::types::entry_type<std::string>
+                    fem::types::entry_type<std::string>
                     static const _form_SET_NAME;
-                    dnvgl::extfem::fem::types::entry_type<std::string>
+                    fem::types::entry_type<std::string>
                     static const _form_CONT;
 
                     bool nlnam;
@@ -716,7 +716,7 @@ namespace dnvgl {
 
                     tdload(std::vector<std::string> const&, size_t const);
 
-                    tdload(void);
+                    tdload();
 
                     tdload(
                         long const NFIELD, long const ILREF, long const CODNAM,
@@ -731,30 +731,30 @@ namespace dnvgl {
                         long const NFIELD, long const ILREF, long const CODNAM,
                         std::string const &SET_NAME);
 
-                    using __base::card::operator();
+                    using card::operator();
 
-                    __base::card const &operator() (
+                    card const &operator() (
                         long const NFIELD, long const ILREF, long const CODNAM,
                         long const CODTXT, std::string const &SET_NAME,
                         std::vector<std::string> const &CONT);
 
-                    __base::card const &operator() (
+                    card const &operator() (
                         long const ILREF, std::string const &SET_NAME,
                         std::vector<std::string> const &CONT={});
 
-                    __base::card const &operator() (
+                    card const &operator() (
                         long const NFIELD, long const ILREF, long const CODNAM,
                         std::string const &SET_NAME);
 
-                    dnvgl::extfem::fem::cards::types const
-                    card_type(void) const;
+                    types
+                    card_type() const override;
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
+                    std::ostream &put(std::ostream&) const override;
 
-                    virtual void read(
-                        const std::vector<std::string>&, size_t const);
+                    void read(
+                        const std::vector<std::string>&, size_t const) override;
                 };
             }
         }

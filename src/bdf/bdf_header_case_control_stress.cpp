@@ -37,7 +37,7 @@ stress::stress(
 stress::stress(
     std::list<describer*> const &describers,
     long const &res) :
-    stress(describers, stress::restype::n, res) {}
+    stress(describers, restype::n, res) {}
 
 std::ostream &stress::put(std::ostream &os) const {
     os << "STRESS";
@@ -54,156 +54,156 @@ std::ostream &stress::put(std::ostream &os) const {
         os << ")";
     }
     switch (this->res) {
-    case stress::restype::n:
+    case restype::n:
         os << " = " << this->res_n;
         break;
-    case stress::restype::ALL:
+    case restype::ALL:
         os << " = ALL";
         break;
-    case stress::restype::NONE:
+    case restype::NONE:
         os << " = NONE";
         break;
     }
     return os << std::endl;
 }
 
-stress::describer::describer(void) {}
+stress::describer::describer() {}
 
-stress::corner::corner(void) {}
+stress::corner::corner() {}
 
-std::string const stress::corner::str(void) const {
+std::string stress::corner::str() const {
     return "CORNER";
 }
 
-stress::sort1::sort1(void) {}
+stress::sort1::sort1() {}
 
-std::string const stress::sort1::str(void) const {
+std::string stress::sort1::str() const {
     return "SORT1";
 }
 
-stress::print::print(void) {}
+stress::print::print() {}
 
-std::string const stress::print::str(void) const {
+std::string stress::print::str() const {
     return "PRINT";
 }
 
-stress::punch::punch(void) {}
+stress::punch::punch() {}
 
-std::string const stress::punch::str(void) const {
+std::string stress::punch::str() const {
     return "PUNCH";
 }
 
-stress::phase::phase(void) {}
+stress::phase::phase() {}
 
-std::string const stress::phase::str(void) const {
+std::string stress::phase::str() const {
     return "PHASE";
 }
 
-stress::plot::plot(void) {}
+stress::plot::plot() {}
 
-std::string const stress::plot::str(void) const {
+std::string stress::plot::str() const {
     return "PLOT";
 }
 
-stress::psdf::psdf(void) {}
+stress::psdf::psdf() {}
 
-std::string const stress::psdf::str(void) const {
+std::string stress::psdf::str() const {
     return "PSDF";
 }
 
-stress::crms::crms(void) {}
+stress::crms::crms() {}
 
-std::string const stress::crms::str(void) const {
+std::string stress::crms::str() const {
     return "CRMS";
 }
 
-stress::rpunch::rpunch(void) {}
+stress::rpunch::rpunch() {}
 
-std::string const stress::rpunch::str(void) const {
+std::string stress::rpunch::str() const {
     return "RPUNCH";
 }
 
-stress::rall::rall(void) {}
+stress::rall::rall() {}
 
-std::string const stress::rall::str(void) const {
+std::string stress::rall::str() const {
     return "RALL";
 }
 
-stress::norprint::norprint(void) {}
+stress::norprint::norprint() {}
 
-std::string const stress::norprint::str(void) const {
+std::string stress::norprint::str() const {
     return "NORPRINT";
 }
 
-stress::sort2::sort2(void) {}
+stress::sort2::sort2() {}
 
-std::string const stress::sort2::str(void) const {
+std::string stress::sort2::str() const {
     return "SORT2";
 }
 
-stress::real::real(void) {}
+stress::real::real() {}
 
-std::string const stress::real::str(void) const {
+std::string stress::real::str() const {
     return "REAL";
 }
 
-stress::imag::imag(void) {}
+stress::imag::imag() {}
 
-std::string const stress::imag::str(void) const {
+std::string stress::imag::str() const {
     return "IMAG";
 }
 
-stress::atoc::atoc(void) {}
+stress::atoc::atoc() {}
 
-std::string const stress::atoc::str(void) const {
+std::string stress::atoc::str() const {
     return "ATOC";
 }
 
-stress::vonmises::vonmises(void) {}
+stress::vonmises::vonmises() {}
 
-std::string const stress::vonmises::str(void) const {
+std::string stress::vonmises::str() const {
     return "VONMISES";
 }
 
-stress::maxs::maxs(void) {}
+stress::maxs::maxs() {}
 
-std::string const stress::maxs::str(void) const {
+std::string stress::maxs::str() const {
     return "MAXS";
 }
 
-stress::shear::shear(void) {}
+stress::shear::shear() {}
 
-std::string const stress::shear::str(void) const {
+std::string stress::shear::str() const {
     return "SHEAR";
 }
 
-stress::center::center(void) {}
+stress::center::center() {}
 
-std::string const stress::center::str(void) const {
+std::string stress::center::str() const {
     return "CENTER";
 }
 
-stress::cubic::cubic(void) {}
+stress::cubic::cubic() {}
 
-std::string const stress::cubic::str(void) const {
+std::string stress::cubic::str() const {
     return "CUBIC";
 }
 
-stress::sgage::sgage(void) {}
+stress::sgage::sgage() {}
 
-std::string const stress::sgage::str(void) const {
+std::string stress::sgage::str() const {
     return "SGAGE";
 }
 
-stress::bilin::bilin(void) {}
+stress::bilin::bilin() {}
 
-std::string const stress::bilin::str(void) const {
+std::string stress::bilin::str() const {
     return "BILIN";
 }
 
-stress::rprint::rprint(void) {}
+stress::rprint::rprint() {}
 
-std::string const stress::rprint::str(void) const {
+std::string stress::rprint::str() const {
     return "RPRINT";
 }
 

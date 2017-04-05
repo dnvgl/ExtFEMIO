@@ -17,8 +17,6 @@ namespace {
         "@(#) $Id$";
 }
 
-#include <memory>
-#include <algorithm>
 #include <cassert>
 
 #include "fem/cards.h"
@@ -35,9 +33,9 @@ using namespace std;
 using namespace dnvgl::extfem;
 using namespace fem;
 using namespace types;
-using namespace dnvgl::extfem::fem::cards;
+using namespace cards;
 
-const fem::types::card bldep::head("BLDEP");
+const card bldep::head("BLDEP");
 
 const entry_type<long> bldep::_form_NODENO("NODENO");
 const entry_type<long> bldep::_form_CNOD("CNOD");
@@ -48,7 +46,7 @@ const entry_type<long> bldep::_form_INDEPDOF("INDEPDOF");
 const entry_type<double> bldep::_form_b("b");
 
 bldep::bldep(const vector<std::string> &inp, size_t const len) {
-    read(inp, len);
+    bldep::read(inp, len);
 }
 
 void bldep::read(const vector<std::string> &inp, size_t const len) {
@@ -69,7 +67,7 @@ void bldep::read(const vector<std::string> &inp, size_t const len) {
     }
 }
 
-bldep::bldep(void) :
+bldep::bldep() :
         bldep(-1, 0, 0, 0, {}, {}, {}) {}
 
 bldep::bldep(
@@ -98,18 +96,17 @@ bldep::bldep(
               static_cast<long>(DEPDOF.size()),
               DEPDOF, INDEPDOF, b) {}
 
-const dnvgl::extfem::fem::cards::types
-bldep::card_type(void) const {
+cards::types bldep::card_type() const {
     return types::BLDEP;
 }
 
 ostream &bldep::put(ostream& os) const {
     if (NODENO == -1) return os;
-    os << bldep::head.format()
+    os << head.format()
        << _form_NODENO.format(NODENO) << _form_CNOD.format(CNOD)
        << _form_NDDOF.format(NDDOF) << _form_NDEP.format(NDEP) << endl;
     for (size_t i{0}; i < static_cast<size_t>(NDEP); i++)
-        os << dnvgl::extfem::fem::types::card().format()
+        os << fem::types::card().format()
            << _form_DEPDOF.format(DEPDOF.at(i))
            << _form_INDEPDOF.format(INDEPDOF.at(i))
            << _form_b.format(b.at(i)) << empty.format() << endl;

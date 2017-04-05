@@ -37,21 +37,21 @@ namespace dnvgl {
 
                 private:
 
-                    dnvgl::extfem::fem::types::card static const head;
+                    fem::types::card static const head;
 
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_SUBNO;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_SLEVEL;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_STYPE;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_ADDNO;
-                    dnvgl::extfem::fem::types::entry_type<double>
+                    fem::types::entry_type<double>
                     static const _form_T;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NNOD;
-                    dnvgl::extfem::fem::types::entry_type<long>
+                    fem::types::entry_type<long>
                     static const _form_NOD;
 
                 public:
@@ -129,7 +129,7 @@ namespace dnvgl {
 
                     gelmnt2(std::vector<std::string> const&, size_t const);
 
-                    gelmnt2(void);
+                    gelmnt2();
 
                     gelmnt2(
                         long const SUBNO, long const SLEVEL, long const STYPE,
@@ -158,15 +158,15 @@ namespace dnvgl {
                         double const T33, double const T14, double const T24,
                         double const T34, std::vector<long> const &NOD);
 
-                    dnvgl::extfem::fem::cards::types const
-                    card_type(void) const;
+                    types
+                    card_type() const override;
 
                 protected:
 
-                    virtual std::ostream &put(std::ostream&) const;
+                    std::ostream &put(std::ostream&) const override;
 
-                    virtual void read(
-                        const std::vector<std::string>&, size_t const);
+                    void read(
+                        const std::vector<std::string>&, size_t const) override;
                 };
             }
         }

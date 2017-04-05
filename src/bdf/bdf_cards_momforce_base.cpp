@@ -9,6 +9,7 @@
 #include "StdAfx.h"
 
 #include "extfem_misc.h"
+#include "bdf/cards_loads.h"
 
 // ID:
 namespace {
@@ -27,8 +28,8 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 namespace {
-    long static const cl0 = 0, cl1 = 1;
-    double static const cd0 = 0.;
+    long const cl0 = 0, cl1 = 1;
+    double const cd0 = 0.;
 }
 
 using namespace std;
@@ -54,11 +55,11 @@ entry_type<double> const cards::__base::momforce::form_N2(
 entry_type<double> const cards::__base::momforce::form_N3(
     "N3", bound<double>(nullptr, nullptr, &cd0));
 
-cards::__base::momforce::momforce(void) : card() {}
+cards::__base::momforce::momforce() : card() {}
 
 cards::__base::momforce::momforce(list<std::string> const &inp) :
 card(inp) {
-    this->read(inp);
+    this->momforce::read(inp);
 }
 
 cards::__base::momforce::momforce(
@@ -137,47 +138,47 @@ void cards::__base::momforce::collect_outdata(
     return;
 }
 
-force::force(void) :
-cards::__base::momforce(&cl0, &cl0, &cl0, &cd0, &cd0, &cd0, &cd0) {}
+force::force() :
+momforce(&cl0, &cl0, &cl0, &cd0, &cd0, &cd0, &cd0) {}
 
 force::force(list<std::string> const &inp) :
-cards::__base::momforce(inp) {}
+momforce(inp) {}
 
 force::force(
     long const *SID, long const *G, long const *CID,
     double const *F,
     double const *N1, double const *N2/*=nullptr*/, double const *N3/*=nullptr*/) :
-    cards::__base::momforce(SID, G, CID, F, N1, N2, N3) {};
+    momforce(SID, G, CID, F, N1, N2, N3) {};
 
 bdf::types::card force::head = bdf::types::card("FORCE");
 
-format_entry *force::get_head(void) const {
-    return format(force::head);
+format_entry *force::get_head() const {
+    return format(head);
 }
 
-cards::types const force::card_type(void) const {
+cards::types force::card_type() const {
     return types::FORCE;
 }
 
-moment::moment(void) :
-cards::__base::momforce(&cl0, &cl0, &cl0, &cd0, &cd0, &cd0, &cd0) {}
+moment::moment() :
+momforce(&cl0, &cl0, &cl0, &cd0, &cd0, &cd0, &cd0) {}
 
 moment::moment(list<std::string> const &inp) :
-cards::__base::momforce(inp) {}
+momforce(inp) {}
 
 moment::moment(
     long const *SID, long const *G, long const *CID,
     double const *F,
     double const *N1, double const *N2/*=nullptr*/, double const *N3/*=nullptr*/) :
-    cards::__base::momforce(SID, G, CID, F, N1, N2, N3) {};
+    momforce(SID, G, CID, F, N1, N2, N3) {};
 
 bdf::types::card moment::head = bdf::types::card("MOMENT");
 
-format_entry *moment::get_head(void) const {
-    return format(moment::head);
+format_entry *moment::get_head() const {
+    return format(head);
 }
 
-cards::types const moment::card_type(void) const {
+cards::types moment::card_type() const {
     return types::MOMENT;
 }
 

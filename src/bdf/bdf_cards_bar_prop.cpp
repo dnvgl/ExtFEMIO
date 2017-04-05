@@ -17,7 +17,6 @@ namespace {
 
 #include "bdf/cards.h"
 
-#include <cstdlib>
 #include <memory>
 
 #if defined(__AFX_H__) && defined(_DEBUG)
@@ -27,7 +26,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 namespace {
-   static const long cl1 = 1;
+   const long cl1 = 1;
 }
 
 using namespace dnvgl::extfem::bdf;
@@ -35,7 +34,7 @@ using namespace dnvgl::extfem::bdf;
 using types::entry_type;
 using namespace type_bounds;
 
-using namespace dnvgl::extfem::bdf::cards::__base;
+using namespace cards::__base;
 
 const entry_type<long> bar_prop::form_PID("PID", bound<long>(&cl1));
 const entry_type<long> bar_prop::form_MID("MID", bound<long>(
@@ -44,8 +43,7 @@ const entry_type<long> bar_prop::form_MID("MID", bound<long>(
 bar_prop::bar_prop(const std::list<std::string> &inp) :
 card(inp) {}
 
-const dnvgl::extfem::bdf::cards::types
-bar_prop::card_type(void) const {
+cards::types bar_prop::card_type() const {
     return types::BAR_PROP;
 }
 

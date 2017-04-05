@@ -21,8 +21,8 @@ namespace {
 using namespace std;
 
 using namespace dnvgl::extfem;
-using namespace dnvgl::extfem::fem;
-using namespace dnvgl::extfem::fem::cards;
+using namespace fem;
+using namespace cards;
 
 fem::types::entry_type<long> const
 cards::__base::geoprop::_form_GEONO("GEONO");
@@ -54,7 +54,7 @@ void cards::__base::geoprop::set_geono(long const GEONO/*=0*/) {
     this->GEONO = GEONO;
 }
 
-cards::__base::geoprop::geoprop(void) :
+cards::__base::geoprop::geoprop() :
         card(), GEONO(-1) {}
 
 cards::__base::geoprop::geoprop(long const GEONO) :
@@ -83,12 +83,12 @@ cards::__base::card const &cards::__base::geoprop::operator() (
     return *this;
 }
 
-void cards::__base::geoprop::reset_geono(void) {
+void cards::__base::geoprop::reset_geono() {
     geono_maxset = 0;
     used_geono.clear();
-    cards::__base::beam_prop::reset_geono();
-    cards::__base::transno::reset_transno();
-    cards::__base::eccno::reset_eccno();
+    beam_prop::reset_geono();
+    transno::reset_transno();
+    eccno::reset_eccno();
 }
 
 // Local Variables:

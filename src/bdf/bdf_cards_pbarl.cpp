@@ -19,7 +19,6 @@ namespace {
 #include "bdf/cards.h"
 #include "bdf/errors.h"
 
-#include <cstdlib>
 #include <memory>
 
 #if defined(__AFX_H__) && defined(_DEBUG)
@@ -29,12 +28,12 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 namespace {
-    static const double cd0 = 0;
+    const double cd0 = 0;
 }
 
 using namespace dnvgl::extfem;
-using namespace dnvgl::extfem::bdf::cards;
-using dnvgl::extfem::bdf::types::entry_type;
+using namespace bdf::cards;
+using bdf::types::entry_type;
 
 entry_type<std::string> const pbarl::form_GROUP(
     "GROUP", bdf::type_bounds::bound<std::string>("MSCBML0"));
@@ -50,13 +49,13 @@ entry_type<double> const pbarl::form_NSM(
 
 pbarl::pbarl(std::list<std::string> const &inp) :
 bar_prop(inp) {
-    this->read(inp);
+    this->pbarl::read(inp);
 }
 
 void pbarl::read(std::list<std::string> const &inp) {
 
-    size_t dim_num = 0;
-    size_t i = 0;
+    size_t dim_num;
+    size_t i;
 
     auto pos = inp.begin();
 
@@ -112,15 +111,13 @@ invalid:
 end:;
 }
 
-dnvgl::extfem::bdf::cards::types const
-pbarl::card_type(void) const {
+types pbarl::card_type() const {
     return types::PBARL;
 };
 
 void pbarl::collect_outdata(
     std::list<std::unique_ptr<format_entry> > &res) const {
-    throw errors::error("PBARL", "can't write PBARL.");
-    return;
+    throw std::not_implemented(__FILE__, __LINE__, "can't write PBARL.");
 }
 
 // Local Variables:

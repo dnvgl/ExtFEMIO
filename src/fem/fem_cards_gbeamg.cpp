@@ -18,7 +18,6 @@ namespace {
 }
 
 #include <memory>
-#include <algorithm>
 
 #include "fem/cards.h"
 #include "fem/types.h"
@@ -32,11 +31,11 @@ static char THIS_FILE[] = __FILE__;
 using namespace std;
 
 using namespace dnvgl::extfem;
-using namespace dnvgl::extfem::fem;
-using namespace dnvgl::extfem::fem::cards;
-using namespace dnvgl::extfem::fem::types;
+using namespace fem;
+using namespace cards;
+using namespace types;
 
-const fem::types::card gbeamg::head("GBEAMG");
+const card gbeamg::head("GBEAMG");
 
 const entry_type<double> gbeamg::_form_AREA("AREA");
 const entry_type<double> gbeamg::_form_IX("IX");
@@ -54,8 +53,8 @@ const entry_type<double> gbeamg::_form_SY("SY");
 const entry_type<double> gbeamg::_form_SZ("SZ");
 
 gbeamg::gbeamg(const vector<std::string> &inp, size_t const len) :
-        __base::beam_prop(inp, len, true) {
-    read(inp, len);
+        beam_prop(inp, len, true) {
+    gbeamg::read(inp, len);
 }
 
 void gbeamg::read(const vector<std::string> &inp, size_t const len) {
@@ -96,7 +95,7 @@ void gbeamg::read(const vector<std::string> &inp, size_t const len) {
     }
 }
 
-gbeamg::gbeamg(void) :
+gbeamg::gbeamg() :
         gbeamg(-1, 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
                0., 0., 0.) {}
 
@@ -108,7 +107,7 @@ gbeamg::gbeamg(
     double const SHARY, double const SHARZ,
     double const SHCENY, double const SHCENZ,
     double const SY, double const SZ) :
-        __base::beam_prop(GEONO, true),
+        beam_prop(GEONO, true),
         AREA(AREA), IX(IX), IY(IY), IZ(IZ), IYZ(IYZ),
         WXMIN(WXMIN), WYMIN(WYMIN), WZMIN(WZMIN),
         SHARY(SHARY), SHARZ(SHARZ),
@@ -116,12 +115,12 @@ gbeamg::gbeamg(
         SZ(SZ) {}
 
 gbeamg::gbeamg(long const GEONO, double const AREA) :
-        __base::beam_prop(GEONO, true), AREA(AREA), IX{0}, IY{0}, IZ{0}, IYZ{0},
+        beam_prop(GEONO, true), AREA(AREA), IX{0}, IY{0}, IZ{0}, IYZ{0},
     WXMIN{0}, WYMIN{0}, WZMIN{0}, SHARY{0}, SHARZ{0}, SHCENY{0}, SHCENZ{0},
     SY{0}, SZ{0} {}
 
 gbeamg::gbeamg(double const AREA) :
-    __base::beam_prop(0), AREA(AREA), IX{0}, IY{0}, IZ{0}, IYZ{0},
+    beam_prop(0), AREA(AREA), IX{0}, IY{0}, IZ{0}, IYZ{0},
     WXMIN{0}, WYMIN{0}, WZMIN{0}, SHARY{0}, SHARZ{0}, SHCENY{0}, SHCENZ{0},
     SY{0}, SZ{0} {}
 
@@ -159,7 +158,7 @@ cards::__base::card const &gbeamg::operator() (
 }
 
 cards::__base::card const &gbeamg::operator() (double const AREA) {
-    __base::beam_prop::set_geono(0, true);
+    set_geono(0, true);
     this->AREA = AREA;
     this->IX = {0};
     this->IY = {0};
@@ -199,12 +198,13 @@ cards::__base::card const &gbeamg::operator() (
 
 }
 
-const dnvgl::extfem::fem::cards::types
-gbeamg::card_type(void) const {return types::GBEAMG;}
+cards::types gbeamg::card_type() const {
+    return types::GBEAMG;
+}
 
 ostream &gbeamg::put(ostream& os) const {
     if (GEONO == -1) return os;
-    os << gbeamg::head.format()
+    os << head.format()
        << _form_GEONO.format(GEONO) << empty.format()
        << _form_AREA.format(AREA) << _form_IX.format(IX) << endl;
 

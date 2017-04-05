@@ -35,7 +35,7 @@ using namespace fem;
 using namespace cards;
 using namespace types;
 
-fem::types::card const gelref1::head("GELREF1");
+card const gelref1::head("GELREF1");
 
 entry_type<long> const gelref1::_form_ELNO("ELNO");
 entry_type<long> const gelref1::_form_MATNO("MATNO");
@@ -56,7 +56,7 @@ entry_type<long> const gelref1::_form_TRANSNO("TRANSNO");
 
 gelref1::gelref1(const vector<std::string> &inp, size_t const len) :
         GEONO(0), FIXNO(0), ECCNO(0), TRANSNO(0) {
-    this->read(inp, len);
+    this->gelref1::read(inp, len);
 }
 
 void gelref1::read(const vector<std::string> &inp, size_t const len) {
@@ -105,34 +105,33 @@ void gelref1::read(const vector<std::string> &inp, size_t const len) {
     if (num_vals > 0) {
         divmod = ldiv(static_cast<long>(num_vals), static_cast<long>(nvals));
         if (divmod.rem != 0)
-            throw dnvgl::extfem::fem::errors::parse_error(
+            throw errors::parse_error(
                 "GELREF1", "Number of node values is not "
                 "as required.");
 
         if (GEONO_OPT == -1) {
-            for (size_t i{0}; i < static_cast<size_t>(divmod.quot); i++)
-                GEONO.push_back(_form_GEONO(node_vals[i]));
+            for (size_t i1{0}; i1 < static_cast<size_t>(divmod.quot); i1++)
+                GEONO.push_back(_form_GEONO(node_vals[i1]));
             ind_offset = nvals;
         }
         if (FIXNO_OPT == -1) {
-            for (size_t i{0}; i < static_cast<size_t>(divmod.quot); i++)
-                FIXNO.push_back(_form_FIXNO(node_vals[i+ind_offset]));
+            for (size_t i2{0}; i2 < static_cast<size_t>(divmod.quot); i2++)
+                FIXNO.push_back(_form_FIXNO(node_vals[i2+ind_offset]));
             ind_offset += nvals;
         }
         if (ECCNO_OPT == -1) {
-            for (size_t i{0}; i < static_cast<size_t>(divmod.quot); i++)
-                ECCNO.push_back(_form_ECCNO(node_vals[i+ind_offset]));
+            for (size_t i3{0}; i3 < static_cast<size_t>(divmod.quot); i3++)
+                ECCNO.push_back(_form_ECCNO(node_vals[i3+ind_offset]));
             ind_offset += nvals;
         }
         if (TRANSNO_OPT == -1) {
-            for (size_t i{0}; i < static_cast<size_t>(divmod.quot); i++)
-                TRANSNO.push_back(_form_TRANSNO(node_vals[i+ind_offset]));
-            ind_offset += nvals;
+            for (size_t i4{0}; i4 < static_cast<size_t>(divmod.quot); i4++)
+                TRANSNO.push_back(_form_TRANSNO(node_vals[i4+ind_offset]));
         }
     }
 }
 
-gelref1::gelref1(void) :
+gelref1::gelref1() :
         gelref1(-1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 {}, {}, {}, {})  {}
 
@@ -186,7 +185,6 @@ gelref1::gelref1(
             lmin = lmin ? TRANSNO.size() > lmin : TRANSNO.size();
             lmax = lmax ? TRANSNO.size() < lmax : TRANSNO.size();
         } else {
-            min_max_set = true;
             lmin = lmax = TRANSNO.size();
         }
         this->TRANSNO.resize(TRANSNO.size());
@@ -194,7 +192,7 @@ gelref1::gelref1(
     }
 
     if (lmin != lmax) {
-        throw dnvgl::extfem::fem::errors::usage_error(
+        throw errors::usage_error(
             "GELREF1",
             "GEONO, FIXNO, ECCNO, and TRANSNO if not empty, have "
             "to be of same size");
@@ -257,7 +255,6 @@ cards::__base::card const &gelref1::operator() (
             lmin = lmin ? TRANSNO.size() > lmin : TRANSNO.size();
             lmax = lmax ? TRANSNO.size() < lmax : TRANSNO.size();
         } else {
-            min_max_set = true;
             lmin = lmax = TRANSNO.size();
         }
         this->TRANSNO.resize(TRANSNO.size());
@@ -265,7 +262,7 @@ cards::__base::card const &gelref1::operator() (
     }
 
     if (lmin != lmax) {
-        throw dnvgl::extfem::fem::errors::usage_error(
+        throw errors::usage_error(
             "GELREF1",
             "GEONO, FIXNO, ECCNO, and TRANSNO if not empty, have "
             "to be of same size");
@@ -273,20 +270,19 @@ cards::__base::card const &gelref1::operator() (
     return *this;
 }
 
-const dnvgl::extfem::fem::cards::types
-gelref1::card_type(void) const {
+cards::types gelref1::card_type() const {
     return types::GELREF1;
 }
 
 ostream &gelref1::put(ostream& os) const {
     if (ELNO == -1) return os;
-    os << gelref1::head.format()
+    os << head.format()
        << _form_ELNO.format(ELNO) << _form_MATNO.format(MATNO)
        << _form_ADDNO.format(ADDNO) << _form_INTNO.format(INTNO) << endl
-       << dnvgl::extfem::fem::types::card().format()
+       << fem::types::card().format()
        << _form_MINTNO.format(MINTNO) << _form_STRANO.format(STRANO)
        << _form_STRENO.format(STRENO) << _form_STREPONO.format(STREPONO) << endl
-       << dnvgl::extfem::fem::types::card().format()
+       << fem::types::card().format()
        << _form_GEONO_OPT.format(GEONO_OPT) << _form_FIXNO_OPT.format(FIXNO_OPT)
        << _form_ECCNO_OPT.format(ECCNO_OPT)
        << _form_TRANSNO_OPT.format(TRANSNO_OPT);
@@ -299,17 +295,17 @@ ostream &gelref1::put(ostream& os) const {
     }
     for (auto p : FIXNO) {
         if (!(i++ % 4))
-            os << endl << ::fem::types::card().format();
+            os << endl << fem::types::card().format();
         os << _form_FIXNO.format(p);
     }
     for (auto p : ECCNO) {
         if (!(i++ % 4))
-            os << endl << dnvgl::extfem::fem::types::card().format();
+            os << endl << fem::types::card().format();
         os << _form_ECCNO.format(p);
     }
     for (auto p : TRANSNO) {
         if (!(i++ % 4))
-            os << endl << dnvgl::extfem::fem::types::card().format();
+            os << endl << fem::types::card().format();
         os << _form_TRANSNO.format(p);
     }
     return os << endl;

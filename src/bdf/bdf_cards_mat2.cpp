@@ -17,7 +17,6 @@ namespace {
 }
 
 #include <list>
-#include <string>
 #include <memory>
 
 #include "bdf/cards.h"
@@ -31,15 +30,15 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 namespace {
-    static const long cl0 = 0, cl1 = 1;
-    static const double cd0 = 0., cd05 = 0.5, cd_1 = -1.;
+    const long cl0 = 0, cl1 = 1;
+    const double cd0 = 0., cd05 = 0.5, cd_1 = -1.;
 }
 
 using namespace dnvgl::extfem::bdf::cards;
 
 mat2::mat2(std::list<std::string> const &inp) :
-__base::mat(inp) {
-    this->read(inp);
+mat(inp) {
+    this->mat2::read(inp);
 }
 
 void mat2::read(std::list<std::string> const &inp) {
@@ -116,19 +115,17 @@ void mat2::read(std::list<std::string> const &inp) {
         throw errors::parse_error("MAT2", "Illegal number of entries.");
     }
 
-    if (((bool)A1 || (bool)A2 || (bool)A3) && !(bool)TREF)
+    if ((bool(A1) || bool(A2) || bool(A3)) && !bool(TREF))
         form_TREF.set_value(TREF, "");
 }
 
-const dnvgl::extfem::bdf::cards::types
-mat2::card_type(void) const {
+types mat2::card_type() const {
     return types::MAT2;
 };
 
 void mat2::collect_outdata(
     std::list<std::unique_ptr<format_entry> > &res) const {
-    throw errors::error("MAT2", "can't write MAT2.");
-    return;
+    throw std::not_implemented(__FILE__, __LINE__, "can't write MAT2.");
 }
 
 // Local Variables:

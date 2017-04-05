@@ -56,7 +56,7 @@ using namespace fem;
 using namespace elements;
 
 void elements::dispatch(
-    unique_ptr<elements::__base::elem> &res, cards::gelmnt1 const *data) {
+    unique_ptr<__base::elem> &res, cards::gelmnt1 const *data) {
 
     switch (data->ELTYP) {
     case el_types::BEPS:
@@ -309,7 +309,7 @@ void elements::dispatch(
 #line 71 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 }
 
-std::string dnvgl::extfem::fem::elements::name_elem(el_types const type) {
+std::string elements::name_elem(el_types const type) {
     switch (type) {
     case el_types::BEPS: return "BEPS";
     case el_types::CSTA: return "CSTA";
@@ -646,7 +646,7 @@ void elements::__base::elem::add(cards::gelmnt1 const *data) {
     if (this->elident == 0)
         this->elident = get_elident(data->ELNO);
     else if (this->elident > 0 && this->elident != data->ELNO)
-        throw dnvgl::extfem::fem::errors::data_not_matching_id(
+        throw errors::data_not_matching_id(
             this->elident, data->ELNO);
     this->el_add = data->ELTYAD;
     this->nodes = data->NODIN;
@@ -656,7 +656,7 @@ void elements::__base::elem::add(cards::gelref1 const *data) {
     if (this->elident == 0)
         this->elident = get_elident(data->ELNO);
     else if (this->elident > 0 && this->elident != data->ELNO)
-        throw dnvgl::extfem::fem::errors::data_not_matching_id(
+        throw errors::data_not_matching_id(
             this->elident, data->ELNO);
     this->matref = data->MATNO;
     this->add_no = data->ADDNO;
@@ -761,7 +761,7 @@ set<long> elements::__base::elem::used_nos;
 long elements::__base::elem::max_no(0);
 
 undef::undef(cards::gelref1 const *data) :
-    __base::elem(data) {}
+    elem(data) {}
 
 ostream &operator<<(
     ostream &os, elements::__base::elem const &data) {
@@ -783,7 +783,7 @@ long beps::nnodes() const {return 2;}
 el_types beps::get_type() const {return el_types::BEPS;}
 
 set<el_processor> const beps::processors{
-        elements::el_processor::general, elements::el_processor::Preframe, elements::el_processor::ADVANCE
+        el_processor::general, el_processor::Preframe, el_processor::ADVANCE
     };
 
 beps::beps() : elem() {}
@@ -795,7 +795,7 @@ beps::beps(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -808,7 +808,7 @@ beps::beps(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -819,18 +819,18 @@ beps::beps(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-beps::beps(cards::gelmnt1 const *data) : __base::elem(data) {}
+beps::beps(cards::gelmnt1 const *data) : elem(data) {}
 
-beps::beps(cards::gelref1 const *data) : __base::elem(data) {}
+beps::beps(cards::gelref1 const *data) : elem(data) {}
 
-beps::beps(elements::__base::elem const *data) :
-         __base::elem(data) {}
+beps::beps(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for csta.
@@ -844,7 +844,7 @@ long csta::nnodes() const {return 3;}
 el_types csta::get_type() const {return el_types::CSTA;}
 
 set<el_processor> const csta::processors{
-        elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::ADVANCE
+        el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE
     };
 
 csta::csta() : elem() {}
@@ -856,7 +856,7 @@ csta::csta(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -869,7 +869,7 @@ csta::csta(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -880,18 +880,18 @@ csta::csta(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-csta::csta(cards::gelmnt1 const *data) : __base::elem(data) {}
+csta::csta(cards::gelmnt1 const *data) : elem(data) {}
 
-csta::csta(cards::gelref1 const *data) : __base::elem(data) {}
+csta::csta(cards::gelref1 const *data) : elem(data) {}
 
-csta::csta(elements::__base::elem const *data) :
-         __base::elem(data) {}
+csta::csta(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for rpbq.
@@ -905,7 +905,7 @@ long rpbq::nnodes() const {return 4;}
 el_types rpbq::get_type() const {return el_types::RPBQ;}
 
 set<el_processor> const rpbq::processors{
-        elements::el_processor::general
+        el_processor::general
     };
 
 rpbq::rpbq() : elem() {}
@@ -917,7 +917,7 @@ rpbq::rpbq(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -930,7 +930,7 @@ rpbq::rpbq(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -941,18 +941,18 @@ rpbq::rpbq(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-rpbq::rpbq(cards::gelmnt1 const *data) : __base::elem(data) {}
+rpbq::rpbq(cards::gelmnt1 const *data) : elem(data) {}
 
-rpbq::rpbq(cards::gelref1 const *data) : __base::elem(data) {}
+rpbq::rpbq(cards::gelref1 const *data) : elem(data) {}
 
-rpbq::rpbq(elements::__base::elem const *data) :
-         __base::elem(data) {}
+rpbq::rpbq(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ilst.
@@ -966,7 +966,7 @@ long ilst::nnodes() const {return 6;}
 el_types ilst::get_type() const {return el_types::ILST;}
 
 set<el_processor> const ilst::processors{
-        elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra
+        el_processor::general, el_processor::Prefem, el_processor::Sestra
     };
 
 ilst::ilst() : elem() {}
@@ -978,7 +978,7 @@ ilst::ilst(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -991,7 +991,7 @@ ilst::ilst(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -1002,18 +1002,18 @@ ilst::ilst(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ilst::ilst(cards::gelmnt1 const *data) : __base::elem(data) {}
+ilst::ilst(cards::gelmnt1 const *data) : elem(data) {}
 
-ilst::ilst(cards::gelref1 const *data) : __base::elem(data) {}
+ilst::ilst(cards::gelref1 const *data) : elem(data) {}
 
-ilst::ilst(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ilst::ilst(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for iqqe.
@@ -1027,7 +1027,7 @@ long iqqe::nnodes() const {return 8;}
 el_types iqqe::get_type() const {return el_types::IQQE;}
 
 set<el_processor> const iqqe::processors{
-        elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra
+        el_processor::general, el_processor::Prefem, el_processor::Sestra
     };
 
 iqqe::iqqe() : elem() {}
@@ -1039,7 +1039,7 @@ iqqe::iqqe(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -1052,7 +1052,7 @@ iqqe::iqqe(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -1063,18 +1063,18 @@ iqqe::iqqe(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-iqqe::iqqe(cards::gelmnt1 const *data) : __base::elem(data) {}
+iqqe::iqqe(cards::gelmnt1 const *data) : elem(data) {}
 
-iqqe::iqqe(cards::gelref1 const *data) : __base::elem(data) {}
+iqqe::iqqe(cards::gelref1 const *data) : elem(data) {}
 
-iqqe::iqqe(elements::__base::elem const *data) :
-         __base::elem(data) {}
+iqqe::iqqe(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for lqua.
@@ -1088,7 +1088,7 @@ long lqua::nnodes() const {return 4;}
 el_types lqua::get_type() const {return el_types::LQUA;}
 
 set<el_processor> const lqua::processors{
-        elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::ADVANCE, elements::el_processor::Poseidon
+        el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE, el_processor::Poseidon
     };
 
 lqua::lqua() : elem() {}
@@ -1100,7 +1100,7 @@ lqua::lqua(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -1113,7 +1113,7 @@ lqua::lqua(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -1124,18 +1124,18 @@ lqua::lqua(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-lqua::lqua(cards::gelmnt1 const *data) : __base::elem(data) {}
+lqua::lqua(cards::gelmnt1 const *data) : elem(data) {}
 
-lqua::lqua(cards::gelref1 const *data) : __base::elem(data) {}
+lqua::lqua(cards::gelref1 const *data) : elem(data) {}
 
-lqua::lqua(elements::__base::elem const *data) :
-         __base::elem(data) {}
+lqua::lqua(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for tess.
@@ -1149,7 +1149,7 @@ long tess::nnodes() const {return 2;}
 el_types tess::get_type() const {return el_types::TESS;}
 
 set<el_processor> const tess::processors{
-        elements::el_processor::general, elements::el_processor::Preframe, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::ADVANCE, elements::el_processor::Poseidon
+        el_processor::general, el_processor::Preframe, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE, el_processor::Poseidon
     };
 
 tess::tess() : elem() {}
@@ -1161,7 +1161,7 @@ tess::tess(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -1174,7 +1174,7 @@ tess::tess(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -1185,18 +1185,18 @@ tess::tess(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-tess::tess(cards::gelmnt1 const *data) : __base::elem(data) {}
+tess::tess(cards::gelmnt1 const *data) : elem(data) {}
 
-tess::tess(cards::gelref1 const *data) : __base::elem(data) {}
+tess::tess(cards::gelref1 const *data) : elem(data) {}
 
-tess::tess(elements::__base::elem const *data) :
-         __base::elem(data) {}
+tess::tess(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for gmas.
@@ -1210,7 +1210,7 @@ long gmas::nnodes() const {return 1;}
 el_types gmas::get_type() const {return el_types::GMAS;}
 
 set<el_processor> const gmas::processors{
-        elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::Poseidon
+        el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::Poseidon
     };
 
 gmas::gmas() : elem() {}
@@ -1222,7 +1222,7 @@ gmas::gmas(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -1235,7 +1235,7 @@ gmas::gmas(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -1246,18 +1246,18 @@ gmas::gmas(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-gmas::gmas(cards::gelmnt1 const *data) : __base::elem(data) {}
+gmas::gmas(cards::gelmnt1 const *data) : elem(data) {}
 
-gmas::gmas(cards::gelref1 const *data) : __base::elem(data) {}
+gmas::gmas(cards::gelref1 const *data) : elem(data) {}
 
-gmas::gmas(elements::__base::elem const *data) :
-         __base::elem(data) {}
+gmas::gmas(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for glma.
@@ -1271,7 +1271,7 @@ long glma::nnodes() const {return 2;}
 el_types glma::get_type() const {return el_types::GLMA;}
 
 set<el_processor> const glma::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 glma::glma() : elem() {}
@@ -1283,7 +1283,7 @@ glma::glma(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -1296,7 +1296,7 @@ glma::glma(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -1307,18 +1307,18 @@ glma::glma(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-glma::glma(cards::gelmnt1 const *data) : __base::elem(data) {}
+glma::glma(cards::gelmnt1 const *data) : elem(data) {}
 
-glma::glma(cards::gelref1 const *data) : __base::elem(data) {}
+glma::glma(cards::gelref1 const *data) : elem(data) {}
 
-glma::glma(elements::__base::elem const *data) :
-         __base::elem(data) {}
+glma::glma(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for glda.
@@ -1332,7 +1332,7 @@ long glda::nnodes() const {return 2;}
 el_types glda::get_type() const {return el_types::GLDA;}
 
 set<el_processor> const glda::processors{
-        elements::el_processor::general
+        el_processor::general
     };
 
 glda::glda() : elem() {}
@@ -1344,7 +1344,7 @@ glda::glda(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -1357,7 +1357,7 @@ glda::glda(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -1368,18 +1368,18 @@ glda::glda(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-glda::glda(cards::gelmnt1 const *data) : __base::elem(data) {}
+glda::glda(cards::gelmnt1 const *data) : elem(data) {}
 
-glda::glda(cards::gelref1 const *data) : __base::elem(data) {}
+glda::glda(cards::gelref1 const *data) : elem(data) {}
 
-glda::glda(elements::__base::elem const *data) :
-         __base::elem(data) {}
+glda::glda(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for beas.
@@ -1393,7 +1393,7 @@ long beas::nnodes() const {return 2;}
 el_types beas::get_type() const {return el_types::BEAS;}
 
 set<el_processor> const beas::processors{
-        elements::el_processor::general, elements::el_processor::Preframe, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::ADVANCE, elements::el_processor::Framework, elements::el_processor::Launch, elements::el_processor::Platework, elements::el_processor::Pretube, elements::el_processor::Wadam, elements::el_processor::Poseidon
+        el_processor::general, el_processor::Preframe, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE, el_processor::Framework, el_processor::Launch, el_processor::Platework, el_processor::Pretube, el_processor::Wadam, el_processor::Poseidon
     };
 
 beas::beas() : elem() {}
@@ -1405,7 +1405,7 @@ beas::beas(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -1418,7 +1418,7 @@ beas::beas(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -1429,18 +1429,18 @@ beas::beas(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-beas::beas(cards::gelmnt1 const *data) : __base::elem(data) {}
+beas::beas(cards::gelmnt1 const *data) : elem(data) {}
 
-beas::beas(cards::gelref1 const *data) : __base::elem(data) {}
+beas::beas(cards::gelref1 const *data) : elem(data) {}
 
-beas::beas(elements::__base::elem const *data) :
-         __base::elem(data) {}
+beas::beas(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for axis.
@@ -1454,7 +1454,7 @@ long axis::nnodes() const {return 2;}
 el_types axis::get_type() const {return el_types::AXIS;}
 
 set<el_processor> const axis::processors{
-        elements::el_processor::general, elements::el_processor::Preframe, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::ADVANCE, elements::el_processor::Framework, elements::el_processor::Poseidon
+        el_processor::general, el_processor::Preframe, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE, el_processor::Framework, el_processor::Poseidon
     };
 
 axis::axis() : elem() {}
@@ -1466,7 +1466,7 @@ axis::axis(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -1479,7 +1479,7 @@ axis::axis(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -1490,18 +1490,18 @@ axis::axis(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-axis::axis(cards::gelmnt1 const *data) : __base::elem(data) {}
+axis::axis(cards::gelmnt1 const *data) : elem(data) {}
 
-axis::axis(cards::gelref1 const *data) : __base::elem(data) {}
+axis::axis(cards::gelref1 const *data) : elem(data) {}
 
-axis::axis(elements::__base::elem const *data) :
-         __base::elem(data) {}
+axis::axis(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for axda.
@@ -1515,7 +1515,7 @@ long axda::nnodes() const {return 2;}
 el_types axda::get_type() const {return el_types::AXDA;}
 
 set<el_processor> const axda::processors{
-        elements::el_processor::general, elements::el_processor::Preframe, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::Poseidon
+        el_processor::general, el_processor::Preframe, el_processor::Prefem, el_processor::Sestra, el_processor::Poseidon
     };
 
 axda::axda() : elem() {}
@@ -1527,7 +1527,7 @@ axda::axda(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -1540,7 +1540,7 @@ axda::axda(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -1551,18 +1551,18 @@ axda::axda(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-axda::axda(cards::gelmnt1 const *data) : __base::elem(data) {}
+axda::axda(cards::gelmnt1 const *data) : elem(data) {}
 
-axda::axda(cards::gelref1 const *data) : __base::elem(data) {}
+axda::axda(cards::gelref1 const *data) : elem(data) {}
 
-axda::axda(elements::__base::elem const *data) :
-         __base::elem(data) {}
+axda::axda(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for gspr.
@@ -1576,7 +1576,7 @@ long gspr::nnodes() const {return 1;}
 el_types gspr::get_type() const {return el_types::GSPR;}
 
 set<el_processor> const gspr::processors{
-        elements::el_processor::general, elements::el_processor::Preframe, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::ADVANCE, elements::el_processor::Framework, elements::el_processor::Poseidon
+        el_processor::general, el_processor::Preframe, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE, el_processor::Framework, el_processor::Poseidon
     };
 
 gspr::gspr() : elem() {}
@@ -1588,7 +1588,7 @@ gspr::gspr(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -1601,7 +1601,7 @@ gspr::gspr(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -1612,18 +1612,18 @@ gspr::gspr(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-gspr::gspr(cards::gelmnt1 const *data) : __base::elem(data) {}
+gspr::gspr(cards::gelmnt1 const *data) : elem(data) {}
 
-gspr::gspr(cards::gelref1 const *data) : __base::elem(data) {}
+gspr::gspr(cards::gelref1 const *data) : elem(data) {}
 
-gspr::gspr(elements::__base::elem const *data) :
-         __base::elem(data) {}
+gspr::gspr(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for gdam.
@@ -1637,7 +1637,7 @@ long gdam::nnodes() const {return 1;}
 el_types gdam::get_type() const {return el_types::GDAM;}
 
 set<el_processor> const gdam::processors{
-        elements::el_processor::general, elements::el_processor::Preframe, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::Poseidon
+        el_processor::general, el_processor::Preframe, el_processor::Prefem, el_processor::Sestra, el_processor::Poseidon
     };
 
 gdam::gdam() : elem() {}
@@ -1649,7 +1649,7 @@ gdam::gdam(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -1662,7 +1662,7 @@ gdam::gdam(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -1673,18 +1673,18 @@ gdam::gdam(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-gdam::gdam(cards::gelmnt1 const *data) : __base::elem(data) {}
+gdam::gdam(cards::gelmnt1 const *data) : elem(data) {}
 
-gdam::gdam(cards::gelref1 const *data) : __base::elem(data) {}
+gdam::gdam(cards::gelref1 const *data) : elem(data) {}
 
-gdam::gdam(elements::__base::elem const *data) :
-         __base::elem(data) {}
+gdam::gdam(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ihex.
@@ -1698,7 +1698,7 @@ long ihex::nnodes() const {return 20;}
 el_types ihex::get_type() const {return el_types::IHEX;}
 
 set<el_processor> const ihex::processors{
-        elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::ADVANCE, elements::el_processor::Framework
+        el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE, el_processor::Framework
     };
 
 ihex::ihex() : elem() {}
@@ -1710,7 +1710,7 @@ ihex::ihex(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -1723,7 +1723,7 @@ ihex::ihex(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -1734,18 +1734,18 @@ ihex::ihex(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ihex::ihex(cards::gelmnt1 const *data) : __base::elem(data) {}
+ihex::ihex(cards::gelmnt1 const *data) : elem(data) {}
 
-ihex::ihex(cards::gelref1 const *data) : __base::elem(data) {}
+ihex::ihex(cards::gelref1 const *data) : elem(data) {}
 
-ihex::ihex(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ihex::ihex(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for lhex.
@@ -1759,7 +1759,7 @@ long lhex::nnodes() const {return 8;}
 el_types lhex::get_type() const {return el_types::LHEX;}
 
 set<el_processor> const lhex::processors{
-        elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::ADVANCE, elements::el_processor::Framework
+        el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE, el_processor::Framework
     };
 
 lhex::lhex() : elem() {}
@@ -1771,7 +1771,7 @@ lhex::lhex(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -1784,7 +1784,7 @@ lhex::lhex(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -1795,18 +1795,18 @@ lhex::lhex(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-lhex::lhex(cards::gelmnt1 const *data) : __base::elem(data) {}
+lhex::lhex(cards::gelmnt1 const *data) : elem(data) {}
 
-lhex::lhex(cards::gelref1 const *data) : __base::elem(data) {}
+lhex::lhex(cards::gelref1 const *data) : elem(data) {}
 
-lhex::lhex(elements::__base::elem const *data) :
-         __base::elem(data) {}
+lhex::lhex(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for secb.
@@ -1820,7 +1820,7 @@ long secb::nnodes() const {return 3;}
 el_types secb::get_type() const {return el_types::SECB;}
 
 set<el_processor> const secb::processors{
-        elements::el_processor::general
+        el_processor::general
     };
 
 secb::secb() : elem() {}
@@ -1832,7 +1832,7 @@ secb::secb(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -1845,7 +1845,7 @@ secb::secb(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -1856,18 +1856,18 @@ secb::secb(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-secb::secb(cards::gelmnt1 const *data) : __base::elem(data) {}
+secb::secb(cards::gelmnt1 const *data) : elem(data) {}
 
-secb::secb(cards::gelref1 const *data) : __base::elem(data) {}
+secb::secb(cards::gelref1 const *data) : elem(data) {}
 
-secb::secb(elements::__base::elem const *data) :
-         __base::elem(data) {}
+secb::secb(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for btss.
@@ -1881,7 +1881,7 @@ long btss::nnodes() const {return 3;}
 el_types btss::get_type() const {return el_types::BTSS;}
 
 set<el_processor> const btss::processors{
-        elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::Platework, elements::el_processor::Pretube
+        el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::Platework, el_processor::Pretube
     };
 
 btss::btss() : elem() {}
@@ -1893,7 +1893,7 @@ btss::btss(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -1906,7 +1906,7 @@ btss::btss(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -1917,18 +1917,18 @@ btss::btss(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-btss::btss(cards::gelmnt1 const *data) : __base::elem(data) {}
+btss::btss(cards::gelmnt1 const *data) : elem(data) {}
 
-btss::btss(cards::gelref1 const *data) : __base::elem(data) {}
+btss::btss(cards::gelref1 const *data) : elem(data) {}
 
-btss::btss(elements::__base::elem const *data) :
-         __base::elem(data) {}
+btss::btss(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for fqus_ffq.
@@ -1942,7 +1942,7 @@ long fqus_ffq::nnodes() const {return 4;}
 el_types fqus_ffq::get_type() const {return el_types::FQUS_FFQ;}
 
 set<el_processor> const fqus_ffq::processors{
-        elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::ADVANCE, elements::el_processor::Platework, elements::el_processor::Pretube, elements::el_processor::Poseidon
+        el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE, el_processor::Platework, el_processor::Pretube, el_processor::Poseidon
     };
 
 fqus_ffq::fqus_ffq() : fem_thin_shell() {}
@@ -1954,7 +1954,7 @@ fqus_ffq::fqus_ffq(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -1967,7 +1967,7 @@ fqus_ffq::fqus_ffq(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -1978,18 +1978,18 @@ fqus_ffq::fqus_ffq(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-fqus_ffq::fqus_ffq(cards::gelmnt1 const *data) : __base::elem(data) {}
+fqus_ffq::fqus_ffq(cards::gelmnt1 const *data) : elem(data) {}
 
-fqus_ffq::fqus_ffq(cards::gelref1 const *data) : __base::elem(data) {}
+fqus_ffq::fqus_ffq(cards::gelref1 const *data) : elem(data) {}
 
-fqus_ffq::fqus_ffq(elements::__base::elem const *data) :
-         __base::elem(data) {}
+fqus_ffq::fqus_ffq(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ftrs_fftr.
@@ -2003,7 +2003,7 @@ long ftrs_fftr::nnodes() const {return 3;}
 el_types ftrs_fftr::get_type() const {return el_types::FTRS_FFTR;}
 
 set<el_processor> const ftrs_fftr::processors{
-        elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::ADVANCE, elements::el_processor::Platework, elements::el_processor::Poseidon
+        el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE, el_processor::Platework, el_processor::Poseidon
     };
 
 ftrs_fftr::ftrs_fftr() : fem_thin_shell() {}
@@ -2015,7 +2015,7 @@ ftrs_fftr::ftrs_fftr(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -2028,7 +2028,7 @@ ftrs_fftr::ftrs_fftr(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -2039,18 +2039,18 @@ ftrs_fftr::ftrs_fftr(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ftrs_fftr::ftrs_fftr(cards::gelmnt1 const *data) : __base::elem(data) {}
+ftrs_fftr::ftrs_fftr(cards::gelmnt1 const *data) : elem(data) {}
 
-ftrs_fftr::ftrs_fftr(cards::gelref1 const *data) : __base::elem(data) {}
+ftrs_fftr::ftrs_fftr(cards::gelref1 const *data) : elem(data) {}
 
-ftrs_fftr::ftrs_fftr(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ftrs_fftr::ftrs_fftr(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for scts.
@@ -2064,7 +2064,7 @@ long scts::nnodes() const {return 6;}
 el_types scts::get_type() const {return el_types::SCTS;}
 
 set<el_processor> const scts::processors{
-        elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::Platework
+        el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::Platework
     };
 
 scts::scts() : elem() {}
@@ -2076,7 +2076,7 @@ scts::scts(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -2089,7 +2089,7 @@ scts::scts(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -2100,18 +2100,18 @@ scts::scts(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-scts::scts(cards::gelmnt1 const *data) : __base::elem(data) {}
+scts::scts(cards::gelmnt1 const *data) : elem(data) {}
 
-scts::scts(cards::gelref1 const *data) : __base::elem(data) {}
+scts::scts(cards::gelref1 const *data) : elem(data) {}
 
-scts::scts(elements::__base::elem const *data) :
-         __base::elem(data) {}
+scts::scts(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for mcts.
@@ -2125,7 +2125,7 @@ long mcts::nnodes() const {return 6;}
 el_types mcts::get_type() const {return el_types::MCTS;}
 
 set<el_processor> const mcts::processors{
-        elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra
+        el_processor::general, el_processor::Prefem, el_processor::Sestra
     };
 
 mcts::mcts() : elem() {}
@@ -2137,7 +2137,7 @@ mcts::mcts(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -2150,7 +2150,7 @@ mcts::mcts(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -2161,18 +2161,18 @@ mcts::mcts(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-mcts::mcts(cards::gelmnt1 const *data) : __base::elem(data) {}
+mcts::mcts(cards::gelmnt1 const *data) : elem(data) {}
 
-mcts::mcts(cards::gelref1 const *data) : __base::elem(data) {}
+mcts::mcts(cards::gelref1 const *data) : elem(data) {}
 
-mcts::mcts(elements::__base::elem const *data) :
-         __base::elem(data) {}
+mcts::mcts(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for scqs.
@@ -2186,7 +2186,7 @@ long scqs::nnodes() const {return 8;}
 el_types scqs::get_type() const {return el_types::SCQS;}
 
 set<el_processor> const scqs::processors{
-        elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::Platework, elements::el_processor::Pretube
+        el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::Platework, el_processor::Pretube
     };
 
 scqs::scqs() : elem() {}
@@ -2198,7 +2198,7 @@ scqs::scqs(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -2211,7 +2211,7 @@ scqs::scqs(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -2222,18 +2222,18 @@ scqs::scqs(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-scqs::scqs(cards::gelmnt1 const *data) : __base::elem(data) {}
+scqs::scqs(cards::gelmnt1 const *data) : elem(data) {}
 
-scqs::scqs(cards::gelref1 const *data) : __base::elem(data) {}
+scqs::scqs(cards::gelref1 const *data) : elem(data) {}
 
-scqs::scqs(elements::__base::elem const *data) :
-         __base::elem(data) {}
+scqs::scqs(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for mcqs.
@@ -2247,7 +2247,7 @@ long mcqs::nnodes() const {return 8;}
 el_types mcqs::get_type() const {return el_types::MCQS;}
 
 set<el_processor> const mcqs::processors{
-        elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra
+        el_processor::general, el_processor::Prefem, el_processor::Sestra
     };
 
 mcqs::mcqs() : elem() {}
@@ -2259,7 +2259,7 @@ mcqs::mcqs(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -2272,7 +2272,7 @@ mcqs::mcqs(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -2283,18 +2283,18 @@ mcqs::mcqs(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-mcqs::mcqs(cards::gelmnt1 const *data) : __base::elem(data) {}
+mcqs::mcqs(cards::gelmnt1 const *data) : elem(data) {}
 
-mcqs::mcqs(cards::gelref1 const *data) : __base::elem(data) {}
+mcqs::mcqs(cards::gelref1 const *data) : elem(data) {}
 
-mcqs::mcqs(elements::__base::elem const *data) :
-         __base::elem(data) {}
+mcqs::mcqs(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ipri.
@@ -2308,7 +2308,7 @@ long ipri::nnodes() const {return 15;}
 el_types ipri::get_type() const {return el_types::IPRI;}
 
 set<el_processor> const ipri::processors{
-        elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::ADVANCE
+        el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE
     };
 
 ipri::ipri() : elem() {}
@@ -2320,7 +2320,7 @@ ipri::ipri(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -2333,7 +2333,7 @@ ipri::ipri(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -2344,18 +2344,18 @@ ipri::ipri(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ipri::ipri(cards::gelmnt1 const *data) : __base::elem(data) {}
+ipri::ipri(cards::gelmnt1 const *data) : elem(data) {}
 
-ipri::ipri(cards::gelref1 const *data) : __base::elem(data) {}
+ipri::ipri(cards::gelref1 const *data) : elem(data) {}
 
-ipri::ipri(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ipri::ipri(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for itet.
@@ -2369,7 +2369,7 @@ long itet::nnodes() const {return 10;}
 el_types itet::get_type() const {return el_types::ITET;}
 
 set<el_processor> const itet::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 itet::itet() : elem() {}
@@ -2381,7 +2381,7 @@ itet::itet(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -2394,7 +2394,7 @@ itet::itet(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -2405,18 +2405,18 @@ itet::itet(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-itet::itet(cards::gelmnt1 const *data) : __base::elem(data) {}
+itet::itet(cards::gelmnt1 const *data) : elem(data) {}
 
-itet::itet(cards::gelref1 const *data) : __base::elem(data) {}
+itet::itet(cards::gelref1 const *data) : elem(data) {}
 
-itet::itet(elements::__base::elem const *data) :
-         __base::elem(data) {}
+itet::itet(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for tpri.
@@ -2430,7 +2430,7 @@ long tpri::nnodes() const {return 6;}
 el_types tpri::get_type() const {return el_types::TPRI;}
 
 set<el_processor> const tpri::processors{
-        elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::Platework
+        el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::Platework
     };
 
 tpri::tpri() : elem() {}
@@ -2442,7 +2442,7 @@ tpri::tpri(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -2455,7 +2455,7 @@ tpri::tpri(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -2466,18 +2466,18 @@ tpri::tpri(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-tpri::tpri(cards::gelmnt1 const *data) : __base::elem(data) {}
+tpri::tpri(cards::gelmnt1 const *data) : elem(data) {}
 
-tpri::tpri(cards::gelref1 const *data) : __base::elem(data) {}
+tpri::tpri(cards::gelref1 const *data) : elem(data) {}
 
-tpri::tpri(elements::__base::elem const *data) :
-         __base::elem(data) {}
+tpri::tpri(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for tetr.
@@ -2491,7 +2491,7 @@ long tetr::nnodes() const {return 4;}
 el_types tetr::get_type() const {return el_types::TETR;}
 
 set<el_processor> const tetr::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 tetr::tetr() : elem() {}
@@ -2503,7 +2503,7 @@ tetr::tetr(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -2516,7 +2516,7 @@ tetr::tetr(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -2527,18 +2527,18 @@ tetr::tetr(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-tetr::tetr(cards::gelmnt1 const *data) : __base::elem(data) {}
+tetr::tetr(cards::gelmnt1 const *data) : elem(data) {}
 
-tetr::tetr(cards::gelref1 const *data) : __base::elem(data) {}
+tetr::tetr(cards::gelref1 const *data) : elem(data) {}
 
-tetr::tetr(elements::__base::elem const *data) :
-         __base::elem(data) {}
+tetr::tetr(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for lcts.
@@ -2552,7 +2552,7 @@ long lcts::nnodes() const {return 6;}
 el_types lcts::get_type() const {return el_types::LCTS;}
 
 set<el_processor> const lcts::processors{
-        elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra
+        el_processor::general, el_processor::Prefem, el_processor::Sestra
     };
 
 lcts::lcts() : elem() {}
@@ -2564,7 +2564,7 @@ lcts::lcts(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -2577,7 +2577,7 @@ lcts::lcts(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -2588,18 +2588,18 @@ lcts::lcts(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-lcts::lcts(cards::gelmnt1 const *data) : __base::elem(data) {}
+lcts::lcts(cards::gelmnt1 const *data) : elem(data) {}
 
-lcts::lcts(cards::gelref1 const *data) : __base::elem(data) {}
+lcts::lcts(cards::gelref1 const *data) : elem(data) {}
 
-lcts::lcts(elements::__base::elem const *data) :
-         __base::elem(data) {}
+lcts::lcts(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for lcqs.
@@ -2613,7 +2613,7 @@ long lcqs::nnodes() const {return 8;}
 el_types lcqs::get_type() const {return el_types::LCQS;}
 
 set<el_processor> const lcqs::processors{
-        elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra
+        el_processor::general, el_processor::Prefem, el_processor::Sestra
     };
 
 lcqs::lcqs() : elem() {}
@@ -2625,7 +2625,7 @@ lcqs::lcqs(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -2638,7 +2638,7 @@ lcqs::lcqs(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -2649,18 +2649,18 @@ lcqs::lcqs(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-lcqs::lcqs(cards::gelmnt1 const *data) : __base::elem(data) {}
+lcqs::lcqs(cards::gelmnt1 const *data) : elem(data) {}
 
-lcqs::lcqs(cards::gelref1 const *data) : __base::elem(data) {}
+lcqs::lcqs(cards::gelref1 const *data) : elem(data) {}
 
-lcqs::lcqs(elements::__base::elem const *data) :
-         __base::elem(data) {}
+lcqs::lcqs(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for trs1.
@@ -2674,7 +2674,7 @@ long trs1::nnodes() const {return 18;}
 el_types trs1::get_type() const {return el_types::TRS1;}
 
 set<el_processor> const trs1::processors{
-        elements::el_processor::general, elements::el_processor::Sestra, elements::el_processor::Pretube
+        el_processor::general, el_processor::Sestra, el_processor::Pretube
     };
 
 trs1::trs1() : elem() {}
@@ -2686,7 +2686,7 @@ trs1::trs1(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -2699,7 +2699,7 @@ trs1::trs1(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -2710,18 +2710,18 @@ trs1::trs1(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-trs1::trs1(cards::gelmnt1 const *data) : __base::elem(data) {}
+trs1::trs1(cards::gelmnt1 const *data) : elem(data) {}
 
-trs1::trs1(cards::gelref1 const *data) : __base::elem(data) {}
+trs1::trs1(cards::gelref1 const *data) : elem(data) {}
 
-trs1::trs1(elements::__base::elem const *data) :
-         __base::elem(data) {}
+trs1::trs1(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for trs2.
@@ -2735,7 +2735,7 @@ long trs2::nnodes() const {return 15;}
 el_types trs2::get_type() const {return el_types::TRS2;}
 
 set<el_processor> const trs2::processors{
-        elements::el_processor::general, elements::el_processor::Sestra, elements::el_processor::Pretube
+        el_processor::general, el_processor::Sestra, el_processor::Pretube
     };
 
 trs2::trs2() : elem() {}
@@ -2747,7 +2747,7 @@ trs2::trs2(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -2760,7 +2760,7 @@ trs2::trs2(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -2771,18 +2771,18 @@ trs2::trs2(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-trs2::trs2(cards::gelmnt1 const *data) : __base::elem(data) {}
+trs2::trs2(cards::gelmnt1 const *data) : elem(data) {}
 
-trs2::trs2(cards::gelref1 const *data) : __base::elem(data) {}
+trs2::trs2(cards::gelref1 const *data) : elem(data) {}
 
-trs2::trs2(elements::__base::elem const *data) :
-         __base::elem(data) {}
+trs2::trs2(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for trs3.
@@ -2796,7 +2796,7 @@ long trs3::nnodes() const {return 12;}
 el_types trs3::get_type() const {return el_types::TRS3;}
 
 set<el_processor> const trs3::processors{
-        elements::el_processor::general, elements::el_processor::Sestra, elements::el_processor::Pretube
+        el_processor::general, el_processor::Sestra, el_processor::Pretube
     };
 
 trs3::trs3() : elem() {}
@@ -2808,7 +2808,7 @@ trs3::trs3(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -2821,7 +2821,7 @@ trs3::trs3(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -2832,18 +2832,18 @@ trs3::trs3(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-trs3::trs3(cards::gelmnt1 const *data) : __base::elem(data) {}
+trs3::trs3(cards::gelmnt1 const *data) : elem(data) {}
 
-trs3::trs3(cards::gelref1 const *data) : __base::elem(data) {}
+trs3::trs3(cards::gelref1 const *data) : elem(data) {}
 
-trs3::trs3(elements::__base::elem const *data) :
-         __base::elem(data) {}
+trs3::trs3(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for glsh.
@@ -2857,7 +2857,7 @@ long glsh::nnodes() const {return 2;}
 el_types glsh::get_type() const {return el_types::GLSH;}
 
 set<el_processor> const glsh::processors{
-        elements::el_processor::general, elements::el_processor::Preframe, elements::el_processor::Sestra, elements::el_processor::Poseidon
+        el_processor::general, el_processor::Preframe, el_processor::Sestra, el_processor::Poseidon
     };
 
 glsh::glsh() : elem() {}
@@ -2869,7 +2869,7 @@ glsh::glsh(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -2882,7 +2882,7 @@ glsh::glsh(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -2893,18 +2893,18 @@ glsh::glsh(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-glsh::glsh(cards::gelmnt1 const *data) : __base::elem(data) {}
+glsh::glsh(cards::gelmnt1 const *data) : elem(data) {}
 
-glsh::glsh(cards::gelref1 const *data) : __base::elem(data) {}
+glsh::glsh(cards::gelref1 const *data) : elem(data) {}
 
-glsh::glsh(elements::__base::elem const *data) :
-         __base::elem(data) {}
+glsh::glsh(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for axcs.
@@ -2918,7 +2918,7 @@ long axcs::nnodes() const {return 3;}
 el_types axcs::get_type() const {return el_types::AXCS;}
 
 set<el_processor> const axcs::processors{
-        elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::ADVANCE
+        el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE
     };
 
 axcs::axcs() : elem() {}
@@ -2930,7 +2930,7 @@ axcs::axcs(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -2943,7 +2943,7 @@ axcs::axcs(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -2954,18 +2954,18 @@ axcs::axcs(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-axcs::axcs(cards::gelmnt1 const *data) : __base::elem(data) {}
+axcs::axcs(cards::gelmnt1 const *data) : elem(data) {}
 
-axcs::axcs(cards::gelref1 const *data) : __base::elem(data) {}
+axcs::axcs(cards::gelref1 const *data) : elem(data) {}
 
-axcs::axcs(elements::__base::elem const *data) :
-         __base::elem(data) {}
+axcs::axcs(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for axlq.
@@ -2979,7 +2979,7 @@ long axlq::nnodes() const {return 4;}
 el_types axlq::get_type() const {return el_types::AXLQ;}
 
 set<el_processor> const axlq::processors{
-        elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra, elements::el_processor::ADVANCE
+        el_processor::general, el_processor::Prefem, el_processor::Sestra, el_processor::ADVANCE
     };
 
 axlq::axlq() : elem() {}
@@ -2991,7 +2991,7 @@ axlq::axlq(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -3004,7 +3004,7 @@ axlq::axlq(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -3015,18 +3015,18 @@ axlq::axlq(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-axlq::axlq(cards::gelmnt1 const *data) : __base::elem(data) {}
+axlq::axlq(cards::gelmnt1 const *data) : elem(data) {}
 
-axlq::axlq(cards::gelref1 const *data) : __base::elem(data) {}
+axlq::axlq(cards::gelref1 const *data) : elem(data) {}
 
-axlq::axlq(elements::__base::elem const *data) :
-         __base::elem(data) {}
+axlq::axlq(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for axls.
@@ -3040,7 +3040,7 @@ long axls::nnodes() const {return 6;}
 el_types axls::get_type() const {return el_types::AXLS;}
 
 set<el_processor> const axls::processors{
-        elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra
+        el_processor::general, el_processor::Prefem, el_processor::Sestra
     };
 
 axls::axls() : elem() {}
@@ -3052,7 +3052,7 @@ axls::axls(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -3065,7 +3065,7 @@ axls::axls(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -3076,18 +3076,18 @@ axls::axls(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-axls::axls(cards::gelmnt1 const *data) : __base::elem(data) {}
+axls::axls(cards::gelmnt1 const *data) : elem(data) {}
 
-axls::axls(cards::gelref1 const *data) : __base::elem(data) {}
+axls::axls(cards::gelref1 const *data) : elem(data) {}
 
-axls::axls(elements::__base::elem const *data) :
-         __base::elem(data) {}
+axls::axls(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for axqq.
@@ -3101,7 +3101,7 @@ long axqq::nnodes() const {return 8;}
 el_types axqq::get_type() const {return el_types::AXQQ;}
 
 set<el_processor> const axqq::processors{
-        elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Sestra
+        el_processor::general, el_processor::Prefem, el_processor::Sestra
     };
 
 axqq::axqq() : elem() {}
@@ -3113,7 +3113,7 @@ axqq::axqq(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -3126,7 +3126,7 @@ axqq::axqq(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -3137,18 +3137,18 @@ axqq::axqq(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-axqq::axqq(cards::gelmnt1 const *data) : __base::elem(data) {}
+axqq::axqq(cards::gelmnt1 const *data) : elem(data) {}
 
-axqq::axqq(cards::gelref1 const *data) : __base::elem(data) {}
+axqq::axqq(cards::gelref1 const *data) : elem(data) {}
 
-axqq::axqq(elements::__base::elem const *data) :
-         __base::elem(data) {}
+axqq::axqq(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for pils.
@@ -3162,7 +3162,7 @@ long pils::nnodes() const {return 1;}
 el_types pils::get_type() const {return el_types::PILS;}
 
 set<el_processor> const pils::processors{
-        elements::el_processor::general, elements::el_processor::Preframe, elements::el_processor::ADVANCE
+        el_processor::general, el_processor::Preframe, el_processor::ADVANCE
     };
 
 pils::pils() : elem() {}
@@ -3174,7 +3174,7 @@ pils::pils(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -3187,7 +3187,7 @@ pils::pils(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -3198,18 +3198,18 @@ pils::pils(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-pils::pils(cards::gelmnt1 const *data) : __base::elem(data) {}
+pils::pils(cards::gelmnt1 const *data) : elem(data) {}
 
-pils::pils(cards::gelref1 const *data) : __base::elem(data) {}
+pils::pils(cards::gelref1 const *data) : elem(data) {}
 
-pils::pils(elements::__base::elem const *data) :
-         __base::elem(data) {}
+pils::pils(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for pcab.
@@ -3223,7 +3223,7 @@ long pcab::nnodes() const {return 2;}
 el_types pcab::get_type() const {return el_types::PCAB;}
 
 set<el_processor> const pcab::processors{
-        elements::el_processor::general, elements::el_processor::Preframe, elements::el_processor::ADVANCE
+        el_processor::general, el_processor::Preframe, el_processor::ADVANCE
     };
 
 pcab::pcab() : elem() {}
@@ -3235,7 +3235,7 @@ pcab::pcab(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -3248,7 +3248,7 @@ pcab::pcab(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -3259,18 +3259,18 @@ pcab::pcab(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-pcab::pcab(cards::gelmnt1 const *data) : __base::elem(data) {}
+pcab::pcab(cards::gelmnt1 const *data) : elem(data) {}
 
-pcab::pcab(cards::gelref1 const *data) : __base::elem(data) {}
+pcab::pcab(cards::gelref1 const *data) : elem(data) {}
 
-pcab::pcab(elements::__base::elem const *data) :
-         __base::elem(data) {}
+pcab::pcab(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for pspr.
@@ -3284,7 +3284,7 @@ long pspr::nnodes() const {return 1;}
 el_types pspr::get_type() const {return el_types::PSPR;}
 
 set<el_processor> const pspr::processors{
-        elements::el_processor::general, elements::el_processor::Preframe, elements::el_processor::ADVANCE
+        el_processor::general, el_processor::Preframe, el_processor::ADVANCE
     };
 
 pspr::pspr() : elem() {}
@@ -3296,7 +3296,7 @@ pspr::pspr(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -3309,7 +3309,7 @@ pspr::pspr(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -3320,18 +3320,18 @@ pspr::pspr(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-pspr::pspr(cards::gelmnt1 const *data) : __base::elem(data) {}
+pspr::pspr(cards::gelmnt1 const *data) : elem(data) {}
 
-pspr::pspr(cards::gelref1 const *data) : __base::elem(data) {}
+pspr::pspr(cards::gelref1 const *data) : elem(data) {}
 
-pspr::pspr(elements::__base::elem const *data) :
-         __base::elem(data) {}
+pspr::pspr(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for adva_4.
@@ -3345,7 +3345,7 @@ long adva_4::nnodes() const {return 4;}
 el_types adva_4::get_type() const {return el_types::ADVA_4;}
 
 set<el_processor> const adva_4::processors{
-        elements::el_processor::general, elements::el_processor::ADVANCE
+        el_processor::general, el_processor::ADVANCE
     };
 
 adva_4::adva_4() : elem() {}
@@ -3357,7 +3357,7 @@ adva_4::adva_4(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -3370,7 +3370,7 @@ adva_4::adva_4(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -3381,18 +3381,18 @@ adva_4::adva_4(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-adva_4::adva_4(cards::gelmnt1 const *data) : __base::elem(data) {}
+adva_4::adva_4(cards::gelmnt1 const *data) : elem(data) {}
 
-adva_4::adva_4(cards::gelref1 const *data) : __base::elem(data) {}
+adva_4::adva_4(cards::gelref1 const *data) : elem(data) {}
 
-adva_4::adva_4(elements::__base::elem const *data) :
-         __base::elem(data) {}
+adva_4::adva_4(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for adva_2.
@@ -3406,7 +3406,7 @@ long adva_2::nnodes() const {return 2;}
 el_types adva_2::get_type() const {return el_types::ADVA_2;}
 
 set<el_processor> const adva_2::processors{
-        elements::el_processor::general, elements::el_processor::ADVANCE
+        el_processor::general, el_processor::ADVANCE
     };
 
 adva_2::adva_2() : elem() {}
@@ -3418,7 +3418,7 @@ adva_2::adva_2(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -3431,7 +3431,7 @@ adva_2::adva_2(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -3442,18 +3442,18 @@ adva_2::adva_2(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-adva_2::adva_2(cards::gelmnt1 const *data) : __base::elem(data) {}
+adva_2::adva_2(cards::gelmnt1 const *data) : elem(data) {}
 
-adva_2::adva_2(cards::gelref1 const *data) : __base::elem(data) {}
+adva_2::adva_2(cards::gelref1 const *data) : elem(data) {}
 
-adva_2::adva_2(elements::__base::elem const *data) :
-         __base::elem(data) {}
+adva_2::adva_2(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ctcp.
@@ -3467,7 +3467,7 @@ long ctcp::nnodes() const {return 2;}
 el_types ctcp::get_type() const {return el_types::CTCP;}
 
 set<el_processor> const ctcp::processors{
-        elements::el_processor::general
+        el_processor::general
     };
 
 ctcp::ctcp() : elem() {}
@@ -3479,7 +3479,7 @@ ctcp::ctcp(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -3492,7 +3492,7 @@ ctcp::ctcp(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -3503,18 +3503,18 @@ ctcp::ctcp(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ctcp::ctcp(cards::gelmnt1 const *data) : __base::elem(data) {}
+ctcp::ctcp(cards::gelmnt1 const *data) : elem(data) {}
 
-ctcp::ctcp(cards::gelref1 const *data) : __base::elem(data) {}
+ctcp::ctcp(cards::gelref1 const *data) : elem(data) {}
 
-ctcp::ctcp(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ctcp::ctcp(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ctcl.
@@ -3528,7 +3528,7 @@ long ctcl::nnodes() const {return 4;}
 el_types ctcl::get_type() const {return el_types::CTCL;}
 
 set<el_processor> const ctcl::processors{
-        elements::el_processor::general
+        el_processor::general
     };
 
 ctcl::ctcl() : elem() {}
@@ -3540,7 +3540,7 @@ ctcl::ctcl(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -3553,7 +3553,7 @@ ctcl::ctcl(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -3564,18 +3564,18 @@ ctcl::ctcl(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ctcl::ctcl(cards::gelmnt1 const *data) : __base::elem(data) {}
+ctcl::ctcl(cards::gelmnt1 const *data) : elem(data) {}
 
-ctcl::ctcl(cards::gelref1 const *data) : __base::elem(data) {}
+ctcl::ctcl(cards::gelref1 const *data) : elem(data) {}
 
-ctcl::ctcl(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ctcl::ctcl(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ctal.
@@ -3589,7 +3589,7 @@ long ctal::nnodes() const {return 4;}
 el_types ctal::get_type() const {return el_types::CTAL;}
 
 set<el_processor> const ctal::processors{
-        elements::el_processor::general
+        el_processor::general
     };
 
 ctal::ctal() : elem() {}
@@ -3601,7 +3601,7 @@ ctal::ctal(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -3614,7 +3614,7 @@ ctal::ctal(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -3625,18 +3625,18 @@ ctal::ctal(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ctal::ctal(cards::gelmnt1 const *data) : __base::elem(data) {}
+ctal::ctal(cards::gelmnt1 const *data) : elem(data) {}
 
-ctal::ctal(cards::gelref1 const *data) : __base::elem(data) {}
+ctal::ctal(cards::gelref1 const *data) : elem(data) {}
 
-ctal::ctal(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ctal::ctal(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ctcc.
@@ -3650,7 +3650,7 @@ long ctcc::nnodes() const {return 6;}
 el_types ctcc::get_type() const {return el_types::CTCC;}
 
 set<el_processor> const ctcc::processors{
-        elements::el_processor::general
+        el_processor::general
     };
 
 ctcc::ctcc() : elem() {}
@@ -3662,7 +3662,7 @@ ctcc::ctcc(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -3675,7 +3675,7 @@ ctcc::ctcc(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -3686,18 +3686,18 @@ ctcc::ctcc(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ctcc::ctcc(cards::gelmnt1 const *data) : __base::elem(data) {}
+ctcc::ctcc(cards::gelmnt1 const *data) : elem(data) {}
 
-ctcc::ctcc(cards::gelref1 const *data) : __base::elem(data) {}
+ctcc::ctcc(cards::gelref1 const *data) : elem(data) {}
 
-ctcc::ctcc(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ctcc::ctcc(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ctaq.
@@ -3711,7 +3711,7 @@ long ctaq::nnodes() const {return 6;}
 el_types ctaq::get_type() const {return el_types::CTAQ;}
 
 set<el_processor> const ctaq::processors{
-        elements::el_processor::general, elements::el_processor::Prefem
+        el_processor::general, el_processor::Prefem
     };
 
 ctaq::ctaq() : elem() {}
@@ -3723,7 +3723,7 @@ ctaq::ctaq(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -3736,7 +3736,7 @@ ctaq::ctaq(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -3747,18 +3747,18 @@ ctaq::ctaq(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ctaq::ctaq(cards::gelmnt1 const *data) : __base::elem(data) {}
+ctaq::ctaq(cards::gelmnt1 const *data) : elem(data) {}
 
-ctaq::ctaq(cards::gelref1 const *data) : __base::elem(data) {}
+ctaq::ctaq(cards::gelref1 const *data) : elem(data) {}
 
-ctaq::ctaq(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ctaq::ctaq(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ctlq.
@@ -3772,7 +3772,7 @@ long ctlq::nnodes() const {return 8;}
 el_types ctlq::get_type() const {return el_types::CTLQ;}
 
 set<el_processor> const ctlq::processors{
-        elements::el_processor::general, elements::el_processor::Pretube
+        el_processor::general, el_processor::Pretube
     };
 
 ctlq::ctlq() : elem() {}
@@ -3784,7 +3784,7 @@ ctlq::ctlq(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -3797,7 +3797,7 @@ ctlq::ctlq(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -3808,18 +3808,18 @@ ctlq::ctlq(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ctlq::ctlq(cards::gelmnt1 const *data) : __base::elem(data) {}
+ctlq::ctlq(cards::gelmnt1 const *data) : elem(data) {}
 
-ctlq::ctlq(cards::gelref1 const *data) : __base::elem(data) {}
+ctlq::ctlq(cards::gelref1 const *data) : elem(data) {}
 
-ctlq::ctlq(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ctlq::ctlq(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ctcq.
@@ -3833,7 +3833,7 @@ long ctcq::nnodes() const {return 16;}
 el_types ctcq::get_type() const {return el_types::CTCQ;}
 
 set<el_processor> const ctcq::processors{
-        elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Pretube
+        el_processor::general, el_processor::Prefem, el_processor::Pretube
     };
 
 ctcq::ctcq() : elem() {}
@@ -3845,7 +3845,7 @@ ctcq::ctcq(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -3858,7 +3858,7 @@ ctcq::ctcq(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -3869,18 +3869,18 @@ ctcq::ctcq(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ctcq::ctcq(cards::gelmnt1 const *data) : __base::elem(data) {}
+ctcq::ctcq(cards::gelmnt1 const *data) : elem(data) {}
 
-ctcq::ctcq(cards::gelref1 const *data) : __base::elem(data) {}
+ctcq::ctcq(cards::gelref1 const *data) : elem(data) {}
 
-ctcq::ctcq(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ctcq::ctcq(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ctmq.
@@ -3894,7 +3894,7 @@ long ctmq::nnodes() const {return 18;}
 el_types ctmq::get_type() const {return el_types::CTMQ;}
 
 set<el_processor> const ctmq::processors{
-        elements::el_processor::general, elements::el_processor::Pretube
+        el_processor::general, el_processor::Pretube
     };
 
 ctmq::ctmq() : elem() {}
@@ -3906,7 +3906,7 @@ ctmq::ctmq(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -3919,7 +3919,7 @@ ctmq::ctmq(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -3930,18 +3930,18 @@ ctmq::ctmq(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ctmq::ctmq(cards::gelmnt1 const *data) : __base::elem(data) {}
+ctmq::ctmq(cards::gelmnt1 const *data) : elem(data) {}
 
-ctmq::ctmq(cards::gelref1 const *data) : __base::elem(data) {}
+ctmq::ctmq(cards::gelref1 const *data) : elem(data) {}
 
-ctmq::ctmq(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ctmq::ctmq(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for hcqs.
@@ -3955,7 +3955,7 @@ long hcqs::nnodes() const {return 9;}
 el_types hcqs::get_type() const {return el_types::HCQS;}
 
 set<el_processor> const hcqs::processors{
-        elements::el_processor::general, elements::el_processor::Prefem, elements::el_processor::Pretube
+        el_processor::general, el_processor::Prefem, el_processor::Pretube
     };
 
 hcqs::hcqs() : elem() {}
@@ -3967,7 +3967,7 @@ hcqs::hcqs(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -3980,7 +3980,7 @@ hcqs::hcqs(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -3991,18 +3991,18 @@ hcqs::hcqs(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-hcqs::hcqs(cards::gelmnt1 const *data) : __base::elem(data) {}
+hcqs::hcqs(cards::gelmnt1 const *data) : elem(data) {}
 
-hcqs::hcqs(cards::gelref1 const *data) : __base::elem(data) {}
+hcqs::hcqs(cards::gelref1 const *data) : elem(data) {}
 
-hcqs::hcqs(elements::__base::elem const *data) :
-         __base::elem(data) {}
+hcqs::hcqs(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for slqs.
@@ -4016,7 +4016,7 @@ long slqs::nnodes() const {return 8;}
 el_types slqs::get_type() const {return el_types::SLQS;}
 
 set<el_processor> const slqs::processors{
-        elements::el_processor::general
+        el_processor::general
     };
 
 slqs::slqs() : elem() {}
@@ -4028,7 +4028,7 @@ slqs::slqs(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -4041,7 +4041,7 @@ slqs::slqs(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -4052,18 +4052,18 @@ slqs::slqs(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-slqs::slqs(cards::gelmnt1 const *data) : __base::elem(data) {}
+slqs::slqs(cards::gelmnt1 const *data) : elem(data) {}
 
-slqs::slqs(cards::gelref1 const *data) : __base::elem(data) {}
+slqs::slqs(cards::gelref1 const *data) : elem(data) {}
 
-slqs::slqs(elements::__base::elem const *data) :
-         __base::elem(data) {}
+slqs::slqs(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for slts.
@@ -4077,7 +4077,7 @@ long slts::nnodes() const {return 6;}
 el_types slts::get_type() const {return el_types::SLTS;}
 
 set<el_processor> const slts::processors{
-        elements::el_processor::general
+        el_processor::general
     };
 
 slts::slts() : elem() {}
@@ -4089,7 +4089,7 @@ slts::slts(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -4102,7 +4102,7 @@ slts::slts(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -4113,18 +4113,18 @@ slts::slts(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-slts::slts(cards::gelmnt1 const *data) : __base::elem(data) {}
+slts::slts(cards::gelmnt1 const *data) : elem(data) {}
 
-slts::slts(cards::gelref1 const *data) : __base::elem(data) {}
+slts::slts(cards::gelref1 const *data) : elem(data) {}
 
-slts::slts(elements::__base::elem const *data) :
-         __base::elem(data) {}
+slts::slts(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for slcb.
@@ -4138,7 +4138,7 @@ long slcb::nnodes() const {return 3;}
 el_types slcb::get_type() const {return el_types::SLCB;}
 
 set<el_processor> const slcb::processors{
-        elements::el_processor::general
+        el_processor::general
     };
 
 slcb::slcb() : elem() {}
@@ -4150,7 +4150,7 @@ slcb::slcb(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -4163,7 +4163,7 @@ slcb::slcb(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -4174,18 +4174,18 @@ slcb::slcb(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-slcb::slcb(cards::gelmnt1 const *data) : __base::elem(data) {}
+slcb::slcb(cards::gelmnt1 const *data) : elem(data) {}
 
-slcb::slcb(cards::gelref1 const *data) : __base::elem(data) {}
+slcb::slcb(cards::gelref1 const *data) : elem(data) {}
 
-slcb::slcb(elements::__base::elem const *data) :
-         __base::elem(data) {}
+slcb::slcb(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for matr.
@@ -4199,7 +4199,7 @@ long matr::nnodes() const {return 0;}
 el_types matr::get_type() const {return el_types::MATR;}
 
 set<el_processor> const matr::processors{
-        elements::el_processor::general, elements::el_processor::ADVANCE, elements::el_processor::Splice
+        el_processor::general, el_processor::ADVANCE, el_processor::Splice
     };
 
 matr::matr() : elem() {}
@@ -4211,7 +4211,7 @@ matr::matr(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -4224,7 +4224,7 @@ matr::matr(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -4235,18 +4235,18 @@ matr::matr(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-matr::matr(cards::gelmnt1 const *data) : __base::elem(data) {}
+matr::matr(cards::gelmnt1 const *data) : elem(data) {}
 
-matr::matr(cards::gelref1 const *data) : __base::elem(data) {}
+matr::matr(cards::gelref1 const *data) : elem(data) {}
 
-matr::matr(elements::__base::elem const *data) :
-         __base::elem(data) {}
+matr::matr(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex100.
@@ -4260,7 +4260,7 @@ long ghex100::nnodes() const {return 21;}
 el_types ghex100::get_type() const {return el_types::GHEX100;}
 
 set<el_processor> const ghex100::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex100::ghex100() : elem() {}
@@ -4272,7 +4272,7 @@ ghex100::ghex100(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -4285,7 +4285,7 @@ ghex100::ghex100(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -4296,18 +4296,18 @@ ghex100::ghex100(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex100::ghex100(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex100::ghex100(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex100::ghex100(cards::gelref1 const *data) : __base::elem(data) {}
+ghex100::ghex100(cards::gelref1 const *data) : elem(data) {}
 
-ghex100::ghex100(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex100::ghex100(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex101.
@@ -4321,7 +4321,7 @@ long ghex101::nnodes() const {return 22;}
 el_types ghex101::get_type() const {return el_types::GHEX101;}
 
 set<el_processor> const ghex101::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex101::ghex101() : elem() {}
@@ -4333,7 +4333,7 @@ ghex101::ghex101(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -4346,7 +4346,7 @@ ghex101::ghex101(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -4357,18 +4357,18 @@ ghex101::ghex101(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex101::ghex101(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex101::ghex101(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex101::ghex101(cards::gelref1 const *data) : __base::elem(data) {}
+ghex101::ghex101(cards::gelref1 const *data) : elem(data) {}
 
-ghex101::ghex101(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex101::ghex101(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex102.
@@ -4382,7 +4382,7 @@ long ghex102::nnodes() const {return 22;}
 el_types ghex102::get_type() const {return el_types::GHEX102;}
 
 set<el_processor> const ghex102::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex102::ghex102() : elem() {}
@@ -4394,7 +4394,7 @@ ghex102::ghex102(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -4407,7 +4407,7 @@ ghex102::ghex102(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -4418,18 +4418,18 @@ ghex102::ghex102(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex102::ghex102(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex102::ghex102(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex102::ghex102(cards::gelref1 const *data) : __base::elem(data) {}
+ghex102::ghex102(cards::gelref1 const *data) : elem(data) {}
 
-ghex102::ghex102(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex102::ghex102(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex103.
@@ -4443,7 +4443,7 @@ long ghex103::nnodes() const {return 23;}
 el_types ghex103::get_type() const {return el_types::GHEX103;}
 
 set<el_processor> const ghex103::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex103::ghex103() : elem() {}
@@ -4455,7 +4455,7 @@ ghex103::ghex103(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -4468,7 +4468,7 @@ ghex103::ghex103(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -4479,18 +4479,18 @@ ghex103::ghex103(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex103::ghex103(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex103::ghex103(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex103::ghex103(cards::gelref1 const *data) : __base::elem(data) {}
+ghex103::ghex103(cards::gelref1 const *data) : elem(data) {}
 
-ghex103::ghex103(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex103::ghex103(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex104.
@@ -4504,7 +4504,7 @@ long ghex104::nnodes() const {return 22;}
 el_types ghex104::get_type() const {return el_types::GHEX104;}
 
 set<el_processor> const ghex104::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex104::ghex104() : elem() {}
@@ -4516,7 +4516,7 @@ ghex104::ghex104(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -4529,7 +4529,7 @@ ghex104::ghex104(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -4540,18 +4540,18 @@ ghex104::ghex104(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex104::ghex104(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex104::ghex104(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex104::ghex104(cards::gelref1 const *data) : __base::elem(data) {}
+ghex104::ghex104(cards::gelref1 const *data) : elem(data) {}
 
-ghex104::ghex104(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex104::ghex104(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex105.
@@ -4565,7 +4565,7 @@ long ghex105::nnodes() const {return 23;}
 el_types ghex105::get_type() const {return el_types::GHEX105;}
 
 set<el_processor> const ghex105::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex105::ghex105() : elem() {}
@@ -4577,7 +4577,7 @@ ghex105::ghex105(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -4590,7 +4590,7 @@ ghex105::ghex105(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -4601,18 +4601,18 @@ ghex105::ghex105(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex105::ghex105(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex105::ghex105(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex105::ghex105(cards::gelref1 const *data) : __base::elem(data) {}
+ghex105::ghex105(cards::gelref1 const *data) : elem(data) {}
 
-ghex105::ghex105(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex105::ghex105(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex106.
@@ -4626,7 +4626,7 @@ long ghex106::nnodes() const {return 23;}
 el_types ghex106::get_type() const {return el_types::GHEX106;}
 
 set<el_processor> const ghex106::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex106::ghex106() : elem() {}
@@ -4638,7 +4638,7 @@ ghex106::ghex106(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -4651,7 +4651,7 @@ ghex106::ghex106(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -4662,18 +4662,18 @@ ghex106::ghex106(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex106::ghex106(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex106::ghex106(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex106::ghex106(cards::gelref1 const *data) : __base::elem(data) {}
+ghex106::ghex106(cards::gelref1 const *data) : elem(data) {}
 
-ghex106::ghex106(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex106::ghex106(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex107.
@@ -4687,7 +4687,7 @@ long ghex107::nnodes() const {return 24;}
 el_types ghex107::get_type() const {return el_types::GHEX107;}
 
 set<el_processor> const ghex107::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex107::ghex107() : elem() {}
@@ -4699,7 +4699,7 @@ ghex107::ghex107(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -4712,7 +4712,7 @@ ghex107::ghex107(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -4723,18 +4723,18 @@ ghex107::ghex107(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex107::ghex107(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex107::ghex107(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex107::ghex107(cards::gelref1 const *data) : __base::elem(data) {}
+ghex107::ghex107(cards::gelref1 const *data) : elem(data) {}
 
-ghex107::ghex107(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex107::ghex107(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex108.
@@ -4748,7 +4748,7 @@ long ghex108::nnodes() const {return 22;}
 el_types ghex108::get_type() const {return el_types::GHEX108;}
 
 set<el_processor> const ghex108::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex108::ghex108() : elem() {}
@@ -4760,7 +4760,7 @@ ghex108::ghex108(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -4773,7 +4773,7 @@ ghex108::ghex108(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -4784,18 +4784,18 @@ ghex108::ghex108(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex108::ghex108(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex108::ghex108(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex108::ghex108(cards::gelref1 const *data) : __base::elem(data) {}
+ghex108::ghex108(cards::gelref1 const *data) : elem(data) {}
 
-ghex108::ghex108(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex108::ghex108(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex109.
@@ -4809,7 +4809,7 @@ long ghex109::nnodes() const {return 23;}
 el_types ghex109::get_type() const {return el_types::GHEX109;}
 
 set<el_processor> const ghex109::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex109::ghex109() : elem() {}
@@ -4821,7 +4821,7 @@ ghex109::ghex109(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -4834,7 +4834,7 @@ ghex109::ghex109(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -4845,18 +4845,18 @@ ghex109::ghex109(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex109::ghex109(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex109::ghex109(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex109::ghex109(cards::gelref1 const *data) : __base::elem(data) {}
+ghex109::ghex109(cards::gelref1 const *data) : elem(data) {}
 
-ghex109::ghex109(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex109::ghex109(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex110.
@@ -4870,7 +4870,7 @@ long ghex110::nnodes() const {return 23;}
 el_types ghex110::get_type() const {return el_types::GHEX110;}
 
 set<el_processor> const ghex110::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex110::ghex110() : elem() {}
@@ -4882,7 +4882,7 @@ ghex110::ghex110(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -4895,7 +4895,7 @@ ghex110::ghex110(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -4906,18 +4906,18 @@ ghex110::ghex110(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex110::ghex110(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex110::ghex110(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex110::ghex110(cards::gelref1 const *data) : __base::elem(data) {}
+ghex110::ghex110(cards::gelref1 const *data) : elem(data) {}
 
-ghex110::ghex110(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex110::ghex110(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex111.
@@ -4931,7 +4931,7 @@ long ghex111::nnodes() const {return 24;}
 el_types ghex111::get_type() const {return el_types::GHEX111;}
 
 set<el_processor> const ghex111::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex111::ghex111() : elem() {}
@@ -4943,7 +4943,7 @@ ghex111::ghex111(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -4956,7 +4956,7 @@ ghex111::ghex111(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -4967,18 +4967,18 @@ ghex111::ghex111(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex111::ghex111(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex111::ghex111(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex111::ghex111(cards::gelref1 const *data) : __base::elem(data) {}
+ghex111::ghex111(cards::gelref1 const *data) : elem(data) {}
 
-ghex111::ghex111(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex111::ghex111(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex112.
@@ -4992,7 +4992,7 @@ long ghex112::nnodes() const {return 23;}
 el_types ghex112::get_type() const {return el_types::GHEX112;}
 
 set<el_processor> const ghex112::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex112::ghex112() : elem() {}
@@ -5004,7 +5004,7 @@ ghex112::ghex112(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -5017,7 +5017,7 @@ ghex112::ghex112(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -5028,18 +5028,18 @@ ghex112::ghex112(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex112::ghex112(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex112::ghex112(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex112::ghex112(cards::gelref1 const *data) : __base::elem(data) {}
+ghex112::ghex112(cards::gelref1 const *data) : elem(data) {}
 
-ghex112::ghex112(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex112::ghex112(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex113.
@@ -5053,7 +5053,7 @@ long ghex113::nnodes() const {return 24;}
 el_types ghex113::get_type() const {return el_types::GHEX113;}
 
 set<el_processor> const ghex113::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex113::ghex113() : elem() {}
@@ -5065,7 +5065,7 @@ ghex113::ghex113(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -5078,7 +5078,7 @@ ghex113::ghex113(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -5089,18 +5089,18 @@ ghex113::ghex113(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex113::ghex113(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex113::ghex113(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex113::ghex113(cards::gelref1 const *data) : __base::elem(data) {}
+ghex113::ghex113(cards::gelref1 const *data) : elem(data) {}
 
-ghex113::ghex113(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex113::ghex113(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex114.
@@ -5114,7 +5114,7 @@ long ghex114::nnodes() const {return 24;}
 el_types ghex114::get_type() const {return el_types::GHEX114;}
 
 set<el_processor> const ghex114::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex114::ghex114() : elem() {}
@@ -5126,7 +5126,7 @@ ghex114::ghex114(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -5139,7 +5139,7 @@ ghex114::ghex114(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -5150,18 +5150,18 @@ ghex114::ghex114(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex114::ghex114(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex114::ghex114(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex114::ghex114(cards::gelref1 const *data) : __base::elem(data) {}
+ghex114::ghex114(cards::gelref1 const *data) : elem(data) {}
 
-ghex114::ghex114(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex114::ghex114(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex115.
@@ -5175,7 +5175,7 @@ long ghex115::nnodes() const {return 25;}
 el_types ghex115::get_type() const {return el_types::GHEX115;}
 
 set<el_processor> const ghex115::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex115::ghex115() : elem() {}
@@ -5187,7 +5187,7 @@ ghex115::ghex115(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -5200,7 +5200,7 @@ ghex115::ghex115(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -5211,18 +5211,18 @@ ghex115::ghex115(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex115::ghex115(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex115::ghex115(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex115::ghex115(cards::gelref1 const *data) : __base::elem(data) {}
+ghex115::ghex115(cards::gelref1 const *data) : elem(data) {}
 
-ghex115::ghex115(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex115::ghex115(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex116.
@@ -5236,7 +5236,7 @@ long ghex116::nnodes() const {return 22;}
 el_types ghex116::get_type() const {return el_types::GHEX116;}
 
 set<el_processor> const ghex116::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex116::ghex116() : elem() {}
@@ -5248,7 +5248,7 @@ ghex116::ghex116(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -5261,7 +5261,7 @@ ghex116::ghex116(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -5272,18 +5272,18 @@ ghex116::ghex116(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex116::ghex116(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex116::ghex116(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex116::ghex116(cards::gelref1 const *data) : __base::elem(data) {}
+ghex116::ghex116(cards::gelref1 const *data) : elem(data) {}
 
-ghex116::ghex116(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex116::ghex116(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex117.
@@ -5297,7 +5297,7 @@ long ghex117::nnodes() const {return 23;}
 el_types ghex117::get_type() const {return el_types::GHEX117;}
 
 set<el_processor> const ghex117::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex117::ghex117() : elem() {}
@@ -5309,7 +5309,7 @@ ghex117::ghex117(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -5322,7 +5322,7 @@ ghex117::ghex117(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -5333,18 +5333,18 @@ ghex117::ghex117(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex117::ghex117(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex117::ghex117(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex117::ghex117(cards::gelref1 const *data) : __base::elem(data) {}
+ghex117::ghex117(cards::gelref1 const *data) : elem(data) {}
 
-ghex117::ghex117(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex117::ghex117(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex118.
@@ -5358,7 +5358,7 @@ long ghex118::nnodes() const {return 23;}
 el_types ghex118::get_type() const {return el_types::GHEX118;}
 
 set<el_processor> const ghex118::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex118::ghex118() : elem() {}
@@ -5370,7 +5370,7 @@ ghex118::ghex118(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -5383,7 +5383,7 @@ ghex118::ghex118(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -5394,18 +5394,18 @@ ghex118::ghex118(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex118::ghex118(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex118::ghex118(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex118::ghex118(cards::gelref1 const *data) : __base::elem(data) {}
+ghex118::ghex118(cards::gelref1 const *data) : elem(data) {}
 
-ghex118::ghex118(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex118::ghex118(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex119.
@@ -5419,7 +5419,7 @@ long ghex119::nnodes() const {return 24;}
 el_types ghex119::get_type() const {return el_types::GHEX119;}
 
 set<el_processor> const ghex119::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex119::ghex119() : elem() {}
@@ -5431,7 +5431,7 @@ ghex119::ghex119(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -5444,7 +5444,7 @@ ghex119::ghex119(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -5455,18 +5455,18 @@ ghex119::ghex119(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex119::ghex119(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex119::ghex119(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex119::ghex119(cards::gelref1 const *data) : __base::elem(data) {}
+ghex119::ghex119(cards::gelref1 const *data) : elem(data) {}
 
-ghex119::ghex119(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex119::ghex119(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex120.
@@ -5480,7 +5480,7 @@ long ghex120::nnodes() const {return 23;}
 el_types ghex120::get_type() const {return el_types::GHEX120;}
 
 set<el_processor> const ghex120::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex120::ghex120() : elem() {}
@@ -5492,7 +5492,7 @@ ghex120::ghex120(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -5505,7 +5505,7 @@ ghex120::ghex120(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -5516,18 +5516,18 @@ ghex120::ghex120(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex120::ghex120(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex120::ghex120(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex120::ghex120(cards::gelref1 const *data) : __base::elem(data) {}
+ghex120::ghex120(cards::gelref1 const *data) : elem(data) {}
 
-ghex120::ghex120(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex120::ghex120(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex121.
@@ -5541,7 +5541,7 @@ long ghex121::nnodes() const {return 24;}
 el_types ghex121::get_type() const {return el_types::GHEX121;}
 
 set<el_processor> const ghex121::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex121::ghex121() : elem() {}
@@ -5553,7 +5553,7 @@ ghex121::ghex121(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -5566,7 +5566,7 @@ ghex121::ghex121(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -5577,18 +5577,18 @@ ghex121::ghex121(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex121::ghex121(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex121::ghex121(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex121::ghex121(cards::gelref1 const *data) : __base::elem(data) {}
+ghex121::ghex121(cards::gelref1 const *data) : elem(data) {}
 
-ghex121::ghex121(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex121::ghex121(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex122.
@@ -5602,7 +5602,7 @@ long ghex122::nnodes() const {return 24;}
 el_types ghex122::get_type() const {return el_types::GHEX122;}
 
 set<el_processor> const ghex122::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex122::ghex122() : elem() {}
@@ -5614,7 +5614,7 @@ ghex122::ghex122(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -5627,7 +5627,7 @@ ghex122::ghex122(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -5638,18 +5638,18 @@ ghex122::ghex122(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex122::ghex122(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex122::ghex122(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex122::ghex122(cards::gelref1 const *data) : __base::elem(data) {}
+ghex122::ghex122(cards::gelref1 const *data) : elem(data) {}
 
-ghex122::ghex122(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex122::ghex122(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex123.
@@ -5663,7 +5663,7 @@ long ghex123::nnodes() const {return 25;}
 el_types ghex123::get_type() const {return el_types::GHEX123;}
 
 set<el_processor> const ghex123::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex123::ghex123() : elem() {}
@@ -5675,7 +5675,7 @@ ghex123::ghex123(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -5688,7 +5688,7 @@ ghex123::ghex123(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -5699,18 +5699,18 @@ ghex123::ghex123(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex123::ghex123(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex123::ghex123(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex123::ghex123(cards::gelref1 const *data) : __base::elem(data) {}
+ghex123::ghex123(cards::gelref1 const *data) : elem(data) {}
 
-ghex123::ghex123(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex123::ghex123(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex124.
@@ -5724,7 +5724,7 @@ long ghex124::nnodes() const {return 23;}
 el_types ghex124::get_type() const {return el_types::GHEX124;}
 
 set<el_processor> const ghex124::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex124::ghex124() : elem() {}
@@ -5736,7 +5736,7 @@ ghex124::ghex124(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -5749,7 +5749,7 @@ ghex124::ghex124(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -5760,18 +5760,18 @@ ghex124::ghex124(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex124::ghex124(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex124::ghex124(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex124::ghex124(cards::gelref1 const *data) : __base::elem(data) {}
+ghex124::ghex124(cards::gelref1 const *data) : elem(data) {}
 
-ghex124::ghex124(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex124::ghex124(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex125.
@@ -5785,7 +5785,7 @@ long ghex125::nnodes() const {return 24;}
 el_types ghex125::get_type() const {return el_types::GHEX125;}
 
 set<el_processor> const ghex125::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex125::ghex125() : elem() {}
@@ -5797,7 +5797,7 @@ ghex125::ghex125(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -5810,7 +5810,7 @@ ghex125::ghex125(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -5821,18 +5821,18 @@ ghex125::ghex125(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex125::ghex125(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex125::ghex125(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex125::ghex125(cards::gelref1 const *data) : __base::elem(data) {}
+ghex125::ghex125(cards::gelref1 const *data) : elem(data) {}
 
-ghex125::ghex125(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex125::ghex125(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex126.
@@ -5846,7 +5846,7 @@ long ghex126::nnodes() const {return 24;}
 el_types ghex126::get_type() const {return el_types::GHEX126;}
 
 set<el_processor> const ghex126::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex126::ghex126() : elem() {}
@@ -5858,7 +5858,7 @@ ghex126::ghex126(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -5871,7 +5871,7 @@ ghex126::ghex126(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -5882,18 +5882,18 @@ ghex126::ghex126(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex126::ghex126(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex126::ghex126(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex126::ghex126(cards::gelref1 const *data) : __base::elem(data) {}
+ghex126::ghex126(cards::gelref1 const *data) : elem(data) {}
 
-ghex126::ghex126(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex126::ghex126(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex127.
@@ -5907,7 +5907,7 @@ long ghex127::nnodes() const {return 25;}
 el_types ghex127::get_type() const {return el_types::GHEX127;}
 
 set<el_processor> const ghex127::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex127::ghex127() : elem() {}
@@ -5919,7 +5919,7 @@ ghex127::ghex127(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -5932,7 +5932,7 @@ ghex127::ghex127(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -5943,18 +5943,18 @@ ghex127::ghex127(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex127::ghex127(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex127::ghex127(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex127::ghex127(cards::gelref1 const *data) : __base::elem(data) {}
+ghex127::ghex127(cards::gelref1 const *data) : elem(data) {}
 
-ghex127::ghex127(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex127::ghex127(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex128.
@@ -5968,7 +5968,7 @@ long ghex128::nnodes() const {return 24;}
 el_types ghex128::get_type() const {return el_types::GHEX128;}
 
 set<el_processor> const ghex128::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex128::ghex128() : elem() {}
@@ -5980,7 +5980,7 @@ ghex128::ghex128(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -5993,7 +5993,7 @@ ghex128::ghex128(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -6004,18 +6004,18 @@ ghex128::ghex128(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex128::ghex128(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex128::ghex128(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex128::ghex128(cards::gelref1 const *data) : __base::elem(data) {}
+ghex128::ghex128(cards::gelref1 const *data) : elem(data) {}
 
-ghex128::ghex128(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex128::ghex128(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex129.
@@ -6029,7 +6029,7 @@ long ghex129::nnodes() const {return 25;}
 el_types ghex129::get_type() const {return el_types::GHEX129;}
 
 set<el_processor> const ghex129::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex129::ghex129() : elem() {}
@@ -6041,7 +6041,7 @@ ghex129::ghex129(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -6054,7 +6054,7 @@ ghex129::ghex129(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -6065,18 +6065,18 @@ ghex129::ghex129(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex129::ghex129(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex129::ghex129(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex129::ghex129(cards::gelref1 const *data) : __base::elem(data) {}
+ghex129::ghex129(cards::gelref1 const *data) : elem(data) {}
 
-ghex129::ghex129(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex129::ghex129(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex130.
@@ -6090,7 +6090,7 @@ long ghex130::nnodes() const {return 25;}
 el_types ghex130::get_type() const {return el_types::GHEX130;}
 
 set<el_processor> const ghex130::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex130::ghex130() : elem() {}
@@ -6102,7 +6102,7 @@ ghex130::ghex130(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -6115,7 +6115,7 @@ ghex130::ghex130(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -6126,18 +6126,18 @@ ghex130::ghex130(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex130::ghex130(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex130::ghex130(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex130::ghex130(cards::gelref1 const *data) : __base::elem(data) {}
+ghex130::ghex130(cards::gelref1 const *data) : elem(data) {}
 
-ghex130::ghex130(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex130::ghex130(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex131.
@@ -6151,7 +6151,7 @@ long ghex131::nnodes() const {return 26;}
 el_types ghex131::get_type() const {return el_types::GHEX131;}
 
 set<el_processor> const ghex131::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex131::ghex131() : elem() {}
@@ -6163,7 +6163,7 @@ ghex131::ghex131(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -6176,7 +6176,7 @@ ghex131::ghex131(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -6187,18 +6187,18 @@ ghex131::ghex131(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex131::ghex131(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex131::ghex131(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex131::ghex131(cards::gelref1 const *data) : __base::elem(data) {}
+ghex131::ghex131(cards::gelref1 const *data) : elem(data) {}
 
-ghex131::ghex131(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex131::ghex131(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex132.
@@ -6212,7 +6212,7 @@ long ghex132::nnodes() const {return 22;}
 el_types ghex132::get_type() const {return el_types::GHEX132;}
 
 set<el_processor> const ghex132::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex132::ghex132() : elem() {}
@@ -6224,7 +6224,7 @@ ghex132::ghex132(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -6237,7 +6237,7 @@ ghex132::ghex132(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -6248,18 +6248,18 @@ ghex132::ghex132(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex132::ghex132(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex132::ghex132(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex132::ghex132(cards::gelref1 const *data) : __base::elem(data) {}
+ghex132::ghex132(cards::gelref1 const *data) : elem(data) {}
 
-ghex132::ghex132(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex132::ghex132(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex133.
@@ -6273,7 +6273,7 @@ long ghex133::nnodes() const {return 23;}
 el_types ghex133::get_type() const {return el_types::GHEX133;}
 
 set<el_processor> const ghex133::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex133::ghex133() : elem() {}
@@ -6285,7 +6285,7 @@ ghex133::ghex133(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -6298,7 +6298,7 @@ ghex133::ghex133(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -6309,18 +6309,18 @@ ghex133::ghex133(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex133::ghex133(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex133::ghex133(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex133::ghex133(cards::gelref1 const *data) : __base::elem(data) {}
+ghex133::ghex133(cards::gelref1 const *data) : elem(data) {}
 
-ghex133::ghex133(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex133::ghex133(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex134.
@@ -6334,7 +6334,7 @@ long ghex134::nnodes() const {return 23;}
 el_types ghex134::get_type() const {return el_types::GHEX134;}
 
 set<el_processor> const ghex134::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex134::ghex134() : elem() {}
@@ -6346,7 +6346,7 @@ ghex134::ghex134(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -6359,7 +6359,7 @@ ghex134::ghex134(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -6370,18 +6370,18 @@ ghex134::ghex134(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex134::ghex134(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex134::ghex134(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex134::ghex134(cards::gelref1 const *data) : __base::elem(data) {}
+ghex134::ghex134(cards::gelref1 const *data) : elem(data) {}
 
-ghex134::ghex134(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex134::ghex134(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex135.
@@ -6395,7 +6395,7 @@ long ghex135::nnodes() const {return 24;}
 el_types ghex135::get_type() const {return el_types::GHEX135;}
 
 set<el_processor> const ghex135::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex135::ghex135() : elem() {}
@@ -6407,7 +6407,7 @@ ghex135::ghex135(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -6420,7 +6420,7 @@ ghex135::ghex135(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -6431,18 +6431,18 @@ ghex135::ghex135(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex135::ghex135(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex135::ghex135(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex135::ghex135(cards::gelref1 const *data) : __base::elem(data) {}
+ghex135::ghex135(cards::gelref1 const *data) : elem(data) {}
 
-ghex135::ghex135(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex135::ghex135(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex136.
@@ -6456,7 +6456,7 @@ long ghex136::nnodes() const {return 23;}
 el_types ghex136::get_type() const {return el_types::GHEX136;}
 
 set<el_processor> const ghex136::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex136::ghex136() : elem() {}
@@ -6468,7 +6468,7 @@ ghex136::ghex136(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -6481,7 +6481,7 @@ ghex136::ghex136(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -6492,18 +6492,18 @@ ghex136::ghex136(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex136::ghex136(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex136::ghex136(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex136::ghex136(cards::gelref1 const *data) : __base::elem(data) {}
+ghex136::ghex136(cards::gelref1 const *data) : elem(data) {}
 
-ghex136::ghex136(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex136::ghex136(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex137.
@@ -6517,7 +6517,7 @@ long ghex137::nnodes() const {return 24;}
 el_types ghex137::get_type() const {return el_types::GHEX137;}
 
 set<el_processor> const ghex137::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex137::ghex137() : elem() {}
@@ -6529,7 +6529,7 @@ ghex137::ghex137(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -6542,7 +6542,7 @@ ghex137::ghex137(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -6553,18 +6553,18 @@ ghex137::ghex137(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex137::ghex137(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex137::ghex137(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex137::ghex137(cards::gelref1 const *data) : __base::elem(data) {}
+ghex137::ghex137(cards::gelref1 const *data) : elem(data) {}
 
-ghex137::ghex137(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex137::ghex137(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex138.
@@ -6578,7 +6578,7 @@ long ghex138::nnodes() const {return 24;}
 el_types ghex138::get_type() const {return el_types::GHEX138;}
 
 set<el_processor> const ghex138::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex138::ghex138() : elem() {}
@@ -6590,7 +6590,7 @@ ghex138::ghex138(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -6603,7 +6603,7 @@ ghex138::ghex138(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -6614,18 +6614,18 @@ ghex138::ghex138(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex138::ghex138(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex138::ghex138(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex138::ghex138(cards::gelref1 const *data) : __base::elem(data) {}
+ghex138::ghex138(cards::gelref1 const *data) : elem(data) {}
 
-ghex138::ghex138(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex138::ghex138(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex139.
@@ -6639,7 +6639,7 @@ long ghex139::nnodes() const {return 25;}
 el_types ghex139::get_type() const {return el_types::GHEX139;}
 
 set<el_processor> const ghex139::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex139::ghex139() : elem() {}
@@ -6651,7 +6651,7 @@ ghex139::ghex139(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -6664,7 +6664,7 @@ ghex139::ghex139(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -6675,18 +6675,18 @@ ghex139::ghex139(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex139::ghex139(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex139::ghex139(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex139::ghex139(cards::gelref1 const *data) : __base::elem(data) {}
+ghex139::ghex139(cards::gelref1 const *data) : elem(data) {}
 
-ghex139::ghex139(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex139::ghex139(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex140.
@@ -6700,7 +6700,7 @@ long ghex140::nnodes() const {return 23;}
 el_types ghex140::get_type() const {return el_types::GHEX140;}
 
 set<el_processor> const ghex140::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex140::ghex140() : elem() {}
@@ -6712,7 +6712,7 @@ ghex140::ghex140(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -6725,7 +6725,7 @@ ghex140::ghex140(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -6736,18 +6736,18 @@ ghex140::ghex140(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex140::ghex140(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex140::ghex140(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex140::ghex140(cards::gelref1 const *data) : __base::elem(data) {}
+ghex140::ghex140(cards::gelref1 const *data) : elem(data) {}
 
-ghex140::ghex140(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex140::ghex140(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex141.
@@ -6761,7 +6761,7 @@ long ghex141::nnodes() const {return 24;}
 el_types ghex141::get_type() const {return el_types::GHEX141;}
 
 set<el_processor> const ghex141::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex141::ghex141() : elem() {}
@@ -6773,7 +6773,7 @@ ghex141::ghex141(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -6786,7 +6786,7 @@ ghex141::ghex141(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -6797,18 +6797,18 @@ ghex141::ghex141(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex141::ghex141(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex141::ghex141(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex141::ghex141(cards::gelref1 const *data) : __base::elem(data) {}
+ghex141::ghex141(cards::gelref1 const *data) : elem(data) {}
 
-ghex141::ghex141(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex141::ghex141(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex142.
@@ -6822,7 +6822,7 @@ long ghex142::nnodes() const {return 24;}
 el_types ghex142::get_type() const {return el_types::GHEX142;}
 
 set<el_processor> const ghex142::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex142::ghex142() : elem() {}
@@ -6834,7 +6834,7 @@ ghex142::ghex142(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -6847,7 +6847,7 @@ ghex142::ghex142(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -6858,18 +6858,18 @@ ghex142::ghex142(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex142::ghex142(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex142::ghex142(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex142::ghex142(cards::gelref1 const *data) : __base::elem(data) {}
+ghex142::ghex142(cards::gelref1 const *data) : elem(data) {}
 
-ghex142::ghex142(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex142::ghex142(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex143.
@@ -6883,7 +6883,7 @@ long ghex143::nnodes() const {return 25;}
 el_types ghex143::get_type() const {return el_types::GHEX143;}
 
 set<el_processor> const ghex143::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex143::ghex143() : elem() {}
@@ -6895,7 +6895,7 @@ ghex143::ghex143(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -6908,7 +6908,7 @@ ghex143::ghex143(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -6919,18 +6919,18 @@ ghex143::ghex143(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex143::ghex143(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex143::ghex143(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex143::ghex143(cards::gelref1 const *data) : __base::elem(data) {}
+ghex143::ghex143(cards::gelref1 const *data) : elem(data) {}
 
-ghex143::ghex143(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex143::ghex143(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex144.
@@ -6944,7 +6944,7 @@ long ghex144::nnodes() const {return 24;}
 el_types ghex144::get_type() const {return el_types::GHEX144;}
 
 set<el_processor> const ghex144::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex144::ghex144() : elem() {}
@@ -6956,7 +6956,7 @@ ghex144::ghex144(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -6969,7 +6969,7 @@ ghex144::ghex144(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -6980,18 +6980,18 @@ ghex144::ghex144(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex144::ghex144(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex144::ghex144(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex144::ghex144(cards::gelref1 const *data) : __base::elem(data) {}
+ghex144::ghex144(cards::gelref1 const *data) : elem(data) {}
 
-ghex144::ghex144(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex144::ghex144(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex145.
@@ -7005,7 +7005,7 @@ long ghex145::nnodes() const {return 25;}
 el_types ghex145::get_type() const {return el_types::GHEX145;}
 
 set<el_processor> const ghex145::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex145::ghex145() : elem() {}
@@ -7017,7 +7017,7 @@ ghex145::ghex145(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -7030,7 +7030,7 @@ ghex145::ghex145(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -7041,18 +7041,18 @@ ghex145::ghex145(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex145::ghex145(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex145::ghex145(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex145::ghex145(cards::gelref1 const *data) : __base::elem(data) {}
+ghex145::ghex145(cards::gelref1 const *data) : elem(data) {}
 
-ghex145::ghex145(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex145::ghex145(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex146.
@@ -7066,7 +7066,7 @@ long ghex146::nnodes() const {return 25;}
 el_types ghex146::get_type() const {return el_types::GHEX146;}
 
 set<el_processor> const ghex146::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex146::ghex146() : elem() {}
@@ -7078,7 +7078,7 @@ ghex146::ghex146(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -7091,7 +7091,7 @@ ghex146::ghex146(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -7102,18 +7102,18 @@ ghex146::ghex146(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex146::ghex146(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex146::ghex146(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex146::ghex146(cards::gelref1 const *data) : __base::elem(data) {}
+ghex146::ghex146(cards::gelref1 const *data) : elem(data) {}
 
-ghex146::ghex146(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex146::ghex146(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex147.
@@ -7127,7 +7127,7 @@ long ghex147::nnodes() const {return 26;}
 el_types ghex147::get_type() const {return el_types::GHEX147;}
 
 set<el_processor> const ghex147::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex147::ghex147() : elem() {}
@@ -7139,7 +7139,7 @@ ghex147::ghex147(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -7152,7 +7152,7 @@ ghex147::ghex147(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -7163,18 +7163,18 @@ ghex147::ghex147(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex147::ghex147(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex147::ghex147(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex147::ghex147(cards::gelref1 const *data) : __base::elem(data) {}
+ghex147::ghex147(cards::gelref1 const *data) : elem(data) {}
 
-ghex147::ghex147(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex147::ghex147(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex148.
@@ -7188,7 +7188,7 @@ long ghex148::nnodes() const {return 23;}
 el_types ghex148::get_type() const {return el_types::GHEX148;}
 
 set<el_processor> const ghex148::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex148::ghex148() : elem() {}
@@ -7200,7 +7200,7 @@ ghex148::ghex148(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -7213,7 +7213,7 @@ ghex148::ghex148(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -7224,18 +7224,18 @@ ghex148::ghex148(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex148::ghex148(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex148::ghex148(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex148::ghex148(cards::gelref1 const *data) : __base::elem(data) {}
+ghex148::ghex148(cards::gelref1 const *data) : elem(data) {}
 
-ghex148::ghex148(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex148::ghex148(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex149.
@@ -7249,7 +7249,7 @@ long ghex149::nnodes() const {return 24;}
 el_types ghex149::get_type() const {return el_types::GHEX149;}
 
 set<el_processor> const ghex149::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex149::ghex149() : elem() {}
@@ -7261,7 +7261,7 @@ ghex149::ghex149(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -7274,7 +7274,7 @@ ghex149::ghex149(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -7285,18 +7285,18 @@ ghex149::ghex149(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex149::ghex149(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex149::ghex149(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex149::ghex149(cards::gelref1 const *data) : __base::elem(data) {}
+ghex149::ghex149(cards::gelref1 const *data) : elem(data) {}
 
-ghex149::ghex149(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex149::ghex149(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex150.
@@ -7310,7 +7310,7 @@ long ghex150::nnodes() const {return 24;}
 el_types ghex150::get_type() const {return el_types::GHEX150;}
 
 set<el_processor> const ghex150::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex150::ghex150() : elem() {}
@@ -7322,7 +7322,7 @@ ghex150::ghex150(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -7335,7 +7335,7 @@ ghex150::ghex150(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -7346,18 +7346,18 @@ ghex150::ghex150(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex150::ghex150(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex150::ghex150(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex150::ghex150(cards::gelref1 const *data) : __base::elem(data) {}
+ghex150::ghex150(cards::gelref1 const *data) : elem(data) {}
 
-ghex150::ghex150(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex150::ghex150(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex151.
@@ -7371,7 +7371,7 @@ long ghex151::nnodes() const {return 25;}
 el_types ghex151::get_type() const {return el_types::GHEX151;}
 
 set<el_processor> const ghex151::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex151::ghex151() : elem() {}
@@ -7383,7 +7383,7 @@ ghex151::ghex151(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -7396,7 +7396,7 @@ ghex151::ghex151(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -7407,18 +7407,18 @@ ghex151::ghex151(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex151::ghex151(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex151::ghex151(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex151::ghex151(cards::gelref1 const *data) : __base::elem(data) {}
+ghex151::ghex151(cards::gelref1 const *data) : elem(data) {}
 
-ghex151::ghex151(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex151::ghex151(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex152.
@@ -7432,7 +7432,7 @@ long ghex152::nnodes() const {return 24;}
 el_types ghex152::get_type() const {return el_types::GHEX152;}
 
 set<el_processor> const ghex152::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex152::ghex152() : elem() {}
@@ -7444,7 +7444,7 @@ ghex152::ghex152(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -7457,7 +7457,7 @@ ghex152::ghex152(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -7468,18 +7468,18 @@ ghex152::ghex152(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex152::ghex152(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex152::ghex152(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex152::ghex152(cards::gelref1 const *data) : __base::elem(data) {}
+ghex152::ghex152(cards::gelref1 const *data) : elem(data) {}
 
-ghex152::ghex152(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex152::ghex152(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex153.
@@ -7493,7 +7493,7 @@ long ghex153::nnodes() const {return 25;}
 el_types ghex153::get_type() const {return el_types::GHEX153;}
 
 set<el_processor> const ghex153::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex153::ghex153() : elem() {}
@@ -7505,7 +7505,7 @@ ghex153::ghex153(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -7518,7 +7518,7 @@ ghex153::ghex153(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -7529,18 +7529,18 @@ ghex153::ghex153(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex153::ghex153(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex153::ghex153(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex153::ghex153(cards::gelref1 const *data) : __base::elem(data) {}
+ghex153::ghex153(cards::gelref1 const *data) : elem(data) {}
 
-ghex153::ghex153(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex153::ghex153(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex154.
@@ -7554,7 +7554,7 @@ long ghex154::nnodes() const {return 25;}
 el_types ghex154::get_type() const {return el_types::GHEX154;}
 
 set<el_processor> const ghex154::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex154::ghex154() : elem() {}
@@ -7566,7 +7566,7 @@ ghex154::ghex154(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -7579,7 +7579,7 @@ ghex154::ghex154(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -7590,18 +7590,18 @@ ghex154::ghex154(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex154::ghex154(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex154::ghex154(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex154::ghex154(cards::gelref1 const *data) : __base::elem(data) {}
+ghex154::ghex154(cards::gelref1 const *data) : elem(data) {}
 
-ghex154::ghex154(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex154::ghex154(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex155.
@@ -7615,7 +7615,7 @@ long ghex155::nnodes() const {return 26;}
 el_types ghex155::get_type() const {return el_types::GHEX155;}
 
 set<el_processor> const ghex155::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex155::ghex155() : elem() {}
@@ -7627,7 +7627,7 @@ ghex155::ghex155(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -7640,7 +7640,7 @@ ghex155::ghex155(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -7651,18 +7651,18 @@ ghex155::ghex155(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex155::ghex155(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex155::ghex155(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex155::ghex155(cards::gelref1 const *data) : __base::elem(data) {}
+ghex155::ghex155(cards::gelref1 const *data) : elem(data) {}
 
-ghex155::ghex155(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex155::ghex155(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex156.
@@ -7676,7 +7676,7 @@ long ghex156::nnodes() const {return 24;}
 el_types ghex156::get_type() const {return el_types::GHEX156;}
 
 set<el_processor> const ghex156::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex156::ghex156() : elem() {}
@@ -7688,7 +7688,7 @@ ghex156::ghex156(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -7701,7 +7701,7 @@ ghex156::ghex156(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -7712,18 +7712,18 @@ ghex156::ghex156(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex156::ghex156(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex156::ghex156(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex156::ghex156(cards::gelref1 const *data) : __base::elem(data) {}
+ghex156::ghex156(cards::gelref1 const *data) : elem(data) {}
 
-ghex156::ghex156(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex156::ghex156(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex157.
@@ -7737,7 +7737,7 @@ long ghex157::nnodes() const {return 25;}
 el_types ghex157::get_type() const {return el_types::GHEX157;}
 
 set<el_processor> const ghex157::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex157::ghex157() : elem() {}
@@ -7749,7 +7749,7 @@ ghex157::ghex157(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -7762,7 +7762,7 @@ ghex157::ghex157(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -7773,18 +7773,18 @@ ghex157::ghex157(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex157::ghex157(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex157::ghex157(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex157::ghex157(cards::gelref1 const *data) : __base::elem(data) {}
+ghex157::ghex157(cards::gelref1 const *data) : elem(data) {}
 
-ghex157::ghex157(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex157::ghex157(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex158.
@@ -7798,7 +7798,7 @@ long ghex158::nnodes() const {return 25;}
 el_types ghex158::get_type() const {return el_types::GHEX158;}
 
 set<el_processor> const ghex158::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex158::ghex158() : elem() {}
@@ -7810,7 +7810,7 @@ ghex158::ghex158(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -7823,7 +7823,7 @@ ghex158::ghex158(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -7834,18 +7834,18 @@ ghex158::ghex158(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex158::ghex158(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex158::ghex158(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex158::ghex158(cards::gelref1 const *data) : __base::elem(data) {}
+ghex158::ghex158(cards::gelref1 const *data) : elem(data) {}
 
-ghex158::ghex158(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex158::ghex158(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex159.
@@ -7859,7 +7859,7 @@ long ghex159::nnodes() const {return 26;}
 el_types ghex159::get_type() const {return el_types::GHEX159;}
 
 set<el_processor> const ghex159::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex159::ghex159() : elem() {}
@@ -7871,7 +7871,7 @@ ghex159::ghex159(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -7884,7 +7884,7 @@ ghex159::ghex159(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -7895,18 +7895,18 @@ ghex159::ghex159(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex159::ghex159(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex159::ghex159(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex159::ghex159(cards::gelref1 const *data) : __base::elem(data) {}
+ghex159::ghex159(cards::gelref1 const *data) : elem(data) {}
 
-ghex159::ghex159(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex159::ghex159(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex160.
@@ -7920,7 +7920,7 @@ long ghex160::nnodes() const {return 25;}
 el_types ghex160::get_type() const {return el_types::GHEX160;}
 
 set<el_processor> const ghex160::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex160::ghex160() : elem() {}
@@ -7932,7 +7932,7 @@ ghex160::ghex160(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -7945,7 +7945,7 @@ ghex160::ghex160(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -7956,18 +7956,18 @@ ghex160::ghex160(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex160::ghex160(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex160::ghex160(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex160::ghex160(cards::gelref1 const *data) : __base::elem(data) {}
+ghex160::ghex160(cards::gelref1 const *data) : elem(data) {}
 
-ghex160::ghex160(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex160::ghex160(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex161.
@@ -7981,7 +7981,7 @@ long ghex161::nnodes() const {return 26;}
 el_types ghex161::get_type() const {return el_types::GHEX161;}
 
 set<el_processor> const ghex161::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex161::ghex161() : elem() {}
@@ -7993,7 +7993,7 @@ ghex161::ghex161(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -8006,7 +8006,7 @@ ghex161::ghex161(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -8017,18 +8017,18 @@ ghex161::ghex161(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex161::ghex161(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex161::ghex161(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex161::ghex161(cards::gelref1 const *data) : __base::elem(data) {}
+ghex161::ghex161(cards::gelref1 const *data) : elem(data) {}
 
-ghex161::ghex161(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex161::ghex161(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex162.
@@ -8042,7 +8042,7 @@ long ghex162::nnodes() const {return 26;}
 el_types ghex162::get_type() const {return el_types::GHEX162;}
 
 set<el_processor> const ghex162::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex162::ghex162() : elem() {}
@@ -8054,7 +8054,7 @@ ghex162::ghex162(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -8067,7 +8067,7 @@ ghex162::ghex162(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -8078,18 +8078,18 @@ ghex162::ghex162(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex162::ghex162(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex162::ghex162(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex162::ghex162(cards::gelref1 const *data) : __base::elem(data) {}
+ghex162::ghex162(cards::gelref1 const *data) : elem(data) {}
 
-ghex162::ghex162(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex162::ghex162(elem const *data) :
+         elem(data) {}
 
 /**
    \brief FEM element definition for ghex163.
@@ -8103,7 +8103,7 @@ long ghex163::nnodes() const {return 27;}
 el_types ghex163::get_type() const {return el_types::GHEX163;}
 
 set<el_processor> const ghex163::processors{
-        elements::el_processor::general, elements::el_processor::Sestra
+        el_processor::general, el_processor::Sestra
     };
 
 ghex163::ghex163() : elem() {}
@@ -8115,7 +8115,7 @@ ghex163::ghex163(
     long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, elident, el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
@@ -8128,7 +8128,7 @@ ghex163::ghex163(
     long const strpoint_ref, vector<long> const &section,
     vector<long> const &fixations, vector<long> const &eccentrities,
     vector<long> const &csys) :
-        __base::elem(
+        elem(
             eleno, el_add, nodes, matref, add_no, intno, mass_intno,
             i_strain_ref, i_stress_ref, strpoint_ref, section, fixations,
             eccentrities, csys) {}
@@ -8139,18 +8139,18 @@ ghex163::ghex163(
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
     vector<long> const &section, vector<long> const &fixations,
     vector<long> const &eccentrities, vector<long> const &csys) :
-        __base::elem(
+        elem(
             el_add, nodes, matref, add_no,
             intno, mass_intno, i_strain_ref, i_stress_ref,
             strpoint_ref, section, fixations, eccentrities,
             csys) {}
 
-ghex163::ghex163(cards::gelmnt1 const *data) : __base::elem(data) {}
+ghex163::ghex163(cards::gelmnt1 const *data) : elem(data) {}
 
-ghex163::ghex163(cards::gelref1 const *data) : __base::elem(data) {}
+ghex163::ghex163(cards::gelref1 const *data) : elem(data) {}
 
-ghex163::ghex163(elements::__base::elem const *data) :
-         __base::elem(data) {}
+ghex163::ghex163(elem const *data) :
+         elem(data) {}
 
 // Local Variables:
 // mode: c++

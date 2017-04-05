@@ -9,6 +9,7 @@
 #include "StdAfx.h"
 
 #include "extfem_misc.h"
+#include "bdf/cards_elements.h"
 
 // ID:
 namespace {
@@ -30,47 +31,49 @@ namespace {
 }
 
 using namespace dnvgl::extfem;
-using namespace dnvgl::extfem::bdf;
+using namespace bdf;
 
-using dnvgl::extfem::bdf::types::entry_type;
+using types::entry_type;
 
-using namespace dnvgl::extfem::bdf::cards::__base;
+using namespace cards::__base;
 
 // const entry_type<long> shell::form_EID(
 //    "EID", bdf::type_bounds::bound<long>(&cl1));
 const entry_type<long> shell::form_PID(
     "PID",
-    bdf::type_bounds::bound<long>(&cl1, nullptr, nullptr, true));
+    type_bounds::bound<long>(&cl1, nullptr, nullptr, true));
 const entry_type<long> shell::form_G1(
-    "G1", bdf::type_bounds::bound<long>(&cl1));
+    "G1", type_bounds::bound<long>(&cl1));
 const entry_type<long> shell::form_G2(
-    "G2", bdf::type_bounds::bound<long>(&cl1));
+    "G2", type_bounds::bound<long>(&cl1));
 const entry_type<long> shell::form_G3(
-    "G3", bdf::type_bounds::bound<long>(&cl1));
+    "G3", type_bounds::bound<long>(&cl1));
 const entry_type<long> shell::form_G4(
-    "G4", bdf::type_bounds::bound<long>(&cl1));
+    "G4", type_bounds::bound<long>(&cl1));
 const entry_type<long> shell::form_MCID(
-    "MCID", bdf::type_bounds::bound<long>(&cl0));
+    "MCID", type_bounds::bound<long>(&cl0));
 const entry_type<double> shell::form_THETA(
-    "MCID", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
+    "MCID", type_bounds::bound<double>(nullptr, nullptr, &cd0));
 const entry_type<double> shell::form_ZOFFS(
-    "ZOFFS", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
+    "ZOFFS", type_bounds::bound<double>(nullptr, nullptr, &cd0));
 const entry_type<long> shell::form_TFLAG(
-    "TFLAG", bdf::type_bounds::bound<long>(&cl0, &cl1, &cl0));
+    "TFLAG", type_bounds::bound<long>(&cl0, &cl1, &cl0));
 const entry_type<double> shell::form_T1(
-    "T1", bdf::type_bounds::bound<double>(&cd0, nullptr, &cd0, true));
+    "T1", type_bounds::bound<double>(&cd0, nullptr, &cd0, true));
 const entry_type<double> shell::form_T2(
-    "T2", bdf::type_bounds::bound<double>(&cd0, nullptr, &cd0, true));
+    "T2", type_bounds::bound<double>(&cd0, nullptr, &cd0, true));
 const entry_type<double> shell::form_T3(
-    "T3", bdf::type_bounds::bound<double>(&cd0, nullptr, &cd0, true));
+    "T3", type_bounds::bound<double>(&cd0, nullptr, &cd0, true));
 const entry_type<double> shell::form_T4(
-    "T4", bdf::type_bounds::bound<double>(&cd0, nullptr, &cd0, true));
+    "T4", type_bounds::bound<double>(&cd0, nullptr, &cd0, true));
 
 shell::shell(const std::list<std::string> &inp) :
-__base::element(inp) {};
+    element(inp), choose_mcid_theta() {
+};
 
 shell::shell(long const *EID) :
-__base::element(EID) {};
+    element(EID), choose_mcid_theta() {
+};
 
 // Local Variables:
 // mode: c++

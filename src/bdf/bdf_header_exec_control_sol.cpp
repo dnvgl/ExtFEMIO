@@ -24,15 +24,15 @@ namespace {
 using namespace dnvgl::extfem::bdf::header::executive_control;
 
 sol::sol(long const &sol_no) :
-sol_no(sol::sol_no_type_conv::from_long(sol_no)) {}
+sol_no(sol_no_type_conv::from_long(sol_no)) {}
 
 sol::sol(
-    sol::sol_no_type const &sol_no) :
+    sol_no_type const &sol_no) :
     sol_no(sol_no) {}
 
 std::ostream &sol::put(std::ostream &os) const {
     return os << "SOL "
-        << sol::sol_no_type_conv::to_long(this->sol_no)
+        << sol_no_type_conv::to_long(this->sol_no)
         << std::endl;
 }
 
@@ -103,12 +103,11 @@ sol::sol_no_type_conv::from_long(long const &inp) {
                 "invalid solution value ", std::ostringstream::ate);
             msg << inp;
             throw errors::error("HEAD", msg.str());
-            break;
         }
     }
 }
 
-long sol::sol_no_type_conv::to_long(sol::sol_no_type const &inp) {
+long sol::sol_no_type_conv::to_long(sol_no_type const &inp) {
     return long(inp);
 }
 

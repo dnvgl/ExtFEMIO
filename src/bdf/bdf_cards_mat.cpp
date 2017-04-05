@@ -17,12 +17,10 @@ namespace {
 }
 
 #include <list>
-#include <string>
 #include <memory>
 
 #include "bdf/cards.h"
 #include "bdf/types.h"
-#include "bdf/errors.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
@@ -37,10 +35,10 @@ namespace {
 
 using namespace dnvgl::extfem::bdf;
 
-using dnvgl::extfem::bdf::types::entry_type;
-using namespace dnvgl::extfem::bdf::type_bounds;
+using types::entry_type;
+using namespace type_bounds;
 
-using namespace dnvgl::extfem::bdf::cards::__base;
+using namespace cards::__base;
 
 const entry_type<long> mat::form_MID(
     "MID", bound<long>(&cl1));
