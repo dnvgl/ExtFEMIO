@@ -94,19 +94,19 @@ double entry_type<double>::operator() (std::string const &inp) const {
 
 fem_types entry_type<double>::type() const {return _type;};
 
-string entry_type<double>::format(double const &inp) const {
+std::string entry_type<double>::format(double const &inp) const {
 
-    ostringstream res;
-    res.imbue(locale::classic());
+    std::ostringstream res;
+    res.imbue(std::locale::classic());
 
 #ifdef _MSC_VER
     // std::set output to two digit exponetial format.
     unsigned int ext_exp_format = _set_output_format(_TWO_DIGIT_EXPONENT);
 #endif
 
-    res.setf(ios_base::showpos);
-    res.setf(ios_base::scientific, ios::floatfield);
-    res.setf(ios_base::adjustfield, ios::left);
+    res.setf(std::ios_base::showpos);
+    res.setf(std::ios_base::scientific, std::ios::floatfield);
+    res.setf(std::ios_base::adjustfield, std::ios::left);
 
     res.precision(9);
     res.width(16);
@@ -115,7 +115,7 @@ string entry_type<double>::format(double const &inp) const {
     res << inp;
     std::string out(res.str());
     if (out.size() != 16) {
-        ostringstream msg("output string for value ", ostringstream::ate);
+        std::ostringstream msg("output string for value ", std::ostringstream::ate);
         msg << inp << " of incorrect size, got length of " << out.size()
             << " instead of allowed length of 16.";
         throw errors::output_error(name, msg.str());

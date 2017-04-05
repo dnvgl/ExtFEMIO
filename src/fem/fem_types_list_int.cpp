@@ -43,7 +43,7 @@ using namespace std;
 
 using namespace dnvgl::extfem::fem::types;
 
-const regex entry_type<vector<int> >::list_int_re(
+const regex entry_type<std::vector<int> >::list_int_re(
     "(            0.00)|"
     "([[:space:]]"
     "[[:space:]\\+-][[:digit:]][.][[:digit:]]{8}[eE][\\+-][[:digit:]]{2})|"
@@ -52,16 +52,16 @@ const regex entry_type<vector<int> >::list_int_re(
     "([[:space:]\\+-][[:digit:]][.][[:digit:]]{9}[eE][\\+-][[:digit:]]{2})",
     regex_constants::ECMAScript);
 
-fem_types const entry_type<vector<int> >::_type = fem_types::List;
+fem_types const entry_type<std::vector<int> >::_type = fem_types::List;
 
-entry_type<vector<int> >::entry_type(std::string const &name) :
+entry_type<std::vector<int> >::entry_type(std::string const &name) :
         b_type(name) {}
 
-void entry_type<vector<int> >::operator() (
-    vector<int> &value, std::string const &inp) const {
+void entry_type<std::vector<int> >::operator() (
+    std::vector<int> &value, std::string const &inp) const {
 
     double tmp_d;
-    list<int> tmp_l;
+    std::list<int> tmp_l;
     long tmp;
 
     if (! regex_match(inp, list_int_re)) {
@@ -76,7 +76,7 @@ void entry_type<vector<int> >::operator() (
     tmp = static_cast<long>(tmp_d);
 
     while (tmp) {
-        ldiv_t divmod = div(tmp, static_cast<long>(10));
+        ldiv_t divmod = std::div(tmp, static_cast<long>(10));
         value.push_back(divmod.rem);
         tmp /= 10;
     }
@@ -85,16 +85,16 @@ void entry_type<vector<int> >::operator() (
     return;
 }
 
-inline fem_types entry_type<vector<int> >::type() const {
+inline fem_types entry_type<std::vector<int> >::type() const {
     return _type;
 }
 
-string entry_type<vector<int> >::format(
-    vector<int> const &inp) const {
+std::string entry_type<std::vector<int> >::format(
+    std::vector<int> const &inp) const {
 
-    ostringstream res, res2;
-    res.imbue(locale::classic());
-    res2.imbue(locale::classic());
+    std::ostringstream res, res2;
+    res.imbue(std::locale::classic());
+    res2.imbue(std::locale::classic());
 
     double value = 0;
     for (auto &p : inp) {
@@ -107,8 +107,8 @@ string entry_type<vector<int> >::format(
     unsigned int ext_exp_format = _set_output_format(_TWO_DIGIT_EXPONENT);
 #endif
 
-    res.setf(ios_base::scientific, ios::floatfield);
-    res.setf(ios_base::adjustfield, ios::left);
+    res.setf(std::ios_base::scientific, std::ios::floatfield);
+    res.setf(std::ios_base::adjustfield, std::ios::left);
 
     res << " ";
     res.precision(9);
@@ -118,12 +118,12 @@ string entry_type<vector<int> >::format(
     res << value;
     std::string out(res.str());
     if (out.size() != 16) {
-        ostringstream msg(
+        std::ostringstream msg(
             "output string for value ",
-            ostringstream::ate);
+            std::ostringstream::ate);
         copy(
             inp.begin(), inp.end(),
-            ostream_iterator<int>(msg, ", "));
+            std::ostream_iterator<int>(msg, ", "));
         msg << " of incorrect size, got length of " << out.size()
             << " instead of allowed length of 16. " << "!" << out << "!";
         throw errors::output_error(name, msg.str());

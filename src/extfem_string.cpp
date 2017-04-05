@@ -8,6 +8,8 @@
 */
 #include "StdAfx.h"
 
+#include <algorithm>
+
 #include "extfem_string.h"
 #include "extfem_misc.h"
 

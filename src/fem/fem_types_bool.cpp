@@ -71,7 +71,7 @@ bool entry_type<bool>::operator() (std::string const &inp) const {
 
 fem_types entry_type<bool>::type() const { return _type; }
 
-string entry_type<bool>::format(bool const &inp) {
+std::string entry_type<bool>::format(bool const &inp) {
     if (inp) return "           +1.00";
     else return "           +0.00";
 }
