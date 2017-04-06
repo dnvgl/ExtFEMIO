@@ -22,8 +22,6 @@
 
 // ID: $Id$
 
-#include "fem/cards.h"
-
 #ifndef _FEM_ELEMENTS_H_
 #define _FEM_ELEMENTS_H_
 
@@ -32,6 +30,8 @@
 #endif
 
 #include <set>
+
+#include "fem/cards.h"
 
 {% line %}
 
