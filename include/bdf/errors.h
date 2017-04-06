@@ -23,73 +23,73 @@
 #endif
 
 namespace dnvgl {
-   namespace extfem {
-      namespace bdf {
-         namespace errors {
+    namespace extfem {
+        namespace bdf {
+            namespace errors {
 
-            class error{
-            protected:
-               std::string msg;
-               std::string name;
-               std::string err_class;
+                class error : std::exception {
+                protected:
+                    std::string msg;
+                    std::string name;
+                    std::string err_class;
 
-               std::string get_msg() const;
-            public:
-               error(
-                  const std::string&, const std::string &msg,
-                  const std::string &err_class="bdf_error");
-               char const *what() const _EXTFEMIO_NOEXCEPT;
-            };
+                    std::string get_msg() const;
+                public:
+                    error(
+                        const std::string&, const std::string &msg,
+                        const std::string &err_class="bdf_error");
+                    char const *what() const _EXTFEMIO_NOEXCEPT override;
+                };
 
-            class types_error : public error {
-            public:
-               types_error(const std::string &msg);
-            };
+                class types_error : public error {
+                public:
+                    types_error(const std::string &msg);
+                };
 
-            class form_error : public error {
-            protected:
-               form_error(
-                  const std::string &name, const std::string &msg,
-                  const std::string &cls);
-            };
+                class form_error : public error {
+                protected:
+                    form_error(
+                        const std::string &name, const std::string &msg,
+                        const std::string &cls);
+                };
 
-            class float_error : public form_error {
-            public:
-               float_error(const std::string&, const std::string&);
-            };
+                class float_error : public form_error {
+                public:
+                    float_error(const std::string&, const std::string&);
+                };
 
-            class int_error : public form_error {
-            public:
-               int_error(const std::string&, const std::string&);
-            };
+                class int_error : public form_error {
+                public:
+                    int_error(const std::string&, const std::string&);
+                };
 
-            class output_error : public error {
-            public:
-               output_error(const std::string&, const std::string&);
-            };
+                class output_error : public error {
+                public:
+                    output_error(const std::string&, const std::string&);
+                };
 
-            class list_error : public error {
-            public:
-               list_error(const std::string&, const std::string &);
-            };
+                class list_error : public error {
+                public:
+                    list_error(const std::string&, const std::string &);
+                };
 
-            class str_error : public error {
-            public:
-               str_error(const std::string&, const std::string &);
-            };
+                class str_error : public error {
+                public:
+                    str_error(const std::string&, const std::string &);
+                };
 
-            class string_error : public error {
-            public:
-               string_error(const std::string&, const std::string &);
-            };
+                class string_error : public error {
+                public:
+                    string_error(const std::string&, const std::string &);
+                };
 
-            class parse_error : public error {
-            public:
-               parse_error(const std::string&, const std::string &);
-            };
-         }
-      }
-   }
+                class parse_error : public error {
+                public:
+                    parse_error(const std::string&, const std::string &);
+                };
+            }
+        }
+    }
 }
 
 #endif // _BDF_ERRORS_H_

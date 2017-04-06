@@ -45,7 +45,7 @@ namespace dnvgl {
                         const std::string&, const std::string &msg,
                         const std::string &err_class);
 
-                    char const *what() const override _EXTFEMIO_NOEXCEPT;
+                    char const *what() const _EXTFEMIO_NOEXCEPT override;
                 };
 
                 class types_error : public error {

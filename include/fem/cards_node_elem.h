@@ -14,6 +14,8 @@
 #ifndef _FEM_CARDS_NODE_ELEM_H_
 #define _FEM_CARDS_NODE_ELEM_H_
 
+#include "fem/elements.h"
+
 namespace dnvgl {
     namespace extfem {
         namespace fem {
@@ -1100,7 +1102,7 @@ namespace dnvgl {
                     static const _form_NODIN;
 
                     std::unordered_map<
-                        long, elements::el_types>
+                        long, dnvgl::extfem::fem::elements::el_types>
                     static const eltyp_map;
 
                 public:
@@ -1117,7 +1119,7 @@ namespace dnvgl {
     stiffness, mass, damping matrices a.s.o. See the AMATRIX record
     for more information.
 */
-                    elements::el_types ELTYP;
+                    fem::elements::el_types ELTYP;
 /** Additional information related to element type.
 
       - For membrane elements used to specify plane stress / plane
@@ -1158,11 +1160,11 @@ namespace dnvgl {
                     gelmnt1();
                     gelmnt1(std::vector<std::string> const&, size_t const);
                     gelmnt1(long const ELNOX, long const ELNO,
-                            elements::el_types const &ELTYP,
+                            fem::elements::el_types const &ELTYP,
                             long const ELTYAD,
                             std::vector<long> const &NODIN);
                     gelmnt1(long const ELNOX, long const ELNO,
-                            elements::el_types const &ELTYP,
+                            fem::elements::el_types const &ELTYP,
                             std::vector<long> const &NODIN);
 
                     types card_type() const override;
@@ -1170,12 +1172,12 @@ namespace dnvgl {
                     using card::operator();
                     card const &operator()(
                         long const ELNOX, long const ELNO,
-                        elements::el_types const &ELTYP,
+                        fem::elements::el_types const &ELTYP,
                         long const ELTYAD,
                         std::vector<long> const &NODIN);
                     card const &operator()(
                         long const ELNOX, long const ELNO,
-                        elements::el_types const &ELTYP,
+                        fem::elements::el_types const &ELTYP,
                         std::vector<long> const &NODIN);
 
                 protected:

@@ -27,6 +27,7 @@ namespace {
 
 #include "config.h"
 
+#include "fem/cards.h"
 #include "fem/elements.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)

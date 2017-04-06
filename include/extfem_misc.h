@@ -13,6 +13,8 @@
 #define _EXTFEM_MISC_H_
 
 #include <sstream>
+#include <cstring>
+
 
 #if defined(_MSC_VER) & _MSC_VER < 1900
 #define _EXTFEMIO_NOEXCEPT
@@ -45,7 +47,7 @@ namespace std {
         }
 
         // Provided for compatibility with std::exception.
-        const char *what() const override _EXTFEMIO_NOEXCEPT {
+        const char *what() const _EXTFEMIO_NOEXCEPT override {
             return errorMessage.c_str();
         }
 

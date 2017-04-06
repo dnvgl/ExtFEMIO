@@ -22,16 +22,21 @@
 
 // ID: $Id$
 
-#include "fem/cards.h"
+#line 26 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
 
 #ifndef _FEM_ELEMENTS_H_
 #define _FEM_ELEMENTS_H_
 
-#include <my_c++14.h>
+#if (__GNUC__ && (__GNUC__ < 4 || (__GNUC__ == 4 && __GNUC_MINOR__ < 9))) || \
+    (_MSC_VER && _MSC_VER <= 1700)
+#include "my_c++14.h"
+#endif
 
 #include <set>
 
-#line 35 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#include "fem/cards.h"
+
+#line 40 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
 
 namespace dnvgl {
     namespace extfem {
@@ -55,247 +60,247 @@ namespace dnvgl {
 
                 enum class el_types {
                     BEPS = 2,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     CSTA = 3,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     RPBQ = 5,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     ILST = 6,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     IQQE = 8,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     LQUA = 9,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     TESS = 10,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GMAS = 11,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GLMA = 12,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GLDA = 13,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     BEAS = 15,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     AXIS = 16,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     AXDA = 17,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GSPR = 18,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GDAM = 19,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     IHEX = 20,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     LHEX = 21,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     SECB = 22,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     BTSS = 23,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     FQUS_FFQ = 24,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     FTRS_FFTR = 25,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     SCTS = 26,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     MCTS = 27,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     SCQS = 28,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     MCQS = 29,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     IPRI = 30,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     ITET = 31,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     TPRI = 32,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     TETR = 33,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     LCTS = 34,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     LCQS = 35,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     TRS1 = 36,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     TRS2 = 37,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     TRS3 = 38,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GLSH = 40,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     AXCS = 41,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     AXLQ = 42,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     AXLS = 43,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     AXQQ = 44,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     PILS = 45,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     PCAB = 46,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     PSPR = 47,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     ADVA_4 = 48,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     ADVA_2 = 49,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     CTCP = 51,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     CTCL = 52,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     CTAL = 53,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     CTCC = 54,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     CTAQ = 55,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     CTLQ = 56,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     CTCQ = 57,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     CTMQ = 58,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     HCQS = 61,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     SLQS = 66,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     SLTS = 67,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     SLCB = 68,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     MATR = 70,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX100 = 100,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX101 = 101,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX102 = 102,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX103 = 103,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX104 = 104,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX105 = 105,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX106 = 106,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX107 = 107,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX108 = 108,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX109 = 109,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX110 = 110,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX111 = 111,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX112 = 112,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX113 = 113,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX114 = 114,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX115 = 115,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX116 = 116,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX117 = 117,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX118 = 118,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX119 = 119,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX120 = 120,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX121 = 121,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX122 = 122,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX123 = 123,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX124 = 124,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX125 = 125,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX126 = 126,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX127 = 127,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX128 = 128,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX129 = 129,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX130 = 130,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX131 = 131,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX132 = 132,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX133 = 133,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX134 = 134,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX135 = 135,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX136 = 136,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX137 = 137,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX138 = 138,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX139 = 139,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX140 = 140,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX141 = 141,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX142 = 142,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX143 = 143,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX144 = 144,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX145 = 145,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX146 = 146,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX147 = 147,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX148 = 148,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX149 = 149,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX150 = 150,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX151 = 151,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX152 = 152,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX153 = 153,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX154 = 154,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX155 = 155,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX156 = 156,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX157 = 157,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX158 = 158,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX159 = 159,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX160 = 160,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX161 = 161,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX162 = 162,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     GHEX163 = 163,
-                    #line 59 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+                    #line 64 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                     INVALID=-1, UNDEFINED=-2};
                 enum class el_processor {
                     general, Preframe, Prefem, Sestra, ADVANCE,
@@ -361,7 +366,7 @@ namespace dnvgl {
                              std::vector<long> const &eccentrities={},
                              std::vector<long> const &csys={});
 
-                        elem const &operator() (
+                        __base::elem const &operator() (
                             long const eleno, long const elident,
                             long const el_add,
                             std::vector<long> const &nodes,
@@ -374,7 +379,7 @@ namespace dnvgl {
                             std::vector<long> const &eccentrities={},
                             std::vector<long> const &csys={});
 
-                        elem const &operator() (
+                        __base::elem const &operator() (
                             long const eleno, long const el_add,
                             std::vector<long> const &nodes,
                             long const matref,
@@ -386,7 +391,7 @@ namespace dnvgl {
                             std::vector<long> const &eccentrities={},
                             std::vector<long> const &csys={});
 
-                        elem const &operator() (
+                        __base::elem const &operator() (
                             std::vector<long> const &nodes,
                             long const matref,
                             long const add_no=0, long const intno=0,
@@ -397,7 +402,7 @@ namespace dnvgl {
                             std::vector<long> const &eccentrities={},
                             std::vector<long> const &csys={});
 
-                        elem const &operator() (
+                        __base::elem const &operator() (
                             long const eleno,
                             std::vector<long> const &nodes,
                             long const matref,
@@ -413,7 +418,7 @@ namespace dnvgl {
                             std::vector<long> const &eccentrities={},
                             std::vector<long> const &csys={});
 
-                        elem const &operator() (
+                        __base::elem const &operator() (
                             long const el_add,
                             std::vector<long> const &nodes,
                             long const matref,
@@ -428,7 +433,7 @@ namespace dnvgl {
                             std::vector<long> const &eccentrities={},
                             std::vector<long> const &csys={});
 
-                        elem const &operator() (
+                        __base::elem const &operator() (
                             std::vector<long> const &nodes,
                             long const matref,
                             std::vector<long> const &sections={},
@@ -443,7 +448,7 @@ namespace dnvgl {
                             long const strpoint_ref=0,
                             std::vector<long> const &csys={});
 
-                        elem const &set_values(
+                        __base::elem const &set_values(
                             long const eleno, long const elident,
                             long const el_add,
                             std::vector<long> const &nodes,
@@ -458,8 +463,8 @@ namespace dnvgl {
 
 
                     public:
-                        elem(cards::gelmnt1 const*);
-                        elem(cards::gelref1 const*);
+                        elem(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                        elem(dnvgl::extfem::fem::cards::gelref1 const*);
                         elem(elem const*);
                         virtual ~elem();
 
@@ -537,8 +542,8 @@ namespace dnvgl {
                         */
                         std::vector<long> csys;
 
-                        virtual void add(cards::gelref1 const*);
-                        virtual void add(cards::gelmnt1 const*);
+                        virtual void add(dnvgl::extfem::fem::cards::gelref1 const*);
+                        virtual void add(dnvgl::extfem::fem::cards::gelmnt1 const*);
 
                         virtual long nnodes() const = 0;
 
@@ -553,18 +558,18 @@ namespace dnvgl {
                        Flat Quadrilateral/Triangular Thin Shell / Free
                        Formulation Quadrilateral/Triangular Shell
                     */
-                    class fem_thin_shell : public virtual elem {};
+                    class fem_thin_shell : public virtual __base::elem {};
                 }
 
                 class undef : public __base::elem {
                 public:
                     undef ();
-                    undef(cards::gelref1 const*);
+                    undef(dnvgl::extfem::fem::cards::gelref1 const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 2-D, 2 Node Beam
                  */
                 class beps : public __base::elem {
@@ -599,9 +604,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    beps(cards::gelmnt1 const*);
-                    beps(cards::gelref1 const*);
-                    beps(elem const*);
+                    beps(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    beps(dnvgl::extfem::fem::cards::gelref1 const*);
+                    beps(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -609,7 +614,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Plane Constant Strain Triangle
                  */
                 class csta : public __base::elem {
@@ -644,9 +649,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    csta(cards::gelmnt1 const*);
-                    csta(cards::gelref1 const*);
-                    csta(elem const*);
+                    csta(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    csta(dnvgl::extfem::fem::cards::gelref1 const*);
+                    csta(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -654,7 +659,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Rect. Plate. Bending Modes
                  */
                 class rpbq : public __base::elem {
@@ -689,9 +694,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    rpbq(cards::gelmnt1 const*);
-                    rpbq(cards::gelref1 const*);
-                    rpbq(elem const*);
+                    rpbq(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    rpbq(dnvgl::extfem::fem::cards::gelref1 const*);
+                    rpbq(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -699,7 +704,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Plane Lin. Strain Triangle
                  */
                 class ilst : public __base::elem {
@@ -734,9 +739,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ilst(cards::gelmnt1 const*);
-                    ilst(cards::gelref1 const*);
-                    ilst(elem const*);
+                    ilst(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ilst(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ilst(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -744,7 +749,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Plane Quadrilateral Membrane Element
                  */
                 class iqqe : public __base::elem {
@@ -779,9 +784,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    iqqe(cards::gelmnt1 const*);
-                    iqqe(cards::gelref1 const*);
-                    iqqe(elem const*);
+                    iqqe(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    iqqe(dnvgl::extfem::fem::cards::gelref1 const*);
+                    iqqe(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -789,7 +794,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Plane Quadrilateral Membrane Element
                  */
                 class lqua : public __base::elem {
@@ -824,9 +829,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    lqua(cards::gelmnt1 const*);
-                    lqua(cards::gelref1 const*);
-                    lqua(elem const*);
+                    lqua(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    lqua(dnvgl::extfem::fem::cards::gelref1 const*);
+                    lqua(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -834,7 +839,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Truss Element
                  */
                 class tess : public __base::elem {
@@ -869,9 +874,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    tess(cards::gelmnt1 const*);
-                    tess(cards::gelref1 const*);
-                    tess(elem const*);
+                    tess(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    tess(dnvgl::extfem::fem::cards::gelref1 const*);
+                    tess(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -879,7 +884,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 1-Noded Mass-Matrix
                  */
                 class gmas : public __base::elem {
@@ -914,9 +919,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    gmas(cards::gelmnt1 const*);
-                    gmas(cards::gelref1 const*);
-                    gmas(elem const*);
+                    gmas(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    gmas(dnvgl::extfem::fem::cards::gelref1 const*);
+                    gmas(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -924,7 +929,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 2-Noded Mass-Matrix
                  */
                 class glma : public __base::elem {
@@ -959,9 +964,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    glma(cards::gelmnt1 const*);
-                    glma(cards::gelref1 const*);
-                    glma(elem const*);
+                    glma(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    glma(dnvgl::extfem::fem::cards::gelref1 const*);
+                    glma(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -969,7 +974,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 2-Noded Damping-Matrix
                  */
                 class glda : public __base::elem {
@@ -1004,9 +1009,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    glda(cards::gelmnt1 const*);
-                    glda(cards::gelref1 const*);
-                    glda(elem const*);
+                    glda(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    glda(dnvgl::extfem::fem::cards::gelref1 const*);
+                    glda(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1014,7 +1019,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 3-D, 2 Node Beam
                  */
                 class beas : public __base::elem {
@@ -1049,9 +1054,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    beas(cards::gelmnt1 const*);
-                    beas(cards::gelref1 const*);
-                    beas(elem const*);
+                    beas(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    beas(dnvgl::extfem::fem::cards::gelref1 const*);
+                    beas(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1059,7 +1064,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Axial Spring
                  */
                 class axis : public __base::elem {
@@ -1094,9 +1099,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    axis(cards::gelmnt1 const*);
-                    axis(cards::gelref1 const*);
-                    axis(elem const*);
+                    axis(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    axis(dnvgl::extfem::fem::cards::gelref1 const*);
+                    axis(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1104,7 +1109,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Axial Damper
                  */
                 class axda : public __base::elem {
@@ -1139,9 +1144,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    axda(cards::gelmnt1 const*);
-                    axda(cards::gelref1 const*);
-                    axda(elem const*);
+                    axda(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    axda(dnvgl::extfem::fem::cards::gelref1 const*);
+                    axda(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1149,7 +1154,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Spring to Ground
                  */
                 class gspr : public __base::elem {
@@ -1184,9 +1189,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    gspr(cards::gelmnt1 const*);
-                    gspr(cards::gelref1 const*);
-                    gspr(elem const*);
+                    gspr(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    gspr(dnvgl::extfem::fem::cards::gelref1 const*);
+                    gspr(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1194,7 +1199,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Damper to Ground
                  */
                 class gdam : public __base::elem {
@@ -1229,9 +1234,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    gdam(cards::gelmnt1 const*);
-                    gdam(cards::gelref1 const*);
-                    gdam(elem const*);
+                    gdam(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    gdam(dnvgl::extfem::fem::cards::gelref1 const*);
+                    gdam(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1239,7 +1244,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Isoparametric Hexahedron
                  */
                 class ihex : public __base::elem {
@@ -1274,9 +1279,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ihex(cards::gelmnt1 const*);
-                    ihex(cards::gelref1 const*);
-                    ihex(elem const*);
+                    ihex(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ihex(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ihex(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1284,7 +1289,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Linear Hexahedron
                  */
                 class lhex : public __base::elem {
@@ -1319,9 +1324,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    lhex(cards::gelmnt1 const*);
-                    lhex(cards::gelref1 const*);
-                    lhex(elem const*);
+                    lhex(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    lhex(dnvgl::extfem::fem::cards::gelref1 const*);
+                    lhex(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1329,7 +1334,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Subparametric Curved Beam
                  */
                 class secb : public __base::elem {
@@ -1364,9 +1369,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    secb(cards::gelmnt1 const*);
-                    secb(cards::gelref1 const*);
-                    secb(elem const*);
+                    secb(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    secb(dnvgl::extfem::fem::cards::gelref1 const*);
+                    secb(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1374,7 +1379,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Curved Beam
                  */
                 class btss : public __base::elem {
@@ -1409,9 +1414,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    btss(cards::gelmnt1 const*);
-                    btss(cards::gelref1 const*);
-                    btss(elem const*);
+                    btss(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    btss(dnvgl::extfem::fem::cards::gelref1 const*);
+                    btss(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1419,7 +1424,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Flat Quadrilateral Thin Shell / Free Formulation Quadrilateral Shell
                  */
                 class fqus_ffq : public __base::fem_thin_shell {
@@ -1454,9 +1459,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    fqus_ffq(cards::gelmnt1 const*);
-                    fqus_ffq(cards::gelref1 const*);
-                    fqus_ffq(elem const*);
+                    fqus_ffq(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    fqus_ffq(dnvgl::extfem::fem::cards::gelref1 const*);
+                    fqus_ffq(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1464,7 +1469,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /**  Flat Triangular Thin Shell / Free Formulation Triangular Shell
                  */
                 class ftrs_fftr : public __base::fem_thin_shell {
@@ -1499,9 +1504,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ftrs_fftr(cards::gelmnt1 const*);
-                    ftrs_fftr(cards::gelref1 const*);
-                    ftrs_fftr(elem const*);
+                    ftrs_fftr(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ftrs_fftr(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ftrs_fftr(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1509,7 +1514,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Subparametric Curved Triangular Thick Shell
                  */
                 class scts : public __base::elem {
@@ -1544,9 +1549,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    scts(cards::gelmnt1 const*);
-                    scts(cards::gelref1 const*);
-                    scts(elem const*);
+                    scts(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    scts(dnvgl::extfem::fem::cards::gelref1 const*);
+                    scts(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1554,7 +1559,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Subparam. Curved Triang. Thick Sandwich Elem.
                  */
                 class mcts : public __base::elem {
@@ -1589,9 +1594,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    mcts(cards::gelmnt1 const*);
-                    mcts(cards::gelref1 const*);
-                    mcts(elem const*);
+                    mcts(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    mcts(dnvgl::extfem::fem::cards::gelref1 const*);
+                    mcts(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1599,7 +1604,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Subparametric Curved Quadrilateral Thick Shell
                  */
                 class scqs : public __base::elem {
@@ -1634,9 +1639,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    scqs(cards::gelmnt1 const*);
-                    scqs(cards::gelref1 const*);
-                    scqs(elem const*);
+                    scqs(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    scqs(dnvgl::extfem::fem::cards::gelref1 const*);
+                    scqs(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1644,7 +1649,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Subparam. Curved Quadr. Thick Sandwich Elem.
                  */
                 class mcqs : public __base::elem {
@@ -1679,9 +1684,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    mcqs(cards::gelmnt1 const*);
-                    mcqs(cards::gelref1 const*);
-                    mcqs(elem const*);
+                    mcqs(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    mcqs(dnvgl::extfem::fem::cards::gelref1 const*);
+                    mcqs(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1689,7 +1694,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Isoparametric Triangular Prism
                  */
                 class ipri : public __base::elem {
@@ -1724,9 +1729,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ipri(cards::gelmnt1 const*);
-                    ipri(cards::gelref1 const*);
-                    ipri(elem const*);
+                    ipri(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ipri(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ipri(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1734,7 +1739,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Isoparametric Tetrahedron
                  */
                 class itet : public __base::elem {
@@ -1769,9 +1774,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    itet(cards::gelmnt1 const*);
-                    itet(cards::gelref1 const*);
-                    itet(elem const*);
+                    itet(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    itet(dnvgl::extfem::fem::cards::gelref1 const*);
+                    itet(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1779,7 +1784,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Triangular Prism
                  */
                 class tpri : public __base::elem {
@@ -1814,9 +1819,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    tpri(cards::gelmnt1 const*);
-                    tpri(cards::gelref1 const*);
-                    tpri(elem const*);
+                    tpri(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    tpri(dnvgl::extfem::fem::cards::gelref1 const*);
+                    tpri(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1824,7 +1829,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Tetrahedron
                  */
                 class tetr : public __base::elem {
@@ -1859,9 +1864,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    tetr(cards::gelmnt1 const*);
-                    tetr(cards::gelref1 const*);
-                    tetr(elem const*);
+                    tetr(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    tetr(dnvgl::extfem::fem::cards::gelref1 const*);
+                    tetr(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1869,7 +1874,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Subparam. Layered Curved Triangular Thick Shell
                  */
                 class lcts : public __base::elem {
@@ -1904,9 +1909,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    lcts(cards::gelmnt1 const*);
-                    lcts(cards::gelref1 const*);
-                    lcts(elem const*);
+                    lcts(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    lcts(dnvgl::extfem::fem::cards::gelref1 const*);
+                    lcts(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1914,7 +1919,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Subparam. Layered Curved Quadrilat. Thick Shell
                  */
                 class lcqs : public __base::elem {
@@ -1949,9 +1954,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    lcqs(cards::gelmnt1 const*);
-                    lcqs(cards::gelref1 const*);
-                    lcqs(elem const*);
+                    lcqs(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    lcqs(dnvgl::extfem::fem::cards::gelref1 const*);
+                    lcqs(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1959,7 +1964,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 2nd Order Hexahed. Transition Elem., Solid / Shell
                  */
                 class trs1 : public __base::elem {
@@ -1994,9 +1999,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    trs1(cards::gelmnt1 const*);
-                    trs1(cards::gelref1 const*);
-                    trs1(elem const*);
+                    trs1(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    trs1(dnvgl::extfem::fem::cards::gelref1 const*);
+                    trs1(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2004,7 +2009,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 2nd Order Hexahed. Transition Elem., Solid / Shell
                  */
                 class trs2 : public __base::elem {
@@ -2039,9 +2044,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    trs2(cards::gelmnt1 const*);
-                    trs2(cards::gelref1 const*);
-                    trs2(elem const*);
+                    trs2(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    trs2(dnvgl::extfem::fem::cards::gelref1 const*);
+                    trs2(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2049,7 +2054,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 2nd Order Hexahed. Transition Elem., Solid / Shell
                  */
                 class trs3 : public __base::elem {
@@ -2084,9 +2089,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    trs3(cards::gelmnt1 const*);
-                    trs3(cards::gelref1 const*);
-                    trs3(elem const*);
+                    trs3(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    trs3(dnvgl::extfem::fem::cards::gelref1 const*);
+                    trs3(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2094,7 +2099,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Spring / Shim Element
                  */
                 class glsh : public __base::elem {
@@ -2129,9 +2134,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    glsh(cards::gelmnt1 const*);
-                    glsh(cards::gelref1 const*);
-                    glsh(elem const*);
+                    glsh(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    glsh(dnvgl::extfem::fem::cards::gelref1 const*);
+                    glsh(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2139,7 +2144,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Axisymmetric Constant Strain Triangle
                  */
                 class axcs : public __base::elem {
@@ -2174,9 +2179,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    axcs(cards::gelmnt1 const*);
-                    axcs(cards::gelref1 const*);
-                    axcs(elem const*);
+                    axcs(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    axcs(dnvgl::extfem::fem::cards::gelref1 const*);
+                    axcs(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2184,7 +2189,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Axisymmetric Quadrilateral
                  */
                 class axlq : public __base::elem {
@@ -2219,9 +2224,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    axlq(cards::gelmnt1 const*);
-                    axlq(cards::gelref1 const*);
-                    axlq(elem const*);
+                    axlq(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    axlq(dnvgl::extfem::fem::cards::gelref1 const*);
+                    axlq(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2229,7 +2234,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Axisymmetric Linear Strain Triangle
                  */
                 class axls : public __base::elem {
@@ -2264,9 +2269,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    axls(cards::gelmnt1 const*);
-                    axls(cards::gelref1 const*);
-                    axls(elem const*);
+                    axls(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    axls(dnvgl::extfem::fem::cards::gelref1 const*);
+                    axls(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2274,7 +2279,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Axisymmetric Linear Strain Quadrilateral
                  */
                 class axqq : public __base::elem {
@@ -2309,9 +2314,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    axqq(cards::gelmnt1 const*);
-                    axqq(cards::gelref1 const*);
-                    axqq(elem const*);
+                    axqq(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    axqq(dnvgl::extfem::fem::cards::gelref1 const*);
+                    axqq(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2319,7 +2324,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Pile / Soil
                  */
                 class pils : public __base::elem {
@@ -2354,9 +2359,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    pils(cards::gelmnt1 const*);
-                    pils(cards::gelref1 const*);
-                    pils(elem const*);
+                    pils(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    pils(dnvgl::extfem::fem::cards::gelref1 const*);
+                    pils(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2364,7 +2369,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Plane Cable-Bar Element
                  */
                 class pcab : public __base::elem {
@@ -2399,9 +2404,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    pcab(cards::gelmnt1 const*);
-                    pcab(cards::gelref1 const*);
-                    pcab(elem const*);
+                    pcab(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    pcab(dnvgl::extfem::fem::cards::gelref1 const*);
+                    pcab(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2409,7 +2414,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Plane Spring Element
                  */
                 class pspr : public __base::elem {
@@ -2444,9 +2449,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    pspr(cards::gelmnt1 const*);
-                    pspr(cards::gelref1 const*);
-                    pspr(elem const*);
+                    pspr(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    pspr(dnvgl::extfem::fem::cards::gelref1 const*);
+                    pspr(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2454,7 +2459,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 4-node Contact Element with triangular Shape
                  */
                 class adva_4 : public __base::elem {
@@ -2489,9 +2494,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    adva_4(cards::gelmnt1 const*);
-                    adva_4(cards::gelref1 const*);
-                    adva_4(elem const*);
+                    adva_4(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    adva_4(dnvgl::extfem::fem::cards::gelref1 const*);
+                    adva_4(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2499,7 +2504,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 2-Noded Link Element
                  */
                 class adva_2 : public __base::elem {
@@ -2534,9 +2539,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    adva_2(cards::gelmnt1 const*);
-                    adva_2(cards::gelref1 const*);
-                    adva_2(elem const*);
+                    adva_2(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    adva_2(dnvgl::extfem::fem::cards::gelref1 const*);
+                    adva_2(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2544,7 +2549,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 2-Noded Contact Element
                  */
                 class ctcp : public __base::elem {
@@ -2579,9 +2584,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ctcp(cards::gelmnt1 const*);
-                    ctcp(cards::gelref1 const*);
-                    ctcp(elem const*);
+                    ctcp(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ctcp(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ctcp(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2589,7 +2594,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 4-Noded Contact Element
                  */
                 class ctcl : public __base::elem {
@@ -2624,9 +2629,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ctcl(cards::gelmnt1 const*);
-                    ctcl(cards::gelref1 const*);
-                    ctcl(elem const*);
+                    ctcl(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ctcl(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ctcl(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2634,7 +2639,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 4-Noded Axisymmetric Contact Element
                  */
                 class ctal : public __base::elem {
@@ -2669,9 +2674,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ctal(cards::gelmnt1 const*);
-                    ctal(cards::gelref1 const*);
-                    ctal(elem const*);
+                    ctal(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ctal(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ctal(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2679,7 +2684,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 6-Noded Contact Element
                  */
                 class ctcc : public __base::elem {
@@ -2714,9 +2719,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ctcc(cards::gelmnt1 const*);
-                    ctcc(cards::gelref1 const*);
-                    ctcc(elem const*);
+                    ctcc(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ctcc(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ctcc(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2724,7 +2729,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 6-Noded (3+3) Axisymmetric Contact Element
                  */
                 class ctaq : public __base::elem {
@@ -2759,9 +2764,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ctaq(cards::gelmnt1 const*);
-                    ctaq(cards::gelref1 const*);
-                    ctaq(elem const*);
+                    ctaq(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ctaq(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ctaq(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2769,7 +2774,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 8-Noded (4+4) Contact Element
                  */
                 class ctlq : public __base::elem {
@@ -2804,9 +2809,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ctlq(cards::gelmnt1 const*);
-                    ctlq(cards::gelref1 const*);
-                    ctlq(elem const*);
+                    ctlq(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ctlq(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ctlq(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2814,7 +2819,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 16-Noded (8+8) Contact Element
                  */
                 class ctcq : public __base::elem {
@@ -2849,9 +2854,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ctcq(cards::gelmnt1 const*);
-                    ctcq(cards::gelref1 const*);
-                    ctcq(elem const*);
+                    ctcq(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ctcq(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ctcq(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2859,7 +2864,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 18-Noded (9+9) Contact Element
                  */
                 class ctmq : public __base::elem {
@@ -2894,9 +2899,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ctmq(cards::gelmnt1 const*);
-                    ctmq(cards::gelref1 const*);
-                    ctmq(elem const*);
+                    ctmq(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ctmq(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ctmq(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2904,7 +2909,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 9-Noded Shell Element
                  */
                 class hcqs : public __base::elem {
@@ -2939,9 +2944,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    hcqs(cards::gelmnt1 const*);
-                    hcqs(cards::gelref1 const*);
-                    hcqs(elem const*);
+                    hcqs(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    hcqs(dnvgl::extfem::fem::cards::gelref1 const*);
+                    hcqs(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2949,7 +2954,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Semiloof Quadrilateral Curved Thin Shell (32 d.o.fs)
                  */
                 class slqs : public __base::elem {
@@ -2984,9 +2989,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    slqs(cards::gelmnt1 const*);
-                    slqs(cards::gelref1 const*);
-                    slqs(elem const*);
+                    slqs(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    slqs(dnvgl::extfem::fem::cards::gelref1 const*);
+                    slqs(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2994,7 +2999,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Semiloof Triangular Curved Thin Shell (24 d.o.fs)
                  */
                 class slts : public __base::elem {
@@ -3029,9 +3034,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    slts(cards::gelmnt1 const*);
-                    slts(cards::gelref1 const*);
-                    slts(elem const*);
+                    slts(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    slts(dnvgl::extfem::fem::cards::gelref1 const*);
+                    slts(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3039,7 +3044,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Semiloof Curved Beam (11 d.o.fs)
                  */
                 class slcb : public __base::elem {
@@ -3074,9 +3079,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    slcb(cards::gelmnt1 const*);
-                    slcb(cards::gelref1 const*);
-                    slcb(elem const*);
+                    slcb(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    slcb(dnvgl::extfem::fem::cards::gelref1 const*);
+                    slcb(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3084,7 +3089,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Matrix Element with arbitrary no. of nodes (/n/)
                  */
                 class matr : public __base::elem {
@@ -3119,9 +3124,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    matr(cards::gelmnt1 const*);
-                    matr(cards::gelref1 const*);
-                    matr(elem const*);
+                    matr(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    matr(dnvgl::extfem::fem::cards::gelref1 const*);
+                    matr(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3129,7 +3134,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3168,9 +3173,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex100(cards::gelmnt1 const*);
-                    ghex100(cards::gelref1 const*);
-                    ghex100(elem const*);
+                    ghex100(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex100(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex100(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3178,7 +3183,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3218,9 +3223,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex101(cards::gelmnt1 const*);
-                    ghex101(cards::gelref1 const*);
-                    ghex101(elem const*);
+                    ghex101(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex101(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex101(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3228,7 +3233,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3268,9 +3273,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex102(cards::gelmnt1 const*);
-                    ghex102(cards::gelref1 const*);
-                    ghex102(elem const*);
+                    ghex102(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex102(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex102(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3278,7 +3283,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3319,9 +3324,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex103(cards::gelmnt1 const*);
-                    ghex103(cards::gelref1 const*);
-                    ghex103(elem const*);
+                    ghex103(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex103(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex103(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3329,7 +3334,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 23, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3369,9 +3374,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex104(cards::gelmnt1 const*);
-                    ghex104(cards::gelref1 const*);
-                    ghex104(elem const*);
+                    ghex104(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex104(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex104(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3379,7 +3384,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3420,9 +3425,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex105(cards::gelmnt1 const*);
-                    ghex105(cards::gelref1 const*);
-                    ghex105(elem const*);
+                    ghex105(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex105(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex105(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3430,7 +3435,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3471,9 +3476,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex106(cards::gelmnt1 const*);
-                    ghex106(cards::gelref1 const*);
-                    ghex106(elem const*);
+                    ghex106(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex106(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex106(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3481,7 +3486,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3523,9 +3528,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex107(cards::gelmnt1 const*);
-                    ghex107(cards::gelref1 const*);
-                    ghex107(elem const*);
+                    ghex107(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex107(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex107(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3533,7 +3538,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3573,9 +3578,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex108(cards::gelmnt1 const*);
-                    ghex108(cards::gelref1 const*);
-                    ghex108(elem const*);
+                    ghex108(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex108(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex108(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3583,7 +3588,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3624,9 +3629,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex109(cards::gelmnt1 const*);
-                    ghex109(cards::gelref1 const*);
-                    ghex109(elem const*);
+                    ghex109(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex109(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex109(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3634,7 +3639,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3675,9 +3680,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex110(cards::gelmnt1 const*);
-                    ghex110(cards::gelref1 const*);
-                    ghex110(elem const*);
+                    ghex110(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex110(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex110(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3685,7 +3690,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3727,9 +3732,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex111(cards::gelmnt1 const*);
-                    ghex111(cards::gelref1 const*);
-                    ghex111(elem const*);
+                    ghex111(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex111(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex111(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3737,7 +3742,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 23, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3778,9 +3783,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex112(cards::gelmnt1 const*);
-                    ghex112(cards::gelref1 const*);
-                    ghex112(elem const*);
+                    ghex112(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex112(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex112(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3788,7 +3793,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3830,9 +3835,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex113(cards::gelmnt1 const*);
-                    ghex113(cards::gelref1 const*);
-                    ghex113(elem const*);
+                    ghex113(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex113(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex113(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3840,7 +3845,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3882,9 +3887,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex114(cards::gelmnt1 const*);
-                    ghex114(cards::gelref1 const*);
-                    ghex114(elem const*);
+                    ghex114(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex114(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex114(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3892,7 +3897,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3935,9 +3940,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex115(cards::gelmnt1 const*);
-                    ghex115(cards::gelref1 const*);
-                    ghex115(elem const*);
+                    ghex115(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex115(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex115(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3945,7 +3950,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3985,9 +3990,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex116(cards::gelmnt1 const*);
-                    ghex116(cards::gelref1 const*);
-                    ghex116(elem const*);
+                    ghex116(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex116(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex116(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3995,7 +4000,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4036,9 +4041,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex117(cards::gelmnt1 const*);
-                    ghex117(cards::gelref1 const*);
-                    ghex117(elem const*);
+                    ghex117(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex117(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex117(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4046,7 +4051,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4087,9 +4092,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex118(cards::gelmnt1 const*);
-                    ghex118(cards::gelref1 const*);
-                    ghex118(elem const*);
+                    ghex118(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex118(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex118(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4097,7 +4102,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4139,9 +4144,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex119(cards::gelmnt1 const*);
-                    ghex119(cards::gelref1 const*);
-                    ghex119(elem const*);
+                    ghex119(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex119(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex119(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4149,7 +4154,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 23, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4190,9 +4195,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex120(cards::gelmnt1 const*);
-                    ghex120(cards::gelref1 const*);
-                    ghex120(elem const*);
+                    ghex120(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex120(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex120(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4200,7 +4205,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4242,9 +4247,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex121(cards::gelmnt1 const*);
-                    ghex121(cards::gelref1 const*);
-                    ghex121(elem const*);
+                    ghex121(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex121(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex121(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4252,7 +4257,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4294,9 +4299,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex122(cards::gelmnt1 const*);
-                    ghex122(cards::gelref1 const*);
-                    ghex122(elem const*);
+                    ghex122(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex122(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex122(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4304,7 +4309,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4347,9 +4352,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex123(cards::gelmnt1 const*);
-                    ghex123(cards::gelref1 const*);
-                    ghex123(elem const*);
+                    ghex123(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex123(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex123(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4357,7 +4362,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4398,9 +4403,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex124(cards::gelmnt1 const*);
-                    ghex124(cards::gelref1 const*);
-                    ghex124(elem const*);
+                    ghex124(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex124(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex124(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4408,7 +4413,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4450,9 +4455,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex125(cards::gelmnt1 const*);
-                    ghex125(cards::gelref1 const*);
-                    ghex125(elem const*);
+                    ghex125(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex125(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex125(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4460,7 +4465,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4502,9 +4507,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex126(cards::gelmnt1 const*);
-                    ghex126(cards::gelref1 const*);
-                    ghex126(elem const*);
+                    ghex126(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex126(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex126(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4512,7 +4517,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4555,9 +4560,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex127(cards::gelmnt1 const*);
-                    ghex127(cards::gelref1 const*);
-                    ghex127(elem const*);
+                    ghex127(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex127(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex127(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4565,7 +4570,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 23, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4607,9 +4612,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex128(cards::gelmnt1 const*);
-                    ghex128(cards::gelref1 const*);
-                    ghex128(elem const*);
+                    ghex128(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex128(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex128(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4617,7 +4622,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4660,9 +4665,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex129(cards::gelmnt1 const*);
-                    ghex129(cards::gelref1 const*);
-                    ghex129(elem const*);
+                    ghex129(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex129(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex129(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4670,7 +4675,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4713,9 +4718,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex130(cards::gelmnt1 const*);
-                    ghex130(cards::gelref1 const*);
-                    ghex130(elem const*);
+                    ghex130(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex130(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex130(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4723,7 +4728,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4767,9 +4772,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex131(cards::gelmnt1 const*);
-                    ghex131(cards::gelref1 const*);
-                    ghex131(elem const*);
+                    ghex131(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex131(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex131(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4777,7 +4782,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4817,9 +4822,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex132(cards::gelmnt1 const*);
-                    ghex132(cards::gelref1 const*);
-                    ghex132(elem const*);
+                    ghex132(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex132(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex132(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4827,7 +4832,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4868,9 +4873,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex133(cards::gelmnt1 const*);
-                    ghex133(cards::gelref1 const*);
-                    ghex133(elem const*);
+                    ghex133(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex133(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex133(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4878,7 +4883,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4919,9 +4924,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex134(cards::gelmnt1 const*);
-                    ghex134(cards::gelref1 const*);
-                    ghex134(elem const*);
+                    ghex134(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex134(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex134(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4929,7 +4934,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4971,9 +4976,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex135(cards::gelmnt1 const*);
-                    ghex135(cards::gelref1 const*);
-                    ghex135(elem const*);
+                    ghex135(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex135(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex135(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4981,7 +4986,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 23, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5022,9 +5027,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex136(cards::gelmnt1 const*);
-                    ghex136(cards::gelref1 const*);
-                    ghex136(elem const*);
+                    ghex136(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex136(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex136(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5032,7 +5037,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5074,9 +5079,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex137(cards::gelmnt1 const*);
-                    ghex137(cards::gelref1 const*);
-                    ghex137(elem const*);
+                    ghex137(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex137(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex137(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5084,7 +5089,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5126,9 +5131,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex138(cards::gelmnt1 const*);
-                    ghex138(cards::gelref1 const*);
-                    ghex138(elem const*);
+                    ghex138(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex138(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex138(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5136,7 +5141,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5179,9 +5184,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex139(cards::gelmnt1 const*);
-                    ghex139(cards::gelref1 const*);
-                    ghex139(elem const*);
+                    ghex139(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex139(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex139(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5189,7 +5194,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5230,9 +5235,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex140(cards::gelmnt1 const*);
-                    ghex140(cards::gelref1 const*);
-                    ghex140(elem const*);
+                    ghex140(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex140(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex140(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5240,7 +5245,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5282,9 +5287,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex141(cards::gelmnt1 const*);
-                    ghex141(cards::gelref1 const*);
-                    ghex141(elem const*);
+                    ghex141(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex141(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex141(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5292,7 +5297,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5334,9 +5339,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex142(cards::gelmnt1 const*);
-                    ghex142(cards::gelref1 const*);
-                    ghex142(elem const*);
+                    ghex142(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex142(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex142(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5344,7 +5349,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5387,9 +5392,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex143(cards::gelmnt1 const*);
-                    ghex143(cards::gelref1 const*);
-                    ghex143(elem const*);
+                    ghex143(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex143(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex143(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5397,7 +5402,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 23, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5439,9 +5444,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex144(cards::gelmnt1 const*);
-                    ghex144(cards::gelref1 const*);
-                    ghex144(elem const*);
+                    ghex144(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex144(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex144(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5449,7 +5454,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5492,9 +5497,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex145(cards::gelmnt1 const*);
-                    ghex145(cards::gelref1 const*);
-                    ghex145(elem const*);
+                    ghex145(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex145(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex145(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5502,7 +5507,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5545,9 +5550,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex146(cards::gelmnt1 const*);
-                    ghex146(cards::gelref1 const*);
-                    ghex146(elem const*);
+                    ghex146(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex146(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex146(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5555,7 +5560,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5599,9 +5604,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex147(cards::gelmnt1 const*);
-                    ghex147(cards::gelref1 const*);
-                    ghex147(elem const*);
+                    ghex147(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex147(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex147(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5609,7 +5614,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5650,9 +5655,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex148(cards::gelmnt1 const*);
-                    ghex148(cards::gelref1 const*);
-                    ghex148(elem const*);
+                    ghex148(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex148(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex148(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5660,7 +5665,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5702,9 +5707,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex149(cards::gelmnt1 const*);
-                    ghex149(cards::gelref1 const*);
-                    ghex149(elem const*);
+                    ghex149(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex149(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex149(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5712,7 +5717,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5754,9 +5759,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex150(cards::gelmnt1 const*);
-                    ghex150(cards::gelref1 const*);
-                    ghex150(elem const*);
+                    ghex150(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex150(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex150(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5764,7 +5769,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5807,9 +5812,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex151(cards::gelmnt1 const*);
-                    ghex151(cards::gelref1 const*);
-                    ghex151(elem const*);
+                    ghex151(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex151(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex151(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5817,7 +5822,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 23, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5859,9 +5864,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex152(cards::gelmnt1 const*);
-                    ghex152(cards::gelref1 const*);
-                    ghex152(elem const*);
+                    ghex152(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex152(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex152(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5869,7 +5874,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5912,9 +5917,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex153(cards::gelmnt1 const*);
-                    ghex153(cards::gelref1 const*);
-                    ghex153(elem const*);
+                    ghex153(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex153(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex153(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5922,7 +5927,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5965,9 +5970,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex154(cards::gelmnt1 const*);
-                    ghex154(cards::gelref1 const*);
-                    ghex154(elem const*);
+                    ghex154(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex154(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex154(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5975,7 +5980,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6019,9 +6024,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex155(cards::gelmnt1 const*);
-                    ghex155(cards::gelref1 const*);
-                    ghex155(elem const*);
+                    ghex155(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex155(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex155(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -6029,7 +6034,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6071,9 +6076,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex156(cards::gelmnt1 const*);
-                    ghex156(cards::gelref1 const*);
-                    ghex156(elem const*);
+                    ghex156(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex156(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex156(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -6081,7 +6086,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6124,9 +6129,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex157(cards::gelmnt1 const*);
-                    ghex157(cards::gelref1 const*);
-                    ghex157(elem const*);
+                    ghex157(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex157(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex157(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -6134,7 +6139,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6177,9 +6182,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex158(cards::gelmnt1 const*);
-                    ghex158(cards::gelref1 const*);
-                    ghex158(elem const*);
+                    ghex158(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex158(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex158(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -6187,7 +6192,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6231,9 +6236,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex159(cards::gelmnt1 const*);
-                    ghex159(cards::gelref1 const*);
-                    ghex159(elem const*);
+                    ghex159(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex159(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex159(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -6241,7 +6246,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 23, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6284,9 +6289,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex160(cards::gelmnt1 const*);
-                    ghex160(cards::gelref1 const*);
-                    ghex160(elem const*);
+                    ghex160(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex160(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex160(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -6294,7 +6299,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6338,9 +6343,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex161(cards::gelmnt1 const*);
-                    ghex161(cards::gelref1 const*);
-                    ghex161(elem const*);
+                    ghex161(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex161(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex161(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -6348,7 +6353,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6392,9 +6397,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex162(cards::gelmnt1 const*);
-                    ghex162(cards::gelref1 const*);
-                    ghex162(elem const*);
+                    ghex162(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex162(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex162(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -6402,7 +6407,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 328 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6447,9 +6452,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex163(cards::gelmnt1 const*);
-                    ghex163(cards::gelref1 const*);
-                    ghex163(elem const*);
+                    ghex163(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    ghex163(dnvgl::extfem::fem::cards::gelref1 const*);
+                    ghex163(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -6457,7 +6462,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 373 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 378 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Dispatch element class instance for `id`
                  */
                 void dispatch(
@@ -6466,7 +6471,7 @@ namespace dnvgl {
                 /** Match element type id to element type name.
                  */
                 std::string name_elem(
-                    el_types const);
+                    dnvgl::extfem::fem::elements::el_types const);
             }
         }
     }
