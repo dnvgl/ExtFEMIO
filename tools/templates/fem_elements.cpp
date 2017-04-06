@@ -32,7 +32,9 @@ namespace {
 
 #include <memory>
 
-#include "my_c++14.h"
+#if (__GNUC__ && (__GNUC__ < 4 || (__GNUC__ == 4 && __GNUC_MINOR__ < 9))) || (_MSC_VER && _MSC_VER <= 1700)
+#include <my_c++14.h>
+#endif
 #include "fem/cards.h"
 #include "fem/elements.h"
 #include "fem/errors.h"
@@ -116,7 +118,7 @@ elements::__base::elem::elem(
         elem(eleno, 0, el_add, nodes, matref, add_no, intno,
              mass_intno, i_strain_ref, i_stress_ref, strpoint_ref,
              section, fixations, eccentrities, csys) { }
-
+			 
 elements::__base::elem::elem(
     long const el_add, vector<long> const &nodes, long const matref,
     long const add_no, long const intno, long const mass_intno,
@@ -220,6 +222,22 @@ elements::__base::elem const &elements::__base::elem::operator() (
 }
 
 elements::__base::elem const &elements::__base::elem::operator() (
+    std::vector<long> const &nodes,
+    long const matref,
+    long const add_no = 0, long const intno = 0,
+    long const mass_intno = 0, long const i_strain_ref = 0,
+    long const i_stressef = 0, long const strpoint_ref = 0,
+    std::vector<long> const &sections = {},
+    std::vector<long> const &fixations = {},
+    std::vector<long> const &eccentrities = {},
+    std::vector<long> const &csys = {}) {
+    return (*this)(0, 0, 0, nodes, matref, add_no, intno, mass_intno,
+                   i_strain_ref, i_stress_ref, strpoint_ref,
+                   section, fixations, eccentrities, csys);
+}
+							
+							
+							elements::__base::elem const &elements::__base::elem::operator() (
     long const el_add, vector<long> const &nodes, long const matref,
     long const add_no, long const intno, long const mass_intno,
     long const i_strain_ref, long const i_stress_ref, long const strpoint_ref,
@@ -228,7 +246,7 @@ elements::__base::elem const &elements::__base::elem::operator() (
     return (*this)(0, 0, el_add, nodes, matref, add_no, intno, mass_intno,
                    i_strain_ref, i_stress_ref, strpoint_ref,
                    section, fixations, eccentrities, csys);
-}
+	}
 
 elements::__base::elem const &elements::__base::elem::operator() (
     long const eleno, vector<long> const &nodes, long const matref,
