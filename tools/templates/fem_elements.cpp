@@ -20,6 +20,8 @@
    Detailed description
 */
 
+{% line %}
+
 #include "StdAfx.h"
 
 #include "extfem_misc.h"
@@ -36,6 +38,7 @@ namespace {
 #include <my_c++14.h>
 #endif
 
+#include "fem/cards.h"
 #include "fem/elements.h"
 #include "fem/errors.h"
 
