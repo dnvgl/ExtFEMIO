@@ -15,19 +15,16 @@ namespace {
         "@(#) $Id$";
 }
 
-#include <limits>
-
 // This tells Catch to provide a main() - only do this in one cpp file
 #define CATCH_CONFIG_MAIN
 
 #include <catch.hpp>
 
-#include <sstream>
-
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "bdf/types.h"
-#include "bdf/errors.h"
 
 #include <clocale>
 
@@ -42,7 +39,7 @@ using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::types;
 
 namespace {
-    static const long cl1 = 1, cl100 = 100, cl_1 = -1, cl0 = 0;
+    const long cl1 = 1, cl100 = 100, cl_1 = -1, cl0 = 0;
 }
 
 TEST_CASE("BDF int types parsing.", "[bdf_types]") {
@@ -59,25 +56,25 @@ TEST_CASE("BDF int types parsing.", "[bdf_types]") {
 
     SECTION("'2       '") {
         entry_type<long> obj(
-            "dummy", type_bounds::bound<long>(&cl0, NULL, &cl0));
+            "dummy", type_bounds::bound<long>(&cl0, nullptr, &cl0));
         CHECK(obj("2       ").value == 2);
     }
 
     SECTION("'    -1  '") {
         entry_type<long> obj(
-            "dummy", type_bounds::bound<long>(&cl_1, NULL, &cl0));
+            "dummy", type_bounds::bound<long>(&cl_1, nullptr, &cl0));
         CHECK(obj("    -1  ").value == -1);
     }
 
     SECTION("default 1") {
         entry_type<long> obj(
-            "dummy", type_bounds::bound<long>(&cl_1, NULL, &cl0));
+            "dummy", type_bounds::bound<long>(&cl_1, nullptr, &cl0));
         CHECK(obj("        ").value == 0);
     }
 
     SECTION("default 2") {
         entry_type<long> obj(
-            "dummy", type_bounds::bound<long>(&cl_1, NULL, &cl100));
+            "dummy", type_bounds::bound<long>(&cl_1, nullptr, &cl100));
         CHECK(obj("        ").value == 100);
     }
 
@@ -117,7 +114,7 @@ TEST_CASE("BDF int types output.", "[bdf_types]") {
     }
 
     SECTION("SHORT ()") {
-        long lval = 1;
+        lval = 1;
         bdf::types::base::out_form = bdf::types::out_form_type::SHORT;
         CHECK(obj.format(&lval).size() == 8);
         CHECK(obj.format(&lval) == "       1");

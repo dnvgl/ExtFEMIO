@@ -16,8 +16,6 @@ namespace {
         "@(#) $Id$";
 }
 
-#include <limits>
-#include <string>
 #include <vector>
 
 // This tells Catch to provide a main() - only do this in one cpp file
@@ -25,10 +23,11 @@ namespace {
 
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "bdf/types.h"
-#include "bdf/errors.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
@@ -42,12 +41,12 @@ using namespace dnvgl::extfem::bdf::types;
 using namespace dnvgl::extfem::bdf::type_bounds;
 
 namespace {
-    static const double cd0 = 0.;
+    const double cd0 = 0.;
 }
 
 TEST_CASE("BDF float types parsing.", "[bdf_types]") {
 
-    entry_type<double> probe("dummy", bound<double>(NULL, NULL, &cd0));
+    entry_type<double> probe("dummy", bound<double>(nullptr, nullptr, &cd0));
 
     SECTION("'   1.   '") {
         CHECK(probe("   1.   ").value == 1.);
@@ -66,8 +65,8 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]") {
     }
 
     SECTION("'  -1.   ', min 0.") {
-        entry_type<double> probe("dummy", bound<double>(&cd0, NULL, &cd0));
-        CHECK_THROWS(probe("  -1.   "));
+        entry_type<double> probe1("dummy", bound<double>(&cd0, nullptr, &cd0));
+        CHECK_THROWS(probe1("  -1.   "));
     }
 
     SECTION("Quick Reference") {
@@ -110,8 +109,8 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]") {
     }
 
     SECTION("'        ', no default") {
-        entry_type<double> probe("dummy", bound<double>(NULL, NULL, NULL));
-        CHECK_THROWS(probe("        "));
+        entry_type<double> probel("dummy", bound<double>(nullptr, nullptr, nullptr));
+        CHECK_THROWS(probel("        "));
     }
 
     SECTION("'   123.  '") {
@@ -151,9 +150,9 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]") {
     }
 
     SECTION("'        '") {
-        entry_type<double> probe(
+        entry_type<double> probe_l(
             "probe", bound<double>(nullptr, nullptr, nullptr, true));
-        CHECK_FALSE(probe("        "));
+        CHECK_FALSE(probe_l("        "));
     }
 }
 
@@ -179,20 +178,20 @@ TEST_CASE("BDF double types output.", "[bdf_types]") {
     }
 
     SECTION("SHORT ()") {
-        double *lval = new double(1.);
+        auto p_lval = new double(1.);
         bdf::types::base::out_form = bdf::types::out_form_type::SHORT;
-        CHECK(*lval == 1.);
-        CHECK(obj.format(lval).size() == 8);
-        CHECK(obj.format(lval) == "1.000+00");
-        *lval = 2.9;
-        CHECK(obj.format(lval) == "2.900+00");
-        *lval = 1.9;
-        CHECK(obj.format(lval) == "1.900+00");
-        *lval = 0.;
-        CHECK(obj.format(lval) == " 0.00+00");
-        *lval = -0.;
-        CHECK(obj.format(lval) == "-0.00+00");
-        delete lval;
+        CHECK(*p_lval == 1.);
+        CHECK(obj.format(p_lval).size() == 8);
+        CHECK(obj.format(p_lval) == "1.000+00");
+        *p_lval = 2.9;
+        CHECK(obj.format(p_lval) == "2.900+00");
+        *p_lval = 1.9;
+        CHECK(obj.format(p_lval) == "1.900+00");
+        *p_lval = 0.;
+        CHECK(obj.format(p_lval) == " 0.00+00");
+        *p_lval = -0.;
+        CHECK(obj.format(p_lval) == "-0.00+00");
+        delete p_lval;
     }
 
     SECTION("SHORT (nullptr, void)") {
@@ -202,40 +201,40 @@ TEST_CASE("BDF double types output.", "[bdf_types]") {
     }
 
     SECTION("SHORT (inexact)") {
-        double *lval = new double(1234.5);
-        CHECK_THROWS(obj.format(lval));
-        *lval = 1234.05;
-        CHECK_THROWS(obj.format(lval));
-        *lval = 1234.005;
-        CHECK_THROWS(obj.format(lval));
-        *lval = 1234.0005;
-        CHECK_THROWS(obj.format(lval));
-        *lval = 1234.00005;
-        CHECK_THROWS(obj.format(lval));
-        *lval = 1234.000005;
-        CHECK(obj.format(lval).size() == 8);
-        CHECK(obj.format(lval) == "1.234+03");
-        *lval = 1234.01;
-        CHECK_THROWS(obj.format(lval));
-        *lval = 1234.001;
-        CHECK_THROWS(obj.format(lval));
-        *lval = 1234.0001;
-        CHECK_THROWS(obj.format(lval));
-        *lval = 1234.00001;
-        CHECK(obj.format(lval).size() == 8);
-        CHECK(obj.format(lval) == "1.234+03");
-        *lval = 1233.9;
-        CHECK_THROWS(obj.format(lval));
-        *lval = 1233.99;
-        CHECK_THROWS(obj.format(lval));
-        *lval = 1233.999;
-        CHECK_THROWS(obj.format(lval));
-        *lval = 1233.9999;
-        CHECK_THROWS(obj.format(lval));
-        *lval = 1233.99999;
-        CHECK(obj.format(lval).size() == 8);
-        CHECK(obj.format(lval) == "1.234+03");
-        delete lval;
+        double *p_lval = new double(1234.5);
+        CHECK_THROWS(obj.format(p_lval));
+        *p_lval = 1234.05;
+        CHECK_THROWS(obj.format(p_lval));
+        *p_lval = 1234.005;
+        CHECK_THROWS(obj.format(p_lval));
+        *p_lval = 1234.0005;
+        CHECK_THROWS(obj.format(p_lval));
+        *p_lval = 1234.00005;
+        CHECK_THROWS(obj.format(p_lval));
+        *p_lval = 1234.000005;
+        CHECK(obj.format(p_lval).size() == 8);
+        CHECK(obj.format(p_lval) == "1.234+03");
+        *p_lval = 1234.01;
+        CHECK_THROWS(obj.format(p_lval));
+        *p_lval = 1234.001;
+        CHECK_THROWS(obj.format(p_lval));
+        *p_lval = 1234.0001;
+        CHECK_THROWS(obj.format(p_lval));
+        *p_lval = 1234.00001;
+        CHECK(obj.format(p_lval).size() == 8);
+        CHECK(obj.format(p_lval) == "1.234+03");
+        *p_lval = 1233.9;
+        CHECK_THROWS(obj.format(p_lval));
+        *p_lval = 1233.99;
+        CHECK_THROWS(obj.format(p_lval));
+        *p_lval = 1233.999;
+        CHECK_THROWS(obj.format(p_lval));
+        *p_lval = 1233.9999;
+        CHECK_THROWS(obj.format(p_lval));
+        *p_lval = 1233.99999;
+        CHECK(obj.format(p_lval).size() == 8);
+        CHECK(obj.format(p_lval) == "1.234+03");
+        delete p_lval;
     }
 
     SECTION("LONG") {

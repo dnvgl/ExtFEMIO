@@ -209,15 +209,10 @@ namespace dnvgl {
                 }
 
                 template <> inline
-                entry_value<std::list<int> >::entry_value(
-                    const entry_value<std::list<int> > &val) :
-                    value(val.value), is_value(val.is_value) {};
+                entry_value<std::list<int> >::entry_value(const entry_value<std::list<int> > &val) : value(val.value), is_value(val.is_value) {}
 
                 template <> inline
-                entry_value<std::list<int> >::entry_value(
-                    const std::list<int> &value, const bool &is_value) :
-                    value(value), is_value(is_value) {
-                }
+                entry_value<std::list<int> >::entry_value(const std::list<int> &value, const bool &is_value) : value(value), is_value(is_value) {}
 
                 template <> inline
                     entry_value<std::list<int> >::entry_value(const std::list<int> *value) : is_value(value != nullptr) {

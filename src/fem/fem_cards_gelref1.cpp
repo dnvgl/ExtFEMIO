@@ -68,9 +68,7 @@ void gelref1::read(const vector<std::string> &inp, size_t const len) {
     vector<std::string> static node_vals;
     entry_type<long> static const lval("lval");
 
-    long tmp;
     size_t nvals{0}, ind_offset{0};
-    ldiv_t divmod;
 
     ELNO = _form_ELNO(inp.at(1));
     MATNO = _form_MATNO(inp.at(2));
@@ -92,7 +90,7 @@ void gelref1::read(const vector<std::string> &inp, size_t const len) {
     size_t i{12};
     size_t num_vals{0};
     while (++i < len && inp.at(i) != empty) {
-        tmp = lval(inp[i]);
+        long tmp{lval(inp[i])};
         if (tmp == 0) break;
         try {
             node_vals.at(num_vals).assign(inp[i]);
@@ -103,7 +101,7 @@ void gelref1::read(const vector<std::string> &inp, size_t const len) {
     };
 
     if (num_vals > 0) {
-        divmod = ldiv(static_cast<long>(num_vals), static_cast<long>(nvals));
+        auto divmod = ldiv(static_cast<long>(num_vals), static_cast<long>(nvals));
         if (divmod.rem != 0)
             throw errors::parse_error(
                 "GELREF1", "Number of node values is not "

@@ -62,7 +62,6 @@ void entry_type<std::vector<int> >::operator() (
 
     double tmp_d;
     std::list<int> tmp_l;
-    long tmp;
 
     if (! regex_match(inp, list_int_re)) {
         std::string msg("illegal input (""");
@@ -73,7 +72,7 @@ void entry_type<std::vector<int> >::operator() (
     conv.str(inp);
     conv.seekg(0);
     conv >> tmp_d;
-    tmp = static_cast<long>(tmp_d);
+    long tmp{static_cast<long>(tmp_d)};
 
     while (tmp) {
         ldiv_t divmod = std::div(tmp, static_cast<long>(10));

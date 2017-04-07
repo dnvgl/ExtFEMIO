@@ -15,19 +15,16 @@ namespace {
         "@(#) $Id$";
 }
 
-#include <limits>
-
 // This tells Catch to provide a main() - only do this in one cpp file
 #define CATCH_CONFIG_MAIN
 
 #include <catch.hpp>
 
-#include <sstream>
-
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "fem/types.h"
-#include "fem/errors.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
@@ -96,9 +93,9 @@ TEST_CASE("FEM bool types output.", "[fem_types]") {
     }
 
     SECTION("Output (false)") {
-        bool lval(false);
-        CHECK(obj.format(lval).size() == 16);
-        CHECK(obj.format(lval) == "           +0.00");
+        bool lval_l(false);
+        CHECK(obj.format(lval_l).size() == 16);
+        CHECK(obj.format(lval_l) == "           +0.00");
     }
 }
 

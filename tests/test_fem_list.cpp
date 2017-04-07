@@ -15,8 +15,6 @@ namespace {
         "@(#) $Id$";
 }
 
-#include <limits>
-#include <string>
 #include <vector>
 
 // This tells Catch to provide a main() - only do this in one cpp file
@@ -24,10 +22,11 @@ namespace {
 
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "fem/types.h"
-#include "fem/errors.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW

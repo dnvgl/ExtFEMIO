@@ -179,11 +179,9 @@ void gelmnt1::read(const vector<std::string> &inp, size_t const len) {
         throw errors::parse_error(
             "GELMNT1", "Illegal number of entries.");
 
-    long tmp;
-
     ELNOX = _form_ELNOX(inp.at(1));
     ELNO = _form_ELNO(inp.at(2));
-    tmp = _form_ELTYP(inp.at(3));
+    long tmp{_form_ELTYP(inp.at(3))};
     try {
         ELTYP = eltyp_map.at(tmp);
     } catch (out_of_range) {

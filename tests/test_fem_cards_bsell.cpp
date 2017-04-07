@@ -17,14 +17,13 @@ namespace {
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
 
-#include <limits>
-
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "fem/cards.h"
-#include "fem/errors.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
@@ -39,15 +38,13 @@ using namespace dnvgl::extfem::fem::cards;
 
 TEST_CASE("FEM BSELL definitions. (Small Field Format)", "[fem_bsell]") {
 
-    size_t len;
-
     SECTION("BSELL (1)") {
         vector<std::string> data({
             // 345678|234567890123456|234567890123456|234567890123456|234567890123456
             "BSELL    1.000000000e+00 1.000000000e+00 0.000000000e+00 0.00000000E+00\n",
             "         1.000000000e+00 1.000000000e+00 2.000000000e+00-1.00000000E+00\n"});
         vector<std::string> lines;
-        len = __base::card::card_split(data, data.size(), lines);
+        size_t len{__base::card::card_split(data, data.size(), lines)};
         bsell probe(lines, len);
 
         CHECK((long)probe.LC == 1);

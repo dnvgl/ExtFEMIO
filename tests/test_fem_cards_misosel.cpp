@@ -17,11 +17,11 @@ namespace {
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
 
-#include <limits>
-
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "fem/cards.h"
 
@@ -81,13 +81,12 @@ TEST_CASE("FEM MISOSEL definitions.", "[fem_misosel]" ) {
 TEST_CASE("FEMIO-27: Failing to import MISOEL card from SESAM GeniE FEM file") {
 
     vector<std::string> lines;
-    size_t len;
 
     SECTION("Failing card") {
         vector<std::string> data({
                 "MISOSEL  1.00000000e+000 2.06000000e+008 3.00000012e-001 7.84999990e+000\n",
                     "         0.00000000e+000 0.00000000e+000\n"});
-        len = __base::card::card_split(data, data.size(), lines);
+        size_t len{__base::card::card_split(data, data.size(), lines)};
         misosel probe(lines, len);
 
         CHECK(probe.MATNO == 1);

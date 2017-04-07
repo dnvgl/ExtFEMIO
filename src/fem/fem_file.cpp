@@ -18,11 +18,6 @@ namespace {
 
 #include "fem/file.h"
 
-#include <iostream>
-#include <iterator>
-#include <list>
-#include <algorithm>
-
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
 #undef THIS_FILE

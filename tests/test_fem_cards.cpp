@@ -17,22 +17,20 @@ namespace {
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
 
-#include <limits>
-
 // This tells Catch to provide a main() - only do this in one cpp file
 #define CATCH_CONFIG_MAIN
 
-#include <iostream>
 #include <list>
 #include <vector>
 
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "fem/cards.h"
 #include "fem/file.h"
-#include "fem/errors.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
@@ -207,7 +205,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     vector<string> ref;
     vector<string> entries;
 
-    size_t len;
+    size_t len{0};
 
     unique_ptr<cards::__base::card> current;
 
@@ -229,7 +227,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [text].") {
-        for (int i = 0; i < 2; i++) len = probe.get(l);
+        for (auto i = 0; i < 2; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -256,7 +254,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [date].") {
-        for (int i = 0; i < 3; i++) len = probe.get(l);
+        for (auto i = 0; i < 3; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -283,7 +281,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [tdload].") {
-        for (int i = 0; i < 4; i++) len = probe.get(l);
+        for (auto i = 0; i < 4; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -305,7 +303,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [gnode].") {
-        for (int i = 0; i < 5; i++) len = probe.get(l);
+        for (auto i = 0; i < 5; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -322,7 +320,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [gcoord].") {
-        for (int i = 0; i < 6; i++) len = probe.get(l);
+        for (auto i = 0; i < 6; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -338,27 +336,26 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [gelmnt1].") {
-        for (int i = 0; i < 7; i++) len = probe.get(l);
+        for (auto i = 0; i < 7; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
         len = __base::card::card_split(l, len, entries);
         cards::dispatch(entries, len, current);
         REQUIRE(current->card_type() == cards::types::GELMNT1);
-        gelmnt1 *cur = static_cast<gelmnt1*>(current.get());
+        auto cur = static_cast<gelmnt1*>(current.get());
         // 12345678|234567890123456|234567890123456|234567890123456|234567890123456
         // GELMNT1  3.39000000e+002 8.54000000e+002 2.40000000e+001 0.00000000e+000
         //          6.08000000e+002 6.18000000e+002 5.71000000e+002 5.65000000e+002
-        REQUIRE(static_cast<gelmnt1*>(current.get())->ELNOX == 339);
-        REQUIRE(static_cast<gelmnt1*>(current.get())->ELNO == 854);
-        REQUIRE(static_cast<gelmnt1*>(current.get())->ELTYP == elements::el_types::FQUS_FFQ);
-        REQUIRE(static_cast<gelmnt1*>(current.get())->ELTYAD == 0);
-        REQUIRE(static_cast<gelmnt1*>(current.get())->NODIN == vector<long>(
-                    {608, 618, 571, 565}));
+        REQUIRE(cur->ELNOX == 339);
+        REQUIRE(cur->ELNO == 854);
+        REQUIRE(cur->ELTYP == elements::el_types::FQUS_FFQ);
+        REQUIRE(cur->ELTYAD == 0);
+        REQUIRE(cur->NODIN == vector<long>({608, 618, 571, 565}));
     }
 
     SECTION("Checking dispatch [gelref1].") {
-        for (int i = 0; i < 8; i++) len = probe.get(l);
+        for (auto i = 0; i < 8; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -388,7 +385,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [gbarm].") {
-        for (int i = 0; i < 9; i++) len = probe.get(l);
+        for (auto i = 0; i < 9; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -409,7 +406,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [gbeamg].") {
-        for (int i = 0; i < 10; i++) len = probe.get(l);
+        for (auto i = 0; i < 10; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -439,7 +436,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [geccen].") {
-        for (int i = 0; i < 11; i++) len = probe.get(l);
+        for (auto i = 0; i < 11; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -455,7 +452,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [gelth].") {
-        for (int i = 0; i < 12; i++) len = probe.get(l);
+        for (auto i = 0; i < 12; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -471,7 +468,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
 
 
     SECTION("Checking dispatch [giorh].") {
-        for (int i = 0; i < 13; i++) len = probe.get(l);
+        for (auto i = 0; i < 13; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -496,7 +493,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [gusyi].") {
-        for (int i = 0; i < 14; i++) len = probe.get(l);
+        for (auto i = 0; i < 14; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -524,7 +521,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [glsec].") {
-        for (int i = 0; i < 15; i++) len = probe.get(l);
+        for (auto i = 0; i < 15; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -547,7 +544,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [gpipe].") {
-        for (int i = 0; i < 16; i++) len = probe.get(l);
+        for (auto i = 0; i < 16; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -567,7 +564,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [bldep].") {
-        for (int i = 0; i < 17; i++) len = probe.get(l);
+        for (auto i = 0; i < 17; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -603,7 +600,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [bnbcd].") {
-        for (int i = 0; i < 18; i++) len = probe.get(l);
+        for (auto i = 0; i < 18; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -619,7 +616,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [belfix].") {
-        for (int i = 0; i < 19; i++) len = probe.get(l);
+        for (auto i = 0; i < 19; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -637,7 +634,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [bndispl].") {
-        for (int i = 0; i < 20; i++) len = probe.get(l);
+        for (auto i = 0; i < 20; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -659,7 +656,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [bnload].") {
-        for (int i = 0; i < 21; i++) len = probe.get(l);
+        for (auto i = 0; i < 21; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -681,7 +678,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [mgsprng].") {
-        for (int i = 0; i < 22; i++) len = probe.get(l);
+        for (auto i = 0; i < 22; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -698,7 +695,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
         REQUIRE(static_cast<mgsprng*>(current.get())->NDOF == 6);
         double c_ref_k[6] = {0., 0., 0., 0., 0., 0.};
         vector<vector<double> > ref_K;
-        for (int i = 0; i < 6; i++)
+        for (auto i = 0; i < 6; i++)
             ref_K.push_back(vector<double>(c_ref_k, c_ref_k + 6));
         ref_K[0][0] = 1e8;
 
@@ -706,7 +703,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [gsetmemb].") {
-        for (int i = 0; i < 23; i++) len = probe.get(l);
+        for (auto i = 0; i < 23; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -725,7 +722,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [gunivec].") {
-        for (int i = 0; i < 24; i++) len = probe.get(l);
+        for (auto i = 0; i < 24; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -740,7 +737,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [misosel].") {
-        for (int i = 0; i < 25; i++) len = probe.get(l);
+        for (auto i = 0; i < 25; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -758,7 +755,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [morsmel].") {
-        for (int i = 0; i < 26; i++) len = probe.get(l);
+        for (auto i = 0; i < 26; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -792,7 +789,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [tdsetnam].") {
-        for (int i = 0; i < 27; i++) len = probe.get(l);
+        for (auto i = 0; i < 27; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -812,7 +809,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [tdsupnam].") {
-        for (int i = 0; i < 28; i++) len = probe.get(l);
+        for (auto i = 0; i < 28; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -832,7 +829,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [gelmnt2].") {
-        for (int i = 0; i < 29; i++) len = probe.get(l);
+        for (auto i = 0; i < 29; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -867,7 +864,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [hsupstat].") {
-        for (int i = 0; i < 30; i++) len = probe.get(l);
+        for (auto i = 0; i < 30; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -890,7 +887,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [hsuptran].") {
-        for (int i = 0; i < 31; i++) len = probe.get(l);
+        for (auto i = 0; i < 31; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -924,7 +921,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [hierarch].") {
-        for (int i = 0; i < 32; i++) len = probe.get(l);
+        for (auto i = 0; i < 32; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -948,7 +945,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [tdload].") {
-        for (int i = 0; i < 33; i++) len = probe.get(l);
+        for (auto i = 0; i < 33; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -968,7 +965,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [bsell].") {
-        for (int i = 0; i < 34; i++) len = probe.get(l);
+        for (auto i = 0; i < 34; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -987,7 +984,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [bnbcd].") {
-        for (int i = 0; i < 35; i++) len = probe.get(l);
+        for (auto i = 0; i < 35; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -1003,7 +1000,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [beuslo].") {
-        for (int i = 0; i < 36; i++) len = probe.get(l);
+        for (auto i = 0; i < 36; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -1030,7 +1027,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [bnload].") {
-        for (int i = 0; i < 37; i++) len = probe.get(l);
+        for (auto i = 0; i < 37; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -1053,7 +1050,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [iend].") {
-        for (int i = 0; i < 38; i++) len = probe.get(l);
+        for (auto i = 0; i < 38; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -1067,7 +1064,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [gbox].") {
-        for (int i = 0; i < 39; i++) len = probe.get(l);
+        for (auto i = 0; i < 39; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -1091,7 +1088,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [gchan].") {
-        for (int i = 0; i < 40; i++) len = probe.get(l);
+        for (auto i = 0; i < 40; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -1116,7 +1113,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [gchanr].") {
-        for (int i = 0; i < 41; i++) len = probe.get(l);
+        for (auto i = 0; i < 41; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -1142,7 +1139,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [gdobo].") {
-        for (int i = 0; i < 42; i++) len = probe.get(l);
+        for (auto i = 0; i < 42; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -1166,7 +1163,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [giorhr].") {
-        for (int i = 0; i < 43; i++) len = probe.get(l);
+        for (auto i = 0; i < 43; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -1195,7 +1192,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [glsecr].") {
-        for (int i = 0; i < 44; i++) len = probe.get(l);
+        for (auto i = 0; i < 44; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -1221,7 +1218,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 
     SECTION("Checking dispatch [gtonp].") {
-        for (int i = 0; i < 45; i++) len = probe.get(l);
+        for (auto i = 0; i < 45; i++) len = probe.get(l);
         string msg;
         for (size_t i=0; i < len; i++) msg += l.at(i) + "\n";
         CAPTURE(msg);
@@ -1322,7 +1319,7 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
                             2, 1, 23046,
                             vector<double>({0., 0., 0., 0., 0., 0.})));
         cards.push_back(make_unique<bnload>(
-                            1, 0, (long)15220,
+                            1, 0, static_cast<long>(15220),
                             vector<double>({0., 0., 2.e6, 0., 0., 0.})));
         cards.push_back(
             make_unique<mgsprng>(

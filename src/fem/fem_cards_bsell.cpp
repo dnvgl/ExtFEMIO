@@ -48,8 +48,6 @@ bsell::bsell(vector<std::string> const &inp, size_t const len) {
 void bsell::read(vector<std::string> const &inp, size_t const len) {
     static const std::string empty(16, ' ');
 
-    long tmp;
-
     if (len < 7)
         throw errors::parse_error(
             "BSELL", "Illegal number of entries.");
@@ -59,7 +57,7 @@ void bsell::read(vector<std::string> const &inp, size_t const len) {
 
     for (size_t i{5}; i < len; i += 2) {
         if (inp.at(i) == empty) break;
-        tmp = _form_LLC(inp.at(i));
+        long tmp{_form_LLC(inp.at(i))};
         if (tmp == 0) break;
         LLC.push_back(tmp);
         FACT.push_back(_form_FACT(inp.at(i + 1)));

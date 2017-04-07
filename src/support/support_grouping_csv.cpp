@@ -17,10 +17,6 @@ namespace {
         "@(#) $Id$";
 }
 
-#include <vector>
-#include <iostream>
-#include <cstdlib>
-
 #include "support/grouping.h"
 #include "support/errors.h"
 

@@ -17,11 +17,11 @@ namespace {
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
 
-#include <limits>
-
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "fem/cards.h"
 
@@ -121,7 +121,7 @@ TEST_CASE("FEM BNLOAD types output.", "[fem_bnload,out]" ) {
    }
 
    SECTION("simple (calc COMPLX)") {
-      bnload probe(1, 1, (long)4, 6,
+      bnload probe(1, 1, long(4), 6,
                    vector<double>({1., 2., 3., 4., 5., 6.}));
       test << probe;
       CHECK(test.str() ==
@@ -131,7 +131,7 @@ TEST_CASE("FEM BNLOAD types output.", "[fem_bnload,out]" ) {
    }
 
    SECTION("simple (with ILOAD, calc COMPLX)") {
-      bnload probe(1, 1, (long)4, 6,
+      bnload probe(1, 1, long(4), 6,
                    vector<double>({1., 2., 3., 4., 5., 6.}),
                    vector<double>({1., 2., 3., 4., 5., 6.}));
       test << probe;

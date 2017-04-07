@@ -17,15 +17,15 @@ namespace {
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
 
-#include <limits>
 #include <complex>
 
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "bdf/cards.h"
-#include "bdf/errors.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
@@ -105,7 +105,7 @@ TEST_CASE("BDF PARAM types output.", "[bdf_param,out]") {
     std::ostringstream test;
 
     SECTION("output int") {
-        param probe("int", (long)123);
+        param probe("int", long(123));
         test << probe;
         CHECK(test.str() == "PARAM   INT          123\n");
     }

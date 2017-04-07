@@ -172,7 +172,7 @@ namespace dnvgl {
                             std::vector<std::string> const&, size_t const,
                             std::vector<std::string>&);
 
-                        card(std::vector<std::string> const&, size_t const);
+                        card(std::vector<std::string> const&, size_t const) {};
                         card();
 
                         virtual ~card();
@@ -340,8 +340,8 @@ namespace dnvgl {
                         fem::types::entry_type<long>
                         static const _form_MATNO;
 
-                        material();
-                        material(long const MATNO);
+                        material() : card(), MATNO(0) {};
+                        explicit material(long const MATNO);
                         material(
                             std::vector<std::string> const&, size_t const);
 

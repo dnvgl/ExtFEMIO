@@ -17,11 +17,11 @@ namespace {
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
 
-#include <limits>
-
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "fem/cards.h"
 
@@ -176,12 +176,11 @@ TEST_CASE("FEM GNODE types output.", "[fem_gnode,out]") {
 TEST_CASE("FEM GNODE conversion from own output.", "[fem_gnode,in/out]") {
 
     vector<std::string> lines;
-    size_t len;
 
     SECTION("GNODE (1)") {
         vector<std::string> data({
             "GNODE   +1.000000000e+00+2.220000000e+02+3.000000000e+00 2.360000000e+02\n"});
-        len = __base::card::card_split(data, data.size(), lines);
+        size_t len{__base::card::card_split(data, data.size(), lines)};
         gnode probe(lines, len);
 
         CHECK(probe.NODEX == 1);

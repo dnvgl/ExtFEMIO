@@ -19,10 +19,11 @@ namespace {
 
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "fem/cards.h"
-#include "fem/errors.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
@@ -152,7 +153,6 @@ TEST_CASE("FEM BELFIX types output.", "[fem_belfix,out]" ) {
 TEST_CASE("FEM BELFIX conversion from own output.", "[fem_belfix,in/out]") {
 
     vector<std::string> lines;
-    size_t len;
 
     SECTION("BELFIX (own output)") {
 
@@ -161,7 +161,7 @@ TEST_CASE("FEM BELFIX conversion from own output.", "[fem_belfix,in/out]") {
                 "BELFIX  +1.000000000e+00+1.000000000e+00+1.000000000e+00            0.00\n",
                     "        +1.000000000e+00+0.000000000e+00+5.000000000e-01+1.000000000e+00\n",
                     "        +1.000000000e+00+1.000000000e+00\n"});
-        len = __base::card::card_split(data, 3, lines);
+        size_t len{__base::card::card_split(data, 3, lines)};
         belfix probe(lines, len);
 
         CHECK(probe.FIXNO == 1);

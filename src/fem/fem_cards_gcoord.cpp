@@ -18,7 +18,6 @@ namespace {
 }
 
 #include <memory>
-#include <algorithm>
 
 #include "fem/cards.h"
 #include "fem/types.h"
@@ -44,7 +43,7 @@ const entry_type<double> gcoord::_form_YCOORD("YCOORD");
 const entry_type<double> gcoord::_form_ZCOORD("ZCOORD");
 
 gcoord::gcoord(const vector<std::string> &inp, size_t const len) {
-    this->read(inp, len);
+    this->gcoord::read(inp, len);
 }
 
 void gcoord::read(const vector<std::string> &inp, size_t const len) {

@@ -22,7 +22,9 @@ namespace {
 
 #include <deque>
 
+#if (__GNUC__ && (__GNUC__ < 4 || (__GNUC__ == 4 && __GNUC_MINOR__ < 9))) || (_MSC_VER && _MSC_VER <= 1700)
 #include <my_c++14.h>
+#endif
 
 #include <catch.hpp>
 

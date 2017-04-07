@@ -16,8 +16,6 @@ namespace {
         "@(#) $Id$";
 }
 
-#include <string>
-
 #include "fem/type_bounds.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)

@@ -17,11 +17,11 @@ namespace {
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
 
-#include <limits>
-
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "fem/cards.h"
 
@@ -112,11 +112,6 @@ TEST_CASE("FEM GELMNT1 types output.", "[fem_gelmnt1,out]") {
     }
 
     SECTION("GELMNT1 OUT (FQUS, const)") {
-        long ELNOX(1), ELNO(6);
-        elements::el_types ELTYP(elements::el_types::FQUS_FFQ);
-        long ELTYAD(0);
-        std::vector<long> NODIN({1, 6, 4, 2});
-
         gelmnt1 probe(1, 6, elements::el_types::FQUS_FFQ, 0, {1, 6, 4, 2});
         test << probe;
         CHECK(test.str() ==

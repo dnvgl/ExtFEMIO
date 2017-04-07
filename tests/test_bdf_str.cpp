@@ -15,8 +15,6 @@ namespace {
         "@(#) $Id$";
 }
 
-#include <limits>
-
 // This tells Catch to provide a main() - only do this in one cpp file
 #define CATCH_CONFIG_MAIN
 
@@ -24,7 +22,9 @@ namespace {
 
 #include <set>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "bdf/types.h"
 
@@ -90,10 +90,10 @@ TEST_CASE("BDF list of str types output.", "[bdf_types]") {
     }
 
     SECTION("SHORT ()") {
-        std::string lval("abcd");
+        std::string lval_l("abcd");
         bdf::types::base::out_form = bdf::types::out_form_type::SHORT;
-        CHECK(obj.format(&lval).size() == 8);
-        CHECK(obj.format(&lval) == "abcd    ");
+        CHECK(obj.format(&lval_l).size() == 8);
+        CHECK(obj.format(&lval_l) == "abcd    ");
     }
 
     SECTION("SHORT (nullptr, void)") {

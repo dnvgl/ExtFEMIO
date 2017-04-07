@@ -17,11 +17,11 @@ namespace {
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
 
-#include <limits>
-
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "fem/cards.h"
 
@@ -139,14 +139,13 @@ TEST_CASE("FEM GIORH definitions.", "[fem_giorh]") {
 TEST_CASE("FEMIO-25: Failing to import GIORH card from SESAM GeniE FEM file") {
 
     vector<std::string> lines;
-    size_t len;
     SECTION("Failing card") {
         vector<std::string> data({
             // 345678|234567890123456|234567890123456|234567890123456|234567890123456
             "GIORH     6.00000000E+00  7.14999974E-01  9.99999978E-03  1.09999999E-02\n",
             "          1.00000005E-03  1.50000006E-01  1.49999997E-02  1.00000000E+00\n",
             "          1.00000000E+00\n"});
-        len = __base::card::card_split(data, data.size(), lines);
+        size_t len{__base::card::card_split(data, data.size(), lines)};
         giorh probe(lines, len);
 
         CHECK(probe.GEONO == 6);

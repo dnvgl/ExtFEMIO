@@ -17,11 +17,11 @@ namespace {
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
 
-#include <limits>
-
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "fem/cards.h"
 
@@ -39,7 +39,6 @@ using namespace dnvgl::extfem::fem::cards;
 TEST_CASE("FEM DATE definitions.", "[fem_date]") {
 
     vector<std::string> lines;
-    size_t len;
 
     SECTION("DATE (1)") {
         vector<std::string> data({
@@ -50,7 +49,7 @@ TEST_CASE("FEM DATE definitions.", "[fem_date]") {
             "        COMPUTER: HAML130185",
             "        USER: berhol"});
 
-        len = __base::card::card_split(data, data.size(), lines);
+        size_t len{__base::card::card_split(data, data.size(), lines)};
         date probe(lines, len);
 
         CHECK(probe.TYPE == 0);

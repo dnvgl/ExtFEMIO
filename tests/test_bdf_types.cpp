@@ -24,7 +24,9 @@ namespace {
 
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "bdf/types.h"
 
@@ -41,7 +43,8 @@ using namespace dnvgl::extfem;
 using namespace bdf::types;
 
 namespace {
-    static const long cl1 = 1;
+    const long cl1 = 1;
+    const double cf1 = 1;
 }
 
 TEST_CASE("BDF types are compared.", "[bdf_types]" ) {
@@ -109,11 +112,29 @@ TEST_CASE("Testing bdf entry values.", "[bdf_types]" ) {
     }
 
     SECTION("Simple integer value with default") {
-        entry_type<long> obj_int(
+        entry_type<long> obj_int_l(
             "dummy1",
             bdf::type_bounds::bound<long>(nullptr, nullptr, &cl1));
-        obj_int.set_value(val_int, "");
+        obj_int_l.set_value(val_int, "");
         REQUIRE((long)val_int == 1);
+    }
+
+    SECTION("Simple float value") {
+        obj_float.set_value(val_float, "3.");
+        REQUIRE((double)val_float == 3.);
+    }
+
+    SECTION("Simple float value with default") {
+        entry_type<double> obj_float_l(
+            "dummy2",
+            bdf::type_bounds::bound<double>(nullptr, nullptr, &cf1));
+        obj_float_l.set_value(val_float, "");
+        REQUIRE((double)val_float == 1.);
+    }
+
+    SECTION("Simple int list value") {
+        obj_list.set_value(val_list, "123");
+        REQUIRE(val_list.value == list<int>({1, 2, 3}));
     }
 }
 

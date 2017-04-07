@@ -17,11 +17,11 @@ namespace {
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
 
-#include <limits>
-
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "fem/cards.h"
 
@@ -81,13 +81,12 @@ TEST_CASE("FEMIO-37: Failing to import GBARM record from SESAM GeniE FEM file") 
 
     vector<std::string> lines;
     __base::geoprop::reset_geono();
-    size_t len;
 
     SECTION("Failing card") {
         vector<std::string> data({
                 "GBARM     2.80000000E+01  1.50000006E-01  1.20000001E-02  1.20000001E-02\n",
                     "          1.00000000E+00  1.00000000E+00\n"});
-        len = __base::card::card_split(data, data.size(), lines);
+        size_t len{__base::card::card_split(data, data.size(), lines)};
         gbarm probe(lines, len);
 
         CHECK(probe.GEONO == 28);

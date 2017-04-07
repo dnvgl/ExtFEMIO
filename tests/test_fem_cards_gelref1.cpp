@@ -17,12 +17,11 @@ namespace {
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
 
-#include <limits>
-#include <string>
-
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "fem/cards.h"
 
@@ -39,7 +38,7 @@ using namespace dnvgl::extfem::fem::cards;
 TEST_CASE("FEM GELREF1 definitions.", "[fem_gelref1]") {
 
     vector<std::string> lines;
-    size_t len{100};
+    size_t len;
 
     SECTION("GELREF1 (sample 1)") {
         vector<std::string> data({
@@ -214,7 +213,6 @@ TEST_CASE("FEM GELREF1 definitions.", "[fem_gelref1]") {
 TEST_CASE("FEMIO-28: Failing to import GELREF1 card from SESAM GeniE FEM file") {
 
     vector<std::string> lines;
-    size_t len;
 
     SECTION("Failing card") {
         vector<std::string> data({
@@ -222,7 +220,7 @@ TEST_CASE("FEMIO-28: Failing to import GELREF1 card from SESAM GeniE FEM file") 
             "          0.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n",
             "          1.10000000E+01  0.00000000E+00 -1.00000000E+00  6.00000000E+00\n",
             "          1.80000000E+01  1.90000000E+01\n"});
-        len = __base::card::card_split(data, data.size(), lines);
+        auto len = __base::card::card_split(data, data.size(), lines);
         gelref1 probe(lines, len);
 
         CHECK(probe.ELNO == 56168);

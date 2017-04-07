@@ -25,14 +25,14 @@ namespace {
 #define CATCH_CONFIG_MAIN
 
 #include <memory>
-#include <string>
 
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "bdf/types.h"
-#include "bdf/errors.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
@@ -57,7 +57,7 @@ TEST_CASE("BDF boundary definitions (long).", "[bdf_bounds]") {
         CHECK_FALSE(probe.has_default());
         entry_value<long> val(std::numeric_limits<long>::min());
         CHECK(probe.in_bounds(val));
-        val = entry_value<long>((long)0);
+        val = entry_value<long>(long(0));
         CHECK(probe.in_bounds(val));
         val = entry_value<long>(std::numeric_limits<long>::max());
         CHECK(probe.in_bounds(val));
@@ -72,7 +72,7 @@ TEST_CASE("BDF boundary definitions (long).", "[bdf_bounds]") {
         CHECK_FALSE(probe_min.in_bounds(val_a));
         val = entry_value<long>(-12);
         CHECK(probe_min.in_bounds(val));
-        val = entry_value<long>((long)0);
+        val = entry_value<long>(long(0));
         CHECK(probe_min.in_bounds(val));
         val = entry_value<long>(std::numeric_limits<long>::max());
         CHECK(probe_min.in_bounds(val));
@@ -84,7 +84,7 @@ TEST_CASE("BDF boundary definitions (long).", "[bdf_bounds]") {
         CHECK_FALSE(probe_min.in_bounds(val));
         val = entry_value<long>(-12);
         CHECK(probe_min.in_bounds(val));
-        val = entry_value<long>((long)0);
+        val = entry_value<long>(long(0));
         CHECK(probe_min.in_bounds(val));
         val = entry_value<long>(std::numeric_limits<long>::max());
         CHECK(probe_min.in_bounds(val));
@@ -96,7 +96,7 @@ TEST_CASE("BDF boundary definitions (long).", "[bdf_bounds]") {
         CHECK_FALSE(probe_max.in_bounds(val));
         val = entry_value<long>(12);
         CHECK(probe_max.in_bounds(val));
-        val = entry_value<long>((long)0);
+        val = entry_value<long>(long(0));
         CHECK(probe_max.in_bounds(val));
         val = entry_value<long>(std::numeric_limits<long>::min());
         CHECK(probe_max.in_bounds(val));
@@ -108,7 +108,7 @@ TEST_CASE("BDF boundary definitions (long).", "[bdf_bounds]") {
         CHECK_FALSE(probe_max.in_bounds(val));
         val = entry_value<long>(12);
         CHECK(probe_max.in_bounds(val));
-        val = entry_value<long>((long)0);
+        val = entry_value<long>(long(0));
         CHECK(probe_max.in_bounds(val));
         val = entry_value<long>(std::numeric_limits<long>::min());
         CHECK(probe_max.in_bounds(val));
@@ -121,7 +121,7 @@ TEST_CASE("BDF boundary definitions (long).", "[bdf_bounds]") {
         CHECK_FALSE(probe_mm.in_bounds(val));
         val = entry_value<long>(-12);
         CHECK(probe_mm.in_bounds(val));
-        val = entry_value<long>((long)0);
+        val = entry_value<long>(long(0));
         CHECK(probe_mm.in_bounds(val));
         val = entry_value<long>(12);
         CHECK(probe_mm.in_bounds(val));
@@ -136,7 +136,7 @@ TEST_CASE("BDF boundary definitions (long).", "[bdf_bounds]") {
         CHECK_FALSE(probe_mmd.in_bounds(val));
         val = entry_value<long>(-12);
         CHECK(probe_mm.in_bounds(val));
-        val = entry_value<long>((long)0);
+        val = entry_value<long>(long(0));
         CHECK(probe_mmd.in_bounds(val));
         val = entry_value<long>(12);
         CHECK(probe_mm.in_bounds(val));

@@ -18,7 +18,6 @@ namespace {
 }
 
 #include <memory>
-#include <algorithm>
 
 #include "fem/cards.h"
 #include "fem/types.h"
@@ -53,7 +52,7 @@ entry_type<long> const gtonp::_form_NLOBZ("NLOBZ");
 
 gtonp::gtonp(const vector<std::string> &inp, size_t const len) :
         beam_prop(inp, len, false) {
-    read(inp, len);
+    gtonp::read(inp, len);
 }
 
 void gtonp::read(const vector<std::string> &inp, size_t const len) {

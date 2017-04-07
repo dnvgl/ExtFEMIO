@@ -18,7 +18,6 @@ namespace {
 #include <catch.hpp>
 
 #include "support/grouping.h"
-#include "support/errors.h"
 
 #include <iostream>
 

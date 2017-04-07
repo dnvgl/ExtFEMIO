@@ -141,7 +141,7 @@ tdsupnam::tdsupnam(long const IHREF, std::string const &SUP_NAME) :
         CODTXT(0),
         SUP_NAME(SUP_NAME), CONT() {
     nlnam = true;
-    ncnam = (long)SUP_NAME.size();
+    ncnam = long(SUP_NAME.size());
     CODNAM = 100 + ncnam;
     nltxt = 0;
     nctxt = 0;

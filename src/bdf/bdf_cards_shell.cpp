@@ -26,8 +26,8 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 namespace {
-    static const long cl0 = 0, cl1 = 1;
-    static const double cd0 = 0.;
+    const long cl0 = 0, cl1 = 1;
+    const double cd0 = 0.;
 }
 
 using namespace dnvgl::extfem;

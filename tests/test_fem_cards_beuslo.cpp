@@ -17,14 +17,13 @@ namespace {
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
 
-#include <limits>
-
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "fem/cards.h"
-#include "fem/errors.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
@@ -39,8 +38,6 @@ using namespace dnvgl::extfem::fem::cards;
 
 TEST_CASE("FEM BEUSLO definitions. (Small Field Format)", "[fem_beuslo]" ) {
 
-    size_t len;
-
     SECTION("first") {
         vector<std::string> data({
                 // 345678|234567890123456|234567890123456|234567890123456|234567890123456
@@ -48,7 +45,7 @@ TEST_CASE("FEM BEUSLO definitions. (Small Field Format)", "[fem_beuslo]" ) {
                     "         1.000000000e+00 4.000000000e+00 0.000000000e+00 2.00000000E+00 \n",
                     "         1.66046816E+04  3.86669189E+03  3.86368091E+03  1.62054932E+04 \n"});
         vector<std::string> lines;
-        len = __base::card::card_split(data, data.size(), lines);
+        size_t len{__base::card::card_split(data, data.size(), lines)};
         beuslo probe(lines, len);
 
         REQUIRE(probe.LLC == 1);
@@ -183,10 +180,10 @@ TEST_CASE("FEM BEUSLO types output.", "[fem_beuslo,out]" ) {
 
     SECTION("write (complex, verbose, fails 3)") {
         COMPLX = true;
-        std::vector<double> ILOADi({12., 13., 14., 15., 16., 17.});
+        std::vector<double> ILOADi_l({12., 13., 14., 15., 16., 17.});
         REQUIRE_THROWS(
             beuslo(LLC,  LOTYP, COMPLX, LAYER, ELNO, NDOF+1, INTNO,
-                   SIDE, RLOADi, ILOADi));
+                   SIDE, RLOADi, ILOADi_l));
     }
 
     SECTION("write (complex, impl. COMPLX)") {
@@ -197,17 +194,17 @@ TEST_CASE("FEM BEUSLO types output.", "[fem_beuslo,out]" ) {
     }
 
     SECTION("write (complex, impl. COMPLX, fails 1)") {
-        std::vector<double> RLOADi({12., 13., 14., 15., 16., 17.});
+        std::vector<double> RLOADi_l({12., 13., 14., 15., 16., 17.});
         REQUIRE_THROWS(
             beuslo(LLC,  LOTYP, LAYER, ELNO, NDOF, INTNO,
-                   SIDE, RLOADi, ILOADi));
+                   SIDE, RLOADi_l, ILOADi));
     }
 
     SECTION("write (complex, impl. COMPLX, fails 2)") {
-        std::vector<double> ILOADi({12., 13., 14., 15., 16., 17.});
+        std::vector<double> ILOADi_l({12., 13., 14., 15., 16., 17.});
         REQUIRE_THROWS(
             beuslo(LLC,  LOTYP, LAYER, ELNO, NDOF, INTNO,
-                   SIDE, RLOADi, ILOADi));
+                   SIDE, RLOADi, ILOADi_l));
     }
 
     SECTION("write (complex, impl. NDOF)") {
@@ -227,10 +224,10 @@ TEST_CASE("FEM BEUSLO types output.", "[fem_beuslo,out]" ) {
 
     SECTION("write (complex, impl. NDOF, fails 1)") {
         COMPLX = true;
-        std::vector<double> ILOADi({12., 13., 14., 15., 16., 17.});
+        std::vector<double> ILOADi_l({12., 13., 14., 15., 16., 17.});
         REQUIRE_THROWS(
             beuslo(LLC,  LOTYP, COMPLX, LAYER, ELNO, INTNO,
-                   SIDE, RLOADi, ILOADi));
+                   SIDE, RLOADi, ILOADi_l));
     }
 
     SECTION("write (complex, impl. NDOF, COMPLX)") {
@@ -241,10 +238,10 @@ TEST_CASE("FEM BEUSLO types output.", "[fem_beuslo,out]" ) {
     }
 
     SECTION("write (complex, impl. NDOF, COMPLX, fails)") {
-        std::vector<double> ILOADi({12., 13., 14., 15., 16., 17.});
+        std::vector<double> ILOADi_l({12., 13., 14., 15., 16., 17.});
         REQUIRE_THROWS(
             beuslo(LLC,  LOTYP, LAYER, ELNO, INTNO,
-                   SIDE, RLOADi, ILOADi));
+                   SIDE, RLOADi, ILOADi_l));
     }
 }
 

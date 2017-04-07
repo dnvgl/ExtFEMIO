@@ -19,10 +19,6 @@ namespace {
 
 #include "config.h"
 
-#include "extfem_misc.h"
-
-#include "bdf/errors.h"
-
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
 #undef THIS_FILE

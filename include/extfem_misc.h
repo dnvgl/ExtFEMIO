@@ -13,7 +13,6 @@
 #define _EXTFEM_MISC_H_
 
 #include <sstream>
-#include <cstring>
 
 
 #if defined(_MSC_VER) & _MSC_VER < 1900
@@ -74,7 +73,7 @@ namespace dnvgl {
                 outline();
                 virtual ~outline();
             public:
-                std::ostream &operator<<(std::ostream&);
+                std::ostream &operator<<(std::ostream&) const;
                 friend std::ostream &::operator<<(
                     std::ostream&, outline const&);
             protected:

@@ -17,11 +17,11 @@ namespace {
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
 
-#include <limits>
-
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "fem/cards.h"
 
@@ -71,13 +71,12 @@ TEST_CASE("FEM GELTH definitions.", "[fem_gelth]" ) {
 TEST_CASE("FEMIO-24: Failing to import line from SESAM GeniE FEM file") {
 
     vector<std::string> lines;
-    size_t len;
     __base::geoprop::reset_geono();
 
     SECTION("Failing card") {
         vector<std::string> data(
             {"GELTH     1.00000000E+00  2.99999993E-02\n"});
-        len = __base::card::card_split(data, data.size(), lines);
+        size_t len{__base::card::card_split(data, data.size(), lines)};
         gelth probe(lines, len);
 
         CHECK(probe.GEONO == 1);

@@ -17,11 +17,11 @@ namespace {
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
 
-#include <limits>
-
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "fem/cards.h"
 
@@ -99,14 +99,13 @@ TEST_CASE("FEM GPIPE definitions.", "[fem_gpipe]" ) {
 TEST_CASE("FEMIO-26: Failing to import GPIPE card from SESAM GeniE FEM file") {
 
     vector<std::string> lines;
-    size_t len;
     __base::geoprop::reset_geono();
 
     SECTION("Failing card") {
         vector<std::string> data(
             {"GPIPE     1.80000000E+01  1.49100006E-01  2.19100013E-01  3.50000001E-02\n",
              "          1.00000000E+00  1.00000000E+00\n"});
-        len = __base::card::card_split(data, data.size(), lines);
+        size_t len{__base::card::card_split(data, data.size(), lines)};
         gpipe probe(lines, len);
 
         CHECK(probe.GEONO == 18);

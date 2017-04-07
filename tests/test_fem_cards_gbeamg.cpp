@@ -17,11 +17,11 @@ namespace {
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
 
-#include <limits>
-
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "fem/cards.h"
 
@@ -153,9 +153,6 @@ TEST_CASE("FEM GBEAMG types output.", "[fem_gbeamg,out]" ) {
 
     ostringstream test;
 
-    long NODEX(1), NODENO(222), NDOF(3);
-    list<int> ODOF({2, 6, 3});
-
     __base::geoprop::reset_geono();
 
     SECTION("empty") {
@@ -217,7 +214,6 @@ TEST_CASE("FEM GBEAMG conversion from own output.", "[fem_gbeamg,in/out]") {
 
     vector<std::string> lines;
     __base::geoprop::reset_geono();
-    size_t len;
 
     SECTION("GBEAMG (1)") {
         vector<std::string> data(
@@ -226,7 +222,7 @@ TEST_CASE("FEM GBEAMG conversion from own output.", "[fem_gbeamg,in/out]") {
              "        +4.000000000e+00+5.000000000e+00+6.000000000e+00+7.000000000e+00\n",
              "        +8.000000000e+00+9.000000000e+00+1.000000000e+01+1.100000000e+01\n",
              "        +1.200000000e+01+1.300000000e+01+1.400000000e+01+1.500000000e+01\n"});
-        len = __base::card::card_split(data, data.size(), lines);
+        size_t len{__base::card::card_split(data, data.size(), lines)};
         gbeamg probe(lines, len);
 
         CHECK(probe.GEONO == 1);

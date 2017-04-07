@@ -17,14 +17,13 @@ namespace {
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
 
-#include <limits>
-
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "fem/cards.h"
-#include "fem/errors.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
@@ -146,7 +145,6 @@ TEST_CASE("FEM HSUPTRAN types output.", "[fem_hsuptran,out]") {
 TEST_CASE("FEM HSUPTRAN conversion from own output.", "[fem_hsuptran,in/out]") {
 
     vector<std::string> lines;
-    size_t len;
 
     SECTION("HSUPTRAN") {
 
@@ -157,7 +155,7 @@ TEST_CASE("FEM HSUPTRAN conversion from own output.", "[fem_hsuptran,in/out]") {
             "        +3.200000000e+01+0.000000000e+00+1.300000000e+01+3.300000000e+01\n",
             "        +3.300000000e+01+0.000000000e+00+1.400000000e+01+2.400000000e+01\n",
             "        +3.400000000e+01+1.000000000e+00\n"});
-        len = __base::card::card_split(data, data.size(), lines);
+        size_t len{__base::card::card_split(data, data.size(), lines)};
         hsuptran probe(lines, len);
 
         CHECK(probe.NFIELD == 1);

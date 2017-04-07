@@ -17,11 +17,11 @@ namespace {
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
 
-#include <limits>
-
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "fem/cards.h"
 
@@ -132,12 +132,11 @@ TEST_CASE("FEM GUNIVEC types output.", "[fem_gunivec,out]" ) {
 TEST_CASE("FEM GUNIVEC conversion from own output.", "[fem_gunivec,in/out]") {
 
     vector<std::string> lines;
-    size_t len;
 
     SECTION("GUNIVEC (1)") {
         vector<std::string> data({
                 "GUNIVEC +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"});
-        len = __base::card::card_split(data, data.size(), lines);
+        size_t len{__base::card::card_split(data, data.size(), lines)};
         gunivec probe(lines, len);
 
         CHECK(probe.TRANSNO == 1);

@@ -15,8 +15,6 @@ namespace {
         "@(#) $Id$";
 }
 
-#include <limits>
-#include <string>
 #include <vector>
 
 // This tells Catch to provide a main() - only do this in one cpp file
@@ -24,11 +22,11 @@ namespace {
 
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
-#include "extfem_misc.h"
 #include "fem/types.h"
-#include "fem/errors.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
@@ -44,7 +42,7 @@ using namespace dnvgl::extfem::fem::types;
 using namespace dnvgl::extfem::fem::type_bounds;
 
 namespace {
-    static const double dc0 = 0.;
+    const double dc0 = 0.;
 }
 
 TEST_CASE("FEM float types parsing.", "[fem_types]") {
@@ -116,9 +114,9 @@ TEST_CASE("FEM float types parsing.", "[fem_types]") {
     }
 
     SECTION("'-1.00000000e-01 ', min 0.") {
-        entry_type<double> probe("dummy",
+        entry_type<double> probe_l("dummy",
                                  bound<double>(&dc0, nullptr, &dc0));
-        CHECK_THROWS(probe(" -1.00000000e-01 "));
+        CHECK_THROWS(probe_l(" -1.00000000e-01 "));
     }
 
     SECTION("Quick Reference") {
@@ -136,9 +134,9 @@ TEST_CASE("FEM float types parsing.", "[fem_types]") {
     }
 
     SECTION("'                ', no default") {
-        entry_type<double> probe(
+        entry_type<double> probe_l(
             "dummy", bound<double>(nullptr, nullptr, nullptr));
-        CHECK_THROWS(probe("                "));
+        CHECK_THROWS(probe_l("                "));
     }
 
     //        12345678901e3456
@@ -167,9 +165,9 @@ TEST_CASE("FEM float types parsing.", "[fem_types]") {
     }
 
     SECTION("'        '") {
-        entry_type<double> probe(
+        entry_type<double> probe_l(
             "probe", bound<double>(nullptr, nullptr, nullptr, true));
-        CHECK_THROWS(probe("        "));
+        CHECK_THROWS(probe_l("        "));
     }
 
     SECTION("Own output") {

@@ -17,7 +17,9 @@ namespace {
         "@(#) $Id$";
 }
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 using namespace dnvgl::extfem;
 using namespace dnvgl::extfem::__base;
@@ -26,7 +28,7 @@ outline::outline() {}
 
 outline::~outline() {}
 
-std::ostream &outline::operator<<(std::ostream &os) {
+std::ostream &outline::operator<<(std::ostream &os) const {
     return this->put(os);
 }
 

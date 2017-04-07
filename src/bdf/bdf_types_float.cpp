@@ -21,10 +21,6 @@ namespace {
 #include "config.h"
 #endif
 
-#ifdef _MSC_VER
-#include <stdio.h>
-#endif
-
 #ifdef HAVE_BOOST_REGEX_HPP
 #include <boost/regex.hpp>
 #else
@@ -32,7 +28,6 @@ namespace {
 #endif
 
 #include "bdf/types.h"
-#include "bdf/errors.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW

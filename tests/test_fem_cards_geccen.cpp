@@ -17,11 +17,11 @@ namespace {
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
 
-#include <limits>
-
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "fem/cards.h"
 
@@ -183,12 +183,11 @@ TEST_CASE("FEM GECCEN types output.", "[fem_geccen,out]") {
 TEST_CASE("FEM GECCEN conversion from own output.", "[fem_geccen,in/out]") {
 
     vector<std::string> lines;
-    size_t len;
 
     SECTION("GECCEN") {
         vector<std::string> data({
             "GECCEN  +1.000000000e+00+1.000000000e+00+3.000000000e+00+1.340000000e+02\n"});
-        len = __base::card::card_split(data, data.size(), lines);
+        size_t len = __base::card::card_split(data, data.size(), lines);
         geccen probe(lines, len);
 
         REQUIRE(probe.ECCNO == 1);

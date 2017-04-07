@@ -15,8 +15,6 @@ namespace {
         "@(#) $Id$";
 }
 
-#include <limits>
-#include <string>
 #include <vector>
 
 // This tells Catch to provide a main() - only do this in one cpp file
@@ -24,10 +22,11 @@ namespace {
 
 #include <catch.hpp>
 
+#ifdef  __GNUC__
 #include "config.h"
+#endif
 
 #include "bdf/types.h"
-#include "bdf/errors.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
@@ -124,55 +123,55 @@ TEST_CASE("BDF std::complex<double> types output.", "[bdf_types]") {
     }
 
     SECTION("SHORT ()") {
-        std::complex<double> *lval = new std::complex<double>(1.);
+        auto p_lval = new std::complex<double>(1.);
         bdf::types::base::out_form = bdf::types::out_form_type::SHORT;
-        CHECK(*lval == 1.);
-        CHECK(obj.format(lval).size() == 16);
-        CHECK(obj.format(lval) == "1.000+000.000+00");
-        *lval = std::complex<double>(2.9, -2.9);
-        CHECK(obj.format(lval) == "2.900+00-2.90+00");
-        *lval = std::complex<double>(1.9, -1.9);
-        CHECK(obj.format(lval) == "1.900+00-1.90+00");
-        *lval = std::complex<double>(0.);
-        CHECK(obj.format(lval) == "0.000+000.000+00");
-        delete lval;
+        CHECK(*p_lval == 1.);
+        CHECK(obj.format(p_lval).size() == 16);
+        CHECK(obj.format(p_lval) == "1.000+000.000+00");
+        *p_lval = std::complex<double>(2.9, -2.9);
+        CHECK(obj.format(p_lval) == "2.900+00-2.90+00");
+        *p_lval = std::complex<double>(1.9, -1.9);
+        CHECK(obj.format(p_lval) == "1.900+00-1.90+00");
+        *p_lval = std::complex<double>(0.);
+        CHECK(obj.format(p_lval) == "0.000+000.000+00");
+        delete p_lval;
     }
 
     SECTION("SHORT (inexact)") {
-        std::complex<double> *lval = new std::complex<double>(1234.5);
-        CHECK_THROWS(obj.format(lval));
-        *lval = std::complex<double>(1234.05);
-        CHECK_THROWS(obj.format(lval));
-        *lval = std::complex<double>(1234.005);
-        CHECK_THROWS(obj.format(lval));
-        *lval = std::complex<double>(1234.0005);
-        CHECK_THROWS(obj.format(lval));
-        *lval = std::complex<double>(1234.00005);
-        CHECK_THROWS(obj.format(lval));
-        *lval = std::complex<double>(1234.000005);
-        CHECK(obj.format(lval).size() == 16);
-        CHECK(obj.format(lval) == "1.234+030.000+00");
-        *lval = std::complex<double>(1234.01);
-        CHECK_THROWS(obj.format(lval));
-        *lval = std::complex<double>(1234.001);
-        CHECK_THROWS(obj.format(lval));
-        *lval = std::complex<double>(1234.0001);
-        CHECK_THROWS(obj.format(lval));
-        *lval = std::complex<double>(1234.00001);
-        CHECK(obj.format(lval).size() == 16);
-        CHECK(obj.format(lval) == "1.234+030.000+00");
-        *lval = std::complex<double>(1233.9);
-        CHECK_THROWS(obj.format(lval));
-        *lval = std::complex<double>(1233.99);
-        CHECK_THROWS(obj.format(lval));
-        *lval = std::complex<double>(1233.999);
-        CHECK_THROWS(obj.format(lval));
-        *lval = std::complex<double>(1233.9999);
-        CHECK_THROWS(obj.format(lval));
-        *lval = std::complex<double>(1233.99999);
-        CHECK(obj.format(lval).size() == 16);
-        CHECK(obj.format(lval) == "1.234+030.000+00");
-        delete lval;
+        auto p_lval = new std::complex<double>(1234.5);
+        CHECK_THROWS(obj.format(p_lval));
+        *p_lval = std::complex<double>(1234.05);
+        CHECK_THROWS(obj.format(p_lval));
+        *p_lval = std::complex<double>(1234.005);
+        CHECK_THROWS(obj.format(p_lval));
+        *p_lval = std::complex<double>(1234.0005);
+        CHECK_THROWS(obj.format(p_lval));
+        *p_lval = std::complex<double>(1234.00005);
+        CHECK_THROWS(obj.format(p_lval));
+        *p_lval = std::complex<double>(1234.000005);
+        CHECK(obj.format(p_lval).size() == 16);
+        CHECK(obj.format(p_lval) == "1.234+030.000+00");
+        *p_lval = std::complex<double>(1234.01);
+        CHECK_THROWS(obj.format(p_lval));
+        *p_lval = std::complex<double>(1234.001);
+        CHECK_THROWS(obj.format(p_lval));
+        *p_lval = std::complex<double>(1234.0001);
+        CHECK_THROWS(obj.format(p_lval));
+        *p_lval = std::complex<double>(1234.00001);
+        CHECK(obj.format(p_lval).size() == 16);
+        CHECK(obj.format(p_lval) == "1.234+030.000+00");
+        *p_lval = std::complex<double>(1233.9);
+        CHECK_THROWS(obj.format(p_lval));
+        *p_lval = std::complex<double>(1233.99);
+        CHECK_THROWS(obj.format(p_lval));
+        *p_lval = std::complex<double>(1233.999);
+        CHECK_THROWS(obj.format(p_lval));
+        *p_lval = std::complex<double>(1233.9999);
+        CHECK_THROWS(obj.format(p_lval));
+        *p_lval = std::complex<double>(1233.99999);
+        CHECK(obj.format(p_lval).size() == 16);
+        CHECK(obj.format(p_lval) == "1.234+030.000+00");
+        delete p_lval;
     }
 
     SECTION("LONG") {

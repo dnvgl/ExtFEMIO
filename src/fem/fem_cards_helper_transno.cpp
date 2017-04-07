@@ -64,7 +64,7 @@ cards::__base::transno::transno(long const TRANSNO) :
 
 cards::__base::transno::transno(
     vector<std::string> const &inp, size_t const len) {
-    read(inp, len);
+    transno::read(inp, len);
 }
 
 void cards::__base::transno::read(

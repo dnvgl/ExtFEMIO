@@ -64,7 +64,7 @@ cards::__base::geoprop::geoprop(long const GEONO) :
 
 cards::__base::geoprop::geoprop(
     vector<std::string> const &inp, size_t const len) {
-    read(inp, len);
+    geoprop::read(inp, len);
 }
 
 void cards::__base::geoprop::read(

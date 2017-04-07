@@ -17,14 +17,13 @@ namespace {
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
 
-#include <limits>
-
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "bdf/cards.h"
-#include "bdf/errors.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
@@ -84,8 +83,6 @@ TEST_CASE("BDF GRID definitions. (Large Field Format)",
 
 TEST_CASE("BDF GRID definitions. (Free Field Format)",
           "[bdf_grid]") {
-
-    std::list<std::string> data;
 
     SECTION("first grid") {
         std::list<std::string> data({
@@ -168,8 +165,6 @@ TEST_CASE("BDF GRID definitions. (Free Field Format)",
 }
 
 TEST_CASE("FEMIO-43: BDF import failed") {
-
-    std::list<std::string> data;
 
     SECTION("report") {
         std::list<std::string> data({
