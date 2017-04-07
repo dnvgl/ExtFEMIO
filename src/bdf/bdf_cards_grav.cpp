@@ -163,8 +163,6 @@ void grav::collect_outdata(
     res.push_back(unique_ptr<format_entry>(format<double>(form_Ni, N3)));
     if (MB)
         res.push_back(unique_ptr<format_entry>(format<long>(form_MB, MB)));
-
-    return;
 }
 
 // Local Variables:

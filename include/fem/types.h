@@ -14,14 +14,7 @@
 #if !defined _FEM_TYPES_H_
 #define _FEM_TYPES_H_
 
-#include <string>
 #include <vector>
-#include <set>
-#include <list>
-#include <iostream>
-#include <typeinfo>
-#include <limits>
-#include <memory>
 #include <sstream>
 
 #ifdef __GNUC__
@@ -39,9 +32,7 @@
 #include "my_c++14.h"
 #endif
 
-#include "extfem_string.h"
 #include "fem/type_bounds.h"
-#include "fem/errors.h"
 
 namespace dnvgl {
     namespace extfem {
@@ -125,6 +116,10 @@ namespace dnvgl {
                 class entry_type : public __base::b_type {
 
                 public:
+                    explicit entry_type(std::string const& cs)
+                        : b_type(cs) {
+                    }
+
                     virtual std::string format(_Ty const &d) const = 0;
                 };
 

@@ -34,7 +34,7 @@ using namespace std;
 using namespace rel_ops;
 
 namespace {
-   long static const cl1 = 1;
+   long const cl1 = 1;
 }
 
 using namespace dnvgl::extfem;

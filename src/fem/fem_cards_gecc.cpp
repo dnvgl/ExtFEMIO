@@ -16,8 +16,6 @@ namespace {
         "@(#) $Id$";
 }
 
-#include <memory>
-#include <algorithm>
 #include <cassert>
 
 #include "fem/cards.h"
@@ -45,10 +43,10 @@ const entry_type<double> gecc::_form_EX("EX");
 const entry_type<double> gecc::_form_EY("EY");
 const entry_type<double> gecc::_form_EZ("EZ");
 
-gecc::gecc(void) : gecc(-1, ecc_opt::UNDEF_TYPE, 0., 0., 0.) {}
+gecc::gecc() : gecc(-1, ecc_opt::UNDEF_TYPE, 0., 0., 0.) {}
 
 gecc::gecc(const vector<std::string> &inp, size_t const len) {
-    read(inp, len);
+    gecc::read(inp, len);
 }
 
 void gecc::read(const vector<std::string> &inp, size_t const len) {
@@ -84,7 +82,16 @@ gecc::gecc(
     eccno(ECCNO), IOPT(IOPT), EX(EX), EY(EY), EZ(EZ) {}
 
 cards::types
-gecc::card_type(void) const {return types::GECC;}
+gecc::card_type() const {return types::GECC;}
+
+cards::__base::card const& gecc::operator()(long const ECCNO, ecc_opt IOPT, double const EX, double const EY, double const EZ) {
+    this->ECCNO = ECCNO;
+    this->IOPT = IOPT;
+    this->EX = EX;
+    this->EY = EY;
+    this->EZ = EZ;
+    return *this;
+}
 
 ostream &gecc::put(ostream& os) const {
     if (ECCNO == -1) return os;

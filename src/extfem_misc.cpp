@@ -10,6 +10,7 @@
 #include "StdAfx.h"
 
 #include "extfem_misc.h"
+#include "config.h"
 
 // ID:
 namespace {
@@ -17,9 +18,8 @@ namespace {
         "@(#) $Id$";
 }
 
-#ifdef __GNUC__
+// ReSharper disable once CppUnusedIncludeDirective
 #include "config.h"
-#endif
 
 using namespace dnvgl::extfem;
 using namespace dnvgl::extfem::__base;
@@ -30,6 +30,18 @@ outline::~outline() {}
 
 std::ostream &outline::operator<<(std::ostream &os) const {
     return this->put(os);
+}
+
+std::not_implemented::not_implemented(const char* fname, const size_t& line, const char* error) {
+    ostringstream msg("", ostringstream::ate);
+    if (line != 0 && strlen(fname) > 0)
+        msg << fname << ":" << line << ":";
+    msg << "Functionality not yet implemented!";
+    errorMessage = msg.str();
+}
+
+const char* std::not_implemented::what() const {
+    return errorMessage.c_str();
 }
 
 std::ostream &operator<<(std::ostream &os, outline const &val) {

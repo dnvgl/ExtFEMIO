@@ -102,7 +102,7 @@ TEST_CASE("BDF CBAR definitions. (Small Field Format), dircode",
     }
 }
 
-TEST_CASE("BDF CBAR types output.", "[bdf_cbar,out]" ) {
+TEST_CASE("BDF CBAR types output.", "[bdf_cbar,out]") {
 
     std::ostringstream test;
 

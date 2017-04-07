@@ -54,7 +54,7 @@ void cards::__base::eccno::set_eccno(long const ECCNO/*=0*/) {
     this->ECCNO = ECCNO;
 }
 
-cards::__base::eccno::eccno(void) :
+cards::__base::eccno::eccno() :
         card(), ECCNO(-1) {}
 
 cards::__base::eccno::eccno(long const ECCNO) :
@@ -64,7 +64,7 @@ cards::__base::eccno::eccno(long const ECCNO) :
 
 cards::__base::eccno::eccno(
     vector<std::string> const &inp, size_t const len) {
-    read(inp, len);
+    eccno::read(inp, len);
 }
 
 void cards::__base::eccno::read(
@@ -76,7 +76,7 @@ void cards::__base::eccno::read(
     set_eccno(_form_ECCNO(inp.at(1)));
 }
 
-void cards::__base::eccno::reset_eccno(void) {
+void cards::__base::eccno::reset_eccno() {
     eccno_maxset = 0;
     used_eccno.clear();
 }

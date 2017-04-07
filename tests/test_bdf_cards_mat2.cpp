@@ -17,14 +17,13 @@ namespace {
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
 
-#include <limits>
-
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "bdf/cards.h"
-#include "bdf/errors.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
@@ -38,7 +37,7 @@ using namespace dnvgl::extfem::bdf::cards;
 namespace {
     std::string err_msg;
 
-    const void _warn_res(const std::string &msg) {
+    void _warn_res(const std::string &msg) {
         err_msg = msg;
     }
 }

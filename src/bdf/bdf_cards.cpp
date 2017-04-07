@@ -37,11 +37,11 @@ using namespace bdf;
 using namespace cards;
 
 namespace {
-    void const _stderr_report(std::string const &msg) {
+    void _stderr_report(std::string const &msg) {
         std::cerr << msg << std::endl;
     }
 
-    void const _stdout_report(std::string const &msg) {
+    void _stdout_report(std::string const &msg) {
         std::cout << msg << std::endl;
     }
 
@@ -164,13 +164,13 @@ namespace {
         {"SPLINE5", cards::types::SPLINE5}});
 }
 
-void const (*cards::note_report)(std::string const &) = &_stdout_report;
+void (*cards::note_report)(std::string const &) = &_stdout_report;
 
-void const (*cards::info_report)(std::string const &) = &_stderr_report;
+void (*cards::info_report)(std::string const &) = &_stderr_report;
 
-void const (*cards::warn_report)(std::string const &) = &_stderr_report;
+void (*cards::warn_report)(std::string const &) = &_stderr_report;
 
-void const (*cards::error_report)(std::string const &) = &_stderr_report;
+void (*cards::error_report)(std::string const &) = &_stderr_report;
 
 cards::__base::card::card(std::list<std::string> const &inp) {}
 
@@ -226,14 +226,13 @@ bdf::types::card cards::__base::card::head = bdf::types::card("<DUMMY>");
 
 void cards::__base::card::card_split(
     std::list<std::string> const &inp, std::list<std::string> &res) {
-    std::string head;
 
     res.clear();
 
-    bool first = true;
+    bool first{true};
 
     for (auto pos=inp.begin(); pos!=inp.end(); ++pos) {
-        head = string::string(pos->substr(0, 8)).trim();
+        std::string head = string::string(pos->substr(0, 8)).trim();
         // Free Field Format
         if (head.find(',') != std::string::npos) {
             if (first) {

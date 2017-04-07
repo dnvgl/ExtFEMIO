@@ -29,7 +29,7 @@ unordered_set<long> cards::__base::beam_prop::used_cross_desc;
 
 cards::__base::beam_prop::beam_prop(
     vector<std::string> const &inp, size_t const len) {
-    read(inp, len);
+    geoprop::read(inp, len);
 }
 
 cards::__base::beam_prop::beam_prop(

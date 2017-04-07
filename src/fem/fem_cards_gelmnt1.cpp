@@ -36,7 +36,7 @@ using namespace fem;
 using namespace cards;
 using namespace types;
 
-const unordered_map<long, elements::el_types>
+const unordered_map<long, const elements::el_types>
 gelmnt1::eltyp_map({
         {2, elements::el_types::BEPS},
         {3, elements::el_types::CSTA},
