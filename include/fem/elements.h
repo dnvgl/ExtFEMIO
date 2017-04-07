@@ -22,7 +22,9 @@
 
 // ID: $Id$
 
-#line 26 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#pragma once
+
+#line 28 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
 
 #ifndef _FEM_ELEMENTS_H_
 #define _FEM_ELEMENTS_H_
@@ -33,8 +35,6 @@
 #endif
 
 #include <set>
-
-#include "fem/cards.h"
 
 #line 40 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
 
@@ -463,9 +463,9 @@ namespace dnvgl {
 
 
                     public:
-                        elem(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                        elem(dnvgl::extfem::fem::cards::gelref1 const*);
-                        elem(elem const*);
+                        explicit elem(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                        explicit elem(dnvgl::extfem::fem::cards::gelref1 const*);
+                        explicit elem(elem const*);
                         virtual ~elem();
 
                         cards::__base::card const &gelmnt1() const;
@@ -564,7 +564,7 @@ namespace dnvgl {
                 class undef : public __base::elem {
                 public:
                     undef ();
-                    undef(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit undef(dnvgl::extfem::fem::cards::gelref1 const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                 };
@@ -604,9 +604,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    beps(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    beps(dnvgl::extfem::fem::cards::gelref1 const*);
-                    beps(__base::elem const*);
+                    explicit beps(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit beps(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit beps(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -649,9 +649,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    csta(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    csta(dnvgl::extfem::fem::cards::gelref1 const*);
-                    csta(__base::elem const*);
+                    explicit csta(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit csta(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit csta(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -694,9 +694,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    rpbq(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    rpbq(dnvgl::extfem::fem::cards::gelref1 const*);
-                    rpbq(__base::elem const*);
+                    explicit rpbq(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit rpbq(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit rpbq(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -739,9 +739,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ilst(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ilst(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ilst(__base::elem const*);
+                    explicit ilst(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ilst(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ilst(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -784,9 +784,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    iqqe(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    iqqe(dnvgl::extfem::fem::cards::gelref1 const*);
-                    iqqe(__base::elem const*);
+                    explicit iqqe(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit iqqe(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit iqqe(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -829,9 +829,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    lqua(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    lqua(dnvgl::extfem::fem::cards::gelref1 const*);
-                    lqua(__base::elem const*);
+                    explicit lqua(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit lqua(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit lqua(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -874,9 +874,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    tess(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    tess(dnvgl::extfem::fem::cards::gelref1 const*);
-                    tess(__base::elem const*);
+                    explicit tess(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit tess(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit tess(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -919,9 +919,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    gmas(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    gmas(dnvgl::extfem::fem::cards::gelref1 const*);
-                    gmas(__base::elem const*);
+                    explicit gmas(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit gmas(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit gmas(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -964,9 +964,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    glma(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    glma(dnvgl::extfem::fem::cards::gelref1 const*);
-                    glma(__base::elem const*);
+                    explicit glma(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit glma(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit glma(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1009,9 +1009,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    glda(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    glda(dnvgl::extfem::fem::cards::gelref1 const*);
-                    glda(__base::elem const*);
+                    explicit glda(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit glda(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit glda(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1054,9 +1054,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    beas(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    beas(dnvgl::extfem::fem::cards::gelref1 const*);
-                    beas(__base::elem const*);
+                    explicit beas(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit beas(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit beas(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1099,9 +1099,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    axis(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    axis(dnvgl::extfem::fem::cards::gelref1 const*);
-                    axis(__base::elem const*);
+                    explicit axis(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit axis(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit axis(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1144,9 +1144,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    axda(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    axda(dnvgl::extfem::fem::cards::gelref1 const*);
-                    axda(__base::elem const*);
+                    explicit axda(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit axda(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit axda(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1189,9 +1189,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    gspr(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    gspr(dnvgl::extfem::fem::cards::gelref1 const*);
-                    gspr(__base::elem const*);
+                    explicit gspr(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit gspr(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit gspr(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1234,9 +1234,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    gdam(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    gdam(dnvgl::extfem::fem::cards::gelref1 const*);
-                    gdam(__base::elem const*);
+                    explicit gdam(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit gdam(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit gdam(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1279,9 +1279,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ihex(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ihex(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ihex(__base::elem const*);
+                    explicit ihex(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ihex(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ihex(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1324,9 +1324,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    lhex(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    lhex(dnvgl::extfem::fem::cards::gelref1 const*);
-                    lhex(__base::elem const*);
+                    explicit lhex(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit lhex(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit lhex(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1369,9 +1369,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    secb(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    secb(dnvgl::extfem::fem::cards::gelref1 const*);
-                    secb(__base::elem const*);
+                    explicit secb(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit secb(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit secb(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1414,9 +1414,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    btss(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    btss(dnvgl::extfem::fem::cards::gelref1 const*);
-                    btss(__base::elem const*);
+                    explicit btss(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit btss(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit btss(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1459,9 +1459,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    fqus_ffq(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    fqus_ffq(dnvgl::extfem::fem::cards::gelref1 const*);
-                    fqus_ffq(__base::elem const*);
+                    explicit fqus_ffq(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit fqus_ffq(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit fqus_ffq(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1504,9 +1504,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ftrs_fftr(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ftrs_fftr(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ftrs_fftr(__base::elem const*);
+                    explicit ftrs_fftr(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ftrs_fftr(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ftrs_fftr(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1549,9 +1549,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    scts(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    scts(dnvgl::extfem::fem::cards::gelref1 const*);
-                    scts(__base::elem const*);
+                    explicit scts(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit scts(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit scts(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1594,9 +1594,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    mcts(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    mcts(dnvgl::extfem::fem::cards::gelref1 const*);
-                    mcts(__base::elem const*);
+                    explicit mcts(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit mcts(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit mcts(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1639,9 +1639,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    scqs(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    scqs(dnvgl::extfem::fem::cards::gelref1 const*);
-                    scqs(__base::elem const*);
+                    explicit scqs(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit scqs(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit scqs(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1684,9 +1684,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    mcqs(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    mcqs(dnvgl::extfem::fem::cards::gelref1 const*);
-                    mcqs(__base::elem const*);
+                    explicit mcqs(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit mcqs(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit mcqs(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1729,9 +1729,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ipri(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ipri(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ipri(__base::elem const*);
+                    explicit ipri(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ipri(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ipri(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1774,9 +1774,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    itet(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    itet(dnvgl::extfem::fem::cards::gelref1 const*);
-                    itet(__base::elem const*);
+                    explicit itet(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit itet(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit itet(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1819,9 +1819,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    tpri(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    tpri(dnvgl::extfem::fem::cards::gelref1 const*);
-                    tpri(__base::elem const*);
+                    explicit tpri(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit tpri(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit tpri(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1864,9 +1864,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    tetr(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    tetr(dnvgl::extfem::fem::cards::gelref1 const*);
-                    tetr(__base::elem const*);
+                    explicit tetr(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit tetr(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit tetr(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1909,9 +1909,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    lcts(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    lcts(dnvgl::extfem::fem::cards::gelref1 const*);
-                    lcts(__base::elem const*);
+                    explicit lcts(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit lcts(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit lcts(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1954,9 +1954,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    lcqs(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    lcqs(dnvgl::extfem::fem::cards::gelref1 const*);
-                    lcqs(__base::elem const*);
+                    explicit lcqs(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit lcqs(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit lcqs(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -1999,9 +1999,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    trs1(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    trs1(dnvgl::extfem::fem::cards::gelref1 const*);
-                    trs1(__base::elem const*);
+                    explicit trs1(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit trs1(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit trs1(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2044,9 +2044,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    trs2(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    trs2(dnvgl::extfem::fem::cards::gelref1 const*);
-                    trs2(__base::elem const*);
+                    explicit trs2(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit trs2(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit trs2(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2089,9 +2089,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    trs3(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    trs3(dnvgl::extfem::fem::cards::gelref1 const*);
-                    trs3(__base::elem const*);
+                    explicit trs3(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit trs3(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit trs3(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2134,9 +2134,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    glsh(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    glsh(dnvgl::extfem::fem::cards::gelref1 const*);
-                    glsh(__base::elem const*);
+                    explicit glsh(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit glsh(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit glsh(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2179,9 +2179,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    axcs(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    axcs(dnvgl::extfem::fem::cards::gelref1 const*);
-                    axcs(__base::elem const*);
+                    explicit axcs(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit axcs(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit axcs(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2224,9 +2224,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    axlq(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    axlq(dnvgl::extfem::fem::cards::gelref1 const*);
-                    axlq(__base::elem const*);
+                    explicit axlq(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit axlq(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit axlq(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2269,9 +2269,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    axls(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    axls(dnvgl::extfem::fem::cards::gelref1 const*);
-                    axls(__base::elem const*);
+                    explicit axls(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit axls(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit axls(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2314,9 +2314,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    axqq(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    axqq(dnvgl::extfem::fem::cards::gelref1 const*);
-                    axqq(__base::elem const*);
+                    explicit axqq(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit axqq(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit axqq(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2359,9 +2359,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    pils(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    pils(dnvgl::extfem::fem::cards::gelref1 const*);
-                    pils(__base::elem const*);
+                    explicit pils(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit pils(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit pils(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2404,9 +2404,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    pcab(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    pcab(dnvgl::extfem::fem::cards::gelref1 const*);
-                    pcab(__base::elem const*);
+                    explicit pcab(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit pcab(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit pcab(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2449,9 +2449,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    pspr(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    pspr(dnvgl::extfem::fem::cards::gelref1 const*);
-                    pspr(__base::elem const*);
+                    explicit pspr(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit pspr(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit pspr(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2494,9 +2494,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    adva_4(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    adva_4(dnvgl::extfem::fem::cards::gelref1 const*);
-                    adva_4(__base::elem const*);
+                    explicit adva_4(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit adva_4(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit adva_4(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2539,9 +2539,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    adva_2(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    adva_2(dnvgl::extfem::fem::cards::gelref1 const*);
-                    adva_2(__base::elem const*);
+                    explicit adva_2(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit adva_2(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit adva_2(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2584,9 +2584,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ctcp(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ctcp(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ctcp(__base::elem const*);
+                    explicit ctcp(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ctcp(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ctcp(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2629,9 +2629,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ctcl(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ctcl(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ctcl(__base::elem const*);
+                    explicit ctcl(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ctcl(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ctcl(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2674,9 +2674,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ctal(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ctal(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ctal(__base::elem const*);
+                    explicit ctal(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ctal(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ctal(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2719,9 +2719,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ctcc(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ctcc(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ctcc(__base::elem const*);
+                    explicit ctcc(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ctcc(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ctcc(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2764,9 +2764,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ctaq(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ctaq(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ctaq(__base::elem const*);
+                    explicit ctaq(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ctaq(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ctaq(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2809,9 +2809,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ctlq(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ctlq(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ctlq(__base::elem const*);
+                    explicit ctlq(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ctlq(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ctlq(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2854,9 +2854,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ctcq(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ctcq(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ctcq(__base::elem const*);
+                    explicit ctcq(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ctcq(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ctcq(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2899,9 +2899,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ctmq(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ctmq(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ctmq(__base::elem const*);
+                    explicit ctmq(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ctmq(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ctmq(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2944,9 +2944,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    hcqs(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    hcqs(dnvgl::extfem::fem::cards::gelref1 const*);
-                    hcqs(__base::elem const*);
+                    explicit hcqs(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit hcqs(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit hcqs(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -2989,9 +2989,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    slqs(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    slqs(dnvgl::extfem::fem::cards::gelref1 const*);
-                    slqs(__base::elem const*);
+                    explicit slqs(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit slqs(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit slqs(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3034,9 +3034,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    slts(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    slts(dnvgl::extfem::fem::cards::gelref1 const*);
-                    slts(__base::elem const*);
+                    explicit slts(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit slts(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit slts(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3079,9 +3079,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    slcb(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    slcb(dnvgl::extfem::fem::cards::gelref1 const*);
-                    slcb(__base::elem const*);
+                    explicit slcb(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit slcb(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit slcb(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3124,9 +3124,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    matr(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    matr(dnvgl::extfem::fem::cards::gelref1 const*);
-                    matr(__base::elem const*);
+                    explicit matr(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit matr(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit matr(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3173,9 +3173,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex100(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex100(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex100(__base::elem const*);
+                    explicit ghex100(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex100(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex100(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3223,9 +3223,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex101(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex101(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex101(__base::elem const*);
+                    explicit ghex101(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex101(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex101(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3273,9 +3273,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex102(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex102(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex102(__base::elem const*);
+                    explicit ghex102(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex102(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex102(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3324,9 +3324,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex103(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex103(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex103(__base::elem const*);
+                    explicit ghex103(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex103(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex103(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3374,9 +3374,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex104(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex104(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex104(__base::elem const*);
+                    explicit ghex104(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex104(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex104(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3425,9 +3425,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex105(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex105(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex105(__base::elem const*);
+                    explicit ghex105(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex105(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex105(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3476,9 +3476,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex106(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex106(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex106(__base::elem const*);
+                    explicit ghex106(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex106(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex106(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3528,9 +3528,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex107(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex107(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex107(__base::elem const*);
+                    explicit ghex107(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex107(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex107(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3578,9 +3578,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex108(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex108(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex108(__base::elem const*);
+                    explicit ghex108(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex108(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex108(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3629,9 +3629,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex109(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex109(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex109(__base::elem const*);
+                    explicit ghex109(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex109(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex109(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3680,9 +3680,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex110(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex110(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex110(__base::elem const*);
+                    explicit ghex110(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex110(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex110(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3732,9 +3732,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex111(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex111(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex111(__base::elem const*);
+                    explicit ghex111(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex111(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex111(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3783,9 +3783,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex112(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex112(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex112(__base::elem const*);
+                    explicit ghex112(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex112(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex112(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3835,9 +3835,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex113(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex113(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex113(__base::elem const*);
+                    explicit ghex113(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex113(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex113(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3887,9 +3887,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex114(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex114(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex114(__base::elem const*);
+                    explicit ghex114(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex114(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex114(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3940,9 +3940,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex115(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex115(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex115(__base::elem const*);
+                    explicit ghex115(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex115(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex115(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -3990,9 +3990,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex116(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex116(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex116(__base::elem const*);
+                    explicit ghex116(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex116(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex116(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4041,9 +4041,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex117(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex117(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex117(__base::elem const*);
+                    explicit ghex117(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex117(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex117(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4092,9 +4092,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex118(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex118(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex118(__base::elem const*);
+                    explicit ghex118(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex118(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex118(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4144,9 +4144,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex119(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex119(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex119(__base::elem const*);
+                    explicit ghex119(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex119(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex119(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4195,9 +4195,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex120(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex120(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex120(__base::elem const*);
+                    explicit ghex120(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex120(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex120(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4247,9 +4247,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex121(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex121(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex121(__base::elem const*);
+                    explicit ghex121(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex121(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex121(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4299,9 +4299,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex122(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex122(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex122(__base::elem const*);
+                    explicit ghex122(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex122(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex122(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4352,9 +4352,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex123(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex123(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex123(__base::elem const*);
+                    explicit ghex123(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex123(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex123(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4403,9 +4403,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex124(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex124(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex124(__base::elem const*);
+                    explicit ghex124(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex124(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex124(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4455,9 +4455,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex125(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex125(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex125(__base::elem const*);
+                    explicit ghex125(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex125(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex125(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4507,9 +4507,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex126(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex126(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex126(__base::elem const*);
+                    explicit ghex126(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex126(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex126(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4560,9 +4560,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex127(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex127(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex127(__base::elem const*);
+                    explicit ghex127(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex127(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex127(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4612,9 +4612,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex128(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex128(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex128(__base::elem const*);
+                    explicit ghex128(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex128(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex128(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4665,9 +4665,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex129(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex129(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex129(__base::elem const*);
+                    explicit ghex129(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex129(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex129(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4718,9 +4718,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex130(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex130(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex130(__base::elem const*);
+                    explicit ghex130(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex130(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex130(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4772,9 +4772,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex131(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex131(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex131(__base::elem const*);
+                    explicit ghex131(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex131(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex131(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4822,9 +4822,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex132(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex132(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex132(__base::elem const*);
+                    explicit ghex132(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex132(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex132(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4873,9 +4873,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex133(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex133(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex133(__base::elem const*);
+                    explicit ghex133(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex133(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex133(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4924,9 +4924,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex134(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex134(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex134(__base::elem const*);
+                    explicit ghex134(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex134(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex134(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -4976,9 +4976,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex135(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex135(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex135(__base::elem const*);
+                    explicit ghex135(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex135(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex135(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5027,9 +5027,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex136(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex136(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex136(__base::elem const*);
+                    explicit ghex136(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex136(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex136(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5079,9 +5079,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex137(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex137(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex137(__base::elem const*);
+                    explicit ghex137(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex137(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex137(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5131,9 +5131,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex138(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex138(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex138(__base::elem const*);
+                    explicit ghex138(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex138(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex138(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5184,9 +5184,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex139(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex139(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex139(__base::elem const*);
+                    explicit ghex139(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex139(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex139(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5235,9 +5235,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex140(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex140(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex140(__base::elem const*);
+                    explicit ghex140(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex140(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex140(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5287,9 +5287,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex141(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex141(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex141(__base::elem const*);
+                    explicit ghex141(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex141(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex141(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5339,9 +5339,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex142(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex142(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex142(__base::elem const*);
+                    explicit ghex142(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex142(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex142(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5392,9 +5392,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex143(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex143(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex143(__base::elem const*);
+                    explicit ghex143(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex143(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex143(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5444,9 +5444,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex144(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex144(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex144(__base::elem const*);
+                    explicit ghex144(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex144(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex144(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5497,9 +5497,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex145(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex145(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex145(__base::elem const*);
+                    explicit ghex145(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex145(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex145(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5550,9 +5550,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex146(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex146(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex146(__base::elem const*);
+                    explicit ghex146(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex146(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex146(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5604,9 +5604,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex147(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex147(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex147(__base::elem const*);
+                    explicit ghex147(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex147(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex147(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5655,9 +5655,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex148(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex148(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex148(__base::elem const*);
+                    explicit ghex148(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex148(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex148(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5707,9 +5707,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex149(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex149(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex149(__base::elem const*);
+                    explicit ghex149(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex149(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex149(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5759,9 +5759,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex150(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex150(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex150(__base::elem const*);
+                    explicit ghex150(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex150(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex150(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5812,9 +5812,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex151(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex151(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex151(__base::elem const*);
+                    explicit ghex151(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex151(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex151(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5864,9 +5864,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex152(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex152(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex152(__base::elem const*);
+                    explicit ghex152(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex152(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex152(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5917,9 +5917,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex153(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex153(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex153(__base::elem const*);
+                    explicit ghex153(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex153(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex153(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -5970,9 +5970,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex154(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex154(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex154(__base::elem const*);
+                    explicit ghex154(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex154(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex154(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -6024,9 +6024,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex155(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex155(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex155(__base::elem const*);
+                    explicit ghex155(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex155(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex155(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -6076,9 +6076,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex156(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex156(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex156(__base::elem const*);
+                    explicit ghex156(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex156(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex156(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -6129,9 +6129,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex157(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex157(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex157(__base::elem const*);
+                    explicit ghex157(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex157(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex157(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -6182,9 +6182,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex158(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex158(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex158(__base::elem const*);
+                    explicit ghex158(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex158(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex158(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -6236,9 +6236,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex159(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex159(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex159(__base::elem const*);
+                    explicit ghex159(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex159(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex159(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -6289,9 +6289,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex160(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex160(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex160(__base::elem const*);
+                    explicit ghex160(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex160(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex160(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -6343,9 +6343,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex161(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex161(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex161(__base::elem const*);
+                    explicit ghex161(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex161(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex161(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -6397,9 +6397,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex162(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex162(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex162(__base::elem const*);
+                    explicit ghex162(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex162(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex162(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
@@ -6452,9 +6452,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    ghex163(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    ghex163(dnvgl::extfem::fem::cards::gelref1 const*);
-                    ghex163(__base::elem const*);
+                    explicit ghex163(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit ghex163(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit ghex163(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
