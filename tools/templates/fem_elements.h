@@ -22,6 +22,8 @@
 
 // ID: $Id$
 
+#pragma once
+
 {% line %}
 
 #ifndef _FEM_ELEMENTS_H_
@@ -33,8 +35,6 @@
 #endif
 
 #include <set>
-
-#include "fem/cards.h"
 
 {% line %}
 
@@ -223,9 +223,9 @@ namespace dnvgl {
 
 
                     public:
-                        elem(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                        elem(dnvgl::extfem::fem::cards::gelref1 const*);
-                        elem(elem const*);
+                        explicit elem(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                        explicit elem(dnvgl::extfem::fem::cards::gelref1 const*);
+                        explicit elem(elem const*);
                         virtual ~elem();
 
                         cards::__base::card const &gelmnt1() const;
@@ -324,7 +324,7 @@ namespace dnvgl {
                 class undef : public __base::elem {
                 public:
                     undef ();
-                    undef(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit undef(dnvgl::extfem::fem::cards::gelref1 const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                 };
@@ -364,9 +364,9 @@ namespace dnvgl {
                         std::vector<long> const &fixations={},
                         std::vector<long> const &eccentrities={},
                         std::vector<long> const &csys={});
-                    {{ elem }}(dnvgl::extfem::fem::cards::gelmnt1 const*);
-                    {{ elem }}(dnvgl::extfem::fem::cards::gelref1 const*);
-                    {{ elem }}(__base::elem const*);
+                    explicit {{ elem }}(dnvgl::extfem::fem::cards::gelmnt1 const*);
+                    explicit {{ elem }}(dnvgl::extfem::fem::cards::gelref1 const*);
+                    explicit {{ elem }}(__base::elem const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                     std::set<el_processor> static const processors;
