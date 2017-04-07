@@ -387,6 +387,7 @@ namespace dnvgl {
     }
 }
 
+// ReSharper disable CppUnusedIncludeDirective
 #include "fem/elements.h"
 #include "fem/cards_ident.h"
 #include "fem/cards_bounds.h"
@@ -394,6 +395,7 @@ namespace dnvgl {
 #include "fem/cards_mat.h"
 #include "fem/card_hl_node_elem.h"
 #include "fem/cards_superele.h"
+// ReSharper restore CppUnusedIncludeDirective
 
 namespace dnvgl {
     namespace extfem {

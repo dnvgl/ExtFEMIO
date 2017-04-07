@@ -945,14 +945,14 @@ namespace dnvgl {
                                  pos.at(0), pos.at(1), pos.at(2)) {};
                     gecc(double const EX, double const EY, double const EZ) :
                             gecc(0, ecc_opt::XYZ, EX, EY, EZ) {};
-                    gecc(std::vector<double> const &pos) :
+                    explicit gecc(std::vector<double> const &pos) :
                             gecc(0, ecc_opt::XYZ,
                                  pos.at(0), pos.at(1), pos.at(2)) {};
                     gecc(long const ECCNO, double const EZ) :
                             gecc(ECCNO, ecc_opt::Z_ONLY, 0., 0., EZ) {};
-                    gecc(double const EZ) :
+                    explicit gecc(double const EZ) :
                             gecc(0, ecc_opt::Z_ONLY, 0., 0., EZ) {};
-                    gecc(gecc const *that) :
+                    explicit gecc(gecc const *that) :
                             gecc(that->ECCNO, that->IOPT,
                                  that->EX, that->EY, that->EZ) {};
 
@@ -1058,13 +1058,13 @@ namespace dnvgl {
                     using card::operator();
                     card const &operator() (
                         long const ECCNO,
-                        double const EX, double const EY, double const EZ);
+                        double const EX, double const EY, double const EZ) = delete;
                     card const &operator() (
-                        long const ECCNO, std::vector<double> const &pos);
+                        long const ECCNO, std::vector<double> const &pos) = delete;
                     card const &operator() (
-                        double const EX, double const EY, double const EZ);
+                        double const EX, double const EY, double const EZ) = delete;
                     card const &operator() (
-                        std::vector<double> const &pos);
+                        std::vector<double> const &pos) = delete;
 
                 protected:
 
@@ -1101,8 +1101,7 @@ namespace dnvgl {
                     fem::types::entry_type<long>
                     static const _form_NODIN;
 
-                    std::unordered_map<
-                        long, dnvgl::extfem::fem::elements::el_types>
+                    std::unordered_map<long, const elements::el_types>
                     static const eltyp_map;
 
                 public:
@@ -1119,7 +1118,7 @@ namespace dnvgl {
     stiffness, mass, damping matrices a.s.o. See the AMATRIX record
     for more information.
 */
-                    fem::elements::el_types ELTYP;
+                    elements::el_types ELTYP;
 /** Additional information related to element type.
 
       - For membrane elements used to specify plane stress / plane
@@ -2373,7 +2372,7 @@ namespace dnvgl {
                     card const &operator() (
                         long const NFIELD, long const ISREF, long const INDEX,
                         types const ISTYPE, origins const ISORIG,
-                        std::vector<long> const &IRMEMB={});
+                        std::vector<long> const &IRMEMB={}) = delete;
 
                 protected:
 
@@ -2589,8 +2588,6 @@ namespace dnvgl {
                     card const &operator() (
                         double const UNIX, double const UNIY,
                         double const UNIZ);
-
-                    void reset();
 
                 protected:
 

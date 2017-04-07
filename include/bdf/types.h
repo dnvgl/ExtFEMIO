@@ -93,7 +93,7 @@ namespace dnvgl {
 
                     static out_form_type out_form;
 
-                    base(const std::string&);
+                    explicit base(const std::string&);
 
                     virtual ~base();
 
@@ -103,13 +103,13 @@ namespace dnvgl {
                     friend inline bool ::operator> (
                         const _Ty1 &one, const _Ty2 &other) {
                         return other < one;
-                    };
+                    }
 
                     template <class _Ty1, class _Ty2>
                     friend inline bool ::operator!= (
                         const _Ty1 &one, const _Ty2 &other) {
                         return !(other == one);
-                    };
+                    }
 
                     virtual std::string format(const void*) const = 0;
                 };
@@ -119,7 +119,7 @@ namespace dnvgl {
                 class imbue_helper : public base {
                 public:
 
-                    imbue_helper(const std::locale &loc);
+                    explicit imbue_helper(const std::locale &loc);
 
                     bdf_types type() const override;
 
@@ -129,7 +129,7 @@ namespace dnvgl {
                 class card : public base {
                 public:
 
-                    card(const std::string &name);
+                    explicit card(const std::string &name);
 
                     bdf_types type() const override;
 
@@ -209,6 +209,7 @@ namespace dnvgl {
                 }
 
                 template <> inline
+                // ReSharper disable CppPossiblyUninitializedMember
                 entry_value<std::list<int> >::entry_value(const entry_value<std::list<int> > &val) : value(val.value), is_value(val.is_value) {}
 
                 template <> inline
@@ -223,20 +224,25 @@ namespace dnvgl {
                 }
 
                 template <> inline
-                void entry_value<std::list<int> >::push_back(const long &inp) {
-                    this->value.push_back(inp);
-                }
-
-                template <> inline
                     entry_value<std::string>::entry_value(const std::string *value) : is_value(value != nullptr) {
                     if (is_value)
                         this->value = *value;
                     else
                         this->value = "";
                 }
+                // ReSharper restore CppPossiblyUninitializedMember
+
+                template <> inline
+                void entry_value<std::list<int> >::push_back(const long &inp) {
+                    this->value.push_back(inp);
+                }
 
                 template <class _Ty>
-                class entry_type : public base { };
+                class entry_type : public base {
+                public:
+                    explicit entry_type(const std::string& cs)
+                        : base(cs) { }
+                };
 
 /// Integer value.
                 extern const
@@ -260,7 +266,7 @@ namespace dnvgl {
 
                 public:
 
-                    entry_type(const std::string &name) :
+                    explicit entry_type(const std::string &name) :
                             bdf::types::base(name), bounds(nullptr) {};
 
                     entry_type(

@@ -66,10 +66,10 @@ namespace dnvgl {
         namespace bdf {
             namespace cards {
 
-                void extern const(*note_report)(std::string const &);
-                void extern const(*info_report)(std::string const &);
-                void extern const(*warn_report)(std::string const &);
-                void extern const(*error_report)(std::string const &);
+                void extern(*note_report)(std::string const &);
+                void extern(*info_report)(std::string const &);
+                void extern(*warn_report)(std::string const &);
+                void extern(*error_report)(std::string const &);
 
 /**
    \brief Unique identifier for each class representing a BDF card.
@@ -898,6 +898,7 @@ namespace dnvgl {
     }
 }
 
+// ReSharper disable once CppUnusedIncludeDirective
 #include "bdf/cards_properties.h"
 
 namespace dnvgl {

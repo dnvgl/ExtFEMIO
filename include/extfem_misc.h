@@ -9,11 +9,16 @@
 
 // ID: $Id$
 
+#pragma once
+
 #if !defined _EXTFEM_MISC_H_
 #define _EXTFEM_MISC_H_
 
-#include <sstream>
+// ReSharper disable CppUnusedIncludeDirective
 #include <cstring>
+// ReSharper restore CppUnusedIncludeDirective
+#include <string>
+#include <exception>
 
 #if defined(_MSC_VER) & _MSC_VER < 1900
 #define _EXTFEMIO_NOEXCEPT
@@ -35,20 +40,12 @@ namespace std {
     public:
 
         // Construct with given error message:
-        not_implemented(
-            const char *fname="", const size_t &line=0,
-            const char *error="Functionality not yet implemented!") {
-            ostringstream msg("", ostringstream::ate);
-            if (line != 0 && strlen(fname) > 0)
-                msg << fname << ":" << line << ":";
-            msg << "Functionality not yet implemented!";
-            errorMessage = msg.str();
-        }
+        explicit not_implemented(
+            const char* fname = "", const size_t& line = 0,
+            const char* error = "Functionality not yet implemented!");
 
         // Provided for compatibility with std::exception.
-        const char *what() const _EXTFEMIO_NOEXCEPT override {
-            return errorMessage.c_str();
-        }
+        const char* what() const _EXTFEMIO_NOEXCEPT override;
 
     private:
 

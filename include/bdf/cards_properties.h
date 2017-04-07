@@ -16,6 +16,7 @@
 #include <memory>
 #include <list>
 
+// ReSharper disable once CppUnusedIncludeDirective
 #include "bdf/cards.h"
 
 namespace dnvgl {

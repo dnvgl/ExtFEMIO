@@ -12,10 +12,6 @@
 #if !defined _BDF_ERRORS_H_
 #define _BDF_ERRORS_H_
 
-#include <string>
-
-#include "extfem_misc.h"
-
 #if defined(_MSC_VER) & _MSC_VER < 1900
 #define _EXTFEMIO_NOEXCEPT
 #else

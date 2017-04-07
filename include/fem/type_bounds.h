@@ -158,9 +158,9 @@ namespace dnvgl {
 
                 public:
 
-                    bound() {};
+                    bound() = default;
 
-                    bound(bool &_default) {
+                    explicit bound(bool &_default) {
                         got_default();
                     }
 

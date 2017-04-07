@@ -283,13 +283,13 @@ Defines a scalar mass element without reference to a property entry.
                     entry_value<std::list<int>> C2;
 
                 private:
-                    explicit cmass2(std::string const&);
+                    explicit cmass2(std::string const&) = delete;
 
                 public:
 
                     cmass2();
 
-                    cmass2(std::list<std::string> const&);
+                    explicit cmass2(std::list<std::string> const&);
 
                     cmass2(long const *EID, double const *M,
                            long const *G1, std::list<int> const *C1,
@@ -378,7 +378,7 @@ reference to a property entry.
                     */
                     entry_value<long> S2;
                 private:
-                    explicit cmass4(std::string const&);
+                    explicit cmass4(std::string const&) = delete;
 
                 public:
 
@@ -514,13 +514,13 @@ Defines acceleration vectors for gravity or other acceleration loading.
 
                 private:
 
-                    explicit grav(std::string const&);
+                    explicit grav(std::string const&) = delete;
 
                 public:
 
                     grav();
 
-                    grav(std::list<std::string> const&);
+                    explicit grav(std::list<std::string> const&);
 
                     grav(long const *SID, long const *CID,
                          double const *A,
