@@ -33,15 +33,14 @@ namespace {
 // This tells Catch to provide a main() - only do this in one cpp file
 #define CATCH_CONFIG_MAIN
 
-#include <limits>
-
-#include <iostream>
 #include <deque>
 #include <memory>
 
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "fem/elements.h"
 

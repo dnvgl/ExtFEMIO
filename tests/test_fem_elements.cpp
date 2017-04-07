@@ -33,15 +33,14 @@ namespace {
 // This tells Catch to provide a main() - only do this in one cpp file
 #define CATCH_CONFIG_MAIN
 
-#include <limits>
-
-#include <iostream>
 #include <deque>
 #include <memory>
 
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "fem/cards.h"
 #include "fem/elements.h"
@@ -28417,5 +28416,5 @@ TEST_CASE("Output for GHEX163 elements.", "[fem_element_ghex163]") {
 // indent-tabs-mode: nil
 // compile-command: "make -C ../cbuild -j8&&
 //    (make -C ../cbuild test;
-//     ../.cbuild/tests/test_fem_elements --use-colour no)"
+//     ../cbuild/tests/test_fem_elements --use-colour no)"
 // End:
