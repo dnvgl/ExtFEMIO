@@ -324,9 +324,9 @@ namespace dnvgl {
 
                     protected:
 
-                        long static const get_eleno();
+                        long static get_eleno();
                         long static get_eleno(long const eleno);
-                        long static const get_elident();
+                        long static get_elident();
                         long static get_elident(long const elident);
                         el_types static const type;
 

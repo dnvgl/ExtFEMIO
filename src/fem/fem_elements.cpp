@@ -310,7 +310,7 @@ void elements::dispatch(
     case el_types::UNDEFINED:
         res = make_unique<undef>(); break;
     case el_types::INVALID:
-        throw errors::parse_error("GELMNT1", "invalid element type"); break;
+        throw errors::parse_error("GELMNT1", "invalid element type");
     };
 #line 77 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 }
@@ -498,12 +498,12 @@ elements::__base::elem::elem(cards::gelmnt1 const *data) :
     i_stress_ref(0), strpoint_ref(0),
     section(), fixations(), eccentrities(),
     csys() {
-    this->add(data);
+    this->elem::add(data);
 }
 
 elements::__base::elem::elem(cards::gelref1 const *data) :
     eleno(0), elident(0), el_add(0), nodes() {
-    this->add(data);
+    this->elem::add(data);
 }
 
 elements::__base::elem::elem(elem const *data) {
@@ -643,7 +643,7 @@ long elements::__base::elem::get_eleno(long const eleno) {
     return res;
 }
 
-long const elements::__base::elem::get_eleno() {
+long elements::__base::elem::get_eleno() {
     do {;} while (used_nos.find(++max_no) != used_nos.end());
     used_nos.insert(max_no);
     return max_no;
@@ -656,7 +656,7 @@ long elements::__base::elem::get_elident(long const elident) {
     return res;
 }
 
-long const elements::__base::elem::get_elident() {
+long elements::__base::elem::get_elident() {
     do {;} while (used_ids.find(++max_id) != used_ids.end());
     used_ids.insert(max_id);
     return max_id;
