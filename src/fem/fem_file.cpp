@@ -8,6 +8,8 @@
 */
 #include "StdAfx.h"
 
+#include <stdexcept>
+
 #include "extfem_misc.h"
 
 // ID:

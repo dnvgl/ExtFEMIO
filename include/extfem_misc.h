@@ -13,7 +13,7 @@
 #define _EXTFEM_MISC_H_
 
 #include <sstream>
-
+#include <cstring>
 
 #if defined(_MSC_VER) & _MSC_VER < 1900
 #define _EXTFEMIO_NOEXCEPT
