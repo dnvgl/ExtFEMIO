@@ -140,11 +140,11 @@ int cmdline_parser_file_save(const char *filename,
 /**
  * Print the help
  */
-void cmdline_parser_print_help();
+void cmdline_parser_print_help(void);
 /**
  * Print the version
  */
-void cmdline_parser_print_version();
+void cmdline_parser_print_version(void);
 
 /**
  * Initializes all the fields a cmdline_parser_params structure 
@@ -158,7 +158,7 @@ void cmdline_parser_params_init(struct cmdline_parser_params *params);
  * all its fields to their default values
  * @return the created and initialized cmdline_parser_params structure
  */
-struct cmdline_parser_params *cmdline_parser_params_create();
+struct cmdline_parser_params *cmdline_parser_params_create(void);
 
 /**
  * Initializes the passed gengetopt_args_info structure's fields
