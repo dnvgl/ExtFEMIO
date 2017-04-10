@@ -14,8 +14,6 @@
 
 #pragma once
 
-#ifdef _MSC_VER
-
 #ifdef _X64
    #define NTDDI_VERSION    NTDDI_WIN7SP4
 #else
@@ -80,8 +78,6 @@ static char THIS_FILE[] = __FILE__;
 #endif
 #include "extfem_misc.h"
 #include "extfem_string.h"
-
-#endif
 
 // Local Variables:
 // mode: c++

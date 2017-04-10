@@ -9,6 +9,8 @@
 
 #include "StdAfx.h"
 
+#include <iostream>
+
 #include "extfem_misc.h"
 
 // ID:
@@ -24,7 +26,7 @@ using namespace std;
 using namespace dnvgl::extfem::support;
 using namespace dnvgl::extfem::support::GroupInfo;
 
-CSV::CSV(std::istream &inp) {
+CSV::CSV(istream &inp) {
     std::string line;
     elem_info info;
 
@@ -42,10 +44,10 @@ void CSV::process_line(std::string const &line,
     istringstream inp(line);
     istringstream proc;
     std::string segment;
-    proc.imbue(std::locale::classic());
+    proc.imbue(locale::classic());
 
     if (getline(inp, segment, ';')) {
-        // data->id = std::atol(segment.c_str());
+        // data->id = atol(segment.c_str());
         proc.str(segment);
         proc >> data->id;
     } else
@@ -53,7 +55,7 @@ void CSV::process_line(std::string const &line,
             "Read CSV",
             "Can't read line """ + line + """");
     if (getline(inp, segment, ';')) {
-        // data->nnodes = std::atol(segment.c_str());
+        // data->nnodes = atol(segment.c_str());
         proc.str(segment);
         proc.seekg(0) >> data->nnodes;
     } else
@@ -82,7 +84,7 @@ void CSV::process_line(std::string const &line,
         // proc.seekg(0) >> data->grade;
     }
     if (getline(inp, segment, ';')) {
-        //data->yield = std::atof(segment.c_str());
+        //data->yield = atof(segment.c_str());
         proc.str(segment);
         proc.seekg(0) >> data->yield;
     }

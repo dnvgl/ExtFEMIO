@@ -32,7 +32,8 @@ std::ostream &outline::operator<<(std::ostream &os) const {
     return this->put(os);
 }
 
-std::not_implemented::not_implemented(const char* fname, const size_t& line, const char* error) {
+std::not_implemented::not_implemented(
+    const char* fname, const size_t& line, const char* error) {
     ostringstream msg("", ostringstream::ate);
     if (line != 0 && strlen(fname) > 0)
         msg << fname << ":" << line << ":";
@@ -40,7 +41,7 @@ std::not_implemented::not_implemented(const char* fname, const size_t& line, con
     errorMessage = msg.str();
 }
 
-const char* std::not_implemented::what() const {
+const char* std::not_implemented::what() const _EXTFEMIO_NOEXCEPT {
     return errorMessage.c_str();
 }
 
