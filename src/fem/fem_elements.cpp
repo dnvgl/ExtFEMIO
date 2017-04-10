@@ -14,15 +14,15 @@
 /**
    \file fem/fem_elements.cpp
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
-   \copyright Copyright © 2015 by DNV GL SE
+   \copyright Copyright © 2015,2016,2017 by DNV GL SE
    \brief Common definitions for FEM elements.
 
    Detailed description
 */
 
-#line 24 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
-
 #include "StdAfx.h"
+
+#line 26 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
 #include "extfem_misc.h"
 
