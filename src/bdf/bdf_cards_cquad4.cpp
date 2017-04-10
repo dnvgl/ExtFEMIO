@@ -92,7 +92,7 @@ void cquad4::read(const std::list<std::string> &inp) {
         form_G3.set_value(G3, *(pos++));
         form_G2.set_value(G2, *(pos++));
         form_G1.set_value(G1, *(pos++));
-        form_PID.set_value(PID, *(pos++));
+        form_PID.set_value(PID, *(pos));
         // form_EID.set_value(EID, *pos);
         break;
     default:

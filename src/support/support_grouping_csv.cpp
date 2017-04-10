@@ -1,5 +1,5 @@
 /**
-   \file support_grouping_csv.cpp
+   \file support/support_grouping_csv.cpp
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
    \brief Read FE grouping information from NAPA Provided CSV file.
@@ -8,8 +8,6 @@
 */
 
 #include "StdAfx.h"
-
-#include <iostream>
 
 #include "extfem_misc.h"
 

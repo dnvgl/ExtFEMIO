@@ -93,7 +93,7 @@ void ctria3::read(std::list<std::string> const &inp) {
         form_G4.set_value(G4, *(pos++));
         form_G2.set_value(G2, *(pos++));
         form_G1.set_value(G1, *(pos++));
-        form_PID.set_value(PID, *(pos++));
+        form_PID.set_value(PID, *(pos));
         // form_EID.set_value(EID, *pos);
         break;
     default:

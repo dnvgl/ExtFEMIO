@@ -113,7 +113,7 @@ void cards::__base::momforce::read(list<std::string> const &inp) {
         form_F.set_value(F, *(pos++));
         form_CID.set_value(CID, *(pos++));
         form_G.set_value(G, *(pos++));
-        form_SID.set_value(SID, *(pos++));
+        form_SID.set_value(SID, *(pos));
         break;
     default:
         throw errors::parse_error("FORCE/MOMENT", "Illegal number of entries.");

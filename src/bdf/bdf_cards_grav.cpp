@@ -138,7 +138,7 @@ void grav::read(list<std::string> const &inp) {
     if (pos == inp.end()) goto invalid;
     form_Ni.set_value(N3, *(pos++));
     if (pos == inp.end()) goto invalid;
-    form_MB.set_value(MB, *(pos++));
+    form_MB.set_value(MB, *(pos));
     goto end;
 
 invalid:

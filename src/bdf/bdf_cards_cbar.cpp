@@ -163,7 +163,7 @@ void cbar::read(list<std::string> const &inp) {
         ++pos;
         form_GB.set_value(GB, *(pos++));
         form_GA.set_value(GA, *(pos++));
-        form_PID.set_value(PID, *(pos++));
+        form_PID.set_value(PID, *(pos));
         // form_EID.set_value(EID, *(pos++));
         break;
     default:

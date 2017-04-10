@@ -66,8 +66,7 @@ void crod::read(std::list<std::string> const &inp) {
     case 4:
         form_G2.set_value(G2, *(pos++));
         form_G1.set_value(G1, *(pos++));
-        form_PID.set_value(PID, *(pos++));
-        // form_EID.set_value(EID, *pos);
+        form_PID.set_value(PID, *(pos));
         break;
     default:
         throw errors::parse_error(

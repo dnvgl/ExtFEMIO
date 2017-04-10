@@ -94,7 +94,7 @@ void cmass4::read(list<std::string> const &inp) {
     if (pos == inp.end()) goto end;
     form_S1.set_value(S1, *(pos++));
     if (pos == inp.end()) goto end;
-    form_S2.set_value(S2, *(pos++));
+    form_S2.set_value(S2, *(pos));
     goto end;
 
 invalid:

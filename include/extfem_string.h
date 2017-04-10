@@ -11,10 +11,10 @@
 
 #pragma once
 
+#include <string>
+
 #if !defined _EXTFEM_STRING_H_
 #define _EXTFEM_STRING_H_
-
-#include <string>
 
 namespace dnvgl {
     namespace extfem {

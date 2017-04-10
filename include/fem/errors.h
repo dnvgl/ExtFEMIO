@@ -9,8 +9,7 @@
 
 // ID: $Id$
 
-#if !defined _FEM_ERRORS_H_
-#define _FEM_ERRORS_H_
+#pragma once
 
 #include <string>
 
@@ -19,6 +18,9 @@
 #else
 #define _EXTFEMIO_NOEXCEPT noexcept
 #endif
+
+#if !defined _FEM_ERRORS_H_
+#define _FEM_ERRORS_H_
 
 namespace dnvgl {
     namespace extfem {

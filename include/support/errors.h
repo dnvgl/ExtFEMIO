@@ -29,7 +29,7 @@ namespace dnvgl {
                std::string name;
                std::string err_class;
 
-               std::string get_msg(void) const;
+               std::string get_msg() const;
 
             public:
 
@@ -37,7 +37,7 @@ namespace dnvgl {
                   const std::string&, const std::string &msg,
                   const std::string &err_class="support_error");
 
-               std::string operator() (void) const;
+               std::string operator() () const;
             };
 
             class string_error : public error {

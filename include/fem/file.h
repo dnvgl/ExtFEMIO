@@ -24,39 +24,39 @@
 #include "extfem_misc.h"
 
 namespace dnvgl {
-   namespace extfem {
-      namespace fem {
-         namespace input {
+    namespace extfem {
+        namespace fem {
+            namespace input {
 
-            class fem_file {
+                class fem_file {
 
-            private:
+                private:
 
-               static const std::set<char> cont_chars;
-               std::string cur_line;
-               std::istream &data;
+                    static const std::set<char> cont_chars;
+                    std::string cur_line;
+                    std::istream &data;
 
-            public:
+                public:
 
-               std::string last_comment;
+                    std::string last_comment;
 
-               bool eof() const;
+                    bool eof() const;
 
-               fem_file(std::istream&);
+                    explicit fem_file(std::istream&);
 
-               size_t get(std::vector<std::string>&);
+                    size_t get(std::vector<std::string>&);
 
-               /// actual byte position (hopefully no fem > 2Gybte will be
-               /// readin ...)
-               std::streampos size() const;
+                    /// actual byte position (hopefully no fem > 2Gybte will be
+                    /// readin ...)
+                    std::streampos size() const;
 
-               /// actual byte position (hopefully no fem > 2Gybte will be
-               /// readin ...)
-               std::streampos pos() const;
-            };
-         }
-      }
-   }
+                    /// actual byte position (hopefully no fem > 2Gybte will be
+                    /// readin ...)
+                    std::streampos pos() const;
+                };
+            }
+        }
+    }
 }
 
 #endif // _FEM_FILE_H_

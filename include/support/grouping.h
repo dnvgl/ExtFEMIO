@@ -60,11 +60,13 @@ namespace dnvgl {
 
                     long lastID;
 
+                    grp_info() : lastID{0} {}
+
                 public:
 
                     double const &yield(const long &id);
 
-                    inline void add_elem(
+                    void add_elem(
                         long const &id,
                         long const &nnodes,
                         std::string const &napa_obj,
@@ -75,7 +77,7 @@ namespace dnvgl {
                             id, nnodes, napa_obj, func_name, grade, yield);
                     };
 
-                    inline void add_elem(long const &id) {
+                    void add_elem(long const &id) {
                         (*this)[id] = elem_info(id);
                     };
                 };
@@ -84,11 +86,11 @@ namespace dnvgl {
 
                 public:
 
-                    CSV(std::istream &);
+                    explicit CSV(std::istream &);
 
                 protected:
 
-                    CSV(void) {};
+                    CSV() {};
 
                     static void process_line(std::string const &, elem_info *);
                 };
@@ -97,12 +99,12 @@ namespace dnvgl {
 
                 public:
 
-                    Session(std::istream const &);
+                    explicit Session(std::istream const &);
 
                 protected:
 
                     static void process_range(
-                        std::string const &, std::vector<long> *);
+                        std::string const &, std::vector<long> *) = delete;
                 };
             }
         }

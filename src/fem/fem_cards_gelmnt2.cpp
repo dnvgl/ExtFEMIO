@@ -54,10 +54,6 @@ void gelmnt2::read(const vector<std::string> &inp, size_t const len) {
         throw errors::parse_error(
             "GELMNT2", "Illegal number of entries.");
 
-    auto pos = inp.begin();
-
-    ++pos;
-
     SUBNO = _form_SUBNO(inp.at(1));
     SLEVEL = _form_SLEVEL(inp.at(2));
     STYPE = _form_STYPE(inp.at(3));

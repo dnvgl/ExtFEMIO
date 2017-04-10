@@ -47,9 +47,6 @@ void iend::read(vector<std::string> const &inp, size_t const len) {
         throw errors::parse_error(
             "IEND", "Illegal number of entries.");
 
-    auto pos = inp.begin();
-
-    ++pos;
     CONT = _form_CONT(inp.at(1));
 }
 

@@ -65,8 +65,7 @@ void element::read(std::list<std::string> const &inp) {
         throw errors::parse_error(
         "ELEMENT", "Illegal number of entries.");
 
-    ++pos;
-    form_EID.set_value(EID, *(pos++));
+    form_EID.set_value(EID, *(++pos));
 }
 
 cards::types element::card_type() const {
