@@ -32,8 +32,6 @@ namespace {
        "@(#) $Id$";
 }
 
-#include <memory>
-
 #if (__GNUC__ && (__GNUC__ < 4 || (__GNUC__ == 4 && __GNUC_MINOR__ < 9))) || \
     (_MSC_VER && _MSC_VER <= 1700)
 #include "my_c++14.h"
@@ -41,7 +39,6 @@ namespace {
 
 #include "fem/cards.h"
 #include "fem/elements.h"
-#include "fem/errors.h"
 
 #if defined(__AFX_H__) & defined(_DEBUG)
 #define new DEBUG_NEW
