@@ -17,11 +17,11 @@ namespace {
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
 
-#include <limits>
-
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "fem/cards.h"
 
@@ -68,12 +68,12 @@ TEST_CASE("FEM TEXT definitions.", "[fem_text]" ) {
 
     SECTION("TEXT (2)") {
         vector<std::string> data({
-                // 345678|234567890123456|234567890123456|234567890123456|234567890123456
-                "TEXT     0.000000000e+00 0.000000000e+00 4.000000000e+00 7.200000000e+01",
-                "        CONVERSION DETAILS:",
-                "        Msc Nastran File Format -> Sesam Interface File.",
-                "        Input  : \\test_01.bdt",
-                "        Log    : \\test_01.txt"});
+            // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+            "TEXT     0.000000000e+00 0.000000000e+00 4.000000000e+00 7.200000000e+01",
+            "        CONVERSION DETAILS:",
+            "        Msc Nastran File Format -> Sesam Interface File.",
+            "        Input  : \\test_01.bdt",
+            "        Log    : \\test_01.txt"});
 
         len = __base::card::card_split(data, data.size(), lines);
         text probe(lines, len);
@@ -83,12 +83,31 @@ TEST_CASE("FEM TEXT definitions.", "[fem_text]" ) {
         CHECK(probe.NRECS == 4);
         CHECK(probe.NBYTE == 72);
         CHECK(probe.CONT == std::vector<std::string>({
-                    //        1         2         3         4         5         6         7
-                    // 3456789012345678901234567890123456789012345678901234567890123456789012
-                    "CONVERSION DETAILS:                                                     ",
-                    "Msc Nastran File Format -> Sesam Interface File.                        ",
-                    "Input  : \\test_01.bdt                                                   ",
-                    "Log    : \\test_01.txt                                                   "}));
+            //        1         2         3         4         5         6         7
+            // 3456789012345678901234567890123456789012345678901234567890123456789012
+            "CONVERSION DETAILS:                                                     ",
+            "Msc Nastran File Format -> Sesam Interface File.                        ",
+            "Input  : \\test_01.bdt                                                   ",
+            "Log    : \\test_01.txt                                                   "}));
+    }
+
+    SECTION("TEXT (empty)") {
+        vector<std::string> data({
+            // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+            "TEXT    +3.000000000e+00+1.000000000e+00+1.000000000e+00+2.000000000e+01",
+            "                            "});
+
+        len = __base::card::card_split(data, data.size(), lines);
+        text probe(lines, len);
+
+        CHECK(probe.TYPE == 3);
+        CHECK(probe.SUBTYPE == 1);
+        CHECK(probe.NRECS == 1);
+        CHECK(probe.NBYTE == 20);
+        CHECK(probe.CONT == std::vector<std::string>({
+            //        1         2         3         4         5         6         7
+            // 3456789012345678901234567890123456789012345678901234567890123456789012
+            "                    "}));
     }
 }
 
@@ -189,7 +208,6 @@ TEST_CASE("FEM TEXT types output.", "[fem_text,out]" ) {
 TEST_CASE("FEM TEXT conversion from own output.", "[fem_text,in/out]") {
 
     vector<std::string> lines;
-    size_t len;
 
     SECTION("TEXT (1)") {
         vector<std::string> data({
@@ -199,7 +217,7 @@ TEST_CASE("FEM TEXT conversion from own output.", "[fem_text,in/out]") {
                 "        Msc Nastran File Format -> Sesam Interface File.\n",
                 "        Input  : \\test_01.bdt                           \n",
                 "        Log    : \\test_01.txt                           \n"});
-        len = __base::card::card_split(data, data.size(), lines);
+        auto len = __base::card::card_split(data, data.size(), lines);
         text probe(lines, len);
 
         CHECK(probe.TYPE == 0);

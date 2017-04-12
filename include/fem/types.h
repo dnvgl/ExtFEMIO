@@ -238,7 +238,7 @@ namespace dnvgl {
 
                 public:
 
-                    entry_type(std::string const&);
+                    explicit entry_type(std::string const&);
 
                     entry_type(
                         std::string const&,

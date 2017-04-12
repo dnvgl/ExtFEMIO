@@ -17,11 +17,11 @@ namespace {
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
 
-#include <limits>
-
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "fem/cards.h"
 
@@ -96,19 +96,37 @@ TEST_CASE("FEM TDLOAD definitions.", "[fem_tdload]") {
         //                      1234567891123456789212345678931234567894123456789512345678961234
         CHECK(probe.CONT[1] == "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNUPQRSTUVWXYZ1234567890#+");
     }
+
+
+    SECTION("TDLOAD (empty)") {
+        vector<std::string> data({
+            // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+            "TDLOAD  +4.000000000e+00+1.000000000e+00+1.120000000e+02+0.000000000e+00",
+            "                    "
+        });
+
+        len = __base::card::card_split(data, data.size(), lines);
+        tdload probe(lines, len);
+
+        CHECK(probe.NFIELD == 4);
+        CHECK(probe.ILREF == 1);
+        CHECK(probe.CODNAM == 112);
+        CHECK(probe.CODTXT == 0);
+        CHECK(probe.SET_NAME == "            ");
+        CHECK(probe.CONT.size() == 0);
+    }
 }
 
 TEST_CASE("FEMIO-32: Import failed when reading TDLOAD entry") {
 
     vector<std::string> lines;
-    size_t len;
 
     SECTION("Failing card") {
         vector<std::string> data({
             // 345678|234567890123456|234567890123456|234567890123456|234567890123456
             "TDLOAD   4.00000000e+000 1.00000000e+000 1.00000000e+002 0.00000000e+000\n",
             "         "});
-        len = __base::card::card_split(data, data.size(), lines);
+        auto len = __base::card::card_split(data, data.size(), lines);
         tdload probe(lines, len);
 
         CHECK(probe.NFIELD == 4);

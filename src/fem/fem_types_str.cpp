@@ -54,7 +54,7 @@ entry_type<string>::operator() (
 
     sval.insert(0, inp1).insert(16, inp2).insert(32, inp3).insert(48, inp4);
 
-    std::string res(sval.trim());
+    std::string res(sval);
 
     if (res.length() == 0)
         res.assign(bounds.get_default());
