@@ -70,24 +70,22 @@ set(LIBEXTFEMIO_FEM_SOURCES
   fem_types_list_int.cpp
   fem_types_str.cpp)
 set(LIBEXTFEMIO_FEM_HEADERS
-  ../../include/extfem_misc.h
-  ../../include/extfem_string.h
-  ../../include/fem2fem_args.h
-  ../../include/my_c++14.h
-  ../../include/resource.h
-  ../../include/StdAfx.h
-  ../../include/fem/cards.h
-  ../../include/fem/card_hl_node_elem.h
-  ../../include/fem/cards_bounds.h
-  ../../include/fem/cards_ident.h
-  ../../include/fem/cards_mat.h
-  ../../include/fem/cards_node_elem.h
-  ../../include/fem/cards_superele.h
-  ../../include/fem/elements.h
-  ../../include/fem/errors.h
-  ../../include/fem/file.h
-  ../../include/fem/type_bounds.h
-  ../../include/fem/types.h)
+  ${CMAKE_SOURCE_DIR}/include/extfem_misc.h
+  ${CMAKE_SOURCE_DIR}/include/extfem_string.h
+  ${CMAKE_SOURCE_DIR}/include/my_c++14.h
+  ${CMAKE_SOURCE_DIR}/include/resource.h
+  ${CMAKE_SOURCE_DIR}/include/fem/cards.h
+  ${CMAKE_SOURCE_DIR}/include/fem/card_hl_node_elem.h
+  ${CMAKE_SOURCE_DIR}/include/fem/cards_bounds.h
+  ${CMAKE_SOURCE_DIR}/include/fem/cards_ident.h
+  ${CMAKE_SOURCE_DIR}/include/fem/cards_mat.h
+  ${CMAKE_SOURCE_DIR}/include/fem/cards_node_elem.h
+  ${CMAKE_SOURCE_DIR}/include/fem/cards_superele.h
+  ${CMAKE_SOURCE_DIR}/include/fem/elements.h
+  ${CMAKE_SOURCE_DIR}/include/fem/errors.h
+  ${CMAKE_SOURCE_DIR}/include/fem/file.h
+  ${CMAKE_SOURCE_DIR}/include/fem/type_bounds.h
+  ${CMAKE_SOURCE_DIR}/include/fem/types.h)
 add_library (extfemio_fem STATIC
   ${LIBEXTFEMIO_FEM_SOURCES}
   ${LIBEXTFEMIO_FEM_HEADERS})
@@ -95,10 +93,11 @@ if (COMMAND cotire)
   cotire(extfemio_fem)
   set_target_properties(extfemio_fem
     PROPERTIES
-    COTIRE_CXX_PREFIX_HEADER_INIT "${CMAKE_SOURCE_DIR}/include/stdafx.h")
+    COTIRE_CXX_PREFIX_HEADER_INIT "${CMAKE_SOURCE_DIR}/src/StdAfx.h")
 endif()
 
 target_include_directories (extfemio_fem PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+include_directories(${CMAKE_SOURCE_DIR}/include ${CMAKE_SOURCE_DIR}/src)
 
 IF(NOT MSVC)
   add_executable(fem2fem

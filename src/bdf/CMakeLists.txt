@@ -60,21 +60,19 @@ set(LIBEXTFEMIO_BDF_SOURCES
   bdf_header_exec_control_cend.cpp
   bdf_header_exec_control_sol.cpp)
 set(LIBEXTFEMIO_BDF_HEADERS
-  ../../include/extfem_misc.h
-  ../../include/extfem_string.h
-  ../../include/fem2fem_args.h
-  ../../include/my_c++14.h
-  ../../include/resource.h
-  ../../include/StdAfx.h
-  ../../include/bdf/cards_elements.h
-  ../../include/bdf/cards.h
-  ../../include/bdf/cards_loads.h
-  ../../include/bdf/cards_properties.h
-  ../../include/bdf/errors.h
-  ../../include/bdf/file.h
-  ../../include/bdf/header.h
-  ../../include/bdf/type_bounds.h
-  ../../include/bdf/types.h)
+  ${CMAKE_SOURCE_DIR}/include/extfem_misc.h
+  ${CMAKE_SOURCE_DIR}/include/extfem_string.h
+  ${CMAKE_SOURCE_DIR}/include/my_c++14.h
+  ${CMAKE_SOURCE_DIR}/include/resource.h
+  ${CMAKE_SOURCE_DIR}/include/bdf/cards_elements.h
+  ${CMAKE_SOURCE_DIR}/include/bdf/cards.h
+  ${CMAKE_SOURCE_DIR}/include/bdf/cards_loads.h
+  ${CMAKE_SOURCE_DIR}/include/bdf/cards_properties.h
+  ${CMAKE_SOURCE_DIR}/include/bdf/errors.h
+  ${CMAKE_SOURCE_DIR}/include/bdf/file.h
+  ${CMAKE_SOURCE_DIR}/include/bdf/header.h
+  ${CMAKE_SOURCE_DIR}/include/bdf/type_bounds.h
+  ${CMAKE_SOURCE_DIR}/include/bdf/types.h)
 add_library (extfemio_bdf STATIC
   ${LIBEXTFEMIO_BDF_SOURCES}
   ${LIBEXTFEMIO_BDF_HEADERS})
@@ -82,11 +80,11 @@ if (COMMAND cotire)
   cotire(extfemio_bdf)
   set_target_properties(extfemio_bdf
     PROPERTIES
-    COTIRE_CXX_PREFIX_HEADER_INIT "${CMAKE_SOURCE_DIR}/include/stdafx.h")
+    COTIRE_CXX_PREFIX_HEADER_INIT "${CMAKE_SOURCE_DIR}/src/StdAfx.h")
 endif()
 
 target_include_directories (extfemio_bdf PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-include_directories(${CMAKE_SOURCE_DIR}/include)
+include_directories(${CMAKE_SOURCE_DIR}/include ${CMAKE_SOURCE_DIR}/src)
 
 # Local Variables:
 # mode: cmake

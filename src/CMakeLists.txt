@@ -16,12 +16,10 @@ set(LIBEXTFEMIO_SOURCES
   extfem_string
   extfem_misc)
 set(LIBEXTFEMIO_HEADERS
-  ../include/extfem_misc
-  ../include/extfem_string
-  ../include/fem2fem_args
-  ../include/my_c++14
-  ../include/resource
-  ../include/StdAfx)
+  ${CMAKE_SOURCE_DIR}/include/extfem_misc
+  ${CMAKE_SOURCE_DIR}/include/extfem_string
+  ${CMAKE_SOURCE_DIR}/include/my_c++14
+  ${CMAKE_SOURCE_DIR}/include/resource)
 add_library (extfemio
   ${LIBEXTFEMIO_SOURCES}
   ${LIBEXTFEMIO_HEADERS})
@@ -35,7 +33,7 @@ target_include_directories (extfemio PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 if (COMMAND cotire)
   set_target_properties(extfemio
     PROPERTIES
-    COTIRE_CXX_PREFIX_HEADER_INIT "${CMAKE_SOURCE_DIR}/include/stdafx.h")
+    COTIRE_CXX_PREFIX_HEADER_INIT "${CMAKE_SOURCE_DIR}/src/StdAfx.h")
 endif()
 
 add_subdirectory(bdf)
