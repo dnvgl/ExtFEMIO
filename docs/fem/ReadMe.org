@@ -1,4 +1,4 @@
-# -*- mode: org -*-
+# -*- mode: org; coding: utf-8 -*-
 #+STARTUP: showall
 #+HTML_MATHJAX: align: left indent: 5em tagside: left font: Neo-Euler
 
@@ -10,51 +10,51 @@
    | /        |            |                                                              | <      | >       |       |
    |          |            | <60>                                                         |        |         |   <5> |
    | General  |            |                                                              |        |         |       |
-   |          | =DATE=     | Date and Program Information                                 | \check | \check  |   4-2 |
-   |          | =GCOORD=   | Nodal Coordinates                                            | \check | \check  |  6-56 |
-   |          | =GNODE=    | Correspondence between External and Internal Node Numbering, and Number of Degrees of Freedom of Each Node | \check | \check  |  6-80 |
-   |          | =IDENT=    | Identification of Superelements                              | \check | \check  |   4-3 |
-   |          | =IEND=     | End of a Superelement                                        | \check | \check  |   4-4 |
+   |          | =DATE=     | Date and Program Information                                 | ✓      | ✓       |   4-2 |
+   |          | =GCOORD=   | Nodal Coordinates                                            | ✓      | ✓       |  6-56 |
+   |          | =GNODE=    | Correspondence between External and Internal Node Numbering, and Number of Degrees of Freedom of Each Node | ✓      | ✓       |  6-80 |
+   |          | =IDENT=    | Identification of Superelements                              | ✓      | ✓       |   4-3 |
+   |          | =IEND=     | End of a Superelement                                        | ✓      | ✓       |   4-4 |
    |----------+------------+--------------------------------------------------------------+--------+---------+-------|
    | Elements |            |                                                              |        |         |       |
-   |          | =GELMNT1=  | Element Data Definition                                      | \check | \check  |  6-65 |
-   |          | =GELREF1=  | Reference to Element Data                                    | \check | \check  |  6-66 |
+   |          | =GELMNT1=  | Element Data Definition                                      | ✓      | ✓       |  6-65 |
+   |          | =GELREF1=  | Reference to Element Data                                    | ✓      | ✓       |  6-66 |
    |----------+------------+--------------------------------------------------------------+--------+---------+-------|
    | Element  | properties |                                                              |        |         |       |
-   |          | =GBEAMG=   | General Beam Element Data                                    | \check | \check  |  6-49 |
-   |          | =GBARM=    | Cross Section Type Massive Bar                               | \check | \check  |  6-48 |
-   |          | =GIORH=    | Cross Section Type I or H Beam                               | \check | \check  |  6-71 |
-   |          | =GLSEC=    | Cross Section Type L-Section                                 | \check | \check  |  6-76 |
-   |          | =GPIPE=    | Cross Section Type Tube                                      | \check | \check  |  6-81 |
-   |          | =GUSYI=    | Cross Section Type Unsymmetrical I-Beam                      | \check | \check  |  6-93 |
-   |          | =GECCEN=   | Eccentricities                                               | \check | \check  |  6-61 |
-   |          | =BELFIX=   | Flexible Joint/Hinge                                         | \check | \check  |   6-8 |
-   |          | =GELTH=    | Thickness of Two-dimensional Elements                        | \check | \check  |  6-70 |
+   |          | =GBEAMG=   | General Beam Element Data                                    | ✓      | ✓       |  6-49 |
+   |          | =GBARM=    | Cross Section Type Massive Bar                               | ✓      | ✓       |  6-48 |
+   |          | =GIORH=    | Cross Section Type I or H Beam                               | ✓      | ✓       |  6-71 |
+   |          | =GLSEC=    | Cross Section Type L-Section                                 | ✓      | ✓       |  6-76 |
+   |          | =GPIPE=    | Cross Section Type Tube                                      | ✓      | ✓       |  6-81 |
+   |          | =GUSYI=    | Cross Section Type Unsymmetrical I-Beam                      | ✓      | ✓       |  6-93 |
+   |          | =GECCEN=   | Eccentricities                                               | ✓      | ✓       |  6-61 |
+   |          | =BELFIX=   | Flexible Joint/Hinge                                         | ✓      | ✓       |   6-8 |
+   |          | =GELTH=    | Thickness of Two-dimensional Elements                        | ✓      | ✓       |  6-70 |
    |----------+------------+--------------------------------------------------------------+--------+---------+-------|
    | Load     |            |                                                              |        |         |       |
-   |          | =BLDEP=    | Nodes with Linear Dependence                                 | \check | \check  |  6-27 |
-   |          | =BNBCD=    | Nodes with Boundary Conditions                               | \check | \check  |  6-30 |
-   |          | =BNDISPL=  | Nodes with Prescribed Displacements and Accelerations        | \check | \check  |  6-31 |
-   |          | =BNLOAD=   | Nodes with Loads                                             | \check | \check  |  6-35 |
-   |          | =MGSPRNG=  | Element to Ground                                            | \check | \check  | 6-103 |
-   |          | =TDLOAD=   | *not documented* (Seems to be similar to =TDMATER= or =TDSETNAM=) | \check | \check  |       |
-   |          | =BEUSLO=   | Elements with Surface Loads                                  | \check | \check  |  6-21 |
+   |          | =BLDEP=    | Nodes with Linear Dependence                                 | ✓      | ✓       |  6-27 |
+   |          | =BNBCD=    | Nodes with Boundary Conditions                               | ✓      | ✓       |  6-30 |
+   |          | =BNDISPL=  | Nodes with Prescribed Displacements and Accelerations        | ✓      | ✓       |  6-31 |
+   |          | =BNLOAD=   | Nodes with Loads                                             | ✓      | ✓       |  6-35 |
+   |          | =MGSPRNG=  | Element to Ground                                            | ✓      | ✓       | 6-103 |
+   |          | =TDLOAD=   | *not documented* (Seems to be similar to =TDMATER= or =TDSETNAM=) | ✓      | ✓       |       |
+   |          | =BEUSLO=   | Elements with Surface Loads                                  | ✓      | ✓       |  6-21 |
    |----------+------------+--------------------------------------------------------------+--------+---------+-------|
    | Superel. |            |                                                              |        |         |       |
-   |          | =BSELL=    | Subelement Load Description                                  | \check | \check  |  7-27 |
-   |          | =GELMNT2=  | Subelement Description with Simple Correspondence            | \check | \check  |  7-31 |
-   |          | =HSUPSTAT= | Superelement Statistical Information                         | \check | \check  |  7-40 |
-   |          | =HSUPTRAN= | Superelement Transformations                                 | \check | \check  |  7-41 |
-   |          | =HIERARCH= | Superelement Hierarchy Description                           | \check | \check  |  7-38 |
-   |          | =TDSUPNAM= | Name and Description of a Super-Element.                     | \check | \check  |   4-8 |
+   |          | =BSELL=    | Subelement Load Description                                  | ✓      | ✓       |  7-27 |
+   |          | =GELMNT2=  | Subelement Description with Simple Correspondence            | ✓      | ✓       |  7-31 |
+   |          | =HSUPSTAT= | Superelement Statistical Information                         | ✓      | ✓       |  7-40 |
+   |          | =HSUPTRAN= | Superelement Transformations                                 | ✓      | ✓       |  7-41 |
+   |          | =HIERARCH= | Superelement Hierarchy Description                           | ✓      | ✓       |  7-38 |
+   |          | =TDSUPNAM= | Name and Description of a Super-Element.                     | ✓      | ✓       |   4-8 |
    |----------+------------+--------------------------------------------------------------+--------+---------+-------|
    | Misc     |            |                                                              |        |         |       |
-   |          | =GSETMEMB= | Set (group) of Nodes or Elements (Members)                   | \check | \check  |  6-84 |
-   |          | =GUNIVEC=  | Specification of Local Element Coordinate System             | \check | \check  |  6-92 |
-   |          | =MISOSEL=  | Isotropy, Linear Elastic Structural Analysis                 | \check | \check  | 6-115 |
-   |          | =MORSMEL=  | Anisotropy, Linear Elastic Structural Analysis, 2-D Membrane Elements and 2-D Thin Shell Elements | \check | \check  | 6-117 |
-   |          | =TDSETNAM= | Name and Description of a Set (group)                        | \check | \check  |   4-7 |
-   |          | =TEXT=     | User supplied Text                                           | \check | \check  |  4-10 |
+   |          | =GSETMEMB= | Set (group) of Nodes or Elements (Members)                   | ✓      | ✓       |  6-84 |
+   |          | =GUNIVEC=  | Specification of Local Element Coordinate System             | ✓      | ✓       |  6-92 |
+   |          | =MISOSEL=  | Isotropy, Linear Elastic Structural Analysis                 | ✓      | ✓       | 6-115 |
+   |          | =MORSMEL=  | Anisotropy, Linear Elastic Structural Analysis, 2-D Membrane Elements and 2-D Thin Shell Elements | ✓      | ✓       | 6-117 |
+   |          | =TDSETNAM= | Name and Description of a Set (group)                        | ✓      | ✓       |   4-7 |
+   |          | =TEXT=     | User supplied Text                                           | ✓      | ✓       |  4-10 |
 
 * Element Types in SESAM
 
@@ -78,73 +78,73 @@
    |   / | <      |    |                                                          |      | <     |       |       |       |       |                    |
    | <3> |        | <2> |                                                          |  <4> | <5>   | <5>   | <5>   | <5>   | <5>   |                    |
    |   1 |        |    | /Not/ /yet/ /defined/                                    |      |       |       |       |       |       |                    |
-   |   2 | =BEPS= |  2 | 2-D, 2 Node Beam                                         | 3, 5 | \check |       |       | \check |       |                    |
-   |   3 | =CSTA= |  3 | Plane Constant Strain Triangle                           | 2, 4 |       | \check | \check | \check |       |                    |
+   |   2 | =BEPS= |  2 | 2-D, 2 Node Beam                                         | 3, 5 | ✓     |       |       | ✓     |       |                    |
+   |   3 | =CSTA= |  3 | Plane Constant Strain Triangle                           | 2, 4 |       | ✓     | ✓     | ✓     |       |                    |
    |   4 |        |    | /Not/ /yet/ /defined/                                    |    3 |       |       |       |       |       |                    |
    |   5 | =RPBQ= |  4 | Rectangular Plate. Bending Modes                         |    3 |       |       |       |       |       |                    |
-   |   6 | =ILST= |  6 | Plane Lin. Strain Triangle                               |    2 |       | \check | \check |       |       |                    |
+   |   6 | =ILST= |  6 | Plane Lin. Strain Triangle                               |    2 |       | ✓     | ✓     |       |       |                    |
    |   7 |        |    | /Not/ /yet/ /defined/                                    |      |       |       |       |       |       |                    |
-   |   8 | =IQQE= |  8 | Plane Quadrilateral Membrane Element                     |    2 |       | \check | \check |       |       |                    |
-   |   9 | =LQUA= |  4 | Plane Quadrilateral Membrane Element                     | 2, 4 |       | \check | \check | \check |       |                    |
-   |  10 | =TESS= |  2 | Truss Element                                            | 2, 4 | \check | \check | \check | \check | \sad  |                    |
-   |  11 | =GMAS= |  1 | 1-Noded Mass-Matrix                                      |      |       | \check | \check |       | \sad  |                    |
-   |  12 | =GLMA= |  2 | 2-Noded Mass-Matrix                                      |      |       |       | \check |       |       |                    |
+   |   8 | =IQQE= |  8 | Plane Quadrilateral Membrane Element                     |    2 |       | ✓     | ✓     |       |       |                    |
+   |   9 | =LQUA= |  4 | Plane Quadrilateral Membrane Element                     | 2, 4 |       | ✓     | ✓     | ✓     |       |                    |
+   |  10 | =TESS= |  2 | Truss Element                                            | 2, 4 | ✓     | ✓     | ✓     | ✓     | ✓     |                    |
+   |  11 | =GMAS= |  1 | 1-Noded Mass-Matrix                                      |      |       | ✓     | ✓     |       | ✗     |                    |
+   |  12 | =GLMA= |  2 | 2-Noded Mass-Matrix                                      |      |       |       | ✓     |       |       |                    |
    |  13 | =GLDA= |  2 | 2-Noded Damping-Matrix                                   |      |       |       |       |       |       |                    |
    |  14 |        |    | /Not/ /yet/ /defined/                                    |      |       |       |       |       |       |                    |
-   |  15 | =BEAS= |  2 | 3-D, 2 Node Beam                                         | 2, 4 | \check | \check | \check | \check | \sad  | FR, LA, PL, PR, WA |
+   |  15 | =BEAS= |  2 | 3-D, 2 Node Beam                                         | 2, 4 | ✓     | ✓     | ✓     | ✓     | ✓     | FR, LA, PL, PR, WA |
    |-----+--------+----+----------------------------------------------------------+------+-------+-------+-------+-------+-------+--------------------|
-   |  16 | =AXIS= |  2 | Axial Spring                                             |      | \check | \check | \check | \check[fn:ax_spri] | \sad  | FR                 |
-   |  17 | =AXDA= |  2 | Axial Damper                                             |      | \check | \check | \check |       | \sad  |                    |
-   |  18 | =GSPR= |  1 | Spring to Ground                                         |    4 | \check | \check | \check | \check | \sad  | FR                 |
-   |  19 | =GDAM= |  1 | Damper to Ground                                         |      | \check | \check | \check |       | \sad  |                    |
-   |  20 | =IHEX= | 20 | Isoparametric Hexahedron                                 |    2 |       | \check | \check | \check |       | FR                 |
+   |  16 | =AXIS= |  2 | Axial Spring                                             |      | ✓     | ✓     | ✓     | ✓[fn:ax_spri] | ✗     | FR                 |
+   |  17 | =AXDA= |  2 | Axial Damper                                             |      | ✓     | ✓     | ✓     |       | ✗     |                    |
+   |  18 | =GSPR= |  1 | Spring to Ground                                         |    4 | ✓     | ✓     | ✓     | ✓     | ✗     | FR                 |
+   |  19 | =GDAM= |  1 | Damper to Ground                                         |      | ✓     | ✓     | ✓     |       | ✗     |                    |
+   |  20 | =IHEX= | 20 | Isoparametric Hexahedron                                 |    2 |       | ✓     | ✓     | ✓     |       | FR                 |
    |-----+--------+----+----------------------------------------------------------+------+-------+-------+-------+-------+-------+--------------------|
-   |  21 | =LHEX= |  8 | Linear Hexahedron                                        | 2, 4 |       | \check | \check | \check |       | FR                 |
+   |  21 | =LHEX= |  8 | Linear Hexahedron                                        | 2, 4 |       | ✓     | ✓     | ✓     |       | FR                 |
    |  22 | =SECB= |  3 | Subparametric Curved Beam                                |    2 |       |       |       |       |       |                    |
-   |  23 | =BTSS= |  3 | General Curved Beam                                      |    2 |       | \check | \check |       |       | PL, PR             |
-   |  24 | =FQUS= |  4 | Flat Quadrilateral Thin Shell                            |    4 |       | \check | \check |       | \check | PL, PR             |
-   |  24 | =FFQ=  |  4 | Free Formulation Quadrilateral Shell                     |    5 |       |       |       | \check |       |                    |
-   |  25 | =FTRS= |  3 | Flat Triangular Thin Shell                               |    4 |       | \check | \check |       | \check | PL                 |
-   |  25 | =FFTR= |  3 | Free Formulation Triangular Shell                        |    5 |       |       |       | \check |       |                    |
-   |  26 | =SCTS= |  6 | Subparametric Curved Triangular Thick Shell              |    2 |       | \check | \check |       |       | PL                 |
-   |  27 | =MCTS= |  6 | Subparametric Curved Triangular Thick Sandwich Element   | 2[fn:th_shell] |       | \check | \check |       |       |                    |
-   |  28 | =SCQS= |  8 | Subparametric Curved Quadrilateral Thick Shell           |    2 |       | \check | \check |       |       | PL, PR             |
+   |  23 | =BTSS= |  3 | General Curved Beam                                      |    2 |       | ✓     | ✓     |       |       | PL, PR             |
+   |  24 | =FQUS= |  4 | Flat Quadrilateral Thin Shell                            |    4 |       | ✓     | ✓     |       | ✓     | PL, PR             |
+   |  24 | =FFQ=  |  4 | Free Formulation Quadrilateral Shell                     |    5 |       |       |       | ✓     |       |                    |
+   |  25 | =FTRS= |  3 | Flat Triangular Thin Shell                               |    4 |       | ✓     | ✓     |       | ✓     | PL                 |
+   |  25 | =FFTR= |  3 | Free Formulation Triangular Shell                        |    5 |       |       |       | ✓     |       |                    |
+   |  26 | =SCTS= |  6 | Subparametric Curved Triangular Thick Shell              |    2 |       | ✓     | ✓     |       |       | PL                 |
+   |  27 | =MCTS= |  6 | Subparametric Curved Triangular Thick Sandwich Element   | 2[fn:th_shell] |       | ✓     | ✓     |       |       |                    |
+   |  28 | =SCQS= |  8 | Subparametric Curved Quadrilateral Thick Shell           |    2 |       | ✓     | ✓     |       |       | PL, PR             |
    |-----+--------+----+----------------------------------------------------------+------+-------+-------+-------+-------+-------+--------------------|
-   |  29 | =MCQS= |  8 | Subparam. Curved Quadr. Thick Sandwich Elem.             | 2[fn:th_shell] |       | \check | \check |       |       |                    |
-   |  30 | =IPRI= | 15 | Isoparametric Triangular Prism                           |    2 |       | \check | \check | \check |       |                    |
-   |  31 | =ITET= | 10 | Isoparametric Tetrahedron                                |    2 |       |       | \check |       |       |                    |
-   |  32 | =TPRI= |  6 | Triangular Prism                                         | 2, 4 |       | \check | \check | \check |       |                    |
-   |  33 | =TETR= |  4 | Tetrahedron                                              |    2 |       |       | \check |       |       |                    |
-   |  34 | =LCTS= |  6 | Subparam. Layered Curved Triangular Thick Shell          | 2[fn:th_shell] |       | \check | \check |       |       |                    |
-   |  35 | =LCQS= |  8 | Subparam. Layered Curved Quadrilat. Thick Shell          | 2[fn:th_shell] |       | \check | \check |       |       |                    |
+   |  29 | =MCQS= |  8 | Subparam. Curved Quadr. Thick Sandwich Elem.             | 2[fn:th_shell] |       | ✓     | ✓     |       |       |                    |
+   |  30 | =IPRI= | 15 | Isoparametric Triangular Prism                           |    2 |       | ✓     | ✓     | ✓     |       |                    |
+   |  31 | =ITET= | 10 | Isoparametric Tetrahedron                                |    2 |       |       | ✓     |       |       |                    |
+   |  32 | =TPRI= |  6 | Triangular Prism                                         | 2, 4 |       | ✓     | ✓     | ✓     |       |                    |
+   |  33 | =TETR= |  4 | Tetrahedron                                              |    2 |       |       | ✓     |       |       |                    |
+   |  34 | =LCTS= |  6 | Subparam. Layered Curved Triangular Thick Shell          | 2[fn:th_shell] |       | ✓     | ✓     |       |       |                    |
+   |  35 | =LCQS= |  8 | Subparam. Layered Curved Quadrilat. Thick Shell          | 2[fn:th_shell] |       | ✓     | ✓     |       |       |                    |
    |-----+--------+----+----------------------------------------------------------+------+-------+-------+-------+-------+-------+--------------------|
-   |  36 | =TRS1= | 18 | 2nd Order Hexahed. Transition Elem., Solid / Shell       |    6 |       |       | \check |       |       | PR                 |
-   |  37 | =TRS2= | 15 | 2nd Order Hexahed. Transition Elem., Solid / Shell       |    6 |       |       | \check |       |       | PR                 |
-   |  38 | =TRS3= | 12 | 2nd Order Hexahed. Transition Elem., Solid / Shell       |    6 |       |       | \check |       |       | PR                 |
+   |  36 | =TRS1= | 18 | 2nd Order Hexahed. Transition Elem., Solid / Shell       |    6 |       |       | ✓     |       |       | PR                 |
+   |  37 | =TRS2= | 15 | 2nd Order Hexahed. Transition Elem., Solid / Shell       |    6 |       |       | ✓     |       |       | PR                 |
+   |  38 | =TRS3= | 12 | 2nd Order Hexahed. Transition Elem., Solid / Shell       |    6 |       |       | ✓     |       |       | PR                 |
    |-----+--------+----+----------------------------------------------------------+------+-------+-------+-------+-------+-------+--------------------|
    |  39 |        |    | /Not/ /yet/ /defined/                                    |      |       |       |       |       |       |                    |
-   |  40 | =GLSH= |  2 | General Spring / Shim Element                            | [fn:2n_spring] | \check |       | \check |       | \sad  |                    |
-   |  41 | =AXCS= |  3 | Axisymmetric Constant Strain Triangle                    | 7, 5 |       | \check | \check | \check |       |                    |
-   |  42 | =AXLQ= |  4 | Axisymmetric Quadrilateral                               | 7, 5 |       | \check | \check | \check |       |                    |
-   |  43 | =AXLS= |  6 | Axisymmetric Linear Strain Triangle                      |    7 |       | \check | \check |       |       |                    |
-   |  44 | =AXQQ= |  8 | Axisymmetric Linear Strain Quadrilateral                 |    7 |       | \check | \check |       |       |                    |
-   |  45 | =PILS= |  1 | Pile / Soil                                              |    4 | \check |       |       | \check |       |                    |
-   |  46 | =PCAB= |  2 | Plane Cable-Bar Element                                  |    4 | \check |       |       | \check |       |                    |
-   |  47 | =PSPR= |  1 | Plane Spring Element                                     |    4 | \check |       |       | \check |       |                    |
-   |  48 |        |  4 | 4-node Contact Element with triangular Shape             |    4 |       |       |       | \check |       |                    |
-   |  49 |        |  2 | 2-Noded Link Element                                     |    4 |       |       |       | \check |       |                    |
+   |  40 | =GLSH= |  2 | General Spring / Shim Element                            | [fn:2n_spring] | ✓     |       | ✓     |       | ✗     |                    |
+   |  41 | =AXCS= |  3 | Axisymmetric Constant Strain Triangle                    | 7, 5 |       | ✓     | ✓     | ✓     |       |                    |
+   |  42 | =AXLQ= |  4 | Axisymmetric Quadrilateral                               | 7, 5 |       | ✓     | ✓     | ✓     |       |                    |
+   |  43 | =AXLS= |  6 | Axisymmetric Linear Strain Triangle                      |    7 |       | ✓     | ✓     |       |       |                    |
+   |  44 | =AXQQ= |  8 | Axisymmetric Linear Strain Quadrilateral                 |    7 |       | ✓     | ✓     |       |       |                    |
+   |  45 | =PILS= |  1 | Pile / Soil                                              |    4 | ✓     |       |       | ✓     |       |                    |
+   |  46 | =PCAB= |  2 | Plane Cable-Bar Element                                  |    4 | ✓     |       |       | ✓     |       |                    |
+   |  47 | =PSPR= |  1 | Plane Spring Element                                     |    4 | ✓     |       |       | ✓     |       |                    |
+   |  48 |        |  4 | 4-node Contact Element with triangular Shape             |    4 |       |       |       | ✓     |       |                    |
+   |  49 |        |  2 | 2-Noded Link Element                                     |    4 |       |       |       | ✓     |       |                    |
    |  50 |        |    | /Not/ /yet/ /defined/                                    |      |       |       |       |       |       |                    |
    |  51 | =CTCP= |  2 | 2-Noded Contact Element                                  |      |       |       |       |       |       |                    |
    |  52 | =CTCL= |  4 | 4-Noded Contact Element                                  |      |       |       |       |       |       |                    |
    |  53 | =CTAL= |  4 | 4-Noded Axisymmetric Contact Element                     |      |       |       |       |       |       |                    |
    |  54 | =CTCC= |  6 | 6-Noded Contact Element                                  |      |       |       |       |       |       |                    |
-   |  55 | =CTAQ= |  6 | 6-Noded (3+3) Axisymmetric Contact Element               |      |       | \check |       |       |       |                    |
+   |  55 | =CTAQ= |  6 | 6-Noded (3+3) Axisymmetric Contact Element               |      |       | ✓     |       |       |       |                    |
    |  56 | =CTLQ= |  8 | 8-Noded (4+4) Contact Element                            | 8, 9 |       |       |       |       |       | PR                 |
-   |  57 | =CTCQ= | 16 | 16-Noded (8+8) Contact Element                           | 8, 9 |       | \check |       |       |       | PR                 |
+   |  57 | =CTCQ= | 16 | 16-Noded (8+8) Contact Element                           | 8, 9 |       | ✓     |       |       |       | PR                 |
    |  58 | =CTMQ= | 18 | 18-Noded (9+9) Contact Element                           | 8, 9 |       |       |       |       |       | PR                 |
    |  59 |        |    | /Not/ /yet/ /defined/                                    |      |       |       |       |       |       |                    |
    |  60 |        |    | /Not/ /yet/ /defined/                                    |      |       |       |       |       |       |                    |
-   |  61 | =HCQS= |  9 | 9-Noded Shell Element                                    |      |       | \check |       |       |       | PR                 |
+   |  61 | =HCQS= |  9 | 9-Noded Shell Element                                    |      |       | ✓     |       |       |       | PR                 |
    |  62 |        |    | /Not/ /yet/ /defined/                                    |      |       |       |       |       |       |                    |
    |  63 |        |    | /Not/ /yet/ /defined/                                    |      |       |       |       |       |       |                    |
    |  64 |        |    | /Not/ /yet/ /defined/                                    |      |       |       |       |       |       |                    |
@@ -153,11 +153,11 @@
    |  67 | =SLTS= |  6 | Semiloof Triangular Curved Thin Shell (24 d.o.fs)        |      |       |       |       |       |       |                    |
    |  68 | =SLCB= |  3 | Semiloof Curved Beam (11 d.o.fs)                         |      |       |       |       |       |       |                    |
    |  69 |        |    | /Not/ /yet/ /defined/                                    |      |       |       |       |       |       |                    |
-   |  70 | =MATR= | /n/ | General Matrix Element with arbitrary no. of nodes (/n/) |      |       |       |       | \check |       | SP                 |
+   |  70 | =MATR= | /n/ | General Matrix Element with arbitrary no. of nodes (/n/) |      |       |       |       | ✓     |       | SP                 |
    | \dots |        |    |                                                          |      |       |       |       |       |       |                    |
-   | 100 | =GHEX= | 21 | General Hexahedron                                       |      |       |       | \check |       |       |                    |
+   | 100 | =GHEX= | 21 | General Hexahedron                                       |      |       |       | ✓     |       |       |                    |
    | \dots |        |    |                                                          |      |       |       |       |       |       |                    |
-   | 163 | =GHEX= | 27 | General Hexahedron                                       |      |       |       | \check |       |       |                    |
+   | 163 | =GHEX= | 27 | General Hexahedron                                       |      |       |       | ✓     |       |       |                    |
 
 * Footnotes
 

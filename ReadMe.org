@@ -1,10 +1,16 @@
-# -*- mode: org -*-
+# -*- mode: org; coding: utf-8 -*-
 #+STARTUP: showall
 #+OPTIONS: H:6
 #+OPTIONS: toc:6
+#+LATEX_COMPILER: xelatex
 #+LATEX_CLASS: dnvglartcl
 #+LATEX_HEADER: \usepackage{tabu}
 #+LATEX_HEADER: \usepackage{booktabs}
+#+LATEX_HEADER: \usepackage{newunicodechar}
+#+LATEX_HEADER: \usepackage{arevmath}
+#+LATEX_HEADER: \newunicodechar{✓}{{\(\green\ballotcheck\)}}
+#+LATEX_HEADER: \newunicodechar{✗}{{\(\red\ballotx\)}}
+#+LATEX_HEADER: \newunicodechar{—}{{\red—}}
 #+LATEX_HEADER: \graphicspath{{./docs/images/}}
 #+LATEX_HEADER: \let\strcmp\pdfstrcmp
 #+LATEX_HEADER: \setcounter{secnumdepth}{6}
@@ -19,7 +25,7 @@ supported. The supported subset is currently mainly defined by the
 functionality supported in GLFrame rspt. the BMF file format.
 
 More detailed information on supported functionality can be found in
-the according directories in the doc dubdirectory.
+the according directories in the =docs= subdirectory.
 
 ** NASTRAN Bulk Data Format (BDF)
 

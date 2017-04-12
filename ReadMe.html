@@ -4,12 +4,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-09-13 Di 12:40 -->
-<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<!-- 2017-04-12 Mi 11:48 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>C++ IO support for various FEM exchange file formats</title>
-<meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Berthold Höllmann" />
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Berthold Höllmann" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center;
@@ -54,13 +54,97 @@
     border: 1px solid black;
   }
   pre.src:hover:before { display: inline;}
-  pre.src-sh:before    { content: 'sh'; }
-  pre.src-bash:before  { content: 'sh'; }
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
   pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-R:before     { content: 'R'; }
-  pre.src-perl:before  { content: 'Perl'; }
-  pre.src-java:before  { content: 'Java'; }
-  pre.src-sql:before   { content: 'SQL'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
 
   table { border-collapse:collapse; }
   caption.t-above { caption-side: top; }
@@ -93,6 +177,7 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
 <script type="text/javascript">
@@ -149,22 +234,22 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline8">1. Supported FEM file formats</a>
+<li><a href="#orgcceb820">1. Supported FEM file formats</a>
 <ul>
-<li><a href="#orgheadline4">1.1. NASTRAN Bulk Data Format (BDF)</a>
+<li><a href="#org01f9e79">1.1. NASTRAN Bulk Data Format (BDF)</a>
 <ul>
-<li><a href="#orgheadline3">1.1.1. BDF Cards supported</a>
+<li><a href="#org4866b70">1.1.1. BDF Cards supported</a>
 <ul>
-<li><a href="#orgheadline1">1.1.1.1. Bulk Data</a></li>
-<li><a href="#orgheadline2">1.1.1.2. Header Data</a></li>
+<li><a href="#org5423718">1.1.1.1. Bulk Data</a></li>
+<li><a href="#orga4f12ca">1.1.1.2. Header Data</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgheadline7">1.2. DNV GL Seasam Input Interface File (FEM)</a>
+<li><a href="#org97573be">1.2. DNV GL Seasam Input Interface File (FEM)</a>
 <ul>
-<li><a href="#orgheadline5">1.2.1. FEM Cards supported</a></li>
-<li><a href="#orgheadline6">1.2.2. Element Types in SESAM</a></li>
+<li><a href="#org292d250">1.2.1. FEM Cards supported</a></li>
+<li><a href="#org4b438a1">1.2.2. Element Types in SESAM</a></li>
 </ul>
 </li>
 </ul>
@@ -173,8 +258,8 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-orgheadline8" class="outline-2">
-<h2 id="orgheadline8"><span class="section-number-2">1</span> Supported FEM file formats</h2>
+<div id="outline-container-orgcceb820" class="outline-2">
+<h2 id="orgcceb820"><span class="section-number-2">1</span> Supported FEM file formats</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Not all functionality defined for the exchange file formats is
@@ -184,18 +269,20 @@ functionality supported in GLFrame rspt. the BMF file format.
 
 <p>
 More detailed information on supported functionality can be found in
-the according directories in the doc dubdirectory.
+the according directories in the <code>docs</code> subdirectory.
 </p>
 </div>
 
-<div id="outline-container-orgheadline4" class="outline-3">
-<h3 id="orgheadline4"><span class="section-number-3">1.1</span> NASTRAN Bulk Data Format (BDF)</h3>
+<div id="outline-container-org01f9e79" class="outline-3">
+<h3 id="org01f9e79"><span class="section-number-3">1.1</span> NASTRAN Bulk Data Format (BDF)</h3>
 <div class="outline-text-3" id="text-1-1">
-</div><div id="outline-container-orgheadline3" class="outline-4">
-<h4 id="orgheadline3"><span class="section-number-4">1.1.1</span> BDF Cards supported</h4>
+</div>
+
+<div id="outline-container-org4866b70" class="outline-4">
+<h4 id="org4866b70"><span class="section-number-4">1.1.1</span> BDF Cards supported</h4>
 <div class="outline-text-4" id="text-1-1-1">
-</div><div id="outline-container-orgheadline1" class="outline-5">
-<h5 id="orgheadline1"><span class="section-number-5">1.1.1.1</span> Bulk Data</h5>
+</div><div id="outline-container-org5423718" class="outline-5">
+<h5 id="org5423718"><span class="section-number-5">1.1.1.1</span> Bulk Data</h5>
 <div class="outline-text-5" id="text-1-1-1-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -233,24 +320,24 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>MAT1</code></td>
 <td class="org-left">Material definition</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&#9785;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✗</td>
 </tr>
 
 <tr>
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>MAT2</code></td>
 <td class="org-left">Shell Element Anisotropic Material Property Definition</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&#9785;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✗</td>
 </tr>
 
 <tr>
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>GRID</code></td>
 <td class="org-left">Grid nodes</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&#9785;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✗</td>
 </tr>
 </tbody>
 <tbody>
@@ -266,48 +353,48 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>CTRIA3</code></td>
 <td class="org-left">3 node shaped shell elements</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&#9785;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✗</td>
 </tr>
 
 <tr>
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>CQUAD4</code></td>
 <td class="org-left">4 node shaped shell elements</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&#9785;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✗</td>
 </tr>
 
 <tr>
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>CBEAM</code></td>
 <td class="org-left">Complex beams <sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup></td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&#9785;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✗</td>
 </tr>
 
 <tr>
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>CBAR</code></td>
 <td class="org-left">Simple beams</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 </tr>
 
 <tr>
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>CROD</code></td>
 <td class="org-left">Trusses</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&#9785;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✗</td>
 </tr>
 
 <tr>
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>CELAS1</code></td>
 <td class="org-left">Scalar Spring Connection</td>
-<td class="org-left">&#9785;</td>
-<td class="org-left">&#9785;</td>
+<td class="org-left">✗</td>
+<td class="org-left">✗</td>
 </tr>
 </tbody>
 <tbody>
@@ -323,56 +410,56 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>PSHELL</code></td>
 <td class="org-left">Properties for <code>CTRIA3</code>, and <code>CQUAD4</code></td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&#9785;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✗</td>
 </tr>
 
 <tr>
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>PBEAM</code></td>
 <td class="org-left">Integral properties for <code>CBEAM</code></td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&#9785;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✗</td>
 </tr>
 
 <tr>
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>PBEAML</code></td>
 <td class="org-left">Properties for <code>CBEAM</code> describing cross section</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&#9785;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✗</td>
 </tr>
 
 <tr>
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>PBAR</code></td>
 <td class="org-left">Integral properties for <code>CBAR</code></td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&#9785;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✗</td>
 </tr>
 
 <tr>
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>PBARL</code></td>
 <td class="org-left">Properties for <code>CBAR</code> describing cross section</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&#9785;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✗</td>
 </tr>
 
 <tr>
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>PROD</code></td>
 <td class="org-left">Properties for <code>CROD</code></td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&#9785;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✗</td>
 </tr>
 
 <tr>
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>PELAS</code></td>
 <td class="org-left">Properties for <code>CELAS*</code></td>
-<td class="org-left">&#9785;</td>
-<td class="org-left">&#9785;</td>
+<td class="org-left">✗</td>
+<td class="org-left">✗</td>
 </tr>
 </tbody>
 <tbody>
@@ -388,48 +475,48 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>LOAD</code></td>
 <td class="org-left">Load case combination</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 </tr>
 
 <tr>
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>FORCE</code></td>
 <td class="org-left">Forces on Nodes</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 </tr>
 
 <tr>
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>MOMENT</code></td>
 <td class="org-left">Moments on Nodes</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 </tr>
 
 <tr>
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>CMASS2</code></td>
 <td class="org-left">Scalar Mass Property and Connection</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 </tr>
 
 <tr>
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>CMASS4</code></td>
 <td class="org-left">Scalar Mass Property and Connection to Scalar Points Only</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 </tr>
 
 <tr>
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>GRAV</code></td>
 <td class="org-left">Acceleration or Gravity Load</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 </tr>
 </tbody>
 <tbody>
@@ -445,16 +532,24 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>ENDDATA</code></td>
 <td class="org-left">Marker for end of input file</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><code>PARAM</code></td>
+<td class="org-left">Specifies values for parameters used in solution sequences or user written <code>DMAP</code> programs.</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 
-<div id="outline-container-orgheadline2" class="outline-5">
-<h5 id="orgheadline2"><span class="section-number-5">1.1.1.2</span> Header Data</h5>
+<div id="outline-container-orga4f12ca" class="outline-5">
+<h5 id="orga4f12ca"><span class="section-number-5">1.1.1.2</span> Header Data</h5>
 <div class="outline-text-5" id="text-1-1-1-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -480,78 +575,78 @@ the according directories in the doc dubdirectory.
 <tr>
 <td class="org-left"><code>SOL</code></td>
 <td class="org-left">Execute a Solution Sequence</td>
-<td class="org-left">&#9785;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✗</td>
+<td class="org-left">✓</td>
 </tr>
 
 <tr>
 <td class="org-left"><code>CEND</code></td>
 <td class="org-left">End of Executive Control Delimiter</td>
-<td class="org-left">&#9785;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✗</td>
+<td class="org-left">✓</td>
 </tr>
 
 <tr>
 <td class="org-left"><code>TITLE</code></td>
 <td class="org-left">Output Title</td>
-<td class="org-left">&#9785;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✗</td>
+<td class="org-left">✓</td>
 </tr>
 
 <tr>
 <td class="org-left"><code>ECHO</code></td>
 <td class="org-left">Bulk Data Echo Request</td>
-<td class="org-left">&#9785;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✗</td>
+<td class="org-left">✓</td>
 </tr>
 
 <tr>
 <td class="org-left"><code>DISPLACEMENT</code></td>
 <td class="org-left">Displacement Output Request</td>
-<td class="org-left">&#9785;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✗</td>
+<td class="org-left">✓</td>
 </tr>
 
 <tr>
 <td class="org-left"><code>SPCFORCES</code></td>
 <td class="org-left">Single-Point Forces of Constraint Output Request</td>
-<td class="org-left">&#9785;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✗</td>
+<td class="org-left">✓</td>
 </tr>
 
 <tr>
 <td class="org-left"><code>STRESS</code></td>
 <td class="org-left">Element Stress Output Request</td>
-<td class="org-left">&#9785;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✗</td>
+<td class="org-left">✓</td>
 </tr>
 
 <tr>
 <td class="org-left"><code>LOAD</code></td>
 <td class="org-left">External Static Load Set Selection</td>
-<td class="org-left">&#9785;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✗</td>
+<td class="org-left">✓</td>
 </tr>
 
 <tr>
 <td class="org-left"><code>SUBTITLE</code></td>
 <td class="org-left">Output Subtitle</td>
-<td class="org-left">&#9785;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✗</td>
+<td class="org-left">✓</td>
 </tr>
 
 <tr>
 <td class="org-left"><code>SUBCASE</code></td>
 <td class="org-left">Subcase Delimiter</td>
-<td class="org-left">&#9785;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✗</td>
+<td class="org-left">✓</td>
 </tr>
 
 <tr>
 <td class="org-left"><code>BEGIN</code> <code>BULK</code></td>
 <td class="org-left">Case Control and Bulk Data Delimiter</td>
-<td class="org-left">&#9785;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✗</td>
+<td class="org-left">✓</td>
 </tr>
 </tbody>
 </table>
@@ -560,13 +655,13 @@ the according directories in the doc dubdirectory.
 </div>
 </div>
 
-<div id="outline-container-orgheadline7" class="outline-3">
-<h3 id="orgheadline7"><span class="section-number-3">1.2</span> DNV GL Seasam Input Interface File (FEM)</h3>
+<div id="outline-container-org97573be" class="outline-3">
+<h3 id="org97573be"><span class="section-number-3">1.2</span> DNV GL Seasam Input Interface File (FEM)</h3>
 <div class="outline-text-3" id="text-1-2">
 </div>
 
-<div id="outline-container-orgheadline5" class="outline-4">
-<h4 id="orgheadline5"><span class="section-number-4">1.2.1</span> FEM Cards supported</h4>
+<div id="outline-container-org292d250" class="outline-4">
+<h4 id="org292d250"><span class="section-number-4">1.2.1</span> FEM Cards supported</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -612,8 +707,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>DATE</code></td>
 <td class="org-left">Date and Program Information</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-right">4-2</td>
 </tr>
 
@@ -621,8 +716,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>GCOORD</code></td>
 <td class="org-left">Nodal Coordinates</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-right">6-56</td>
 </tr>
 
@@ -630,8 +725,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>GNODE</code></td>
 <td class="org-left">Correspondence between External and Internal Node Numbering, and Number of Degrees of Freedom of Each Node</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-right">6-80</td>
 </tr>
 
@@ -639,8 +734,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>IDENT</code></td>
 <td class="org-left">Identification of Superelements</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-right">4-3</td>
 </tr>
 
@@ -648,8 +743,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>IEND</code></td>
 <td class="org-left">End of a Superelement</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-right">4-4</td>
 </tr>
 </tbody>
@@ -667,8 +762,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>GELMNT1</code></td>
 <td class="org-left">Element Data Definition</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-right">6-65</td>
 </tr>
 
@@ -676,8 +771,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>GELREF1</code></td>
 <td class="org-left">Reference to Element Data</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-right">6-66</td>
 </tr>
 </tbody>
@@ -695,8 +790,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>GBEAMG</code></td>
 <td class="org-left">General Beam Element Data</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-right">6-49</td>
 </tr>
 
@@ -704,8 +799,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>GBARM</code></td>
 <td class="org-left">Cross Section Type Massive Bar</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-right">6-48</td>
 </tr>
 
@@ -713,8 +808,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>GIORH</code></td>
 <td class="org-left">Cross Section Type I or H Beam</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-right">6-71</td>
 </tr>
 
@@ -722,8 +817,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>GLSEC</code></td>
 <td class="org-left">Cross Section Type L-Section</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-right">6-76</td>
 </tr>
 
@@ -731,8 +826,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>GPIPE</code></td>
 <td class="org-left">Cross Section Type Tube</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-right">6-81</td>
 </tr>
 
@@ -740,8 +835,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>GUSYI</code></td>
 <td class="org-left">Cross Section Type Unsymmetrical I-Beam</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-right">6-93</td>
 </tr>
 
@@ -749,8 +844,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>GECCEN</code></td>
 <td class="org-left">Eccentricities</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-right">6-61</td>
 </tr>
 
@@ -758,8 +853,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>BELFIX</code></td>
 <td class="org-left">Flexible Joint/Hinge</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-right">6-8</td>
 </tr>
 
@@ -767,8 +862,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>GELTH</code></td>
 <td class="org-left">Thickness of Two-dimensional Elements</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-right">6-70</td>
 </tr>
 </tbody>
@@ -786,8 +881,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>BLDEP</code></td>
 <td class="org-left">Nodes with Linear Dependence</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-right">6-27</td>
 </tr>
 
@@ -795,8 +890,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>BNBCD</code></td>
 <td class="org-left">Nodes with Boundary Conditions</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-right">6-30</td>
 </tr>
 
@@ -804,8 +899,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>BNDISPL</code></td>
 <td class="org-left">Nodes with Prescribed Displacements and Accelerations</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-right">6-31</td>
 </tr>
 
@@ -813,8 +908,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>BNLOAD</code></td>
 <td class="org-left">Nodes with Loads</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-right">6-35</td>
 </tr>
 
@@ -822,8 +917,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>MGSPRNG</code></td>
 <td class="org-left">Element to Ground</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-right">6-103</td>
 </tr>
 
@@ -831,8 +926,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>TDLOAD</code></td>
 <td class="org-left"><b>not documented</b> (Seems to be similar to <code>TDMATER</code> or <code>TDSETNAM</code>)</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-right">&#xa0;</td>
 </tr>
 
@@ -840,8 +935,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>BEUSLO</code></td>
 <td class="org-left">Elements with Surface Loads</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-right">6-21</td>
 </tr>
 </tbody>
@@ -859,8 +954,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>BSELL</code></td>
 <td class="org-left">Subelement Load Description</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-right">7-27</td>
 </tr>
 
@@ -868,8 +963,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>GELMNT2</code></td>
 <td class="org-left">Subelement Description with Simple Correspondence</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-right">7-31</td>
 </tr>
 
@@ -877,8 +972,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>HSUPSTAT</code></td>
 <td class="org-left">Superelement Statistical Information</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-right">7-40</td>
 </tr>
 
@@ -886,8 +981,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>HSUPTRAN</code></td>
 <td class="org-left">Superelement Transformations</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-right">7-41</td>
 </tr>
 
@@ -895,8 +990,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>HIERARCH</code></td>
 <td class="org-left">Superelement Hierarchy Description</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-right">7-38</td>
 </tr>
 
@@ -904,8 +999,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>TDSUPNAM</code></td>
 <td class="org-left">Name and Description of a Super-Element.</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-right">4-8</td>
 </tr>
 </tbody>
@@ -923,8 +1018,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>GSETMEMB</code></td>
 <td class="org-left">Set (group) of Nodes or Elements (Members)</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-right">6-84</td>
 </tr>
 
@@ -932,8 +1027,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>GUNIVEC</code></td>
 <td class="org-left">Specification of Local Element Coordinate System</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-right">6-92</td>
 </tr>
 
@@ -941,8 +1036,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>MISOSEL</code></td>
 <td class="org-left">Isotropy, Linear Elastic Structural Analysis</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-right">6-115</td>
 </tr>
 
@@ -950,8 +1045,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>MORSMEL</code></td>
 <td class="org-left">Anisotropy, Linear Elastic Structural Analysis, 2-D Membrane Elements and 2-D Thin Shell Elements</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-right">6-117</td>
 </tr>
 
@@ -959,8 +1054,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>TDSETNAM</code></td>
 <td class="org-left">Name and Description of a Set (group)</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-right">4-7</td>
 </tr>
 
@@ -968,8 +1063,8 @@ the according directories in the doc dubdirectory.
 <td class="org-left">&#xa0;</td>
 <td class="org-left"><code>TEXT</code></td>
 <td class="org-left">User supplied Text</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-right">4-10</td>
 </tr>
 </tbody>
@@ -977,8 +1072,8 @@ the according directories in the doc dubdirectory.
 </div>
 </div>
 
-<div id="outline-container-orgheadline6" class="outline-4">
-<h4 id="orgheadline6"><span class="section-number-4">1.2.2</span> Element Types in SESAM</h4>
+<div id="outline-container-org4b438a1" class="outline-4">
+<h4 id="org4b438a1"><span class="section-number-4">1.2.2</span> Element Types in SESAM</h4>
 <div class="outline-text-4" id="text-1-2-2">
 <p>
 Conventions for use of the interface file for the elements in SESAM
@@ -998,7 +1093,7 @@ element types.
 </p>
 
 
-<table id="orgtable1" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org4ad19bd" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Table 1:</span> List of existing Element Types</caption>
 
 <colgroup>
@@ -1064,10 +1159,10 @@ element types.
 <td class="org-right">2</td>
 <td class="org-left">2-D, 2 Node Beam</td>
 <td class="org-left">3, 5</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 </tr>
@@ -1079,9 +1174,9 @@ element types.
 <td class="org-left">Plane Constant Strain Triangle</td>
 <td class="org-left">2, 4</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 </tr>
@@ -1121,8 +1216,8 @@ element types.
 <td class="org-left">Plane Lin. Strain Triangle</td>
 <td class="org-left">2</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
@@ -1149,8 +1244,8 @@ element types.
 <td class="org-left">Plane Quadrilateral Membrane Element</td>
 <td class="org-left">2</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
@@ -1163,9 +1258,9 @@ element types.
 <td class="org-left">Plane Quadrilateral Membrane Element</td>
 <td class="org-left">2, 4</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 </tr>
@@ -1176,11 +1271,11 @@ element types.
 <td class="org-right">2</td>
 <td class="org-left">Truss Element</td>
 <td class="org-left">2, 4</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&#9785;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 </tr>
 
@@ -1191,10 +1286,10 @@ element types.
 <td class="org-left">1-Noded Mass-Matrix</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&#9785;</td>
+<td class="org-left">✗</td>
 <td class="org-left">&#xa0;</td>
 </tr>
 
@@ -1206,7 +1301,7 @@ element types.
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
@@ -1246,11 +1341,11 @@ element types.
 <td class="org-right">2</td>
 <td class="org-left">3-D, 2 Node Beam</td>
 <td class="org-left">2, 4</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&#9785;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-left">FR, LA, PL, PR, WA</td>
 </tr>
 </tbody>
@@ -1261,11 +1356,11 @@ element types.
 <td class="org-right">2</td>
 <td class="org-left">Axial Spring</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;<sup><a id="fnr.11" class="footref" href="#fn.11">11</a></sup></td>
-<td class="org-left">&#9785;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓<sup><a id="fnr.11" class="footref" href="#fn.11">11</a></sup></td>
+<td class="org-left">✗</td>
 <td class="org-left">FR</td>
 </tr>
 
@@ -1275,11 +1370,11 @@ element types.
 <td class="org-right">2</td>
 <td class="org-left">Axial Damper</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&#9785;</td>
+<td class="org-left">✗</td>
 <td class="org-left">&#xa0;</td>
 </tr>
 
@@ -1289,11 +1384,11 @@ element types.
 <td class="org-right">1</td>
 <td class="org-left">Spring to Ground</td>
 <td class="org-left">4</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&#9785;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
+<td class="org-left">✗</td>
 <td class="org-left">FR</td>
 </tr>
 
@@ -1303,11 +1398,11 @@ element types.
 <td class="org-right">1</td>
 <td class="org-left">Damper to Ground</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&#9785;</td>
+<td class="org-left">✗</td>
 <td class="org-left">&#xa0;</td>
 </tr>
 
@@ -1318,9 +1413,9 @@ element types.
 <td class="org-left">Isoparametric Hexahedron</td>
 <td class="org-left">2</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">FR</td>
 </tr>
@@ -1333,9 +1428,9 @@ element types.
 <td class="org-left">Linear Hexahedron</td>
 <td class="org-left">2, 4</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">FR</td>
 </tr>
@@ -1361,8 +1456,8 @@ element types.
 <td class="org-left">General Curved Beam</td>
 <td class="org-left">2</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">PL, PR</td>
@@ -1375,10 +1470,10 @@ element types.
 <td class="org-left">Flat Quadrilateral Thin Shell</td>
 <td class="org-left">4</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
 <td class="org-left">PL, PR</td>
 </tr>
 
@@ -1391,7 +1486,7 @@ element types.
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 </tr>
@@ -1403,10 +1498,10 @@ element types.
 <td class="org-left">Flat Triangular Thin Shell</td>
 <td class="org-left">4</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
 <td class="org-left">PL</td>
 </tr>
 
@@ -1419,7 +1514,7 @@ element types.
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 </tr>
@@ -1431,8 +1526,8 @@ element types.
 <td class="org-left">Subparametric Curved Triangular Thick Shell</td>
 <td class="org-left">2</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">PL</td>
@@ -1445,8 +1540,8 @@ element types.
 <td class="org-left">Subparametric Curved Triangular Thick Sandwich Element</td>
 <td class="org-left">2<sup><a id="fnr.12" class="footref" href="#fn.12">12</a></sup></td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
@@ -1459,8 +1554,8 @@ element types.
 <td class="org-left">Subparametric Curved Quadrilateral Thick Shell</td>
 <td class="org-left">2</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">PL, PR</td>
@@ -1474,8 +1569,8 @@ element types.
 <td class="org-left">Subparam. Curved Quadr. Thick Sandwich Elem.</td>
 <td class="org-left">2<sup><a id="fnr.12.100" class="footref" href="#fn.12">12</a></sup></td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
@@ -1488,9 +1583,9 @@ element types.
 <td class="org-left">Isoparametric Triangular Prism</td>
 <td class="org-left">2</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 </tr>
@@ -1503,7 +1598,7 @@ element types.
 <td class="org-left">2</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
@@ -1516,9 +1611,9 @@ element types.
 <td class="org-left">Triangular Prism</td>
 <td class="org-left">2, 4</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 </tr>
@@ -1531,7 +1626,7 @@ element types.
 <td class="org-left">2</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
@@ -1544,8 +1639,8 @@ element types.
 <td class="org-left">Subparam. Layered Curved Triangular Thick Shell</td>
 <td class="org-left">2<sup><a id="fnr.12.100" class="footref" href="#fn.12">12</a></sup></td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
@@ -1558,8 +1653,8 @@ element types.
 <td class="org-left">Subparam. Layered Curved Quadrilat. Thick Shell</td>
 <td class="org-left">2<sup><a id="fnr.12.100" class="footref" href="#fn.12">12</a></sup></td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
@@ -1574,7 +1669,7 @@ element types.
 <td class="org-left">6</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">PR</td>
@@ -1588,7 +1683,7 @@ element types.
 <td class="org-left">6</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">PR</td>
@@ -1602,7 +1697,7 @@ element types.
 <td class="org-left">6</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">PR</td>
@@ -1629,11 +1724,11 @@ element types.
 <td class="org-right">2</td>
 <td class="org-left">General Spring / Shim Element</td>
 <td class="org-left"><sup><a id="fnr.13" class="footref" href="#fn.13">13</a></sup></td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&#9785;</td>
+<td class="org-left">✗</td>
 <td class="org-left">&#xa0;</td>
 </tr>
 
@@ -1644,9 +1739,9 @@ element types.
 <td class="org-left">Axisymmetric Constant Strain Triangle</td>
 <td class="org-left">7, 5</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 </tr>
@@ -1658,9 +1753,9 @@ element types.
 <td class="org-left">Axisymmetric Quadrilateral</td>
 <td class="org-left">7, 5</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 </tr>
@@ -1672,8 +1767,8 @@ element types.
 <td class="org-left">Axisymmetric Linear Strain Triangle</td>
 <td class="org-left">7</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
@@ -1686,8 +1781,8 @@ element types.
 <td class="org-left">Axisymmetric Linear Strain Quadrilateral</td>
 <td class="org-left">7</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
@@ -1699,10 +1794,10 @@ element types.
 <td class="org-right">1</td>
 <td class="org-left">Pile / Soil</td>
 <td class="org-left">4</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 </tr>
@@ -1713,10 +1808,10 @@ element types.
 <td class="org-right">2</td>
 <td class="org-left">Plane Cable-Bar Element</td>
 <td class="org-left">4</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 </tr>
@@ -1727,10 +1822,10 @@ element types.
 <td class="org-right">1</td>
 <td class="org-left">Plane Spring Element</td>
 <td class="org-left">4</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 </tr>
@@ -1744,7 +1839,7 @@ element types.
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 </tr>
@@ -1758,7 +1853,7 @@ element types.
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 </tr>
@@ -1840,7 +1935,7 @@ element types.
 <td class="org-left">6-Noded (3+3) Axisymmetric Contact Element</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
@@ -1868,7 +1963,7 @@ element types.
 <td class="org-left">16-Noded (8+8) Contact Element</td>
 <td class="org-left">8, 9</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
@@ -1924,7 +2019,7 @@ element types.
 <td class="org-left">9-Noded Shell Element</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
@@ -2052,7 +2147,7 @@ element types.
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">SP</td>
 </tr>
@@ -2079,7 +2174,7 @@ element types.
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
@@ -2107,7 +2202,7 @@ element types.
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
-<td class="org-left">&checkmark;</td>
+<td class="org-left">✓</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
@@ -2190,7 +2285,7 @@ springs are treated exactly in the same manner.
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Berthold Höllmann</p>
-<p class="date">Created: 2016-09-13 Di 12:40</p>
+<p class="date">Created: 2017-04-12 Mi 11:48</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

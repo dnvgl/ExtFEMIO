@@ -10,37 +10,37 @@
 #+LATEX_HEADER: \setcounter{secnumdepth}{6}
 #+ATTR_LATEX: :booktabs t
 #+HTML_MATHJAX: align: left indent: 5em tagside: left font: Neo-Euler
-#+TITLE: Notes on importing FEM files to Poseidon
+#+TITLE: Notes on importing and exporting FEM files to and from Poseidon
 
 * Information on element and their relevant related entries
 
 ** Contents of =FQUS= and =FTRS=: Flat Quadrilateral/Triangular Thin Shell
 
-   #+BEGIN_HTML
+   #+BEGIN_EXPORT html
     <div class="figure">
     <caption class="t-above"><span class="figure-number">Figure 1:</span> <code>FQUS</code>: Element node numbering on flat quadrilateral shell element.</caption>
     <p><img src="../images/fqus.svg" />
     </p>
-   #+END_HTML
-   #+BEGIN_LATEX
+   #+END_EXPORT
+   #+BEGIN_EXPORT latex
     \captionof{figure}{\texttt{FQUS}: Element node numbering on flat quadrilateral shell element.}
     \begin{center}
       \includegraphics[width=85.13mm]{fqus.eps}
     \end{center}
-   #+END_LATEX
+   #+END_EXPORT
 
-   #+BEGIN_HTML
+   #+BEGIN_EXPORT html
     <div class="figure">
     <caption class="t-above"><span class="figure-number">Figure 2:</span> <code>FTRS</code>: Element node numbering on flat quadrilateral shell element.</caption>
     <p><img src="../images/ftrs.svg" />
     </p>
-   #+END_HTML
-   #+BEGIN_LATEX
+   #+END_EXPORT
+   #+BEGIN_EXPORT latex
     \captionof{figure}{\texttt{FTRS}: Element node numbering and local area coordinates ($A_1$, $A_2$, and $A_3$) on flat triangular shell element.}
     \begin{center}
       \includegraphics[width=93.97mm]{ftrs.eps}
     \end{center}
-   #+END_LATEX
+   #+END_EXPORT
 
 *** =GELMNT1=: Element Data Definition (mandatory)
 
@@ -551,18 +551,18 @@
     |         | =SFZ=   | =NLOBYT= | =NLOBYB= | =NLOBZ= |
     |---------+---------+----------+----------+---------|
 
-    #+BEGIN_HTML
+    #+BEGIN_EXPORT html
     <div class="figure">
     <caption class="t-above"><span class="figure-number">Figure 3:</span> <code>GIORH</code> cross section dimensions</caption>
     <p><img src="../images/giorh.svg" />
     </p>
-    #+END_HTML
-    #+BEGIN_LATEX
+    #+END_EXPORT
+    #+BEGIN_EXPORT latex
     \captionof{figure}{\texttt{GIORH} cross section dimensions.}
     \begin{center}
       \includegraphics[width=65.45mm]{giorh.eps}
     \end{center}
-    #+END_LATEX
+    #+END_EXPORT
 
     - =GEONO=: Beam stress type number, i.e. reference number used for
       element data definition of cross sectional properties of beams.
@@ -614,18 +614,18 @@
     |         | =SFY=   | =SFZ= | =NDIR= | =NRAD= |
     |---------+---------+-------+--------+--------|
 
-    #+BEGIN_HTML
+    #+BEGIN_EXPORT html
     <div class="figure">
     <caption class="t-above"><span class="figure-number">Figure 4:</span> <code>GPIPE</code>cross section dimensions.</caption>
     <p><img src="../images/gpipe.svg" />
     </p>
-    #+END_HTML
-    #+BEGIN_LATEX
+    #+END_EXPORT
+    #+BEGIN_EXPORT latex
     \captionof{figure}{\texttt{GPIPE} cross section dimensions.}
     \begin{center}
       \includegraphics[width=65.13mm]{gpipe.eps}
     \end{center}
-    #+END_LATEX
+    #+END_EXPORT
 
     - =GEONO=: Geometry type number, i.e. reference number used for
       element data definition of geometry properties (Cross sectional
@@ -665,18 +665,18 @@
     |         | =NLOBY= | =NLOBZ= |       |      |
     |---------+---------+---------+-------+------|
 
-    #+BEGIN_HTML
+    #+BEGIN_EXPORT html
     <div class="figure">
     <caption class="t-above"><span class="figure-number">Figure 4:</span> <code>GLSEC</code>cross section dimensions.</caption>
     <p><img src="../images/glsec.svg" />
     </p>
-    #+END_HTML
-    #+BEGIN_LATEX
+    #+END_EXPORT
+    #+BEGIN_EXPORT latex
     \captionof{figure}{\texttt{GLSEC} cross section dimensions.}
     \begin{center}
       \includegraphics[width=65.13mm]{glsec.eps}
     \end{center}
-    #+END_LATEX
+    #+END_EXPORT
 
     - =HZ=: Height of beam at current location.
 
@@ -723,18 +723,18 @@
     |         | =SFY=   | =SFZ= | =NLOBY= | =NLOBZ= |
     |---------+---------+-------+---------+---------|
 
-    #+BEGIN_HTML
+    #+BEGIN_EXPORT html
     <div class="figure">
     <caption class="t-above"><span class="figure-number">Figure 5:</span> <code>GBARM</code>cross section dimensions.</caption>
     <p><img src="../images/gbarm.svg" />
     </p>
-    #+END_HTML
-    #+BEGIN_LATEX
+    #+END_EXPORT
+    #+BEGIN_EXPORT latex
     \captionof{figure}{\texttt{GBARM} cross section dimensions.}
     \begin{center}
       \includegraphics[width=66.47mm]{gbarm.eps}
     \end{center}
-    #+END_LATEX
+    #+END_EXPORT
 
     - =GEONO=: Geometry type number, i.e. reference number used for
       element data definition of geometry properties (Cross sectional

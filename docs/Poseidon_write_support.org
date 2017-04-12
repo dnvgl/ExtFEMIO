@@ -1,6 +1,15 @@
-# -*- mode: org -*-
+# -*- mode: org; coding: utf-8 -*-
+#+STARTUP: showall
+#+OPTIONS: H:6
+#+OPTIONS: toc:6
+#+LATEX_COMPILER: xelatex
 #+LATEX_CLASS: dnvglartcl
 #+LATEX_HEADER: \usepackage{tabu,booktabs}
+#+LATEX_HEADER: \usepackage{newunicodechar}
+#+LATEX_HEADER: \usepackage{arevmath}
+#+LATEX_HEADER: \newunicodechar{✓}{{\(\green\ballotcheck\)}}
+#+LATEX_HEADER: \newunicodechar{✗}{{\(\red\ballotx\)}}
+#+LATEX_HEADER: \newunicodechar{—}{{\red—}}
 #+OPTIONS: toc:nil
 
 #+TITLE: IO support for Poseidon
@@ -10,14 +19,19 @@
   |-------------+---------------------+------------------------------------------+--------+--------|
   |             |                     | <40>                                     | <c6>   | <c6>   |
   | Properties  |                     |                                          |        |        |
-  |             | beam properties     | This is probably quite tricky, because in general the beam cross section information in =BDF= files is given as description of the cross section geometry which probably has to be converted to integral values. | \check/— | —/—    |
-  |             | group information   |                                          | \check/— | —/—    |
-  | Elements    |                     |                                          |        | —/—    |
-  |             | Shell               |                                          | \check/— | —/—    |
-  |             | PSE                 |                                          | \check/— | —/—    |
-  |             | Truss               |                                          | \check/— | —/—    |
-  |             | Beam                |                                          | \check/— | —/—    |
+  |             | beam properties     | This is probably quite tricky, because in general the beam cross section information in =BDF= files is given as description of the cross section geometry which probably has to be converted to integral values. | ✓/—    | ✓/✓    |
+  |             | group information   |                                          | ✓/—    | ✓/✓    |
+  | Elements    |                     |                                          |        |        |
+  |             | Shell               |                                          | ✓/—    | ✓/✓    |
+  |             | PSE                 |                                          | ✓/—    | ✓/✓    |
+  |             | Truss               |                                          | ✓/—    | ✓/✓    |
+  |             | Beam                |                                          | ✓/—    | ✓/✓    |
   |             | Boundary Elements   |                                          |        | —/—    |
-  | Group Info. |                     |                                          |        | —/—    |
-  |             | NAPA CSV file       | contains also yield stress informaton    | \check/— | —/—    |
-  |             | Patran session file | does not contain yield stress information |        | —/—    |
+  | Group Info. |                     |                                          |        | ✓/✓    |
+  |             | NAPA CSV file       | contains also yield stress information   | ✓/—    | N/A    |
+  |             | Patran session file | does not contain yield stress information | —/—    | N/A    |
+
+# Local Variables:
+# org-latex-inputenc-alist: (("utf8" . "utf8x"))
+# eval: (setq org-latex-default-packages-alist (cons '("mathletters" "ucs" nil) org-latex-default-packages-alist))
+# End:
