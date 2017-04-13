@@ -28,18 +28,45 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace dnvgl::extfem::bdf;
+using namespace std;
+
+using namespace dnvgl::extfem;
+using namespace bdf;
+using namespace type_bounds;
+using namespace cards;
 
 using types::entry_type;
 
-using namespace cards;
+bdf::types::card cquad4::head = bdf::types::card("CQUAD4");
 
-cquad4::cquad4(const std::list<std::string> &inp) :
+cquad4::cquad4() : shell() {}
+
+cquad4::cquad4(std::list<std::string> const &inp) :
 shell(inp) {
     this->cquad4::read(inp);
 }
 
-void cquad4::read(const std::list<std::string> &inp) {
+cquad4::cquad4(long const *EID, long const *PID,
+               long const *G1, long const *G2, long const *G3, long const *G4,
+               double const *THETA/*=nullptr*/,
+               double const *ZOFFS/*=nullptr*/,
+               long const *TFLAG/*=nullptr*/,
+               double const *T1/*=nullptr*/, double const *T2/*=nullptr*/,
+               double const *T3/*=nullptr*/, double const *T4/*=nullptr*/) :
+        shell(EID, PID, G1, G2, G3, G3, THETA,ZOFFS, TFLAG,
+              T1, T2, T3, T4) {}
+
+cquad4::cquad4(long const *EID, long const *PID,
+               long const *G1, long const *G2, long const *G3, long const *G4,
+               long const *MCID,
+               double const *ZOFFS/*=nullptr*/,
+               long const *TFLAG/*=nullptr*/,
+               double const *T1/*=nullptr*/, double const *T2/*=nullptr*/,
+               double const *T3/*=nullptr*/, double const *T4/*=nullptr*/) :
+        shell(EID, PID, G1, G2, G3, G4, MCID, ZOFFS, TFLAG,
+              T1, T2, T3, T4) {}
+
+void cquad4::read(std::list<std::string> const &inp) {
     auto pos = inp.rbegin();
 
     form_THETA.set_value(THETA, "");
@@ -109,14 +136,84 @@ void cquad4::read(const std::list<std::string> &inp) {
         if (!T4.is_value) form_T4.set_value(T4, "");
     }
 }
-            
+
 cards::types cquad4::card_type() const {
     return types::CQUAD4;
 }
 
+cards::__base::card const &cquad4::operator() (std::list<std::string> const &inp) {
+    this->cquad4::read(inp);
+    return *this;
+}
+
+cards::__base::card const &cquad4::operator() (
+    long const *EID, long const *PID,
+    long const *G1, long const *G2, long const *G3, long const *G4,
+    double const *THETA/*=nullptr*/,
+    double const *ZOFFS/*=nullptr*/,
+    long const *TFLAG/*=nullptr*/,
+    double const *T1/*=nullptr*/, double const *T2/*=nullptr*/,
+    double const *T3/*=nullptr*/, double const *T4/*=nullptr*/) {
+    this->shell::operator() (EID, PID, G1, G2, G3, G4, THETA,ZOFFS, TFLAG,
+                             T1, T2, T3, T4);
+    return *this;
+}
+
+cards::__base::card const &cquad4::operator() (
+    long const *EID, long const *PID,
+    long const *G1, long const *G2, long const *G3, long const *G4,
+    long const *MCID,
+    double const *ZOFFS/*=nullptr*/,
+    long const *TFLAG/*=nullptr*/,
+    double const *T1/*=nullptr*/, double const *T2/*=nullptr*/,
+    double const *T3/*=nullptr*/, double const *T4/*=nullptr*/) {
+    this->shell::operator() (EID, PID, G1, G2, G3, G4, MCID, ZOFFS, TFLAG,
+                             T1, T2, T3, T4);
+    return *this;
+}
+
 void cquad4::collect_outdata(
-    std::list<std::unique_ptr<format_entry> > &res) const {
-    throw errors::error("CQUAD4", "can't write CQUAD4.");
+    std::list<std::unique_ptr<format_entry>> &res) const {
+    if (!bool(EID) || choose_mcid_theta == CHOOSE_MCID_THETA::UNDEF)
+        return;
+    res.push_back(unique_ptr<format_entry>(format(head)));
+
+    res.push_back(unique_ptr<format_entry>(format<long>(form_EID, EID)));
+    res.push_back(unique_ptr<format_entry>(format<long>(form_PID, PID)));
+    res.push_back(unique_ptr<format_entry>(format<long>(form_G1, G1)));
+    res.push_back(unique_ptr<format_entry>(format<long>(form_G2, G2)));
+    res.push_back(unique_ptr<format_entry>(format<long>(form_G3, G3)));
+    res.push_back(unique_ptr<format_entry>(format<long>(form_G4, G4)));
+    if (choose_mcid_theta == CHOOSE_MCID_THETA::has_MCID)
+        res.push_back(unique_ptr<format_entry>(format<long>(form_MCID, MCID)));
+    else
+        res.push_back(unique_ptr<format_entry>(format<double>(form_THETA, THETA)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_ZOFFS, ZOFFS)));
+    if (bool(TFLAG) || bool(T1) || bool(T2) || bool(T3) || bool(T4)) {
+        res.push_back(unique_ptr<format_entry>(format(empty)));
+        if (bool(TFLAG))
+            res.push_back(unique_ptr<format_entry>(format<long>(form_TFLAG, TFLAG)));
+        else
+            res.push_back(unique_ptr<format_entry>(format(empty)));
+    } else goto finish;
+    if (bool(T1))
+        res.push_back(unique_ptr<format_entry>(format<double>(form_T1, T1)));
+    else
+        res.push_back(unique_ptr<format_entry>(format(empty)));
+    if (bool(T2))
+        res.push_back(unique_ptr<format_entry>(format<double>(form_T2, T2)));
+    else
+        res.push_back(unique_ptr<format_entry>(format(empty)));
+    if (bool(T3))
+        res.push_back(unique_ptr<format_entry>(format<double>(form_T3, T3)));
+    else
+        res.push_back(unique_ptr<format_entry>(format(empty)));
+    if (bool(T4))
+        res.push_back(unique_ptr<format_entry>(format<double>(form_T4, T4)));
+    else
+        res.push_back(unique_ptr<format_entry>(format(empty)));
+
+finish:return;
 }
 
 // Local Variables:

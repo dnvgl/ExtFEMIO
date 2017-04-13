@@ -74,7 +74,7 @@ namespace dnvgl {
                     public:
 
                         enum class CHOOSE_MCID_THETA {
-                            has_MCID, has_THETA
+                            has_MCID, has_THETA, UNDEF
                         };
 
                         CHOOSE_MCID_THETA choose_mcid_theta;
@@ -166,7 +166,26 @@ namespace dnvgl {
 
                     protected:
 
-                        virtual card const &operator() (
+                        shell();
+
+                        shell(long const *EID, long const *PID,
+                              long const *G1, long const *G2,
+                              long const *G3, long const *G4,
+                              double const *THETA,
+                              double const *ZOFFS,
+                              long const *TFLAG,
+                              double const *T1, double const *T2,
+                              double const *T3, double const *T4);
+
+                        shell(long const *EID, long const *PID,
+                              long const *G1, long const *G2,
+                              long const *G3, long const *G4,
+                              long const *MCID,
+                              double const *ZOFFS, long const *TFLAG,
+                              double const *T1, double const *T2,
+                              double const *T3, double const *T4);
+
+                        card const &operator() (
                             long const *EID, long const *PID,
                             long const *G1, long const *G2,
                             long const *G3, long const *G4,
@@ -174,16 +193,16 @@ namespace dnvgl {
                             double const *ZOFFS,
                             long const *TFLAG,
                             double const *T1, double const *T2,
-                            double const *T3, double const *T4) = delete;
+                            double const *T3, double const *T4);
 
-                        virtual card const &operator() (
+                        card const &operator() (
                             long const *EID, long const *PID,
                             long const *G1, long const *G2,
                             long const *G3, long const *G4,
                             long const *MCID,
                             double const *ZOFFS, long const *TFLAG,
                             double const *T1, double const *T2,
-                            double const *T3, double const *T4) = delete;
+                            double const *T3, double const *T4);
 
                         using card::put;
                         using card::read;
@@ -210,29 +229,49 @@ namespace dnvgl {
 
                 public:
 
-                    ctria3(std::list<std::string> const&);
+                    ctria3();
+
+                    explicit ctria3(std::list<std::string> const&);
+
+                    ctria3(long const *EID, long const *PID,
+                           long const *G1, long const *G2, long const *G3,
+                           double const *THETA=nullptr,
+                           double const *ZOFFS=nullptr,
+                           long const *TFLAG=nullptr,
+                           double const *T1=nullptr, double const *T2=nullptr,
+                           double const *T3=nullptr);
+
+                    ctria3(long const *EID, long const *PID,
+                           long const *G1, long const *G2, long const *G3,
+                           long const *MCID,
+                           double const *ZOFFS=nullptr,
+                           long const *TFLAG=nullptr,
+                           double const *T1=nullptr, double const *T2=nullptr,
+                           double const *T3=nullptr);
+
+                    void read(std::list<std::string> const&) override;
 
                     types card_type() const override;
 
-                    void read(std::list<std::string> const&) override;
+                    card const &operator() (std::list<std::string> const&);
 
                     card const &operator() (
                         long const *EID, long const *PID,
                         long const *G1, long const *G2, long const *G3,
-                        double const *THETA = nullptr,
-                        double const *ZOFFS = nullptr,
-                        long const *TFLAG = nullptr,
-                        double const *T1 = nullptr, double const *T2 = nullptr,
-                        double const *T3 = nullptr, double const *T4 = nullptr) = delete;
+                        double const *THETA=nullptr,
+                        double const *ZOFFS=nullptr,
+                        long const *TFLAG=nullptr,
+                        double const *T1=nullptr, double const *T2=nullptr,
+                        double const *T3=nullptr);
 
                     card const &operator() (
                         long const *EID, long const *PID,
                         long const *G1, long const *G2, long const *G3,
                         long const *MCID,
-                        double const *ZOFFS = nullptr,
-                        long const *TFLAG = nullptr,
-                        double const *T1 = nullptr, double const *T2 = nullptr,
-                        double const *T3 = nullptr, double const *T4 = nullptr) = delete;
+                        double const *ZOFFS=nullptr,
+                        long const *TFLAG=nullptr,
+                        double const *T1=nullptr, double const *T2=nullptr,
+                        double const *T3=nullptr);
 
                 private:
 
@@ -263,31 +302,51 @@ namespace dnvgl {
 
                 public:
 
-                    cquad4(std::list<std::string> const&);
+                    cquad4();
 
-                    types card_type() const override;
+                    explicit cquad4(std::list<std::string> const&);
+
+                    cquad4(long const *EID, long const *PID,
+                           long const *G1, long const *G2, long const *G3, long const *G4,
+                           double const *THETA=nullptr,
+                           double const *ZOFFS=nullptr,
+                           long const *TFLAG=nullptr,
+                           double const *T1=nullptr, double const *T2=nullptr,
+                           double const *T3=nullptr, double const *T4=nullptr);
+
+                    cquad4(long const *EID, long const *PID,
+                           long const *G1, long const *G2, long const *G3, long const *G4,
+                           long const *MCID,
+                           double const *ZOFFS=nullptr,
+                           long const *TFLAG=nullptr,
+                           double const *T1=nullptr, double const *T2=nullptr,
+                           double const *T3=nullptr, double const *T4=nullptr);
 
                     void read(std::list<std::string> const&) override;
 
-                    card const &operator() (
+                    types card_type() const override;
+
+                    __base::card const &operator() (std::list<std::string> const&);
+
+                    __base::card const &operator() (
                         long const *EID, long const *PID,
                         long const *G1, long const *G2,
                         long const *G3, long const *G4,
-                        double const *THETA = nullptr,
-                        double const *ZOFFS = nullptr,
-                        long const *TFLAG = nullptr,
-                        double const *T1 = nullptr, double const *T2 = nullptr,
-                        double const *T3 = nullptr, double const *T4 = nullptr) override = delete;
+                        double const *THETA=nullptr,
+                        double const *ZOFFS=nullptr,
+                        long const *TFLAG=nullptr,
+                        double const *T1=nullptr, double const *T2=nullptr,
+                        double const *T3=nullptr, double const *T4=nullptr);
 
-                    card const &operator() (
+                    __base::card const &operator() (
                         long const *EID, long const *PID,
                         long const *G1, long const *G2,
                         long const *G3, long const *G4,
                         long const *MCID,
-                        double const *ZOFFS = nullptr,
-                        long const *TFLAG = nullptr,
-                        double const *T1 = nullptr, double const *T2 = nullptr,
-                        double const *T3 = nullptr, double const *T4 = nullptr) override = delete;
+                        double const *ZOFFS=nullptr,
+                        long const *TFLAG=nullptr,
+                        double const *T1=nullptr, double const *T2=nullptr,
+                        double const *T3=nullptr, double const *T4=nullptr);
 
                 private:
 
@@ -504,12 +563,12 @@ namespace dnvgl {
                         double const *X1,
                         double const *X2,
                         double const *X3,
-                        std::string const *OFFT = nullptr,
-                        std::list<int> const *PA = nullptr, std::list<int> const *PB = nullptr,
-                        double const *W1A = nullptr, double const *W2A = nullptr,
-                        double const *W3A = nullptr, double const *W1B = nullptr,
-                        double const *W2B = nullptr, double const *W3B = nullptr,
-                        long const *SA = nullptr, long const *SB = nullptr) = delete;
+                        std::string const *OFFT=nullptr,
+                        std::list<int> const *PA=nullptr, std::list<int> const *PB=nullptr,
+                        double const *W1A=nullptr, double const *W2A=nullptr,
+                        double const *W3A=nullptr, double const *W1B=nullptr,
+                        double const *W2B=nullptr, double const *W3B=nullptr,
+                        long const *SA=nullptr, long const *SB=nullptr) = delete;
 
                     card const &operator() (
                         long const *EID, long const *PID,
@@ -518,33 +577,33 @@ namespace dnvgl {
                         double const *X2,
                         double const *X3,
                         double const *BIT,
-                        std::list<int> const *PA = nullptr, std::list<int> const *PB = nullptr,
-                        double const *W1A = nullptr, double const *W2A = nullptr,
-                        double const *W3A = nullptr, double const *W1B = nullptr,
-                        double const *W2B = nullptr, double const *W3B = nullptr,
-                        long const *SA = nullptr, long const *SB = nullptr) = delete;
+                        std::list<int> const *PA=nullptr, std::list<int> const *PB=nullptr,
+                        double const *W1A=nullptr, double const *W2A=nullptr,
+                        double const *W3A=nullptr, double const *W1B=nullptr,
+                        double const *W2B=nullptr, double const *W3B=nullptr,
+                        long const *SA=nullptr, long const *SB=nullptr) = delete;
 
                     card const &operator() (
                         long const *EID, long const *PID,
                         long const *GA, long const *GB,
                         long const *G0,
-                        std::string const *OFFT = nullptr,
-                        std::list<int> const *PA = nullptr, std::list<int> const *PB = nullptr,
-                        double const *W1A = nullptr, double const *W2A = nullptr,
-                        double const *W3A = nullptr, double const *W1B = nullptr,
-                        double const *W2B = nullptr, double const *W3B = nullptr,
-                        long const *SA = nullptr, long const *SB = nullptr) = delete;
+                        std::string const *OFFT=nullptr,
+                        std::list<int> const *PA=nullptr, std::list<int> const *PB=nullptr,
+                        double const *W1A=nullptr, double const *W2A=nullptr,
+                        double const *W3A=nullptr, double const *W1B=nullptr,
+                        double const *W2B=nullptr, double const *W3B=nullptr,
+                        long const *SA=nullptr, long const *SB=nullptr) = delete;
 
                     card const &operator() (
                         long const *EID, long const *PID,
                         long const *GA, long const *GB,
                         long const *G0,
                         double const *BIT,
-                        std::list<int> const *PA = nullptr, std::list<int> const *PB = nullptr,
-                        double const *W1A = nullptr, double const *W2A = nullptr,
-                        double const *W3A = nullptr, double const *W1B = nullptr,
-                        double const *W2B = nullptr, double const *W3B = nullptr,
-                        long const *SA = nullptr, long const *SB = nullptr) = delete;
+                        std::list<int> const *PA=nullptr, std::list<int> const *PB=nullptr,
+                        double const *W1A=nullptr, double const *W2A=nullptr,
+                        double const *W3A=nullptr, double const *W1B=nullptr,
+                        double const *W2B=nullptr, double const *W3B=nullptr,
+                        long const *SA=nullptr, long const *SB=nullptr) = delete;
 
                 private:
 
@@ -746,22 +805,22 @@ namespace dnvgl {
                         long const *EID, long const *PID,
                         long const *GA, long const *GB,
                         double const *X1, double const *X2, double const *X3,
-                        std::string const *OFFT = nullptr,
-                        std::list<int> const *PA = nullptr,
-                        std::list<int> const *PB = nullptr,
-                        double const *W1A = nullptr, double const *W2A = nullptr,
-                        double const *W3A = nullptr, double const *W1B = nullptr,
-                        double const *W2B = nullptr, double const *W3B = nullptr);
+                        std::string const *OFFT=nullptr,
+                        std::list<int> const *PA=nullptr,
+                        std::list<int> const *PB=nullptr,
+                        double const *W1A=nullptr, double const *W2A=nullptr,
+                        double const *W3A=nullptr, double const *W1B=nullptr,
+                        double const *W2B=nullptr, double const *W3B=nullptr);
 
                     cbar(
                         long const *EID, long const *PID,
                         long const *GA, long const *GB, long const *G0,
-                        std::string const *OFFT = nullptr,
-                        std::list<int> const *PA = nullptr,
-                        std::list<int> const *PB = nullptr,
-                        double const *W1A = nullptr, double const *W2A = nullptr,
-                        double const *W3A = nullptr, double const *W1B = nullptr,
-                        double const *W2B = nullptr, double const *W3B = nullptr);
+                        std::string const *OFFT=nullptr,
+                        std::list<int> const *PA=nullptr,
+                        std::list<int> const *PB=nullptr,
+                        double const *W1A=nullptr, double const *W2A=nullptr,
+                        double const *W3A=nullptr, double const *W1B=nullptr,
+                        double const *W2B=nullptr, double const *W3B=nullptr);
 
                     void read(std::list<std::string> const &) override;
 
@@ -787,12 +846,12 @@ namespace dnvgl {
                         long const *EID, long const *PID,
                         long const *GA, long const *GB,
                         long const *G0,
-                        std::string const *OFFT = nullptr,
-                        std::list<int> const *PA = nullptr,
-                        std::list<int> const *PB = nullptr,
-                        double const *W1A = nullptr, double const *W2A = nullptr,
-                        double const *W3A = nullptr, double const *W1B = nullptr,
-                        double const *W2B = nullptr, double const *W3B = nullptr);
+                        std::string const *OFFT=nullptr,
+                        std::list<int> const *PA=nullptr,
+                        std::list<int> const *PB=nullptr,
+                        double const *W1A=nullptr, double const *W2A=nullptr,
+                        double const *W3A=nullptr, double const *W1B=nullptr,
+                        double const *W2B=nullptr, double const *W3B=nullptr);
 
                     /**
                      * \brief Returns instance with new values.
@@ -818,12 +877,12 @@ namespace dnvgl {
                         long const *EID, long const *PID,
                         long const *GA, long const *GB,
                         double const *X1, double const *X2, double const *X3,
-                        std::string const *OFFT = nullptr,
-                        std::list<int> const *PA = nullptr,
-                        std::list<int> const *PB = nullptr,
-                        double const *W1A = nullptr, double const *W2A = nullptr,
-                        double const *W3A = nullptr, double const *W1B = nullptr,
-                        double const *W2B = nullptr, double const *W3B = nullptr);
+                        std::string const *OFFT=nullptr,
+                        std::list<int> const *PA=nullptr,
+                        std::list<int> const *PB=nullptr,
+                        double const *W1A=nullptr, double const *W2A=nullptr,
+                        double const *W3A=nullptr, double const *W1B=nullptr,
+                        double const *W2B=nullptr, double const *W3B=nullptr);
 
                 private:
 
@@ -911,7 +970,7 @@ namespace dnvgl {
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
 // compile-command: "make -C ../../cbuild -j7 &&
-//                   (make -C ../../cbuild test;
-//                    ../../cbuild/tests/test_bdf_cards --use-colour no)"
+//    (make -C ../../cbuild test;
+//     ../../cbuild/tests/test_bdf_cards --use-colour no)"
 // coding: utf-8
 // End:

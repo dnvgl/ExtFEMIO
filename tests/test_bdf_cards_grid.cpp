@@ -233,7 +233,7 @@ TEST_CASE("FEMIO-43: BDF import failed") {
     }
 }
 
-TEST_CASE("BDF GRID types output.", "[bdf_mat1,out]") {
+TEST_CASE("BDF GRID types output.", "[bdf_grid,out]") {
 
     ostringstream test;
 
@@ -286,7 +286,7 @@ TEST_CASE("BDF GRID types output.", "[bdf_mat1,out]") {
     }
 }
 
-TEST_CASE("BDF GRID types output (reuse instance).", "[bdf_mat1,out.reuse]") {
+TEST_CASE("BDF GRID types output (reuse instance).", "[bdf_grid,out.reuse]") {
 
     ostringstream test;
 

@@ -67,13 +67,89 @@ const entry_type<double> shell::form_T3(
 const entry_type<double> shell::form_T4(
     "T4", type_bounds::bound<double>(&cd0, nullptr, &cd0, true));
 
+shell::shell() : element(nullptr), choose_mcid_theta() {}
+
 shell::shell(const std::list<std::string> &inp) :
-    element(inp), choose_mcid_theta() {
+    element(inp), choose_mcid_theta(CHOOSE_MCID_THETA::UNDEF) {
 };
 
 shell::shell(long const *EID) :
-    element(EID), choose_mcid_theta() {
+        element(EID), choose_mcid_theta(CHOOSE_MCID_THETA::UNDEF) {
 };
+
+shell::shell(long const *EID, long const *PID,
+             long const *G1, long const *G2,
+             long const *G3, long const *G4,
+             double const *THETA,
+             double const *ZOFFS, long const *TFLAG,
+             double const *T1, double const *T2,
+             double const *T3, double const *T4) :
+        element(EID), choose_mcid_theta(CHOOSE_MCID_THETA::has_THETA),
+        PID(PID), G1(G1), G2(G2), G3(G3), G4(G4),
+        THETA(THETA), ZOFFS(ZOFFS), TFLAG(TFLAG),
+        T1(T1), T2(T2), T3(T3), T4(T4) {}
+
+shell::shell(long const *EID, long const *PID,
+             long const *G1, long const *G2,
+             long const *G3, long const *G4,
+             long const *MCID,
+             double const *ZOFFS, long const *TFLAG,
+             double const *T1, double const *T2,
+             double const *T3, double const *T4) :
+        element(EID), choose_mcid_theta(CHOOSE_MCID_THETA::has_MCID),
+        PID(PID), G1(G1), G2(G2), G3(G3), G4(G4),
+        MCID(MCID), ZOFFS(ZOFFS), TFLAG(TFLAG),
+        T1(T1), T2(T2), T3(T3), T4(T4) {}
+
+cards::__base::card const &shell::operator() (
+    long const *EID, long const *PID,
+    long const *G1, long const *G2,
+    long const *G3, long const *G4,
+    double const *THETA,
+    double const *ZOFFS, long const *TFLAG,
+    double const *T1, double const *T2,
+    double const *T3, double const *T4) {
+    this->element::operator() (EID);
+    choose_mcid_theta = CHOOSE_MCID_THETA::has_THETA;
+    this->PID(PID);
+    this->G1(G1);
+    this->G2(G2);
+    this->G3(G3);
+    this->G4(G4);
+    this->THETA(THETA);
+    this->ZOFFS(ZOFFS);
+    this->TFLAG(TFLAG);
+    this->T1(T1);
+    this->T2(T2);
+    this->T3(T3);
+    this->T4(T4) ;
+    return *this;
+}
+
+cards::__base::card const &shell::operator() (
+    long const *EID, long const *PID,
+    long const *G1, long const *G2,
+    long const *G3, long const *G4,
+    long const *MCID,
+    double const *ZOFFS, long const *TFLAG,
+    double const *T1, double const *T2,
+    double const *T3, double const *T4) {
+    this->element::operator() (EID);
+    choose_mcid_theta = CHOOSE_MCID_THETA::has_MCID;
+    this->PID(PID);
+    this->G1(G1);
+    this->G2(G2);
+    this->G3(G3);
+    this->G4(G4);
+    this->MCID(MCID);
+    this->ZOFFS(ZOFFS);
+    this->TFLAG(TFLAG);
+    this->T1(T1);
+    this->T2(T2);
+    this->T3(T3);
+    this->T4(T4);
+    return *this;
+}
 
 // Local Variables:
 // mode: c++

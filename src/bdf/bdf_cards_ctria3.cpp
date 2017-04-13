@@ -28,14 +28,43 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-using namespace dnvgl::extfem::bdf;
-using types::entry_type;
+using namespace std;
+
+using namespace dnvgl::extfem;
+using namespace bdf;
+using namespace type_bounds;
 using namespace cards;
+
+using types::entry_type;
+
+bdf::types::card ctria3::head = bdf::types::card("CTRIA3");
+
+ctria3::ctria3() : shell() {}
 
 ctria3::ctria3(std::list<std::string> const &inp) :
 shell(inp) {
     this->ctria3::read(inp);
 }
+
+ctria3::ctria3(long const *EID, long const *PID,
+               long const *G1, long const *G2, long const *G3,
+               double const *THETA/*=nullptr*/,
+               double const *ZOFFS/*=nullptr*/,
+               long const *TFLAG/*=nullptr*/,
+               double const *T1/*=nullptr*/, double const *T2/*=nullptr*/,
+               double const *T3/*=nullptr*/) :
+        shell(EID, PID, G1, G2, G3, nullptr, THETA,ZOFFS, TFLAG,
+              T1, T2, T3, nullptr) {}
+
+ctria3::ctria3(long const *EID, long const *PID,
+               long const *G1, long const *G2, long const *G3,
+               long const *MCID,
+               double const *ZOFFS/*=nullptr*/,
+               long const *TFLAG/*=nullptr*/,
+               double const *T1/*=nullptr*/, double const *T2/*=nullptr*/,
+               double const *T3/*=nullptr*/) :
+        shell(EID, PID, G1, G2, G3, nullptr, MCID, ZOFFS, TFLAG,
+              T1, T2, T3, nullptr) {}
 
 void ctria3::read(std::list<std::string> const &inp) {
     auto pos = inp.rbegin();
@@ -115,9 +144,75 @@ cards::types ctria3::card_type() const {
     return types::CTRIA3;
 }
 
+cards::__base::card const &ctria3::operator() (std::list<std::string> const &inp) {
+    this->ctria3::read(inp);
+    return *this;
+}
+
+cards::__base::card const &ctria3::operator() (
+    long const *EID, long const *PID,
+    long const *G1, long const *G2, long const *G3,
+    double const *THETA/*=nullptr*/,
+    double const *ZOFFS/*=nullptr*/,
+    long const *TFLAG/*=nullptr*/,
+    double const *T1/*=nullptr*/, double const *T2/*=nullptr*/,
+    double const *T3/*=nullptr*/) {
+    this->shell::operator() (EID, PID, G1, G2, G3, nullptr, THETA,ZOFFS, TFLAG,
+                             T1, T2, T3, nullptr);
+    return *this;
+}
+
+cards::__base::card const &ctria3::operator() (
+    long const *EID, long const *PID,
+    long const *G1, long const *G2, long const *G3,
+    long const *MCID,
+    double const *ZOFFS/*=nullptr*/,
+    long const *TFLAG/*=nullptr*/,
+    double const *T1/*=nullptr*/, double const *T2/*=nullptr*/,
+    double const *T3/*=nullptr*/) {
+    this->shell::operator() (EID, PID, G1, G2, G3, nullptr, MCID, ZOFFS, TFLAG,
+                             T1, T2, T3, nullptr);
+    return *this;
+}
+
 void ctria3::collect_outdata(
-    std::list<std::unique_ptr<format_entry> >&) const {
-    throw std::not_implemented(__FILE__, __LINE__, "can't write CTRIA3.");
+    std::list<std::unique_ptr<format_entry>> &res) const {
+    if (!bool(EID) || choose_mcid_theta == CHOOSE_MCID_THETA::UNDEF)
+        return;
+    res.push_back(unique_ptr<format_entry>(format(head)));
+
+    res.push_back(unique_ptr<format_entry>(format<long>(form_EID, EID)));
+    res.push_back(unique_ptr<format_entry>(format<long>(form_PID, PID)));
+    res.push_back(unique_ptr<format_entry>(format<long>(form_G1, G1)));
+    res.push_back(unique_ptr<format_entry>(format<long>(form_G2, G2)));
+    res.push_back(unique_ptr<format_entry>(format<long>(form_G3, G3)));
+    if (choose_mcid_theta == CHOOSE_MCID_THETA::has_MCID)
+        res.push_back(unique_ptr<format_entry>(format<long>(form_MCID, MCID)));
+    else
+        res.push_back(unique_ptr<format_entry>(format<double>(form_THETA, THETA)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_ZOFFS, ZOFFS)));
+    if (bool(TFLAG) || bool(T1) || bool(T2) || bool(T3)) {
+        res.push_back(unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(format(empty)));
+        if (bool(TFLAG))
+            res.push_back(unique_ptr<format_entry>(format<long>(form_TFLAG, TFLAG)));
+        else
+            res.push_back(unique_ptr<format_entry>(format(empty)));
+    } else goto finish;
+    if (bool(T1))
+        res.push_back(unique_ptr<format_entry>(format<double>(form_T1, T1)));
+    else
+        res.push_back(unique_ptr<format_entry>(format(empty)));
+    if (bool(T2))
+        res.push_back(unique_ptr<format_entry>(format<double>(form_T2, T2)));
+    else
+        res.push_back(unique_ptr<format_entry>(format(empty)));
+    if (bool(T3))
+        res.push_back(unique_ptr<format_entry>(format<double>(form_T3, T3)));
+    else
+        res.push_back(unique_ptr<format_entry>(format(empty)));
+
+finish:return;
 }
 
 // Local Variables:
@@ -125,5 +220,7 @@ void ctria3::collect_outdata(
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// make -C ../../cbuild -j7 &&
+//    (make -C ../../cbuild test;
+//     ../../cbuild/tests/test_bdf_cards --use-colour no)
 // End:
