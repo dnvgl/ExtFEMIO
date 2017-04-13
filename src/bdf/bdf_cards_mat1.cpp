@@ -22,7 +22,6 @@ namespace {
 #include "bdf/cards.h"
 #include "bdf/types.h"
 #include "bdf/errors.h"
-#include "extfem_misc.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
@@ -37,7 +36,7 @@ using namespace bdf;
 using namespace type_bounds;
 using namespace cards;
 
-using types::entry_type;
+using bdf::types::entry_type;
 
 namespace {
     const long cl0 = 0, cl1 = 1;
