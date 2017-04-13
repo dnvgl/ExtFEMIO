@@ -170,7 +170,7 @@ cards::types mat1::card_type() const {
 
 void mat1::collect_outdata(
     list<unique_ptr<format_entry> > &res) const {
-    if (long(MID) == 0)
+    if (!bool(MID))
         return;
     res.push_back(unique_ptr<format_entry>(format(head)));
 

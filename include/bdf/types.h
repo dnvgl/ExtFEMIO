@@ -202,6 +202,12 @@ namespace dnvgl {
                         return;
                     }
 
+                    void inline operator() (const _Ty &val) {
+                        is_value = true;
+                        value = val;
+                        return;
+                    }
+
                     void push_back(const long&);
                 };
 

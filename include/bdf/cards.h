@@ -597,16 +597,32 @@ namespace dnvgl {
                     */
                     bdf::types::entry_value<long> SEID;
 
+                    grid();
+
                     grid(const std::list<std::string> &);
-                    grid(long &ID, long &CP, double &X1, double &X2, double &X3);
+
+                    grid(long const *ID, long const *CP,
+                         double const *X1, double const *X2, double const *X3,
+                         long const *CD, std::list<int> const *PS,
+                         long const *SEID);
+
+                    grid(long const &ID, long const &CP,
+                         double const &X1, double const &X2, double const &X3);
 
                     types card_type() const override;
 
                     void read(const std::list<std::string> &) override;
 
+                    card const &operator()(const std::list<std::string> &);
+
+                    card const &operator()(long const *ID, long const *CP,
+                         double const *X1, double const *X2, double const *X3,
+                         long const *CD, std::list<int> const *PS,
+                         long const *SEID);
+
                     card const &operator()(
                         long const &ID, long const &CP,
-                        double const &X1, double const &X2, double const &X3) = delete;
+                        double const &X1, double const &X2, double const &X3);
 
                 private:
 

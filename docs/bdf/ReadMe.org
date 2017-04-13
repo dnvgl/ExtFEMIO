@@ -8,9 +8,9 @@
   |          | *Name*     | *Description*                                                                               | *Read* | *Write* |
   |----------+------------+---------------------------------------------------------------------------------------------+--------+---------|
   | General  |            |                                                                                             |        |         |
-  |          | =MAT1=     | Material definition                                                                         | ✓      | ✗       |
-  |          | =MAT2=     | Shell Element Anisotropic Material Property Definition                                      | ✓      | ✗       |
-  |          | =GRID=     | Grid nodes                                                                                  | ✓      | ✗       |
+  |          | =MAT1=     | Material definition                                                                         | ✓      | ✓       |
+  |          | =MAT2=     | Shell Element Anisotropic Material Property Definition                                      | ✓      | ✓       |
+  |          | =GRID=     | Grid nodes                                                                                  | ✓      | ✓       |
   |----------+------------+---------------------------------------------------------------------------------------------+--------+---------|
   | Elements |            |                                                                                             |        |         |
   |          | =CTRIA3=   | 3 node shaped shell elements                                                                | ✓      | ✗       |

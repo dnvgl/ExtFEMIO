@@ -35,8 +35,13 @@ namespace {
    const double cd0 = 0.;
 }
 
+using namespace std;
+
 using namespace dnvgl::extfem;
-using namespace bdf::cards;
+using namespace bdf;
+using namespace cards;
+
+bdf::types::card grid::head = bdf::types::card("GRID");
 
 const bdf::types::entry_type<long> grid::form_ID(
     "ID", bdf::type_bounds::bound<long>(&cl1, &cl1e8));
@@ -54,21 +59,66 @@ const bdf::types::entry_type<std::list<int> > grid::form_PS("PS");
 const bdf::types::entry_type<long> grid::form_SEID(
     "SEID", bdf::type_bounds::bound<long>(&cl_1, nullptr, &cl0));
 
+grid::grid() : card(), ID(), CP(), X1(), X2(), X3(),
+CD(), PS(), SEID() {}
+
 grid::grid(std::list<std::string> const &inp) :
 card(inp) {
     this->grid::read(inp);
 }
 
-grid::grid(long &ID, long &CP, double &X1, double &X2, double &X3) :
+grid::grid(long const &ID, long const &CP,
+           double const &X1, double const &X2, double const &X3) :
 card(),
 ID(ID), CP(CP), X1(X1), X2(X2), X3(X3),
 CD(), PS(), SEID() {}
 
-types grid::card_type() const {
+grid::grid(long const *ID, long const *CP,
+           double const *X1, double const *X2, double const *X3,
+           long const *CD, list<int> const *PS, long const *SEID) :
+        card(), ID(ID), CP(CP), X1(X1), X2(X2), X3(X3),
+        CD(CD), PS(PS), SEID(SEID) {}
+
+cards::types grid::card_type() const {
     return types::GRID;
 }
 
-void grid::read(std::list<std::string> const &inp) {
+cards::__base::card const &grid::operator()(list<std::string> const &inp) {
+    this->grid::read(inp);
+    return *this;
+}
+
+cards::__base::card const &grid::operator()(
+    long const *ID, long const *CP,
+    double const *X1, double const *X2, double const *X3,
+    long const *CD, std::list<int> const *PS,
+    long const *SEID) {
+    this->ID(ID);
+    this->CP(CP);
+    this->X1(X1);
+    this->X2(X2);
+    this->X3(X3);
+    this->CD(CD);
+    this->PS(PS);
+    this->SEID(SEID);
+    return *this;
+}
+
+cards::__base::card const &grid::operator()(
+    long const &ID, long const &CP,
+    double const &X1, double const &X2, double const &X3) {
+    this->ID(ID);
+    this->CP(CP);
+    this->X1(X1);
+    this->X2(X2);
+    this->X3(X3);
+    this->CD(nullptr);
+    this->PS(nullptr);
+    this->SEID(nullptr);
+    return *this;
+}
+
+void grid::read(list<std::string> const &inp) {
     auto pos = inp.rbegin();
 
     form_SEID.set_value(SEID, "");
@@ -96,7 +146,33 @@ void grid::read(std::list<std::string> const &inp) {
 
 void grid::collect_outdata(
     std::list<std::unique_ptr<format_entry> > &res) const {
-    throw errors::error("GRID", "can't write GRID.");
+    if (!bool(ID))
+        return;
+    res.push_back(unique_ptr<format_entry>(format(head)));
+
+    res.push_back(unique_ptr<format_entry>(format<long>(form_ID, ID)));
+    if (bool(CP))
+        res.push_back(unique_ptr<format_entry>(format<long>(form_CP, CP)));
+    else
+        res.push_back(unique_ptr<format_entry>(format(empty)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_X1, X1)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_X2, X2)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_X3, X3)));
+    if (bool(CD) || bool(PS) || bool(SEID)) {
+        if (bool(CD))
+            res.push_back(unique_ptr<format_entry>(format<long>(form_CD, CD)));
+        else
+            res.push_back(unique_ptr<format_entry>(format(empty)));
+    } else goto finish;
+    if (bool(PS) || bool(SEID)) {
+        if (bool(PS))
+            res.push_back(unique_ptr<format_entry>(format<std::list<int>>(form_PS, PS)));
+        else
+            res.push_back(unique_ptr<format_entry>(format(empty)));
+    } else goto finish;
+    if (bool(SEID))
+        res.push_back(unique_ptr<format_entry>(format<long>(form_SEID, SEID)));
+finish:return;
 }
 
 // Local Variables:
@@ -104,5 +180,7 @@ void grid::collect_outdata(
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j7 &&
+//           (make -C ../../cbuild test ||
+//            ../../cbuild/tests/test_bdf_cards --use-colour no)"
 // End:

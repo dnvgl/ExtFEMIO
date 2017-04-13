@@ -31,16 +31,18 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::cards;
 
 TEST_CASE("BDF GRID definitions. (Small Field Format)",
           "[bdf_grid]") {
 
-    std::list<std::string> data({
+    list<std::string> data({
         "GRID           1      22111525. 18000.  21000.        11       6       2\n"});
 
-    std::list<std::string> lines;
+    list<std::string> lines;
     __base::card::card_split(data, lines);
     grid probe(lines);
 
@@ -51,7 +53,31 @@ TEST_CASE("BDF GRID definitions. (Small Field Format)",
         CHECK((double)probe.X2 == 18000.);
         CHECK((double)probe.X3 == 21000.);
         CHECK((long)probe.CD == 11);
-        std::list<int> ps_ref({6});
+        list<int> ps_ref({6});
+        CHECK(probe.PS == ps_ref);
+        CHECK((long)probe.SEID == 2);
+    }
+}
+
+TEST_CASE("BDF GRID definitions. (Small Field Format) (reuse instance)",
+          "[bdf_grid,in,reuse]") {
+
+    list<std::string> data({
+        "GRID           1      22111525. 18000.  21000.        11       6       2\n"});
+
+    list<std::string> lines;
+    __base::card::card_split(data, lines);
+    grid probe;
+    probe(lines);
+
+    SECTION("first grid") {
+        CHECK((long)probe.ID == 1);
+        CHECK((long)probe.CP == 22);
+        CHECK((double)probe.X1 == 111525.);
+        CHECK((double)probe.X2 == 18000.);
+        CHECK((double)probe.X3 == 21000.);
+        CHECK((long)probe.CD == 11);
+        list<int> ps_ref({6});
         CHECK(probe.PS == ps_ref);
         CHECK((long)probe.SEID == 2);
     }
@@ -60,11 +86,11 @@ TEST_CASE("BDF GRID definitions. (Small Field Format)",
 TEST_CASE("BDF GRID definitions. (Large Field Format)",
           "[bdf_grid]") {
 
-    std::list<std::string> data({
+    list<std::string> data({
         "GRID*                  1              22         111525.          18000.\n",
         "                  21000.              11               6               2\n"});
 
-    std::list<std::string> lines;
+    list<std::string> lines;
     __base::card::card_split(data, lines);
     grid probe(lines);
 
@@ -75,7 +101,7 @@ TEST_CASE("BDF GRID definitions. (Large Field Format)",
         CHECK((double)probe.X2 == 18000.);
         CHECK((double)probe.X3 == 21000.);
         CHECK((long)probe.CD == 11);
-        std::list<int> ps_ref({6});
+        list<int> ps_ref({6});
         CHECK(probe.PS == ps_ref);
         CHECK((long)probe.SEID == 2);
     }
@@ -85,10 +111,10 @@ TEST_CASE("BDF GRID definitions. (Free Field Format)",
           "[bdf_grid]") {
 
     SECTION("first grid") {
-        std::list<std::string> data({
+        list<std::string> data({
             "GRID,1,22,111525.,18000.,21000.,11,6,2\n"});
 
-        std::list<std::string> lines;
+        list<std::string> lines;
         __base::card::card_split(data, lines);
         grid probe(lines);
 
@@ -98,17 +124,17 @@ TEST_CASE("BDF GRID definitions. (Free Field Format)",
         CHECK((double)probe.X2 == 18000.);
         CHECK((double)probe.X3 == 21000.);
         CHECK((long)probe.CD == 11);
-        std::list<int> ps_ref({6});
+        list<int> ps_ref({6});
         CHECK(probe.PS == ps_ref);
         CHECK((long)probe.SEID == 2);
     }
 
     SECTION("first grid (cont)") {
-        std::list<std::string> data({
+        list<std::string> data({
             "GRID,1,22,111525.,\n",
             ",18000.,21000.,11,6,2\n"});
 
-        std::list<std::string> lines;
+        list<std::string> lines;
         __base::card::card_split(data, lines);
         grid probe(lines);
 
@@ -118,17 +144,17 @@ TEST_CASE("BDF GRID definitions. (Free Field Format)",
         CHECK((double)probe.X2 == 18000.);
         CHECK((double)probe.X3 == 21000.);
         CHECK((long)probe.CD == 11);
-        std::list<int> ps_ref({6});
+        list<int> ps_ref({6});
         CHECK(probe.PS == ps_ref);
         CHECK((long)probe.SEID == 2);
     }
 
     SECTION("first grid (cont+)") {
-        std::list<std::string> data({
+        list<std::string> data({
             "GRID,1,22,111525.,+",
             "+,18000.,21000.,11,6,2\n"});
 
-        std::list<std::string> lines;
+        list<std::string> lines;
         __base::card::card_split(data, lines);
         grid probe(lines);
 
@@ -138,17 +164,17 @@ TEST_CASE("BDF GRID definitions. (Free Field Format)",
         CHECK((double)probe.X2 == 18000.);
         CHECK((double)probe.X3 == 21000.);
         CHECK((long)probe.CD == 11);
-        std::list<int> ps_ref({6});
+        list<int> ps_ref({6});
         CHECK(probe.PS == ps_ref);
         CHECK((long)probe.SEID == 2);
     }
 
     SECTION("first grid (cont named +)") {
-        std::list<std::string> data({
+        list<std::string> data({
             "GRID,1,22,111525.,+G001\n",
             "+G001,18000.,21000.,11,6,2\n"});
 
-        std::list<std::string> lines;
+        list<std::string> lines;
         __base::card::card_split(data, lines);
         grid probe(lines);
 
@@ -158,7 +184,7 @@ TEST_CASE("BDF GRID definitions. (Free Field Format)",
         CHECK((double)probe.X2 == 18000.);
         CHECK((double)probe.X3 == 21000.);
         CHECK((long)probe.CD == 11);
-        std::list<int> ps_ref({6});
+        list<int> ps_ref({6});
         CHECK(probe.PS == ps_ref);
         CHECK((long)probe.SEID == 2);
     }
@@ -167,11 +193,11 @@ TEST_CASE("BDF GRID definitions. (Free Field Format)",
 TEST_CASE("FEMIO-43: BDF import failed") {
 
     SECTION("report") {
-        std::list<std::string> data({
+        list<std::string> data({
             // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
             "GRID    1       0       -9550.  0.      5700.   0\n"});
 
-        std::list<std::string> lines;
+        list<std::string> lines;
         __base::card::card_split(data, lines);
         grid probe(lines);
 
@@ -181,17 +207,17 @@ TEST_CASE("FEMIO-43: BDF import failed") {
         CHECK((double)probe.X2 == 0.);
         CHECK((double)probe.X3 == 5700.);
         CHECK((long)probe.CD == 0);
-        std::list<int> ps_ref({});
+        list<int> ps_ref({});
         CHECK(probe.PS == ps_ref);
         CHECK((long)probe.SEID == 0);
     }
 
     SECTION("default CP") {
-        std::list<std::string> data({
+        list<std::string> data({
             // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
             "GRID    1               -9550.  0.      5700.   0\n"});
 
-        std::list<std::string> lines;
+        list<std::string> lines;
         __base::card::card_split(data, lines);
         grid probe(lines);
 
@@ -201,11 +227,119 @@ TEST_CASE("FEMIO-43: BDF import failed") {
         CHECK((double)probe.X2 == 0.);
         CHECK((double)probe.X3 == 5700.);
         CHECK((long)probe.CD == 0);
-        std::list<int> ps_ref({});
+        list<int> ps_ref({});
         CHECK(probe.PS == ps_ref);
         CHECK((long)probe.SEID == 0);
     }
 }
+
+TEST_CASE("BDF GRID types output.", "[bdf_mat1,out]") {
+
+    ostringstream test;
+
+    SECTION("test 1") {
+        long ID{1};
+        long CP{2};
+        double X1{3.}, X2{4.}, X3{5.};
+        long CD{-1};
+        list<int> PS{4, 5, 6};
+        long SEID{1};
+
+        grid probe(&ID, &CP, &X1, &X2, &X3, &CD, &PS, &SEID);
+
+        test << probe;
+        CHECK(test.str() == ("GRID           1       23.000+004.000+005.000+00"
+                             "      -1     456       1\n"));
+    }
+
+    SECTION("test 2") {
+        long ID{2};
+        long CP{3};
+        double X1{1.}, X2{ -2.}, X3{3.};
+        list<int> PS{3, 1, 6};
+
+        grid probe(&ID, &CP, &X1, &X2, &X3, nullptr, &PS, nullptr);
+
+        test << probe;
+        CHECK(test.str() == ("GRID           2       31.000+00-2.00+003.000+00"
+                             "             316\n"));
+    }
+
+    SECTION("test 3") {
+        grid probe(1, 2, 3., 4., 5.);
+
+        test << probe;
+        CHECK(test.str() ==
+              "GRID           1       23.000+004.000+005.000+00\n");
+    }
+
+    SECTION("test 4") {
+        long ID{2};
+        double X1{1.}, X2{ -2.}, X3{3.};
+        list<int> PS{3, 1, 6};
+
+        grid probe(&ID, nullptr, &X1, &X2, &X3, nullptr, &PS, nullptr);
+
+        test << probe;
+        CHECK(test.str() == ("GRID           2        1.000+00-2.00+003.000+00"
+                             "             316\n"));
+    }
+}
+
+TEST_CASE("BDF GRID types output (reuse instance).", "[bdf_mat1,out.reuse]") {
+
+    ostringstream test;
+
+    SECTION("test 1") {
+        long ID{1};
+        long CP{2};
+        double X1{3.}, X2{4.}, X3{5.};
+        long CD{-1};
+        list<int> PS{4, 5, 6};
+        long SEID{1};
+
+        grid probe;
+
+        test << probe;
+        test << probe(&ID, &CP, &X1, &X2, &X3, &CD, &PS, &SEID);
+        CHECK(test.str() == ("GRID           1       23.000+004.000+005.000+00"
+                             "      -1     456       1\n"));
+    }
+
+    SECTION("test 2") {
+        long ID{2};
+        long CP{3};
+        double X1{1.}, X2{ -2.}, X3{3.};
+        list<int> PS{3, 1, 6};
+
+        grid probe;
+
+        test << probe(&ID, &CP, &X1, &X2, &X3, nullptr, &PS, nullptr);
+        CHECK(test.str() == ("GRID           2       31.000+00-2.00+003.000+00"
+                             "             316\n"));
+    }
+
+    SECTION("test 3") {
+        grid probe;
+
+        test << probe(1, 2, 3., 4., 5.);
+        CHECK(test.str() ==
+              "GRID           1       23.000+004.000+005.000+00\n");
+    }
+
+    SECTION("test 4") {
+        long ID{2};
+        double X1{1.}, X2{ -2.}, X3{3.};
+        list<int> PS{3, 1, 6};
+
+        grid probe;
+
+        test << probe(&ID, nullptr, &X1, &X2, &X3, nullptr, &PS, nullptr);
+        CHECK(test.str() == ("GRID           2        1.000+00-2.00+003.000+00"
+                             "             316\n"));
+    }
+}
+
 
 // Local Variables:
 // mode: c++
