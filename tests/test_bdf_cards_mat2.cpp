@@ -114,12 +114,80 @@ TEST_CASE("BDF MAT2 definitions. (Free Field Format)",
     }
 }
 
+TEST_CASE("BDF MAT2 output.", "[bdf_mat1,out]") {
+
+    std::ostringstream test;
+
+    SECTION("test reuse 1") {
+        long MID{1};
+        double G11{2.};
+        double G12{3.};
+        double G13{4.};
+        double G22{5.};
+        double G23{6.};
+        double G33{7.};
+        double RHO{8.};
+        double A1{9.};
+        double A2{10.};
+        double A3{11.};
+        double TREF{12.};
+        double GE{13.};
+        double ST{14.};
+        double SC{15.};
+        double SS{16.};
+        long MCSID{17};
+
+        mat2 probe(&MID, &G11, &G12, &G13, &G22, &G23, &G33, &RHO,
+                   &A1, &A2, &A3, &TREF, &GE, &ST, &SC, &SS,
+                   &MCSID);
+        test << probe;
+        CHECK(test.str() ==
+              "MAT2           12.000+003.000+004.000+005.000+006.000+007.000+008.000+00\n"
+              "        9.000+001.000+011.100+011.200+011.300+011.400+011.500+011.600+01\n"
+              "              17\n");
+    }
+}
+
+TEST_CASE("BDF MAT2 reuse instance for output.", "[bdf_mat1,out reuse]") {
+
+    std::ostringstream test;
+
+    SECTION("test reuse 1") {
+        long MID{1};
+        double G11{2.};
+        double G12{3.};
+        double G13{4.};
+        double G22{5.};
+        double G23{6.};
+        double G33{7.};
+        double RHO{8.};
+        double A1{9.};
+        double A2{10.};
+        double A3{11.};
+        double TREF{12.};
+        double GE{13.};
+        double ST{14.};
+        double SC{15.};
+        double SS{16.};
+        long MCSID{17};
+
+        mat2 probe;
+        test << probe;
+        test << probe(&MID, &G11, &G12, &G13, &G22, &G23, &G33, &RHO,
+                      &A1, &A2, &A3, &TREF, &GE, &ST, &SC, &SS,
+                      &MCSID);
+        CHECK(test.str() ==
+              "MAT2           12.000+003.000+004.000+005.000+006.000+007.000+008.000+00\n"
+              "        9.000+001.000+011.100+011.200+011.300+011.400+011.500+011.600+01\n"
+              "              17\n");
+    }
+}
 // Local Variables:
 // mode: c++
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&
+// compile-command: "make -C ../cbuild -j7 &&
 //    (make -C ../cbuild test;
 //     ../cbuild/tests/test_bdf_cards --use-colour no)"
 // End:

@@ -148,7 +148,6 @@ mat1::mat1(long *MID, double *E, double *G, double *NU, double *RHO,
 
 cards::__base::card const &mat1::operator() (const list<std::string> &inp) {
     this->mat1::read(inp);
-    NOT_IMPLEMENTED("mat1::operator()");
     return *this;
 }
 
@@ -172,7 +171,9 @@ cards::types mat1::card_type() const {
 
 void mat1::collect_outdata(
     list<unique_ptr<format_entry> > &res) const {
-        res.push_back(unique_ptr<format_entry>(format(head)));
+    if (long(MID) == 0)
+        return;
+    res.push_back(unique_ptr<format_entry>(format(head)));
 
     res.push_back(unique_ptr<format_entry>(format<long>(form_MID, MID)));
     res.push_back(unique_ptr<format_entry>(format<double>(form_E, E)));

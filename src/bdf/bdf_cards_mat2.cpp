@@ -29,20 +29,70 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
+using namespace dnvgl::extfem;
+using namespace bdf;
+using namespace type_bounds;
+using namespace cards;
+
+using types::entry_type;
+
 namespace {
     const long cl0 = 0, cl1 = 1;
     const double cd0 = 0., cd05 = 0.5, cd_1 = -1.;
 }
 
-using namespace dnvgl::extfem::bdf::cards;
+bdf::types::card mat2::head = bdf::types::card("MAT2");
 
-mat2::mat2(std::list<std::string> const &inp) :
+mat2::mat2(list<std::string> const &inp) :
 mat(inp) {
     this->mat2::read(inp);
 }
 
-void mat2::read(std::list<std::string> const &inp) {
+cards::__base::card const &mat2::operator() (const list<std::string> &inp) {
+    this->mat2::read(inp);
+    return *this;
+}
 
+mat2::mat2() : mat(nullptr), G11(nullptr), G12(nullptr),
+    G13(nullptr), G22(nullptr), G23(nullptr), G33(nullptr),
+    A1(nullptr), A2(nullptr), A3(nullptr) {}
+
+mat2::mat2(long *MID, double *G11, double *G12, double *G13,
+           double *G22, double *G23, double *G33, double *RHO,
+           double *A1, double *A2, double *A3, double *TREF,
+           double *GE, double *ST/*=nullptr*/, double *SC/*=nullptr*/,
+           double *SS/*=nullptr*/, long *MCSID/*=nullptr*/) :
+
+        mat(MID, RHO, TREF, GE, ST, SC, SS, MCSID),
+        G11(G11),G12(G12), G13(G13), G22(G22),
+        G23(G23), G33(G33), A1(A1), A2(A2), A3(A3) {}
+
+
+cards::__base::card const &mat2::operator()(
+    long *MID,
+    double *G11, double *G12, double *G13, double *G22, double *G23,
+    double *G33,
+    double *RHO,
+    double *A1, double *A2, double *A3,
+    double *TREF, double *GE,
+    double *ST/*=nullptr*/, double *SC/*=nullptr*/, double *SS/*=nullptr*/,
+    long *MCSID/*=nullptr*/) {
+    this->mat::operator() (MID, RHO, TREF, GE, ST, SC, SS, MCSID);
+    this->G11(G11);
+    this->G12(G12);
+    this->G13(G13);
+    this->G22(G22);
+    this->G23(G23);
+    this->G33(G33);
+    this->A1(A1);
+    this->A2(A2);
+    this->A3(A3);
+    return *this;
+}
+
+void mat2::read(list<std::string> const &inp) {
     form_MCSID.set_value(MCSID, "");
     form_SS.set_value(SS, "");
     form_SC.set_value(SC, "");
@@ -119,13 +169,54 @@ void mat2::read(std::list<std::string> const &inp) {
         form_TREF.set_value(TREF, "");
 }
 
-types mat2::card_type() const {
+cards::types mat2::card_type() const {
     return types::MAT2;
 };
 
 void mat2::collect_outdata(
-    std::list<std::unique_ptr<format_entry> > &res) const {
-    throw std::not_implemented(__FILE__, __LINE__, "can't write MAT2.");
+    list<unique_ptr<format_entry> > &res) const {
+    if (long(MID) == 0)
+        return;
+    res.push_back(unique_ptr<format_entry>(format(head)));
+
+    res.push_back(unique_ptr<format_entry>(format<long>(form_MID, MID)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_G, G11)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_G, G12)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_G, G13)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_G, G22)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_G, G23)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_G, G33)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_RHO, RHO)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_A, A1)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_A, A2)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_A, A3)));
+    if (bool(TREF))
+        res.push_back(unique_ptr<format_entry>(format<double>(form_TREF, TREF)));
+    else
+        res.push_back(unique_ptr<format_entry>(format(empty)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_GE, GE)));
+    if (bool(ST) || bool(SC) || bool(SS) || bool(MCSID))
+        if (bool(ST))
+            res.push_back(unique_ptr<format_entry>(format<double>(form_ST, ST)));
+        else
+            res.push_back(unique_ptr<format_entry>(format(empty)));
+    else goto finish;
+    if (bool(SC) || bool(SS) || bool(MCSID))
+        if (bool(SC))
+            res.push_back(unique_ptr<format_entry>(format<double>(form_SC, SC)));
+        else
+            res.push_back(unique_ptr<format_entry>(format(empty)));
+    else goto finish;
+    if (bool(SS) || bool(MCSID))
+        if (bool(SS))
+            res.push_back(unique_ptr<format_entry>(format<double>(form_SS, SS)));
+        else
+            res.push_back(unique_ptr<format_entry>(format(empty)));
+    else goto finish;
+    if (bool(MCSID))
+        res.push_back(unique_ptr<format_entry>(format<long>(form_MCSID, MCSID)));
+
+finish:return;
 }
 
 // Local Variables:

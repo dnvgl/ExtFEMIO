@@ -800,6 +800,18 @@ namespace dnvgl {
 
                     static bdf::types::card head;
 
+
+                    // static const bdf::types::entry_type<long> form_MID;
+                    // static const bdf::types::entry_type<double> form_G;
+                    // static const bdf::types::entry_type<double> form_RHO;
+                    // static const bdf::types::entry_type<double> form_A;
+                    // static const bdf::types::entry_type<double> form_TREF;
+                    // static const bdf::types::entry_type<double> form_GE;
+                    // static const bdf::types::entry_type<double> form_ST;
+                    // static const bdf::types::entry_type<double> form_SC;
+                    // static const bdf::types::entry_type<double> form_SS;
+                    // static const bdf::types::entry_type<long> form_MCSID;
+
                 public:
 
                     /** The material property matrix. (Real)
@@ -817,6 +829,31 @@ namespace dnvgl {
                     bdf::types::entry_value<double> A3;
 
                     mat2(const std::list<std::string> &);
+
+                    mat2();
+
+                    mat2(long *MID,
+                         double *G11, double *G12, double *G13, double *G22,
+                         double *G23, double *G33,
+                         double *RHO,
+                         double *A1, double *A2, double *A3,
+                         double *TREF, double *GE,
+                         double *ST=nullptr, double *SC=nullptr,
+                         double *SS=nullptr,
+                         long *MCSID=nullptr);
+
+                    card const &operator() (const std::list<std::string> &) override;
+
+                    card const &operator() (
+                        long *MID,
+                        double *G11, double *G12, double *G13, double *G22,
+                        double *G23, double *G33,
+                        double *RHO,
+                        double *A1, double *A2, double *A3,
+                        double *TREF, double *GE,
+                        double *ST=nullptr, double *SC=nullptr,
+                        double *SS=nullptr,
+                        long *MCSID=nullptr);
 
                     types card_type() const override;
 
