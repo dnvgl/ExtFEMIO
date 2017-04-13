@@ -65,10 +65,39 @@ mat::mat(const std::list<std::string> &inp) : card(inp) {}
 
 mat::mat() : card() {}
 
+mat::mat(long *MID, double *RHO/*=nullptr*/, double *TREF/*=nullptr*/,
+         double *GE/*=nullptr*/, double *ST/*=nullptr*/, double *SC/*=nullptr*/,
+         double *SS/*=nullptr*/, long *MCSID/*=nullptr*/) :
+        card(),
+        MID{MID}, RHO(RHO), TREF{TREF}, GE{GE},
+        ST{ST}, SC{SC}, SS{SS}, MCSID{MCSID} {}
+
+void mat::operator() (
+    long *MID, double *RHO/*=nullptr*/, double *TREF/*=nullptr*/,
+    double *GE/*=nullptr*/, double *ST/*=nullptr*/, double *SC/*=nullptr*/,
+    double *SS/*=nullptr*/, long *MCSID/*=nullptr*/) {
+    this->MID(MID);
+    this->RHO(RHO);
+    this->TREF(TREF);
+    this->GE(GE);
+    this->ST(ST);
+    this->SC(SC);
+    this->SS(SS);
+    this->MCSID(MCSID);
+    return;
+}
+
 // Local Variables:
 // mode: c++
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// Local Variables:
+// mode: c++
+// coding: utf-8
+// c-file-style: "dnvgl"
+// indent-tabs-mode: nil
+// compile-command: "make -C ../../cbuild -j7 &&
+//           (make -C ../../cbuild test ||
+//            ../../cbuild/tests/test_bdf_cards --use-colour no)"
 // End:

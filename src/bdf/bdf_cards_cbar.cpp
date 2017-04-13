@@ -82,6 +82,15 @@ element(inp) {
     this->cbar::read(inp);
 }
 
+cbar::cbar() :
+        element(nullptr),
+        choose_dir_code(CHOOSE_DIR_CODE::UNDEF), PID(nullptr),
+        GA(nullptr), GB(nullptr), X1(nullptr), G0(nullptr), X2(nullptr), X3(nullptr),
+        OFFT(nullptr),
+        PA(nullptr), PB(nullptr),
+        W1A(nullptr), W2A(nullptr), W3A(nullptr),
+        W1B(nullptr), W2B(nullptr), W3B(nullptr) {}
+
 cbar::cbar(
     long const *EID, long const *PID,
     long const *GA, long const *GB,
@@ -172,12 +181,61 @@ void cbar::read(list<std::string> const &inp) {
     }
 }
 
-cards::__base::card const& cbar::operator()(long const* EID, long const* PID, long const* GA, long const* GB, long const* G0, std::string const* OFFT, list<int> const* PA, list<int> const* PB, double const* W1A, double const* W2A, double const* W3A, double const* W1B, double const* W2B, double const* W3B) const {
-    throw not_implemented(__FILE__, __LINE__);
+cards::__base::card const& cbar::operator()(
+    long const* EID, long const* PID,
+    long const* GA, long const* GB,
+    double const* X1, double const* X2, double const* X3,
+    std::string const* OFFT,
+    list<int> const* PA, list<int> const* PB,
+    double const* W1A, double const* W2A, double const* W3A,
+    double const* W1B, double const* W2B, double const* W3B) {
+    this->element::operator() (EID);
+    choose_dir_code = CHOOSE_DIR_CODE::has_DVEC;
+    this->PID(PID);
+    this->GA(GA);
+    this->GB(GB);
+    this->X1(X1);
+    this->G0(nullptr);
+    this->X2(X2);
+    this->X3(X3);
+    this->OFFT(OFFT);
+    this->PA(PA);
+    this->PB(PB);
+    this->W1A(W1A);
+    this->W2A(W2A);
+    this->W3A(W3A);
+    this->W1B(W1B);
+    this->W2B(W2B);
+    this->W3B(W3B);
+    return *this;
 }
 
-cards::__base::card const& cbar::operator()(long const* EID, long const* PID, long const* GA, long const* GB, double const* X1, double const* X2, double const* X3, std::string const* OFFT, list<int> const* PA, list<int> const* PB, double const* W1A, double const* W2A, double const* W3A, double const* W1B, double const* W2B, double const* W3B) const {
-    throw not_implemented(__FILE__, __LINE__);
+cards::__base::card const& cbar::operator()(
+    long const* EID, long const* PID,
+    long const* GA, long const* GB, long const* G0,
+    std::string const* OFFT,
+    list<int> const* PA, list<int> const* PB,
+    double const* W1A, double const* W2A, double const* W3A,
+    double const* W1B, double const* W2B, double const* W3B) {
+    this->element::operator() (EID);
+    choose_dir_code = CHOOSE_DIR_CODE::has_DCODE;
+    this->PID(PID);
+    this->GA(GA);
+    this->GB(GB);
+    this->X1(nullptr);
+    this->G0(G0);
+    this->X2(nullptr);
+    this->X3(nullptr);
+    this->OFFT(OFFT);
+    this->PA(PA);
+    this->PB(PB);
+    this->W1A(W1A);
+    this->W2A(W2A);
+    this->W3A(W3A);
+    this->W1B(W1B);
+    this->W2B(W2B);
+    this->W3B(W3B);
+    return *this;
 }
 
 void cbar::collect_outdata(

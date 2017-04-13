@@ -194,6 +194,14 @@ namespace dnvgl {
                         return value;
                     }
 
+                    void inline operator() (const _Ty *val) {
+                        is_value = (val != nullptr);
+
+                        if (is_value)
+                            value = *val;
+                        return;
+                    }
+
                     void push_back(const long&);
                 };
 

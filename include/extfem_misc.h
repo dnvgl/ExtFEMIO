@@ -32,6 +32,7 @@
 #define _EXTFEMIO_UNUSED
 #endif
 
+#define NOT_IMPLEMENTED(msg) throw std::not_implemented(__FILE__, __LINE__, msg)
 
 namespace std {
 
@@ -41,8 +42,8 @@ namespace std {
 
         // Construct with given error message:
         explicit not_implemented(
-            const char* fname = "", const size_t& line = 0,
-            const char* error = "Functionality not yet implemented!");
+            const char* fname, const size_t& line,
+            const char* error=nullptr);
 
         // Provided for compatibility with std::exception.
         const char* what() const _EXTFEMIO_NOEXCEPT override;

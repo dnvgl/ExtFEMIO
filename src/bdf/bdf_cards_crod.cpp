@@ -74,13 +74,14 @@ void crod::read(std::list<std::string> const &inp) {
     }
 }
 
-__base::card const& crod::operator()(long const* EID, long const* PID, long const* G1, long const* G2) const {
-    throw std::not_implemented(__FILE__, __LINE__);
+__base::card const& crod::operator()(
+    long const* EID, long const* PID, long const* G1, long const* G2) const {
+    NOT_IMPLEMENTED(nullptr);
 }
 
 void crod::collect_outdata(
     std::list<std::unique_ptr<format_entry> > &res) const {
-    throw std::not_implemented(__FILE__, __LINE__, "can't write CROD.");
+    NOT_IMPLEMENTED("Can't write CROD.");
 }
 
 // Local Variables:

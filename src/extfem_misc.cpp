@@ -33,10 +33,12 @@ std::ostream &outline::operator<<(std::ostream &os) const {
 }
 
 std::not_implemented::not_implemented(
-    const char* fname, const size_t& line, const char* error) {
+    const char* fname, const size_t& line, const char* error/*=nullptr*/) {
     ostringstream msg("", ostringstream::ate);
     if (line != 0 && strlen(fname) > 0)
         msg << fname << ":" << line << ":";
+    if (error != nullptr)
+        msg << error << " ";
     msg << "Functionality not yet implemented!";
     errorMessage = msg.str();
 }

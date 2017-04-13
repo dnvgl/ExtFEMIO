@@ -22,6 +22,7 @@ namespace {
 #include "bdf/cards.h"
 #include "bdf/types.h"
 #include "bdf/errors.h"
+#include "extfem_misc.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
@@ -29,28 +30,33 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
+using namespace dnvgl::extfem;
+using namespace bdf;
+using namespace type_bounds;
+using namespace cards;
+
+using types::entry_type;
+
 namespace {
     const long cl0 = 0, cl1 = 1;
     const double cd0 = 0., cd05 = 0.5, cd_1 = -1.;
 }
 
-using namespace dnvgl::extfem::bdf;
-using types::entry_type;
-using namespace type_bounds;
-
-using namespace cards;
+bdf::types::card mat1::head = bdf::types::card("MAT1");
 
 const entry_type<double> mat1::form_E(
     "E", bound<double>(&cd0, nullptr, nullptr, true));
 const entry_type<double> mat1::form_NU(
     "NU", bound<double>(&cd_1, &cd05, nullptr, true));
 
-mat1::mat1(std::list<std::string> const &inp) :
+mat1::mat1(list<std::string> const &inp) :
 mat(inp) {
     this->mat1::read(inp);
 }
 
-void mat1::read(std::list<std::string> const &inp) {
+void mat1::read(list<std::string> const &inp) {
 
     form_MCSID.set_value(MCSID, "");
     form_SS.set_value(SS, "");
@@ -132,13 +138,81 @@ void mat1::read(std::list<std::string> const &inp) {
     }
 }
 
+mat1::mat1() : mat(nullptr),
+               E{nullptr}, G{nullptr}, NU{nullptr}, A{nullptr} {}
+
+mat1::mat1(long *MID, double *E, double *G, double *NU, double *RHO,
+           double *A, double *TREF, double *GE, double *ST,
+           double *SC, double *SS, long *MCSID) :
+        mat(MID, RHO, TREF, GE, ST, SC, SS, MCSID), E{E}, G{G}, NU{NU}, A{A} {}
+
+cards::__base::card const &mat1::operator() (const list<std::string> &inp) {
+    this->mat1::read(inp);
+    NOT_IMPLEMENTED("mat1::operator()");
+    return *this;
+}
+
+cards::__base::card const &mat1::operator() (
+    long *MID, double *E, double *G, double *NU,
+    double *RHO/*=nullptr*/, double *A/*=nullptr*/,
+    double *TREF/*=nullptr*/, double *GE/*=nullptr*/,
+    double *ST/*=nullptr*/, double *SC/*=nullptr*/,
+    double *SS/*=nullptr*/, long *MCSID/*=nullptr*/) {
+    this->mat::operator() (MID, RHO, TREF, GE, ST, SC, SS, MCSID);
+    this->E(E);
+    this->G(G);
+    this->NU(NU);
+    this->A(A);
+    return *this;
+}
+
 cards::types mat1::card_type() const {
     return types::MAT1;
 };
 
 void mat1::collect_outdata(
-    std::list<std::unique_ptr<format_entry> > &res) const {
-    throw std::not_implemented(__FILE__, __LINE__, "can't write MAT1.");
+    list<unique_ptr<format_entry> > &res) const {
+        res.push_back(unique_ptr<format_entry>(format(head)));
+
+    res.push_back(unique_ptr<format_entry>(format<long>(form_MID, MID)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_E, E)));
+    if (bool(G))
+        res.push_back(unique_ptr<format_entry>(format<double>(form_G, G)));
+    else
+        res.push_back(unique_ptr<format_entry>(format(empty)));
+    if (bool(NU))
+        res.push_back(unique_ptr<format_entry>(format<double>(form_NU, NU)));
+    else
+        res.push_back(unique_ptr<format_entry>(format(empty)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_RHO, RHO)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_A, A)));
+    if (bool(TREF))
+        res.push_back(unique_ptr<format_entry>(format<double>(form_TREF, TREF)));
+    else
+        res.push_back(unique_ptr<format_entry>(format(empty)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_GE, GE)));
+    if (bool(ST) || bool(SC) || bool(SS) || bool(MCSID))
+        if (bool(ST))
+            res.push_back(unique_ptr<format_entry>(format<double>(form_ST, ST)));
+        else
+            res.push_back(unique_ptr<format_entry>(format(empty)));
+    else goto finish;
+    if (bool(SC) || bool(SS) || bool(MCSID))
+        if (bool(SC))
+            res.push_back(unique_ptr<format_entry>(format<double>(form_SC, SC)));
+        else
+            res.push_back(unique_ptr<format_entry>(format(empty)));
+    else goto finish;
+    if (bool(SS) || bool(MCSID))
+        if (bool(SS))
+            res.push_back(unique_ptr<format_entry>(format<double>(form_SS, SS)));
+        else
+            res.push_back(unique_ptr<format_entry>(format(empty)));
+    else goto finish;
+    if (bool(MCSID))
+        res.push_back(unique_ptr<format_entry>(format<long>(form_MCSID, MCSID)));
+
+finish:return;
 }
 
 // Local Variables:
@@ -146,5 +220,7 @@ void mat1::collect_outdata(
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j7 &&
+//           (make -C ../../cbuild test ||
+//            ../../cbuild/tests/test_bdf_cards --use-colour no)"
 // End:

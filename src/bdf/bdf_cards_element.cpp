@@ -53,6 +53,10 @@ card(inp) {
 
 element::element(long const *EID) : card(), EID(EID) {}
 
+void element::operator() (long const *EID) {
+    this->EID(EID);
+}
+
 void element::collect_outdata(
     std::list<std::unique_ptr<format_entry> >&) const {
     throw std::not_implemented(__FILE__, __LINE__, "can't write write generic ELEMENT.");

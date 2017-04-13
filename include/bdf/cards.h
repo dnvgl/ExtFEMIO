@@ -670,8 +670,18 @@ namespace dnvgl {
                         */
                         bdf::types::entry_value<long> MCSID;
 
+                    protected:
                         mat(const std::list<std::string> &);
                         mat();
+                        mat(long *MID, double *RHO=nullptr,
+                            double *TREF=nullptr, double *GE=nullptr,
+                            double *ST=nullptr, double *SC=nullptr,
+                            double *SS=nullptr, long *MCSID=nullptr);
+                        void operator() (
+                            long *MID, double *RHO=nullptr,
+                            double *TREF=nullptr, double *GE=nullptr,
+                            double *ST=nullptr, double *SC=nullptr,
+                            double *SS=nullptr, long *MCSID=nullptr);
                     };
                 }
 
@@ -723,6 +733,27 @@ namespace dnvgl {
                     bdf::types::entry_value<double> A;
 
                     mat1(const std::list<std::string> &);
+
+                    mat1();
+
+                    mat1(long *MID, double *E, double *G, double *NU,
+                         double *RHO=nullptr,
+                         double *A=nullptr,
+                         double *TREF=nullptr,
+                         double *GE=nullptr,
+                         double *ST=nullptr,
+                         double *SC=nullptr,
+                         double *SS=nullptr,
+                         long *MCSID=nullptr);
+
+                    card const &operator() (const std::list<std::string> &) override;
+
+                    card const &operator() (
+                        long *MID, double *E, double *G, double *NU,
+                        double *RHO=nullptr, double *A=nullptr,
+                        double *TREF=nullptr, double *GE=nullptr,
+                        double *ST=nullptr, double *SC=nullptr,
+                        double *SS=nullptr, long *MCSID=nullptr);
 
                     /**
                      * \brief returns the card type of the current card.

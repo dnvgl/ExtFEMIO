@@ -520,7 +520,7 @@ void unknown::read(std::list<std::string> const &inp) {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&
-//    (make -C ../../cbuild test;
-//     ../../cbuild/tests/test_bdf_cards --use-colour no)"
+// compile-command: "make -C ../../cbuild -j7 &&
+//                   (make -C ../../cbuild test;
+//                    ../../cbuild/tests/test_bdf_cards --use-colour no)"
 // End:

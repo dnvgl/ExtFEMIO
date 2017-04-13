@@ -30,9 +30,14 @@ namespace dnvgl {
                     protected:
                         static bdf::types::card head;
                         entry_type<long> static const form_EID;
+
                     public:
                         element(std::list<std::string> const &);
+
+                    protected:
                         element(long const *EID);
+
+                        void operator() (long const *EID);
 
                         void collect_outdata(std::list<std::unique_ptr<format_entry> >&) const override;
                         void read(std::list<std::string> const &) override;
@@ -349,7 +354,8 @@ namespace dnvgl {
                         /// Element has direction vector entry
                         has_DVEC,
                         /// Element direction defined by direction code
-                        has_DCODE
+                        has_DCODE,
+                        UNDEF
                     };
                     CHOOSE_DIR_CODE choose_dir_code;
                     /** Flag to store whether 'OFFT' or 'BIT' was std::set.
@@ -602,7 +608,8 @@ namespace dnvgl {
                         /// Element has direction vector entry
                         has_DVEC,
                         /// Element direction defined by direction code
-                        has_DCODE
+                        has_DCODE,
+                        UNDEF
                     };
                     CHOOSE_DIR_CODE choose_dir_code;
 
@@ -733,6 +740,8 @@ namespace dnvgl {
 
                     cbar(std::list<std::string> const &inp);
 
+                    cbar();
+
                     cbar(
                         long const *EID, long const *PID,
                         long const *GA, long const *GB,
@@ -758,21 +767,21 @@ namespace dnvgl {
 
                     /**
                      * \brief Returns instance with new values.
-                     * \param EID 
-                     * \param PID 
-                     * \param GA 
-                     * \param GB 
-                     * \param G0 
-                     * \param OFFT 
-                     * \param PA 
-                     * \param PB 
-                     * \param W1A 
-                     * \param W2A 
-                     * \param W3A 
-                     * \param W1B 
-                     * \param W2B 
-                     * \param W3B 
-                     * \return 
+                     * \param EID
+                     * \param PID
+                     * \param GA
+                     * \param GB
+                     * \param G0
+                     * \param OFFT
+                     * \param PA
+                     * \param PB
+                     * \param W1A
+                     * \param W2A
+                     * \param W3A
+                     * \param W1B
+                     * \param W2B
+                     * \param W3B
+                     * \return
                      */
                     card const &operator() (
                         long const *EID, long const *PID,
@@ -783,27 +792,27 @@ namespace dnvgl {
                         std::list<int> const *PB = nullptr,
                         double const *W1A = nullptr, double const *W2A = nullptr,
                         double const *W3A = nullptr, double const *W1B = nullptr,
-                        double const *W2B = nullptr, double const *W3B = nullptr) const;
+                        double const *W2B = nullptr, double const *W3B = nullptr);
 
                     /**
                      * \brief Returns instance with new values.
-                     * \param EID 
-                     * \param PID 
-                     * \param GA 
-                     * \param GB 
-                     * \param X1 
-                     * \param X2 
-                     * \param X3 
-                     * \param OFFT 
-                     * \param PA 
-                     * \param PB 
-                     * \param W1A 
-                     * \param W2A 
-                     * \param W3A 
-                     * \param W1B 
-                     * \param W2B 
-                     * \param W3B 
-                     * \return 
+                     * \param EID
+                     * \param PID
+                     * \param GA
+                     * \param GB
+                     * \param X1
+                     * \param X2
+                     * \param X3
+                     * \param OFFT
+                     * \param PA
+                     * \param PB
+                     * \param W1A
+                     * \param W2A
+                     * \param W3A
+                     * \param W1B
+                     * \param W2B
+                     * \param W3B
+                     * \return
                      */
                     card const &operator() (
                         long const *EID, long const *PID,
@@ -814,7 +823,7 @@ namespace dnvgl {
                         std::list<int> const *PB = nullptr,
                         double const *W1A = nullptr, double const *W2A = nullptr,
                         double const *W3A = nullptr, double const *W1B = nullptr,
-                        double const *W2B = nullptr, double const *W3B = nullptr) const;
+                        double const *W2B = nullptr, double const *W3B = nullptr);
 
                 private:
 
@@ -866,7 +875,7 @@ namespace dnvgl {
 
                     /**
                      * \brief Card type indicator.
-                     * \return 
+                     * \return
                      */
                     types card_type() const override;;
 
@@ -874,11 +883,11 @@ namespace dnvgl {
 
                     /**
                      * \brief Return instance with changed values.
-                     * \param EID 
-                     * \param PID 
-                     * \param G1 
-                     * \param G2 
-                     * \return 
+                     * \param EID
+                     * \param PID
+                     * \param G1
+                     * \param G2
+                     * \return
                      */
                     card const &operator() (
                         long const *EID, long const *PID,
@@ -901,6 +910,8 @@ namespace dnvgl {
 // mode: c++
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j7 &&
+//                   (make -C ../../cbuild test;
+//                    ../../cbuild/tests/test_bdf_cards --use-colour no)"
 // coding: utf-8
 // End:

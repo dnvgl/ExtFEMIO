@@ -141,6 +141,76 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format)",
     }
 }
 
+TEST_CASE("BDF MAT1 types output.", "[bdf_mat1,out]") {
+
+    std::ostringstream test;
+
+    SECTION("test 1") {
+        long MID{1}, MCSID{2};
+        double E{2.}, G{3.}, NU{4.}, RHO{5.}, A{6}, TREF{7.}, GE{8.},
+            ST{9.}, SC{10.}, SS{11.};
+
+        mat1 probe(&MID, &E, &G, &NU, &RHO, &A, &TREF, &GE,
+                   &ST, &SC, &SS, &MCSID);
+        test << probe;
+        CHECK(test.str() ==
+              "MAT1           12.000+003.000+004.000+005.000+006.000+007.000+008.000+00\n"
+              "        9.000+001.000+011.100+01       2\n");
+    }
+
+    SECTION("test 2") {
+        long MID{17}, MCSID{1003};
+        double E{3e7}, NU{.33}, RHO{4.28}, A{6.5e-6}, TREF{5.37e2},
+               GE{.23}, ST{20e4}, SC{15e4}, SS{12e4};
+
+        mat1 probe(&MID, &E, nullptr, &NU, &RHO, &A, &TREF, &GE,
+                   &ST, &SC, &SS, &MCSID);
+        test << probe;
+        CHECK(test.str() ==
+              "MAT1          173.000+07        3.300-014.280+006.500-065.370+022.300-01\n"
+              "        2.000+051.500+051.200+05    1003\n");
+    }
+
+    SECTION("test min data") {
+        long MID{17};
+        double E{3e7}, RHO{4.28}, A{6.5e-6}, GE{.23};
+
+        mat1 probe(&MID, &E, nullptr, nullptr, &RHO, &A, nullptr, &GE);
+        test << probe;
+        CHECK(test.str() ==
+              "MAT1          173.000+07                4.280+006.500-06        2.300-01\n");
+    }
+}
+
+TEST_CASE("BDF MAT1 reuse instance for output.", "[bdf_mat1,out]") {
+
+    std::ostringstream test;
+
+    SECTION("test reuse 1") {
+        long MID{1}, MCSID{2};
+        double E{2.}, G{3.}, NU{4.}, RHO{5.}, A{6}, TREF{7.}, GE{8.},
+            ST{9.}, SC{10.}, SS{11.};
+
+        mat1 probe;
+        test << probe(&MID, &E, &G, &NU, &RHO, &A, &TREF, &GE,
+                      &ST, &SC, &SS, &MCSID);
+        CHECK(test.str() ==
+              "MAT1           12.000+003.000+004.000+005.000+006.000+007.000+008.000+00\n"
+              "        9.000+001.000+011.100+01       2\n");
+    }
+
+    SECTION("test reuse min data") {
+        long MID{17};
+        double E{3e7}, RHO{4.28}, A{6.5e-6}, GE{.23};
+
+        mat1 probe;
+        test << probe(&MID, &E, nullptr, nullptr, &RHO, &A, nullptr, &GE);
+        CHECK(test.str() ==
+              "MAT1          173.000+07                4.280+006.500-06        2.300-01\n");
+    }
+
+}
+
 // Local Variables:
 // mode: c++
 // coding: utf-8

@@ -133,10 +133,9 @@ TEST_CASE("BDF CBAR types output.", "[bdf_cbar,out]") {
         long EID(2), PID(39), GA(7), GB(3);
         double X1(.6), X2(18), X3(1234.5);
         std::string OFFT("EEG");
+        list<int> PB{5, 1, 3};
 
-        cbar probe(&EID, &PID, &GA, &GB, &X1, &X2, &X3, &OFFT);
-        probe.PB.is_value = true;
-        probe.PB.value.assign({5, 1, 3});
+        cbar probe(&EID, &PID, &GA, &GB, &X1, &X2, &X3, &OFFT, nullptr, &PB);
 
         test << probe;
         CHECK(test.str() ==
@@ -184,6 +183,80 @@ TEST_CASE("BDF CBAR types output.", "[bdf_cbar,out]") {
               "*                                        0.0000000000+00 0.0000000000+00\n"
               "*        0.0000000000+00 0.0000000000+00 0.0000000000+002.00000000000+00\n");
         delete probe;
+    }
+}
+
+TEST_CASE("BDF CBAR types output my reuse instance.", "[bdf_cbar,out]") {
+
+    std::ostringstream test;
+
+    SECTION("dir code reuse") {
+        long EID(1), PID(2), GA(3), GB(4), G0(5);
+
+        cbar probe;
+        test << probe(&EID, &PID, &GA, &GB, &G0);
+        CHECK(test.str() ==
+              "CBAR           1       2       3       4       5\n");
+    }
+
+    SECTION("QRG sample 1 reuse") {
+        long EID(2), PID(39), GA(7), GB(3);
+        double X1(.6), X2(18), X3(26);
+        std::string OFFT("EEG");
+        list<int> PB{5, 1, 3};
+
+        cbar probe;
+        test << probe(&EID, &PID, &GA, &GB, &X1, &X2, &X3, &OFFT, nullptr, &PB);
+        CHECK(test.str() ==
+              "CBAR           2      39       7       36.000-011.800+012.600+01EEG     \n"
+              "                     513\n");
+    }
+
+    SECTION("QRG sample 1 (long) reuse") {
+        long EID(2), PID(39), GA(7), GB(3);
+        double X1(.6), X2(18), X3(1234.5);
+        std::string OFFT("EEG");
+        list<int> PB{5, 1, 3};
+
+        cbar probe;
+
+        test << probe(&EID, &PID, &GA, &GB, &X1, &X2, &X3, &OFFT, nullptr, &PB);
+        CHECK(test.str() ==
+              "CBAR*                  2              39               7               3\n"
+              "*       6.00000000000-011.80000000000+011.23450000000+03EEG             \n"
+              "*                                    513\n"
+              "*       \n");
+    }
+
+    SECTION("dir code all elements reuse") {
+        long EID(1), PID(2), GA(3), GB(4), G0(5);
+        double W3B{2.};
+
+        cbar probe;
+        test << probe(&EID, &PID, &GA, &GB, &G0,
+                      nullptr, nullptr, nullptr, nullptr,
+                      nullptr, nullptr, nullptr, nullptr,
+                      &W3B);
+        CHECK(test.str() ==
+              "CBAR           1       2       3       4       5                        \n"
+              "                         0.00+00 0.00+00 0.00+00 0.00+00 0.00+002.000+00\n");
+    }
+
+    SECTION("dir code all large reuse") {
+        long EID(123456789), PID(2), GA(3), GB(4), G0(5);
+        double W3B{2.};
+
+        cbar probe;
+        test << probe(&EID, &PID, &GA, &GB, &G0,
+                      nullptr, nullptr, nullptr, nullptr,
+                      nullptr, nullptr, nullptr, nullptr,
+                      &W3B);
+        CHECK(test.str() ==
+              // 34567!123456789012345!123456789012345!123456789012345!123456789012345!
+              "CBAR*          123456789               2               3               4\n"
+              "*                      5                                                \n"
+              "*                                        0.0000000000+00 0.0000000000+00\n"
+              "*        0.0000000000+00 0.0000000000+00 0.0000000000+002.00000000000+00\n");
     }
 }
 
