@@ -8,7 +8,6 @@
 */
 
 #include "extfem_misc.h"
-#include "fem/types.h"
 
 // ID:
 namespace {

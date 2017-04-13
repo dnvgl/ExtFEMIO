@@ -39,7 +39,7 @@ namespace dnvgl {
 
                 public:
 
-                    error(
+                    explicit error(
                         const std::string &msg,
                         const std::string &err_class="fem_error");
 
@@ -54,7 +54,7 @@ namespace dnvgl {
 
                 public:
 
-                    types_error(const std::string &msg);
+                    explicit types_error(const std::string &msg);
                 };
 
                 class float_error : public error {
@@ -120,24 +120,21 @@ namespace dnvgl {
                     usage_error(const std::string &name, const std::string &msg);
                 };
 
-                class no_used :
-                    public virtual error {
+                class no_used : public virtual error {
 
                 public:
 
-                    no_used(long const &no);
+                    explicit no_used(long const &no);
                 };
 
-                class id_used :
-                    public virtual error {
+                class id_used : public virtual error {
 
                 public:
 
-                    id_used(long const &id);
+                    explicit id_used(long const &id);
                 };
 
-                class data_not_matching_id :
-                    public virtual error {
+                class data_not_matching_id : public virtual error {
 
                 public:
 

@@ -17,11 +17,11 @@ namespace {
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
 
-#include <limits>
-
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "fem/cards.h"
 
@@ -88,7 +88,7 @@ TEST_CASE("FEM IDENT definitions.", "[fem_ident]") {
 
 TEST_CASE("FEM IDENT types output.", "[fem_ident,out]") {
 
-    std::ostringstream test;
+    ostringstream test;
 
     SECTION("empty") {
         ident probe;
@@ -104,8 +104,8 @@ TEST_CASE("FEM IDENT types output.", "[fem_ident,out]") {
     }
 
     SECTION("simple") {
-        long SLEVEL(1), SELTYP(2);
-        ident::mod_type SELMOD(ident::mod_type::DIM_3D);
+        long SLEVEL{1}, SELTYP{2};
+        ident::mod_type SELMOD{ident::mod_type::DIM_3D};
         ident probe(SLEVEL, SELTYP, SELMOD);
         test << probe;
         CHECK(test.str() ==
@@ -116,12 +116,11 @@ TEST_CASE("FEM IDENT types output.", "[fem_ident,out]") {
 TEST_CASE("FEM IDENT conversion from own output.", "[fem_ident,in/out]") {
 
     vector<std::string> lines;
-    size_t len;
 
     SECTION("IDENT (1)") {
         vector<std::string> data({
             "IDENT   +1.000000000e+00+2.000000000e+00+3.000000000e+00\n"});
-        len = __base::card::card_split(data, data.size(), lines);
+        auto len = __base::card::card_split(data, data.size(), lines);
         ident probe(lines, len);
 
         CHECK(probe.SLEVEL == 1);

@@ -17,14 +17,13 @@ namespace {
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
 
-#include <limits>
-
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "fem/cards.h"
-#include "fem/errors.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
@@ -45,7 +44,7 @@ TEST_CASE("FEM HSUPSTAT definitions. (Small Field Format)", "[fem_hsupstat]") {
         "          5.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n",
         "         -1.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00\n"});
     vector<std::string> lines;
-    size_t len = __base::card::card_split(data, data.size(), lines);
+    auto len = __base::card::card_split(data, data.size(), lines);
     hsupstat probe(lines, len);
 
     SECTION("first moment") {
@@ -62,7 +61,7 @@ TEST_CASE("FEM HSUPSTAT definitions. (Small Field Format)", "[fem_hsupstat]") {
 }
 
 TEST_CASE("FEM HSUPSTAT types output.", "[fem_hsupstat,out]") {
-    std::ostringstream test;
+    ostringstream test;
 
     long NFIELD(1);
     long ISELTY(2);
@@ -106,7 +105,6 @@ TEST_CASE("FEM HSUPSTAT types output.", "[fem_hsupstat,out]") {
 TEST_CASE("FEM HSUPSTAT conversion from own output.", "[fem_hsupstat,in/out]") {
 
     vector<std::string> lines;
-    size_t len;
 
     SECTION("HSUPSTAT") {
 
@@ -116,9 +114,9 @@ TEST_CASE("FEM HSUPSTAT conversion from own output.", "[fem_hsupstat,in/out]") {
             "        +5.000000000e+00+6.000000000e+00+7.000000000e+00+8.000000000e+00\n",
             "        +9.000000000e+00\n"});
 
-        vector<std::string> lines;
-        len = __base::card::card_split(data, data.size(), lines);
-        hsupstat probe(lines, len);
+        vector<std::string> lines_l;
+        auto len = __base::card::card_split(data, data.size(), lines_l);
+        hsupstat probe(lines_l, len);
 
         CHECK(probe.NFIELD == 1);
         CHECK(probe.ISELTY == 2);

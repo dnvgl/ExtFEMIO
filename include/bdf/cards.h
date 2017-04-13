@@ -613,7 +613,7 @@ namespace dnvgl {
 
                     void read(const std::list<std::string> &) override;
 
-                    card const &operator()(const std::list<std::string> &);
+                    card const &operator()(const std::list<std::string> &) override;
 
                     card const &operator()(long const *ID, long const *CP,
                          double const *X1, double const *X2, double const *X3,

@@ -17,11 +17,11 @@ namespace {
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
 
-#include <limits>
-
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "fem/cards.h"
 
@@ -118,9 +118,8 @@ TEST_CASE("FEM GECC types output.", "[fem_gecc,out]") {
     __base::eccno::reset_eccno();
     std::ostringstream test;
 
-    long ECCNO(1);
-    gecc::ecc_opt IOPT{gecc::ecc_opt::XYZ};
-    double EX(1.), EY(3.), EZ(134.);
+    long ECCNO{1};
+    double EX{1.}, EY{3.}, EZ{134.};
 
     SECTION("empty") {
         gecc probe;
@@ -245,13 +244,12 @@ TEST_CASE("FEM GECC types output.", "[fem_gecc,out]") {
 TEST_CASE("FEM GECC conversion from own output.", "[fem_gecc,in/out]") {
 
     vector<std::string> lines;
-    size_t len;
 
     SECTION("GECC") {
         vector<std::string> data({
                 "GECC    +1.000000000e+00+2.000000000e+00+1.000000000e+00+3.000000000e+00\n", 
                 "        +1.340000000e+02\n"});
-        len = __base::card::card_split(data, data.size(), lines);
+        auto len = __base::card::card_split(data, data.size(), lines);
         gecc probe(lines, len);
 
         REQUIRE(probe.ECCNO == 1);

@@ -185,7 +185,7 @@ namespace dnvgl {
                               double const *T1, double const *T2,
                               double const *T3, double const *T4);
 
-                        card const &operator() (
+                        virtual card const &operator() (
                             long const *EID, long const *PID,
                             long const *G1, long const *G2,
                             long const *G3, long const *G4,
@@ -195,7 +195,7 @@ namespace dnvgl {
                             double const *T1, double const *T2,
                             double const *T3, double const *T4);
 
-                        card const &operator() (
+                        virtual card const &operator() (
                             long const *EID, long const *PID,
                             long const *G1, long const *G2,
                             long const *G3, long const *G4,
@@ -253,7 +253,7 @@ namespace dnvgl {
 
                     types card_type() const override;
 
-                    card const &operator() (std::list<std::string> const&);
+                    card const &operator() (std::list<std::string> const&) override;
 
                     card const &operator() (
                         long const *EID, long const *PID,
@@ -326,7 +326,7 @@ namespace dnvgl {
 
                     types card_type() const override;
 
-                    __base::card const &operator() (std::list<std::string> const&);
+                    __base::card const &operator() (std::list<std::string> const&) override;
 
                     __base::card const &operator() (
                         long const *EID, long const *PID,
@@ -336,7 +336,7 @@ namespace dnvgl {
                         double const *ZOFFS=nullptr,
                         long const *TFLAG=nullptr,
                         double const *T1=nullptr, double const *T2=nullptr,
-                        double const *T3=nullptr, double const *T4=nullptr);
+                        double const *T3=nullptr, double const *T4=nullptr) override;
 
                     __base::card const &operator() (
                         long const *EID, long const *PID,
@@ -346,7 +346,7 @@ namespace dnvgl {
                         double const *ZOFFS=nullptr,
                         long const *TFLAG=nullptr,
                         double const *T1=nullptr, double const *T2=nullptr,
-                        double const *T3=nullptr, double const *T4=nullptr);
+                        double const *T3=nullptr, double const *T4=nullptr) override;
 
                 private:
 

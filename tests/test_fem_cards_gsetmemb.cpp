@@ -17,11 +17,13 @@ namespace {
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
 
-#include <limits>
+#include <vector>
 
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "fem/cards.h"
 
@@ -826,14 +828,13 @@ TEST_CASE("FEM GSETMEMB types output.", "[fem_gsetmemb,out]") {
 TEST_CASE("FEM GSETMEMB conversion from own output.", "[fem_gsetmemb,in/out]") {
 
     vector<std::string> lines;
-    size_t len;
 
     SECTION("GSETMEMB (1)") {
         vector<std::string> data({
             "GSETMEMB+5.000000000e+00+2.000000000e+00+3.000000000e+00+2.000000000e+00\n",
             "        +3.000000000e+00\n"});
 
-        len = __base::card::card_split(data, data.size(), lines);
+        size_t len = __base::card::card_split(data, data.size(), lines);
         gsetmemb probe(lines, len);
 
         CHECK(probe.NFIELD == 5);

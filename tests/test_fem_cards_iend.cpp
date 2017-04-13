@@ -17,11 +17,11 @@ namespace {
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
 
-#include <limits>
-
 #include <catch.hpp>
 
+#ifdef __GNUC__
 #include "config.h"
+#endif
 
 #include "fem/cards.h"
 
@@ -98,12 +98,11 @@ TEST_CASE("FEM IEND types output.", "[fem_iend,out]") {
 TEST_CASE("FEM IEND conversion from own output.", "[fem_iend,in/out]") {
 
     vector<std::string> lines;
-    size_t len;
 
     SECTION("IEND (1)") {
         vector<std::string> data({
             "IEND    +3.000000000e+00            0.00            0.00            0.00\n"});
-        len = __base::card::card_split(data, data.size(), lines);
+        auto len = __base::card::card_split(data, data.size(), lines);
         iend probe(lines, len);
 
         CHECK(probe.CONT == 3);
