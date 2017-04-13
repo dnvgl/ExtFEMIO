@@ -35,7 +35,7 @@ using namespace bdf;
 using namespace type_bounds;
 using namespace cards;
 
-using types::entry_type;
+using bdf::types::entry_type;
 
 bdf::types::card ctria3::head = bdf::types::card("CTRIA3");
 
