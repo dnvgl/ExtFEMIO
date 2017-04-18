@@ -310,6 +310,9 @@ cards::__base::card const& cbar::operator()(
 
 void cbar::collect_outdata(
     list<unique_ptr<format_entry> > &res) const {
+
+    if (!EID) return;
+
     res.push_back(unique_ptr<format_entry>(format(head)));
 
     res.push_back(unique_ptr<format_entry>(format<long>(form_EID, EID)));

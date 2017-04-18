@@ -78,7 +78,7 @@ TEST_CASE("BDF CBAR definitions. (Small Field Format)", "[bdf_cbar]" ) {
     }
 }
 
-TEST_CASE("Roundtrip test 1 (dir code).", "[bdf_cbar_roundtrip_1]") {
+TEST_CASE("CBAR Roundtrip test 1 (dir code).", "[bdf_cbar_roundtrip_1]") {
 
     std::stringstream test;
 
@@ -111,7 +111,7 @@ TEST_CASE("Roundtrip test 1 (dir code).", "[bdf_cbar_roundtrip_1]") {
     }
 }
 
-TEST_CASE("Roundtrip test 1 (dir code) (reuse).", "[bdf_cbar_roundtrip_1_reuse]") {
+TEST_CASE("CBAR Roundtrip test 1 (dir code) (reuse).", "[bdf_cbar_roundtrip_1_reuse]") {
 
     std::stringstream test;
 
@@ -146,7 +146,7 @@ TEST_CASE("Roundtrip test 1 (dir code) (reuse).", "[bdf_cbar_roundtrip_1_reuse]"
     }
 }
 
-TEST_CASE("Roundtrip test (QRG sample 1)", "[bdf_cbar_roundtrip_2]"){
+TEST_CASE("CBAR Roundtrip test (QRG sample 1)", "[bdf_cbar_roundtrip_2]"){
 
     std::ostringstream test;
 
@@ -187,7 +187,7 @@ TEST_CASE("Roundtrip test (QRG sample 1)", "[bdf_cbar_roundtrip_2]"){
     }
 }
 
-TEST_CASE("Roundtrip test (QRG sample 1) (reuse)", "[bdf_cbar_roundtrip_2_reuse]"){
+TEST_CASE("CBAR Roundtrip test (QRG sample 1) (reuse)", "[bdf_cbar_roundtrip_2_reuse]"){
 
     std::ostringstream test;
 
@@ -230,7 +230,7 @@ TEST_CASE("Roundtrip test (QRG sample 1) (reuse)", "[bdf_cbar_roundtrip_2_reuse]
     }
 }
 
-TEST_CASE("Roundtrip test (QRG sample 1 (long))", "[bdf_cbar_roundtrip_3]") {
+TEST_CASE("CBAR Roundtrip test (QRG sample 1 (long))", "[bdf_cbar_roundtrip_3]") {
 
     std::ostringstream test;
 
@@ -274,7 +274,7 @@ TEST_CASE("Roundtrip test (QRG sample 1 (long))", "[bdf_cbar_roundtrip_3]") {
     }
 }
 
-TEST_CASE("Roundtrip test (QRG sample 1 (long)) (reuse)", "[bdf_cbar_roundtrip_3_reuse]") {
+TEST_CASE("CBAR Roundtrip test (QRG sample 1 (long)) (reuse)", "[bdf_cbar_roundtrip_3_reuse]") {
 
     std::ostringstream test;
 
@@ -320,7 +320,7 @@ TEST_CASE("Roundtrip test (QRG sample 1 (long)) (reuse)", "[bdf_cbar_roundtrip_3
     }
 }
 
-TEST_CASE("Roundtrip test (dir code all elements)", "[bdf_cbar_roundtrip_4]") {
+TEST_CASE("CBAR Roundtrip test (dir code all elements)", "[bdf_cbar_roundtrip_4]") {
 
     std::ostringstream test;
 
@@ -359,7 +359,7 @@ TEST_CASE("Roundtrip test (dir code all elements)", "[bdf_cbar_roundtrip_4]") {
     }
 }
 
-TEST_CASE("Roundtrip test (dir code all elements) (reuse)",
+TEST_CASE("CBAR Roundtrip test (dir code all elements) (reuse)",
           "[bdf_cbar_roundtrip_4_reuse]") {
 
     std::ostringstream test;
@@ -399,7 +399,7 @@ TEST_CASE("Roundtrip test (dir code all elements) (reuse)",
     }
 }
 
-TEST_CASE("Roundtrip test (dir code all elements) (large)",
+TEST_CASE("CBAR Roundtrip test (dir code all elements) (large)",
           "[bdf_cbar_roundtrip_5]") {
 
     std::ostringstream test;
@@ -442,7 +442,7 @@ TEST_CASE("Roundtrip test (dir code all elements) (large)",
     }
 }
 
-TEST_CASE("Roundtrip test (dir code all elements) (large) (reuse)",
+TEST_CASE("CBAR Roundtrip test (dir code all elements) (large) (reuse)",
           "[bdf_cbar_roundtrip_5_reuse]") {
 
     std::ostringstream test;
@@ -450,11 +450,11 @@ TEST_CASE("Roundtrip test (dir code all elements) (large) (reuse)",
     double W3B{2.};
 
     cbar probe;
-    probe(&EID, &PID, &GA, &GB, &G0,
-               nullptr, nullptr, nullptr, nullptr,
-               nullptr, nullptr, nullptr, nullptr,
-               &W3B);
     test << probe;
+    test << probe(&EID, &PID, &GA, &GB, &G0,
+                  nullptr, nullptr, nullptr, nullptr,
+                  nullptr, nullptr, nullptr, nullptr,
+                  &W3B);
 
     SECTION("check output") {
         CHECK(test.str() ==
@@ -487,7 +487,7 @@ TEST_CASE("Roundtrip test (dir code all elements) (large) (reuse)",
     }
 }
 
-TEST_CASE("Roundtrip test dir code all large (ptr)", "[bdf_cbar_roundtrip_6]") {
+TEST_CASE("CBAR Roundtrip test dir code all large (ptr)", "[bdf_cbar_roundtrip_6]") {
 
     std::ostringstream test;
 
@@ -531,7 +531,7 @@ TEST_CASE("Roundtrip test dir code all large (ptr)", "[bdf_cbar_roundtrip_6]") {
     }
 }
 
-TEST_CASE("Roundtrip test dir code all large (ptr) (reuse)",
+TEST_CASE("CBAR Roundtrip test dir code all large (ptr) (reuse)",
           "[bdf_cbar_roundtrip_6_reuse]") {
 
     std::ostringstream test;
@@ -540,6 +540,7 @@ TEST_CASE("Roundtrip test dir code all large (ptr) (reuse)",
     double W3B{2.};
 
     __base::card *probe = new cbar;
+    test << *probe;
     (*static_cast<cbar*>(probe))(&EID, &PID, &GA, &GB, &G0,
         nullptr, nullptr, nullptr, nullptr,
         nullptr, nullptr, nullptr, nullptr,

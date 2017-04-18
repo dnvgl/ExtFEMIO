@@ -34,17 +34,17 @@ static char THIS_FILE[] = __FILE__;
 using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::cards;
 
-TEST_CASE("BDF MAT1 definitions. (Free Field Format)",
+TEST_CASE("BDF MAT1 definitions. (Free Field Format) first",
           "[bdf_mat1]") {
 
-    SECTION("first mat1") {
-        std::list<std::string> data({
+    std::list<std::string> data({
             "MAT1,1,2.,3.,.4,5.,6.,7.,8.,9.,10.,11.,12\n"});
 
-        std::list<std::string> lines;
-        __base::card::card_split(data, lines);
-        mat1 probe(lines);
+    std::list<std::string> lines;
+    __base::card::card_split(data, lines);
+    mat1 probe(lines);
 
+    SECTION("first mat1") {
         CHECK((long)probe.MID == 1);
         CHECK((double)probe.E == 2.);
         CHECK((double)probe.G == 3.);
@@ -58,14 +58,18 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format)",
         CHECK((double)probe.SS == 11.);
         CHECK((long)probe.MCSID == 12);
     }
+}
+
+TEST_CASE("BDF MAT1 definitions. (Free Field Format) mat1 with missing entries",
+          "[bdf_mat2]") {
+
+    std::list<std::string> data({
+            "MAT1,1,2.070+5,80000.0,0.3,7.850-6\n"});
+    std::list<std::string> lines;
+    __base::card::card_split(data, lines);
+    mat1 probe(lines);
 
     SECTION("mat1 with missing entries") {
-        std::list<std::string> data({
-            "MAT1,1,2.070+5,80000.0,0.3,7.850-6\n"});
-        std::list<std::string> lines;
-        __base::card::card_split(data, lines);
-        mat1 probe(lines);
-
         CHECK((long)probe.MID == 1);
         CHECK((double)probe.E == 2.070e5);
         CHECK((double)probe.G == 8e4);
@@ -79,13 +83,17 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format)",
         CHECK_FALSE(probe.SS);
         CHECK_FALSE(probe.MCSID);
     }
+}
+
+TEST_CASE("BDF MAT1 definitions. (Free Field Format) mat1 default values 1",
+          "[bdf_mat3]") {
+
+    std::list<std::string> data({"MAT1,1,2.070+5\n"});
+    std::list<std::string> lines;
+    __base::card::card_split(data, lines);
+    mat1 probe(lines);
 
     SECTION("mat1 default values 1") {
-        std::list<std::string> data({"MAT1,1,2.070+5\n"});
-        std::list<std::string> lines;
-        __base::card::card_split(data, lines);
-        mat1 probe(lines);
-
         CHECK((long)probe.MID == 1);
         CHECK((double)probe.E == 2.070e5);
         CHECK((double)probe.G == 0.);
@@ -99,13 +107,17 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format)",
         CHECK_FALSE(probe.SS);
         CHECK_FALSE(probe.MCSID);
     }
+}
+
+TEST_CASE("BDF MAT1 definitions.  mat1 default values 2",
+          "[bdf_mat5]") {
+
+    std::list<std::string> data({"MAT1    1       2.070+5 80000.0\n"});
+    std::list<std::string> lines;
+    __base::card::card_split(data, lines);
+    mat1 probe(lines);
 
     SECTION("mat1 default values 2") {
-        std::list<std::string> data({"MAT1    1       2.070+5 80000.0\n"});
-        std::list<std::string> lines;
-        __base::card::card_split(data, lines);
-        mat1 probe(lines);
-
         CHECK((long)probe.MID == 1);
         CHECK((double)probe.E == 2.070e5);
         CHECK((double)probe.G == 8e4);
@@ -120,12 +132,17 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format)",
         CHECK_FALSE(probe.MCSID);
     }
 
-    SECTION("mat1 default values 3") {
-        std::list<std::string> data({"MAT1,1,2.070+5,,.3\n"});
-        std::list<std::string> lines;
-        __base::card::card_split(data, lines);
-        mat1 probe(lines);
+}
 
+TEST_CASE("BDF MAT1 definitions. mat1 default values 3",
+          "[bdf_mat4]") {
+
+    std::list<std::string> data({"MAT1,1,2.070+5,,.3\n"});
+    std::list<std::string> lines;
+    __base::card::card_split(data, lines);
+    mat1 probe(lines);
+
+    SECTION("mat1 default values 3") {
         CHECK((long)probe.MID == 1);
         CHECK((double)probe.E == 2.070e5);
         CHECK((double)probe.G == Approx(79615.));
@@ -141,18 +158,18 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format)",
     }
 }
 
-TEST_CASE("BDF MAT1 definitions. (Free Field Format) (reuse instance)",
-          "[bdf_mat1,reuse read]") {
+TEST_CASE("BDF MAT1 definitions. (Free Field Format) first (reuse)",
+          "[bdf_mat1_reuse]") {
 
-    SECTION("first mat1 (reuse)") {
-        std::list<std::string> data({
+    std::list<std::string> data({
             "MAT1,1,2.,3.,.4,5.,6.,7.,8.,9.,10.,11.,12\n"});
 
-        std::list<std::string> lines;
-        __base::card::card_split(data, lines);
-        mat1 probe;
-        probe(lines);
+    std::list<std::string> lines;
+    __base::card::card_split(data, lines);
+    mat1 probe;
+    probe(lines);
 
+    SECTION("first mat1") {
         CHECK((long)probe.MID == 1);
         CHECK((double)probe.E == 2.);
         CHECK((double)probe.G == 3.);
@@ -166,15 +183,19 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format) (reuse instance)",
         CHECK((double)probe.SS == 11.);
         CHECK((long)probe.MCSID == 12);
     }
+}
 
-    SECTION("mat1 with missing entries (reuse)") {
-        std::list<std::string> data({
+TEST_CASE("BDF MAT1 definitions. (Free Field Format) mat1 with missing entries (reuse)",
+          "[bdf_mat2_reuse]") {
+
+    std::list<std::string> data({
             "MAT1,1,2.070+5,80000.0,0.3,7.850-6\n"});
-        std::list<std::string> lines;
-        __base::card::card_split(data, lines);
-        mat1 probe;
-        probe(lines);
+    std::list<std::string> lines;
+    __base::card::card_split(data, lines);
+    mat1 probe;
+    probe(lines);
 
+    SECTION("mat1 with missing entries") {
         CHECK((long)probe.MID == 1);
         CHECK((double)probe.E == 2.070e5);
         CHECK((double)probe.G == 8e4);
@@ -188,140 +209,94 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format) (reuse instance)",
         CHECK_FALSE(probe.SS);
         CHECK_FALSE(probe.MCSID);
     }
-
-    SECTION("mat1 default values 1 (reuse)") {
-        std::list<std::string> data({"MAT1,1,2.070+5\n"});
-        std::list<std::string> lines;
-        __base::card::card_split(data, lines);
-        mat1 probe;
-        probe(lines);
-
-        CHECK((long)probe.MID == 1);
-        CHECK((double)probe.E == 2.070e5);
-        CHECK((double)probe.G == 0.);
-        CHECK((double)probe.NU == 0.);
-        CHECK_FALSE(probe.RHO);
-        CHECK_FALSE(probe.A);
-        CHECK_FALSE(probe.TREF);
-        CHECK_FALSE(probe.GE);
-        CHECK_FALSE(probe.ST);
-        CHECK_FALSE(probe.SC);
-        CHECK_FALSE(probe.SS);
-        CHECK_FALSE(probe.MCSID);
-    }
-
-    SECTION("mat1 default values 2 (reuse)") {
-        std::list<std::string> data({"MAT1    1       2.070+5 80000.0\n"});
-        std::list<std::string> lines;
-        __base::card::card_split(data, lines);
-        mat1 probe;
-        probe(lines);
-
-        CHECK((long)probe.MID == 1);
-        CHECK((double)probe.E == 2.070e5);
-        CHECK((double)probe.G == 8e4);
-        CHECK((double)probe.NU == Approx(0.29375));
-        CHECK_FALSE(probe.RHO);
-        CHECK_FALSE(probe.A);
-        CHECK_FALSE(probe.TREF);
-        CHECK_FALSE(probe.GE);
-        CHECK_FALSE(probe.ST);
-        CHECK_FALSE(probe.SC);
-        CHECK_FALSE(probe.SS);
-        CHECK_FALSE(probe.MCSID);
-    }
-
-    SECTION("mat1 default values 3 (reuse)") {
-        std::list<std::string> data({"MAT1,1,2.070+5,,.3\n"});
-        std::list<std::string> lines;
-        __base::card::card_split(data, lines);
-        mat1 probe;
-        probe(lines);
-
-        CHECK((long)probe.MID == 1);
-        CHECK((double)probe.E == 2.070e5);
-        CHECK((double)probe.G == Approx(79615.));
-        CHECK((double)probe.NU == 0.3);
-        CHECK_FALSE(probe.RHO);
-        CHECK_FALSE(probe.A);
-        CHECK_FALSE(probe.TREF);
-        CHECK_FALSE(probe.GE);
-        CHECK_FALSE(probe.ST);
-        CHECK_FALSE(probe.SC);
-        CHECK_FALSE(probe.SS);
-        CHECK_FALSE(probe.MCSID);
-    }
 }
 
-TEST_CASE("BDF MAT1 types output.", "[bdf_mat1,out]") {
+TEST_CASE("BDF MAT1 roundtrio test.", "[bdf_mat1_roundtrip_1_reuse]") {
+
 
     std::ostringstream test;
+    long MID{1}, MCSID{2};
+    double E{2.}, G{3.}, NU{.3}, RHO{5.}, A{6}, TREF{7.}, GE{8.};
+    double ST{9.}, SC{10.}, SS{11.};
 
-    SECTION("test 1") {
-        long MID{1}, MCSID{2};
-        double E{2.}, G{3.}, NU{4.}, RHO{5.}, A{6}, TREF{7.}, GE{8.},
-            ST{9.}, SC{10.}, SS{11.};
+    mat1 probe;
+    test << probe;
+    test << probe(&MID, &E, &G, &NU, &RHO, &A, &TREF, &GE,
+                  &ST, &SC, &SS, &MCSID);
 
-        mat1 probe(&MID, &E, &G, &NU, &RHO, &A, &TREF, &GE,
-                   &ST, &SC, &SS, &MCSID);
-        test << probe;
+    SECTION("check output") {
         CHECK(test.str() ==
-              "MAT1           12.000+003.000+004.000+005.000+006.000+007.000+008.000+00\n"
+              "MAT1           12.000+003.000+003.000-015.000+006.000+007.000+008.000+00\n"
               "        9.000+001.000+011.100+01       2\n");
     }
 
-    SECTION("test 2") {
-        long MID{17}, MCSID{1003};
-        double E{3e7}, NU{.33}, RHO{4.28}, A{6.5e-6}, TREF{5.37e2},
-               GE{.23}, ST{20e4}, SC{15e4}, SS{12e4};
+    SECTION("check reading") {
+        std::list<std::string> data;
+        std::list<std::string> lines;
+        std::string tmp;
+        std::istringstream raw(test.str());
 
-        mat1 probe(&MID, &E, nullptr, &NU, &RHO, &A, &TREF, &GE,
-                   &ST, &SC, &SS, &MCSID);
-        test << probe;
-        CHECK(test.str() ==
-              "MAT1          173.000+07        3.300-014.280+006.500-065.370+022.300-01\n"
-              "        2.000+051.500+051.200+05    1003\n");
-    }
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        __base::card::card_split(data, lines);
+        mat1 probe;
+        probe(lines);
 
-    SECTION("test min data") {
-        long MID{17};
-        double E{3e7}, RHO{4.28}, A{6.5e-6}, GE{.23};
-
-        mat1 probe(&MID, &E, nullptr, nullptr, &RHO, &A, nullptr, &GE);
-        test << probe;
-        CHECK(test.str() ==
-              "MAT1          173.000+07                4.280+006.500-06        2.300-01\n");
+        CHECK(probe.MID.value == 1);
+        CHECK(probe.MCSID.value == 2);
+        CHECK(probe.E.value == 2.);
+        CHECK(probe.G.value == 3.);
+        CHECK(probe.NU.value == .3);
+        CHECK(probe.RHO.value == 5.);
+        CHECK(probe.A.value == 6);
+        CHECK(probe.TREF.value == 7.);
+        CHECK(probe.GE.value == 8.);
+        CHECK(probe.ST.value == 9.);
+        CHECK(probe.SC.value == 10.);
+        CHECK(probe.SS.value == 11.);
     }
 }
 
-TEST_CASE("BDF MAT1 reuse instance for output.", "[bdf_mat1,out]") {
+TEST_CASE("BDF MAT1 roundtrio test (min data).", "[bdf_mat1_roundtrip_2_reuse]") {
 
     std::ostringstream test;
 
-    SECTION("test reuse 1") {
-        long MID{1}, MCSID{2};
-        double E{2.}, G{3.}, NU{4.}, RHO{5.}, A{6}, TREF{7.}, GE{8.},
-            ST{9.}, SC{10.}, SS{11.};
+    long MID{17};
+    double E{3e7}, RHO{4.28}, A{6.5e-6}, GE{.23};
 
-        mat1 probe;
-        test << probe;
-        test << probe(&MID, &E, &G, &NU, &RHO, &A, &TREF, &GE,
-                      &ST, &SC, &SS, &MCSID);
-        CHECK(test.str() ==
-              "MAT1           12.000+003.000+004.000+005.000+006.000+007.000+008.000+00\n"
-              "        9.000+001.000+011.100+01       2\n");
-    }
+    mat1 probe;
+    test << probe(&MID, &E, nullptr, nullptr, &RHO, &A, nullptr, &GE);
 
-    SECTION("test reuse min data") {
-        long MID{17};
-        double E{3e7}, RHO{4.28}, A{6.5e-6}, GE{.23};
-
-        mat1 probe;
-        test << probe(&MID, &E, nullptr, nullptr, &RHO, &A, nullptr, &GE);
+    SECTION("check output") {
         CHECK(test.str() ==
               "MAT1          173.000+07                4.280+006.500-06        2.300-01\n");
     }
 
+    SECTION("check reading") {
+        std::list<std::string> data;
+        std::list<std::string> lines;
+        std::string tmp;
+        std::istringstream raw(test.str());
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        __base::card::card_split(data, lines);
+        mat1 probe;
+        probe(lines);
+
+        CHECK(probe.MID.value == 17);
+        CHECK(!bool(probe.MCSID));
+        CHECK(probe.E.value == 30000000.);
+        CHECK(probe.G.value == 0.);
+        CHECK(probe.NU.value == 0.);
+        CHECK(probe.RHO.value == 4.28);
+        CHECK(probe.A.value == 6.5e-6);
+        CHECK(!bool(probe.TREF));
+        CHECK(probe.GE.value == .23);
+        CHECK(!bool(probe.ST));
+        CHECK(!bool(probe.SC));
+        CHECK(!bool(probe.SS));
+    }
 }
 
 // Local Variables:
