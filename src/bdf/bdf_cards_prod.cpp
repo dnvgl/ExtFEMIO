@@ -32,8 +32,11 @@ namespace {
     const double cd0 = 0.;
 }
 
+using namespace std;
+
 using namespace dnvgl::extfem;
-using namespace bdf::cards;
+using namespace bdf;
+using namespace cards;
 
 using bdf::types::entry_type;
 
@@ -51,12 +54,12 @@ const entry_type<double> prod::form_NSM(
     "J",
     bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 
-prod::prod(std::list<std::string> const &inp) :
+prod::prod(list<std::string> const &inp) :
 card(inp) {
     this->prod::read(inp);
 }
 
-void prod::read(std::list<std::string> const &inp) {
+void prod::read(list<std::string> const &inp) {
 
     auto pos = inp.rbegin();
 
@@ -88,13 +91,18 @@ void prod::read(std::list<std::string> const &inp) {
     if (!C.is_value) form_C.set_value(C, "");
 }
 
-types prod::card_type() const {
-    return types::PROD;
+cards::types prod::card_type() const {
+    return cards::types::PROD;
 }
 
 void prod::collect_outdata(
-    std::list<std::unique_ptr<format_entry> > &res) const {
-    throw std::not_implemented(__FILE__, __LINE__, "can't write PROD.");
+    list<std::unique_ptr<format_entry> > &res) const {
+    throw not_implemented(__FILE__, __LINE__, "can't write PROD.");
+}
+
+cards::__base::card const &prod::operator() (list<std::string> const &inp) {
+    this->prod::read(inp);
+    return *this;
 }
 
 // Local Variables:

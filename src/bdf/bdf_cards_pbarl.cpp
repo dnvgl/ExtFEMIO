@@ -31,6 +31,8 @@ namespace {
     const double cd0 = 0;
 }
 
+using namespace std;
+
 using namespace dnvgl::extfem;
 using namespace bdf::cards;
 using bdf::types::entry_type;
@@ -47,12 +49,12 @@ entry_type<double> const pbarl::form_DIM(
 entry_type<double> const pbarl::form_NSM(
     "NSM", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 
-pbarl::pbarl(std::list<std::string> const &inp) :
+pbarl::pbarl(list<std::string> const &inp) :
 bar_prop(inp) {
     this->pbarl::read(inp);
 }
 
-void pbarl::read(std::list<std::string> const &inp) {
+void pbarl::read(list<std::string> const &inp) {
 
     size_t dim_num;
     size_t i;
@@ -118,6 +120,11 @@ types pbarl::card_type() const {
 void pbarl::collect_outdata(
     std::list<std::unique_ptr<format_entry> > &res) const {
     throw std::not_implemented(__FILE__, __LINE__, "can't write PBARL.");
+}
+
+bdf::cards::__base::card const &pbarl::operator()(list<std::string> const &inp) {
+    this->pbarl::read(inp);
+    return *this;
 }
 
 // Local Variables:

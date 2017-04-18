@@ -156,6 +156,12 @@ void cmass2::collect_outdata(
     return;
 }
 
+cards::__base::card const &cmass2::operator()(list<std::string> const &inp) {
+    this->element::read(inp);
+    this->cmass2::read(inp);
+    return *this;
+}
+
 // Local Variables:
 // mode: c++
 // coding: utf-8

@@ -31,6 +31,8 @@ namespace {
     const long cl1 = 1;
 }
 
+using namespace std;
+
 using namespace dnvgl::extfem::bdf;
 
 using types::entry_type;
@@ -42,7 +44,7 @@ const entry_type<long> crod::form_PID("PID");
 const entry_type<long> crod::form_G1("G1");
 const entry_type<long> crod::form_G2("G2");
 
-crod::crod(std::list<std::string> const &inp) :
+crod::crod(list<std::string> const &inp) :
 element(inp) {
     this->crod::read(inp);
 }
@@ -51,7 +53,7 @@ cards::types crod::card_type() const {
     return types::CROD;
 }
 
-void crod::read(std::list<std::string> const &inp) {
+void crod::read(list<std::string> const &inp) {
     auto pos = inp.rbegin();
 
     switch (inp.size() - 1) {
@@ -80,8 +82,14 @@ __base::card const& crod::operator()(
 }
 
 void crod::collect_outdata(
-    std::list<std::unique_ptr<format_entry> > &res) const {
+    list<unique_ptr<format_entry> > &res) const {
     NOT_IMPLEMENTED("Can't write CROD.");
+}
+
+cards::__base::card const &crod::operator()(list<std::string> const &inp) {
+    this->element::read(inp);
+    this->crod::read(inp);
+    return *this;
 }
 
 // Local Variables:

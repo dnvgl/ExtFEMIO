@@ -138,6 +138,12 @@ void cards::__base::momforce::collect_outdata(
     return;
 }
 
+cards::__base::card const &cards::__base::momforce::operator() (
+    list<std::string> const &inp) {
+    this->momforce::read(inp);
+    return *this;
+}
+
 force::force() :
 momforce(&cl0, &cl0, &cl0, &cd0, &cd0, &cd0, &cd0) {}
 

@@ -22,7 +22,8 @@ namespace {
 using namespace std;
 
 using namespace dnvgl::extfem;
-using namespace bdf::cards;
+using namespace bdf;
+using namespace cards;
 
 bdf::types::card param::head = bdf::types::card("PARAM");
 
@@ -70,8 +71,8 @@ card(inp) {
     this->param::read(inp);
 }
 
-types param::card_type() const {
-    return types::PARAM;
+cards::types param::card_type() const {
+    return cards::types::PARAM;
 }
 
 void param::read(list<std::string> const &inp) {
@@ -144,6 +145,12 @@ void param::collect_outdata(
                 format<complex<double>>(form_CPLXVAL, CPLXVAL)));
     else
         throw errors::output_error("PARAM", "no output value.");
+}
+
+cards::__base::card const &cards::param::operator() (
+    list<std::string> const &inp) {
+    this->param::read(inp);
+    return *this;
 }
 
 // Local Variables:

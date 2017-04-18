@@ -31,8 +31,11 @@ namespace {
     const double cd0 = 0., cd1 = 1.;
 }
 
+using namespace std;
+
 using namespace dnvgl::extfem;
-using namespace bdf::cards;
+using namespace bdf;
+using namespace cards;
 
 using bdf::types::entry_type;
 
@@ -167,13 +170,18 @@ clean_SO:
 end:;
 }
 
-types pbeaml::card_type() const {
-    return types::PBEAML;
+cards::types pbeaml::card_type() const {
+    return cards::types::PBEAML;
 };
 
 void pbeaml::collect_outdata(
     std::list<std::unique_ptr<format_entry> > &res) const {
     throw std::not_implemented(__FILE__, __LINE__, "can't write PBEAML.");
+}
+
+cards::__base::card const &pbeaml::operator() (list<std::string> const &inp) {
+    this->pbeaml::read(inp);
+    return *this;
 }
 
 // Local Variables:

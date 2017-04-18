@@ -37,8 +37,11 @@ namespace {
     const double cd0 = 0., cd1 = 1.;
 }
 
+using namespace std;
+
 using namespace dnvgl::extfem;
-using namespace bdf::cards;
+using namespace bdf;
+using namespace cards;
 
 using bdf::types::entry_type;
 
@@ -303,13 +306,18 @@ void pbeam::read(std::list<std::string> const &inp) {
     copy(_F2.begin(), _F2.end(), F2.begin());
 }
 
-types pbeam::card_type() const {
-    return types::PBEAM;
+cards::types pbeam::card_type() const {
+    return cards::types::PBEAM;
 };
 
 void pbeam::collect_outdata(
     std::list<std::unique_ptr<format_entry> > &res) const {
     throw std::not_implemented(__FILE__, __LINE__, "can't write PBEAM.");
+}
+
+bdf::cards::__base::card const &pbeam::operator()(list<std::string> const &inp) {
+    this->pbeam::read(inp);
+    return *this;
 }
 
 // Local Variables:

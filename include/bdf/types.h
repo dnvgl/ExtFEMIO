@@ -253,9 +253,22 @@ namespace dnvgl {
 
                 template <class _Ty>
                 class entry_type : public base {
+                protected:
+
+                    dnvgl::extfem::bdf::type_bounds::bound<_Ty> bounds;
+
                 public:
                     explicit entry_type(const std::string& cs)
                         : base(cs) { }
+
+                    entry_value<_Ty> inline &check(
+                        entry_value<_Ty> &val) const {
+                        if (!bounds.is_allowed(val.value))
+                            throw errors::str_error(
+                                name, "!" + val.value +
+                                "! Value not of allowed values.");
+                        return val;
+                    }
                 };
 
 /// Integer value.
@@ -297,6 +310,17 @@ namespace dnvgl {
 
                     bdf_types type() const override { return _type; };
 
+                    entry_value<long> inline check(
+                        entry_value<long> val) const {
+                        if (!bounds.in_bounds(val.value)) {
+                            std::ostringstream msg("!", std::ostringstream::ate);
+                            msg << val.value
+                                << "! Value not in list of allowed range.";
+                            throw errors::int_error(name, msg.str());
+                        }
+                        return val;
+                    }
+
                     void set_value(
                         dnvgl::extfem::bdf::types::entry_value<long> &val,
                         const std::string &inp) const {
@@ -325,14 +349,7 @@ namespace dnvgl {
                             conv >> val.value;
                             val.is_value = true;
                         }
-                        if (!this->bounds.in_bounds(val)) {
-                            std::ostringstream msg(
-                                "boundary condition violated (",
-                                std::ostringstream::ate);
-                            msg << name << ")\n(""" << inp << ", " << sval
-                                << ", " << val.value << """)";
-                            throw errors::int_error(name, msg.str());
-                        }
+                        check(val);
                         return;
                     }
 
@@ -434,6 +451,17 @@ namespace dnvgl {
                             bdf::types::base(name), bounds(bounds) {};
 
                     bdf_types inline type() const override { return _type; };
+
+                    entry_value<double> inline check(
+                        entry_value<double> val) const {
+                        if (!bounds.in_bounds(val.value)) {
+                            std::ostringstream msg("!", std::ostringstream::ate);
+                            msg << val.value
+                                << "! Value not in list of allowed range.";
+                            throw errors::float_error(name, msg.str());
+                        }
+                        return val;
+                    }
 
                     // Convert string to float
                     void set_value(
@@ -598,24 +626,30 @@ namespace dnvgl {
                 template <>
                 class entry_type<std::string> : public base {
 
-                private:
-
-                    dnvgl::extfem::bdf::type_bounds::bound<std::string> bounds;
-
                 protected:
 
+                    dnvgl::extfem::bdf::type_bounds::bound<std::string> bounds;
                     static const bdf_types _type = bdf_types::Str;
 
                 public:
 
                     entry_type(const std::string &name) :
                             base(name),
-                            bounds(bdf::type_bounds::bound<std::string>()) {};
+                            bounds(bdf::type_bounds::bound<std::string>()) {}
 
                     entry_type(
                         const std::string &name,
                         const bdf::type_bounds::bound<std::string> &bounds) :
-                            bdf::types::base(name), bounds(bounds) {};
+                            bdf::types::base(name), bounds(bounds) {}
+
+                    entry_value<std::string> inline check(
+                        entry_value<std::string> val) const {
+                        if (!bounds.is_allowed(val.value))
+                            throw errors::str_error(
+                                name, "!" + val.value +
+                                "! Value not in list of allowed values.");
+                        return val;
+                    }
 
                     entry_value<std::string>
                     operator() (const std::string &inp) const {
@@ -624,12 +658,7 @@ namespace dnvgl {
                         if (sval.length() == 0)
                             sval = string::string(bounds.get_default());
 
-                        if (!bounds.is_allowed(sval))
-                            throw errors::str_error(
-                                name, "!" + sval +
-                                "! Value not in list of allowed values.");
-
-                        return entry_value<std::string>(sval, true);
+                        return check(entry_value<std::string>(sval, true));
                     };
 
                     bdf_types inline type() const override { return _type; }
@@ -639,10 +668,6 @@ namespace dnvgl {
                         std::string const &inp) const {
                         val = this->operator() (inp);
                     }
-
-                    void set_value(
-                        entry_value<std::string> &,
-                        const std::string *inp) const ;
 
                     std::string format(const void *v) const override {
                         if (!v)
@@ -731,6 +756,17 @@ namespace dnvgl {
                     };
 
                     bdf_types type() const override {return _type;};
+
+                    entry_value<std::list<int>> inline check(
+                        entry_value<std::list<int>> val) const {
+                        // if (!bounds.in_bounds(val.value)) {
+                        //     std::ostringstream msg("!", std::ostringstream::ate);
+                        //     msg << val.value
+                        //         << "! Value not in list of allowed range.";
+                        //     throw errors::list_error(name, msg.str());
+                        // }
+                        return val;
+                    }
 
                     void set_value(
                         entry_value<std::list<int> > &val,
@@ -1048,6 +1084,8 @@ namespace dnvgl {
 // mode: c++
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j7&&
+//   (make -C ../../cbuild test;
+//    ../../cbuild/tests/test_bdf_cards --use-colour no)"
 // coding:utf-8
 // End:

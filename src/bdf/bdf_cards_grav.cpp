@@ -165,6 +165,11 @@ void grav::collect_outdata(
         res.push_back(unique_ptr<format_entry>(format<long>(form_MB, MB)));
 }
 
+cards::__base::card const &grav::operator()(list<std::string> const &inp) {
+    this->grav::read(inp);
+    return *this;
+}
+
 // Local Variables:
 // mode: c++
 // coding: utf-8

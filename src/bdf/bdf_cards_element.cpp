@@ -29,6 +29,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem;
 using namespace bdf;
 
@@ -42,27 +44,30 @@ namespace {
     const long cl1 = 1;
 }
 
-bdf::types::card element::head = bdf::types::card("CBAR");
+bdf::types::card element::head = bdf::types::card("<INVALID>");
 
 const entry_type<long> element::form_EID("EID", bound<long>(&cl1));
 
-element::element(std::list<std::string> const &inp) :
+element::element(list<std::string> const &inp) :
 card(inp) {
     this->element::read(inp);
 }
 
-element::element(long const *EID) : card(), EID(EID) {}
+element::element(long const *EID) : card(), EID(EID) {
+    if (EID) form_EID.check(this->EID);
+}
 
 void element::operator() (long const *EID) {
     this->EID(EID);
+    if (EID) form_EID.check(this->EID);
 }
 
 void element::collect_outdata(
-    std::list<std::unique_ptr<format_entry> >&) const {
-    throw std::not_implemented(__FILE__, __LINE__, "can't write write generic ELEMENT.");
+    list<unique_ptr<format_entry> >&) const {
+    throw not_implemented(__FILE__, __LINE__, "can't write write generic ELEMENT.");
 }
 
-void element::read(std::list<std::string> const &inp) {
+void element::read(list<std::string> const &inp) {
     auto pos = inp.begin();
 
     if (inp.size() < 2)
@@ -74,6 +79,11 @@ void element::read(std::list<std::string> const &inp) {
 
 cards::types element::card_type() const {
     return types::ELEMENT;
+}
+
+cards::__base::card const &element::operator()(list<std::string> const &inp) {
+    this->element::read(inp);
+    return *this;
 }
 
 // Local Variables:

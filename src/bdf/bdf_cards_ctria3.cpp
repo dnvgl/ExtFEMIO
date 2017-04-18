@@ -220,7 +220,7 @@ finish:return;
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// make -C ../../cbuild -j7 &&
+// compile-command: "make -C ../../cbuild -j7 &&
 //    (make -C ../../cbuild test;
-//     ../../cbuild/tests/test_bdf_cards --use-colour no)
+//     ../../cbuild/tests/test_bdf_cards --use-colour no)"
 // End:

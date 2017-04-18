@@ -32,8 +32,11 @@ namespace {
     const double cd0 = 0., cd1 = 1., cd833 = .833333;
 }
 
+using namespace std;
+
 using namespace dnvgl::extfem;
-using namespace bdf::cards;
+using namespace bdf;
+using namespace cards;
 
 using bdf::types::entry_type;
 
@@ -119,13 +122,18 @@ void pshell::read(const std::list<std::string> &inp) {
     }
 }
 
-types pshell::card_type() const {
-    return types::PSHELL;
+cards::types pshell::card_type() const {
+    return cards::types::PSHELL;
 };
 
 void pshell::collect_outdata(
     std::list<std::unique_ptr<format_entry> > &res) const {
     throw std::not_implemented(__FILE__, __LINE__, "can't write PSHELL.");
+}
+
+cards::__base::card const &pshell::operator() (list<std::string> const &inp) {
+    this->pshell::read(inp);
+    return *this;
 }
 
 // Local Variables:

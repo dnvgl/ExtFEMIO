@@ -124,6 +124,12 @@ void cmass4::collect_outdata(
     return;
 }
 
+cards::__base::card const &cmass4::operator()(list<std::string> const &inp) {
+    this->element::read(inp);
+    this->cmass4::read(inp);
+    return *this;
+}
+
 // Local Variables:
 // mode: c++
 // coding: utf-8

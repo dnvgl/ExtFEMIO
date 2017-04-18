@@ -136,6 +136,8 @@ namespace dnvgl {
 
                     void read(std::list<std::string> const&) override;
 
+                    card const &operator() (const std::list<std::string> &) override;
+
                 private:
 
                     void collect_outdata(
@@ -402,6 +404,8 @@ namespace dnvgl {
 
                     void read(std::list<std::string> const &) override;
 
+                    card const &operator() (const std::list<std::string> &) override;
+
                 private:
 
                     void collect_outdata(
@@ -499,6 +503,8 @@ namespace dnvgl {
                     types card_type() const override;
 
                     void read(std::list<std::string> const &) override;
+
+                    card const &operator() (const std::list<std::string> &) override;
 
                 private:
 
@@ -628,6 +634,8 @@ namespace dnvgl {
 
                     void read(std::list<std::string> const &) override;
 
+                    card const &operator() (const std::list<std::string> &) override;
+
                 private:
 
                     void collect_outdata(
@@ -687,6 +695,8 @@ namespace dnvgl {
 
                     void read(std::list<std::string> const &) override;
 
+                    card const &operator() (const std::list<std::string> &) override;
+
                 private:
 
                     void collect_outdata(
@@ -743,6 +753,8 @@ namespace dnvgl {
                     types card_type() const override;
 
                     void read(std::list<std::string> const &) override;
+
+                    card const &operator() (const std::list<std::string> &) override;
 
                 private:
 

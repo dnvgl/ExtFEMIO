@@ -32,20 +32,22 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem;
 using namespace bdf;
 using namespace cards;
 
 namespace {
     void _stderr_report(std::string const &msg) {
-        std::cerr << msg << std::endl;
+        cerr << msg << endl;
     }
 
     void _stdout_report(std::string const &msg) {
-        std::cout << msg << std::endl;
+        cout << msg << endl;
     }
 
-    std::map<std::string, cards::types> const cardtype_map({
+    map<std::string, cards::types> const cardtype_map({
         {"GRID", cards::types::GRID},
         {"MAT1", cards::types::MAT1},
         {"CTRIA3", cards::types::CTRIA3},
@@ -172,7 +174,7 @@ void (*cards::warn_report)(std::string const &) = &_stderr_report;
 
 void (*cards::error_report)(std::string const &) = &_stderr_report;
 
-cards::__base::card::card(std::list<std::string> const &inp) {}
+cards::__base::card::card(list<std::string> const &inp) {}
 
 cards::__base::card::card() {}
 
@@ -180,25 +182,25 @@ cards::__base::card::~card() {}
 
 bdf::types::empty cards::__base::card::empty = bdf::types::empty();
 
-std::set<char> const cards::__base::card::free_form_cont({'+', '*', ','});
+set<char> const cards::__base::card::free_form_cont({'+', '*', ','});
 
 cards::__base::card const &cards::__base::card::operator() (
-    std::list<std::string> const &inp) {
+    list<std::string> const &inp) {
     this->read(inp);
     return *this;
 }
 
 std::string cards::__base::card::format_outlist(
-    std::list<std::unique_ptr<format_entry> > const &en) {
+    list<unique_ptr<format_entry> > const &en) {
 
     unsigned long i = 0;
-    std::ostringstream res("");
+    ostringstream res("");
 
     try {
         for (auto &p : en) {
             if (++i > 9) {
                 i = 2;
-                res << std::endl << bdf::types::card("").format(nullptr);
+                res << endl << bdf::types::card("").format(nullptr);
             }
             res << p->first->format(p->second);
         }
@@ -211,12 +213,12 @@ std::string cards::__base::card::format_outlist(
             if (++i > 5) {
                 lines += 1;
                 i = 2;
-                res << std::endl << bdf::types::card("").format(nullptr);
+                res << endl << bdf::types::card("").format(nullptr);
             }
             res << p->first->format(p->second);
         }
         if (!(lines%2))
-            res << std::endl << bdf::types::card("").format(nullptr);
+            res << endl << bdf::types::card("").format(nullptr);
         bdf::types::base::out_form = bdf::types::out_form_type::SHORT;
     }
     return res.str();
@@ -225,7 +227,7 @@ std::string cards::__base::card::format_outlist(
 bdf::types::card cards::__base::card::head = bdf::types::card("<DUMMY>");
 
 void cards::__base::card::card_split(
-    std::list<std::string> const &inp, std::list<std::string> &res) {
+    list<std::string> const &inp, list<std::string> &res) {
 
     res.clear();
 
@@ -274,10 +276,10 @@ void cards::__base::card::card_split(
                         tmp += string::string((pos)->substr(8)).trim("\t\n");
                 } else {
                     --pos;
-                    std::ostringstream msg(
+                    ostringstream msg(
                         "Long Field Format: Missing continuation line for record:\n",
-                        std::ostringstream::ate);
-                    for (auto l : inp) msg << "--> " << l << std::endl;
+                        ostringstream::ate);
+                    for (auto l : inp) msg << "--> " << l << endl;
                     (*warn_report)(msg.str());
                 }
                 tmp.resize(128, ' ');
@@ -299,96 +301,96 @@ void cards::__base::card::card_split(
     }
 }
 
-std::ostream &cards::__base::card::put(std::ostream &os) const {
+ostream &cards::__base::card::put(ostream &os) const {
 
-    std::list<std::unique_ptr<format_entry> > entries;
+    list<unique_ptr<format_entry> > entries;
 
     this->collect_outdata(entries);
 
     if (entries.size()>0)
-        os << this->format_outlist(entries) << std::endl;
+        os << this->format_outlist(entries) << endl;
 
     return os;
 }
 
 void cards::dispatch(
-    std::list<std::string> const &inp,
-    std::unique_ptr<__base::card> &res) {
+    list<std::string> const &inp,
+    unique_ptr<__base::card> &res) {
 
     res = nullptr;
 
     if (inp.empty()) {
-        res = std::make_unique<unknown>(inp);
+        res = make_unique<unknown>(inp);
         return;
     }
 
     try {
         switch (cardtype_map.at(inp.front())) {
         case types::GRID:
-            res = std::make_unique<grid>(inp);
+            res = make_unique<grid>(inp);
             break;
         case types::CTRIA3:
-            res = std::make_unique<ctria3>(inp);
+            res = make_unique<ctria3>(inp);
             break;
         case types::CQUAD4:
-            res = std::make_unique<cquad4>(inp);
+            res = make_unique<cquad4>(inp);
             break;
         case types::CBEAM:
-            res = std::make_unique<cbeam>(inp);
+            res = make_unique<cbeam>(inp);
             break;
         case types::CBAR:
-            res = std::make_unique<cbar>(inp);
+            res = make_unique<cbar>(inp);
             break;
         case types::CROD:
-            res = std::make_unique<crod>(inp);
+            res = make_unique<crod>(inp);
             break;
         case types::PSHELL:
-            res = std::make_unique<pshell>(inp);
+            res = make_unique<pshell>(inp);
             break;
         case types::PBEAM:
-            res = std::make_unique<pbeam>(inp);
+            res = make_unique<pbeam>(inp);
             break;
         case types::PBEAML:
-            res = std::make_unique<pbeaml>(inp);
+            res = make_unique<pbeaml>(inp);
             break;
         case types::PBAR:
-            res = std::make_unique<pbar>(inp);
+            res = make_unique<pbar>(inp);
             break;
         case types::PBARL:
-            res = std::make_unique<pbarl>(inp);
+            res = make_unique<pbarl>(inp);
             break;
         case types::PROD:
-            res = std::make_unique<prod>(inp);
+            res = make_unique<prod>(inp);
             break;
         case types::MAT1:
-            res = std::make_unique<mat1>(inp);
+            res = make_unique<mat1>(inp);
             break;
         case types::MAT2:
-            res = std::make_unique<mat2>(inp);
+            res = make_unique<mat2>(inp);
             break;
         case types::ENDDATA:
-            res = std::make_unique<enddata>(inp);
+            res = make_unique<enddata>(inp);
             break;
         case types::FORCE:
-            res = std::make_unique<force>(inp);
+            res = make_unique<force>(inp);
             break;
         case types::MOMENT:
-            res = std::make_unique<moment>(inp);
+            res = make_unique<moment>(inp);
             break;
         case types::CMASS2:
-            res = std::make_unique<cmass2>(inp);
+            res = make_unique<cmass2>(inp);
             break;
         case types::CMASS4:
-            res = std::make_unique<cmass4>(inp);
+            res = make_unique<cmass4>(inp);
             break;
         case types::GRAV:
-            res = std::make_unique<grav>(inp);
+            res = make_unique<grav>(inp);
             break;
         case types::LOAD:
-            res = std::make_unique<load>(inp);
+            res = make_unique<load>(inp);
             break;
         case types::PARAM:
-            res = std::make_unique<param>(inp);
+            res = make_unique<param>(inp);
             break;
             /// Elements only supported to allow counting.
         case types::CAABSF:
@@ -485,7 +487,7 @@ void cards::dispatch(
         case types::SPLINE3:
         case types::SPLINE4:
         case types::SPLINE5:
-            res = std::make_unique<__base::element>(inp);
+            res = make_unique<__base::element>(inp);
             break;
             /// These are not real card types, they can't be returned
         case types::UNKNOWN:
@@ -493,14 +495,14 @@ void cards::dispatch(
         case types::BAR_PROP:
         case types::BEAM_BASE:
         case types::CAXIFi:
-            res = std::make_unique<unknown>(inp);
+            res = make_unique<unknown>(inp);
         }
-    } catch (std::out_of_range) {
-        res = std::make_unique<unknown>(inp);
+    } catch (out_of_range) {
+        res = make_unique<unknown>(inp);
     }
 }
 
-unknown::unknown(std::list<std::string> const &inp) :
+unknown::unknown(list<std::string> const &inp) :
         card(inp), content(inp) {};
 
 cards::types unknown::card_type() const {
@@ -508,11 +510,16 @@ cards::types unknown::card_type() const {
 }
 
 void unknown::collect_outdata(
-    std::list<std::unique_ptr<format_entry> > &res) const {
+    list<std::unique_ptr<format_entry> > &res) const {
     throw errors::error("UNKNOWN", "can't write UNKNOWN.");
 }
 
-void unknown::read(std::list<std::string> const &inp) {
+void unknown::read(list<std::string> const &inp) {
+}
+
+cards::__base::card const &unknown::operator()(list<std::string> const &inp) {
+    this->unknown::read(inp);
+    return *this;
 }
 
 // Local Variables:

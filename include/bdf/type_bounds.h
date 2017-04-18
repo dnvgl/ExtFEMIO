@@ -141,7 +141,7 @@ namespace dnvgl {
                     bool is_allowed(const std::string probe) const {
                         if (allowed.size() == 0)
                             return true;
-                        return !(allowed.find(probe) == allowed.end());
+                        return (allowed.find(probe) != allowed.end());
                     }
 
                     std::string get_default() const {

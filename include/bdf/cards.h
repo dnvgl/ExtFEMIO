@@ -398,7 +398,7 @@ namespace dnvgl {
                         virtual void collect_outdata(
                             std::list<std::unique_ptr<format_entry> >&) const = 0;
 
-                        virtual card const &operator()(std::list<std::string> const &);
+                        virtual card const &operator()(std::list<std::string> const &) = 0;
 
                         virtual void read(std::list<std::string> const &) = 0;
 
@@ -449,7 +449,9 @@ namespace dnvgl {
 
                     types card_type() const override;
 
-                    virtual void read(const std::list<std::string> &inp) override;
+                    void read(const std::list<std::string> &inp) override;
+
+                    card const &operator()(std::list<std::string> const &) override;
 
                 private:
 
@@ -524,6 +526,8 @@ namespace dnvgl {
                     types card_type() const override;
 
                     void read(std::list<std::string> const &) override;
+
+                    card const &operator()(std::list<std::string> const &) override;
 
                 private:
 
@@ -762,8 +766,6 @@ namespace dnvgl {
                          double *SS=nullptr,
                          long *MCSID=nullptr);
 
-                    card const &operator() (const std::list<std::string> &) override;
-
                     card const &operator() (
                         long *MID, double *E, double *G, double *NU,
                         double *RHO=nullptr, double *A=nullptr,
@@ -778,6 +780,8 @@ namespace dnvgl {
                     types card_type() const override;
 
                     void read(std::list<std::string> const &) override;
+
+                    card const &operator()(std::list<std::string> const &) override;
 
                 private:
 
@@ -858,8 +862,6 @@ namespace dnvgl {
                          double *SS=nullptr,
                          long *MCSID=nullptr);
 
-                    card const &operator() (const std::list<std::string> &) override;
-
                     card const &operator() (
                         long *MID,
                         double *G11, double *G12, double *G13, double *G22,
@@ -874,6 +876,8 @@ namespace dnvgl {
                     types card_type() const override;
 
                     void read(std::list<std::string> const &) override;
+
+                    card const &operator()(std::list<std::string> const &) override;
 
                 private:
 
@@ -971,6 +975,8 @@ namespace dnvgl {
                     types card_type() const override;
 
                     void read(std::list<std::string> const &) override;
+
+                    card const &operator()(std::list<std::string> const &) override;
 
                 private:
 

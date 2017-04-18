@@ -33,6 +33,8 @@ namespace {
     const double dc0 = 0.;
 }
 
+using namespace std;
+
 using namespace dnvgl::extfem::bdf;
 
 using types::entry_type;
@@ -54,8 +56,8 @@ const entry_type<double> cbeam::form_BIT("BIT", bound<double>());
 const entry_type<std::string> cbeam::form_OFFT(
     "OFFT", bound<std::string>({
     "GGG", "BGG", "GGO", "BGO", "GOG", "BOG", "GOO", "BOO"}, "GGG"));
-const entry_type<std::list<int> > cbeam::form_PA("PA"); // maxelem=5, minval=1, maxval=6, uniq=True);
-const entry_type<std::list<int> > cbeam::form_PB("PB"); // maxelem=5, minval=1, maxval=6, uniq=True);
+const entry_type<list<int> > cbeam::form_PA("PA"); // maxelem=5, minval=1, maxval=6, uniq=True);
+const entry_type<list<int> > cbeam::form_PB("PB"); // maxelem=5, minval=1, maxval=6, uniq=True);
 const entry_type<double> cbeam::form_W1A(
     "W1A", bound<double>(nullptr, nullptr, &dc0)); // default=0.),
 const entry_type<double> cbeam::form_W2A(
@@ -73,7 +75,7 @@ const entry_type<long> cbeam::form_SA(
 const entry_type<long> cbeam::form_SB(
     "SB", bound<long>(&lc1, nullptr, nullptr, true)); // minval=1, default=None)
 
-cbeam::cbeam(std::list<std::string> const &inp) :
+cbeam::cbeam(list<std::string> const &inp) :
 element(inp) {
     this->cbeam::read(inp);
 }
@@ -82,7 +84,7 @@ cards::types cbeam::card_type() const {
     return types::CBEAM;
 }
 
-void cbeam::read(std::list<std::string> const &inp) {
+void cbeam::read(list<std::string> const &inp) {
     auto pos = inp.rbegin();
 
     form_SB.set_value(SB, "");
@@ -186,8 +188,14 @@ void cbeam::read(std::list<std::string> const &inp) {
 }
 
 void cbeam::collect_outdata(
-    std::list<std::unique_ptr<format_entry> > &res) const {
+    list<unique_ptr<format_entry> > &res) const {
     throw errors::error("CBEAM", "can't write CBEAM.");
+}
+
+cards::__base::card const &cbeam::operator()(list<std::string> const &inp) {
+    this->element::read(inp);
+    this->cbeam::read(inp);
+    return *this;
 }
 
 // Local Variables:

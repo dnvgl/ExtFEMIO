@@ -29,14 +29,15 @@ static char THIS_FILE[] = __FILE__;
 using namespace std;
 
 using namespace dnvgl::extfem;
-using namespace bdf::cards;
+using namespace bdf;
+using namespace cards;
 
 enddata::enddata(list<std::string> const &inp) :
 card(inp) {}
 
 enddata::enddata() : card() {}
 
-types enddata::card_type() const {
+cards::types enddata::card_type() const {
     return types::ENDDATA;
 }
 
@@ -48,6 +49,11 @@ void enddata::collect_outdata(
     list<unique_ptr<format_entry> > &res) const {
     res.push_back(unique_ptr<format_entry>(format(head)));
     return;
+}
+
+cards::__base::card const &enddata::operator()(list<std::string> const &inp) {
+    this->enddata::read(inp);
+    return *this;
 }
 
 // Local Variables:

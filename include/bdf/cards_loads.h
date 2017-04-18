@@ -71,6 +71,8 @@ namespace dnvgl {
 
                         void read(std::list<std::string> const &) override;
 
+                        card const &operator() (const std::list<std::string> &) override;
+
                         momforce();
 
                         momforce(std::list<std::string> const &inp);
@@ -306,6 +308,8 @@ Defines a scalar mass element without reference to a property entry.
 
                     void read(std::list<std::string> const &) override;
 
+                    card const &operator() (const std::list<std::string> &) override;
+
                 private:
 
                     void collect_outdata(
@@ -396,6 +400,8 @@ reference to a property entry.
                     types card_type() const override;
 
                     void read(std::list<std::string> const &) override;
+
+                    card const &operator() (const std::list<std::string> &) override;
 
                 private:
 
@@ -548,6 +554,8 @@ Defines acceleration vectors for gravity or other acceleration loading.
 
                     void read(std::list<std::string> const &) override;
 
+                    card const &operator() (const std::list<std::string> &) override;
+
                 private:
 
                     void collect_outdata(
@@ -614,6 +622,8 @@ Defines a static load as a linear combination of load std::sets defined via
                     types card_type() const override;
 
                     void read(std::list<std::string> const &) override;
+
+                    card const &operator() (const std::list<std::string> &) override;
 
                 private:
 

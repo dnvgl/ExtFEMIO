@@ -31,8 +31,11 @@ namespace {
     double const cd0 = 0.;
 }
 
+using namespace std;
+
 using namespace dnvgl::extfem;
-using namespace bdf::cards;
+using namespace bdf;
+using namespace cards;
 using bdf::types::entry_type;;
 
 entry_type<double> const pbar::form_A(
@@ -77,12 +80,12 @@ entry_type<double> const pbar::form_I12(
     "I12", bdf::type_bounds::bound<double>(
     nullptr, nullptr, &cd0));
 
-pbar::pbar(std::list<std::string> const &inp) :
+pbar::pbar(list<std::string> const &inp) :
 bar_prop(inp) {
     this->pbar::read(inp);
 }
 
-void pbar::read(std::list<std::string> const &inp) {
+void pbar::read(list<std::string> const &inp) {
 
     auto pos = inp.rbegin();
 
@@ -163,13 +166,18 @@ void pbar::read(std::list<std::string> const &inp) {
     }
 }
 
-types pbar::card_type() const {
-    return types::PBAR;
+cards::types pbar::card_type() const {
+    return cards::types::PBAR;
 };
 
 void pbar::collect_outdata(
-    std::list<std::unique_ptr<format_entry> > &res) const {
-    throw std::not_implemented(__FILE__, __LINE__, "can't write PBAR.");
+    list<unique_ptr<format_entry> > &res) const {
+    throw not_implemented(__FILE__, __LINE__, "can't write PBAR.");
+}
+
+cards::__base::card const &pbar::operator() (list<std::string> const &inp) {
+    this->pbar::read(inp);
+    return *this;
 }
 
 // Local Variables:

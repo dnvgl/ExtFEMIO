@@ -25,6 +25,7 @@ namespace {
 #endif
 
 #include "bdf/cards.h"
+#include "bdf/errors.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
@@ -35,13 +36,21 @@ static char THIS_FILE[] = __FILE__;
 using namespace std;
 
 using namespace dnvgl::extfem::bdf;
-using namespace dnvgl::extfem::bdf::cards;
+using namespace cards;
+
+CATCH_TRANSLATE_EXCEPTION(std::exception& ex) {
+    return ex.what();
+}
+
+CATCH_TRANSLATE_EXCEPTION(errors::error& ex) {
+    return ex.what();
+}
 
 TEST_CASE("BDF CBAR definitions. (Small Field Format)", "[bdf_cbar]" ) {
 
     std::list<std::string> data({
-            "CBAR    7869    104010  76      153     0.0     66.5206 997.785 \n",
-                "                        0.0     -22.617 -339.25 0.0     -22.617 \n"});
+         "CBAR    7869    104010  76      153     0.0     66.5206 997.785 \n",
+         "                        0.0     -22.617 -339.25 0.0     -22.617 \n"});
     std::list<std::string> lines;
     __base::card::card_split(data, lines);
     cbar probe(lines);
@@ -69,99 +78,341 @@ TEST_CASE("BDF CBAR definitions. (Small Field Format)", "[bdf_cbar]" ) {
     }
 }
 
-TEST_CASE("BDF CBAR definitions. (Small Field Format), dircode",
-          "[bdf_cbar,dcode]" ) {
+TEST_CASE("Roundtrip test 1 (dir code).", "[bdf_cbar_roundtrip_1]") {
 
-    std::list<std::string> data({
-            "CBAR    7869    104010  76      153      13                     GOO     \n",
-                "                        0.0     -22.617 -339.25 0.0     -22.617 "});
-    std::list<std::string> lines;
-    __base::card::card_split(data, lines);
-    cbar probe(lines);
+    std::stringstream test;
 
-    SECTION("dir code cbar") {
-        CHECK((long)probe.EID == 7869);
-        CHECK((long)probe.PID == 104010);
-        CHECK(probe.GA.value == 76);
-        CHECK(probe.GB.value == 153);
-        CHECK(probe.G0.value == 13);
-        CHECK_FALSE(probe.X1);
-        CHECK_FALSE(probe.X2);
-        CHECK_FALSE(probe.X3);
-        CHECK(probe.choose_dir_code == cbar::CHOOSE_DIR_CODE::has_DCODE);
-        CHECK(probe.OFFT == "GOO");
-        std::list<int> p_ref;
-        CHECK(probe.PA.value == p_ref);
-        CHECK(probe.PB.value == p_ref);
-        CHECK(probe.W1A.value == 0.);
-        CHECK(probe.W2A.value == -22.617);
-        CHECK(probe.W3A.value == -339.25);
-        CHECK(probe.W1B.value == 0.);
-        CHECK(probe.W2B.value == -22.617);
-        CHECK(probe.W3B.value == 0.);
-    }
-}
+    long EID(1), PID(2), GA(3), GB(4), G0(5);
 
-TEST_CASE("BDF CBAR types output.", "[bdf_cbar,out]") {
+    cbar probe(&EID, &PID, &GA, &GB, &G0);
+    test << probe;
 
-    std::ostringstream test;
-
-    SECTION("dir code") {
-        long EID(1), PID(2), GA(3), GB(4), G0(5);
-
-        cbar probe(&EID, &PID, &GA, &GB, &G0);
-        test << probe;
+    SECTION("check output") {
         CHECK(test.str() ==
               "CBAR           1       2       3       4       5\n");
     }
 
-    SECTION("QRG sample 1") {
-        long EID(2), PID(39), GA(7), GB(3);
-        double X1(.6), X2(18), X3(26);
-        std::string OFFT("EEG");
+    SECTION("check reading") {
+        std::list<std::string> data;
+        std::list<std::string> lines;
+        std::string tmp;
+        std::istringstream raw(test.str());
 
-        cbar probe(&EID, &PID, &GA, &GB, &X1, &X2, &X3, &OFFT);
-        probe.PB.is_value = true;
-        probe.PB.value.assign({5, 1, 3});
-        test << probe;
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        __base::card::card_split(data, lines);
+        cbar probe(lines);
+
+        CHECK(probe.EID.value == 1);
+        CHECK(probe.PID.value == 2);
+        CHECK(probe.GA.value == 3);
+        CHECK(probe.GB.value == 4);
+        CHECK(probe.G0.value == 5);
+    }
+}
+
+TEST_CASE("Roundtrip test 1 (dir code) (reuse).", "[bdf_cbar_roundtrip_1_reuse]") {
+
+    std::stringstream test;
+
+    long EID(1), PID(2), GA(3), GB(4), G0(5);
+
+    cbar probe;
+    probe(&EID, &PID, &GA, &GB, &G0);
+    test << probe;
+
+    SECTION("check output") {
         CHECK(test.str() ==
-              "CBAR           2      39       7       36.000-011.800+012.600+01EEG     \n"
+              "CBAR           1       2       3       4       5\n");
+    }
+
+    SECTION("check reading") {
+        std::list<std::string> data;
+        std::list<std::string> lines;
+        std::string tmp;
+        std::istringstream raw(test.str());
+        cbar probe;
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        __base::card::card_split(data, lines);
+        probe(lines);
+
+        CHECK(probe.EID.value == 1);
+        CHECK(probe.PID.value == 2);
+        CHECK(probe.GA.value == 3);
+        CHECK(probe.GB.value == 4);
+        CHECK(probe.G0.value == 5);
+    }
+}
+
+TEST_CASE("Roundtrip test (QRG sample 1)", "[bdf_cbar_roundtrip_2]"){
+
+    std::ostringstream test;
+
+    long EID(2), PID(39), GA(7), GB(3);
+    double X1(.6), X2(18), X3(26);
+    std::string OFFT("GGO");
+
+    cbar probe(&EID, &PID, &GA, &GB, &X1, &X2, &X3, &OFFT);
+    probe.PB.is_value = true;
+    probe.PB.value.assign({5, 1, 3});
+    test << probe;
+
+    SECTION("check output") {
+        CHECK(test.str() ==
+              "CBAR           2      39       7       36.000-011.800+012.600+01GGO     \n"
               "                     513\n");
     }
 
-    SECTION("QRG sample 1 (long)") {
-        long EID(2), PID(39), GA(7), GB(3);
-        double X1(.6), X2(18), X3(1234.5);
-        std::string OFFT("EEG");
-        list<int> PB{5, 1, 3};
+    SECTION("check reading") {
+        std::list<std::string> data;
+        std::list<std::string> lines;
+        std::string tmp;
+        std::istringstream raw(test.str());
 
-        cbar probe(&EID, &PID, &GA, &GB, &X1, &X2, &X3, &OFFT, nullptr, &PB);
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        __base::card::card_split(data, lines);
+        cbar probe(lines);
 
-        test << probe;
+        CHECK(probe.EID.value == 2);
+        CHECK(probe.PID.value == 39);
+        CHECK(probe.GA.value == 7);
+        CHECK(probe.GB.value == 3);
+        CHECK(probe.X1.value == .6);
+        CHECK(probe.X2.value == 18);
+        CHECK(probe.X3.value == 26);
+        CHECK(probe.OFFT.value == "GGO");
+    }
+}
+
+TEST_CASE("Roundtrip test (QRG sample 1) (reuse)", "[bdf_cbar_roundtrip_2_reuse]"){
+
+    std::ostringstream test;
+
+    long EID(2), PID(39), GA(7), GB(3);
+    double X1(.6), X2(18), X3(26);
+    std::string OFFT("GGO");
+
+    cbar probe;
+    probe(&EID, &PID, &GA, &GB, &X1, &X2, &X3, &OFFT);
+    probe.PB.is_value = true;
+    probe.PB.value.assign({5, 1, 3});
+    test << probe;
+
+    SECTION("check output") {
         CHECK(test.str() ==
+              "CBAR           2      39       7       36.000-011.800+012.600+01GGO     \n"
+              "                     513\n");
+    }
+
+    SECTION("check reading") {
+        std::list<std::string> data;
+        std::list<std::string> lines;
+        std::string tmp;
+        std::istringstream raw(test.str());
+        cbar probe;
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        __base::card::card_split(data, lines);
+        probe(lines);
+
+        CHECK(probe.EID.value == 2);
+        CHECK(probe.PID.value == 39);
+        CHECK(probe.GA.value == 7);
+        CHECK(probe.GB.value == 3);
+        CHECK(probe.X1.value == .6);
+        CHECK(probe.X2.value == 18);
+        CHECK(probe.X3.value == 26);
+        CHECK(probe.OFFT.value == "GGO");
+    }
+}
+
+TEST_CASE("Roundtrip test (QRG sample 1 (long))", "[bdf_cbar_roundtrip_3]") {
+
+    std::ostringstream test;
+
+    long EID(2), PID(39), GA(7), GB(3);
+    double X1(.6), X2(18), X3(1234.5);
+    std::string OFFT("GGO");
+    list<int> PB{5, 1, 3};
+
+    cbar probe(&EID, &PID, &GA, &GB, &X1, &X2, &X3, &OFFT, nullptr, &PB);
+
+    test << probe;
+
+    SECTION("check output") {
+            CHECK(test.str() ==
               "CBAR*                  2              39               7               3\n"
-              "*       6.00000000000-011.80000000000+011.23450000000+03EEG             \n"
+              "*       6.00000000000-011.80000000000+011.23450000000+03GGO             \n"
               "*                                    513\n"
               "*       \n");
     }
 
-    SECTION("dir code all elements") {
-        long EID(1), PID(2), GA(3), GB(4), G0(5);
+    SECTION("check reading") {
+        std::list<std::string> data;
+        std::list<std::string> lines;
+        std::string tmp;
+        std::istringstream raw(test.str());
 
-        cbar probe(&EID, &PID, &GA, &GB, &G0);
-        probe.W3B = 2.;
-        test << probe;
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        __base::card::card_split(data, lines);
+        cbar probe(lines);
+
+        CHECK(probe.EID.value == 2);
+        CHECK(probe.PID.value == 39);
+        CHECK(probe.GA.value == 7);
+        CHECK(probe.GB.value == 3);
+        CHECK(probe.X1.value == .6);
+        CHECK(probe.X2.value == 18);
+        CHECK(probe.X3.value == 1234.5);
+        CHECK(probe.OFFT.value == "GGO");
+        CHECK(probe.PB == list<int>({5, 1, 3}));
+    }
+}
+
+TEST_CASE("Roundtrip test (QRG sample 1 (long)) (reuse)", "[bdf_cbar_roundtrip_3_reuse]") {
+
+    std::ostringstream test;
+
+    long EID(2), PID(39), GA(7), GB(3);
+    double X1(.6), X2(18), X3(1234.5);
+    std::string OFFT("GGO");
+    list<int> PB{5, 1, 3};
+
+    cbar probe;
+    probe(&EID, &PID, &GA, &GB, &X1, &X2, &X3, &OFFT, nullptr, &PB);
+
+    test << probe;
+
+    SECTION("check output") {
+            CHECK(test.str() ==
+              "CBAR*                  2              39               7               3\n"
+              "*       6.00000000000-011.80000000000+011.23450000000+03GGO             \n"
+              "*                                    513\n"
+              "*       \n");
+    }
+
+    SECTION("check reading") {
+        std::list<std::string> data;
+        std::list<std::string> lines;
+        std::string tmp;
+        std::istringstream raw(test.str());
+        cbar probe;
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        __base::card::card_split(data, lines);
+        probe(lines);
+
+        CHECK(probe.EID.value == 2);
+        CHECK(probe.PID.value == 39);
+        CHECK(probe.GA.value == 7);
+        CHECK(probe.GB.value == 3);
+        CHECK(probe.X1.value == .6);
+        CHECK(probe.X2.value == 18);
+        CHECK(probe.X3.value == 1234.5);
+        CHECK(probe.OFFT.value == "GGO");
+        CHECK(probe.PB == list<int>({5, 1, 3}));
+    }
+}
+
+TEST_CASE("Roundtrip test (dir code all elements)", "[bdf_cbar_roundtrip_4]") {
+
+    std::ostringstream test;
+
+    long EID(1), PID(2), GA(3), GB(4), G0(5);
+    double W3B{2.};
+
+    cbar probe(&EID, &PID, &GA, &GB, &G0,
+               nullptr, nullptr, nullptr, nullptr,
+               nullptr, nullptr, nullptr, nullptr,
+                &W3B);
+    test << probe;
+
+    SECTION("check output") {
         CHECK(test.str() ==
               "CBAR           1       2       3       4       5                        \n"
               "                         0.00+00 0.00+00 0.00+00 0.00+00 0.00+002.000+00\n");
     }
 
-    SECTION("dir code all large") {
-        long EID(123456789), PID(2), GA(3), GB(4), G0(5);
+    SECTION("check reading") {
+        std::list<std::string> data;
+        std::list<std::string> lines;
+        std::string tmp;
+        std::istringstream raw(test.str());
 
-        cbar probe(&EID, &PID, &GA, &GB, &G0);
-        probe.W3B = 2.;
-        test << probe;
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        __base::card::card_split(data, lines);
+        cbar probe(lines);
+
+        CHECK(probe.EID.value == 1);
+        CHECK(probe.PID.value == 2);
+        CHECK(probe.GA.value == 3);
+        CHECK(probe.GB.value == 4);
+        CHECK(probe.G0.value == 5);
+        CHECK(probe.W3B.value == 2.);
+    }
+}
+
+TEST_CASE("Roundtrip test (dir code all elements) (reuse)",
+          "[bdf_cbar_roundtrip_4_reuse]") {
+
+    std::ostringstream test;
+
+    long EID(1), PID(2), GA(3), GB(4), G0(5);
+    double W3B{2.};
+
+    cbar probe(&EID, &PID, &GA, &GB, &G0,
+               nullptr, nullptr, nullptr, nullptr,
+               nullptr, nullptr, nullptr, nullptr,
+               &W3B);
+    test << probe;
+
+    SECTION("check output") {
+        CHECK(test.str() ==
+              "CBAR           1       2       3       4       5                        \n"
+              "                         0.00+00 0.00+00 0.00+00 0.00+00 0.00+002.000+00\n");
+    }
+
+    SECTION("check reading") {
+        std::list<std::string> data;
+        std::list<std::string> lines;
+        std::string tmp;
+        std::istringstream raw(test.str());
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        __base::card::card_split(data, lines);
+        cbar probe(lines);
+
+        CHECK(probe.EID.value == 1);
+        CHECK(probe.PID.value == 2);
+        CHECK(probe.GA.value == 3);
+        CHECK(probe.GB.value == 4);
+        CHECK(probe.G0.value == 5);
+        CHECK(probe.W3B.value == 2.);
+    }
+}
+
+TEST_CASE("Roundtrip test (dir code all elements) (large)",
+          "[bdf_cbar_roundtrip_5]") {
+
+    std::ostringstream test;
+    long EID(123456789), PID(2), GA(3), GB(4), G0(5);
+    double W3B{2.};
+
+    cbar probe(&EID, &PID, &GA, &GB, &G0,
+               nullptr, nullptr, nullptr, nullptr,
+               nullptr, nullptr, nullptr, nullptr,
+               &W3B);
+    test << probe;
+
+    SECTION("check output") {
         CHECK(test.str() ==
               // 34567!123456789012345!123456789012345!123456789012345!123456789012345!
               "CBAR*          123456789               2               3               4\n"
@@ -170,12 +421,87 @@ TEST_CASE("BDF CBAR types output.", "[bdf_cbar,out]") {
               "*        0.0000000000+00 0.0000000000+00 0.0000000000+002.00000000000+00\n");
     }
 
-    SECTION("dir code all large (ptr)") {
-        long EID(123456789), PID(2), GA(3), GB(4), G0(5);
+    SECTION("check reading") {
+        std::list<std::string> data;
+        std::list<std::string> lines;
+        std::string tmp;
+        std::istringstream raw(test.str());
 
-        __base::card *probe = new cbar(&EID, &PID, &GA, &GB, &G0);
-        static_cast<cbar*>(probe)->W3B = 2.;
-        test << *probe;
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        __base::card::card_split(data, lines);
+        cbar probe(lines);
+
+        CHECK(probe.EID.value == 123456789);
+        CHECK(probe.PID.value == 2);
+        CHECK(probe.GA.value == 3);
+        CHECK(probe.GB.value == 4);
+        CHECK(probe.G0.value == 5);
+        CHECK(probe.W3B.value == 2.);
+
+    }
+}
+
+TEST_CASE("Roundtrip test (dir code all elements) (large) (reuse)",
+          "[bdf_cbar_roundtrip_5_reuse]") {
+
+    std::ostringstream test;
+    long EID(123456789), PID(2), GA(3), GB(4), G0(5);
+    double W3B{2.};
+
+    cbar probe;
+    probe(&EID, &PID, &GA, &GB, &G0,
+               nullptr, nullptr, nullptr, nullptr,
+               nullptr, nullptr, nullptr, nullptr,
+               &W3B);
+    test << probe;
+
+    SECTION("check output") {
+        CHECK(test.str() ==
+              // 34567!123456789012345!123456789012345!123456789012345!123456789012345!
+              "CBAR*          123456789               2               3               4\n"
+              "*                      5                                                \n"
+              "*                                        0.0000000000+00 0.0000000000+00\n"
+              "*        0.0000000000+00 0.0000000000+00 0.0000000000+002.00000000000+00\n");
+    }
+
+    SECTION("check reading") {
+        std::list<std::string> data;
+        std::list<std::string> lines;
+        std::string tmp;
+        std::istringstream raw(test.str());
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        __base::card::card_split(data, lines);
+        cbar probe;
+        probe(lines);
+
+        CHECK(probe.EID.value == 123456789);
+        CHECK(probe.PID.value == 2);
+        CHECK(probe.GA.value == 3);
+        CHECK(probe.GB.value == 4);
+        CHECK(probe.G0.value == 5);
+        CHECK(probe.W3B.value == 2.);
+
+    }
+}
+
+TEST_CASE("Roundtrip test dir code all large (ptr)", "[bdf_cbar_roundtrip_6]") {
+
+    std::ostringstream test;
+
+    long EID(123456789), PID(2), GA(3), GB(4), G0(5);
+    double W3B{2.};
+
+    __base::card *probe = new cbar(
+        &EID, &PID, &GA, &GB, &G0,
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr, nullptr, nullptr,
+        &W3B);
+    test << *probe;
+
+    SECTION("check output") {
         CHECK(test.str() ==
               // 34567!123456789012345!123456789012345!123456789012345!123456789012345!
               "CBAR*          123456789               2               3               4\n"
@@ -184,82 +510,92 @@ TEST_CASE("BDF CBAR types output.", "[bdf_cbar,out]") {
               "*        0.0000000000+00 0.0000000000+00 0.0000000000+002.00000000000+00\n");
         delete probe;
     }
+
+    SECTION("check reading") {
+        std::list<std::string> data;
+        std::list<std::string> lines;
+        std::string tmp;
+        std::istringstream raw(test.str());
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        __base::card::card_split(data, lines);
+        __base::card *probe = new cbar(lines);
+
+        CHECK(static_cast<cbar*>(probe)->EID.value == 123456789);
+        CHECK(static_cast<cbar*>(probe)->PID.value == 2);
+        CHECK(static_cast<cbar*>(probe)->GA.value == 3);
+        CHECK(static_cast<cbar*>(probe)->GB.value == 4);
+        CHECK(static_cast<cbar*>(probe)->G0.value == 5);
+        CHECK(static_cast<cbar*>(probe)->W3B.value == 2.);
+    }
 }
 
-TEST_CASE("BDF CBAR types output my reuse instance.", "[bdf_cbar,out]") {
+TEST_CASE("Roundtrip test dir code all large (ptr) (reuse)",
+          "[bdf_cbar_roundtrip_6_reuse]") {
 
     std::ostringstream test;
 
-    SECTION("dir code reuse") {
-        long EID(1), PID(2), GA(3), GB(4), G0(5);
+    long EID(123456789), PID(2), GA(3), GB(4), G0(5);
+    double W3B{2.};
 
-        cbar probe;
-        test << probe(&EID, &PID, &GA, &GB, &G0);
-        CHECK(test.str() ==
-              "CBAR           1       2       3       4       5\n");
-    }
+    __base::card *probe = new cbar;
+    (*static_cast<cbar*>(probe))(&EID, &PID, &GA, &GB, &G0,
+        nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr, nullptr, nullptr,
+        &W3B);
+    test << *probe;
 
-    SECTION("QRG sample 1 reuse") {
-        long EID(2), PID(39), GA(7), GB(3);
-        double X1(.6), X2(18), X3(26);
-        std::string OFFT("EEG");
-        list<int> PB{5, 1, 3};
-
-        cbar probe;
-        test << probe(&EID, &PID, &GA, &GB, &X1, &X2, &X3, &OFFT, nullptr, &PB);
-        CHECK(test.str() ==
-              "CBAR           2      39       7       36.000-011.800+012.600+01EEG     \n"
-              "                     513\n");
-    }
-
-    SECTION("QRG sample 1 (long) reuse") {
-        long EID(2), PID(39), GA(7), GB(3);
-        double X1(.6), X2(18), X3(1234.5);
-        std::string OFFT("EEG");
-        list<int> PB{5, 1, 3};
-
-        cbar probe;
-
-        test << probe(&EID, &PID, &GA, &GB, &X1, &X2, &X3, &OFFT, nullptr, &PB);
-        CHECK(test.str() ==
-              "CBAR*                  2              39               7               3\n"
-              "*       6.00000000000-011.80000000000+011.23450000000+03EEG             \n"
-              "*                                    513\n"
-              "*       \n");
-    }
-
-    SECTION("dir code all elements reuse") {
-        long EID(1), PID(2), GA(3), GB(4), G0(5);
-        double W3B{2.};
-
-        cbar probe;
-        test << probe(&EID, &PID, &GA, &GB, &G0,
-                      nullptr, nullptr, nullptr, nullptr,
-                      nullptr, nullptr, nullptr, nullptr,
-                      &W3B);
-        CHECK(test.str() ==
-              "CBAR           1       2       3       4       5                        \n"
-              "                         0.00+00 0.00+00 0.00+00 0.00+00 0.00+002.000+00\n");
-    }
-
-    SECTION("dir code all large reuse") {
-        long EID(123456789), PID(2), GA(3), GB(4), G0(5);
-        double W3B{2.};
-
-        cbar probe;
-        test << probe(&EID, &PID, &GA, &GB, &G0,
-                      nullptr, nullptr, nullptr, nullptr,
-                      nullptr, nullptr, nullptr, nullptr,
-                      &W3B);
+    SECTION("check output") {
         CHECK(test.str() ==
               // 34567!123456789012345!123456789012345!123456789012345!123456789012345!
               "CBAR*          123456789               2               3               4\n"
               "*                      5                                                \n"
               "*                                        0.0000000000+00 0.0000000000+00\n"
               "*        0.0000000000+00 0.0000000000+00 0.0000000000+002.00000000000+00\n");
+        delete probe;
+    }
+
+    SECTION("check reading") {
+        std::list<std::string> data;
+        std::list<std::string> lines;
+        std::string tmp;
+        std::istringstream raw(test.str());
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        __base::card::card_split(data, lines);
+        __base::card *probe = new cbar;
+        (*static_cast<cbar*>(probe))(lines);
+
+        CHECK(static_cast<cbar*>(probe)->EID.value == 123456789);
+        CHECK(static_cast<cbar*>(probe)->PID.value == 2);
+        CHECK(static_cast<cbar*>(probe)->GA.value == 3);
+        CHECK(static_cast<cbar*>(probe)->GB.value == 4);
+        CHECK(static_cast<cbar*>(probe)->G0.value == 5);
+        CHECK(static_cast<cbar*>(probe)->W3B.value == 2.);
     }
 }
 
+TEST_CASE("Error conditions (Wrong OFFT error)", "[bdf_cbar_error_1]") {
+
+    long EID(2), PID(39), GA(7), GB(3);
+    double X1(.6), X2(18), X3(26);
+    std::string OFFT("EEG");
+
+    SECTION("create instance") {
+
+        CHECK_THROWS_AS(cbar(&EID, &PID, &GA, &GB, &X1, &X2, &X3, &OFFT),
+                        errors::str_error);
+    }
+
+    SECTION("reuse instance") {
+        cbar probe;
+
+        CHECK_THROWS_AS(probe(&EID, &PID, &GA, &GB, &X1, &X2, &X3, &OFFT),
+                        errors::str_error);
+    }
+}
 
 // Local Variables:
 // mode: c++

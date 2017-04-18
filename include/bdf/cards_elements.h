@@ -41,7 +41,11 @@ namespace dnvgl {
 
                         void collect_outdata(std::list<std::unique_ptr<format_entry> >&) const override;
                         void read(std::list<std::string> const &) override;
+
+                        card const &operator() (const std::list<std::string> &) override;
+
                         types card_type() const override;
+
                     public:
                         /** Element identification number. (Integer > 0)
                          */
@@ -204,8 +208,9 @@ namespace dnvgl {
                             double const *T1, double const *T2,
                             double const *T3, double const *T4);
 
-                        using card::put;
-                        using card::read;
+                        using element::put;
+                        using element::read;
+                        using element::operator();
                     };
                 }
                 /// Handle Nastran Bulk `CTRIA3` entries.
@@ -251,9 +256,9 @@ namespace dnvgl {
 
                     void read(std::list<std::string> const&) override;
 
-                    types card_type() const override;
+                    card const &operator() (const std::list<std::string> &) override;
 
-                    card const &operator() (std::list<std::string> const&) override;
+                    types card_type() const override;
 
                     card const &operator() (
                         long const *EID, long const *PID,
@@ -324,11 +329,11 @@ namespace dnvgl {
 
                     void read(std::list<std::string> const&) override;
 
+                    card const &operator() (const std::list<std::string> &) override;
+
                     types card_type() const override;
 
-                    __base::card const &operator() (std::list<std::string> const&) override;
-
-                    __base::card const &operator() (
+                    card const &operator() (
                         long const *EID, long const *PID,
                         long const *G1, long const *G2,
                         long const *G3, long const *G4,
@@ -338,7 +343,7 @@ namespace dnvgl {
                         double const *T1=nullptr, double const *T2=nullptr,
                         double const *T3=nullptr, double const *T4=nullptr) override;
 
-                    __base::card const &operator() (
+                    card const &operator() (
                         long const *EID, long const *PID,
                         long const *G1, long const *G2,
                         long const *G3, long const *G4,
@@ -556,6 +561,8 @@ namespace dnvgl {
                     types card_type() const override;;
 
                     void read(std::list<std::string> const&) override;
+
+                    card const &operator() (const std::list<std::string> &) override;
 
                     card const &operator() (
                         long const *EID, long const *PID,
@@ -824,6 +831,8 @@ namespace dnvgl {
 
                     void read(std::list<std::string> const &) override;
 
+                    card const &operator() (const std::list<std::string> &) override;
+
                     /**
                      * \brief Returns instance with new values.
                      * \param EID
@@ -939,6 +948,8 @@ namespace dnvgl {
                     types card_type() const override;;
 
                     void read(std::list<std::string> const &) override;
+
+                    card const &operator() (const std::list<std::string> &) override;
 
                     /**
                      * \brief Return instance with changed values.

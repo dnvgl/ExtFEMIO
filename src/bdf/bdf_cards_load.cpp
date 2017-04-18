@@ -136,6 +136,12 @@ void load::collect_outdata(
     return;
 }
 
+cards::__base::card const &cards::load::operator() (
+    list<std::string> const &inp) {
+    this->load::read(inp);
+    return *this;
+}
+
 // Local Variables:
 // mode: c++
 // coding: utf-8
