@@ -34,18 +34,8 @@ static char THIS_FILE[] = __FILE__;
 using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::cards;
 
-namespace {
-    std::string err_msg;
-
-    void _warn_res(const std::string &msg) {
-        err_msg = msg;
-    }
-}
-
-TEST_CASE("BDF MAT2 definitions. (Free Field Format)",
+TEST_CASE("BDF MAT2 definitions. (Free Field Format) first",
           "[bdf_mat2]") {
-
-    warn_report = &_warn_res;
 
     SECTION("first mat2") {
         std::list<std::string> data({
@@ -74,6 +64,20 @@ TEST_CASE("BDF MAT2 definitions. (Free Field Format)",
         CHECK((double)probe.SS == 16.);
         CHECK((long)probe.MCSID == 17);
     }
+}
+
+namespace {
+    std::string err_msg;
+
+    void _warn_res(const std::string &msg) {
+        err_msg = msg;
+    }
+}
+
+TEST_CASE("BDF MAT2 definitions. (FEMIO-3)",
+          "[bdf_mat_FEMIO_3]") {
+
+    warn_report = &_warn_res;
 
     SECTION("FEMIO-3") {
         std::list<std::string> data({
@@ -114,74 +118,139 @@ TEST_CASE("BDF MAT2 definitions. (Free Field Format)",
     }
 }
 
-TEST_CASE("BDF MAT2 output.", "[bdf_mat1,out]") {
+TEST_CASE("BDF MAT2 roundtrio test 1.", "[bdf_mat2_roundtrip_1]") {
 
     std::ostringstream test;
 
-    SECTION("test reuse 1") {
-        long MID{1};
-        double G11{2.};
-        double G12{3.};
-        double G13{4.};
-        double G22{5.};
-        double G23{6.};
-        double G33{7.};
-        double RHO{8.};
-        double A1{9.};
-        double A2{10.};
-        double A3{11.};
-        double TREF{12.};
-        double GE{13.};
-        double ST{14.};
-        double SC{15.};
-        double SS{16.};
-        long MCSID{17};
+    long MID{1};
+    double G11{2.};
+    double G12{3.};
+    double G13{4.};
+    double G22{5.};
+    double G23{6.};
+    double G33{7.};
+    double RHO{8.};
+    double A1{9.};
+    double A2{10.};
+    double A3{11.};
+    double TREF{12.};
+    double GE{13.};
+    double ST{14.};
+    double SC{15.};
+    double SS{16.};
+    long MCSID{17};
 
-        mat2 probe(&MID, &G11, &G12, &G13, &G22, &G23, &G33, &RHO,
-                   &A1, &A2, &A3, &TREF, &GE, &ST, &SC, &SS,
-                   &MCSID);
-        test << probe;
+    mat2 probe(&MID, &G11, &G12, &G13, &G22, &G23, &G33, &RHO,
+               &A1, &A2, &A3, &TREF, &GE, &ST, &SC, &SS,
+               &MCSID);
+    test << probe;
+
+    SECTION("check output") {
         CHECK(test.str() ==
               "MAT2           12.000+003.000+004.000+005.000+006.000+007.000+008.000+00\n"
               "        9.000+001.000+011.100+011.200+011.300+011.400+011.500+011.600+01\n"
               "              17\n");
     }
+
+    SECTION("check reading") {
+        std::list<std::string> data;
+        std::list<std::string> lines;
+        std::string tmp;
+        std::istringstream raw(test.str());
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        __base::card::card_split(data, lines);
+        mat2 probe(lines);
+
+        CHECK(probe.MID.value == 1);
+        CHECK(probe.G11.value == 2.);
+        CHECK(probe.G12.value == 3.);
+        CHECK(probe.G13.value == 4.);
+        CHECK(probe.G22.value == 5.);
+        CHECK(probe.G23.value == 6.);
+        CHECK(probe.G33.value == 7.);
+        CHECK(probe.RHO.value == 8.);
+        CHECK(probe.A1.value == 9.);
+        CHECK(probe.A2.value == 10.);
+        CHECK(probe.A3.value == 11.);
+        CHECK(probe.TREF.value == 12.);
+        CHECK(probe.GE.value == 13.);
+        CHECK(probe.ST.value == 14.);
+        CHECK(probe.SC.value == 15.);
+        CHECK(probe.SS.value == 16.);
+        CHECK(probe.MCSID.value == 17);
+    }
 }
 
-TEST_CASE("BDF MAT2 reuse instance for output.", "[bdf_mat1,out reuse]") {
+TEST_CASE("BDF MAT2 roundtrio test reuse.", "[bdf_mat2_roundtrip_1_reuse]") {
 
     std::ostringstream test;
 
-    SECTION("test reuse 1") {
-        long MID{1};
-        double G11{2.};
-        double G12{3.};
-        double G13{4.};
-        double G22{5.};
-        double G23{6.};
-        double G33{7.};
-        double RHO{8.};
-        double A1{9.};
-        double A2{10.};
-        double A3{11.};
-        double TREF{12.};
-        double GE{13.};
-        double ST{14.};
-        double SC{15.};
-        double SS{16.};
-        long MCSID{17};
+    long MID{1};
+    double G11{2.};
+    double G12{3.};
+    double G13{4.};
+    double G22{5.};
+    double G23{6.};
+    double G33{7.};
+    double RHO{8.};
+    double A1{9.};
+    double A2{10.};
+    double A3{11.};
+    double TREF{12.};
+    double GE{13.};
+    double ST{14.};
+    double SC{15.};
+    double SS{16.};
+    long MCSID{17};
 
+    mat2 probe;
+    test << probe;
+    test << probe(&MID, &G11, &G12, &G13, &G22, &G23, &G33, &RHO,
+          &A1, &A2, &A3, &TREF, &GE, &ST, &SC, &SS,
+          &MCSID);
+
+
+    SECTION("check output") {
+        CHECK(test.str() ==
+              "MAT2           12.000+003.000+004.000+005.000+006.000+007.000+008.000+00\n"
+              "        9.000+001.000+011.100+011.200+011.300+011.400+011.500+011.600+01\n"
+              "              17\n");
+    }
+
+    SECTION("check reading") {
+        std::list<std::string> data;
+        std::list<std::string> lines;
+        std::string tmp;
+        std::istringstream raw(test.str());
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        __base::card::card_split(data, lines);
         mat2 probe;
-        test << probe;
-        test << probe(&MID, &G11, &G12, &G13, &G22, &G23, &G33, &RHO,
-                      &A1, &A2, &A3, &TREF, &GE, &ST, &SC, &SS,
-                      &MCSID);
-        CHECK(test.str() ==
-              "MAT2           12.000+003.000+004.000+005.000+006.000+007.000+008.000+00\n"
-              "        9.000+001.000+011.100+011.200+011.300+011.400+011.500+011.600+01\n"
-              "              17\n");
+        probe(lines);
+
+        CHECK(probe.MID.value == 1);
+        CHECK(probe.G11.value == 2.);
+        CHECK(probe.G12.value == 3.);
+        CHECK(probe.G13.value == 4.);
+        CHECK(probe.G22.value == 5.);
+        CHECK(probe.G23.value == 6.);
+        CHECK(probe.G33.value == 7.);
+        CHECK(probe.RHO.value == 8.);
+        CHECK(probe.A1.value == 9.);
+        CHECK(probe.A2.value == 10.);
+        CHECK(probe.A3.value == 11.);
+        CHECK(probe.TREF.value == 12.);
+        CHECK(probe.GE.value == 13.);
+        CHECK(probe.ST.value == 14.);
+        CHECK(probe.SC.value == 15.);
+        CHECK(probe.SS.value == 16.);
+        CHECK(probe.MCSID.value == 17);
     }
 }
+
 // Local Variables:
 // mode: c++
 // coding: utf-8
