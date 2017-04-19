@@ -31,7 +31,7 @@ static char THIS_FILE[] = __FILE__;
 
 namespace {
    const long cl0 = 0, cl1 = 1, cl_1 = -1, cl_2 = -2;
-   const long cl1e8 = 100000000;
+   const long cl1e8 = 100000000 - 1;
    const double cd0 = 0.;
 }
 
@@ -54,7 +54,7 @@ const bdf::types::entry_type<double> grid::form_X2(
 const bdf::types::entry_type<double> grid::form_X3(
     "X3", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 const bdf::types::entry_type<long> grid::form_CD(
-    "CD", bdf::type_bounds::bound<long>(&cl_1, nullptr, &cl_2));
+    "CD", bdf::type_bounds::bound<long>(&cl_1, nullptr, nullptr, true));
 const bdf::types::entry_type<std::list<int> > grid::form_PS("PS");
 const bdf::types::entry_type<long> grid::form_SEID(
     "SEID", bdf::type_bounds::bound<long>(&cl_1, nullptr, &cl0));
