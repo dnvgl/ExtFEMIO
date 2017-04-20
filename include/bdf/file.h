@@ -16,10 +16,10 @@
 
 #include <list>
 #include <set>
-// ReSharper disable once CppUnusedIncludeDirective
+// ReSharper disable CppUnusedIncludeDirective
 #include <string>
-// ReSharper disable once CppUnusedIncludeDirective
 #include <iostream>
+// ReSharper restore CppUnusedIncludeDirective
 
 namespace dnvgl {
     namespace extfem {

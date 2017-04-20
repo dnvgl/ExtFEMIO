@@ -16,8 +16,8 @@
 
 // ReSharper disable CppUnusedIncludeDirective
 #include <cstring>
-// ReSharper restore CppUnusedIncludeDirective
 #include <string>
+// ReSharper restore CppUnusedIncludeDirective
 #include <exception>
 
 #if defined(_MSC_VER) & _MSC_VER < 1900

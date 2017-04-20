@@ -127,8 +127,8 @@ TEST_CASE("CBAR Roundtrip test 1 (dir code) (reuse).", "[bdf_cbar_roundtrip_1_re
     }
 
     SECTION("check reading") {
-        std::list<std::string> data;
-        std::list<std::string> lines;
+        list<std::string> data;
+        list<std::string> lines;
         std::string tmp;
         std::istringstream raw(test.str());
         cbar probe_l;
@@ -148,7 +148,7 @@ TEST_CASE("CBAR Roundtrip test 1 (dir code) (reuse).", "[bdf_cbar_roundtrip_1_re
 
 TEST_CASE("CBAR Roundtrip test (QRG sample 1)", "[bdf_cbar_roundtrip_2]"){
 
-    std::ostringstream test;
+    ostringstream test;
 
     long EID(2), PID(39), GA(7), GB(3);
     double X1(.6), X2(18), X3(26);
@@ -166,10 +166,10 @@ TEST_CASE("CBAR Roundtrip test (QRG sample 1)", "[bdf_cbar_roundtrip_2]"){
     }
 
     SECTION("check reading") {
-        std::list<std::string> data;
-        std::list<std::string> lines;
+        list<std::string> data;
+        list<std::string> lines;
         std::string tmp;
-        std::istringstream raw(test.str());
+        istringstream raw(test.str());
 
         while (getline(raw, tmp))
             data.push_back(tmp);

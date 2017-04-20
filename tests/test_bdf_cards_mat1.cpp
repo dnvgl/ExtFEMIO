@@ -239,21 +239,21 @@ TEST_CASE("BDF MAT1 roundtrio test.", "[bdf_mat1_roundtrip_1_reuse]") {
         while (getline(raw, tmp))
             data.push_back(tmp);
         __base::card::card_split(data, lines);
-        mat1 probe;
-        probe(lines);
+        mat1 probe_l;
+        probe_l(lines);
 
-        CHECK(probe.MID.value == 1);
-        CHECK(probe.MCSID.value == 2);
-        CHECK(probe.E.value == 2.);
-        CHECK(probe.G.value == 3.);
-        CHECK(probe.NU.value == .3);
-        CHECK(probe.RHO.value == 5.);
-        CHECK(probe.A.value == 6);
-        CHECK(probe.TREF.value == 7.);
-        CHECK(probe.GE.value == 8.);
-        CHECK(probe.ST.value == 9.);
-        CHECK(probe.SC.value == 10.);
-        CHECK(probe.SS.value == 11.);
+        CHECK(probe_l.MID.value == 1);
+        CHECK(probe_l.MCSID.value == 2);
+        CHECK(probe_l.E.value == 2.);
+        CHECK(probe_l.G.value == 3.);
+        CHECK(probe_l.NU.value == .3);
+        CHECK(probe_l.RHO.value == 5.);
+        CHECK(probe_l.A.value == 6);
+        CHECK(probe_l.TREF.value == 7.);
+        CHECK(probe_l.GE.value == 8.);
+        CHECK(probe_l.ST.value == 9.);
+        CHECK(probe_l.SC.value == 10.);
+        CHECK(probe_l.SS.value == 11.);
     }
 }
 
@@ -265,6 +265,7 @@ TEST_CASE("BDF MAT1 roundtrio test (min data).", "[bdf_mat1_roundtrip_2_reuse]")
     double E{3e7}, RHO{4.28}, A{6.5e-6}, GE{.23};
 
     mat1 probe;
+    test << probe;
     test << probe(&MID, &E, nullptr, nullptr, &RHO, &A, nullptr, &GE);
 
     SECTION("check output") {
@@ -281,21 +282,21 @@ TEST_CASE("BDF MAT1 roundtrio test (min data).", "[bdf_mat1_roundtrip_2_reuse]")
         while (getline(raw, tmp))
             data.push_back(tmp);
         __base::card::card_split(data, lines);
-        mat1 probe;
-        probe(lines);
+        mat1 probe_l;
+        probe_l(lines);
 
-        CHECK(probe.MID.value == 17);
-        CHECK_FALSE(probe.MCSID);
-        CHECK(probe.E.value == 30000000.);
-        CHECK(probe.G.value == 0.);
-        CHECK(probe.NU.value == 0.);
-        CHECK(probe.RHO.value == 4.28);
-        CHECK(probe.A.value == 6.5e-6);
-        CHECK_FALSE(probe.TREF);
-        CHECK(probe.GE.value == .23);
-        CHECK_FALSE(probe.ST);
-        CHECK_FALSE(probe.SC);
-        CHECK_FALSE(probe.SS);
+        CHECK(probe_l.MID.value == 17);
+        CHECK_FALSE(probe_l.MCSID);
+        CHECK(probe_l.E.value == 30000000.);
+        CHECK(probe_l.G.value == 0.);
+        CHECK(probe_l.NU.value == 0.);
+        CHECK(probe_l.RHO.value == 4.28);
+        CHECK(probe_l.A.value == 6.5e-6);
+        CHECK_FALSE(probe_l.TREF);
+        CHECK(probe_l.GE.value == .23);
+        CHECK_FALSE(probe_l.ST);
+        CHECK_FALSE(probe_l.SC);
+        CHECK_FALSE(probe_l.SS);
     }
 }
 

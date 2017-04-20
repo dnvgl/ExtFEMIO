@@ -14,11 +14,10 @@
 #define _FEM_FILE_H_
 
 #include <set>
-// ReSharper disable once CppUnusedIncludeDirective
+// ReSharper disable CppUnusedIncludeDirective
 #include <string>
-// ReSharper disable once CppUnusedIncludeDirective
 #include <iostream>
-#include <vector>
+// ReSharper restore CppUnusedIncludeDirective
 
 namespace dnvgl {
     namespace extfem {

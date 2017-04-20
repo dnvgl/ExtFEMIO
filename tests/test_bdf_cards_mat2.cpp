@@ -161,25 +161,25 @@ TEST_CASE("BDF MAT2 roundtrio test 1.", "[bdf_mat2_roundtrip_1]") {
         while (getline(raw, tmp))
             data.push_back(tmp);
         __base::card::card_split(data, lines);
-        mat2 probe(lines);
+        mat2 probe_l(lines);
 
-        CHECK(probe.MID.value == 1);
-        CHECK(probe.G11.value == 2.);
-        CHECK(probe.G12.value == 3.);
-        CHECK(probe.G13.value == 4.);
-        CHECK(probe.G22.value == 5.);
-        CHECK(probe.G23.value == 6.);
-        CHECK(probe.G33.value == 7.);
-        CHECK(probe.RHO.value == 8.);
-        CHECK(probe.A1.value == 9.);
-        CHECK(probe.A2.value == 10.);
-        CHECK(probe.A3.value == 11.);
-        CHECK(probe.TREF.value == 12.);
-        CHECK(probe.GE.value == 13.);
-        CHECK(probe.ST.value == 14.);
-        CHECK(probe.SC.value == 15.);
-        CHECK(probe.SS.value == 16.);
-        CHECK(probe.MCSID.value == 17);
+        CHECK(probe_l.MID.value == 1);
+        CHECK(probe_l.G11.value == 2.);
+        CHECK(probe_l.G12.value == 3.);
+        CHECK(probe_l.G13.value == 4.);
+        CHECK(probe_l.G22.value == 5.);
+        CHECK(probe_l.G23.value == 6.);
+        CHECK(probe_l.G33.value == 7.);
+        CHECK(probe_l.RHO.value == 8.);
+        CHECK(probe_l.A1.value == 9.);
+        CHECK(probe_l.A2.value == 10.);
+        CHECK(probe_l.A3.value == 11.);
+        CHECK(probe_l.TREF.value == 12.);
+        CHECK(probe_l.GE.value == 13.);
+        CHECK(probe_l.ST.value == 14.);
+        CHECK(probe_l.SC.value == 15.);
+        CHECK(probe_l.SS.value == 16.);
+        CHECK(probe_l.MCSID.value == 17);
     }
 }
 
@@ -228,26 +228,26 @@ TEST_CASE("BDF MAT2 roundtrio test reuse.", "[bdf_mat2_roundtrip_1_reuse]") {
         while (getline(raw, tmp))
             data.push_back(tmp);
         __base::card::card_split(data, lines);
-        mat2 probe;
-        probe(lines);
+        mat2 probe_l;
+        probe_l(lines);
 
-        CHECK(probe.MID.value == 1);
-        CHECK(probe.G11.value == 2.);
-        CHECK(probe.G12.value == 3.);
-        CHECK(probe.G13.value == 4.);
-        CHECK(probe.G22.value == 5.);
-        CHECK(probe.G23.value == 6.);
-        CHECK(probe.G33.value == 7.);
-        CHECK(probe.RHO.value == 8.);
-        CHECK(probe.A1.value == 9.);
-        CHECK(probe.A2.value == 10.);
-        CHECK(probe.A3.value == 11.);
-        CHECK(probe.TREF.value == 12.);
-        CHECK(probe.GE.value == 13.);
-        CHECK(probe.ST.value == 14.);
-        CHECK(probe.SC.value == 15.);
-        CHECK(probe.SS.value == 16.);
-        CHECK(probe.MCSID.value == 17);
+        CHECK(probe_l.MID.value == 1);
+        CHECK(probe_l.G11.value == 2.);
+        CHECK(probe_l.G12.value == 3.);
+        CHECK(probe_l.G13.value == 4.);
+        CHECK(probe_l.G22.value == 5.);
+        CHECK(probe_l.G23.value == 6.);
+        CHECK(probe_l.G33.value == 7.);
+        CHECK(probe_l.RHO.value == 8.);
+        CHECK(probe_l.A1.value == 9.);
+        CHECK(probe_l.A2.value == 10.);
+        CHECK(probe_l.A3.value == 11.);
+        CHECK(probe_l.TREF.value == 12.);
+        CHECK(probe_l.GE.value == 13.);
+        CHECK(probe_l.ST.value == 14.);
+        CHECK(probe_l.SC.value == 15.);
+        CHECK(probe_l.SS.value == 16.);
+        CHECK(probe_l.MCSID.value == 17);
     }
 }
 
