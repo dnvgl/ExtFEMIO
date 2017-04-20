@@ -159,6 +159,14 @@ namespace dnvgl {
     }
 }
 
+template <>
+bool inline dnvgl::extfem::bdf::type_bounds::bound<std::complex<double>>::in_bounds(
+    std::complex<double> const &val) const {
+    return ((!has_min() || abs(val) >= abs(this->min_val)) &&
+            (!has_max() || abs(val) <= abs(this->max_val)));
+}
+
+
 #endif // _BDF_TYPE_BOUNDS_H_
 
 // Local Variables:

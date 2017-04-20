@@ -51,13 +51,6 @@ bool type_bound::has_default() const {
     return _has_default;
 }
 
-template <>
-bool bound<std::complex<double>>::in_bounds(
-    std::complex<double> const &val) const {
-    return ((!has_min() || abs(val) >= abs(this->min_val)) &&
-            (!has_max() || abs(val) <= abs(this->max_val)));
-}
-
 // Local Variables:
 // mode: c++
 // coding: utf-8
