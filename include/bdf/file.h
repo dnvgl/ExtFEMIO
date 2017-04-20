@@ -16,50 +16,47 @@
 
 #include <list>
 #include <set>
+// ReSharper disable once CppUnusedIncludeDirective
 #include <string>
+// ReSharper disable once CppUnusedIncludeDirective
 #include <iostream>
-#include <vector>
-#include <locale>
-#include <sstream>
-
-#include "extfem_misc.h"
 
 namespace dnvgl {
-   namespace extfem {
-      namespace bdf {
-         namespace input {
+    namespace extfem {
+        namespace bdf {
+            namespace input {
 
-            class bdf_file {
+                class bdf_file {
 
-            private:
+                private:
 
-               static const std::set<char> cont_chars;
-               std::string cur_line;
-               std::istream &data;
+                    static const std::set<char> cont_chars;
+                    std::string cur_line;
+                    std::istream &data;
 
-            public:
+                public:
 
-               std::string last_comment;
+                    std::string last_comment;
 
-               bool eof() const;
+                    bool eof() const;
 
-               bdf_file(std::istream&);
+                    explicit bdf_file(std::istream&);
 
-               void get(std::list<std::string>& oContent);
+                    void get(std::list<std::string>& oContent);
 
-               /** actual byte position (hopefully no bdf > 2Gybte will be
-                   readin....)
-               */
-               std::streampos size() const;
+                    /** actual byte position (hopefully no bdf > 2Gybte will be
+                        readin....)
+                        */
+                    std::streampos size() const;
 
-               /** actual byte position (hopefully no bdf > 2Gybte will be
-                   readin....)
-               */
-               std::streampos pos() const;
-            };
-         }
-      }
-   }
+                    /** actual byte position (hopefully no bdf > 2Gybte will be
+                        readin....)
+                        */
+                    std::streampos pos() const;
+                };
+            }
+        }
+    }
 }
 
 #endif // _BDF_FILE_H_

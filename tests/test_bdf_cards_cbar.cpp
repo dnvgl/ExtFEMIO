@@ -101,13 +101,13 @@ TEST_CASE("CBAR Roundtrip test 1 (dir code).", "[bdf_cbar_roundtrip_1]") {
         while (getline(raw, tmp))
             data.push_back(tmp);
         __base::card::card_split(data, lines);
-        cbar probe(lines);
+        cbar probe_l(lines);
 
-        CHECK(probe.EID.value == 1);
-        CHECK(probe.PID.value == 2);
-        CHECK(probe.GA.value == 3);
-        CHECK(probe.GB.value == 4);
-        CHECK(probe.G0.value == 5);
+        CHECK(probe_l.EID.value == 1);
+        CHECK(probe_l.PID.value == 2);
+        CHECK(probe_l.GA.value == 3);
+        CHECK(probe_l.GB.value == 4);
+        CHECK(probe_l.G0.value == 5);
     }
 }
 
@@ -131,18 +131,18 @@ TEST_CASE("CBAR Roundtrip test 1 (dir code) (reuse).", "[bdf_cbar_roundtrip_1_re
         std::list<std::string> lines;
         std::string tmp;
         std::istringstream raw(test.str());
-        cbar probe;
+        cbar probe_l;
 
         while (getline(raw, tmp))
             data.push_back(tmp);
         __base::card::card_split(data, lines);
-        probe(lines);
+        probe_l(lines);
 
-        CHECK(probe.EID.value == 1);
-        CHECK(probe.PID.value == 2);
-        CHECK(probe.GA.value == 3);
-        CHECK(probe.GB.value == 4);
-        CHECK(probe.G0.value == 5);
+        CHECK(probe_l.EID.value == 1);
+        CHECK(probe_l.PID.value == 2);
+        CHECK(probe_l.GA.value == 3);
+        CHECK(probe_l.GB.value == 4);
+        CHECK(probe_l.G0.value == 5);
     }
 }
 
@@ -174,16 +174,16 @@ TEST_CASE("CBAR Roundtrip test (QRG sample 1)", "[bdf_cbar_roundtrip_2]"){
         while (getline(raw, tmp))
             data.push_back(tmp);
         __base::card::card_split(data, lines);
-        cbar probe(lines);
+        cbar probe_l(lines);
 
-        CHECK(probe.EID.value == 2);
-        CHECK(probe.PID.value == 39);
-        CHECK(probe.GA.value == 7);
-        CHECK(probe.GB.value == 3);
-        CHECK(probe.X1.value == .6);
-        CHECK(probe.X2.value == 18);
-        CHECK(probe.X3.value == 26);
-        CHECK(probe.OFFT.value == "GGO");
+        CHECK(probe_l.EID.value == 2);
+        CHECK(probe_l.PID.value == 39);
+        CHECK(probe_l.GA.value == 7);
+        CHECK(probe_l.GB.value == 3);
+        CHECK(probe_l.X1.value == .6);
+        CHECK(probe_l.X2.value == 18);
+        CHECK(probe_l.X3.value == 26);
+        CHECK(probe_l.OFFT.value == "GGO");
     }
 }
 
@@ -212,21 +212,21 @@ TEST_CASE("CBAR Roundtrip test (QRG sample 1) (reuse)", "[bdf_cbar_roundtrip_2_r
         std::list<std::string> lines;
         std::string tmp;
         std::istringstream raw(test.str());
-        cbar probe;
+        cbar probe_l;
 
         while (getline(raw, tmp))
             data.push_back(tmp);
         __base::card::card_split(data, lines);
-        probe(lines);
+        probe_l(lines);
 
-        CHECK(probe.EID.value == 2);
-        CHECK(probe.PID.value == 39);
-        CHECK(probe.GA.value == 7);
-        CHECK(probe.GB.value == 3);
-        CHECK(probe.X1.value == .6);
-        CHECK(probe.X2.value == 18);
-        CHECK(probe.X3.value == 26);
-        CHECK(probe.OFFT.value == "GGO");
+        CHECK(probe_l.EID.value == 2);
+        CHECK(probe_l.PID.value == 39);
+        CHECK(probe_l.GA.value == 7);
+        CHECK(probe_l.GB.value == 3);
+        CHECK(probe_l.X1.value == .6);
+        CHECK(probe_l.X2.value == 18);
+        CHECK(probe_l.X3.value == 26);
+        CHECK(probe_l.OFFT.value == "GGO");
     }
 }
 
@@ -260,17 +260,17 @@ TEST_CASE("CBAR Roundtrip test (QRG sample 1 (long))", "[bdf_cbar_roundtrip_3]")
         while (getline(raw, tmp))
             data.push_back(tmp);
         __base::card::card_split(data, lines);
-        cbar probe(lines);
+        cbar probe_l(lines);
 
-        CHECK(probe.EID.value == 2);
-        CHECK(probe.PID.value == 39);
-        CHECK(probe.GA.value == 7);
-        CHECK(probe.GB.value == 3);
-        CHECK(probe.X1.value == .6);
-        CHECK(probe.X2.value == 18);
-        CHECK(probe.X3.value == 1234.5);
-        CHECK(probe.OFFT.value == "GGO");
-        CHECK(probe.PB == list<int>({5, 1, 3}));
+        CHECK(probe_l.EID.value == 2);
+        CHECK(probe_l.PID.value == 39);
+        CHECK(probe_l.GA.value == 7);
+        CHECK(probe_l.GB.value == 3);
+        CHECK(probe_l.X1.value == .6);
+        CHECK(probe_l.X2.value == 18);
+        CHECK(probe_l.X3.value == 1234.5);
+        CHECK(probe_l.OFFT.value == "GGO");
+        CHECK(probe_l.PB == list<int>({5, 1, 3}));
     }
 }
 
@@ -301,22 +301,22 @@ TEST_CASE("CBAR Roundtrip test (QRG sample 1 (long)) (reuse)", "[bdf_cbar_roundt
         std::list<std::string> lines;
         std::string tmp;
         std::istringstream raw(test.str());
-        cbar probe;
+        cbar probe_l;
 
         while (getline(raw, tmp))
             data.push_back(tmp);
         __base::card::card_split(data, lines);
-        probe(lines);
+        probe_l(lines);
 
-        CHECK(probe.EID.value == 2);
-        CHECK(probe.PID.value == 39);
-        CHECK(probe.GA.value == 7);
-        CHECK(probe.GB.value == 3);
-        CHECK(probe.X1.value == .6);
-        CHECK(probe.X2.value == 18);
-        CHECK(probe.X3.value == 1234.5);
-        CHECK(probe.OFFT.value == "GGO");
-        CHECK(probe.PB == list<int>({5, 1, 3}));
+        CHECK(probe_l.EID.value == 2);
+        CHECK(probe_l.PID.value == 39);
+        CHECK(probe_l.GA.value == 7);
+        CHECK(probe_l.GB.value == 3);
+        CHECK(probe_l.X1.value == .6);
+        CHECK(probe_l.X2.value == 18);
+        CHECK(probe_l.X3.value == 1234.5);
+        CHECK(probe_l.OFFT.value == "GGO");
+        CHECK(probe_l.PB == list<int>({5, 1, 3}));
     }
 }
 
@@ -348,14 +348,14 @@ TEST_CASE("CBAR Roundtrip test (dir code all elements)", "[bdf_cbar_roundtrip_4]
         while (getline(raw, tmp))
             data.push_back(tmp);
         __base::card::card_split(data, lines);
-        cbar probe(lines);
+        cbar probe_l(lines);
 
-        CHECK(probe.EID.value == 1);
-        CHECK(probe.PID.value == 2);
-        CHECK(probe.GA.value == 3);
-        CHECK(probe.GB.value == 4);
-        CHECK(probe.G0.value == 5);
-        CHECK(probe.W3B.value == 2.);
+        CHECK(probe_l.EID.value == 1);
+        CHECK(probe_l.PID.value == 2);
+        CHECK(probe_l.GA.value == 3);
+        CHECK(probe_l.GB.value == 4);
+        CHECK(probe_l.G0.value == 5);
+        CHECK(probe_l.W3B.value == 2.);
     }
 }
 
@@ -388,14 +388,14 @@ TEST_CASE("CBAR Roundtrip test (dir code all elements) (reuse)",
         while (getline(raw, tmp))
             data.push_back(tmp);
         __base::card::card_split(data, lines);
-        cbar probe(lines);
+        cbar probe_l(lines);
 
-        CHECK(probe.EID.value == 1);
-        CHECK(probe.PID.value == 2);
-        CHECK(probe.GA.value == 3);
-        CHECK(probe.GB.value == 4);
-        CHECK(probe.G0.value == 5);
-        CHECK(probe.W3B.value == 2.);
+        CHECK(probe_l.EID.value == 1);
+        CHECK(probe_l.PID.value == 2);
+        CHECK(probe_l.GA.value == 3);
+        CHECK(probe_l.GB.value == 4);
+        CHECK(probe_l.G0.value == 5);
+        CHECK(probe_l.W3B.value == 2.);
     }
 }
 
@@ -430,14 +430,14 @@ TEST_CASE("CBAR Roundtrip test (dir code all elements) (large)",
         while (getline(raw, tmp))
             data.push_back(tmp);
         __base::card::card_split(data, lines);
-        cbar probe(lines);
+        cbar probe_l(lines);
 
-        CHECK(probe.EID.value == 123456789);
-        CHECK(probe.PID.value == 2);
-        CHECK(probe.GA.value == 3);
-        CHECK(probe.GB.value == 4);
-        CHECK(probe.G0.value == 5);
-        CHECK(probe.W3B.value == 2.);
+        CHECK(probe_l.EID.value == 123456789);
+        CHECK(probe_l.PID.value == 2);
+        CHECK(probe_l.GA.value == 3);
+        CHECK(probe_l.GB.value == 4);
+        CHECK(probe_l.G0.value == 5);
+        CHECK(probe_l.W3B.value == 2.);
 
     }
 }
@@ -474,15 +474,15 @@ TEST_CASE("CBAR Roundtrip test (dir code all elements) (large) (reuse)",
         while (getline(raw, tmp))
             data.push_back(tmp);
         __base::card::card_split(data, lines);
-        cbar probe;
-        probe(lines);
+        cbar probe_l;
+        probe_l(lines);
 
-        CHECK(probe.EID.value == 123456789);
-        CHECK(probe.PID.value == 2);
-        CHECK(probe.GA.value == 3);
-        CHECK(probe.GB.value == 4);
-        CHECK(probe.G0.value == 5);
-        CHECK(probe.W3B.value == 2.);
+        CHECK(probe_l.EID.value == 123456789);
+        CHECK(probe_l.PID.value == 2);
+        CHECK(probe_l.GA.value == 3);
+        CHECK(probe_l.GB.value == 4);
+        CHECK(probe_l.G0.value == 5);
+        CHECK(probe_l.W3B.value == 2.);
 
     }
 }
@@ -520,14 +520,16 @@ TEST_CASE("CBAR Roundtrip test dir code all large (ptr)", "[bdf_cbar_roundtrip_6
         while (getline(raw, tmp))
             data.push_back(tmp);
         __base::card::card_split(data, lines);
-        __base::card *probe = new cbar(lines);
+        __base::card *probe_l = new cbar(lines);
 
-        CHECK(static_cast<cbar*>(probe)->EID.value == 123456789);
-        CHECK(static_cast<cbar*>(probe)->PID.value == 2);
-        CHECK(static_cast<cbar*>(probe)->GA.value == 3);
-        CHECK(static_cast<cbar*>(probe)->GB.value == 4);
-        CHECK(static_cast<cbar*>(probe)->G0.value == 5);
-        CHECK(static_cast<cbar*>(probe)->W3B.value == 2.);
+        CHECK(static_cast<cbar*>(probe_l)->EID.value == 123456789);
+        CHECK(static_cast<cbar*>(probe_l)->PID.value == 2);
+        CHECK(static_cast<cbar*>(probe_l)->GA.value == 3);
+        CHECK(static_cast<cbar*>(probe_l)->GB.value == 4);
+        CHECK(static_cast<cbar*>(probe_l)->G0.value == 5);
+        CHECK(static_cast<cbar*>(probe_l)->W3B.value == 2.);
+
+        delete probe_l;
     }
 }
 
@@ -566,15 +568,17 @@ TEST_CASE("CBAR Roundtrip test dir code all large (ptr) (reuse)",
         while (getline(raw, tmp))
             data.push_back(tmp);
         __base::card::card_split(data, lines);
-        __base::card *probe = new cbar;
-        (*static_cast<cbar*>(probe))(lines);
+        __base::card *probe_l = new cbar;
+        (*static_cast<cbar*>(probe_l))(lines);
 
-        CHECK(static_cast<cbar*>(probe)->EID.value == 123456789);
-        CHECK(static_cast<cbar*>(probe)->PID.value == 2);
-        CHECK(static_cast<cbar*>(probe)->GA.value == 3);
-        CHECK(static_cast<cbar*>(probe)->GB.value == 4);
-        CHECK(static_cast<cbar*>(probe)->G0.value == 5);
-        CHECK(static_cast<cbar*>(probe)->W3B.value == 2.);
+        CHECK(static_cast<cbar*>(probe_l)->EID.value == 123456789);
+        CHECK(static_cast<cbar*>(probe_l)->PID.value == 2);
+        CHECK(static_cast<cbar*>(probe_l)->GA.value == 3);
+        CHECK(static_cast<cbar*>(probe_l)->GB.value == 4);
+        CHECK(static_cast<cbar*>(probe_l)->G0.value == 5);
+        CHECK(static_cast<cbar*>(probe_l)->W3B.value == 2.);
+
+        delete probe_l;
     }
 }
 

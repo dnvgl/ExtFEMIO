@@ -11,6 +11,7 @@
 
 #pragma once
 
+// ReSharper disable once CppUnusedIncludeDirective
 #include <string>
 
 #if defined(_MSC_VER) & _MSC_VER < 1900

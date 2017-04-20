@@ -13,15 +13,12 @@
 #if !defined _FEM_FILE_H_
 #define _FEM_FILE_H_
 
-#include <list>
 #include <set>
+// ReSharper disable once CppUnusedIncludeDirective
 #include <string>
+// ReSharper disable once CppUnusedIncludeDirective
 #include <iostream>
 #include <vector>
-#include <locale>
-#include <sstream>
-
-#include "extfem_misc.h"
 
 namespace dnvgl {
     namespace extfem {

@@ -35,7 +35,7 @@ using namespace bdf;
 using namespace type_bounds;
 using namespace cards;
 
-using types::entry_type;
+using bdf::types::entry_type;
 
 namespace {
     const long lc1 = 1;
@@ -78,7 +78,11 @@ const entry_type<long> cbeam::form_SA(
 const entry_type<long> cbeam::form_SB(
     "SB", bound<long>(&lc1, nullptr, nullptr, true)); // minval=1, default=None)
 
-cbeam::cbeam() : element() {}
+/**
+ * \brief 
+ */
+cbeam::cbeam() : element(), choose_dir_code(), choose_offt_bit() {
+}
 
 cbeam::cbeam(list<std::string> const &inp) :
         element(inp) {

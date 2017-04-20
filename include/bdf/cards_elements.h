@@ -33,15 +33,17 @@ namespace dnvgl {
 
                         element();
 
-                        element(long const *EID);
+                        explicit element(long const *EID);
 
                     public:
 
-                        element(std::list<std::string> const &);
+                        explicit element(std::list<std::string> const &);
 
                     protected:
 
-                        void operator() (long const *EID);
+                        card const &operator() (long const *EID);
+
+                        virtual card const &operator() (const std::list<std::string> &) override;
 
                         virtual void collect_outdata(
                             std::list<std::unique_ptr<format_entry> >&) const override;
@@ -49,8 +51,6 @@ namespace dnvgl {
                         void check_data() const override;
 
                         void read(std::list<std::string> const &) override;
-
-                        card const &operator() (const std::list<std::string> &) override;
 
                         types card_type() const override;
 
@@ -269,19 +269,19 @@ namespace dnvgl {
 
                     ctria3(long const *EID, long const *PID,
                            long const *G1, long const *G2, long const *G3,
-                           double const *THETA=nullptr,
-                           double const *ZOFFS=nullptr,
-                           long const *TFLAG=nullptr,
-                           double const *T1=nullptr, double const *T2=nullptr,
-                           double const *T3=nullptr);
+                           double const *THETA = nullptr,
+                           double const *ZOFFS = nullptr,
+                           long const *TFLAG = nullptr,
+                           double const *T1 = nullptr, double const *T2 = nullptr,
+                           double const *T3 = nullptr);
 
                     ctria3(long const *EID, long const *PID,
                            long const *G1, long const *G2, long const *G3,
                            long const *MCID,
-                           double const *ZOFFS=nullptr,
-                           long const *TFLAG=nullptr,
-                           double const *T1=nullptr, double const *T2=nullptr,
-                           double const *T3=nullptr);
+                           double const *ZOFFS = nullptr,
+                           long const *TFLAG = nullptr,
+                           double const *T1 = nullptr, double const *T2 = nullptr,
+                           double const *T3 = nullptr);
 
                     void read(std::list<std::string> const&) override;
 
@@ -292,20 +292,20 @@ namespace dnvgl {
                     card const &operator() (
                         long const *EID, long const *PID,
                         long const *G1, long const *G2, long const *G3,
-                        double const *THETA=nullptr,
-                        double const *ZOFFS=nullptr,
-                        long const *TFLAG=nullptr,
-                        double const *T1=nullptr, double const *T2=nullptr,
-                        double const *T3=nullptr);
+                        double const *THETA = nullptr,
+                        double const *ZOFFS = nullptr,
+                        long const *TFLAG = nullptr,
+                        double const *T1 = nullptr, double const *T2 = nullptr,
+                        double const *T3 = nullptr);
 
                     card const &operator() (
                         long const *EID, long const *PID,
                         long const *G1, long const *G2, long const *G3,
                         long const *MCID,
-                        double const *ZOFFS=nullptr,
-                        long const *TFLAG=nullptr,
-                        double const *T1=nullptr, double const *T2=nullptr,
-                        double const *T3=nullptr);
+                        double const *ZOFFS = nullptr,
+                        long const *TFLAG = nullptr,
+                        double const *T1 = nullptr, double const *T2 = nullptr,
+                        double const *T3 = nullptr);
 
                 private:
 
@@ -361,19 +361,19 @@ namespace dnvgl {
 
                     cquad4(long const *EID, long const *PID,
                            long const *G1, long const *G2, long const *G3, long const *G4,
-                           double const *THETA=nullptr,
-                           double const *ZOFFS=nullptr,
-                           long const *TFLAG=nullptr,
-                           double const *T1=nullptr, double const *T2=nullptr,
-                           double const *T3=nullptr, double const *T4=nullptr);
+                           double const *THETA = nullptr,
+                           double const *ZOFFS = nullptr,
+                           long const *TFLAG = nullptr,
+                           double const *T1 = nullptr, double const *T2 = nullptr,
+                           double const *T3 = nullptr, double const *T4 = nullptr);
 
                     cquad4(long const *EID, long const *PID,
                            long const *G1, long const *G2, long const *G3, long const *G4,
                            long const *MCID,
-                           double const *ZOFFS=nullptr,
-                           long const *TFLAG=nullptr,
-                           double const *T1=nullptr, double const *T2=nullptr,
-                           double const *T3=nullptr, double const *T4=nullptr);
+                           double const *ZOFFS = nullptr,
+                           long const *TFLAG = nullptr,
+                           double const *T1 = nullptr, double const *T2 = nullptr,
+                           double const *T3 = nullptr, double const *T4 = nullptr);
 
                     void read(std::list<std::string> const&) override;
 
@@ -385,28 +385,28 @@ namespace dnvgl {
                         long const *EID, long const *PID,
                         long const *G1, long const *G2,
                         long const *G3, long const *G4,
-                        double const *THETA=nullptr,
-                        double const *ZOFFS=nullptr,
-                        long const *TFLAG=nullptr,
-                        double const *T1=nullptr, double const *T2=nullptr,
-                        double const *T3=nullptr, double const *T4=nullptr) override;
+                        double const *THETA = nullptr,
+                        double const *ZOFFS = nullptr,
+                        long const *TFLAG = nullptr,
+                        double const *T1 = nullptr, double const *T2 = nullptr,
+                        double const *T3 = nullptr, double const *T4 = nullptr) override;
 
                     card const &operator() (
                         long const *EID, long const *PID,
                         long const *G1, long const *G2,
                         long const *G3, long const *G4,
                         long const *MCID,
-                        double const *ZOFFS=nullptr,
-                        long const *TFLAG=nullptr,
-                        double const *T1=nullptr, double const *T2=nullptr,
-                        double const *T3=nullptr, double const *T4=nullptr) override;
+                        double const *ZOFFS = nullptr,
+                        long const *TFLAG = nullptr,
+                        double const *T1 = nullptr, double const *T2 = nullptr,
+                        double const *T3 = nullptr, double const *T4 = nullptr) override;
 
                 private:
 
                     using shell::put;
 
                     void collect_outdata(
-                            std::list<std::unique_ptr<format_entry> >&) const override;
+                        std::list<std::unique_ptr<format_entry> >&) const override;
                 };
 
                 /// Handle Nastran Bulk `CBEAM` entries.
@@ -437,7 +437,6 @@ namespace dnvgl {
                     static bdf::types::card head;
 
                     using __base::element::form_EID;
-                    using __base::element::operator();
                     using __base::card::format_outlist;
 
                     // entry_type<long> static const form_EID;
@@ -619,12 +618,12 @@ namespace dnvgl {
                         double const *X1,
                         double const *X2,
                         double const *X3,
-                        std::string const *OFFT=nullptr,
-                        std::list<int> const *PA=nullptr, std::list<int> const *PB=nullptr,
-                        double const *W1A=nullptr, double const *W2A=nullptr,
-                        double const *W3A=nullptr, double const *W1B=nullptr,
-                        double const *W2B=nullptr, double const *W3B=nullptr,
-                        long const *SA=nullptr, long const *SB=nullptr);
+                        std::string const *OFFT = nullptr,
+                        std::list<int> const *PA = nullptr, std::list<int> const *PB = nullptr,
+                        double const *W1A = nullptr, double const *W2A = nullptr,
+                        double const *W3A = nullptr, double const *W1B = nullptr,
+                        double const *W2B = nullptr, double const *W3B = nullptr,
+                        long const *SA = nullptr, long const *SB = nullptr);
 
                     cbeam(
                         long const *EID, long const *PID,
@@ -633,33 +632,33 @@ namespace dnvgl {
                         double const *X2,
                         double const *X3,
                         double const *BIT,
-                        std::list<int> const *PA=nullptr, std::list<int> const *PB=nullptr,
-                        double const *W1A=nullptr, double const *W2A=nullptr,
-                        double const *W3A=nullptr, double const *W1B=nullptr,
-                        double const *W2B=nullptr, double const *W3B=nullptr,
-                        long const *SA=nullptr, long const *SB=nullptr);
+                        std::list<int> const *PA = nullptr, std::list<int> const *PB = nullptr,
+                        double const *W1A = nullptr, double const *W2A = nullptr,
+                        double const *W3A = nullptr, double const *W1B = nullptr,
+                        double const *W2B = nullptr, double const *W3B = nullptr,
+                        long const *SA = nullptr, long const *SB = nullptr);
 
                     cbeam(
                         long const *EID, long const *PID,
                         long const *GA, long const *GB,
                         long const *G0,
-                        std::string const *OFFT=nullptr,
-                        std::list<int> const *PA=nullptr, std::list<int> const *PB=nullptr,
-                        double const *W1A=nullptr, double const *W2A=nullptr,
-                        double const *W3A=nullptr, double const *W1B=nullptr,
-                        double const *W2B=nullptr, double const *W3B=nullptr,
-                        long const *SA=nullptr, long const *SB=nullptr);
+                        std::string const *OFFT = nullptr,
+                        std::list<int> const *PA = nullptr, std::list<int> const *PB = nullptr,
+                        double const *W1A = nullptr, double const *W2A = nullptr,
+                        double const *W3A = nullptr, double const *W1B = nullptr,
+                        double const *W2B = nullptr, double const *W3B = nullptr,
+                        long const *SA = nullptr, long const *SB = nullptr);
 
                     cbeam(
                         long const *EID, long const *PID,
                         long const *GA, long const *GB,
                         long const *G0,
                         double const *BIT,
-                        std::list<int> const *PA=nullptr, std::list<int> const *PB=nullptr,
-                        double const *W1A=nullptr, double const *W2A=nullptr,
-                        double const *W3A=nullptr, double const *W1B=nullptr,
-                        double const *W2B=nullptr, double const *W3B=nullptr,
-                        long const *SA=nullptr, long const *SB=nullptr);
+                        std::list<int> const *PA = nullptr, std::list<int> const *PB = nullptr,
+                        double const *W1A = nullptr, double const *W2A = nullptr,
+                        double const *W3A = nullptr, double const *W1B = nullptr,
+                        double const *W2B = nullptr, double const *W3B = nullptr,
+                        long const *SA = nullptr, long const *SB = nullptr);
 
                     types card_type() const override;;
 
@@ -673,12 +672,12 @@ namespace dnvgl {
                         double const *X1,
                         double const *X2,
                         double const *X3,
-                        std::string const *OFFT=nullptr,
-                        std::list<int> const *PA=nullptr, std::list<int> const *PB=nullptr,
-                        double const *W1A=nullptr, double const *W2A=nullptr,
-                        double const *W3A=nullptr, double const *W1B=nullptr,
-                        double const *W2B=nullptr, double const *W3B=nullptr,
-                        long const *SA=nullptr, long const *SB=nullptr);
+                        std::string const *OFFT = nullptr,
+                        std::list<int> const *PA = nullptr, std::list<int> const *PB = nullptr,
+                        double const *W1A = nullptr, double const *W2A = nullptr,
+                        double const *W3A = nullptr, double const *W1B = nullptr,
+                        double const *W2B = nullptr, double const *W3B = nullptr,
+                        long const *SA = nullptr, long const *SB = nullptr);
 
                     card const &operator() (
                         long const *EID, long const *PID,
@@ -687,33 +686,33 @@ namespace dnvgl {
                         double const *X2,
                         double const *X3,
                         double const *BIT,
-                        std::list<int> const *PA=nullptr, std::list<int> const *PB=nullptr,
-                        double const *W1A=nullptr, double const *W2A=nullptr,
-                        double const *W3A=nullptr, double const *W1B=nullptr,
-                        double const *W2B=nullptr, double const *W3B=nullptr,
-                        long const *SA=nullptr, long const *SB=nullptr);
+                        std::list<int> const *PA = nullptr, std::list<int> const *PB = nullptr,
+                        double const *W1A = nullptr, double const *W2A = nullptr,
+                        double const *W3A = nullptr, double const *W1B = nullptr,
+                        double const *W2B = nullptr, double const *W3B = nullptr,
+                        long const *SA = nullptr, long const *SB = nullptr);
 
                     card const &operator() (
                         long const *EID, long const *PID,
                         long const *GA, long const *GB,
                         long const *G0,
-                        std::string const *OFFT=nullptr,
-                        std::list<int> const *PA=nullptr, std::list<int> const *PB=nullptr,
-                        double const *W1A=nullptr, double const *W2A=nullptr,
-                        double const *W3A=nullptr, double const *W1B=nullptr,
-                        double const *W2B=nullptr, double const *W3B=nullptr,
-                        long const *SA=nullptr, long const *SB=nullptr);
+                        std::string const *OFFT = nullptr,
+                        std::list<int> const *PA = nullptr, std::list<int> const *PB = nullptr,
+                        double const *W1A = nullptr, double const *W2A = nullptr,
+                        double const *W3A = nullptr, double const *W1B = nullptr,
+                        double const *W2B = nullptr, double const *W3B = nullptr,
+                        long const *SA = nullptr, long const *SB = nullptr);
 
                     card const &operator() (
                         long const *EID, long const *PID,
                         long const *GA, long const *GB,
                         long const *G0,
                         double const *BIT,
-                        std::list<int> const *PA=nullptr, std::list<int> const *PB=nullptr,
-                        double const *W1A=nullptr, double const *W2A=nullptr,
-                        double const *W3A=nullptr, double const *W1B=nullptr,
-                        double const *W2B=nullptr, double const *W3B=nullptr,
-                        long const *SA=nullptr, long const *SB=nullptr);
+                        std::list<int> const *PA = nullptr, std::list<int> const *PB = nullptr,
+                        double const *W1A = nullptr, double const *W2A = nullptr,
+                        double const *W3A = nullptr, double const *W1B = nullptr,
+                        double const *W2B = nullptr, double const *W3B = nullptr,
+                        long const *SA = nullptr, long const *SB = nullptr);
 
                 private:
 
@@ -751,7 +750,6 @@ namespace dnvgl {
                     static bdf::types::card head;
 
                     using __base::element::form_EID;
-                    using __base::element::operator();
                     using __base::card::format_outlist;
 
                     // entry_type<long> static const form_EID;
@@ -913,30 +911,28 @@ namespace dnvgl {
                         */
                     entry_value<double> W3B;
 
-                    cbar(std::list<std::string> const &inp);
+                    explicit cbar(std::list<std::string> const &inp);
 
                     cbar();
 
-                    cbar(
-                        long const *EID, long const *PID,
-                        long const *GA, long const *GB,
-                        double const *X1, double const *X2, double const *X3,
-                        std::string const *OFFT=nullptr,
-                        std::list<int> const *PA=nullptr,
-                        std::list<int> const *PB=nullptr,
-                        double const *W1A=nullptr, double const *W2A=nullptr,
-                        double const *W3A=nullptr, double const *W1B=nullptr,
-                        double const *W2B=nullptr, double const *W3B=nullptr);
+                    cbar(long const *EID, long const *PID,
+                         long const *GA, long const *GB,
+                         double const *X1, double const *X2, double const *X3,
+                         std::string const *OFFT = nullptr,
+                         std::list<int> const *PA = nullptr,
+                         std::list<int> const *PB = nullptr,
+                         double const *W1A = nullptr, double const *W2A = nullptr,
+                         double const *W3A = nullptr, double const *W1B = nullptr,
+                         double const *W2B = nullptr, double const *W3B = nullptr);
 
-                    cbar(
-                        long const *EID, long const *PID,
-                        long const *GA, long const *GB, long const *G0,
-                        std::string const *OFFT=nullptr,
-                        std::list<int> const *PA=nullptr,
-                        std::list<int> const *PB=nullptr,
-                        double const *W1A=nullptr, double const *W2A=nullptr,
-                        double const *W3A=nullptr, double const *W1B=nullptr,
-                        double const *W2B=nullptr, double const *W3B=nullptr);
+                    cbar(long const *EID, long const *PID,
+                         long const *GA, long const *GB, long const *G0,
+                         std::string const *OFFT = nullptr,
+                         std::list<int> const *PA = nullptr,
+                         std::list<int> const *PB = nullptr,
+                         double const *W1A = nullptr, double const *W2A = nullptr,
+                         double const *W3A = nullptr, double const *W1B = nullptr,
+                         double const *W2B = nullptr, double const *W3B = nullptr);
 
                     void read(std::list<std::string> const &) override;
 
@@ -964,12 +960,12 @@ namespace dnvgl {
                         long const *EID, long const *PID,
                         long const *GA, long const *GB,
                         long const *G0,
-                        std::string const *OFFT=nullptr,
-                        std::list<int> const *PA=nullptr,
-                        std::list<int> const *PB=nullptr,
-                        double const *W1A=nullptr, double const *W2A=nullptr,
-                        double const *W3A=nullptr, double const *W1B=nullptr,
-                        double const *W2B=nullptr, double const *W3B=nullptr);
+                        std::string const *OFFT = nullptr,
+                        std::list<int> const *PA = nullptr,
+                        std::list<int> const *PB = nullptr,
+                        double const *W1A = nullptr, double const *W2A = nullptr,
+                        double const *W3A = nullptr, double const *W1B = nullptr,
+                        double const *W2B = nullptr, double const *W3B = nullptr);
 
                     /**
                      * \brief Returns instance with new values.
@@ -995,12 +991,12 @@ namespace dnvgl {
                         long const *EID, long const *PID,
                         long const *GA, long const *GB,
                         double const *X1, double const *X2, double const *X3,
-                        std::string const *OFFT=nullptr,
-                        std::list<int> const *PA=nullptr,
-                        std::list<int> const *PB=nullptr,
-                        double const *W1A=nullptr, double const *W2A=nullptr,
-                        double const *W3A=nullptr, double const *W1B=nullptr,
-                        double const *W2B=nullptr, double const *W3B=nullptr);
+                        std::string const *OFFT = nullptr,
+                        std::list<int> const *PA = nullptr,
+                        std::list<int> const *PB = nullptr,
+                        double const *W1A = nullptr, double const *W2A = nullptr,
+                        double const *W3A = nullptr, double const *W1B = nullptr,
+                        double const *W2B = nullptr, double const *W3B = nullptr);
 
                 private:
 

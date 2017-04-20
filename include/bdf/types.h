@@ -757,8 +757,8 @@ namespace dnvgl {
 
                     bdf_types type() const override {return _type;};
 
-                    entry_value<std::list<int>> inline check(
-                        entry_value<std::list<int>> val) const {
+                    static entry_value<std::list<int>> inline check(
+                        entry_value<std::list<int>> val) {
                         // if (!bounds.in_bounds(val.value)) {
                         //     std::ostringstream msg("!", std::ostringstream::ate);
                         //     msg << val.value

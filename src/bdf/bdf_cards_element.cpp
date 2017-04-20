@@ -59,9 +59,10 @@ element::element(long const *EID) : card(), EID(EID) {
     if (EID) form_EID.check(this->EID);
 }
 
-void element::operator() (long const *EID) {
+card const &element::operator() (long const *EID) {
     this->EID(EID);
     this->element::check_data();
+    return *this;
 }
 
 void element::collect_outdata(

@@ -11,6 +11,7 @@
 
 #pragma once
 
+// ReSharper disable once CppUnusedIncludeDirective
 #include <string>
 
 #if !defined _EXTFEM_STRING_H_
