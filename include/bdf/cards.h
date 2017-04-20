@@ -521,6 +521,8 @@ namespace dnvgl {
 
                     static bdf::types::card head;
 
+                    using __base::card::format_outlist;
+
                 public:
 
                     enddata(const std::list<std::string> &);
@@ -558,6 +560,8 @@ namespace dnvgl {
                 private:
 
                     static bdf::types::card head;
+
+                    using __base::card::format_outlist;
 
                     static const bdf::types::entry_type<long> form_ID;
                     static const bdf::types::entry_type<long> form_CP;
@@ -733,6 +737,19 @@ namespace dnvgl {
 
                     static bdf::types::card head;
 
+                    using __base::card::format_outlist;
+
+                    using __base::mat::form_MID;
+                    using __base::mat::form_G;
+                    using __base::mat::form_RHO;
+                    using __base::mat::form_A;
+                    using __base::mat::form_TREF;
+                    using __base::mat::form_GE;
+                    using __base::mat::form_ST;
+                    using __base::mat::form_SC;
+                    using __base::mat::form_SS;
+                    using __base::mat::form_MCSID;
+
                     // static const dnvgl::extfem::bdf::types::entry_type<long> form_MID;
                     static const bdf::types::entry_type<double> form_E;
                     // static const dnvgl::extfem::bdf::types::entry_type<double> form_G;
@@ -831,6 +848,18 @@ namespace dnvgl {
 
                     static bdf::types::card head;
 
+                    using __base::card::format_outlist;
+
+                    using __base::mat::form_MID;
+                    using __base::mat::form_G;
+                    using __base::mat::form_RHO;
+                    using __base::mat::form_A;
+                    using __base::mat::form_TREF;
+                    using __base::mat::form_GE;
+                    using __base::mat::form_ST;
+                    using __base::mat::form_SC;
+                    using __base::mat::form_SS;
+                    using __base::mat::form_MCSID;
 
                     // static const bdf::types::entry_type<long> form_MID;
                     // static const bdf::types::entry_type<double> form_G;
@@ -930,6 +959,9 @@ namespace dnvgl {
                 private:
 
                     static bdf::types::card head;
+
+                    using __base::card::format_outlist;
+
                     static const bdf::types::entry_type<std::string> form_N;
                     static const bdf::types::entry_type<long> form_IVAL;
                     static const bdf::types::entry_type<double> form_RVAL;

@@ -65,7 +65,12 @@ namespace dnvgl {
 
                 private:
 
-                    // bdf::types::entry_type<long> static const form_PID;
+                    bdf::types::card static head;
+
+                    using __base::card::format_outlist;
+
+                    using __base::property::form_PID;
+
                     bdf::types::entry_type<long> static const form_MID1;
                     bdf::types::entry_type<double> static const form_T;
                     bdf::types::entry_type<long> static const form_MID2;
@@ -79,12 +84,8 @@ namespace dnvgl {
 
                 public:
 
-                    // /** Property identification number. (Integer > 0)
-                    //  */
-                    // bdf::types::entry_value<long> PID;
-                    /** Material identification number for the membrane.
-                        (Integer > 0 or blank)
-                        */
+                    using __base::property::PID;
+
                     bdf::types::entry_value<long> MID1;
                     /** Default membrane thickness for `Ti` on the
                         connection entry. If `T` is blank then the
@@ -174,14 +175,16 @@ namespace dnvgl {
 
                     protected:
 
-                        // bdf::types::entry_type<long> static const form_PID;
+                        using __base::property::form_PID;
+
                         bdf::types::entry_type<long> static const form_MID;
 
                         beam_base(std::list<std::string> const&);
 
                     public:
 
-                        // bdf::types::entry_value<long> PID;
+                        using __base::property::PID;
+
                         bdf::types::entry_value<long> MID;
 
                         virtual types card_type() const override;
@@ -234,6 +237,13 @@ namespace dnvgl {
 
                 private:
 
+                    bdf::types::card static head;
+
+                    using __base::card::format_outlist;
+
+                    using __base::property::form_PID;
+                    using __base::beam_base::form_MID;
+
                     bdf::types::entry_type<double> static const form_A;
                     bdf::types::entry_type<double> static const form_I1;
                     bdf::types::entry_type<double> static const form_I2;
@@ -268,6 +278,9 @@ namespace dnvgl {
                     bdf::types::entry_type<double> static const form_N2_B;
 
                 public:
+
+                    using __base::property::PID;
+                    using __base::beam_base::MID;
 
                     // fields that might appear more than once
 
@@ -480,6 +493,13 @@ namespace dnvgl {
 
                 private:
 
+                    bdf::types::card static head;
+
+                    using __base::card::format_outlist;
+
+                    using __base::property::form_PID;
+                    using __base::beam_base::form_MID;
+
                     bdf::types::entry_type<std::string> static const form_GROUP;
                     bdf::types::entry_type<std::string> static const form_TYPE;
                     bdf::types::entry_type<double> static const form_DIM;
@@ -487,7 +507,20 @@ namespace dnvgl {
                     bdf::types::entry_type<std::string> static const form_SO;
                     bdf::types::entry_type<double> static const form_X_XB;
 
+                    using l_geom::dimnum1;
+                    using l_geom::dimnum2;
+                    using l_geom::dimnum3;
+                    using l_geom::dimnum4;
+                    using l_geom::dimnum5;
+                    using l_geom::dimnum6;
+                    using l_geom::dimnum10;
+
                 public:
+
+
+                    using __base::property::PID;
+                    using __base::beam_base::MID;
+
                     /** Cross-section group. (Character; Default =
                      * `MSCBML0`)
                      */
@@ -543,22 +576,13 @@ namespace dnvgl {
 
                 namespace __base {
                     /// Base class for `pbar` and `pbarl`.
-                    class bar_prop : public property {
+                    class bar_prop : public beam_base {
 
                     protected:
-                        // bdf::types::entry_type<long> static const form_PID;
-                        bdf::types::entry_type<long> static const form_MID;
-
-                    public:
-
-                        // /// `PID` : Property identification number. (Integer >
-                        // /// 0)
-                        // bdf::types::entry_value<long> PID;
-                        /// `MID` : Material identification number. (Integer >
-                        /// 0)
-                        bdf::types::entry_value<long> MID;
 
                         bar_prop(std::list<std::string> const&);
+
+                    public:
 
                         types card_type() const override;
                     };
@@ -585,6 +609,13 @@ namespace dnvgl {
 
                 private:
 
+                    bdf::types::card static head;
+
+                    using __base::card::format_outlist;
+
+                    using __base::property::form_PID;
+                    using __base::beam_base::form_MID;
+
                     bdf::types::entry_type<double> static const form_A;
                     bdf::types::entry_type<double> static const form_I1;
                     bdf::types::entry_type<double> static const form_I2;
@@ -604,23 +635,26 @@ namespace dnvgl {
 
                 public:
 
+                    using __base::property::PID;
+                    using __base::beam_base::MID;
+
                     /** Area of bar coss section. (Real; Default = 0.0)
                      */
                     bdf::types::entry_value<double> A;
                     /** Area moments of inertia. (Real; `I1` >= 0;
                         Default=0.0)
-                        */
+                     */
                     bdf::types::entry_value<double> I1;
                     /** Area moments of inertia. (Real; `I2` >= 0;
                         Default=0.0)
-                        */
+                     */
                     bdf::types::entry_value<double> I2;
                     /** Torsional constant. (Real)
                      */
                     bdf::types::entry_value<double> J;
                     /** Nonstructural mass per unit length. (Real,
                         Default=0.0)
-                        */
+                     */
                     bdf::types::entry_value<double> NSM;
                     /** Stress recovery coefficient. (Real; Default=0.0)
                      */
@@ -654,7 +688,7 @@ namespace dnvgl {
                     bdf::types::entry_value<double> K2;
                     /** Area moments of inertia. (Real; `I1`*`I2` > `I12`²;
                         Default=0.0)
-                        */
+                     */
                     bdf::types::entry_value<double> I12;
 
                     pbar(std::list<std::string> const&);
@@ -693,12 +727,30 @@ namespace dnvgl {
 
                 private:
 
+                    bdf::types::card static head;
+
+                    using __base::card::format_outlist;
+
+                    using __base::property::form_PID;
+                    using __base::beam_base::form_MID;
+
                     bdf::types::entry_type<std::string> static const form_GROUP;
                     bdf::types::entry_type<std::string> static const form_TYPE;
                     bdf::types::entry_type<double> static const form_DIM;
                     bdf::types::entry_type<double> static const form_NSM;
 
+                    using l_geom::dimnum1;
+                    using l_geom::dimnum2;
+                    using l_geom::dimnum3;
+                    using l_geom::dimnum4;
+                    using l_geom::dimnum5;
+                    using l_geom::dimnum6;
+                    using l_geom::dimnum10;
+
                 public:
+
+                    using __base::property::PID;
+                    using __base::beam_base::MID;
 
                     /** Cross-section group. (Character; Default =
                         `MSCBML0`)
@@ -751,7 +803,12 @@ namespace dnvgl {
 
                 private:
 
-                    // bdf::types::entry_type<long> static const form_PID;
+                    bdf::types::card static head;
+
+                    using __base::card::format_outlist;
+
+                    using __base::property::form_PID;
+
                     bdf::types::entry_type<long> static const form_MID;
                     bdf::types::entry_type<double> static const form_A;
                     bdf::types::entry_type<double> static const form_J;
@@ -760,12 +817,8 @@ namespace dnvgl {
 
                 public:
 
-                    // /** Property identification number. (Integer > 0)
-                    //  */
-                    // bdf::types::entry_value<long> PID;
-                    /** Material identification number. See Remarks 2.
-                        and 3. (Integer > 0)
-                        */
+                    using __base::property::PID;
+
                     bdf::types::entry_value<long> MID;
                     /** Area of the rod. (Real)
                      */
@@ -808,6 +861,8 @@ namespace dnvgl {
 // mode: c++
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j7 &&
+//   (make -C ../../cbuild test;
+//    ../../cbuild/tests/test_bdf_cards --use-colour no)"
 // coding: utf-8
 // End:

@@ -285,17 +285,17 @@ TEST_CASE("BDF MAT1 roundtrio test (min data).", "[bdf_mat1_roundtrip_2_reuse]")
         probe(lines);
 
         CHECK(probe.MID.value == 17);
-        CHECK(!bool(probe.MCSID));
+        CHECK_FALSE(probe.MCSID);
         CHECK(probe.E.value == 30000000.);
         CHECK(probe.G.value == 0.);
         CHECK(probe.NU.value == 0.);
         CHECK(probe.RHO.value == 4.28);
         CHECK(probe.A.value == 6.5e-6);
-        CHECK(!bool(probe.TREF));
+        CHECK_FALSE(probe.TREF);
         CHECK(probe.GE.value == .23);
-        CHECK(!bool(probe.ST));
-        CHECK(!bool(probe.SC));
-        CHECK(!bool(probe.SS));
+        CHECK_FALSE(probe.ST);
+        CHECK_FALSE(probe.SC);
+        CHECK_FALSE(probe.SS);
     }
 }
 

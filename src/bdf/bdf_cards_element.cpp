@@ -48,6 +48,8 @@ bdf::types::card element::head = bdf::types::card("<INVALID>");
 
 const entry_type<long> element::form_EID("EID", bound<long>(&cl1));
 
+element::element() : cards::__base::card() {}
+
 element::element(list<std::string> const &inp) :
 card(inp) {
     this->element::read(inp);

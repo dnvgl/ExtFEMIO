@@ -29,20 +29,13 @@ namespace dnvgl {
 
                     protected:
 
-                        entry_type<long>
-                        static const form_SID;
-                        entry_type<long>
-                        static const form_G;
-                        entry_type<long>
-                        static const form_CID;
-                        entry_type<double>
-                        static const form_F;
-                        entry_type<double>
-                        static const form_N1;
-                        entry_type<double>
-                        static const form_N2;
-                        entry_type<double>
-                        static const form_N3;
+                        entry_type<long> static const form_SID;
+                        entry_type<long> static const form_G;
+                        entry_type<long> static const form_CID;
+                        entry_type<double> static const form_F;
+                        entry_type<double> static const form_N1;
+                        entry_type<double> static const form_N2;
+                        entry_type<double> static const form_N3;
 
                     public:
 
@@ -116,6 +109,16 @@ vector.
 
                     static bdf::types::card head;
 
+                    using __base::momforce::form_SID;
+                    using __base::momforce::form_G;
+                    using __base::momforce::form_CID;
+                    using __base::momforce::form_F;
+                    using __base::momforce::form_N1;
+                    using __base::momforce::form_N2;
+                    using __base::momforce::form_N3;
+
+                    using __base::card::format_outlist;
+
                 public:
 
                     force();
@@ -157,6 +160,16 @@ vector.
                 private:
 
                     static bdf::types::card head;
+
+                    using __base::momforce::form_SID;
+                    using __base::momforce::form_G;
+                    using __base::momforce::form_CID;
+                    using __base::momforce::form_F;
+                    using __base::momforce::form_N1;
+                    using __base::momforce::form_N2;
+                    using __base::momforce::form_N3;
+
+                    using __base::card::format_outlist;
 
                 public:
 
@@ -248,18 +261,17 @@ Defines a scalar mass element without reference to a property entry.
                 class cmass2 : public __base::element {
 
                     bdf::types::card static head;
-                    // dnvgl::extfem::bdf::types::entry_type<long>
-                    // static const form_EID;
-                    entry_type<double>
-                    static const form_M;
-                    entry_type<long>
-                    static const form_G1;
-                    entry_type<long>
-                    static const form_G2;
-                    entry_type<std::list<int>>
-                    static const form_C1;
-                    entry_type<std::list<int>>
-                    static const form_C2;
+
+                    using __base::card::format_outlist;
+
+                    using __base::element::form_EID;
+
+                    // entry_type<long> static const form_EID;
+                    entry_type<double> static const form_M;
+                    entry_type<long> static const form_G1;
+                    entry_type<long> static const form_G2;
+                    entry_type<std::list<int>> static const form_C1;
+                    entry_type<std::list<int>> static const form_C2;
 
                 public:
                     // /** Unique element identification number. (0 < Integer
@@ -360,14 +372,15 @@ reference to a property entry.
 
                 class cmass4 : public __base::element {
                     bdf::types::card static head;
-                    // dnvgl::extfem::bdf::types::entry_type<long>
-                    // static const form_EID;
-                    entry_type<double>
-                    static const form_M;
-                    entry_type<long>
-                    static const form_S1;
-                    entry_type<long>
-                    static const form_S2;
+
+                    using __base::card::format_outlist;
+
+                    using __base::element::form_EID;
+
+                    // entry_type<long> // static const form_EID;
+                    entry_type<double> static const form_M;
+                    entry_type<long> static const form_S1;
+                    entry_type<long> static const form_S2;
 
                 public:
                     // /** Unique element identification number. (0 < Integer
@@ -485,16 +498,14 @@ Defines acceleration vectors for gravity or other acceleration loading.
                 class grav : public __base::card {
 
                     bdf::types::card static head;
-                    entry_type<long>
-                    static const form_SID;
-                    entry_type<long>
-                    static const form_CID;
-                    entry_type<double>
-                    static const form_A;
-                    entry_type<double>
-                    static const form_Ni;
-                    entry_type<long>
-                    static const form_MB;
+
+                    using __base::card::format_outlist;
+
+                    entry_type<long> static const form_SID;
+                    entry_type<long> static const form_CID;
+                    entry_type<double> static const form_A;
+                    entry_type<double> static const form_Ni;
+                    entry_type<long> static const form_MB;
 
                 public:
 /// Set identification number. (Integer > 0)
@@ -592,14 +603,12 @@ Defines a static load as a linear combination of load std::sets defined via
 
                     bdf::types::card static head;
 
-                    entry_type<long>
-                    static const form_SID;
-                    entry_type<double>
-                    static const form_S;
-                    entry_type<double>
-                    static const form_Si;
-                    entry_type<long>
-                    static const form_Li;
+                    using __base::card::format_outlist;
+
+                    entry_type<long> static const form_SID;
+                    entry_type<double> static const form_S;
+                    entry_type<double> static const form_Si;
+                    entry_type<long> static const form_Li;
 
                 public:
 

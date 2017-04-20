@@ -31,15 +31,19 @@ namespace dnvgl {
                         static bdf::types::card head;
                         entry_type<long> static const form_EID;
 
+                        element();
+
+                        element(long const *EID);
+
                     public:
+
                         element(std::list<std::string> const &);
 
                     protected:
-                        element(long const *EID);
 
                         void operator() (long const *EID);
 
-                        void collect_outdata(
+                        virtual void collect_outdata(
                             std::list<std::unique_ptr<format_entry> >&) const override;
 
                         void check_data() const override;
@@ -238,6 +242,25 @@ namespace dnvgl {
 
                     static bdf::types::card head;
 
+                    using __base::element::form_EID;
+
+                    using __base::shell::form_PID;
+                    using __base::shell::form_G1;
+                    using __base::shell::form_G2;
+                    using __base::shell::form_G3;
+                    using __base::shell::form_G4;
+                    using __base::shell::form_MCID;
+                    using __base::shell::form_THETA;
+                    using __base::shell::form_ZOFFS;
+                    using __base::shell::form_TFLAG;
+                    using __base::shell::form_T1;
+                    using __base::shell::form_T2;
+                    using __base::shell::form_T3;
+                    using __base::shell::form_T4;
+
+                    using __base::element::operator();
+                    using __base::card::format_outlist;
+
                 public:
 
                     ctria3();
@@ -310,6 +333,25 @@ namespace dnvgl {
                 private:
 
                     static bdf::types::card head;
+
+                    using __base::element::form_EID;
+
+                    using __base::shell::form_PID;
+                    using __base::shell::form_G1;
+                    using __base::shell::form_G2;
+                    using __base::shell::form_G3;
+                    using __base::shell::form_G4;
+                    using __base::shell::form_MCID;
+                    using __base::shell::form_THETA;
+                    using __base::shell::form_ZOFFS;
+                    using __base::shell::form_TFLAG;
+                    using __base::shell::form_T1;
+                    using __base::shell::form_T2;
+                    using __base::shell::form_T3;
+                    using __base::shell::form_T4;
+
+                    using __base::element::operator();
+                    using __base::card::format_outlist;
 
                 public:
 
@@ -394,6 +436,10 @@ namespace dnvgl {
 
                     static bdf::types::card head;
 
+                    using __base::element::form_EID;
+                    using __base::element::operator();
+                    using __base::card::format_outlist;
+
                     // entry_type<long> static const form_EID;
                     entry_type<long> static const form_PID;
                     entry_type<long> static const form_GA;
@@ -442,6 +488,7 @@ namespace dnvgl {
                     //     Integer < 100,000,000)
                     // */
                     // entry_value<long> EID;
+                    using __base::element::EID;
                     /** Property identification number of `PBEAM`, `PBCOMP`
                         or `PBEAML` entry. (Integer > 0; Default = `EID`)
                         */
@@ -562,7 +609,57 @@ namespace dnvgl {
                         */
                     entry_value<long> SB;
 
+                    cbeam();
+
                     cbeam(std::list<std::string> const &inp);
+
+                    cbeam(
+                        long const *EID, long const *PID,
+                        long const *GA, long const *GB,
+                        double const *X1,
+                        double const *X2,
+                        double const *X3,
+                        std::string const *OFFT=nullptr,
+                        std::list<int> const *PA=nullptr, std::list<int> const *PB=nullptr,
+                        double const *W1A=nullptr, double const *W2A=nullptr,
+                        double const *W3A=nullptr, double const *W1B=nullptr,
+                        double const *W2B=nullptr, double const *W3B=nullptr,
+                        long const *SA=nullptr, long const *SB=nullptr);
+
+                    cbeam(
+                        long const *EID, long const *PID,
+                        long const *GA, long const *GB,
+                        double const *X1,
+                        double const *X2,
+                        double const *X3,
+                        double const *BIT,
+                        std::list<int> const *PA=nullptr, std::list<int> const *PB=nullptr,
+                        double const *W1A=nullptr, double const *W2A=nullptr,
+                        double const *W3A=nullptr, double const *W1B=nullptr,
+                        double const *W2B=nullptr, double const *W3B=nullptr,
+                        long const *SA=nullptr, long const *SB=nullptr);
+
+                    cbeam(
+                        long const *EID, long const *PID,
+                        long const *GA, long const *GB,
+                        long const *G0,
+                        std::string const *OFFT=nullptr,
+                        std::list<int> const *PA=nullptr, std::list<int> const *PB=nullptr,
+                        double const *W1A=nullptr, double const *W2A=nullptr,
+                        double const *W3A=nullptr, double const *W1B=nullptr,
+                        double const *W2B=nullptr, double const *W3B=nullptr,
+                        long const *SA=nullptr, long const *SB=nullptr);
+
+                    cbeam(
+                        long const *EID, long const *PID,
+                        long const *GA, long const *GB,
+                        long const *G0,
+                        double const *BIT,
+                        std::list<int> const *PA=nullptr, std::list<int> const *PB=nullptr,
+                        double const *W1A=nullptr, double const *W2A=nullptr,
+                        double const *W3A=nullptr, double const *W1B=nullptr,
+                        double const *W2B=nullptr, double const *W3B=nullptr,
+                        long const *SA=nullptr, long const *SB=nullptr);
 
                     types card_type() const override;;
 
@@ -581,7 +678,7 @@ namespace dnvgl {
                         double const *W1A=nullptr, double const *W2A=nullptr,
                         double const *W3A=nullptr, double const *W1B=nullptr,
                         double const *W2B=nullptr, double const *W3B=nullptr,
-                        long const *SA=nullptr, long const *SB=nullptr) = delete;
+                        long const *SA=nullptr, long const *SB=nullptr);
 
                     card const &operator() (
                         long const *EID, long const *PID,
@@ -594,7 +691,7 @@ namespace dnvgl {
                         double const *W1A=nullptr, double const *W2A=nullptr,
                         double const *W3A=nullptr, double const *W1B=nullptr,
                         double const *W2B=nullptr, double const *W3B=nullptr,
-                        long const *SA=nullptr, long const *SB=nullptr) = delete;
+                        long const *SA=nullptr, long const *SB=nullptr);
 
                     card const &operator() (
                         long const *EID, long const *PID,
@@ -605,7 +702,7 @@ namespace dnvgl {
                         double const *W1A=nullptr, double const *W2A=nullptr,
                         double const *W3A=nullptr, double const *W1B=nullptr,
                         double const *W2B=nullptr, double const *W3B=nullptr,
-                        long const *SA=nullptr, long const *SB=nullptr) = delete;
+                        long const *SA=nullptr, long const *SB=nullptr);
 
                     card const &operator() (
                         long const *EID, long const *PID,
@@ -616,7 +713,7 @@ namespace dnvgl {
                         double const *W1A=nullptr, double const *W2A=nullptr,
                         double const *W3A=nullptr, double const *W1B=nullptr,
                         double const *W2B=nullptr, double const *W3B=nullptr,
-                        long const *SA=nullptr, long const *SB=nullptr) = delete;
+                        long const *SA=nullptr, long const *SB=nullptr);
 
                 private:
 
@@ -652,6 +749,10 @@ namespace dnvgl {
                 private:
 
                     static bdf::types::card head;
+
+                    using __base::element::form_EID;
+                    using __base::element::operator();
+                    using __base::card::format_outlist;
 
                     // entry_type<long> static const form_EID;
                     entry_type<long> static const form_PID;
@@ -925,6 +1026,10 @@ namespace dnvgl {
                 private:
 
                     static bdf::types::card head;
+
+                    using __base::element::form_EID;
+                    using __base::element::operator();
+                    using __base::card::format_outlist;
 
                     // entry_type<long> static const form_EID;
                     entry_type<long> static const form_PID;

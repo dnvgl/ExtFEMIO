@@ -28,18 +28,21 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
+using namespace dnvgl::extfem;
+using namespace bdf;
+using namespace type_bounds;
+using namespace cards;
+
+using types::entry_type;
+
 namespace {
     const long lc1 = 1;
     const double dc0 = 0.;
 }
 
-using namespace std;
-
-using namespace dnvgl::extfem::bdf;
-
-using types::entry_type;
-using namespace type_bounds;
-using namespace cards;
+bdf::types::card cbeam::head = bdf::types::card("CBEAM");
 
 // const entry_type<long> cbeam::form_EID(
 //    "EID", bound<long>(&lc1));
@@ -75,9 +78,101 @@ const entry_type<long> cbeam::form_SA(
 const entry_type<long> cbeam::form_SB(
     "SB", bound<long>(&lc1, nullptr, nullptr, true)); // minval=1, default=None)
 
+cbeam::cbeam() : element() {}
+
 cbeam::cbeam(list<std::string> const &inp) :
-element(inp) {
+        element(inp) {
     this->cbeam::read(inp);
+}
+
+cbeam::cbeam(long const *EID, long const *PID, long const *GA,
+             long const *GB, double const *X1, double const *X2,
+             double const *X3, std::string const *OFFT/*=nullptr*/,
+             std::list<int> const *PA/*=nullptr*/,
+             std::list<int> const *PB/*=nullptr*/,
+             double const *W1A/*=nullptr*/,
+             double const *W2A/*=nullptr*/,
+             double const *W3A/*=nullptr*/,
+             double const *W1B/*=nullptr*/,
+             double const *W2B/*=nullptr*/,
+             double const *W3B/*=nullptr*/,
+             long const *SA/*=nullptr*/,
+             long const *SB/*=nullptr*/) :
+        element(EID), choose_dir_code(CHOOSE_DIR_CODE::has_DVEC),
+        choose_offt_bit(CHOOSE_OFFT_BIT::has_OFFT), PID(PID),
+        GA(GA), GB(GB), X1(X1), G0(nullptr/*G0*/), X2(X2), X3(X3),
+        BIT(nullptr/*BIT*/), OFFT(OFFT),
+        PA(PA), PB(PB),
+        W1A(W1A), W2A(W2A), W3A(W3A),
+        W1B(W1B), W2B(W2B), W3B(W3B),
+        SA(SA), SB(SB) {
+    this->element::check_data();
+    this->cbeam::check_data();
+}
+
+cbeam::cbeam(long const *EID, long const *PID,
+             long const *GA, long const *GB,
+             double const *X1,
+             double const *X2,
+             double const *X3,
+             double const *BIT,
+             std::list<int> const *PA/*=nullptr*/, std::list<int> const *PB/*=nullptr*/,
+             double const *W1A/*=nullptr*/, double const *W2A/*=nullptr*/,
+             double const *W3A/*=nullptr*/, double const *W1B/*=nullptr*/,
+             double const *W2B/*=nullptr*/, double const *W3B/*=nullptr*/,
+             long const *SA/*=nullptr*/, long const *SB/*=nullptr*/) :
+        element(EID), choose_dir_code(CHOOSE_DIR_CODE::has_DVEC),
+        choose_offt_bit(CHOOSE_OFFT_BIT::has_BIT), PID(PID),
+        GA(GA), GB(GB), X1(X1), G0(nullptr/*G0*/), X2(X2), X3(X3),
+        BIT(BIT), OFFT(nullptr/*OFFT*/),
+        PA(PA), PB(PB),
+        W1A(W1A), W2A(W2A), W3A(W3A),
+        W1B(W1B), W2B(W2B), W3B(W3B),
+        SA(SA), SB(SB) {
+    this->element::check_data();
+    this->cbeam::check_data();
+}
+
+cbeam::cbeam(long const *EID, long const *PID,
+             long const *GA, long const *GB,
+             long const *G0,
+             std::string const *OFFT/*=nullptr*/,
+             std::list<int> const *PA/*=nullptr*/, std::list<int> const *PB/*=nullptr*/,
+             double const *W1A/*=nullptr*/, double const *W2A/*=nullptr*/,
+             double const *W3A/*=nullptr*/, double const *W1B/*=nullptr*/,
+             double const *W2B/*=nullptr*/, double const *W3B/*=nullptr*/,
+             long const *SA/*=nullptr*/, long const *SB/*=nullptr*/) :
+        element(EID), choose_dir_code(CHOOSE_DIR_CODE::has_DCODE),
+        choose_offt_bit(CHOOSE_OFFT_BIT::has_OFFT), PID(PID),
+        GA(GA), GB(GB), X1(nullptr/*X1*/), G0(G0), X2(nullptr/*X2*/), X3(nullptr/*X3*/),
+        BIT(nullptr/*BIT*/), OFFT(OFFT),
+        PA(PA), PB(PB),
+        W1A(W1A), W2A(W2A), W3A(W3A),
+        W1B(W1B), W2B(W2B), W3B(W3B),
+        SA(SA), SB(SB) {
+    this->element::check_data();
+    this->cbeam::check_data();
+}
+
+cbeam::cbeam(long const *EID, long const *PID,
+             long const *GA, long const *GB,
+             long const *G0,
+             double const *BIT,
+             std::list<int> const *PA/*=nullptr*/, std::list<int> const *PB/*=nullptr*/,
+             double const *W1A/*=nullptr*/, double const *W2A/*=nullptr*/,
+             double const *W3A/*=nullptr*/, double const *W1B/*=nullptr*/,
+             double const *W2B/*=nullptr*/, double const *W3B/*=nullptr*/,
+             long const *SA/*=nullptr*/, long const *SB/*=nullptr*/) :
+        element(EID), choose_dir_code(CHOOSE_DIR_CODE::has_DCODE),
+        choose_offt_bit(CHOOSE_OFFT_BIT::has_BIT), PID(PID),
+        GA(GA), GB(GB), X1(nullptr/*X1*/), G0(G0), X2(nullptr/*X2*/), X3(nullptr/*X3*/),
+        BIT(BIT), OFFT(nullptr/*OFFT*/),
+        PA(PA), PB(PB),
+        W1A(W1A), W2A(W2A), W3A(W3A),
+        W1B(W1B), W2B(W2B), W3B(W3B),
+        SA(SA), SB(SB) {
+    this->element::check_data();
+    this->cbeam::check_data();
 }
 
 cards::types cbeam::card_type() const {
@@ -189,7 +284,75 @@ void cbeam::read(list<std::string> const &inp) {
 
 void cbeam::collect_outdata(
     list<unique_ptr<format_entry> > &res) const {
-    throw errors::error("CBEAM", "can't write CBEAM.");
+
+    if (!EID) return;
+
+    res.push_back(unique_ptr<format_entry>(format(head)));
+
+    res.push_back(unique_ptr<format_entry>(format<long>(form_EID, EID)));
+    res.push_back(unique_ptr<format_entry>(format<long>(form_PID, PID)));
+    res.push_back(unique_ptr<format_entry>(format<long>(form_GA, GA)));
+    res.push_back(unique_ptr<format_entry>(format<long>(form_GB, GB)));
+    if (choose_dir_code == CHOOSE_DIR_CODE::has_DCODE) {
+        res.push_back(unique_ptr<format_entry>(format<long>(form_G0, G0)));
+        if ((bool(OFFT) || bool(BIT)) || bool(PA) || bool(PB) || bool(W1A) ||
+            bool(W2A) || bool(W3A) || bool(W1B) || bool(W2B) || bool(W3B)) {
+            res.push_back(unique_ptr<format_entry>(format(empty)));
+            res.push_back(unique_ptr<format_entry>(format(empty)));
+        }
+    } else {
+        res.push_back(unique_ptr<format_entry>(format<double>(form_X1, X1)));
+        res.push_back(unique_ptr<format_entry>(format<double>(form_X2, X2)));
+        res.push_back(unique_ptr<format_entry>(format<double>(form_X3, X3)));
+    }
+
+    if ((bool(OFFT) || bool(BIT)) || bool(PA) || bool(PB) || bool(W1A) ||
+        bool(W2A) || bool(W3A) || bool(W1B) || bool(W2B) || bool(W3B))
+        if (choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_BIT)
+            res.push_back(
+                unique_ptr<format_entry>(format<double>(form_BIT, BIT)));
+        else
+            res.push_back(
+                unique_ptr<format_entry>(format<std::string>(form_OFFT, OFFT)));
+    else goto cont;
+
+    if (bool(PA) || bool(PB) || bool(W1A) || bool(W2A) || bool(W3A) ||
+        bool(W1B) || bool(W2B) || bool(W3B) || bool(SA) || bool(SB))
+        res.push_back(
+            unique_ptr<format_entry>(format<list<int> >(form_PA, PA)));
+    else goto cont;
+    if (bool(PB) || bool(W1A) || bool(W2A) || bool(W3A) || bool(W1B) ||
+        bool(W2B) || bool(W3B) || bool(SA) || bool(SB))
+        res.push_back(
+            unique_ptr<format_entry>(format<list<int> >(form_PB, PB)));
+    else goto cont;
+    if (bool(W1A) || bool(W2A) || bool(W3A) || bool(W1B) || bool(W2B) ||
+        bool(W3B) || bool(SA) || bool(SB))
+        res.push_back(unique_ptr<format_entry>(format<double>(form_W1A, W1A)));
+    else goto cont;
+    if (bool(W2A) || bool(W3A) || bool(W1B) || bool(W2B) || bool(W3B) ||
+        bool(SA) || bool(SB))
+        res.push_back(unique_ptr<format_entry>(format<double>(form_W2A, W2A)));
+    else goto cont;
+    if (bool(W3A) || bool(W1B) || bool(W2B) || bool(W3B) || bool(SA) || bool(SB))
+        res.push_back(unique_ptr<format_entry>(format<double>(form_W3A, W3A)));
+    else goto cont;
+    if (bool(W1B) || bool(W2B) || bool(W3B) || bool(SA) || bool(SB))
+        res.push_back(unique_ptr<format_entry>(format<double>(form_W1B, W1B)));
+    else goto cont;
+    if (bool(W2B) || bool(W3B) || bool(SA) || bool(SB))
+        res.push_back(unique_ptr<format_entry>(format<double>(form_W2B, W2B)));
+    else goto cont;
+    if (bool(W3B) || bool(SA) || bool(SB))
+        res.push_back(unique_ptr<format_entry>(format<double>(form_W3B, W3B)));
+    else goto cont;
+    if (bool(SA) || bool(SB))
+        res.push_back(unique_ptr<format_entry>(format<long>(form_SA, SA)));
+    else goto cont;
+    if (bool(SB))
+        res.push_back(unique_ptr<format_entry>(format<long>(form_SB, SB)));
+cont:
+    return;
 }
 
 cards::__base::card const &cbeam::operator()(list<std::string> const &inp) {
@@ -219,6 +382,154 @@ void cbeam::check_data() const {
     if (W3B) form_W3B.check(this->W3B);
     if (SA) form_SA.check(this->SA);
     if (SB) form_SB.check(this->SB);
+}
+
+cards::__base::card const &cbeam::operator() (
+    long const *EID, long const *PID,
+    long const *GA, long const *GB,
+    double const *X1, double const *X2, double const *X3,
+    std::string const *OFFT/*=nullptr*/,
+    std::list<int> const *PA/*=nullptr*/, std::list<int> const *PB/*=nullptr*/,
+    double const *W1A/*=nullptr*/, double const *W2A/*=nullptr*/,
+    double const *W3A/*=nullptr*/, double const *W1B/*=nullptr*/,
+    double const *W2B/*=nullptr*/, double const *W3B/*=nullptr*/,
+    long const *SA/*=nullptr*/, long const *SB/*=nullptr*/) {
+    choose_dir_code = CHOOSE_DIR_CODE::has_DVEC;
+    choose_offt_bit = CHOOSE_OFFT_BIT::has_OFFT;
+    this->element::operator() (EID);
+    this->PID(PID);
+    this->GA(GA);
+    this->GB(GB);
+    this->X1(X1);
+    this->G0(nullptr);
+    this->X2(X2);
+    this->X3(X3);
+    this->BIT(nullptr);
+    this->OFFT(OFFT);
+    this->PA(PA);
+    this->PB(PB);
+    this->W1A(W1A);
+    this->W2A(W2A);
+    this->W3A(W3A);
+    this->W1B(W1B);
+    this->W2B(W2B);
+    this->W3B(W3B);
+    this->SA(SA);
+    this->SB(SB);
+    this->element::check_data();
+    this->cbeam::check_data();
+    return *this;
+}
+
+cards::__base::card const &cbeam::operator() (
+    long const *EID, long const *PID,
+    long const *GA, long const *GB,
+    double const *X1, double const *X2, double const *X3,
+    double const *BIT,
+    std::list<int> const *PA/*=nullptr*/, std::list<int> const *PB/*=nullptr*/,
+    double const *W1A/*=nullptr*/, double const *W2A/*=nullptr*/,
+    double const *W3A/*=nullptr*/, double const *W1B/*=nullptr*/,
+    double const *W2B/*=nullptr*/, double const *W3B/*=nullptr*/,
+    long const *SA/*=nullptr*/, long const *SB/*=nullptr*/) {
+    choose_dir_code = CHOOSE_DIR_CODE::has_DVEC;
+    choose_offt_bit = CHOOSE_OFFT_BIT::has_BIT;
+    this->element::operator() (EID);
+    this->PID(PID);
+    this->GA(GA);
+    this->GB(GB);
+    this->X1(X1);
+    this->G0(nullptr);
+    this->X2(X2);
+    this->X3(X3);
+    this->BIT(BIT);
+    this->OFFT(nullptr);
+    this->PA(PA);
+    this->PB(PB);
+    this->W1A(W1A);
+    this->W2A(W2A);
+    this->W3A(W3A);
+    this->W1B(W1B);
+    this->W2B(W2B);
+    this->W3B(W3B);
+    this->SA(SA);
+    this->SB(SB);
+    this->element::check_data();
+    this->cbeam::check_data();
+    return *this;
+}
+
+cards::__base::card const &cbeam::operator() (
+    long const *EID, long const *PID,
+    long const *GA, long const *GB, long const *G0,
+    std::string const *OFFT/*=nullptr*/,
+    std::list<int> const *PA/*=nullptr*/, std::list<int> const *PB/*=nullptr*/,
+    double const *W1A/*=nullptr*/, double const *W2A/*=nullptr*/,
+    double const *W3A/*=nullptr*/, double const *W1B/*=nullptr*/,
+    double const *W2B/*=nullptr*/, double const *W3B/*=nullptr*/,
+    long const *SA/*=nullptr*/, long const *SB/*=nullptr*/) {
+    this->element::operator() (EID);
+    choose_dir_code = CHOOSE_DIR_CODE::has_DCODE;
+    choose_offt_bit = CHOOSE_OFFT_BIT::has_OFFT;
+    this->element::operator() (EID);
+    this->PID(PID);
+    this->GA(GA);
+    this->GB(GB);
+    this->X1(nullptr);
+    this->G0(G0);
+    this->X2(nullptr);
+    this->X3(nullptr);
+    this->BIT(nullptr);
+    this->OFFT(OFFT);
+    this->PA(PA);
+    this->PB(PB);
+    this->W1A(W1A);
+    this->W2A(W2A);
+    this->W3A(W3A);
+    this->W1B(W1B);
+    this->W2B(W2B);
+    this->W3B(W3B);
+    this->SA(SA);
+    this->SB(SB);
+    this->element::check_data();
+    this->cbeam::check_data();
+    return *this;
+}
+
+cards::__base::card const &cbeam::operator() (
+    long const *EID, long const *PID,
+    long const *GA, long const *GB, long const *G0,
+    double const *BIT,
+    std::list<int> const *PA/*=nullptr*/, std::list<int> const *PB/*=nullptr*/,
+    double const *W1A/*=nullptr*/, double const *W2A/*=nullptr*/,
+    double const *W3A/*=nullptr*/, double const *W1B/*=nullptr*/,
+    double const *W2B/*=nullptr*/, double const *W3B/*=nullptr*/,
+    long const *SA/*=nullptr*/, long const *SB/*=nullptr*/) {
+    this->element::operator() (EID);
+    choose_dir_code = CHOOSE_DIR_CODE::has_DCODE;
+    choose_offt_bit = CHOOSE_OFFT_BIT::has_BIT;
+    this->element::operator() (EID);
+    this->PID(PID);
+    this->GA(GA);
+    this->GB(GB);
+    this->X1(nullptr);
+    this->G0(G0);
+    this->X2(nullptr);
+    this->X3(nullptr);
+    this->BIT(BIT);
+    this->OFFT(nullptr);
+    this->PA(PA);
+    this->PB(PB);
+    this->W1A(W1A);
+    this->W2A(W2A);
+    this->W3A(W3A);
+    this->W1B(W1B);
+    this->W2B(W2B);
+    this->W3B(W3B);
+    this->SA(SA);
+    this->SB(SB);
+    this->element::check_data();
+    this->cbeam::check_data();
+    return *this;
 }
 
 // Local Variables:
