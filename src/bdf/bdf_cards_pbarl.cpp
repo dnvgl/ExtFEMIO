@@ -127,10 +127,20 @@ bdf::cards::__base::card const &pbarl::operator()(list<std::string> const &inp) 
     return *this;
 }
 
+void pbarl::check_data() const {
+    this->bar_prop::check_data();
+    if (GROUP) pbarl::form_GROUP.check(GROUP);
+    if (TYPE) pbarl::form_TYPE.check(TYPE);
+    if (DIM.size()>0) for (auto pos : DIM) pbarl::form_DIM.check(pos);
+    if (NSM) pbarl::form_NSM.check(NSM);
+}
+
 // Local Variables:
 // mode: c++
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j7 &&
+//    (make -C ../../cbuild test ||
+//     ../../cbuild/tests/test_bdf_cards --use-colour no)"
 // End:

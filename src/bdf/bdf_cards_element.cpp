@@ -59,12 +59,16 @@ element::element(long const *EID) : card(), EID(EID) {
 
 void element::operator() (long const *EID) {
     this->EID(EID);
-    if (EID) form_EID.check(this->EID);
+    this->element::check_data();
 }
 
 void element::collect_outdata(
     list<unique_ptr<format_entry> >&) const {
     throw not_implemented(__FILE__, __LINE__, "can't write write generic ELEMENT.");
+}
+
+void element::check_data() const {
+    if (EID) form_EID.check(EID);
 }
 
 void element::read(list<std::string> const &inp) {

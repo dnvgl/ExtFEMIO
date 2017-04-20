@@ -179,6 +179,25 @@ void pbeaml::collect_outdata(
     throw std::not_implemented(__FILE__, __LINE__, "can't write PBEAML.");
 }
 
+void pbeaml::check_data() const {
+    this->beam_prop::check_data();
+    if (GROUP) pbeaml::form_GROUP.check(GROUP);
+    if (TYPE) pbeaml::form_TYPE.check(TYPE);
+    if (DIM.size() > 0)
+        for (auto pos : DIM)
+            for (auto ppos : pos)
+                pbeaml::form_DIM.check(ppos);
+    if (NSM.size() > 0)
+        for (auto pos : NSM)
+            pbeaml::form_NSM.check(pos);
+    if (SO.size() > 0)
+        for (auto pos : SO)
+            pbeaml::form_SO.check(pos);
+    if (X_XB.size() > 0)
+        for (auto pos : X_XB)
+            pbeaml::form_X_XB.check(pos);
+ }
+
 cards::__base::card const &pbeaml::operator() (list<std::string> const &inp) {
     this->pbeaml::read(inp);
     return *this;

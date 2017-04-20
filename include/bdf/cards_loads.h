@@ -93,6 +93,8 @@ namespace dnvgl {
 
                         void collect_outdata (
                             std::list<std::unique_ptr<format_entry> > &) const override;
+
+                        void check_data() const override;
                     };
                 }
 
@@ -314,6 +316,8 @@ Defines a scalar mass element without reference to a property entry.
 
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> >&) const override;
+
+                    void check_data() const override;
                 };
 
 /// Handle Nastran Bulk CMASS4 entries.
@@ -407,6 +411,8 @@ reference to a property entry.
 
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> >&) const override;
+
+                    void check_data() const override;
                 };
 
 /// Handle Nastran Bulk GRAV entries.
@@ -560,6 +566,8 @@ Defines acceleration vectors for gravity or other acceleration loading.
 
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> >&) const override;
+
+                    void check_data() const override;
                 };
 
 /// Handle Nastran Bulk `LOAD` entries.
@@ -629,6 +637,8 @@ Defines a static load as a linear combination of load std::sets defined via
 
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> > &res) const override;
+
+                    void check_data() const override;
                 };
             }
         }

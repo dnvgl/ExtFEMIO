@@ -102,7 +102,7 @@ namespace dnvgl {
                         return this->default_val;
                     };
 
-                    bool in_bounds(const _Ty &val) const {
+                    bool in_bounds(_Ty const &val) const {
                         return ((!has_min() || val >= this->min_val) &&
                                 (!has_max() || val <= this->max_val));
                     };
@@ -111,6 +111,10 @@ namespace dnvgl {
                         return allow_empty;
                     };
                 };
+
+                template <>
+                bool bound<std::complex<double>>::in_bounds(
+                    std::complex<double> const &val) const;
 
                 template<>
                 class bound<std::string> : public __base::type_bound{

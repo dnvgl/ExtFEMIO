@@ -514,6 +514,8 @@ void unknown::collect_outdata(
     throw errors::error("UNKNOWN", "can't write UNKNOWN.");
 }
 
+void unknown::check_data() const {}
+
 void unknown::read(list<std::string> const &inp) {
 }
 

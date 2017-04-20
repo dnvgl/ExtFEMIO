@@ -37,60 +37,57 @@ using namespace std;
 using namespace dnvgl::extfem;
 using namespace bdf;
 using namespace cards;
+using namespace cards::__base;
 
 using bdf::types::entry_type;
 using namespace type_bounds;
 
-entry_type<long> const cards::__base::momforce::form_SID(
+entry_type<long> const momforce::form_SID(
     "SID", bound<long>(&cl1));
-entry_type<long> const cards::__base::momforce::form_G(
+entry_type<long> const momforce::form_G(
     "G", bound<long>(&cl1));
-entry_type<long> const cards::__base::momforce::form_CID(
+entry_type<long> const momforce::form_CID(
     "CID", bound<long>(&cl0, nullptr, &cl0));
-entry_type<double> const cards::__base::momforce::form_F("F");
-entry_type<double> const cards::__base::momforce::form_N1(
+entry_type<double> const momforce::form_F("F");
+entry_type<double> const momforce::form_N1(
     "N1", bound<double>(nullptr, nullptr, &cd0));
-entry_type<double> const cards::__base::momforce::form_N2(
+entry_type<double> const momforce::form_N2(
     "N2", bound<double>(nullptr, nullptr, &cd0));
-entry_type<double> const cards::__base::momforce::form_N3(
+entry_type<double> const momforce::form_N3(
     "N3", bound<double>(nullptr, nullptr, &cd0));
 
-cards::__base::momforce::momforce() : card() {}
+momforce::momforce() : card() {}
 
-cards::__base::momforce::momforce(list<std::string> const &inp) :
+momforce::momforce(list<std::string> const &inp) :
 card(inp) {
     this->momforce::read(inp);
 }
 
-cards::__base::momforce::momforce(
+momforce::momforce(
     long const *SID, long const *G, long const *CID,
     double const *F,
     double const *N1, double const *N2, double const *N3) :
-    SID(*SID), G(*G), CID(*CID), F(*F), N1(N1), N2(N2), N3(N3) {}
+    SID(*SID), G(*G), CID(*CID), F(*F), N1(N1), N2(N2), N3(N3) {
+    this->momforce::check_data();
+}
 
-cards::__base::card const &cards::__base::momforce::operator() (
+card const &momforce::operator() (
     long const *SID, long const *G, long const *CID,
     double const *F,
     double const *N1, double const *N2/*=nullptr*/,
     double const *N3/*=nullptr*/) {
-    this->SID = *SID;
-    this->G = *G;
-    this->CID = *CID;
-    this->F = *F;
-    this->N1 = N1;
-    if (N2)
-        this->N2 = N2;
-    else
-        this->N2 = nullptr;
-    if (N3)
-        this->N3 = N3;
-    else
-        this->N3 = nullptr;
+    this->momforce::SID(SID);
+    this->momforce::G(G);
+    this->momforce::CID(CID);
+    this->momforce::F(F);
+    this->momforce::N1(N1);
+    this->momforce::N2(N2);
+    this->momforce::N3(N3);
+    this->momforce::check_data();
     return *this;
 }
 
-
-void cards::__base::momforce::read(list<std::string> const &inp) {
+void momforce::read(list<std::string> const &inp) {
 
     auto pos = inp.rbegin();
 
@@ -120,7 +117,7 @@ void cards::__base::momforce::read(list<std::string> const &inp) {
     }
 }
 
-void cards::__base::momforce::collect_outdata(
+void momforce::collect_outdata(
     list<unique_ptr<format_entry> > &res) const {
     if (static_cast<long>(SID) <= 0) return;
 
@@ -138,14 +135,23 @@ void cards::__base::momforce::collect_outdata(
     return;
 }
 
-cards::__base::card const &cards::__base::momforce::operator() (
+void momforce::check_data() const {
+    if (SID) momforce::form_SID.check(SID);
+    if (G) momforce::form_G.check(G);
+    if (CID) momforce::form_CID.check(CID);
+    if (F) momforce::form_F.check(F);
+    if (N1) momforce::form_N1.check(N1);
+    if (N2) momforce::form_N2.check(N2);
+    if (N3) momforce::form_N3.check(N3);
+}
+
+card const &momforce::operator() (
     list<std::string> const &inp) {
     this->momforce::read(inp);
     return *this;
 }
 
-force::force() :
-momforce(&cl0, &cl0, &cl0, &cd0, &cd0, &cd0, &cd0) {}
+force::force() : momforce() {}
 
 force::force(list<std::string> const &inp) :
 momforce(inp) {}
@@ -166,8 +172,7 @@ cards::types force::card_type() const {
     return types::FORCE;
 }
 
-moment::moment() :
-momforce(&cl0, &cl0, &cl0, &cd0, &cd0, &cd0, &cd0) {}
+moment::moment() : momforce() {}
 
 moment::moment(list<std::string> const &inp) :
 momforce(inp) {}
@@ -193,7 +198,7 @@ cards::types moment::card_type() const {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&
+// compile-command: "make -C ../../cbuild -j7 &&
 //    (make -C ../../cbuild test;
 //     ../../cbuild/tests/test_bdf_cards --use-colour no)"
 // End:

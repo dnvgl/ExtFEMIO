@@ -952,6 +952,17 @@ namespace dnvgl {
                         }
                     }
 
+                    entry_value<std::complex<double>> inline check(
+                        entry_value<std::complex<double>> val) const {
+                        if (!bounds.in_bounds(val.value)) {
+                            std::ostringstream msg("!", std::ostringstream::ate);
+                            msg << val.value
+                                << "! Value not in list of allowed range.";
+                            throw errors::complex_error(name, msg.str());
+                        }
+                        return val;
+                    }
+
                     std::string inline format(
                         const entry_value<std::complex<double> > &inp) const {
 

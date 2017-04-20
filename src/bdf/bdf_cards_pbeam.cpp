@@ -57,7 +57,7 @@ const entry_type<double> pbeam::form_NSM(
 const entry_type<double> pbeam::form_C1(
     "C1", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 const entry_type<double> pbeam::form_C2(
-    "C1", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
+    "C2", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 const entry_type<double> pbeam::form_D1(
     "D1", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 const entry_type<double> pbeam::form_D2(
@@ -72,9 +72,7 @@ const entry_type<double> pbeam::form_F2(
     "F2", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 // fields that might appear more than once
 namespace {
-    const size_t SO_len = 3;
-    const char* SO_init[SO_len] = {"YES", "YESA", "NO"};
-    const std::set<std::string> SO_set(SO_init, SO_init + SO_len);
+    const std::set<std::string> SO_set({"YES", "YESA", "NO"});
 }
 const entry_type<std::string> pbeam::form_SO(
     "SO", bdf::type_bounds::bound<std::string>(SO_set));
@@ -313,6 +311,42 @@ cards::types pbeam::card_type() const {
 void pbeam::collect_outdata(
     std::list<std::unique_ptr<format_entry> > &res) const {
     throw std::not_implemented(__FILE__, __LINE__, "can't write PBEAM.");
+}
+
+void pbeam::check_data() const {
+    this->beam_prop::check_data();
+    if (A.size()>0) for (auto pos : A) pbeam::form_A.check(pos);
+    if (I1.size()>0) for (auto pos : I1) pbeam::form_I1.check(pos);
+    if (I2.size()>0) for (auto pos : I2) pbeam::form_I2.check(pos);
+    if (I12.size()>0) for (auto pos : I12) pbeam::form_I12.check(pos);
+    if (J.size()>0) for (auto pos : J) pbeam::form_J.check(pos);
+    if (NSM.size()>0) for (auto pos : NSM) pbeam::form_NSM.check(pos);
+    if (C1.size()>0) for (auto pos : C1) pbeam::form_C1.check(pos);
+    if (C2.size()>0) for (auto pos : C2) pbeam::form_C2.check(pos);
+    if (D1.size()>0) for (auto pos : D1) pbeam::form_D1.check(pos);
+    if (D2.size()>0) for (auto pos : D2) pbeam::form_D2.check(pos);
+    if (E1.size()>0) for (auto pos : E1) pbeam::form_E1.check(pos);
+    if (E2.size()>0) for (auto pos : E2) pbeam::form_E2.check(pos);
+    if (F1.size()>0) for (auto pos : F1) pbeam::form_F1.check(pos);
+    if (F2.size()>0) for (auto pos : F2) pbeam::form_F2.check(pos);
+    if (SO.size()>0) for (auto pos : SO) pbeam::form_SO.check(pos);
+    if (X_XB.size()>0) for (auto pos : X_XB) pbeam::form_X_XB.check(pos);
+    if (K1) pbeam::form_K1.check(K1);
+    if (K2) pbeam::form_K2.check(K2);
+    if (S1) pbeam::form_S1.check(S1);
+    if (S2) pbeam::form_S2.check(S2);
+    if (NSI_A) pbeam::form_NSI_A.check(NSI_A);
+    if (NSI_B) pbeam::form_NSI_B.check(NSI_B);
+    if (CW_A) pbeam::form_CW_A.check(CW_A);
+    if (CW_B) pbeam::form_CW_B.check(CW_B);
+    if (M1_A) pbeam::form_M1_A.check(M1_A);
+    if (M2_A) pbeam::form_M2_A.check(M2_A);
+    if (M1_B) pbeam::form_M1_B.check(M1_B);
+    if (M2_B) pbeam::form_M2_B.check(M2_B);
+    if (N1_A) pbeam::form_N1_A.check(N1_A);
+    if (N2_A) pbeam::form_N2_A.check(N2_A);
+    if (N1_B) pbeam::form_N1_B.check(N1_B);
+    if (N2_B) pbeam::form_N2_B.check(N2_B);
 }
 
 bdf::cards::__base::card const &pbeam::operator()(list<std::string> const &inp) {

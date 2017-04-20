@@ -23,6 +23,29 @@ namespace dnvgl {
     namespace extfem {
         namespace bdf {
             namespace cards {
+                namespace __base {
+
+                    class property : public __base::card {
+
+                    protected:
+
+                        bdf::types::entry_type<long> static const form_PID;
+
+                    public:
+
+                        /** Property identification number. (Integer > 0)
+                         */
+                        bdf::types::entry_value<long> PID;
+
+                    protected:
+
+                        property(std::list<std::string> const&);
+
+                        virtual void read(std::list<std::string> const&) override;
+
+                        virtual void check_data() const override;
+                    };
+                }
 
                 /// Handle Nastran Bulk `PSHELL` entries.
                 /** # Shell Element Property
@@ -37,12 +60,12 @@ namespace dnvgl {
                 | `PSHELL` | `PID` | `MID1` | `T`    | `MID2` | `12I/T**3` | `MID3` | `TS/T` | `NSM` |    |
                 |          | `Z1`  | `Z2`   | `MID4` |        |            |        |        |       |    |
                 */
-                class pshell : public __base::card {
+                class pshell : public __base::property {
                     // Handle Nastran Bulk PSHELL entries.
 
                 private:
 
-                    bdf::types::entry_type<long> static const form_PID;
+                    // bdf::types::entry_type<long> static const form_PID;
                     bdf::types::entry_type<long> static const form_MID1;
                     bdf::types::entry_type<double> static const form_T;
                     bdf::types::entry_type<long> static const form_MID2;
@@ -56,9 +79,9 @@ namespace dnvgl {
 
                 public:
 
-                    /** Property identification number. (Integer > 0)
-                     */
-                    bdf::types::entry_value<long> PID;
+                    // /** Property identification number. (Integer > 0)
+                    //  */
+                    // bdf::types::entry_value<long> PID;
                     /** Material identification number for the membrane.
                         (Integer > 0 or blank)
                         */
@@ -142,21 +165,23 @@ namespace dnvgl {
 
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> > &res) const override;
+
+                    void check_data() const override;
                 };
 
                 namespace __base {
-                    class beam_base : public card {
+                    class beam_base : public property {
 
                     protected:
 
-                        bdf::types::entry_type<long> static const form_PID;
+                        // bdf::types::entry_type<long> static const form_PID;
                         bdf::types::entry_type<long> static const form_MID;
 
                         beam_base(std::list<std::string> const&);
 
                     public:
 
-                        bdf::types::entry_value<long> PID;
+                        // bdf::types::entry_value<long> PID;
                         bdf::types::entry_value<long> MID;
 
                         virtual types card_type() const override;
@@ -410,6 +435,8 @@ namespace dnvgl {
 
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> > &res) const override;
+
+                    void check_data() const override;
                 };
 
                 namespace __base {
@@ -510,21 +537,23 @@ namespace dnvgl {
 
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> > &res) const override;
+
+                    void check_data() const override;
                 };
 
                 namespace __base {
                     /// Base class for `pbar` and `pbarl`.
-                    class bar_prop : public card {
+                    class bar_prop : public property {
 
                     protected:
-                        bdf::types::entry_type<long> static const form_PID;
+                        // bdf::types::entry_type<long> static const form_PID;
                         bdf::types::entry_type<long> static const form_MID;
 
                     public:
 
-                        /// `PID` : Property identification number. (Integer >
-                        /// 0)
-                        bdf::types::entry_value<long> PID;
+                        // /// `PID` : Property identification number. (Integer >
+                        // /// 0)
+                        // bdf::types::entry_value<long> PID;
                         /// `MID` : Material identification number. (Integer >
                         /// 0)
                         bdf::types::entry_value<long> MID;
@@ -640,6 +669,8 @@ namespace dnvgl {
 
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> > &res) const override;
+
+                    void check_data() const override;
                 };
 
                 /// Handle Nastran Bulk `PBARL` entries.
@@ -701,6 +732,8 @@ namespace dnvgl {
 
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> > &res) const override;
+
+                    void check_data() const override;
                 };
 
                 /// Handle Nastran Bulk `PROD` entries.
@@ -714,11 +747,11 @@ namespace dnvgl {
                 | ------- | ----- | ----- | --- | --- | --- | ----- | - | - | -- |
                 | `PROD`  | `PID` | `MID` | `A` | `J` | `C` | `NSM` |   |   |    |
                 */
-                class prod : public __base::card {
+                class prod : public __base::property {
 
                 private:
 
-                    bdf::types::entry_type<long> static const form_PID;
+                    // bdf::types::entry_type<long> static const form_PID;
                     bdf::types::entry_type<long> static const form_MID;
                     bdf::types::entry_type<double> static const form_A;
                     bdf::types::entry_type<double> static const form_J;
@@ -727,9 +760,9 @@ namespace dnvgl {
 
                 public:
 
-                    /** Property identification number. (Integer > 0)
-                     */
-                    bdf::types::entry_value<long> PID;
+                    // /** Property identification number. (Integer > 0)
+                    //  */
+                    // bdf::types::entry_value<long> PID;
                     /** Material identification number. See Remarks 2.
                         and 3. (Integer > 0)
                         */
@@ -760,6 +793,8 @@ namespace dnvgl {
 
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> > &res) const override;
+
+                    void check_data() const override;
                 };
                 //         pelas
             }

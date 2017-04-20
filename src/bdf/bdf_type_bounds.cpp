@@ -19,7 +19,8 @@ namespace {
 
 #include "bdf/type_bounds.h"
 
-using namespace dnvgl::extfem::bdf::type_bounds::__base;
+using namespace dnvgl::extfem::bdf::type_bounds;
+using namespace __base;
 
 type_bound::~type_bound() {}
 
@@ -48,6 +49,13 @@ _has_min(false), _has_max(false), _has_default(false) {}
 
 bool type_bound::has_default() const {
     return _has_default;
+}
+
+template <>
+bool bound<std::complex<double>>::in_bounds(
+    std::complex<double> const &val) const {
+    return ((!has_min() || abs(val) >= abs(this->min_val)) &&
+            (!has_max() || abs(val) <= abs(this->max_val)));
 }
 
 // Local Variables:

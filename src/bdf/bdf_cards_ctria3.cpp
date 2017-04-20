@@ -123,6 +123,8 @@ void ctria3::read(std::list<std::string> const &inp) {
         form_G2.set_value(G2, *(pos++));
         form_G1.set_value(G1, *(pos++));
         form_PID.set_value(PID, *(pos));
+        if (!PID)
+            PID(EID);
         // form_EID.set_value(EID, *pos);
         break;
     default:
@@ -130,13 +132,13 @@ void ctria3::read(std::list<std::string> const &inp) {
             "CTRIA3", "Illegal number of entries.");
     }
 
-    if (!THETA.is_value && !MCID.is_value)
+    if (!THETA && !MCID)
         form_THETA.set_value(THETA, "");
-    if (TFLAG.is_value) {
-        if (!T1.is_value) form_T1.set_value(T1, "");
-        if (!T2.is_value) form_T2.set_value(T2, "");
-        if (!T3.is_value) form_T3.set_value(T3, "");
-        if (!T4.is_value) form_T4.set_value(T4, "");
+    if (TFLAG && (long)TFLAG == 1) {
+        if (!T1) T1(1.);
+        if (!T2) T2(1.);
+        if (!T3) T3(1.);
+        if (!T4) T4(1.);
     }
 }
 

@@ -83,18 +83,13 @@ card const &cmass2::operator() (
     long const *EID, double const *M,
     long const *G1, list<int> const *C1,
     long const *G2/*=nullptr*/, list<int> const *C2/*=nullptr*/) {
-    this->EID = EID;
-    this->M = *M;
-    this->G1 = *G1;
-    this->C1 = *C1;
-    if (G2)
-        this->G2 = *G2;
-    else
-        this->G2 = nullptr;
-    if (C2)
-        this->C2 = *C2;
-    else
-        this->C2 = nullptr;
+    this->element::operator() (EID);
+    this->M(M);
+    this->G1(G1);
+    this->C1(C1);
+    this->G2(G2);
+    this->C2(C2);
+    this->cmass2::check_data();
     return *this;
 }
 
@@ -162,12 +157,20 @@ cards::__base::card const &cmass2::operator()(list<std::string> const &inp) {
     return *this;
 }
 
+void cmass2::check_data() const {
+    this->element::check_data();
+    if(M)  form_M.check(M);
+    if(G1) form_G1.check(G1);
+    if(C1) form_C1.check(C1);
+    if(G2) form_G2.check(G2);
+    if(C2) form_C2.check(C2);
+}
 // Local Variables:
 // mode: c++
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&
+// compile-command: "make -C ../../cbuild -j7 &&
 //    (make -C ../../cbuild test;
 //     ../../cbuild/tests/test_bdf_cards --use-colour no)"
 // End:

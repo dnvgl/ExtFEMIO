@@ -38,32 +38,38 @@ param::param() : card(), value_type(), IVAL(), RVAL(), CVAL(), CPLXVAL() {
 
 param::param(std::string const &n) : param() {
     N = string::string(n).upper();
+    this->param::check_data();
 }
 
 param::param(std::string const &n, long const &ival) :
 param(n) {
     IVAL = ival;
+    this->param::check_data();
 }
 
 param::param(std::string const &n, std::string const &cval) :
 param(n) {
     CVAL = cval;
+    this->param::check_data();
 }
 
 param::param(std::string const &n, double const &rval) :
 param(n) {
     RVAL = rval;
+    this->param::check_data();
 }
 
 param::param(std::string const &n,
              double const &cplxval_r, double const &cplxval_i) :
              param(n) {
     CPLXVAL = complex<double>(cplxval_r, cplxval_i);
+    this->param::check_data();
 }
 
 param::param(std::string const &n, complex<double> const &cplxval) :
 param(n) {
     CPLXVAL = cplxval;
+    this->param::check_data();
 }
 
 param::param(list<std::string> const &inp) :
@@ -145,6 +151,14 @@ void param::collect_outdata(
                 format<complex<double>>(form_CPLXVAL, CPLXVAL)));
     else
         throw errors::output_error("PARAM", "no output value.");
+}
+
+void param::check_data() const {
+    if(N) param::form_N.check(N);
+    if(IVAL) param::form_IVAL.check(IVAL);
+    if(RVAL) param::form_RVAL.check(RVAL);
+    if(CVAL) param::form_CVAL.check(CVAL);
+    if(CPLXVAL) param::form_CPLXVAL.check(CPLXVAL);
 }
 
 cards::__base::card const &cards::param::operator() (

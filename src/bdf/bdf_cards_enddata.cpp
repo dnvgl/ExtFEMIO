@@ -51,6 +51,9 @@ void enddata::collect_outdata(
     return;
 }
 
+void enddata::check_data() const {
+}
+
 cards::__base::card const &enddata::operator()(list<std::string> const &inp) {
     this->enddata::read(inp);
     return *this;

@@ -143,7 +143,9 @@ mat1::mat1() : mat(nullptr),
 mat1::mat1(long *MID, double *E, double *G, double *NU, double *RHO,
            double *A, double *TREF, double *GE, double *ST,
            double *SC, double *SS, long *MCSID) :
-        mat(MID, RHO, TREF, GE, ST, SC, SS, MCSID), E{E}, G{G}, NU{NU}, A{A} {}
+        mat(MID, RHO, TREF, GE, ST, SC, SS, MCSID), E{E}, G{G}, NU{NU}, A{A} {
+            this->mat1::check_data();
+}
 
 cards::__base::card const &mat1::operator() (const list<std::string> &inp) {
     this->mat1::read(inp);
@@ -161,6 +163,7 @@ cards::__base::card const &mat1::operator() (
     this->G(G);
     this->NU(NU);
     this->A(A);
+    this->mat1::check_data();
     return *this;
 }
 
@@ -213,6 +216,12 @@ void mat1::collect_outdata(
         res.push_back(unique_ptr<format_entry>(format<long>(form_MCSID, MCSID)));
 
 finish:return;
+}
+
+void mat1::check_data() const {
+    this->mat::check_data();
+    if (E) mat1::form_E.check(E);
+    if (NU) mat1::form_NU.check(NU);
 }
 
 // Local Variables:

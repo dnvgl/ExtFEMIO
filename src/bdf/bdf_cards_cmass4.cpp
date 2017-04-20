@@ -63,20 +63,17 @@ cmass4::cmass4(long const *EID, double const *M,
                long const *S1, long const *S2/*=nullptr*/) :
                element(EID),
                M(M), S1(S1), S2(S2) {
-    if (long(this->EID) < 1l || long(this->EID) > 100000000l)
-        throw errors::error("CMASS4", "EID not in valid range");
+    this->cmass4::check_data();
 }
 
 cards::__base::card const &cmass4::operator() (
     long const *EID, double const *M,
     long const *S1, long const *S2/*=nullptr*/) {
-    this->EID = EID;
-    this->M = *M;
-    this->S1 = *S1;
-    if (S2)
-        this->S2 = *S2;
-    else
-        this->S2 = nullptr;
+    this->element::operator()(EID);
+    this->M(M);
+    this->S1(S1);
+    this->S2(S2);
+    this->cmass4::check_data();
     return *this;
 }
 
@@ -122,6 +119,13 @@ void cmass4::collect_outdata(
         res.push_back(unique_ptr<format_entry>(format<long>(form_S2, S2)));
 
     return;
+}
+
+void cmass4::check_data() const {
+    this->element::check_data();
+    if(M) form_M.check(M);
+    if(S1) form_S1.check(S1);
+    if(S2) form_S2.check(S2);
 }
 
 cards::__base::card const &cmass4::operator()(list<std::string> const &inp) {

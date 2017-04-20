@@ -42,6 +42,7 @@ static char THIS_FILE[] = __FILE__;
 
 using namespace dnvgl::extfem::bdf;
 using types::entry_value;
+using types::entry_type;
 
 TEST_CASE("BDF boundary definitions (long).", "[bdf_bounds]") {
 
@@ -163,6 +164,33 @@ TEST_CASE("BDF boundary definitions (double).", "[bdf_bounds]") {
     SECTION("<nothing> (with default)") {
         CHECK(probe_def.has_default());
         CHECK(probe_def.get_default() == 1.);
+    }
+}
+
+TEST_CASE("string allowed values", "[bdf_bounds]") {
+    entry_type<std::string> const form_tst(
+        "tst", type_bounds::bound<std::string>({
+                "A", "B", "C", "D"}, "A"));
+
+    SECTION("set default") {
+        entry_value<std::string> val;
+
+        form_tst.set_value(val, "");
+        CHECK(std::string(val) == "A");
+    }
+
+    SECTION("check for valid value") {
+        entry_value<std::string> val("E");
+        CHECK_THROWS_AS(form_tst.check(val), errors::str_error);
+    }
+
+    SECTION("unexpected fail in cbar") {
+        entry_value<std::string> val("EEG");
+        entry_type<std::string> const form_OFFT(
+            "OFFT", type_bounds::bound<std::string>({
+                    "GGG", "BGG", "GGO", "BGO", "GOG", "BOG", "GOO", "BOO"},
+                "GGG"));
+        CHECK_THROWS_AS(form_OFFT.check(val), errors::str_error);
     }
 }
 

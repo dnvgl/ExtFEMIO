@@ -175,6 +175,17 @@ void grid::collect_outdata(
 finish:return;
 }
 
+void grid::check_data() const {
+    if (ID) form_ID.check(ID);
+    if (CP) form_CP.check(CP);
+    if (X1) form_X1.check(X1);
+    if (X2) form_X2.check(X2);
+    if (X3) form_X3.check(X3);
+    if (CD) form_CD.check(CD);
+    if (PS) form_PS.check(PS);
+    if (SEID) form_SEID.check(SEID);
+}
+
 // Local Variables:
 // mode: c++
 // coding: utf-8

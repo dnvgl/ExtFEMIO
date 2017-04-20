@@ -70,7 +70,9 @@ mat::mat(long *MID, double *RHO/*=nullptr*/, double *TREF/*=nullptr*/,
          double *SS/*=nullptr*/, long *MCSID/*=nullptr*/) :
         card(),
         MID{MID}, RHO(RHO), TREF{TREF}, GE{GE},
-        ST{ST}, SC{SC}, SS{SS}, MCSID{MCSID} {}
+        ST{ST}, SC{SC}, SS{SS}, MCSID{MCSID} {
+            this->mat::check_data();
+}
 
 void mat::operator() (
     long *MID, double *RHO/*=nullptr*/, double *TREF/*=nullptr*/,
@@ -84,14 +86,21 @@ void mat::operator() (
     this->SC(SC);
     this->SS(SS);
     this->MCSID(MCSID);
+    this->mat::check_data();
     return;
 }
 
-// Local Variables:
-// mode: c++
-// coding: utf-8
-// c-file-style: "dnvgl"
-// indent-tabs-mode: nil
+void mat::check_data() const {
+    if (MID) mat::form_MID.check(MID);
+    if (RHO) mat::form_RHO.check(RHO);
+    if (TREF) mat::form_TREF.check(TREF);
+    if (GE) mat::form_GE.check(GE);
+    if (ST) mat::form_ST.check(ST);
+    if (SC) mat::form_SC.check(SC);
+    if (SS) mat::form_SS.check(SS);
+    if (MCSID) mat::form_MCSID.check(MCSID);
+}
+
 // Local Variables:
 // mode: c++
 // coding: utf-8

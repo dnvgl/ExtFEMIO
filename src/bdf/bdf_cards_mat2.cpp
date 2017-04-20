@@ -67,7 +67,9 @@ mat2::mat2(long *MID, double *G11, double *G12, double *G13,
 
         mat(MID, RHO, TREF, GE, ST, SC, SS, MCSID),
         G11(G11),G12(G12), G13(G13), G22(G22),
-        G23(G23), G33(G33), A1(A1), A2(A2), A3(A3) {}
+        G23(G23), G33(G33), A1(A1), A2(A2), A3(A3) {
+    this->mat2::check_data();
+}
 
 
 cards::__base::card const &mat2::operator()(
@@ -89,26 +91,27 @@ cards::__base::card const &mat2::operator()(
     this->A1(A1);
     this->A2(A2);
     this->A3(A3);
+    this->mat2::check_data();
     return *this;
 }
 
 void mat2::read(list<std::string> const &inp) {
-    form_MCSID.set_value(MCSID, "");
-    form_SS.set_value(SS, "");
-    form_SC.set_value(SC, "");
-    form_ST.set_value(ST, "");
-    form_GE.set_value(GE, "");
-    form_TREF.set_value(TREF, "");
-    form_A.set_value(A1, "");
-    form_A.set_value(A2, "");
-    form_A.set_value(A3, "");
-    form_RHO.set_value(RHO, "");
-    form_G.set_value(G33, "");
-    form_G.set_value(G23, "");
-    form_G.set_value(G22, "");
-    form_G.set_value(G13, "");
-    form_G.set_value(G12, "");
-    form_G.set_value(G11, "");
+    mat::form_MCSID.set_value(MCSID, "");
+    mat::form_SS.set_value(SS, "");
+    mat::form_SC.set_value(SC, "");
+    mat::form_ST.set_value(ST, "");
+    mat::form_GE.set_value(GE, "");
+    mat::form_TREF.set_value(TREF, "");
+    mat::form_A.set_value(A1, "");
+    mat::form_A.set_value(A2, "");
+    mat::form_A.set_value(A3, "");
+    mat::form_RHO.set_value(RHO, "");
+    mat::form_G.set_value(G33, "");
+    mat::form_G.set_value(G23, "");
+    mat::form_G.set_value(G22, "");
+    mat::form_G.set_value(G13, "");
+    mat::form_G.set_value(G12, "");
+    mat::form_G.set_value(G11, "");
 
     auto pos = inp.rbegin();
 
@@ -219,12 +222,25 @@ void mat2::collect_outdata(
 finish:return;
 }
 
+void mat2::check_data() const {
+    this->mat::check_data();
+    if (A1) mat::form_A.check(A1);
+    if (A2) mat::form_A.check(A2);
+    if (A3) mat::form_A.check(A3);
+    if (G33) mat::form_G.check(G33);
+    if (G23) mat::form_G.check(G23);
+    if (G22) mat::form_G.check(G22);
+    if (G13) mat::form_G.check(G13);
+    if (G12) mat::form_G.check(G12);
+    if (G11) mat::form_G.check(G11);
+}
+
 // Local Variables:
 // mode: c++
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&
+// compile-command: "make -C ../../cbuild -j7 &&
 //    (make -C ../../cbuild test;
 //     ../../cbuild/tests/test_bdf_cards --use-colour no)"
 // End:

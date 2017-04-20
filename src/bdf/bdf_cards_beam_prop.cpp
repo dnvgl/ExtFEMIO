@@ -34,7 +34,7 @@ using namespace type_bounds;
 using namespace cards::__base;
 
 beam_base::beam_base(const std::list<std::string> &inp) :
-card(inp) {}
+        property(inp) {}
 
 cards::types beam_base::card_type() const {
     return types::BEAM_BASE;
@@ -51,8 +51,8 @@ namespace {
     const long cl1 = 1;
 }
 
-const entry_type<long> beam_base::form_PID(
-    "PID", bound<long>(&cl1));
+// const entry_type<long> beam_base::form_PID(
+//     "PID", bound<long>(&cl1));
 
 const entry_type<long> beam_base::form_MID(
     "MID", bound<long>(&cl1, nullptr, nullptr, true));
@@ -62,7 +62,7 @@ const entry_type<long> beam_base::form_MID(
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&
-//    (make -C ../../cbuild test;
+// compile-command: "make -C ../../cbuild -j7 &&
+//    (make -C ../../cbuild test ;
 //     ../../cbuild/tests/test_bdf_cards --use-colour no)"
 // End:

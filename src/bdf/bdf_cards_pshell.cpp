@@ -40,8 +40,8 @@ using namespace cards;
 
 using bdf::types::entry_type;
 
-const entry_type<long> pshell::form_PID(
-    "PID", bdf::type_bounds::bound<long>(&cl1));
+// const entry_type<long> pshell::form_PID(
+//     "PID", bdf::type_bounds::bound<long>(&cl1));
 const entry_type<long> pshell::form_MID1(
     "MID1",
     bdf::type_bounds::bound<long>(&cl1, nullptr, nullptr, true));
@@ -73,7 +73,7 @@ const entry_type<long> pshell::form_MID4(
     bdf::type_bounds::bound<long>(&cl1, nullptr, nullptr, true));
 
 pshell::pshell(const std::list<std::string> &inp) :
-card(inp) {
+        property(inp) {
     this->pshell::read(inp);
 }
 
@@ -131,6 +131,8 @@ void pshell::collect_outdata(
     throw std::not_implemented(__FILE__, __LINE__, "can't write PSHELL.");
 }
 
+void pshell::check_data() const {
+}
 cards::__base::card const &pshell::operator() (list<std::string> const &inp) {
     this->pshell::read(inp);
     return *this;

@@ -49,6 +49,12 @@ element(inp) {
     this->crod::read(inp);
 }
 
+crod::crod(long const* EID, long const* PID, long const* G1, long const* G2) :
+        element(EID) {
+    NOT_IMPLEMENTED(nullptr);
+    this->crod::check_data();
+}
+
 cards::types crod::card_type() const {
     return types::CROD;
 }
@@ -76,14 +82,26 @@ void crod::read(list<std::string> const &inp) {
     }
 }
 
-__base::card const& crod::operator()(
-    long const* EID, long const* PID, long const* G1, long const* G2) const {
-    NOT_IMPLEMENTED(nullptr);
+__base::card const& crod::operator() (
+    long const* EID, long const* PID, long const* G1, long const* G2) {
+    this->element::operator()(EID);
+    this->PID(PID);
+    this->G1(G1);
+    this->G2(G2);
+    this->crod::check_data();
+    return *this;
 }
 
 void crod::collect_outdata(
     list<unique_ptr<format_entry> > &res) const {
     NOT_IMPLEMENTED("Can't write CROD.");
+}
+
+void crod::check_data() const {
+    this->element::check_data();
+    if (PID) form_PID.check(this->PID);
+    if (G1) form_G1.check(this->G1);
+    if (G2) form_G2.check(this->G2);
 }
 
 cards::__base::card const &crod::operator()(list<std::string> const &inp) {

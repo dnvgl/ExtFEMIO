@@ -136,6 +136,17 @@ void load::collect_outdata(
     return;
 }
 
+void load::check_data() const {
+    if (SID) load::form_SID.check(SID);
+    if (S) load::form_S.check(S);
+    if (Si.size())
+        for (auto pos : Si)
+            load::form_Si.check(pos);
+    if (Li.size())
+        for (auto pos : Li)
+            load::form_Li.check(pos);
+}
+
 cards::__base::card const &cards::load::operator() (
     list<std::string> const &inp) {
     this->load::read(inp);
@@ -147,7 +158,7 @@ cards::__base::card const &cards::load::operator() (
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&
-//    (make -C ../../cbuild test;
+// compile-command: "make -C ../../cbuild -j7 &&
+//    (make -C ../../cbuild test ;
 //     ../../cbuild/tests/test_bdf_cards --use-colour no)"
 // End:

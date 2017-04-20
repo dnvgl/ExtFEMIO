@@ -93,7 +93,7 @@ TEST_CASE("BDF CQUAD4 types output.", "[bdf_cquad4,out]") {
         long G4{6};
         double THETA{7.};
         double ZOFFS{8.};
-        long TFLAG{9};
+        long TFLAG{1};
         double T1{10.}, T2{11.}, T3{12}, T4{13};
 
         cquad4 probe(&EID, &PID, &G1, &G2, &G3, &G4, &THETA, &ZOFFS, &TFLAG,
@@ -102,7 +102,7 @@ TEST_CASE("BDF CQUAD4 types output.", "[bdf_cquad4,out]") {
 
         CHECK(test.str() ==
               "CQUAD4         1       2       3       4       5       57.000+008.000+00\n"
-              "                       91.000+011.100+011.200+011.300+01\n");
+              "                       11.000+011.100+011.200+011.300+01\n");
     }
 
     SECTION("test 2") {
@@ -114,7 +114,7 @@ TEST_CASE("BDF CQUAD4 types output.", "[bdf_cquad4,out]") {
         long G4{6};
         long MCID{7};
         double ZOFFS{8.};
-        long TFLAG{9};
+        long TFLAG{1};
         double T1{910.}, T2{11.}, T3{12.}, T4{13.};
 
         cquad4 probe(&EID, &PID, &G1, &G2, &G3, &G4, &MCID, &ZOFFS, &TFLAG,
@@ -123,7 +123,7 @@ TEST_CASE("BDF CQUAD4 types output.", "[bdf_cquad4,out]") {
 
         CHECK(test.str() ==
               "CQUAD4         1       2       3       4       5       6       78.000+00\n"
-              "                       99.100+021.100+011.200+011.300+01\n");
+              "                       19.100+021.100+011.200+011.300+01\n");
     }
 
     SECTION("test 3") {
@@ -197,7 +197,7 @@ TEST_CASE("BDF CQUAD4 types output (reuse).", "[bdf_cquad4,out,reuse]") {
         long G4{6};
         double THETA{7.};
         double ZOFFS{8.};
-        long TFLAG{9};
+        long TFLAG{1};
         double T1{10.}, T2{11.}, T3{12.}, T4{13.};
 
         cquad4 probe;
@@ -208,7 +208,7 @@ TEST_CASE("BDF CQUAD4 types output (reuse).", "[bdf_cquad4,out,reuse]") {
 
         CHECK(test.str() ==
               "CQUAD4         1       2       3       4       5       67.000+008.000+00\n"
-              "                       91.000+011.100+011.200+011.300+01\n");
+              "                       11.000+011.100+011.200+011.300+01\n");
     }
 
     SECTION("test 2") {
@@ -220,7 +220,7 @@ TEST_CASE("BDF CQUAD4 types output (reuse).", "[bdf_cquad4,out,reuse]") {
         long G4{6};
         long MCID{7};
         double ZOFFS{8.};
-        long TFLAG{9};
+        long TFLAG{0};
         double T1{10.}, T2{101.}, T3{12.}, T4{13.};
 
         cquad4 probe;
@@ -229,7 +229,7 @@ TEST_CASE("BDF CQUAD4 types output (reuse).", "[bdf_cquad4,out,reuse]") {
 
         CHECK(test.str() ==
               "CQUAD4         1       2       3       4       5       6       78.000+00\n"
-              "                       91.000+011.010+021.200+011.300+01\n");
+              "                       01.000+011.010+021.200+011.300+01\n");
     }
 
     SECTION("test 3") {

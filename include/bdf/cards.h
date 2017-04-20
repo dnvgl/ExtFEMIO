@@ -402,6 +402,8 @@ namespace dnvgl {
 
                         virtual void read(std::list<std::string> const &) = 0;
 
+                        virtual void check_data() const = 0;
+
                     public:
 
                         friend format_entry
@@ -457,6 +459,8 @@ namespace dnvgl {
 
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> >&) const override;
+
+                    void check_data() const override;
                 };
             }
         }
@@ -533,6 +537,8 @@ namespace dnvgl {
 
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> >&) const override;
+
+                    void check_data() const override;
                 };
 
 /// Handle Nastran Bulk `GRID` entries.
@@ -632,6 +638,8 @@ namespace dnvgl {
 
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> >&) const override;
+
+                    void check_data() const override;
                 };
 
                 namespace __base {
@@ -702,6 +710,7 @@ namespace dnvgl {
                             double *TREF=nullptr, double *GE=nullptr,
                             double *ST=nullptr, double *SC=nullptr,
                             double *SS=nullptr, long *MCSID=nullptr);
+                        virtual void check_data() const override;
                     };
                 }
 
@@ -787,6 +796,8 @@ namespace dnvgl {
 
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> >&) const override;
+
+                    void check_data() const override;
                 };
 
 /// Handle Nastran Bulk MAT2 entries.
@@ -883,6 +894,8 @@ namespace dnvgl {
 
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> >&) const override;
+
+                    void check_data() const override;
                 };
 
 /// Handle Nastran Bulk PARAM entries.
@@ -982,6 +995,8 @@ namespace dnvgl {
 
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> >&) const override;
+
+                    void check_data() const override;
                 };
             }
         }

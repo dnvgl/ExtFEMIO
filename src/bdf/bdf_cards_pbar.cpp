@@ -180,6 +180,26 @@ cards::__base::card const &pbar::operator() (list<std::string> const &inp) {
     return *this;
 }
 
+void pbar::check_data() const {
+    this->bar_prop::check_data();
+    if (A) pbar::form_A.check(A);
+    if (I1) pbar::form_I1.check(I1);
+    if (I2) pbar::form_I2.check(I2);
+    if (J) pbar::form_J.check(J);
+    if (NSM) pbar::form_NSM.check(NSM);
+    if (C1) pbar::form_C1.check(C1);
+    if (C2) pbar::form_C2.check(C2);
+    if (D1) pbar::form_D1.check(D1);
+    if (D2) pbar::form_D2.check(D2);
+    if (E1) pbar::form_E1.check(E1);
+    if (E2) pbar::form_E2.check(E2);
+    if (F1) pbar::form_F1.check(F1);
+    if (F2) pbar::form_F2.check(F2);
+    if (K1) pbar::form_K1.check(K1);
+    if (K2) pbar::form_K2.check(K2);
+    if (I12) pbar::form_I12.check(I12);
+}
+
 // Local Variables:
 // mode: c++
 // coding: utf-8

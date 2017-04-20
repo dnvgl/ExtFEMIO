@@ -81,22 +81,14 @@ cards::__base::card const &grav::operator() (
     double const *A,
     vector<double> const *N,
     long const *MB/*=nullptr*/) {
-    this->SID = *SID;
-    this->CID = *CID;
-    this->A = *A;
-    this->N1 = (*N)[0];
-    if (N->size() > 1)
-        this->N2 = (*N)[1];
-    else
-        this->N2 = nullptr;
-    if (N->size() > 2)
-        this->N3 = (*N)[2];
-    else
-        this->N3 = nullptr;
-    if (MB)
-        this->MB = *MB;
-    else
-        this->MB = nullptr;
+    this->SID(SID);
+    this->CID(CID);
+    this->A(A);
+    this->N1((*N)[0]);
+    this->N2(N->size() > 1 ? &(*N)[1] : nullptr);
+    this->N3(N->size() > 2 ? &(*N)[2] : nullptr);
+    this->MB(MB);
+    this->grav::check_data();
     return *this;
 }
 
@@ -105,16 +97,14 @@ cards::__base::card const &grav::operator() (
     double const *A,
     double const *N1, double const*N2, double const *N3,
     long const *MB/*=nullptr*/) {
-    this->SID = *SID;
-    this->CID = *CID;
-    this->A = *A;
-    this->N1 = *N1;
-    this->N2 = *N2;
-    this->N3 = *N3;
-    if (MB)
-        this->MB = *MB;
-    else
-        this->MB = nullptr;
+    this->SID(SID);
+    this->CID(CID);
+    this->A(A);
+    this->N1(N1);
+    this->N2(N2);
+    this->N3(N3);
+    this->MB(MB);
+    this->grav::check_data();
     return *this;
 }
 
@@ -165,6 +155,16 @@ void grav::collect_outdata(
         res.push_back(unique_ptr<format_entry>(format<long>(form_MB, MB)));
 }
 
+void grav::check_data() const {
+    if (SID) form_SID.check(SID);
+    if (CID) form_CID.check(CID);
+    if (A) form_A.check(A);
+    if (N1) form_Ni.check(N1);
+    if (N2) form_Ni.check(N2);
+    if (N3) form_Ni.check(N3);
+    if (MB) form_MB.check( MB);
+}
+
 cards::__base::card const &grav::operator()(list<std::string> const &inp) {
     this->grav::read(inp);
     return *this;
@@ -175,7 +175,7 @@ cards::__base::card const &grav::operator()(list<std::string> const &inp) {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&
+// compile-command: "make -C ../../cbuild -j7 &&
 //    (make -C ../../cbuild test;
 //     ../../cbuild/tests/test_bdf_cards --use-colour no)"
 // End:

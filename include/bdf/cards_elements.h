@@ -39,7 +39,11 @@ namespace dnvgl {
 
                         void operator() (long const *EID);
 
-                        void collect_outdata(std::list<std::unique_ptr<format_entry> >&) const override;
+                        void collect_outdata(
+                            std::list<std::unique_ptr<format_entry> >&) const override;
+
+                        void check_data() const override;
+
                         void read(std::list<std::string> const &) override;
 
                         card const &operator() (const std::list<std::string> &) override;
@@ -74,6 +78,8 @@ namespace dnvgl {
 
                         shell(std::list<std::string> const &);
                         shell(long const *);
+
+                        void check_data() const override;
 
                     public:
 
@@ -618,6 +624,8 @@ namespace dnvgl {
 
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> >&) const override;
+
+                    void check_data() const override;
                 };
 
                 /// Handle Nastran Bulk `CBAR` entries.
@@ -897,6 +905,8 @@ namespace dnvgl {
 
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> >&) const override;
+
+                    void check_data() const override;
                 };
 
                 /// Handle Nastran Bulk `CROD` entries.
@@ -941,6 +951,9 @@ namespace dnvgl {
 
                     crod(std::list<std::string> const &inp);
 
+                    crod(long const *EID, long const *PID,
+                         long const *G1, long const *G2);
+
                     /**
                      * \brief Card type indicator.
                      * \return
@@ -961,12 +974,14 @@ namespace dnvgl {
                      */
                     card const &operator() (
                         long const *EID, long const *PID,
-                        long const *G1, long const *G2) const;
+                        long const *G1, long const *G2);
 
                 private:
 
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> >&) const override;
+
+                    void check_data() const override;
                 };
                 // celas
             }

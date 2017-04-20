@@ -40,8 +40,8 @@ using namespace cards;
 
 using bdf::types::entry_type;
 
-const entry_type<long> prod::form_PID(
-    "PID", bdf::type_bounds::bound<long>(&cl1));
+// const entry_type<long> prod::form_PID(
+//     "PID", bdf::type_bounds::bound<long>(&cl1));
 const entry_type<long> prod::form_MID(
     "MID", bdf::type_bounds::bound<long>(&cl1));
 const entry_type<double> prod::form_A("A");
@@ -51,11 +51,11 @@ const entry_type<double> prod::form_J(
 const entry_type<double> prod::form_C(
     "C", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 const entry_type<double> prod::form_NSM(
-    "J",
+    "NSM",
     bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 
 prod::prod(list<std::string> const &inp) :
-card(inp) {
+        property(inp) {
     this->prod::read(inp);
 }
 
@@ -81,7 +81,7 @@ void prod::read(list<std::string> const &inp) {
     case 3:
         form_A.set_value(A, *(pos++));
         form_MID.set_value(MID, *(pos++));
-        form_PID.set_value(PID, *(pos));
+        // form_PID.set_value(PID, *(pos));
         break;
     default:
         throw errors::parse_error(
@@ -100,7 +100,17 @@ void prod::collect_outdata(
     throw not_implemented(__FILE__, __LINE__, "can't write PROD.");
 }
 
+void prod::check_data() const {
+    this->property::check_data();
+    if (MID) prod::form_MID.check(MID);
+    if (A) prod::form_A.check(A);
+    if (J) prod::form_J.check(J);
+    if (C) prod::form_C.check(C);
+    if (NSM) prod::form_NSM.check(NSM);
+}
+
 cards::__base::card const &prod::operator() (list<std::string> const &inp) {
+    this->property::read(inp);
     this->prod::read(inp);
     return *this;
 }
@@ -110,5 +120,7 @@ cards::__base::card const &prod::operator() (list<std::string> const &inp) {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j7 &&
+//   (make -C ../../cbuild test;
+//    ../../cbuild/tests/test_bdf_cards --use-colour no)"
 // End:

@@ -54,6 +54,10 @@ float_error::float_error(
     const std::string &name, const std::string &msg) :
     form_error(name, msg, "float_error") {}
 
+complex_error::complex_error(
+    const std::string &name, const std::string &msg) :
+    form_error(name, msg, "complex_error") {};
+
 int_error::int_error(
     const std::string &name, const std::string &msg) :
     form_error(name, msg, "int_error") {}
@@ -83,6 +87,7 @@ parse_error::parse_error(
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&
-//    make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j7 &&
+//   (make -C ../../cbuild test;
+//    ../../cbuild/tests/test_bdf_cards --use-colour no)"
 // End:

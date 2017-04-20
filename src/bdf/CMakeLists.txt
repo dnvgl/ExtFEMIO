@@ -36,6 +36,7 @@ set(LIBEXTFEMIO_BDF_SOURCES
   bdf_cards_mat.cpp
   bdf_cards_mat1.cpp
   bdf_cards_mat2.cpp
+  bdf_cards_properties.cpp
   bdf_cards_pbar.cpp
   bdf_cards_pbarl.cpp
   bdf_cards_pbeam.cpp

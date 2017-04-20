@@ -173,15 +173,15 @@ void cbeam::read(list<std::string> const &inp) {
             "CBEAM", "Illegal number of entries for CBEAM");
     }
 
-    if (!W3B.is_value) form_W3B.set_value(W3B, "");
-    if (!W2B.is_value) form_W2B.set_value(W2B, "");
-    if (!W1B.is_value) form_W1B.set_value(W1B, "");
-    if (!W3A.is_value) form_W3A.set_value(W3A, "");
-    if (!W2A.is_value) form_W2A.set_value(W2A, "");
-    if (!W1A.is_value) form_W1A.set_value(W1A, "");
-    if (!PB.is_value) form_PB.set_value(PB, "");
-    if (!PA.is_value) form_PA.set_value(PA, "");
-    if (!(BIT.is_value || OFFT.is_value)) {
+    if (!W3B) form_W3B.set_value(W3B, "");
+    if (!W2B) form_W2B.set_value(W2B, "");
+    if (!W1B) form_W1B.set_value(W1B, "");
+    if (!W3A) form_W3A.set_value(W3A, "");
+    if (!W2A) form_W2A.set_value(W2A, "");
+    if (!W1A) form_W1A.set_value(W1A, "");
+    if (!PB) form_PB.set_value(PB, "");
+    if (!PA) form_PA.set_value(PA, "");
+    if (!(bool(BIT) || bool(OFFT))) {
         choose_offt_bit = CHOOSE_OFFT_BIT::has_OFFT;
         form_OFFT.set_value(OFFT, "");
     }
@@ -196,6 +196,29 @@ cards::__base::card const &cbeam::operator()(list<std::string> const &inp) {
     this->element::read(inp);
     this->cbeam::read(inp);
     return *this;
+}
+
+void cbeam::check_data() const {
+    this->element::check_data();
+    if (PID) form_PID.check(this->PID);
+    if (GA) form_GA.check(this->GA);
+    if (GB) form_GB.check(this->GB);
+    if (G0) form_G0.check(this->G0);
+    if (X1) form_X1.check(this->X1);
+    if (X2) form_X2.check(this->X2);
+    if (X3) form_X3.check(this->X3);
+    if (BIT) form_BIT.check(this->BIT);
+    if (OFFT) form_OFFT.check(this->OFFT);
+    if (PA) form_PA.check(this->PA);
+    if (PB) form_PB.check(this->PB);
+    if (W1A) form_W1A.check(this->W1A);
+    if (W2A) form_W2A.check(this->W2A);
+    if (W3A) form_W3A.check(this->W3A);
+    if (W1B) form_W1B.check(this->W1B);
+    if (W2B) form_W2B.check(this->W2B);
+    if (W3B) form_W3B.check(this->W3B);
+    if (SA) form_SA.check(this->SA);
+    if (SB) form_SB.check(this->SB);
 }
 
 // Local Variables:

@@ -54,6 +54,11 @@ namespace dnvgl {
                     float_error(const std::string&, const std::string&);
                 };
 
+                class complex_error : public form_error {
+                public:
+                    complex_error(const std::string&, const std::string&);
+                };
+
                 class int_error : public form_error {
                 public:
                     int_error(const std::string&, const std::string&);

@@ -585,14 +585,12 @@ TEST_CASE("Error conditions (Wrong OFFT error)", "[bdf_cbar_error_1]") {
     std::string OFFT("EEG");
 
     SECTION("create instance") {
-
         CHECK_THROWS_AS(cbar(&EID, &PID, &GA, &GB, &X1, &X2, &X3, &OFFT),
                         errors::str_error);
     }
 
     SECTION("reuse instance") {
         cbar probe;
-
         CHECK_THROWS_AS(probe(&EID, &PID, &GA, &GB, &X1, &X2, &X3, &OFFT),
                         errors::str_error);
     }

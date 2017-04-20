@@ -59,7 +59,7 @@ TEST_CASE("BDF FORCE types output.", "[bdf_force,out]") {
     std::ostringstream test;
 
     SECTION("reverse") {
-        long SID(2), G(5), CID(6);
+        long SID{2}, G{5}, CID{6};
         double F(2.9), N1(0.), N2(1.9), N3(0.);
         force probe(&SID, &G, &CID, &F, &N1, &N2, &N3);
         test << probe;
@@ -68,7 +68,7 @@ TEST_CASE("BDF FORCE types output.", "[bdf_force,out]") {
     }
 
     SECTION("reverse part") {
-        long SID(2), G(5), CID(6);
+        long SID{2}, G{5}, CID{6};
         double F(2.9), N1(0.), N2(1.9);
         force probe(&SID, &G, &CID, &F, &N1, &N2);
         test << probe;
@@ -77,7 +77,7 @@ TEST_CASE("BDF FORCE types output.", "[bdf_force,out]") {
     }
 
     SECTION("reverse part (2)") {
-        long SID(2), G(5), CID(6);
+        long SID{2}, G{5}, CID{6};
         double F(2.9), N1(1.9);
         force probe(&SID, &G, &CID, &F, &N1);
         test << probe;
@@ -85,8 +85,8 @@ TEST_CASE("BDF FORCE types output.", "[bdf_force,out]") {
               "FORCE          2       5       62.900+001.900+00\n");
     }
 
-    SECTION("reverse part (2)") {
-        long SID(2), G(5), CID(6);
+    SECTION("reverse part (3)") {
+        long SID{2}, G{5}, CID{6};
         double F(2.9), N1(1234.5);
         force probe(&SID, &G, &CID, &F, &N1);
         test << probe;
@@ -96,7 +96,7 @@ TEST_CASE("BDF FORCE types output.", "[bdf_force,out]") {
     }
 
     SECTION("reuse") {
-        long SID(2), G(5), CID(6);
+        long SID{2}, G{5}, CID{6};
         double F(2.9), N1(0.), N2(1.9), N3(0.);
         force probe;
         test << probe;
@@ -120,7 +120,7 @@ TEST_CASE("BDF FORCE types output.", "[bdf_force,out]") {
     }
 
     SECTION("Exception, mkoe 2015-12-17") {
-        long const lg(2), nodeId(2), zero(0);
+        long const lg{2}, nodeId{2}, zero(0);
         double const one(1.), fx(15.505163191247204),
             fy(-11.104650284500055), fz(94.254443646696117);
 
@@ -149,5 +149,7 @@ TEST_CASE("BDF FORCE types output.", "[bdf_force,out]") {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
+// compile-command: "make -C ../cbuild -j8&&
+//   (make -C ../cbuild test;
+//    ../cbuild/tests/test_bdf_cards --use-colour no)"
 // End:
