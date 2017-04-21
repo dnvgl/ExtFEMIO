@@ -220,7 +220,6 @@ namespace dnvgl {
 
                         using element::put;
                         using element::read;
-                        using element::operator();
                     };
                 }
                 /// Handle Nastran Bulk `CTRIA3` entries.
@@ -258,7 +257,6 @@ namespace dnvgl {
                     using __base::shell::form_T3;
                     using __base::shell::form_T4;
 
-                    using __base::element::operator();
                     using __base::card::format_outlist;
 
                 public:
@@ -350,7 +348,6 @@ namespace dnvgl {
                     using __base::shell::form_T3;
                     using __base::shell::form_T4;
 
-                    using __base::element::operator();
                     using __base::card::format_outlist;
 
                 public:
@@ -1024,7 +1021,6 @@ namespace dnvgl {
                     static bdf::types::card head;
 
                     using __base::element::form_EID;
-                    using __base::element::operator();
                     using __base::card::format_outlist;
 
                     // entry_type<long> static const form_EID;
