@@ -33,12 +33,11 @@ using namespace std;
 
 using namespace dnvgl::extfem;
 using namespace bdf;
-
-using types::entry_type;
 using namespace type_bounds;
-
 using namespace cards;
 using namespace cards::__base;
+
+using types::entry_type;
 
 namespace {
     const long cl1 = 1;

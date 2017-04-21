@@ -27,22 +27,30 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-namespace {
-    const long cl1 = 1;
-}
-
 using namespace std;
 
-using namespace dnvgl::extfem::bdf;
+using namespace dnvgl::extfem;
+using namespace bdf;
+using namespace type_bounds;
+using namespace cards;
+using namespace cards::__base;
 
 using types::entry_type;
-using namespace cards;
+
+namespace {
+   long const cl1 = 1;
+}
+
+types::card crod::head = bdf::types::card("CROD");
 
 // const entry_type<long> crod::form_EID(
 //    "EID", bdf::type_bounds::bound<long>(&cl1));
-const entry_type<long> crod::form_PID("PID");
-const entry_type<long> crod::form_G1("G1");
-const entry_type<long> crod::form_G2("G2");
+const entry_type<long> crod::form_PID(
+    "PID", bound<long>(&cl1, nullptr, nullptr, true));
+const entry_type<long> crod::form_G1("G1", bound<long>(&cl1));
+const entry_type<long> crod::form_G2("G2", bound<long>(&cl1));
+
+crod::crod() : element(), PID(nullptr), G1(), G2() {}
 
 crod::crod(list<std::string> const &inp) :
 element(inp) {
@@ -50,8 +58,7 @@ element(inp) {
 }
 
 crod::crod(long const* EID, long const* PID, long const* G1, long const* G2) :
-        element(EID) {
-    NOT_IMPLEMENTED(nullptr);
+        element(EID), PID(PID ? PID : EID), G1(G1), G2(G2) {
     this->crod::check_data();
 }
 
@@ -80,12 +87,16 @@ void crod::read(list<std::string> const &inp) {
         throw errors::parse_error(
             "CROD", "Illegal number of entries for CROD");
     }
+    if (!PID) PID(EID);
 }
 
-__base::card const& crod::operator() (
+card const& crod::operator() (
     long const* EID, long const* PID, long const* G1, long const* G2) {
     this->element::operator()(EID);
-    this->PID(PID);
+    if (PID)
+        this->PID(PID);
+    else
+        this->PID(EID);
     this->G1(G1);
     this->G2(G2);
     this->crod::check_data();
@@ -94,7 +105,14 @@ __base::card const& crod::operator() (
 
 void crod::collect_outdata(
     list<unique_ptr<format_entry> > &res) const {
-    NOT_IMPLEMENTED("Can't write CROD.");
+    if (!EID) return;
+
+    res.push_back(unique_ptr<format_entry>(format(head)));
+
+    res.push_back(unique_ptr<format_entry>(format<long>(form_EID, EID)));
+    res.push_back(unique_ptr<format_entry>(format<long>(form_PID, PID)));
+    res.push_back(unique_ptr<format_entry>(format<long>(form_G1, G1)));
+    res.push_back(unique_ptr<format_entry>(format<long>(form_G2, G2)));
 }
 
 void crod::check_data() const {
@@ -115,5 +133,7 @@ cards::__base::card const &crod::operator()(list<std::string> const &inp) {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j7 &&
+//   (make -C ../../cbuild test ;
+//    ../../cbuild/tests/test_bdf_cards --use-colour no)"
 // End:

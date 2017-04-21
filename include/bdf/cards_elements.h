@@ -1050,6 +1050,8 @@ namespace dnvgl {
                         */
                     entry_value<long> G2;
 
+                    crod();
+
                     crod(std::list<std::string> const &inp);
 
                     crod(long const *EID, long const *PID,
