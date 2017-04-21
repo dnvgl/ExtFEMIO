@@ -20,8 +20,6 @@ namespace {
 #undef max
 #endif // max
 
-#include <memory>
-
 #include "fem/cards.h"
 #include "fem/types.h"
 

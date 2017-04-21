@@ -18,9 +18,6 @@ namespace {
 }
 
 #include "fem/cards.h"
-
-#include <memory>
-
 #include "fem/types.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)

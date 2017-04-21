@@ -133,7 +133,7 @@ void pshell::read(const std::list<std::string> &inp) {
         form_12I_T__3.set_value(x12I_T__3, *(pos++));
         form_MID2.set_value(MID2, *(pos++));
         form_T.set_value(T, *(pos++));
-        form_MID1.set_value(MID1, *(pos++));
+        form_MID1.set_value(MID1, *pos);
         // form_PID.set_value(PID, *pos);
         break;
     default:

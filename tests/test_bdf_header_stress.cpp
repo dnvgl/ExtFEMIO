@@ -17,8 +17,6 @@ namespace {
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
 
-#include <deque>
-
 #include <catch.hpp>
 
 #ifdef __GNUC__

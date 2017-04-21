@@ -215,10 +215,10 @@ TEST_CASE("BDF CTRIA3 roundtrip 1.", "[bdf_ctria3_roundtrip]") {
         while (getline(raw, tmp))
             data.push_back(tmp);
         __base::card::card_split(data, lines);
-        ctria3 probe(lines);
+        ctria3 probe_l(lines);
 
-        CHECK(probe.EID.value == 1);
-        CHECK(probe.PID.value == 2);
+        CHECK(probe_l.EID.value == 1);
+        CHECK(probe_l.PID.value == 2);
     }
 
 }

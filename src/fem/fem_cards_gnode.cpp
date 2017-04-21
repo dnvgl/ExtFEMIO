@@ -16,7 +16,6 @@ namespace {
         "@(#) $Id$";
 }
 
-#include <memory>
 #include <algorithm>
 
 #include "fem/cards.h"

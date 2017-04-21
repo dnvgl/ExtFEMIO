@@ -134,7 +134,7 @@ void ctria3::read(std::list<std::string> const &inp) {
 
     if (!THETA && !MCID)
         form_THETA.set_value(THETA, "");
-    if (TFLAG && (long)TFLAG == 1) {
+    if (TFLAG && long(TFLAG) == 1) {
         if (!T1) T1(1.);
         if (!T2) T2(1.);
         if (!T3) T3(1.);

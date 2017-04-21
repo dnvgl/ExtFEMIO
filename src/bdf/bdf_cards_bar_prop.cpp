@@ -17,8 +17,6 @@ namespace {
 
 #include "bdf/cards.h"
 
-#include <memory>
-
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
 #undef THIS_FILE

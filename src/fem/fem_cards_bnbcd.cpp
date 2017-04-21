@@ -20,8 +20,6 @@ namespace {
 #undef FIX
 #endif // FIX
 
-#include <memory>
-
 #include "fem/cards.h"
 #include "fem/types.h"
 

@@ -80,7 +80,7 @@ void prod::read(list<std::string> const &inp) {
         form_J.set_value(J, *(pos++));
     case 3:
         form_A.set_value(A, *(pos++));
-        form_MID.set_value(MID, *(pos++));
+        form_MID.set_value(MID, *pos);
         // form_PID.set_value(PID, *(pos));
         break;
     default:

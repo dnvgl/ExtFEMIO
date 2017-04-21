@@ -17,7 +17,6 @@ namespace {
         "@(#) $Id$";
 }
 
-#include <memory>
 #include <unordered_map>
 
 #include "fem/cards.h"
