@@ -121,12 +121,12 @@ TEST_CASE("BDF CROD roundtrip test.", "[bdf_crod]") {
         while (getline(raw, tmp))
             data.push_back(tmp);
         __base::card::card_split(data, lines);
-        crod probe(lines);
+        crod probe_l(lines);
 
-        CHECK(long(probe.EID) == 7869);
-        CHECK(long(probe.PID) == 104010);
-        CHECK(long(probe.G1) == 76);
-        CHECK(long(probe.G2) == 153);
+        CHECK(long(probe_l.EID) == 7869);
+        CHECK(long(probe_l.PID) == 104010);
+        CHECK(long(probe_l.G1) == 76);
+        CHECK(long(probe_l.G2) == 153);
     }
 }
 
@@ -153,13 +153,13 @@ TEST_CASE("BDF CROD roundtrip test (reuse).", "[bdf_crod]") {
         while (getline(raw, tmp))
             data.push_back(tmp);
         __base::card::card_split(data, lines);
-        crod probe;
-        probe(lines);
+        crod probe_l;
+        probe_l(lines);
 
-        CHECK(long(probe.EID) == 7869);
-        CHECK(long(probe.PID) == 104010);
-        CHECK(long(probe.G1) == 76);
-        CHECK(long(probe.G2) == 153);
+        CHECK(long(probe_l.EID) == 7869);
+        CHECK(long(probe_l.PID) == 104010);
+        CHECK(long(probe_l.G1) == 76);
+        CHECK(long(probe_l.G2) == 153);
     }
 }
 
@@ -185,12 +185,12 @@ TEST_CASE("BDF CROD roundtrip test. (default PID)", "[bdf_crod]") {
         while (getline(raw, tmp))
             data.push_back(tmp);
         __base::card::card_split(data, lines);
-        crod probe(lines);
+        crod probe_l(lines);
 
-        CHECK(long(probe.EID) == 7869);
-        CHECK(long(probe.PID) == 7869);
-        CHECK(long(probe.G1) == 76);
-        CHECK(long(probe.G2) == 153);
+        CHECK(long(probe_l.EID) == 7869);
+        CHECK(long(probe_l.PID) == 7869);
+        CHECK(long(probe_l.G1) == 76);
+        CHECK(long(probe_l.G2) == 153);
     }
 }
 
@@ -217,13 +217,13 @@ TEST_CASE("BDF CROD roundtrip test (reuse) (default PID).", "[bdf_crod]") {
         while (getline(raw, tmp))
             data.push_back(tmp);
         __base::card::card_split(data, lines);
-        crod probe;
-        probe(lines);
+        crod probe_l;
+        probe_l(lines);
 
-        CHECK(long(probe.EID) == 7869);
-        CHECK(long(probe.PID) == 7869);
-        CHECK(long(probe.G1) == 76);
-        CHECK(long(probe.G2) == 153);
+        CHECK(long(probe_l.EID) == 7869);
+        CHECK(long(probe_l.PID) == 7869);
+        CHECK(long(probe_l.G1) == 76);
+        CHECK(long(probe_l.G2) == 153);
     }
 }
 

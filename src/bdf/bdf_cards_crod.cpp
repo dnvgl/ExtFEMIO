@@ -35,13 +35,13 @@ using namespace type_bounds;
 using namespace cards;
 using namespace cards::__base;
 
-using types::entry_type;
+using bdf::types::entry_type;
 
 namespace {
    long const cl1 = 1;
 }
 
-types::card crod::head = bdf::types::card("CROD");
+bdf::types::card crod::head = bdf::types::card("CROD");
 
 // const entry_type<long> crod::form_EID(
 //    "EID", bdf::type_bounds::bound<long>(&cl1));

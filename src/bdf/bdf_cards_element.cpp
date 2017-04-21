@@ -37,7 +37,7 @@ using namespace type_bounds;
 using namespace cards;
 using namespace cards::__base;
 
-using types::entry_type;
+using bdf::types::entry_type;
 
 namespace {
     const long cl1 = 1;
