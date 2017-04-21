@@ -42,7 +42,7 @@ namespace {
     const double cd0 = 0., cd1 = 1., cd833 = .833333;
 }
 
-types::card pshell::head = bdf::types::card("PSHELL");
+bdf::types::card pshell::head = bdf::types::card("PSHELL");
 
 // const entry_type<long> pshell::form_PID(
 //     "PID", bdf::type_bounds::bound<long>(&cl1));
