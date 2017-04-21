@@ -32,6 +32,12 @@ namespace {
 
 const entry_type<long> property::form_PID("PID", bound<long>(&cl1));
 
+property::property() : card() {}
+
+property::property(long const *PID) : card(), PID(PID) {
+    this->property::check_data();
+}
+
 property::property(list<std::string> const &inp) : card(inp) {
     this->property::read(inp);
 }
@@ -48,6 +54,17 @@ void property::read(std::list<std::string> const &inp) {
 
 void property::check_data() const {
     if (PID) property::form_PID.check(PID);
+}
+
+card const &property::operator() (list<std::string> const &inp) {
+    this->property::read(inp);
+    return *this;
+}
+
+card const &property::operator() (long const *PID) {
+    this->PID(PID);
+    this->property::check_data();
+    return *this;
 }
 
 // Local Variables:

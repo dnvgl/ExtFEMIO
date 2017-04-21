@@ -21,7 +21,7 @@
   |          | =CELAS1=   | Scalar Spring Connection                                                                    | ✗      | ✗       |
   |----------+------------+---------------------------------------------------------------------------------------------+--------+---------|
   | Element  | properties |                                                                                             |        |         |
-  |          | =PSHELL=   | Properties for =CTRIA3=, and =CQUAD4=                                                       | ✓      | ✗       |
+  |          | =PSHELL=   | Properties for =CTRIA3=, and =CQUAD4=                                                       | ✓      | ✓       |
   |          | =PBEAM=    | Integral properties for =CBEAM=                                                             | ✓      | ✗       |
   |          | =PBEAML=   | Properties for =CBEAM= describing cross section                                             | ✓      | ✗       |
   |          | =PBAR=     | Integral properties for =CBAR=                                                              | ✓      | ✗       |

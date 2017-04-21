@@ -39,11 +39,19 @@ namespace dnvgl {
 
                     protected:
 
+                        property();
+
+                        property(long const*);
+
                         property(std::list<std::string> const&);
 
                         virtual void read(std::list<std::string> const&) override;
 
                         virtual void check_data() const override;
+
+                        card const &operator() (const std::list<std::string> &) override;
+
+                        card const &operator() (long const*);
                     };
                 }
 
@@ -141,7 +149,18 @@ namespace dnvgl {
                         */
                     bdf::types::entry_value<long> MID4;
 
+                    pshell();
+
                     pshell(std::list<std::string> const&);
+
+                    pshell(
+                        long const *PID, long const *MID1, double const *T = nullptr,
+                        long const *MID2 = nullptr, double const *x12I_T__3 = nullptr, // 12 I / T**3
+                        long const *MID3 = nullptr,
+                        double const *TS_T = nullptr, // TS / T
+                        double const *NSM = nullptr,
+                        double const *Z1 = nullptr, double const *Z2 = nullptr,
+                        long const *MID4 = nullptr);
 
                     /**
                       \brief returns the card type of the current card.
@@ -156,7 +175,7 @@ namespace dnvgl {
                         double const *TS_T = nullptr, // TS / T
                         double const *NSM = nullptr,
                         double const *Z1 = nullptr, double const *Z2 = nullptr,
-                        long const *MID4 = nullptr) = delete;
+                        long const *MID4 = nullptr);
 
                     void read(std::list<std::string> const&) override;
 
