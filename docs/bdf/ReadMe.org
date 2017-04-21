@@ -13,11 +13,11 @@
   |          | =GRID=     | Grid nodes                                                                                  | ✓      | ✓       |
   |----------+------------+---------------------------------------------------------------------------------------------+--------+---------|
   | Elements |            |                                                                                             |        |         |
-  |          | =CTRIA3=   | 3 node shaped shell elements                                                                | ✓      | ✗       |
-  |          | =CQUAD4=   | 4 node shaped shell elements                                                                | ✓      | ✗       |
-  |          | =CBEAM=    | Complex beams [fn:cbeam]                                                                    | ✓      | ✗       |
+  |          | =CTRIA3=   | 3 node shaped shell elements                                                                | ✓      | ✓       |
+  |          | =CQUAD4=   | 4 node shaped shell elements                                                                | ✓      | ✓       |
+  |          | =CBEAM=    | Complex beams [fn:cbeam]                                                                    | ✓      | ✓       |
   |          | =CBAR=     | Simple beams                                                                                | ✓      | ✓       |
-  |          | =CROD=     | Trusses                                                                                     | ✓      | ✗       |
+  |          | =CROD=     | Trusses                                                                                     | ✓      | ✓       |
   |          | =CELAS1=   | Scalar Spring Connection                                                                    | ✗      | ✗       |
   |----------+------------+---------------------------------------------------------------------------------------------+--------+---------|
   | Element  | properties |                                                                                             |        |         |
