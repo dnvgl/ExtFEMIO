@@ -215,32 +215,32 @@ TEST_CASE("BDF CBEAM roundtrip test (DCODE, OFFT)", "[bdf_cbeam]") {
         while (getline(raw, tmp))
             data.push_back(tmp);
         __base::card::card_split(data, lines);
-        cbeam probe(lines);
+        cbeam probe_l(lines);
 
-        CHECK(long(probe.EID) == 7869);
-        CHECK(long(probe.PID) == 104010);
-        CHECK(long(probe.GA) == 76);
-        CHECK(long(probe.GB) == 153);
-        CHECK(long(probe.G0) == 13);
-        CHECK_FALSE(bool(probe.X1));
-        CHECK_FALSE(bool(probe.X2));
-        CHECK_FALSE(bool(probe.X3));
-        CHECK(probe.choose_dir_code == cbeam::CHOOSE_DIR_CODE::has_DCODE);
-        CHECK(std::string(probe.OFFT) == "GGG");
-        CHECK_FALSE(probe.BIT);
-        CHECK(probe.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_OFFT);
+        CHECK(long(probe_l.EID) == 7869);
+        CHECK(long(probe_l.PID) == 104010);
+        CHECK(long(probe_l.GA) == 76);
+        CHECK(long(probe_l.GB) == 153);
+        CHECK(long(probe_l.G0) == 13);
+        CHECK_FALSE(bool(probe_l.X1));
+        CHECK_FALSE(bool(probe_l.X2));
+        CHECK_FALSE(bool(probe_l.X3));
+        CHECK(probe_l.choose_dir_code == cbeam::CHOOSE_DIR_CODE::has_DCODE);
+        CHECK(std::string(probe_l.OFFT) == "GGG");
+        CHECK_FALSE(probe_l.BIT);
+        CHECK(probe_l.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_OFFT);
         std::list<int> p_refA{1, 2};
-        CHECK(probe.PA == p_refA);
+        CHECK(probe_l.PA == p_refA);
         std::list<int> p_refB{3, 4};
-        CHECK(probe.PB == p_refB);
-        CHECK(double(probe.W1A) == 0.);
-        CHECK(double(probe.W2A) == -22.617);
-        CHECK(double(probe.W3A) == -339.25);
-        CHECK(double(probe.W1B) == 0.);
-        CHECK(double(probe.W2B) == 22.617);
-        CHECK(double(probe.W3B) == 0.);
-        CHECK(long(probe.SA) == 11);
-        CHECK(long(probe.SB) == 12);
+        CHECK(probe_l.PB == p_refB);
+        CHECK(double(probe_l.W1A) == 0.);
+        CHECK(double(probe_l.W2A) == -22.617);
+        CHECK(double(probe_l.W3A) == -339.25);
+        CHECK(double(probe_l.W1B) == 0.);
+        CHECK(double(probe_l.W2B) == 22.617);
+        CHECK(double(probe_l.W3B) == 0.);
+        CHECK(long(probe_l.SA) == 11);
+        CHECK(long(probe_l.SB) == 12);
     }
 }
 
@@ -278,33 +278,33 @@ TEST_CASE("BDF CBEAM roundtrip test (DCODE, OFFT) (reuse)", "[bdf_cbeam]") {
         while (getline(raw, tmp))
             data.push_back(tmp);
         __base::card::card_split(data, lines);
-        cbeam probe;
-        probe(lines);
+        cbeam probe_l;
+        probe_l(lines);
 
-        CHECK(long(probe.EID) == 7869);
-        CHECK(long(probe.PID) == 104010);
-        CHECK(long(probe.GA) == 76);
-        CHECK(long(probe.GB) == 153);
-        CHECK(long(probe.G0) == 13);
-        CHECK_FALSE(bool(probe.X1));
-        CHECK_FALSE(bool(probe.X2));
-        CHECK_FALSE(bool(probe.X3));
-        CHECK(probe.choose_dir_code == cbeam::CHOOSE_DIR_CODE::has_DCODE);
-        CHECK(std::string(probe.OFFT) == "GGG");
-        CHECK_FALSE(probe.BIT);
-        CHECK(probe.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_OFFT);
+        CHECK(long(probe_l.EID) == 7869);
+        CHECK(long(probe_l.PID) == 104010);
+        CHECK(long(probe_l.GA) == 76);
+        CHECK(long(probe_l.GB) == 153);
+        CHECK(long(probe_l.G0) == 13);
+        CHECK_FALSE(bool(probe_l.X1));
+        CHECK_FALSE(bool(probe_l.X2));
+        CHECK_FALSE(bool(probe_l.X3));
+        CHECK(probe_l.choose_dir_code == cbeam::CHOOSE_DIR_CODE::has_DCODE);
+        CHECK(std::string(probe_l.OFFT) == "GGG");
+        CHECK_FALSE(probe_l.BIT);
+        CHECK(probe_l.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_OFFT);
         std::list<int> p_refA{1, 2};
-        CHECK(probe.PA == p_refA);
+        CHECK(probe_l.PA == p_refA);
         std::list<int> p_refB{3, 4};
-        CHECK(probe.PB == p_refB);
-        CHECK(double(probe.W1A) == 0.);
-        CHECK(double(probe.W2A) == -22.617);
-        CHECK(double(probe.W3A) == -339.25);
-        CHECK(double(probe.W1B) == 0.);
-        CHECK(double(probe.W2B) == 22.617);
-        CHECK(double(probe.W3B) == 0.);
-        CHECK(long(probe.SA) == 11);
-        CHECK(long(probe.SB) == 12);
+        CHECK(probe_l.PB == p_refB);
+        CHECK(double(probe_l.W1A) == 0.);
+        CHECK(double(probe_l.W2A) == -22.617);
+        CHECK(double(probe_l.W3A) == -339.25);
+        CHECK(double(probe_l.W1B) == 0.);
+        CHECK(double(probe_l.W2B) == 22.617);
+        CHECK(double(probe_l.W3B) == 0.);
+        CHECK(long(probe_l.SA) == 11);
+        CHECK(long(probe_l.SB) == 12);
     }
 }
 
@@ -341,32 +341,32 @@ TEST_CASE("BDF CBEAM roundtrip test (DCODE, BIT)", "[bdf_cbeam]") {
         while (getline(raw, tmp))
             data.push_back(tmp);
         __base::card::card_split(data, lines);
-        cbeam probe(lines);
+        cbeam probe_l(lines);
 
-        CHECK(long(probe.EID) == 7869);
-        CHECK(long(probe.PID) == 104010);
-        CHECK(long(probe.GA) == 76);
-        CHECK(long(probe.GB) == 153);
-        CHECK(long(probe.G0) == 13);
-        CHECK_FALSE(bool(probe.X1));
-        CHECK_FALSE(bool(probe.X2));
-        CHECK_FALSE(bool(probe.X3));
-        CHECK(probe.choose_dir_code == cbeam::CHOOSE_DIR_CODE::has_DCODE);
-        CHECK(double(probe.BIT) == .72);
-        CHECK_FALSE(probe.OFFT);
-        CHECK(probe.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_BIT);
+        CHECK(long(probe_l.EID) == 7869);
+        CHECK(long(probe_l.PID) == 104010);
+        CHECK(long(probe_l.GA) == 76);
+        CHECK(long(probe_l.GB) == 153);
+        CHECK(long(probe_l.G0) == 13);
+        CHECK_FALSE(bool(probe_l.X1));
+        CHECK_FALSE(bool(probe_l.X2));
+        CHECK_FALSE(bool(probe_l.X3));
+        CHECK(probe_l.choose_dir_code == cbeam::CHOOSE_DIR_CODE::has_DCODE);
+        CHECK(double(probe_l.BIT) == .72);
+        CHECK_FALSE(probe_l.OFFT);
+        CHECK(probe_l.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_BIT);
         std::list<int> p_refA{1, 2};
-        CHECK(probe.PA == p_refA);
+        CHECK(probe_l.PA == p_refA);
         std::list<int> p_refB{3, 4};
-        CHECK(probe.PB == p_refB);
-        CHECK(double(probe.W1A) == 0.);
-        CHECK(double(probe.W2A) == -22.617);
-        CHECK(double(probe.W3A) == -339.25);
-        CHECK(double(probe.W1B) == 0.);
-        CHECK(double(probe.W2B) == 22.617);
-        CHECK(double(probe.W3B) == 0.);
-        CHECK(long(probe.SA) == 11);
-        CHECK(long(probe.SB) == 12);
+        CHECK(probe_l.PB == p_refB);
+        CHECK(double(probe_l.W1A) == 0.);
+        CHECK(double(probe_l.W2A) == -22.617);
+        CHECK(double(probe_l.W3A) == -339.25);
+        CHECK(double(probe_l.W1B) == 0.);
+        CHECK(double(probe_l.W2B) == 22.617);
+        CHECK(double(probe_l.W3B) == 0.);
+        CHECK(long(probe_l.SA) == 11);
+        CHECK(long(probe_l.SB) == 12);
     }
 }
 
@@ -404,33 +404,33 @@ TEST_CASE("BDF CBEAM roundtrip test (DCODE, BIT) (reuse)", "[bdf_cbeam]") {
         while (getline(raw, tmp))
             data.push_back(tmp);
         __base::card::card_split(data, lines);
-        cbeam probe;
-        probe(lines);
+        cbeam probe_l;
+        probe_l(lines);
 
-        CHECK(long(probe.EID) == 7869);
-        CHECK(long(probe.PID) == 104010);
-        CHECK(long(probe.GA) == 76);
-        CHECK(long(probe.GB) == 153);
-        CHECK(long(probe.G0) == 13);
-        CHECK_FALSE(bool(probe.X1));
-        CHECK_FALSE(bool(probe.X2));
-        CHECK_FALSE(bool(probe.X3));
-        CHECK(probe.choose_dir_code == cbeam::CHOOSE_DIR_CODE::has_DCODE);
-        CHECK(double(probe.BIT) == .72);
-        CHECK_FALSE(probe.OFFT);
-        CHECK(probe.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_BIT);
+        CHECK(long(probe_l.EID) == 7869);
+        CHECK(long(probe_l.PID) == 104010);
+        CHECK(long(probe_l.GA) == 76);
+        CHECK(long(probe_l.GB) == 153);
+        CHECK(long(probe_l.G0) == 13);
+        CHECK_FALSE(bool(probe_l.X1));
+        CHECK_FALSE(bool(probe_l.X2));
+        CHECK_FALSE(bool(probe_l.X3));
+        CHECK(probe_l.choose_dir_code == cbeam::CHOOSE_DIR_CODE::has_DCODE);
+        CHECK(double(probe_l.BIT) == .72);
+        CHECK_FALSE(probe_l.OFFT);
+        CHECK(probe_l.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_BIT);
         std::list<int> p_refA{1, 2};
-        CHECK(probe.PA == p_refA);
+        CHECK(probe_l.PA == p_refA);
         std::list<int> p_refB{3, 4};
-        CHECK(probe.PB == p_refB);
-        CHECK(double(probe.W1A) == 0.);
-        CHECK(double(probe.W2A) == -22.617);
-        CHECK(double(probe.W3A) == -339.25);
-        CHECK(double(probe.W1B) == 0.);
-        CHECK(double(probe.W2B) == 22.617);
-        CHECK(double(probe.W3B) == 0.);
-        CHECK(long(probe.SA) == 11);
-        CHECK(long(probe.SB) == 12);
+        CHECK(probe_l.PB == p_refB);
+        CHECK(double(probe_l.W1A) == 0.);
+        CHECK(double(probe_l.W2A) == -22.617);
+        CHECK(double(probe_l.W3A) == -339.25);
+        CHECK(double(probe_l.W1B) == 0.);
+        CHECK(double(probe_l.W2B) == 22.617);
+        CHECK(double(probe_l.W3B) == 0.);
+        CHECK(long(probe_l.SA) == 11);
+        CHECK(long(probe_l.SB) == 12);
     }
 }
 
@@ -469,32 +469,32 @@ TEST_CASE("BDF CBEAM roundtrip test (DVEC, OFFT)", "[bdf_cbeam]") {
         while (getline(raw, tmp))
             data.push_back(tmp);
         __base::card::card_split(data, lines);
-        cbeam probe(lines);
+        cbeam probe_l(lines);
 
-        CHECK(long(probe.EID) == 7869);
-        CHECK(long(probe.PID) == 104010);
-        CHECK(long(probe.GA) == 76);
-        CHECK(long(probe.GB) == 153);
-        CHECK_FALSE(bool(probe.G0));
-        CHECK(double(probe.X1) == 111.);
-        CHECK(double(probe.X2) == 222.);
-        CHECK(double(probe.X3) == 333.);
-        CHECK(probe.choose_dir_code == cbeam::CHOOSE_DIR_CODE::has_DVEC);
-        CHECK(std::string(probe.OFFT) == "GGG");
-        CHECK_FALSE(probe.BIT);
-        CHECK(probe.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_OFFT);
+        CHECK(long(probe_l.EID) == 7869);
+        CHECK(long(probe_l.PID) == 104010);
+        CHECK(long(probe_l.GA) == 76);
+        CHECK(long(probe_l.GB) == 153);
+        CHECK_FALSE(bool(probe_l.G0));
+        CHECK(double(probe_l.X1) == 111.);
+        CHECK(double(probe_l.X2) == 222.);
+        CHECK(double(probe_l.X3) == 333.);
+        CHECK(probe_l.choose_dir_code == cbeam::CHOOSE_DIR_CODE::has_DVEC);
+        CHECK(std::string(probe_l.OFFT) == "GGG");
+        CHECK_FALSE(probe_l.BIT);
+        CHECK(probe_l.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_OFFT);
         std::list<int> p_refA{1, 2};
-        CHECK(probe.PA == p_refA);
+        CHECK(probe_l.PA == p_refA);
         std::list<int> p_refB{3, 4};
-        CHECK(probe.PB == p_refB);
-        CHECK(double(probe.W1A) == 0.);
-        CHECK(double(probe.W2A) == -22.617);
-        CHECK(double(probe.W3A) == -339.25);
-        CHECK(double(probe.W1B) == 0.);
-        CHECK(double(probe.W2B) == 22.617);
-        CHECK(double(probe.W3B) == 0.);
-        CHECK(long(probe.SA) == 11);
-        CHECK(long(probe.SB) == 12);
+        CHECK(probe_l.PB == p_refB);
+        CHECK(double(probe_l.W1A) == 0.);
+        CHECK(double(probe_l.W2A) == -22.617);
+        CHECK(double(probe_l.W3A) == -339.25);
+        CHECK(double(probe_l.W1B) == 0.);
+        CHECK(double(probe_l.W2B) == 22.617);
+        CHECK(double(probe_l.W3B) == 0.);
+        CHECK(long(probe_l.SA) == 11);
+        CHECK(long(probe_l.SB) == 12);
     }
 }
 
@@ -533,33 +533,33 @@ TEST_CASE("BDF CBEAM roundtrip test (DVEC, OFFT) (reuse)", "[bdf_cbeam]") {
         while (getline(raw, tmp))
             data.push_back(tmp);
         __base::card::card_split(data, lines);
-        cbeam probe;
-        probe(lines);
+        cbeam probe_l;
+        probe_l(lines);
 
-        CHECK(long(probe.EID) == 7869);
-        CHECK(long(probe.PID) == 104010);
-        CHECK(long(probe.GA) == 76);
-        CHECK(long(probe.GB) == 153);
-        CHECK_FALSE(bool(probe.G0));
-        CHECK(double(probe.X1) == 111.);
-        CHECK(double(probe.X2) == 222.);
-        CHECK(double(probe.X3) == 333.);
-        CHECK(probe.choose_dir_code == cbeam::CHOOSE_DIR_CODE::has_DVEC);
-        CHECK(std::string(probe.OFFT) == "GGG");
-        CHECK_FALSE(probe.BIT);
-        CHECK(probe.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_OFFT);
+        CHECK(long(probe_l.EID) == 7869);
+        CHECK(long(probe_l.PID) == 104010);
+        CHECK(long(probe_l.GA) == 76);
+        CHECK(long(probe_l.GB) == 153);
+        CHECK_FALSE(bool(probe_l.G0));
+        CHECK(double(probe_l.X1) == 111.);
+        CHECK(double(probe_l.X2) == 222.);
+        CHECK(double(probe_l.X3) == 333.);
+        CHECK(probe_l.choose_dir_code == cbeam::CHOOSE_DIR_CODE::has_DVEC);
+        CHECK(std::string(probe_l.OFFT) == "GGG");
+        CHECK_FALSE(probe_l.BIT);
+        CHECK(probe_l.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_OFFT);
         std::list<int> p_refA{1, 2};
-        CHECK(probe.PA == p_refA);
+        CHECK(probe_l.PA == p_refA);
         std::list<int> p_refB{3, 4};
-        CHECK(probe.PB == p_refB);
-        CHECK(double(probe.W1A) == 0.);
-        CHECK(double(probe.W2A) == -22.617);
-        CHECK(double(probe.W3A) == -339.25);
-        CHECK(double(probe.W1B) == 0.);
-        CHECK(double(probe.W2B) == 22.617);
-        CHECK(double(probe.W3B) == 0.);
-        CHECK(long(probe.SA) == 11);
-        CHECK(long(probe.SB) == 12);
+        CHECK(probe_l.PB == p_refB);
+        CHECK(double(probe_l.W1A) == 0.);
+        CHECK(double(probe_l.W2A) == -22.617);
+        CHECK(double(probe_l.W3A) == -339.25);
+        CHECK(double(probe_l.W1B) == 0.);
+        CHECK(double(probe_l.W2B) == 22.617);
+        CHECK(double(probe_l.W3B) == 0.);
+        CHECK(long(probe_l.SA) == 11);
+        CHECK(long(probe_l.SB) == 12);
     }
 }
 
@@ -597,32 +597,32 @@ TEST_CASE("BDF CBEAM roundtrip test (DVEC, BIT)", "[bdf_cbeam]") {
         while (getline(raw, tmp))
             data.push_back(tmp);
         __base::card::card_split(data, lines);
-        cbeam probe(lines);
+        cbeam probe_l(lines);
 
-        CHECK(long(probe.EID) == 7869);
-        CHECK(long(probe.PID) == 104010);
-        CHECK(long(probe.GA) == 76);
-        CHECK(long(probe.GB) == 153);
-        CHECK_FALSE(bool(probe.G0));
-        CHECK(double(probe.X1) == 111.);
-        CHECK(double(probe.X2) == 222.);
-        CHECK(double(probe.X3) == 333.);
-        CHECK(probe.choose_dir_code == cbeam::CHOOSE_DIR_CODE::has_DVEC);
-        CHECK(double(probe.BIT) == .72);
-        CHECK_FALSE(probe.OFFT);
-        CHECK(probe.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_BIT);
+        CHECK(long(probe_l.EID) == 7869);
+        CHECK(long(probe_l.PID) == 104010);
+        CHECK(long(probe_l.GA) == 76);
+        CHECK(long(probe_l.GB) == 153);
+        CHECK_FALSE(bool(probe_l.G0));
+        CHECK(double(probe_l.X1) == 111.);
+        CHECK(double(probe_l.X2) == 222.);
+        CHECK(double(probe_l.X3) == 333.);
+        CHECK(probe_l.choose_dir_code == cbeam::CHOOSE_DIR_CODE::has_DVEC);
+        CHECK(double(probe_l.BIT) == .72);
+        CHECK_FALSE(probe_l.OFFT);
+        CHECK(probe_l.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_BIT);
         std::list<int> p_refA{1, 2};
-        CHECK(probe.PA == p_refA);
+        CHECK(probe_l.PA == p_refA);
         std::list<int> p_refB{3, 4};
-        CHECK(probe.PB == p_refB);
-        CHECK(double(probe.W1A) == 0.);
-        CHECK(double(probe.W2A) == -22.617);
-        CHECK(double(probe.W3A) == -339.25);
-        CHECK(double(probe.W1B) == 0.);
-        CHECK(double(probe.W2B) == 22.617);
-        CHECK(double(probe.W3B) == 0.);
-        CHECK(long(probe.SA) == 11);
-        CHECK(long(probe.SB) == 12);
+        CHECK(probe_l.PB == p_refB);
+        CHECK(double(probe_l.W1A) == 0.);
+        CHECK(double(probe_l.W2A) == -22.617);
+        CHECK(double(probe_l.W3A) == -339.25);
+        CHECK(double(probe_l.W1B) == 0.);
+        CHECK(double(probe_l.W2B) == 22.617);
+        CHECK(double(probe_l.W3B) == 0.);
+        CHECK(long(probe_l.SA) == 11);
+        CHECK(long(probe_l.SB) == 12);
     }
 }
 
@@ -661,33 +661,33 @@ TEST_CASE("BDF CBEAM roundtrip test (DVEC, BIT) (reuse)", "[bdf_cbeam]") {
         while (getline(raw, tmp))
             data.push_back(tmp);
         __base::card::card_split(data, lines);
-        cbeam probe;
-        probe(lines);
+        cbeam probe_l;
+        probe_l(lines);
 
-        CHECK(long(probe.EID) == 7869);
-        CHECK(long(probe.PID) == 104010);
-        CHECK(long(probe.GA) == 76);
-        CHECK(long(probe.GB) == 153);
-        CHECK_FALSE(bool(probe.G0));
-        CHECK(double(probe.X1) == 111.);
-        CHECK(double(probe.X2) == 222.);
-        CHECK(double(probe.X3) == 333.);
-        CHECK(probe.choose_dir_code == cbeam::CHOOSE_DIR_CODE::has_DVEC);
-        CHECK(double(probe.BIT) == .72);
-        CHECK_FALSE(probe.OFFT);
-        CHECK(probe.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_BIT);
+        CHECK(long(probe_l.EID) == 7869);
+        CHECK(long(probe_l.PID) == 104010);
+        CHECK(long(probe_l.GA) == 76);
+        CHECK(long(probe_l.GB) == 153);
+        CHECK_FALSE(bool(probe_l.G0));
+        CHECK(double(probe_l.X1) == 111.);
+        CHECK(double(probe_l.X2) == 222.);
+        CHECK(double(probe_l.X3) == 333.);
+        CHECK(probe_l.choose_dir_code == cbeam::CHOOSE_DIR_CODE::has_DVEC);
+        CHECK(double(probe_l.BIT) == .72);
+        CHECK_FALSE(probe_l.OFFT);
+        CHECK(probe_l.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_BIT);
         std::list<int> p_refA{1, 2};
-        CHECK(probe.PA == p_refA);
+        CHECK(probe_l.PA == p_refA);
         std::list<int> p_refB{3, 4};
-        CHECK(probe.PB == p_refB);
-        CHECK(double(probe.W1A) == 0.);
-        CHECK(double(probe.W2A) == -22.617);
-        CHECK(double(probe.W3A) == -339.25);
-        CHECK(double(probe.W1B) == 0.);
-        CHECK(double(probe.W2B) == 22.617);
-        CHECK(double(probe.W3B) == 0.);
-        CHECK(long(probe.SA) == 11);
-        CHECK(long(probe.SB) == 12);
+        CHECK(probe_l.PB == p_refB);
+        CHECK(double(probe_l.W1A) == 0.);
+        CHECK(double(probe_l.W2A) == -22.617);
+        CHECK(double(probe_l.W3A) == -339.25);
+        CHECK(double(probe_l.W1B) == 0.);
+        CHECK(double(probe_l.W2B) == 22.617);
+        CHECK(double(probe_l.W3B) == 0.);
+        CHECK(long(probe_l.SA) == 11);
+        CHECK(long(probe_l.SB) == 12);
     }
 }
 

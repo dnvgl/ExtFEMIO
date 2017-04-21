@@ -44,12 +44,12 @@ TEST_CASE("BDF PSHELL definitions (Small Field Format).", "[bdf_pshell]") {
 
     SECTION("check data") {
 
-        CHECK((long)probe.PID == 1);
-        CHECK((long)probe.MID1 == 4);
-        CHECK((double)probe.T == 23.);
-        CHECK((long)probe.MID2 == 4);
-        CHECK((double)probe.x12I_T__3 == 1.);
-        CHECK((long)probe.MID3 == 4);
+        CHECK(long(probe.PID) == 1);
+        CHECK(long(probe.MID1) == 4);
+        CHECK(double(probe.T) == 23.);
+        CHECK(long(probe.MID2) == 4);
+        CHECK(double(probe.x12I_T__3) == 1.);
+        CHECK(long(probe.MID3) == 4);
     }
 }
 
@@ -63,12 +63,12 @@ TEST_CASE("BDF PSHELL definitions (reuse) (Small Field Format).", "[bdf_pshell]"
     probe(lines);
 
     SECTION("check data") {
-        CHECK((long)probe.PID == 1);
-        CHECK((long)probe.MID1 == 4);
-        CHECK((double)probe.T == 23.);
-        CHECK((long)probe.MID2 == 4);
-        CHECK((double)probe.x12I_T__3 == 1.);
-        CHECK((long)probe.MID3 == 4);
+        CHECK(long(probe.PID) == 1);
+        CHECK(long(probe.MID1) == 4);
+        CHECK(double(probe.T) == 23.);
+        CHECK(long(probe.MID2) == 4);
+        CHECK(double(probe.x12I_T__3) == 1.);
+        CHECK(long(probe.MID3) == 4);
     }
 }
 
@@ -83,12 +83,12 @@ TEST_CASE("BDF PSHELL definitions (Large Field Format).", "[bdf_pshell]") {
     pshell probe(lines);
 
     SECTION("check data") {
-        CHECK((long)probe.PID == 1);
-        CHECK((long)probe.MID1 == 4);
-        CHECK((double)probe.T == 23.);
-        CHECK((long)probe.MID2 == 4);
-        CHECK((double)probe.x12I_T__3 == 1.);
-        CHECK((long)probe.MID3 == 4);
+        CHECK(long(probe.PID) == 1);
+        CHECK(long(probe.MID1) == 4);
+        CHECK(double(probe.T) == 23.);
+        CHECK(long(probe.MID2) == 4);
+        CHECK(double(probe.x12I_T__3) == 1.);
+        CHECK(long(probe.MID3) == 4);
     }
 }
 
@@ -104,12 +104,12 @@ TEST_CASE("BDF PSHELL definitions (reuse) (Large Field Format).", "[bdf_pshell]"
     probe(lines);
 
     SECTION("check data") {
-        CHECK((long)probe.PID == 1);
-        CHECK((long)probe.MID1 == 4);
-        CHECK((double)probe.T == 23.);
-        CHECK((long)probe.MID2 == 4);
-        CHECK((double)probe.x12I_T__3 == 1.);
-        CHECK((long)probe.MID3 == 4);
+        CHECK(long(probe.PID) == 1);
+        CHECK(long(probe.MID1) == 4);
+        CHECK(double(probe.T) == 23.);
+        CHECK(long(probe.MID2) == 4);
+        CHECK(double(probe.x12I_T__3) == 1.);
+        CHECK(long(probe.MID3) == 4);
     }
 }
 
@@ -121,12 +121,12 @@ TEST_CASE("BDF PSHELL definitions (Free Field Format).", "[bdf_pshell]") {
     pshell probe(lines);
 
     SECTION("check data") {
-        CHECK((long)probe.PID == 1);
-        CHECK((long)probe.MID1 == 4);
-        CHECK((double)probe.T == 23.);
-        CHECK((long)probe.MID2 == 4);
-        CHECK((double)probe.x12I_T__3 == 1.);
-        CHECK((long)probe.MID3 == 4);
+        CHECK(long(probe.PID) == 1);
+        CHECK(long(probe.MID1) == 4);
+        CHECK(double(probe.T) == 23.);
+        CHECK(long(probe.MID2) == 4);
+        CHECK(double(probe.x12I_T__3) == 1.);
+        CHECK(long(probe.MID3) == 4);
     }
 }
 
@@ -139,12 +139,12 @@ TEST_CASE("BDF PSHELL definitions (reuse) (Free Field Format).", "[bdf_pshell]")
     probe(lines);
 
     SECTION("check data") {
-        CHECK((long)probe.PID == 1);
-        CHECK((long)probe.MID1 == 4);
-        CHECK((double)probe.T == 23.);
-        CHECK((long)probe.MID2 == 4);
-        CHECK((double)probe.x12I_T__3 == 1.);
-        CHECK((long)probe.MID3 == 4);
+        CHECK(long(probe.PID) == 1);
+        CHECK(long(probe.MID1) == 4);
+        CHECK(double(probe.T) == 23.);
+        CHECK(long(probe.MID2) == 4);
+        CHECK(double(probe.x12I_T__3) == 1.);
+        CHECK(long(probe.MID3) == 4);
     }
 }
 
