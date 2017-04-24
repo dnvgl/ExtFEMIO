@@ -43,10 +43,10 @@ namespace dnvgl {
                 };
 
                 class form_error : public error {
-                protected:
+                public:
                     form_error(
                         const std::string &name, const std::string &msg,
-                        const std::string &cls);
+                        const std::string &cls="bdf_error");
                 };
 
                 class float_error : public form_error {
@@ -64,24 +64,19 @@ namespace dnvgl {
                     int_error(const std::string&, const std::string&);
                 };
 
-                class output_error : public error {
-                public:
-                    output_error(const std::string&, const std::string&);
-                };
-
-                class list_error : public error {
+                class list_error : public form_error {
                 public:
                     list_error(const std::string&, const std::string &);
                 };
 
-                class str_error : public error {
+                class str_error : public form_error {
                 public:
                     str_error(const std::string&, const std::string &);
                 };
 
-                class string_error : public error {
+                class output_error : public error {
                 public:
-                    string_error(const std::string&, const std::string &);
+                    output_error(const std::string&, const std::string&);
                 };
 
                 class parse_error : public error {
@@ -99,6 +94,8 @@ namespace dnvgl {
 // mode: c++
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j7 &&
+//   (make -C ../../cbuild test;
+//    ../../cbuild/tests/test_bdf_cards --use-colour no)"
 // coding: utf-8
 // End:

@@ -33,10 +33,6 @@ static char THIS_FILE[] = __FILE__;
 #undef _C2
 #endif
 
-namespace {
-    const double cd0 = 0., cd1 = 1.;
-}
-
 using namespace std;
 
 using namespace dnvgl::extfem;
@@ -44,6 +40,12 @@ using namespace bdf;
 using namespace cards;
 
 using bdf::types::entry_type;
+
+namespace {
+    const double cd0 = 0., cd1 = 1.;
+}
+
+bdf::types::card pbeam::head = bdf::types::card("PBEAM");
 
 const entry_type<double> pbeam::form_A("A");
 const entry_type<double> pbeam::form_I1("I1");
@@ -121,6 +123,46 @@ const entry_type<double> pbeam::form_N2_B(
 pbeam::pbeam(std::list<std::string> const &inp) :
 beam_prop(inp) {
     this->pbeam::read(inp);
+}
+
+pbeam::pbeam() : beam_prop() {}
+
+pbeam::pbeam(long const *EID, long const *PID,
+             std::list<double> const *A,
+             std::list<double> const *I1,
+             std::list<double> const *I2,
+             std::list<double> const *I12,
+             std::list<double> const *J,
+             std::list<double> const *NSM,
+             std::list<double> const *C1,
+             std::list<double> const *C2,
+             std::list<double> const *D1,
+             std::list<double> const *D2,
+             std::list<double> const *E1,
+             std::list<double> const *E2,
+             std::list<double> const *F1,
+             std::list<double> const *F2,
+             std::list<std::string> const *SO,
+             std::list<double> const *X_XB,
+             double const *K1, double const *K2,
+             double const *S1, double const *S2,
+             double const *NSI_A, double const *NSI_B,
+             double const *CW_A, double const *CW_B,
+             double const *M1_A, double const *M2_A,
+             double const *M1_B, double const *M2_B,
+             double const *N1_A, double const *N2_A,
+             double const *N1_B, double const *N2_B) :
+        beam_prop(EID, PID),
+        A(*A), I1(*I1), I2(*I2), I12(*I12), J(*J), NSM(*NSM),
+        C1(*C1), C2(*C2), D1(*D1), D2(*D2), E1(*E1), E2(*E2), F1(*F1), F2(*F2),
+        SO((*SO).begin(), (*SO).end()), X_XB(*X_XB),
+        K1(*K1), K2(*K2), S1(*S1), S2(*S2), NSI_A(*NSI_A), NSI_B(*NSI_B),
+        CW_A(*CW_A), CW_B(*CW_B),
+        M1_A(M1_A), M2_A(M2_A), M1_B(M1_B), M2_B(M2_B),
+        N1_A(N1_A), N2_A(N2_A), N1_B(N1_B), N2_B(N2_B)
+{
+    this->beam_prop::check_data();
+    this->pbeam::check_data();
 }
 
 void pbeam::read(std::list<std::string> const &inp) {
@@ -310,11 +352,105 @@ cards::types pbeam::card_type() const {
 
 void pbeam::collect_outdata(
     std::list<std::unique_ptr<format_entry> > &res) const {
-    throw std::not_implemented(__FILE__, __LINE__, "can't write PBEAM.");
+    if (!PID) return;
+
+    res.push_back(unique_ptr<format_entry>(format(head)));
+
+    res.push_back(unique_ptr<format_entry>(format<long>(form_PID, PID)));
+    res.push_back(unique_ptr<format_entry>(format<long>(form_MID, MID)));
+
+    auto pos_A  (A.begin());
+    auto pos_I1 (I1.begin());
+    auto pos_I2 (I2.begin());
+    auto pos_I12(I12.begin());
+    auto pos_J  (J.begin());
+    auto pos_NSM(NSM.begin());
+    auto pos_C1 (C1.begin());
+    auto pos_C2 (C2.begin());
+    auto pos_D1 (D1.begin());
+    auto pos_D2 (D2.begin());
+    auto pos_E1 (E1.begin());
+    auto pos_E2 (E2.begin());
+    auto pos_F1 (F1.begin());
+    auto pos_F2 (F2.begin());
+    auto pos_SO (SO.begin());
+    auto pos_X_XB (X_XB.begin());
+
+
+    res.push_back(unique_ptr<format_entry>(format<double>(form_A, &(*pos_A++))));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_I1, &(*pos_I1++))));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_I2, &(*pos_I2++))));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_I12, &(*pos_I12++))));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_J, &(*pos_J++))));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_NSM, &(*pos_NSM++))));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_C1, &(*pos_C1++))));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_C2, &(*pos_C2++))));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_D1, &(*pos_D1++))));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_D2, &(*pos_D2++))));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_E1, &(*pos_E1++))));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_E2, &(*pos_E2++))));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_F1, &(*pos_F1++))));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_F2, &(*pos_F2++))));
+
+    while (pos_A != A.end()) {
+        res.push_back(unique_ptr<format_entry>(format<std::string>(form_SO, (*pos_SO++))));
+        res.push_back(unique_ptr<format_entry>(format<double>(form_X_XB, &(*pos_X_XB++))));
+        res.push_back(unique_ptr<format_entry>(format<double>(form_A, &(*pos_A++))));
+        res.push_back(unique_ptr<format_entry>(format<double>(form_I1, &(*pos_I1++))));
+        res.push_back(unique_ptr<format_entry>(format<double>(form_I2, &(*pos_I2++))));
+        res.push_back(unique_ptr<format_entry>(format<double>(form_I12, &(*pos_I12++))));
+        res.push_back(unique_ptr<format_entry>(format<double>(form_J, &(*pos_J++))));
+        res.push_back(unique_ptr<format_entry>(format<double>(form_NSM, &(*pos_NSM++))));
+        res.push_back(unique_ptr<format_entry>(format<double>(form_C1, &(*pos_C1++))));
+        res.push_back(unique_ptr<format_entry>(format<double>(form_C2, &(*pos_C2++))));
+        res.push_back(unique_ptr<format_entry>(format<double>(form_D1, &(*pos_D1++))));
+        res.push_back(unique_ptr<format_entry>(format<double>(form_D2, &(*pos_D2++))));
+        res.push_back(unique_ptr<format_entry>(format<double>(form_E1, &(*pos_E1++))));
+        res.push_back(unique_ptr<format_entry>(format<double>(form_E2, &(*pos_E2++))));
+        res.push_back(unique_ptr<format_entry>(format<double>(form_F1, &(*pos_F1++))));
+        res.push_back(unique_ptr<format_entry>(format<double>(form_F2, &(*pos_F2++))));
+    }
+
+    res.push_back(unique_ptr<format_entry>(format<double>(form_K1, K1)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_K2, K2)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_S1, S1)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_S2, S2)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_NSI_A, NSI_A)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_NSI_B, NSI_B)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_CW_A, CW_A)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_CW_B, CW_B)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_M1_A, M1_A)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_M2_A, M2_A)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_M1_B, M1_B)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_M2_B, M2_B)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_N1_A, N1_A)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_N2_A, N2_A)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_N1_B, N1_B)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_N2_B, N2_B)));
 }
 
 void pbeam::check_data() const {
     this->beam_prop::check_data();
+    size_t base_size{A.size()};
+    if (I1.size() != base_size) throw errors::form_error("PBEAM", "wrong size for I1");
+    if (I2.size() != base_size) throw errors::form_error("PBEAM", "wrong size for I");
+    if (I12.size() != base_size) throw errors::form_error("PBEAM", "wrong size for I");
+    if (J.size() != base_size) throw errors::form_error("PBEAM", "wrong size for J");
+    if (NSM.size() != base_size) throw errors::form_error("PBEAM", "wrong size for NSM");
+    if (C1.size() != base_size) throw errors::form_error("PBEAM", "wrong size for C1");
+    if (C2.size() != base_size) throw errors::form_error("PBEAM", "wrong size for C2");
+    if (D1.size() != base_size) throw errors::form_error("PBEAM", "wrong size for D1");
+    if (D2.size() != base_size) throw errors::form_error("PBEAM", "wrong size for D2");
+    if (E1.size() != base_size) throw errors::form_error("PBEAM", "wrong size for E1");
+    if (E2.size() != base_size) throw errors::form_error("PBEAM", "wrong size for E2");
+    if (F1.size() != base_size) throw errors::form_error("PBEAM", "wrong size for F1");
+    if (F2.size() != base_size) throw errors::form_error("PBEAM", "wrong size for F2");
+
+    if (base_size && SO.size() != base_size-1)
+        throw errors::form_error("PBEAM", "wrong size for SO");
+    if (base_size && X_XB.size() != base_size-1)
+        throw errors::form_error("PBEAM", "wrong size for X_XB");
+
     if (A.size()>0) for (auto pos : A) pbeam::form_A.check(pos);
     if (I1.size()>0) for (auto pos : I1) pbeam::form_I1.check(pos);
     if (I2.size()>0) for (auto pos : I2) pbeam::form_I2.check(pos);
@@ -354,10 +490,76 @@ bdf::cards::__base::card const &pbeam::operator()(list<std::string> const &inp) 
     return *this;
 }
 
+bdf::cards::__base::card const &pbeam::operator() (
+    long const *PID, long const *MID,
+    std::list<double> const *A,
+    std::list<double> const *I1,
+    std::list<double> const *I2,
+    std::list<double> const *I12,
+    std::list<double> const *J,
+    std::list<double> const *NSM,
+    std::list<double> const *C1,
+    std::list<double> const *C2,
+    std::list<double> const *D1,
+    std::list<double> const *D2,
+    std::list<double> const *E1,
+    std::list<double> const *E2,
+    std::list<double> const *F1,
+    std::list<double> const *F2,
+    std::list<std::string> const *SO,
+    std::list<double> const *X_XB,
+    double const *K1, double const *K2,
+    double const *S1, double const *S2,
+    double const *NSI_A, double const *NSI_B,
+    double const *CW_A, double const *CW_B,
+    double const *M1_A, double const *M2_A,
+    double const *M1_B, double const *M2_B,
+    double const *N1_A, double const *N2_A,
+    double const *N1_B, double const *N2_B) {
+    this->beam_prop::operator() (PID, MID);
+    this->A.assign(A->begin(), A->end());
+    this->I1.assign(I1->begin(), I1->end());
+    this->I2.assign(I2->begin(), I2->end());
+    this->I12.assign(I12->begin(), I12->end());
+    this->J.assign(J->begin(), J->end());
+    this->NSM.assign(NSM->begin(), NSM->end());
+    this->C1.assign(C1->begin(), C1->end());
+    this->C2.assign(C2->begin(), C2->end());
+    this->D1.assign(D1->begin(), D1->end());
+    this->D2.assign(D2->begin(), D2->end());
+    this->E1.assign(E1->begin(), E1->end());
+    this->E2.assign(E2->begin(), E2->end());
+    this->F1.assign(F1->begin(), F1->end());
+    this->F2.assign(F2->begin(), F2->end());
+    this->SO.assign(SO->begin(), SO->end());
+    this->X_XB.assign(X_XB->begin(), X_XB->end());
+    this->K1(K1);
+    this->K2(K2);
+    this->S1(S1);
+    this->S2(S2);
+    this->NSI_A(NSI_A);
+    this->NSI_B(NSI_B);
+    this->CW_A(CW_A);
+    this->CW_B(CW_B);
+    this->M1_A(M1_A);
+    this->M2_A(M2_A);
+    this->M1_B(M1_B);
+    this->M2_B(M2_B);
+    this->N1_A(N1_A);
+    this->N2_A(N2_A);
+    this->N1_B(N1_B);
+    this->N2_B(N2_B);
+    this->beam_base::check_data();
+    this->pbeam::check_data();
+    return *this;
+}
+
 // Local Variables:
 // mode: c++
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j7 &&
+//   (make -C ../../cbuild test ;
+//    ../../cbuild/tests/test_bdf_cards --use-colour no)"
 // End:

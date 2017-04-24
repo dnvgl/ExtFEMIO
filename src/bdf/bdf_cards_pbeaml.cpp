@@ -59,12 +59,12 @@ const entry_type<double> pbeaml::form_X_XB(
     &cd0, nullptr,
     &cd1));
 
-pbeaml::pbeaml(const std::list<std::string> &inp) :
+pbeaml::pbeaml(const list<std::string> &inp) :
 beam_prop(inp) {
     this->pbeaml::read(inp);
 }
 
-void pbeaml::read(std::list<std::string> const & inp) {
+void pbeaml::read(list<std::string> const & inp) {
 
     size_t dim_num;
     size_t i, j{0};
@@ -109,11 +109,11 @@ void pbeaml::read(std::list<std::string> const & inp) {
         ++pos;
     }
 
-    // DIM.push_back(new std::list<dnvgl::extfem::bdf::double> >);
-    DIM.push_back(std::vector<double>());
+    // DIM.push_back(new list<dnvgl::extfem::bdf::double> >);
+    DIM.push_back(list<double>());
     for (i = 0; i < dim_num; i++) {
         if (pos == inp.end()) goto invalid;
-        (DIM[0]).push_back(form_DIM(*(pos++)));
+        DIM.front().push_back(form_DIM(*(pos++)));
     }
     if (pos == inp.end()) goto end;
     NSM.push_back(form_NSM(*(pos++)));
@@ -130,8 +130,8 @@ void pbeaml::read(std::list<std::string> const & inp) {
     while (pos != inp.end()) {
         if (pos == inp.end()) goto end;
         j++;
-        // DIM.push_back(new std::list<dnvgl::extfem::bdf::types::entry_value<double> >);
-        DIM.push_back(std::vector<double>());
+        // DIM.push_back(new list<dnvgl::extfem::bdf::types::entry_value<double> >);
+        DIM.push_back(list<double>());
         try {
             SO.push_back(form_SO(*(pos++)));
         } catch (errors::error) {
@@ -145,13 +145,13 @@ void pbeaml::read(std::list<std::string> const & inp) {
         }
         if (pos == inp.end()) goto clean;
         try {
-            (DIM[j]).push_back(form_DIM(*(pos++)));
+            DIM.back().push_back(form_DIM(*(pos++)));
         } catch (errors::error) {
             goto clean;
         }
         for (i = 1; i < dim_num; i++) {
             if (pos == inp.end()) goto invalid;
-            (DIM[j]).push_back(form_DIM(*(pos++)));
+            DIM.back().push_back(form_DIM(*(pos++)));
         }
         if (pos == inp.end()) goto end;
         NSM.push_back(form_NSM(*(pos++)));
@@ -208,5 +208,7 @@ cards::__base::card const &pbeaml::operator() (list<std::string> const &inp) {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j7 &&
+// (make -C ../../cbuild test;
+//    ../../cbuild/tests/test_bdf_cards --use-colour no)"
 // End:

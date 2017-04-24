@@ -33,22 +33,8 @@ using namespace type_bounds;
 
 using namespace cards::__base;
 
-beam_base::beam_base(const std::list<std::string> &inp) :
-        property(inp) {}
-
-cards::types beam_base::card_type() const {
-    return types::BEAM_BASE;
-}
-
-beam_prop::beam_prop(const std::list<std::string> &inp) :
-beam_base(inp) {}
-
-cards::types beam_prop::card_type() const {
-    return types::BEAM_PROP;
-}
-
 namespace {
-    const long cl1 = 1;
+   long const cl1 = 1;
 }
 
 // const entry_type<long> beam_base::form_PID(
@@ -56,6 +42,42 @@ namespace {
 
 const entry_type<long> beam_base::form_MID(
     "MID", bound<long>(&cl1, nullptr, nullptr, true));
+
+beam_base::beam_base() :
+        property() {}
+
+beam_base::beam_base(const std::list<std::string> &inp) :
+        property(inp) {}
+
+beam_base::beam_base(long const *PID, long const *MID) :
+        property(PID), MID(MID) {}
+
+cards::types beam_base::card_type() const {
+    return types::BEAM_BASE;
+}
+
+card const &beam_base::operator() (long const *PID, long const *MID) {
+    this->PID(PID);
+    this->MID(MID);
+    return *this;
+}
+
+beam_prop::beam_prop() :
+        beam_base() {}
+
+beam_prop::beam_prop(const std::list<std::string> &inp) :
+        beam_base(inp) {}
+
+beam_prop::beam_prop(long const *PID, long const *MID) :
+        beam_base(PID, MID) {}
+
+cards::types beam_prop::card_type() const {
+    return types::BEAM_PROP;
+}
+
+card const &beam_prop::operator() (long const *PID, long const *MID) {
+    return this->beam_base::operator() (PID, MID);
+}
 
 // Local Variables:
 // mode: c++

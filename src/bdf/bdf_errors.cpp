@@ -5,7 +5,7 @@
    \brief Error handling for processing BDF data.
 
    Detailed description
-   */
+*/
 #include "StdAfx.h"
 
 #include "extfem_misc.h"
@@ -29,7 +29,7 @@ static char THIS_FILE[] = __FILE__;
 error::error(
     const std::string &name, const std::string &msg,
     const std::string &err_class) :
-    msg(msg), name(name), err_class(err_class) {};
+        msg(msg), name(name), err_class(err_class) {};
 
 std::string error::get_msg() const {
     if (name.length())
@@ -42,45 +42,41 @@ char const *error::what() const _EXTFEMIO_NOEXCEPT{
 }
 
 types_error::types_error(const std::string &msg) :
-error("", msg, "types_error") {}
+        error("", msg, "types_error") {}
 
 form_error::form_error(
     const std::string &name, const std::string &msg,
     const std::string &cls) :
-    error(name, msg, cls) {}
+        error(name, msg, cls) {}
 
 
 float_error::float_error(
     const std::string &name, const std::string &msg) :
-    form_error(name, msg, "float_error") {}
+        form_error(name, msg, "float_error") {}
 
 complex_error::complex_error(
     const std::string &name, const std::string &msg) :
-    form_error(name, msg, "complex_error") {};
+        form_error(name, msg, "complex_error") {};
 
 int_error::int_error(
     const std::string &name, const std::string &msg) :
-    form_error(name, msg, "int_error") {}
-
-output_error::output_error(
-    const std::string &name, const std::string &msg) :
-    error(name, msg, "output_error") {}
+        form_error(name, msg, "int_error") {}
 
 list_error::list_error(
     const std::string &name, const std::string &msg) :
-    error(name, msg, "list_error") {}
+        form_error(name, msg, "list_error") {}
 
 str_error::str_error(
     const std::string &name, const std::string &msg) :
-    error(name, msg, "str_error") {};
+        form_error(name, msg, "str_error") {};
 
-string_error::string_error(
+output_error::output_error(
     const std::string &name, const std::string &msg) :
-    error(name, msg, "string_error") {};
+        error(name, msg, "output_error") {}
 
 parse_error::parse_error(
     const std::string &name, const std::string &msg) :
-    error(name, msg, "parse_error") {}
+        error(name, msg, "parse_error") {}
 
 // Local Variables:
 // mode: c++
