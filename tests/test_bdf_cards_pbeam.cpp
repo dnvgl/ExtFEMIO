@@ -318,22 +318,23 @@ TEST_CASE("BDF PBEAM roundtrip test", "[bdf_pbeam]") {
 
         CHECK(long(probe_l.PID) == 7869);
         CHECK(long(probe_l.MID) == 104010);
-        CHECK(A   == std::list<double>({1., 2.}));
-        CHECK(I1  == std::list<double>({2., 3.}));
-        CHECK(I2  == std::list<double>({3., 4.}));
-        CHECK(I12 == std::list<double>({4., 5.}));
-        CHECK(J   == std::list<double>({5., 6.}));
-        CHECK(NSM == std::list<double>({6., 7.}));
-        CHECK(C1  == std::list<double>({7., 8.}));
-        CHECK(C2  == std::list<double>({8., 9.}));
-        CHECK(D1  == std::list<double>({9., 10.}));
-        CHECK(D2  == std::list<double>({10., 11.}));
-        CHECK(E1  == std::list<double>({11., 12.}));
-        CHECK(E2  == std::list<double>({12., 13.}));
-        CHECK(F1  == std::list<double>({13., 14.}));
-        CHECK(F2  == std::list<double>({14., 15.}));
-        CHECK(SO == std::list<std::string>{"YESA"});
-        CHECK(X_XB == std::list<double> {16.});
+        CHECK(probe.A == std::list<double>({1., 2.}));
+        CHECK(probe.I1 == std::list<double>({2., 3.}));
+        CHECK(probe.I2 == std::list<double>({3., 4.}));
+        CHECK(probe.I12 == std::list<double>({4., 5.}));
+        CHECK(probe.J == std::list<double>({5., 6.}));
+        CHECK(probe.NSM == std::list<double>({6., 7.}));
+        CHECK(probe.C1 == std::list<double>({7., 8.}));
+        CHECK(probe.C2 == std::list<double>({8., 9.}));
+        CHECK(probe.D1 == std::list<double>({9., 10.}));
+        CHECK(probe.D2 == std::list<double>({10., 11.}));
+        CHECK(probe.E1 == std::list<double>({11., 12.}));
+        CHECK(probe.E2 == std::list<double>({12., 13.}));
+        CHECK(probe.F1 == std::list<double>({13., 14.}));
+        CHECK(probe.F2 == std::list<double>({14., 15.}));
+        for (auto pos : probe.SO)
+            CHECK(pos.value== "YESA");
+        CHECK(probe.X_XB == std::list<double> {16.});
         CHECK(double(probe.K1) == 17.);
         CHECK(double(probe.K2) == 18.);
         CHECK(double(probe.S1) == 19.);
@@ -422,22 +423,23 @@ TEST_CASE("BDF PBEAM roundtrip test (reuse)", "[bdf_pbeam]") {
 
         CHECK(long(probe_l.PID) == 7869);
         CHECK(long(probe_l.MID) == 104010);
-        CHECK(A   == std::list<double>({1., 2.}));
-        CHECK(I1  == std::list<double>({2., 3.}));
-        CHECK(I2  == std::list<double>({3., 4.}));
-        CHECK(I12 == std::list<double>({4., 5.}));
-        CHECK(J   == std::list<double>({5., 6.}));
-        CHECK(NSM == std::list<double>({6., 7.}));
-        CHECK(C1  == std::list<double>({7., 8.}));
-        CHECK(C2  == std::list<double>({8., 9.}));
-        CHECK(D1  == std::list<double>({9., 10.}));
-        CHECK(D2  == std::list<double>({10., 11.}));
-        CHECK(E1  == std::list<double>({11., 12.}));
-        CHECK(E2  == std::list<double>({12., 13.}));
-        CHECK(F1  == std::list<double>({13., 14.}));
-        CHECK(F2  == std::list<double>({14., 15.}));
-        CHECK(SO == std::list<std::string>{"YESA"});
-        CHECK(X_XB == std::list<double> {16.});
+        CHECK(probe.A == std::list<double>({1., 2.}));
+        CHECK(probe.I1 == std::list<double>({2., 3.}));
+        CHECK(probe.I2 == std::list<double>({3., 4.}));
+        CHECK(probe.I12 == std::list<double>({4., 5.}));
+        CHECK(probe.J == std::list<double>({5., 6.}));
+        CHECK(probe.NSM == std::list<double>({6., 7.}));
+        CHECK(probe.C1 == std::list<double>({7., 8.}));
+        CHECK(probe.C2 == std::list<double>({8., 9.}));
+        CHECK(probe.D1 == std::list<double>({9., 10.}));
+        CHECK(probe.D2 == std::list<double>({10., 11.}));
+        CHECK(probe.E1 == std::list<double>({11., 12.}));
+        CHECK(probe.E2 == std::list<double>({12., 13.}));
+        CHECK(probe.F1 == std::list<double>({13., 14.}));
+        CHECK(probe.F2 == std::list<double>({14., 15.}));
+        for (auto pos : probe.SO)
+            CHECK(pos == "YESA");
+        CHECK(probe.X_XB == std::list<double> {16.});
         CHECK(double(probe.K1) == 17.);
         CHECK(double(probe.K2) == 18.);
         CHECK(double(probe.S1) == 19.);
@@ -453,6 +455,483 @@ TEST_CASE("BDF PBEAM roundtrip test (reuse)", "[bdf_pbeam]") {
         CHECK(double(probe.N1_A) == 29.);
         CHECK(double(probe.N2_A) == 30.);
         CHECK(double(probe.N1_B) == 31.);
+        CHECK(double(probe.N2_B) == 32.);
+    }
+}
+
+TEST_CASE("BDF PBEAM roundtrip test (no taper)", "[bdf_pbeam]") {
+    std::ostringstream test;
+
+    long EID{7869}, PID{104010};
+    std::list<double> A{1.};
+    std::list<double> I1{2.};
+    std::list<double> I2{3.};
+    std::list<double> I12{4.};
+    std::list<double> J{5.};
+    std::list<double> NSM{6.};
+    std::list<double> C1{7.};
+    std::list<double> C2{8.};
+    std::list<double> D1{9.};
+    std::list<double> D2{10.};
+    std::list<double> E1{11.};
+    std::list<double> E2{12.};
+    std::list<double> F1{13.};
+    std::list<double> F2{14.};
+    double K1{17.};
+    double K2{18.};
+    double S1{19.};
+    double S2{20.};
+    double NSI_A{21.};
+    double NSI_B{22.};
+    double CW_A{23.};
+    double CW_B{24.};
+    double M1_A{25.};
+    double M2_A{26.};
+    double M1_B{27.};
+    double M2_B{28.};
+    double N1_A{29.};
+    double N2_A{30.};
+    double N1_B{31.};
+    double N2_B{32.};
+
+    pbeam probe(&EID, &PID, &A, &I1, &I2, &I12, &J, &NSM,
+                &C1, &C2, &D1, &D2, &E1, &E2, &F1, &F2,
+                nullptr, nullptr,
+                &K1, &K2, &S1, &S2, &NSI_A, &NSI_B, &CW_A, &CW_B,
+                &M1_A, &M2_A, &M1_B, &M2_B, &N1_A, &N2_A, &N1_B, &N2_B);
+    test << probe;
+
+    SECTION("check output") {
+        CHECK(test.str() ==
+              "PBEAM       7869  1040101.000+002.000+003.000+004.000+005.000+006.000+00\n"
+              "        7.000+008.000+009.000+001.000+011.100+011.200+011.300+011.400+01\n"
+              "        1.700+011.800+011.900+012.000+012.100+012.200+012.300+012.400+01\n"
+              "        2.500+012.600+012.700+012.800+012.900+013.000+013.100+013.200+01\n");
+    }
+
+    SECTION("check reading") {
+        std::list<std::string> data;
+        std::list<std::string> lines;
+        std::string tmp;
+        std::istringstream raw(test.str());
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        __base::card::card_split(data, lines);
+        pbeam probe_l(lines);
+
+        CHECK(long(probe_l.PID) == 7869);
+        CHECK(long(probe_l.MID) == 104010);
+        CHECK(probe.A == std::list<double>({1.}));
+        CHECK(probe.I1 == std::list<double>({2.}));
+        CHECK(probe.I2 == std::list<double>({3.}));
+        CHECK(probe.I12 == std::list<double>({4.}));
+        CHECK(probe.J == std::list<double>({5.}));
+        CHECK(probe.NSM == std::list<double>({6.}));
+        CHECK(probe.C1 == std::list<double>({7.}));
+        CHECK(probe.C2 == std::list<double>({8.}));
+        CHECK(probe.D1 == std::list<double>({9.}));
+        CHECK(probe.D2 == std::list<double>({10.}));
+        CHECK(probe.E1 == std::list<double>({11.}));
+        CHECK(probe.E2 == std::list<double>({12.}));
+        CHECK(probe.F1 == std::list<double>({13.}));
+        CHECK(probe.F2 == std::list<double>({14.}));
+        CHECK(probe.SO.size() == 0);
+        CHECK(probe.X_XB.size() == 0);
+        CHECK(double(probe.K1) == 17.);
+        CHECK(double(probe.K2) == 18.);
+        CHECK(double(probe.S1) == 19.);
+        CHECK(double(probe.S2) == 20.);
+        CHECK(double(probe.NSI_A) == 21.);
+        CHECK(double(probe.NSI_B) == 22.);
+        CHECK(double(probe.CW_A) == 23.);
+        CHECK(double(probe.CW_B) == 24.);
+        CHECK(double(probe.M1_A) == 25.);
+        CHECK(double(probe.M2_A) == 26.);
+        CHECK(double(probe.M1_B) == 27.);
+        CHECK(double(probe.M2_B) == 28.);
+        CHECK(double(probe.N1_A) == 29.);
+        CHECK(double(probe.N2_A) == 30.);
+        CHECK(double(probe.N1_B) == 31.);
+        CHECK(double(probe.N2_B) == 32.);
+    }
+}
+
+TEST_CASE("BDF PBEAM roundtrip test (no taper) (reuse)", "[bdf_pbeam]") {
+    std::ostringstream test;
+
+    long EID{7869}, PID{104010};
+    std::list<double> A{1.};
+    std::list<double> I1{2.};
+    std::list<double> I2{3.};
+    std::list<double> I12{4.};
+    std::list<double> J{5.};
+    std::list<double> NSM{6.};
+    std::list<double> C1{7.};
+    std::list<double> C2{8.};
+    std::list<double> D1{9.};
+    std::list<double> D2{10.};
+    std::list<double> E1{11.};
+    std::list<double> E2{12.};
+    std::list<double> F1{13.};
+    std::list<double> F2{14.};
+    double K1{17.};
+    double K2{18.};
+    double S1{19.};
+    double S2{20.};
+    double NSI_A{21.};
+    double NSI_B{22.};
+    double CW_A{23.};
+    double CW_B{24.};
+    double M1_A{25.};
+    double M2_A{26.};
+    double M1_B{27.};
+    double M2_B{28.};
+    double N1_A{29.};
+    double N2_A{30.};
+    double N1_B{31.};
+    double N2_B{32.};
+
+    pbeam probe;
+    test << probe;
+    test << probe(&EID, &PID, &A, &I1, &I2, &I12, &J, &NSM,
+                  &C1, &C2, &D1, &D2, &E1, &E2, &F1, &F2,
+                  nullptr, nullptr,
+                  &K1, &K2, &S1, &S2, &NSI_A, &NSI_B, &CW_A, &CW_B,
+                  &M1_A, &M2_A, &M1_B, &M2_B, &N1_A, &N2_A, &N1_B, &N2_B);
+
+    SECTION("check output") {
+        CHECK(test.str() ==
+              "PBEAM       7869  1040101.000+002.000+003.000+004.000+005.000+006.000+00\n"
+              "        7.000+008.000+009.000+001.000+011.100+011.200+011.300+011.400+01\n"
+              "        1.700+011.800+011.900+012.000+012.100+012.200+012.300+012.400+01\n"
+              "        2.500+012.600+012.700+012.800+012.900+013.000+013.100+013.200+01\n");
+    }
+
+    SECTION("check reading") {
+        std::list<std::string> data;
+        std::list<std::string> lines;
+        std::string tmp;
+        std::istringstream raw(test.str());
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        __base::card::card_split(data, lines);
+        pbeam probe_l;
+        probe_l(lines);
+
+        CHECK(long(probe_l.PID) == 7869);
+        CHECK(long(probe_l.MID) == 104010);
+        CHECK(probe.A == std::list<double>({1.}));
+        CHECK(probe.I1 == std::list<double>({2.}));
+        CHECK(probe.I2 == std::list<double>({3.}));
+        CHECK(probe.I12 == std::list<double>({4.}));
+        CHECK(probe.J == std::list<double>({5.}));
+        CHECK(probe.NSM == std::list<double>({6.}));
+        CHECK(probe.C1 == std::list<double>({7.}));
+        CHECK(probe.C2 == std::list<double>({8.}));
+        CHECK(probe.D1 == std::list<double>({9.}));
+        CHECK(probe.D2 == std::list<double>({10.}));
+        CHECK(probe.E1 == std::list<double>({11.}));
+        CHECK(probe.E2 == std::list<double>({12.}));
+        CHECK(probe.F1 == std::list<double>({13.}));
+        CHECK(probe.F2 == std::list<double>({14.}));
+        CHECK(probe.SO.size() == 0);
+        CHECK(probe.X_XB.size() == 0);
+        CHECK(double(probe.K1) == 17.);
+        CHECK(double(probe.K2) == 18.);
+        CHECK(double(probe.S1) == 19.);
+        CHECK(double(probe.S2) == 20.);
+        CHECK(double(probe.NSI_A) == 21.);
+        CHECK(double(probe.NSI_B) == 22.);
+        CHECK(double(probe.CW_A) == 23.);
+        CHECK(double(probe.CW_B) == 24.);
+        CHECK(double(probe.M1_A) == 25.);
+        CHECK(double(probe.M2_A) == 26.);
+        CHECK(double(probe.M1_B) == 27.);
+        CHECK(double(probe.M2_B) == 28.);
+        CHECK(double(probe.N1_A) == 29.);
+        CHECK(double(probe.N2_A) == 30.);
+        CHECK(double(probe.N1_B) == 31.);
+        CHECK(double(probe.N2_B) == 32.);
+    }
+}
+
+TEST_CASE("BDF PBEAM roundtrip test (minimal)", "[bdf_pbeam]") {
+    std::ostringstream test;
+
+    long EID{7869}, PID{104010};
+    std::list<double> A{1.};
+    std::list<double> I1{2.};
+    std::list<double> I2{3.};
+    std::list<double> I12{4.};
+
+    pbeam probe(&EID, &PID, &A, &I1, &I2);
+    test << probe;
+
+    SECTION("check output") {
+        CHECK(test.str() ==
+              "PBEAM       7869  1040101.000+002.000+003.000+00\n");
+    }
+
+    SECTION("check reading") {
+        std::list<std::string> data;
+        std::list<std::string> lines;
+        std::string tmp;
+        std::istringstream raw(test.str());
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        __base::card::card_split(data, lines);
+        pbeam probe_l(lines);
+
+        CHECK(long(probe_l.PID) == 7869);
+        CHECK(long(probe_l.MID) == 104010);
+        CHECK(probe.A == std::list<double>({1.}));
+        CHECK(probe.I1 == std::list<double>({2.}));
+        CHECK(probe.I2 == std::list<double>({3.}));
+        CHECK(probe.I12.size() == 0);
+        CHECK(probe.J.size() == 0);
+        CHECK(probe.NSM.size() == 0);
+        CHECK(probe.C1.size() == 0);
+        CHECK(probe.C2.size() == 0);
+        CHECK(probe.D1.size() == 0);
+        CHECK(probe.D2.size() == 0);
+        CHECK(probe.E1.size() == 0);
+        CHECK(probe.E2.size() == 0);
+        CHECK(probe.F1.size() == 0);
+        CHECK(probe.F2.size() == 0);
+        CHECK(probe.SO.size() == 0);
+        CHECK(probe.X_XB.size() == 0);
+        CHECK_FALSE(probe.K1);
+        CHECK_FALSE(probe.K2);
+        CHECK_FALSE(probe.S1);
+        CHECK_FALSE(probe.S2);
+        CHECK_FALSE(probe.NSI_A);
+        CHECK_FALSE(probe.NSI_B);
+        CHECK_FALSE(probe.CW_A);
+        CHECK_FALSE(probe.CW_B);
+        CHECK_FALSE(probe.M1_A);
+        CHECK_FALSE(probe.M2_A);
+        CHECK_FALSE(probe.M1_B);
+        CHECK_FALSE(probe.M2_B);
+        CHECK_FALSE(probe.N1_A);
+        CHECK_FALSE(probe.N2_A);
+        CHECK_FALSE(probe.N1_B);
+        CHECK_FALSE(probe.N2_B);
+    }
+}
+
+TEST_CASE("BDF PBEAM roundtrip test (minimal) (reuse)", "[bdf_pbeam]") {
+    std::ostringstream test;
+
+    long EID{7869}, PID{104010};
+    std::list<double> A{1.};
+    std::list<double> I1{2.};
+    std::list<double> I2{3.};
+    std::list<double> I12{4.};
+
+    pbeam probe;
+    test << probe;
+    test << probe(&EID, &PID, &A, &I1, &I2);
+
+    SECTION("check output") {
+        CHECK(test.str() ==
+              "PBEAM       7869  1040101.000+002.000+003.000+00\n");
+    }
+
+    SECTION("check reading") {
+        std::list<std::string> data;
+        std::list<std::string> lines;
+        std::string tmp;
+        std::istringstream raw(test.str());
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        __base::card::card_split(data, lines);
+        pbeam probe_l;
+        probe_l(lines);
+
+        CHECK(long(probe_l.PID) == 7869);
+        CHECK(long(probe_l.MID) == 104010);
+        CHECK(probe.A == std::list<double>({1.}));
+        CHECK(probe.I1 == std::list<double>({2.}));
+        CHECK(probe.I2 == std::list<double>({3.}));
+        CHECK(probe.I12.size() == 0);
+        CHECK(probe.J.size() == 0);
+        CHECK(probe.NSM.size() == 0);
+        CHECK(probe.C1.size() == 0);
+        CHECK(probe.C2.size() == 0);
+        CHECK(probe.D1.size() == 0);
+        CHECK(probe.D2.size() == 0);
+        CHECK(probe.E1.size() == 0);
+        CHECK(probe.E2.size() == 0);
+        CHECK(probe.F1.size() == 0);
+        CHECK(probe.F2.size() == 0);
+        CHECK(probe.SO.size() == 0);
+        CHECK(probe.X_XB.size() == 0);
+        CHECK_FALSE(probe.K1);
+        CHECK_FALSE(probe.K2);
+        CHECK_FALSE(probe.S1);
+        CHECK_FALSE(probe.S2);
+        CHECK_FALSE(probe.NSI_A);
+        CHECK_FALSE(probe.NSI_B);
+        CHECK_FALSE(probe.CW_A);
+        CHECK_FALSE(probe.CW_B);
+        CHECK_FALSE(probe.M1_A);
+        CHECK_FALSE(probe.M2_A);
+        CHECK_FALSE(probe.M1_B);
+        CHECK_FALSE(probe.M2_B);
+        CHECK_FALSE(probe.N1_A);
+        CHECK_FALSE(probe.N2_A);
+        CHECK_FALSE(probe.N1_B);
+        CHECK_FALSE(probe.N2_B);
+    }
+}
+
+TEST_CASE("BDF PBEAM roundtrip test (N2_B only)", "[bdf_pbeam]") {
+    std::ostringstream test;
+
+    long EID{7869}, PID{104010};
+    std::list<double> A{1.};
+    std::list<double> I1{2.};
+    std::list<double> I2{3.};
+    double N2_B{32.};
+
+    pbeam probe(&EID, &PID, &A, &I1, &I2, nullptr, nullptr, nullptr,
+                nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
+                nullptr, nullptr,
+                nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
+                nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, &N2_B);
+    test << probe;
+
+    SECTION("check output") {
+        CHECK(test.str() ==
+              "PBEAM       7869  1040101.000+002.000+003.000+00                        \n"
+              "                                                                        \n"
+              "                                                                        \n"
+              "                                                                3.200+01\n");
+    }
+
+    SECTION("check reading") {
+        std::list<std::string> data;
+        std::list<std::string> lines;
+        std::string tmp;
+        std::istringstream raw(test.str());
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        __base::card::card_split(data, lines);
+        pbeam probe_l(lines);
+
+        CHECK(long(probe_l.PID) == 7869);
+        CHECK(long(probe_l.MID) == 104010);
+        CHECK(probe.A == std::list<double>({1.}));
+        CHECK(probe.I1 == std::list<double>({2.}));
+        CHECK(probe.I2 == std::list<double>({3.}));
+        CHECK(probe.I12.size() == 0);
+        CHECK(probe.J.size() == 0);
+        CHECK(probe.NSM.size() == 0);
+        CHECK(probe.C1.size() == 0);
+        CHECK(probe.C2.size() == 0);
+        CHECK(probe.D1.size() == 0);
+        CHECK(probe.D2.size() == 0);
+        CHECK(probe.E1.size() == 0);
+        CHECK(probe.E2.size() == 0);
+        CHECK(probe.F1.size() == 0);
+        CHECK(probe.F2.size() == 0);
+        CHECK(probe.SO.size() == 0);
+        CHECK(probe.X_XB.size() == 0);
+        CHECK_FALSE(bool(probe.K1));
+        CHECK_FALSE(bool(probe.K2));
+        CHECK_FALSE(bool(probe.S1));
+        CHECK_FALSE(bool(probe.S2));
+        CHECK_FALSE(bool(probe.NSI_A));
+        CHECK_FALSE(bool(probe.NSI_B));
+        CHECK_FALSE(bool(probe.CW_A));
+        CHECK_FALSE(bool(probe.CW_B));
+        CHECK_FALSE(bool(probe.M1_A));
+        CHECK_FALSE(bool(probe.M2_A));
+        CHECK_FALSE(bool(probe.M1_B));
+        CHECK_FALSE(bool(probe.M2_B));
+        CHECK_FALSE(bool(probe.N1_A));
+        CHECK_FALSE(bool(probe.N2_A));
+        CHECK_FALSE(bool(probe.N1_B));
+        CHECK(double(probe.N2_B) == 32.);
+    }
+}
+
+TEST_CASE("BDF PBEAM roundtrip test (N2_B only) (reuse)", "[bdf_pbeam]") {
+    std::ostringstream test;
+
+    long EID{7869}, PID{104010};
+    std::list<double> A{1.};
+    std::list<double> I1{2.};
+    std::list<double> I2{3.};
+    double N2_B{32.};
+
+    pbeam probe;
+    test << probe;
+    test << probe(
+        &EID, &PID, &A, &I1, &I2, nullptr, nullptr, nullptr,
+        nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr,
+        nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
+        nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, &N2_B);
+
+    SECTION("check output") {
+        CHECK(test.str() ==
+              "PBEAM       7869  1040101.000+002.000+003.000+00                        \n"
+              "                                                                        \n"
+              "                                                                        \n"
+              "                                                                3.200+01\n");
+    }
+
+    SECTION("check reading") {
+        std::list<std::string> data;
+        std::list<std::string> lines;
+        std::string tmp;
+        std::istringstream raw(test.str());
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        __base::card::card_split(data, lines);
+        pbeam probe_l;
+        probe_l(lines);
+
+        CHECK(long(probe_l.PID) == 7869);
+        CHECK(long(probe_l.MID) == 104010);
+        CHECK(probe.A == std::list<double>({1.}));
+        CHECK(probe.I1 == std::list<double>({2.}));
+        CHECK(probe.I2 == std::list<double>({3.}));
+        CHECK(probe.I12.size() == 0);
+        CHECK(probe.J.size() == 0);
+        CHECK(probe.NSM.size() == 0);
+        CHECK(probe.C1.size() == 0);
+        CHECK(probe.C2.size() == 0);
+        CHECK(probe.D1.size() == 0);
+        CHECK(probe.D2.size() == 0);
+        CHECK(probe.E1.size() == 0);
+        CHECK(probe.E2.size() == 0);
+        CHECK(probe.F1.size() == 0);
+        CHECK(probe.F2.size() == 0);
+        CHECK(probe.SO.size() == 0);
+        CHECK(probe.X_XB.size() == 0);
+        CHECK_FALSE(bool(probe.K1));
+        CHECK_FALSE(bool(probe.K2));
+        CHECK_FALSE(bool(probe.S1));
+        CHECK_FALSE(bool(probe.S2));
+        CHECK_FALSE(bool(probe.NSI_A));
+        CHECK_FALSE(bool(probe.NSI_B));
+        CHECK_FALSE(bool(probe.CW_A));
+        CHECK_FALSE(bool(probe.CW_B));
+        CHECK_FALSE(bool(probe.M1_A));
+        CHECK_FALSE(bool(probe.M2_A));
+        CHECK_FALSE(bool(probe.M1_B));
+        CHECK_FALSE(bool(probe.M2_B));
+        CHECK_FALSE(bool(probe.N1_A));
+        CHECK_FALSE(bool(probe.N2_A));
+        CHECK_FALSE(bool(probe.N1_B));
         CHECK(double(probe.N2_B) == 32.);
     }
 }
