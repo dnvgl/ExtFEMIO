@@ -75,10 +75,6 @@ cards::types beam_prop::card_type() const {
     return types::BEAM_PROP;
 }
 
-card const &beam_prop::operator() (long const *PID, long const *MID) {
-    return this->beam_base::operator() (PID, MID);
-}
-
 // Local Variables:
 // mode: c++
 // coding: utf-8

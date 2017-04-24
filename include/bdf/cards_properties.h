@@ -41,9 +41,9 @@ namespace dnvgl {
 
                         property();
 
-                        property(long const*);
+                        explicit property(long const *PID);
 
-                        property(std::list<std::string> const&);
+                        explicit property(std::list<std::string> const&);
 
                         virtual void read(std::list<std::string> const&) override;
 
@@ -200,18 +200,18 @@ namespace dnvgl {
 
                         bdf::types::entry_type<long> static const form_MID;
 
-                        /// Material identification number. (Integer > 0)
-                        bdf::types::entry_value<long> MID;
-
                         beam_base();
 
-                        beam_base(std::list<std::string> const&);
+                        explicit beam_base(std::list<std::string> const&);
 
                         beam_base(long const *PID, long const *MID);
 
-                        card const &operator() (long const *PID, long const *MID);
+                        virtual card const &operator() (long const *PID, long const *MID);
 
                     public:
+
+                        /// Material identification number. (Integer > 0)
+                        bdf::types::entry_value<long> MID;
 
                         virtual types card_type() const override;
                     };
@@ -226,13 +226,13 @@ namespace dnvgl {
                         using __base::beam_base::PID;
                         using __base::beam_base::MID;
 
+                        using __base::beam_base::operator();
+
                         beam_prop();
 
-                        beam_prop(std::list<std::string> const&);
+                        explicit beam_prop(std::list<std::string> const&);
 
                         beam_prop(long const *PID, long const *MID);
-
-                        card const &operator() (long const *PID, long const *MID);
 
                     public:
 
@@ -317,7 +317,7 @@ namespace dnvgl {
 
                 public:
 
-                    using __base::beam_base::PID;
+                    using __base::property::PID;
                     using __base::beam_base::MID;
 
                     // fields that might appear more than once

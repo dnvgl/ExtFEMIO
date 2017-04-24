@@ -332,8 +332,9 @@ TEST_CASE("BDF PBEAM roundtrip test", "[bdf_pbeam]") {
         CHECK(probe.E2 == std::list<double>({12., 13.}));
         CHECK(probe.F1 == std::list<double>({13., 14.}));
         CHECK(probe.F2 == std::list<double>({14., 15.}));
-        for (auto pos : probe.SO)
-            CHECK(pos.value== "YESA");
+        for (auto pos : probe.SO) {
+            CHECK(pos.value == "YESA");
+        }
         CHECK(probe.X_XB == std::list<double> {16.});
         CHECK(double(probe.K1) == 17.);
         CHECK(double(probe.K2) == 18.);
@@ -437,8 +438,9 @@ TEST_CASE("BDF PBEAM roundtrip test (reuse)", "[bdf_pbeam]") {
         CHECK(probe.E2 == std::list<double>({12., 13.}));
         CHECK(probe.F1 == std::list<double>({13., 14.}));
         CHECK(probe.F2 == std::list<double>({14., 15.}));
-        for (auto pos : probe.SO)
+        for (auto pos : probe.SO) {
             CHECK(pos == "YESA");
+        }
         CHECK(probe.X_XB == std::list<double> {16.});
         CHECK(double(probe.K1) == 17.);
         CHECK(double(probe.K2) == 18.);
