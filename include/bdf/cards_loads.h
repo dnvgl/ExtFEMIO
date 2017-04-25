@@ -270,8 +270,8 @@ Defines a scalar mass element without reference to a property entry.
                     entry_type<double> static const form_M;
                     entry_type<long> static const form_G1;
                     entry_type<long> static const form_G2;
-                    entry_type<std::list<int>> static const form_C1;
-                    entry_type<std::list<int>> static const form_C2;
+                    entry_type<std::vector<int>> static const form_C1;
+                    entry_type<std::vector<int>> static const form_C2;
 
                 public:
                     // /** Unique element identification number. (0 < Integer
@@ -288,7 +288,7 @@ Defines a scalar mass element without reference to a property entry.
                     /** Component number. (0 < Integer < 6; blank or zero
                         if scalar point)
                     */
-                    entry_value<std::list<int>> C1;
+                    entry_value<std::vector<int>> C1;
                     /** Geometric grid or scalar point identification
                         number. (Integer > 0)
                     */
@@ -296,7 +296,7 @@ Defines a scalar mass element without reference to a property entry.
                     /** Component number. (0 < Integer < 6; blank or zero
                         if scalar point)
                     */
-                    entry_value<std::list<int>> C2;
+                    entry_value<std::vector<int>> C2;
 
                 private:
                     explicit cmass2(std::string const&) = delete;
@@ -308,15 +308,15 @@ Defines a scalar mass element without reference to a property entry.
                     explicit cmass2(std::list<std::string> const&);
 
                     cmass2(long const *EID, double const *M,
-                           long const *G1, std::list<int> const *C1,
+                           long const *G1, std::vector<int> const *C1,
                            long const *G2=nullptr,
-                           std::list<int> const *C2=nullptr);
+                           std::vector<int> const *C2=nullptr);
 
                     card const &operator() (
                         long const *EID, double const *M,
-                        long const *G1, std::list<int> const *C1,
+                        long const *G1, std::vector<int> const *C1,
                         long const *G2=nullptr,
-                        std::list<int> const *C2=nullptr);
+                        std::vector<int> const *C2=nullptr);
 
                     types card_type() const override;
 
@@ -617,24 +617,24 @@ Defines a static load as a linear combination of load std::sets defined via
 /// Overall scale factor. (Real)
                     entry_value<double> S;
 /// Scale factor on `Li`. (Real)
-                    std::list<double> Si;
+                    std::vector<double> Si;
 /** Load std::set identification numbers defined on entry types listed
     above. (Integer > 0)
 */
-                    std::list<long> Li;
+                    std::vector<long> Li;
 
                     load();
 
                     load(const std::list<std::string> &inp);
 
                     load(long const *SID, double const *S,
-                         std::list<double> const *Si,
-                         std::list<long> const *Li);
+                         std::vector<double> const *Si,
+                         std::vector<long> const *Li);
 
                     card const &operator() (
                         long const *SID, double const *S,
-                        std::list<double> const *Si,
-                        std::list<long> const *Li);
+                        std::vector<double> const *Si,
+                        std::vector<long> const *Li);
 
                     types card_type() const override;
 

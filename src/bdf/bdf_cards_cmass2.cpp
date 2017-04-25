@@ -51,10 +51,10 @@ using bdf::types::entry_type;
 entry_type<double> const cmass2::form_M("M");
 entry_type<long> const cmass2::form_G1(
    "G1", bound<long>(nullptr, nullptr, nullptr, true));
-entry_type<list<int> > const cmass2::form_C1("C1");
+entry_type<vector<int> > const cmass2::form_C1("C1");
 entry_type<long> const cmass2::form_G2(
    "G2", bound<long>(nullptr, nullptr, nullptr, true));
-entry_type<list<int> > const cmass2::form_C2("C2");
+entry_type<vector<int> > const cmass2::form_C2("C2");
 
 cmass2::cmass2() :
    element(nullptr),
@@ -67,8 +67,8 @@ element(inp) {
 }
 
 cmass2::cmass2(long const *EID, double const *M,
-               long const *G1, list<int> const *C1,
-               long const *G2/*=nullptr*/, list<int> const *C2/*=nullptr*/) :
+               long const *G1, vector<int> const *C1,
+               long const *G2/*=nullptr*/, vector<int> const *C2/*=nullptr*/) :
                element(EID),
                M(M), G1(G1), C1(C1), G2(G2), C2(C2) {
     if (long(this->EID) < 1l || long(this->EID) > 100000000l)
@@ -81,8 +81,8 @@ cmass2::cmass2(long const *EID, double const *M,
 
 card const &cmass2::operator() (
     long const *EID, double const *M,
-    long const *G1, list<int> const *C1,
-    long const *G2/*=nullptr*/, list<int> const *C2/*=nullptr*/) {
+    long const *G1, vector<int> const *C1,
+    long const *G2/*=nullptr*/, vector<int> const *C2/*=nullptr*/) {
     this->element::operator() (EID);
     this->M(M);
     this->G1(G1);
@@ -140,12 +140,12 @@ void cmass2::collect_outdata(
     if (G1 || G2) {
         res.push_back(unique_ptr<format_entry>(format<long>(form_G1, G1)));
         res.push_back(
-            unique_ptr<format_entry>(format<list<int> >(form_C1, C1)));
+            unique_ptr<format_entry>(format<vector<int> >(form_C1, C1)));
     }
     if (G2) {
         res.push_back(unique_ptr<format_entry>(format<long>(form_G2, G2)));
         res.push_back(
-            unique_ptr<format_entry>(format<list<int> >(form_C2, C2)));
+            unique_ptr<format_entry>(format<vector<int> >(form_C2, C2)));
     }
 
     return;

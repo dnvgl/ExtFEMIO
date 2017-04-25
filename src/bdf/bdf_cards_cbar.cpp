@@ -65,8 +65,8 @@ entry_type<double> const cbar::form_X3(
 entry_type<std::string> const cbar::form_OFFT(
     "OFFT", bound<std::string>({
     "GGG", "BGG", "GGO", "BGO", "GOG", "BOG", "GOO", "BOO"}, "GGG"));
-entry_type<list<int> > const cbar::form_PA("PA");
-entry_type<list<int> > const cbar::form_PB("PB");
+entry_type<vector<int> > const cbar::form_PA("PA");
+entry_type<vector<int> > const cbar::form_PB("PB");
 entry_type<double> const cbar::form_W1A(
     "W1A", bound<double>(nullptr, nullptr, &cd0));
 entry_type<double> const cbar::form_W2A(
@@ -99,8 +99,8 @@ cbar::cbar(
     long const *GA, long const *GB,
     double const *X1, double const *X2, double const *X3,
     std::string const *OFFT,
-    list<int> const *PA,
-    list<int> const *PB,
+    vector<int> const *PA,
+    vector<int> const *PB,
     double const *W1A, double const *W2A,
     double const *W3A, double const *W1B,
     double const *W2B, double const *W3B) :
@@ -118,7 +118,7 @@ cbar::cbar(
     long const *EID, long const *PID,
     long const *GA, long const *GB, long const *G0,
     std::string const *OFFT,
-    list<int> const *PA, list<int> const *PB,
+    vector<int> const *PA, vector<int> const *PB,
     double const *W1A, double const *W2A,
     double const *W3A, double const *W1B,
     double const *W2B, double const *W3B) :
@@ -203,7 +203,7 @@ cards::__base::card const& cbar::operator()(
     long const* GA, long const* GB,
     double const* X1, double const* X2, double const* X3,
     std::string const* OFFT,
-    list<int> const* PA, list<int> const* PB,
+    vector<int> const* PA, vector<int> const* PB,
     double const* W1A, double const* W2A, double const* W3A,
     double const* W1B, double const* W2B, double const* W3B) {
     this->element::operator() (EID);
@@ -233,7 +233,7 @@ cards::__base::card const& cbar::operator()(
     long const* EID, long const* PID,
     long const* GA, long const* GB, long const* G0,
     std::string const* OFFT,
-    list<int> const* PA, list<int> const* PB,
+    vector<int> const* PA, vector<int> const* PB,
     double const* W1A, double const* W2A, double const* W3A,
     double const* W1B, double const* W2B, double const* W3B) {
     this->element::operator() (EID);
@@ -291,12 +291,12 @@ void cbar::collect_outdata(
     if (bool(PA) || bool(PB) || bool(W1A) || bool(W2A) || bool(W3A) ||
         bool(W1B) || bool(W2B) || bool(W3B))
         res.push_back(
-            unique_ptr<format_entry>(format<list<int> >(form_PA, PA)));
+            unique_ptr<format_entry>(format<vector<int> >(form_PA, PA)));
     else goto cont;
     if (bool(PB) || bool(W1A) || bool(W2A) || bool(W3A) || bool(W1B) ||
         bool(W2B) || bool(W3B))
         res.push_back(
-            unique_ptr<format_entry>(format<list<int> >(form_PB, PB)));
+            unique_ptr<format_entry>(format<vector<int> >(form_PB, PB)));
     else goto cont;
     if (bool(W1A) || bool(W2A) || bool(W3A) || bool(W1B) || bool(W2B) ||
         bool(W3B))

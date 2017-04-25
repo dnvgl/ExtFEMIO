@@ -118,7 +118,7 @@ types pbarl::card_type() const {
 };
 
 void pbarl::collect_outdata(
-    std::list<std::unique_ptr<format_entry> > &res) const {
+    list<std::unique_ptr<format_entry> > &res) const {
     throw std::not_implemented(__FILE__, __LINE__, "can't write PBARL.");
 }
 

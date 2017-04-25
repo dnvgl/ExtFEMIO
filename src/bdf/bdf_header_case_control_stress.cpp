@@ -22,7 +22,7 @@ namespace {
 using namespace dnvgl::extfem::bdf::header::case_control;
 
 stress::stress(
-    std::list<describer*> const &_describers,
+    std::vector<describer*> const &_describers,
     restype const &res, long const &res_n) :
     res(res), res_n(res_n) {
     for (auto p : _describers)
@@ -30,12 +30,12 @@ stress::stress(
 }
 
 stress::stress(
-    std::list<describer*> const &describers,
+    std::vector<describer*> const &describers,
     restype const &res/*=NONE*/) :
     stress(describers, res, 0) {}
 
 stress::stress(
-    std::list<describer*> const &describers,
+    std::vector<describer*> const &describers,
     long const &res) :
     stress(describers, restype::n, res) {}
 

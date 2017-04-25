@@ -45,7 +45,7 @@ TEST_CASE("BDF GRID definitions. (default values)",
     list<std::string> lines;
     __base::card::card_split(data, lines);
     grid probe(lines);
-    list<int> ps_ref({});
+    vector<int> ps_ref({});
 
     SECTION("first grid") {
         CHECK(long(probe.ID) == 1);
@@ -54,7 +54,7 @@ TEST_CASE("BDF GRID definitions. (default values)",
         CHECK(double(probe.X2) == 0.);
         CHECK(double(probe.X3) == 0.);
         CHECK_FALSE(probe.CD);
-        CHECK(probe.PS == ps_ref);
+        CHECK(probe.PS.value == ps_ref);
         CHECK(long(probe.SEID) == 0);
     }
 }
@@ -68,7 +68,7 @@ TEST_CASE("BDF GRID definitions. (default values 2)",
     list<std::string> lines;
     __base::card::card_split(data, lines);
     grid probe(lines);
-    list<int> ps_ref({});
+    vector<int> ps_ref({});
 
     SECTION("first grid") {
         CHECK(long(probe.ID) == 1);
@@ -99,7 +99,7 @@ TEST_CASE("BDF GRID definitions. (Small Field Format)",
         CHECK((double)probe.X2 == 18000.);
         CHECK((double)probe.X3 == 21000.);
         CHECK((long)probe.CD == 11);
-        list<int> ps_ref({6});
+        vector<int> ps_ref({6});
         CHECK(probe.PS == ps_ref);
         CHECK((long)probe.SEID == 2);
     }
@@ -123,7 +123,7 @@ TEST_CASE("BDF GRID definitions. (Small Field Format) (reuse instance)",
         CHECK((double)probe.X2 == 18000.);
         CHECK((double)probe.X3 == 21000.);
         CHECK((long)probe.CD == 11);
-        list<int> ps_ref({6});
+        vector<int> ps_ref({6});
         CHECK(probe.PS == ps_ref);
         CHECK((long)probe.SEID == 2);
     }
@@ -147,7 +147,7 @@ TEST_CASE("BDF GRID definitions. (Large Field Format)",
         CHECK((double)probe.X2 == 18000.);
         CHECK((double)probe.X3 == 21000.);
         CHECK((long)probe.CD == 11);
-        list<int> ps_ref({6});
+        vector<int> ps_ref({6});
         CHECK(probe.PS == ps_ref);
         CHECK((long)probe.SEID == 2);
     }
@@ -162,7 +162,7 @@ TEST_CASE("BDF GRID definitions. (Free Field Format)",
     list<std::string> lines;
     __base::card::card_split(data, lines);
     grid probe(lines);
-    list<int> ps_ref({6});
+    vector<int> ps_ref({6});
 
     SECTION("run test") {
         CHECK((long)probe.ID == 1);
@@ -186,7 +186,7 @@ TEST_CASE("BDF GRID definitions. (Free Field Format, continuation line)",
     list<std::string> lines;
     __base::card::card_split(data, lines);
     grid probe(lines);
-    list<int> ps_ref({6});
+    vector<int> ps_ref({6});
 
     SECTION("runtest") {
         CHECK((long)probe.ID == 1);
@@ -218,7 +218,7 @@ TEST_CASE("BDF GRID definitions. (Free Field Format, continuation line with +)",
         CHECK((double)probe.X2 == 18000.);
         CHECK((double)probe.X3 == 21000.);
         CHECK((long)probe.CD == 11);
-        list<int> ps_ref({6});
+        vector<int> ps_ref({6});
         CHECK(probe.PS == ps_ref);
         CHECK((long)probe.SEID == 2);
     }
@@ -242,7 +242,7 @@ TEST_CASE("BDF GRID definitions. (Free Field Format, continuation line named)",
         CHECK((double)probe.X2 == 18000.);
         CHECK((double)probe.X3 == 21000.);
         CHECK((long)probe.CD == 11);
-        list<int> ps_ref({6});
+        vector<int> ps_ref({6});
         CHECK(probe.PS == ps_ref);
         CHECK((long)probe.SEID == 2);
     }
@@ -250,7 +250,7 @@ TEST_CASE("BDF GRID definitions. (Free Field Format, continuation line named)",
 
 TEST_CASE("FEMIO-43: BDF import failed") {
 
-    list<int> ps_ref({});
+    vector<int> ps_ref({});
 
     SECTION("report") {
         list<std::string> data({
@@ -299,7 +299,7 @@ TEST_CASE("BDF GRID types roundtrip test.", "[bdf_grid_roudtrip]") {
     long CP{2};
     double X1{3.}, X2{4.}, X3{5.};
     long CD{-1};
-    list<int> PS{4, 5, 6};
+    vector<int> PS{4, 5, 6};
     long SEID{1};
 
     grid probe(&ID, &CP, &X1, &X2, &X3, &CD, &PS, &SEID);
@@ -327,7 +327,7 @@ TEST_CASE("BDF GRID types roundtrip test.", "[bdf_grid_roudtrip]") {
         CHECK(probe_l.X2.value == 4.);
         CHECK(probe_l.X3.value == 5.);
         CHECK(probe_l.CD.value == -1);
-        CHECK(probe_l.PS.value == list<int>({4, 5, 6}));
+        CHECK(probe_l.PS.value == vector<int>({4, 5, 6}));
         CHECK(probe_l.SEID.value == 1);
     }
 }
@@ -340,7 +340,7 @@ TEST_CASE("BDF GRID types roundtrip test (reuse).", "[bdf_grid_roudtrip_reuse]")
     long CP{2};
     double X1{3.}, X2{4.}, X3{5.};
     long CD{-1};
-    list<int> PS{4, 5, 6};
+    vector<int> PS{4, 5, 6};
     long SEID{1};
 
     grid probe;
@@ -371,7 +371,7 @@ TEST_CASE("BDF GRID types roundtrip test (reuse).", "[bdf_grid_roudtrip_reuse]")
         CHECK(probe_l.X2.value == 4.);
         CHECK(probe_l.X3.value == 5.);
         CHECK(probe_l.CD.value == -1);
-        CHECK(probe_l.PS.value == list<int>({4, 5, 6}));
+        CHECK(probe_l.PS.value == vector<int>({4, 5, 6}));
         CHECK(probe_l.SEID.value == 1);
     }
 }
@@ -383,7 +383,7 @@ TEST_CASE("BDF GRID types roundtrip test 2.", "[bdf_grid_roudtrip]") {
     long ID{2};
     long CP{3};
     double X1{1.}, X2{ -2.}, X3{3.};
-    list<int> PS{3, 1, 6};
+    vector<int> PS{3, 1, 6};
 
     grid probe(&ID, &CP, &X1, &X2, &X3, nullptr, &PS, nullptr);
     test << probe;
@@ -410,7 +410,7 @@ TEST_CASE("BDF GRID types roundtrip test 2.", "[bdf_grid_roudtrip]") {
         CHECK(probe_l.X2.value == -2.);
         CHECK(probe_l.X3.value == 3.);
         CHECK_FALSE(probe_l.CD);
-        CHECK(probe_l.PS.value == list<int>({3, 1, 6}));
+        CHECK(probe_l.PS.value == vector<int>({3, 1, 6}));
         CHECK(probe_l.SEID.value == 0);
     }
 }
@@ -443,7 +443,7 @@ TEST_CASE("BDF GRID types roundtrip test 3.", "[bdf_grid_roudtrip]") {
         CHECK(probe_l.X2.value == 4.);
         CHECK(probe_l.X3.value == 5.);
         CHECK_FALSE(probe_l.CD);
-        CHECK(probe_l.PS.value == list<int>({}));
+        CHECK(probe_l.PS.value == vector<int>({}));
         CHECK(probe_l.SEID.value == 0);
     }
 }
@@ -478,7 +478,7 @@ TEST_CASE("BDF GRID types roundtrip test 3 (reuse).", "[bdf_grid_roudtrip_reuse]
         CHECK(probe_l.X2.value == 4.);
         CHECK(probe_l.X3.value == 5.);
         CHECK_FALSE(probe_l.CD);
-        CHECK(probe_l.PS.value == list<int>({}));
+        CHECK(probe_l.PS.value == vector<int>({}));
         CHECK(probe_l.SEID.value == 0);
     }
 }
@@ -489,7 +489,7 @@ TEST_CASE("BDF GRID types roundtrip test 4.", "[bdf_grid_roudtrip]") {
 
     long ID{2};
     double X1{1.}, X2{ -2.}, X3{3.};
-    list<int> PS{3, 1, 6};
+    vector<int> PS{3, 1, 6};
 
     grid probe(&ID, nullptr, &X1, &X2, &X3, nullptr, &PS, nullptr);
     test << probe;
@@ -517,7 +517,7 @@ TEST_CASE("BDF GRID types roundtrip test 4.", "[bdf_grid_roudtrip]") {
         CHECK(probe_l.X2.value == -2.);
         CHECK(probe_l.X3.value == 3.);
         CHECK_FALSE(probe_l.CD);
-        CHECK(probe_l.PS.value == list<int>({3, 1, 6}));
+        CHECK(probe_l.PS.value == vector<int>({3, 1, 6}));
         CHECK(probe_l.SEID.value == 0);
     }
 }

@@ -510,7 +510,7 @@ cards::types unknown::card_type() const {
 }
 
 void unknown::collect_outdata(
-    list<std::unique_ptr<format_entry> > &res) const {
+    list<unique_ptr<format_entry> > &res) const {
     throw errors::error("UNKNOWN", "can't write UNKNOWN.");
 }
 

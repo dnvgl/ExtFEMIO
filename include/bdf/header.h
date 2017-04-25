@@ -13,7 +13,7 @@
 #ifndef _HEADER_H_
 #define _HEADER_H_
 
-#include <list>
+#include <vector>
 #include <memory>
 
 #include "extfem_misc.h"
@@ -323,10 +323,10 @@ namespace dnvgl {
                             };
 
                         private:
-                            std::list<cdni_entry> cdni;
+                            std::vector<cdni_entry> cdni;
 
                         public:
-                            explicit sort(std::list<cdni_entry> const &);
+                            explicit sort(std::vector<cdni_entry> const &);
                             ~sort() override;
                             std::string str() const override;
                         };
@@ -361,10 +361,10 @@ namespace dnvgl {
                                 NEWBULK};
 
                         private:
-                            std::list<option_type> options;
+                            std::vector<option_type> options;
 
                         public:
-                            explicit punch(std::list<option_type> const &options={});
+                            explicit punch(std::vector<option_type> const &options={});
                             ~punch() override = default;
                             std::string str() const override;
                         };
@@ -381,10 +381,10 @@ namespace dnvgl {
                         };
 
                     protected:
-                        std::list<describer*> oper;
+                        std::vector<describer*> oper;
 
                     public:
-                        explicit echo(std::list<describer*> const &oper={});
+                        explicit echo(std::vector<describer*> const &oper={});
                         ~echo() override;
                     private:
                         std::ostream &put(std::ostream&) const override;
@@ -794,13 +794,13 @@ namespace dnvgl {
 */
                             n};
                     private:
-                        std::list<std::unique_ptr<describer> > describers;
+                        std::vector<std::unique_ptr<describer> > describers;
                         restype res;
                         long res_n;
-                        displacement(std::list<describer*> const &, restype const &res, long const &);
+                        displacement(std::vector<describer*> const &, restype const &res, long const &);
                     public:
-                        displacement(std::list<describer*> const &, restype const &res=restype::NONE);
-                        displacement(std::list<describer*> const &, long const &);
+                        displacement(std::vector<describer*> const &, restype const &res=restype::NONE);
+                        displacement(std::vector<describer*> const &, long const &);
                     private:
                         std::ostream &put(std::ostream&) const override;
                     };
@@ -1083,13 +1083,13 @@ SPCFORCES(PRINT, RALL, NORPRINT)=ALL
 */
                             n};
                     private:
-                        std::list<std::unique_ptr<describer> > describers;
+                        std::vector<std::unique_ptr<describer> > describers;
                         restype res;
                         long res_n;
-                        spcforces(std::list<describer*> const &, restype const &res, long const &);
+                        spcforces(std::vector<describer*> const &, restype const &res, long const &);
                     public:
-                        spcforces(std::list<describer*> const &, restype const &res=restype::NONE);
-                        spcforces(std::list<describer*> const &, long const &res);
+                        spcforces(std::vector<describer*> const &, restype const &res=restype::NONE);
+                        spcforces(std::vector<describer*> const &, long const &res);
                     private:
                         std::ostream &put(std::ostream&) const override;
                     };
@@ -1424,13 +1424,13 @@ using strain gage approach with cubic bending correction.
 /// No element stress will be output.
                             NONE};
                     private:
-                        std::list<std::unique_ptr<describer> > describers;
+                        std::vector<std::unique_ptr<describer> > describers;
                         restype res;
                         long res_n;
-                        stress(std::list<describer*> const &, restype const &, long const &);
+                        stress(std::vector<describer*> const &, restype const &, long const &);
                     public:
-                        stress(std::list<describer*> const &, restype const &res=restype::NONE);
-                        stress(std::list<describer*> const &, long const &);
+                        stress(std::vector<describer*> const &, restype const &res=restype::NONE);
+                        stress(std::vector<describer*> const &, long const &);
                     private:
                         std::ostream &put(std::ostream&) const override;
                     };

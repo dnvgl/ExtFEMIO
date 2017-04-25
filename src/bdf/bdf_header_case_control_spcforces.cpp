@@ -21,18 +21,18 @@ namespace {
 using namespace dnvgl::extfem::bdf::header::case_control;
 
 spcforces::spcforces(
-    std::list<describer*> const &_describers, restype const &res, long const &n) :
+    std::vector<describer*> const &_describers, restype const &res, long const &n) :
     res(res), res_n(n) {
     for (auto p : _describers)
         describers.push_back(std::unique_ptr<describer>(p));
 }
 
 spcforces::spcforces(
-    std::list<describer*> const &describers, restype const &res) :
+    std::vector<describer*> const &describers, restype const &res) :
     spcforces(describers, res, 0) {}
 
 spcforces::spcforces(
-    std::list<describer*> const &describers, long const &res) :
+    std::vector<describer*> const &describers, long const &res) :
     spcforces(describers, restype::n, res) {}
 
 std::ostream &spcforces::put(std::ostream &os) const {

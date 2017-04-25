@@ -55,14 +55,14 @@ const bdf::types::entry_type<double> grid::form_X3(
     "X3", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
 const bdf::types::entry_type<long> grid::form_CD(
     "CD", bdf::type_bounds::bound<long>(&cl_1, nullptr, nullptr, true));
-const bdf::types::entry_type<std::list<int> > grid::form_PS("PS");
+const bdf::types::entry_type<vector<int> > grid::form_PS("PS");
 const bdf::types::entry_type<long> grid::form_SEID(
     "SEID", bdf::type_bounds::bound<long>(&cl_1, nullptr, &cl0));
 
 grid::grid() : card(), ID(), CP(), X1(), X2(), X3(),
 CD(), PS(), SEID() {}
 
-grid::grid(std::list<std::string> const &inp) :
+grid::grid(list<std::string> const &inp) :
 card(inp) {
     this->grid::read(inp);
 }
@@ -75,7 +75,7 @@ CD(), PS(), SEID() {}
 
 grid::grid(long const *ID, long const *CP,
            double const *X1, double const *X2, double const *X3,
-           long const *CD, list<int> const *PS, long const *SEID) :
+           long const *CD, vector<int> const *PS, long const *SEID) :
         card(), ID(ID), CP(CP), X1(X1), X2(X2), X3(X3),
         CD(CD), PS(PS), SEID(SEID) {}
 
@@ -91,7 +91,7 @@ cards::__base::card const &grid::operator()(list<std::string> const &inp) {
 cards::__base::card const &grid::operator()(
     long const *ID, long const *CP,
     double const *X1, double const *X2, double const *X3,
-    long const *CD, std::list<int> const *PS,
+    long const *CD, vector<int> const *PS,
     long const *SEID) {
     this->ID(ID);
     this->CP(CP);
@@ -145,7 +145,7 @@ void grid::read(list<std::string> const &inp) {
 }
 
 void grid::collect_outdata(
-    std::list<std::unique_ptr<format_entry> > &res) const {
+    list<unique_ptr<format_entry> > &res) const {
     if (!bool(ID))
         return;
     res.push_back(unique_ptr<format_entry>(format(head)));
@@ -166,7 +166,7 @@ void grid::collect_outdata(
     } else goto finish;
     if (bool(PS) || bool(SEID)) {
         if (bool(PS))
-            res.push_back(unique_ptr<format_entry>(format<std::list<int>>(form_PS, PS)));
+            res.push_back(unique_ptr<format_entry>(format<vector<int>>(form_PS, PS)));
         else
             res.push_back(unique_ptr<format_entry>(format(empty)));
     } else goto finish;

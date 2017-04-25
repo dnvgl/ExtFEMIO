@@ -92,8 +92,8 @@ cards::types gsetmemb::card_type() const {
 }
 
 ostream &gsetmemb::put(ostream& os) const {
-    list<int>::size_type cnt = 0;
-    list<int>::size_type field = 0;
+    vector<int>::size_type cnt = 0;
+    vector<int>::size_type field = 0;
     int pos = 0;
     long index = INDEX;
     bool first = true;

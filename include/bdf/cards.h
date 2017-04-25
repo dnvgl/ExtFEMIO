@@ -16,6 +16,7 @@
 #define _BDF_CARDS_H_
 
 #include <list>
+#include <vector>
 #include <set>
 #include <map>
 #include <utility>
@@ -569,7 +570,7 @@ namespace dnvgl {
                     static const bdf::types::entry_type<double> form_X2;
                     static const bdf::types::entry_type<double> form_X3;
                     static const bdf::types::entry_type<long> form_CD;
-                    static const bdf::types::entry_type<std::list<int> > form_PS;
+                    static const bdf::types::entry_type<std::vector<int> > form_PS;
                     static const bdf::types::entry_type<long> form_SEID;
 
                 public:
@@ -605,7 +606,7 @@ namespace dnvgl {
                         grid point. (Any of the Integers 1 through 6 with no
                         embedded blanks, or blank.)
                     */
-                    bdf::types::entry_value<std::list<int> > PS;
+                    bdf::types::entry_value<std::vector<int> > PS;
                     /** Superelement identification number. (Integer > 0;
                         Default = 0)
                     */
@@ -617,7 +618,7 @@ namespace dnvgl {
 
                     grid(long const *ID, long const *CP,
                          double const *X1, double const *X2, double const *X3,
-                         long const *CD, std::list<int> const *PS,
+                         long const *CD, std::vector<int> const *PS,
                          long const *SEID);
 
                     grid(long const &ID, long const &CP,
@@ -631,7 +632,7 @@ namespace dnvgl {
 
                     card const &operator()(long const *ID, long const *CP,
                          double const *X1, double const *X2, double const *X3,
-                         long const *CD, std::list<int> const *PS,
+                         long const *CD, std::vector<int> const *PS,
                          long const *SEID);
 
                     card const &operator()(

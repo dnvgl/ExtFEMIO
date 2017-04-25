@@ -15,6 +15,7 @@
 
 #include <memory>
 #include <list>
+#include <vector>
 
 // ReSharper disable once CppUnusedIncludeDirective
 #include "bdf/cards.h"
@@ -325,69 +326,69 @@ namespace dnvgl {
                     /** Area of the beam cross section at the various
                         stations. (Real > 0.0)
                         */
-                    std::list<double> A;
+                    std::vector<double> A;
                     /** Area moment of inertia at the various stations for
                         bending in plane 1 about the neutral axis. (Real >
                         0.0)
                         */
-                    std::list<double> I1;
+                    std::vector<double> I1;
                     /** Area moment of inertia at the various stations for
                         bending in plane 2 about the neutral axis. (Real >
                         0.0)
                         */
-                    std::list<double> I2;
+                    std::vector<double> I2;
                     /** Area product of inertia at the various stations. (Real)
                      */
-                    std::list<double> I12;
+                    std::vector<double> I12;
                     /** Torsional stiffness parameter at the various
                         stations. (Real >= 0.0 but > 0.0 if warping is
                         present)
                         */
-                    std::list<double> J;
+                    std::vector<double> J;
                     /** Nonstructural mass per unit length at the various
                         stations. (Real, Default=0.0)
                         */
-                    std::list<double> NSM;
+                    std::vector<double> NSM;
                     /** *y* coordinate for location of first stress
                         recovery point at the various stations. (Real;
                         Default: 0)
                         */
-                    std::list<double> C1;
+                    std::vector<double> C1;
                     /** *z* coordinate for location of first stress
                         recovery point at the various stations. (Real;
                         Default: 0)
                         */
-                    std::list<double> C2;
+                    std::vector<double> C2;
                     /** *y* coordinate for location of second stress
                         recovery point at the various stations. (Real;
                         Default: 0)
                         */
-                    std::list<double> D1;
+                    std::vector<double> D1;
                     /** *z* coordinate for location of second stress
                         recovery point at the various stations. (Real;
                         Default: 0)
                         */
-                    std::list<double> D2;
+                    std::vector<double> D2;
                     /** *y* coordinate for location of third stress
                         recovery point at the various stations. (Real;
                         Default: 0)
                         */
-                    std::list<double> E1;
+                    std::vector<double> E1;
                     /** *z* coordinate for location of third stress
                         recovery point at the various stations. (Real;
                         Default: 0)
                         */
-                    std::list<double> E2;
+                    std::vector<double> E2;
                     /** *y* coordinate for location of fourth stress
                         recovery point at the various stations. (Real;
                         Default: 0)
                         */
-                    std::list<double> F1;
+                    std::vector<double> F1;
                     /** *z* coordinate for location of fourth stress
                         recovery point at the various stations. (Real;
                         Default: 0)
                         */
-                    std::list<double> F2;
+                    std::vector<double> F2;
                     /** Stress output request option at the various
                         stations. (Character)
 
@@ -399,12 +400,12 @@ namespace dnvgl {
 
                         - `NO` --- No stresses or forces are recovered.
                         */
-                    std::list<bdf::types::entry_value<std::string> > SO;
+                    std::vector<bdf::types::entry_value<std::string> > SO;
                     /** `X/XB` : Distance from end `A` in the element
                         coordinate system divided by the length of the
                         element. (Real > 0.0)
                         */
-                    std::list<double> X_XB;
+                    std::vector<double> X_XB;
                     /** Shear stiffness factor *K* in *KxAxG* for plane 1.
                         (Real, Default = 1.0)
                         */
@@ -479,22 +480,22 @@ namespace dnvgl {
                     pbeam(std::list<std::string> const&);
 
                     pbeam(long const *EID, long const *PID,
-                          std::list<double> const *A,
-                          std::list<double> const *I1,
-                          std::list<double> const *I2,
-                          std::list<double> const *I12=nullptr,
-                          std::list<double> const *J=nullptr,
-                          std::list<double> const *NSM=nullptr,
-                          std::list<double> const *C1=nullptr,
-                          std::list<double> const *C2=nullptr,
-                          std::list<double> const *D1=nullptr,
-                          std::list<double> const *D2=nullptr,
-                          std::list<double> const *E1=nullptr,
-                          std::list<double> const *E2=nullptr,
-                          std::list<double> const *F1=nullptr,
-                          std::list<double> const *F2=nullptr,
-                          std::list<std::string> const *SO=nullptr,
-                          std::list<double> const *X_XB=nullptr,
+                          std::vector<double> const *A,
+                          std::vector<double> const *I1,
+                          std::vector<double> const *I2,
+                          std::vector<double> const *I12=nullptr,
+                          std::vector<double> const *J=nullptr,
+                          std::vector<double> const *NSM=nullptr,
+                          std::vector<double> const *C1=nullptr,
+                          std::vector<double> const *C2=nullptr,
+                          std::vector<double> const *D1=nullptr,
+                          std::vector<double> const *D2=nullptr,
+                          std::vector<double> const *E1=nullptr,
+                          std::vector<double> const *E2=nullptr,
+                          std::vector<double> const *F1=nullptr,
+                          std::vector<double> const *F2=nullptr,
+                          std::vector<std::string> const *SO=nullptr,
+                          std::vector<double> const *X_XB=nullptr,
                           double const *K1=nullptr, double const *K2=nullptr,
                           double const *S1=nullptr, double const *S2=nullptr,
                           double const *NSI_A=nullptr, double const *NSI_B=nullptr,
@@ -512,22 +513,22 @@ namespace dnvgl {
 
                     card const &operator() (
                         long const *EID, long const *PID,
-                        std::list<double> const *A,
-                        std::list<double> const *I1,
-                        std::list<double> const *I2,
-                        std::list<double> const *I12=nullptr,
-                        std::list<double> const *J=nullptr,
-                        std::list<double> const *NSM=nullptr,
-                        std::list<double> const *C1=nullptr,
-                        std::list<double> const *C2=nullptr,
-                        std::list<double> const *D1=nullptr,
-                        std::list<double> const *D2=nullptr,
-                        std::list<double> const *E1=nullptr,
-                        std::list<double> const *E2=nullptr,
-                        std::list<double> const *F1=nullptr,
-                        std::list<double> const *F2=nullptr,
-                        std::list<std::string> const *SO=nullptr,
-                        std::list<double> const *X_XB=nullptr,
+                        std::vector<double> const *A,
+                        std::vector<double> const *I1,
+                        std::vector<double> const *I2,
+                        std::vector<double> const *I12=nullptr,
+                        std::vector<double> const *J=nullptr,
+                        std::vector<double> const *NSM=nullptr,
+                        std::vector<double> const *C1=nullptr,
+                        std::vector<double> const *C2=nullptr,
+                        std::vector<double> const *D1=nullptr,
+                        std::vector<double> const *D2=nullptr,
+                        std::vector<double> const *E1=nullptr,
+                        std::vector<double> const *E2=nullptr,
+                        std::vector<double> const *F1=nullptr,
+                        std::vector<double> const *F2=nullptr,
+                        std::vector<std::string> const *SO=nullptr,
+                        std::vector<double> const *X_XB=nullptr,
                         double const *K1=nullptr, double const *K2=nullptr,
                         double const *S1=nullptr, double const *S2=nullptr,
                         double const *NSI_A=nullptr, double const *NSI_B=nullptr,
@@ -629,10 +630,10 @@ namespace dnvgl {
                         station *j* and end `B`. (Real > 0.0 for `GROUP` =
                         `MSCBML0`)
                         */
-                    std::list<std::list<double> > DIM;
+                    std::vector<std::vector<double> > DIM;
                     /** Nonstructural mass per unit length. (Default = 0.0)
                      */
-                    std::list<double> NSM;
+                    std::vector<double> NSM;
                     /** Stress output request option for intermediate
                         station *j* and end `B`. (Character; Default =
                         `YES`):
@@ -643,13 +644,13 @@ namespace dnvgl {
 
                         - `NO` --- No stresses or forces are recovered.
                         */
-                    std::list<std::string> SO;
+                    std::vector<std::string> SO;
                     /** `X(j)/XB` : Distance from end `A` to intermediate
                         station *j* in the element coordinate system
                         divided by the length of the element. (Real>0.0;
                         Default = 1.0)
                         */
-                    std::list<double> X_XB;
+                    std::vector<double> X_XB;
 
                     pbeaml(std::list<std::string> const&);
 
@@ -859,7 +860,7 @@ namespace dnvgl {
                     /** Cross-section dimensions. (Real > 0.0 for `GROUP` =
                         `MSCBML0`)
                         */
-                    std::list<double> DIM;
+                    std::vector<double> DIM;
                     /** Nonstructural mass per unit length. `NSM` is
                         specified after the last `DIMi`. (Default = 0.0)
                         */

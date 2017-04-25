@@ -120,7 +120,7 @@ const entry_type<double> pbeam::form_N2_B(
     "N2_B",
     bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
 
-pbeam::pbeam(std::list<std::string> const &inp) :
+pbeam::pbeam(list<std::string> const &inp) :
 beam_prop(inp) {
     this->pbeam::read(inp);
 }
@@ -128,22 +128,22 @@ beam_prop(inp) {
 pbeam::pbeam() : beam_prop() {}
 
 pbeam::pbeam(long const *EID, long const *PID,
-             std::list<double> const *A,
-             std::list<double> const *I1,
-             std::list<double> const *I2,
-             std::list<double> const *I12,
-             std::list<double> const *J,
-             std::list<double> const *NSM,
-             std::list<double> const *C1,
-             std::list<double> const *C2,
-             std::list<double> const *D1,
-             std::list<double> const *D2,
-             std::list<double> const *E1,
-             std::list<double> const *E2,
-             std::list<double> const *F1,
-             std::list<double> const *F2,
-             std::list<std::string> const *SO,
-             std::list<double> const *X_XB,
+             vector<double> const *A,
+             vector<double> const *I1,
+             vector<double> const *I2,
+             vector<double> const *I12,
+             vector<double> const *J,
+             vector<double> const *NSM,
+             vector<double> const *C1,
+             vector<double> const *C2,
+             vector<double> const *D1,
+             vector<double> const *D2,
+             vector<double> const *E1,
+             vector<double> const *E2,
+             vector<double> const *F1,
+             vector<double> const *F2,
+             vector<std::string> const *SO,
+             vector<double> const *X_XB,
              double const *K1, double const *K2,
              double const *S1, double const *S2,
              double const *NSI_A, double const *NSI_B,
@@ -182,7 +182,7 @@ pbeam::pbeam(long const *EID, long const *PID,
     this->pbeam::check_data();
 }
 
-void pbeam::read(std::list<std::string> const &inp) {
+void pbeam::read(list<std::string> const &inp) {
 
     auto pos = inp.rbegin();
 
@@ -368,7 +368,7 @@ cards::types pbeam::card_type() const {
 };
 
 void pbeam::collect_outdata(
-    std::list<std::unique_ptr<format_entry> > &res) const {
+    list<std::unique_ptr<format_entry> > &res) const {
     if (!PID) return;
 
     res.push_back(unique_ptr<format_entry>(format(head)));
@@ -754,29 +754,30 @@ void pbeam::check_data() const {
     if (N2_B) pbeam::form_N2_B.check(N2_B);
 }
 
-bdf::cards::__base::card const &pbeam::operator()(list<std::string> const &inp) {
+bdf::cards::__base::card const &pbeam::operator() (
+    list<std::string> const &inp) {
     this->pbeam::read(inp);
     return *this;
 }
 
 bdf::cards::__base::card const &pbeam::operator() (
     long const *PID, long const *MID,
-    std::list<double> const *A,
-    std::list<double> const *I1,
-    std::list<double> const *I2,
-    std::list<double> const *I12,
-    std::list<double> const *J,
-    std::list<double> const *NSM,
-    std::list<double> const *C1,
-    std::list<double> const *C2,
-    std::list<double> const *D1,
-    std::list<double> const *D2,
-    std::list<double> const *E1,
-    std::list<double> const *E2,
-    std::list<double> const *F1,
-    std::list<double> const *F2,
-    std::list<std::string> const *SO,
-    std::list<double> const *X_XB,
+    vector<double> const *A,
+    vector<double> const *I1,
+    vector<double> const *I2,
+    vector<double> const *I12,
+    vector<double> const *J,
+    vector<double> const *NSM,
+    vector<double> const *C1,
+    vector<double> const *C2,
+    vector<double> const *D1,
+    vector<double> const *D2,
+    vector<double> const *E1,
+    vector<double> const *E2,
+    vector<double> const *F1,
+    vector<double> const *F2,
+    vector<std::string> const *SO,
+    vector<double> const *X_XB,
     double const *K1, double const *K2,
     double const *S1, double const *S2,
     double const *NSI_A, double const *NSI_B,

@@ -17,7 +17,7 @@
 #include <cmath>
 #include <complex>
 #include <iomanip>
-#include <list>
+#include <vector>
 #include <sstream>
 #include <string>
 
@@ -224,13 +224,13 @@ namespace dnvgl {
 
                 template <> inline
                 // ReSharper disable CppPossiblyUninitializedMember
-                entry_value<std::list<int> >::entry_value(const entry_value<std::list<int> > &val) : value(val.value), is_value(val.is_value) {}
+                entry_value<std::vector<int> >::entry_value(const entry_value<std::vector<int> > &val) : value(val.value), is_value(val.is_value) {}
 
                 template <> inline
-                entry_value<std::list<int> >::entry_value(const std::list<int> &value, const bool &is_value) : value(value), is_value(is_value) {}
+                entry_value<std::vector<int> >::entry_value(const std::vector<int> &value, const bool &is_value) : value(value), is_value(is_value) {}
 
                 template <> inline
-                    entry_value<std::list<int> >::entry_value(const std::list<int> *value) : is_value(value != nullptr) {
+                    entry_value<std::vector<int> >::entry_value(const std::vector<int> *value) : is_value(value != nullptr) {
                     if (value)
                         copy(value->begin(), value->end(),
                         back_inserter(this->value));
@@ -247,7 +247,7 @@ namespace dnvgl {
                 // ReSharper restore CppPossiblyUninitializedMember
 
                 template <> inline
-                void entry_value<std::list<int> >::push_back(const long &inp) {
+                void entry_value<std::vector<int> >::push_back(const long &inp) {
                     this->value.push_back(inp);
                 }
 
@@ -735,7 +735,7 @@ namespace dnvgl {
                 list_int_re;
 
                 template <>
-                class entry_type<std::list<int> > : public base {
+                class entry_type<std::vector<int> > : public base {
 
                 private:
 
@@ -745,20 +745,20 @@ namespace dnvgl {
 
                 public:
 
-                    entry_type<std::list<int> >(const std::string &name) :
+                    entry_type<std::vector<int> >(const std::string &name) :
                             base(name) {};
 
-                    entry_value<std::list<int> >
+                    entry_value<std::vector<int> >
                     operator() (const std::string &inp) const {
-                        entry_value<std::list<int> > val;
+                        entry_value<std::vector<int> > val;
                         this->set_value(val, inp);
                         return val;
                     };
 
                     bdf_types type() const override {return _type;};
 
-                    static entry_value<std::list<int>> inline check(
-                        entry_value<std::list<int>> val) {
+                    static entry_value<std::vector<int>> inline check(
+                        entry_value<std::vector<int>> val) {
                         // if (!bounds.in_bounds(val.value)) {
                         //     std::ostringstream msg("!", std::ostringstream::ate);
                         //     msg << val.value
@@ -769,7 +769,7 @@ namespace dnvgl {
                     }
 
                     void set_value(
-                        entry_value<std::list<int> > &val,
+                        entry_value<std::vector<int> > &val,
                         const std::string inp) const {
 
                         auto sval = extfem::string::string(inp).trim();
@@ -791,14 +791,14 @@ namespace dnvgl {
                             return dnvgl::extfem::bdf::types::
                                 empty().format(nullptr);
                         else {
-                            entry_value<std::list<int> > val(
-                                static_cast<std::list<int> const*>(inp));
+                            entry_value<std::vector<int> > val(
+                                static_cast<std::vector<int> const*>(inp));
                             return this->format(val);
                         }
                     };
 
                     std::string format(
-                        const entry_value<std::list<int> > &inp) const {
+                        const entry_value<std::vector<int> > &inp) const {
 
                         if (!inp)
                             return bdf::types::empty().format(nullptr);

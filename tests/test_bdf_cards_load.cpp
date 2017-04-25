@@ -47,8 +47,8 @@ TEST_CASE("BDF LOAD definitions. (Small Field Format)", "[bdf_load]") {
     SECTION("first moment") {
         CHECK((long)probe.SID == 101);
         CHECK((double)probe.S == -.5);
-        CHECK(probe.Si == std::list<double>({1., 6.2}));
-        CHECK(probe.Li == std::list<long>({3, 4}));
+        CHECK(probe.Si == std::vector<double>({1., 6.2}));
+        CHECK(probe.Li == std::vector<long>({3, 4}));
     }
 }
 
@@ -66,8 +66,8 @@ TEST_CASE("BDF LOAD types output.", "[bdf_load,out]") {
     }
 
     SECTION("write (1)") {
-        std::list<double> Si({3., 1.7});
-        std::list<long> Li({3, 4});
+        std::vector<double> Si({3., 1.7});
+        std::vector<long> Li({3, 4});
         load probe(&SID, &S, &Si, &Li);
         test << probe;
         CHECK(test.str() ==
@@ -75,8 +75,8 @@ TEST_CASE("BDF LOAD types output.", "[bdf_load,out]") {
     }
 
     SECTION("write (2)") {
-        std::list<double> Si({3.});
-        std::list<long> Li({3, 0});
+        std::vector<double> Si({3.});
+        std::vector<long> Li({3, 0});
         Li.resize(1);
         load probe(&SID, &S, &Si, &Li);
         test << probe;
@@ -85,8 +85,8 @@ TEST_CASE("BDF LOAD types output.", "[bdf_load,out]") {
     }
 
     SECTION("write (3)") {
-        std::list<double> Si({0, 1, 2, 3, 4, 5, 6, 7, 8, 9});
-        std::list<long> Li({4, 5, 6, 7, 8, 9, 10, 11, 12, 13});
+        std::vector<double> Si({0, 1, 2, 3, 4, 5, 6, 7, 8, 9});
+        std::vector<long> Li({4, 5, 6, 7, 8, 9, 10, 11, 12, 13});
         load probe(&SID, &S, &Si, &Li);
         test << probe;
         CHECK(test.str() ==
@@ -96,8 +96,8 @@ TEST_CASE("BDF LOAD types output.", "[bdf_load,out]") {
     }
 
     SECTION("write (multiple)") {
-        std::list<double> Si({3.});
-        std::list<long> Li({3, 0});
+        std::vector<double> Si({3.});
+        std::vector<long> Li({3, 0});
         Li.resize(1);
         load probe;
         test << probe;

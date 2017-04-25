@@ -56,9 +56,9 @@ TEST_CASE("BDF CBEAM definitions. (Small Field Format)", "[bdf_cbeam]") {
         CHECK(double(probe.BIT) == 2.);
         CHECK_FALSE(probe.OFFT);
         CHECK(probe.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_BIT);
-        std::list<int> p_ref;
-        CHECK(probe.PA == p_ref);
-        CHECK(probe.PB == p_ref);
+        std::vector<int> p_ref;
+        CHECK(probe.PA.value == p_ref);
+        CHECK(probe.PB.value == p_ref);
         CHECK(double(probe.W1A) == 0.);
         CHECK(double(probe.W2A) == -22.617);
         CHECK(double(probe.W3A) == -339.25);
@@ -95,7 +95,7 @@ TEST_CASE("BDF CBEAM definitions (OFFT default). (Small Field Format)", "[bdf_cb
         CHECK(std::string(probe.OFFT) == "GGG");
         CHECK_FALSE(bool(probe.BIT) );
         CHECK(probe.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_OFFT);
-        std::list<int> p_ref;
+        std::vector<int> p_ref;
         CHECK(probe.PA == p_ref);
         CHECK(probe.PB == p_ref);
         CHECK(double(probe.W1A) == 0.);
@@ -131,7 +131,7 @@ TEST_CASE("BDF CBEAM definitions. (Small Field Format), dircode",
         CHECK(std::string(probe.OFFT) == "GOO");
         CHECK_FALSE(probe.BIT);
         CHECK(probe.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_OFFT);
-        std::list<int> p_ref;
+        std::vector<int> p_ref;
         CHECK(probe.PA == p_ref);
         CHECK(probe.PB == p_ref);
         CHECK(double(probe.W1A) == 0.);
@@ -168,7 +168,7 @@ TEST_CASE("BDF CBEAM definitions (OFFT default). (Small Field Format), dircode",
         CHECK(std::string(probe.OFFT) == "GGG");
         CHECK_FALSE(bool(probe.BIT) );
         CHECK(probe.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_OFFT);
-        std::list<int> p_ref;
+        std::vector<int> p_ref;
         CHECK(probe.PA == p_ref);
         CHECK(probe.PB == p_ref);
         CHECK(double(probe.W1A) == 0.);
@@ -187,8 +187,8 @@ TEST_CASE("BDF CBEAM roundtrip test (DCODE, OFFT)", "[bdf_cbeam]") {
 
     long EID{7869}, PID{104010}, GA{76}, GB{153}, G0{13};
     std::string OFFT("GGG");
-    std::list<int> PA{1, 2};
-    std::list<int> PB{3, 4};
+    std::vector<int> PA{1, 2};
+    std::vector<int> PB{3, 4};
     double W1A{0.}, W2A{-22.617}, W3A{-339.25}, W1B{0.}, W2B{22.617}, W3B{0.};
     long SA{11}, SB{12};
 
@@ -229,9 +229,9 @@ TEST_CASE("BDF CBEAM roundtrip test (DCODE, OFFT)", "[bdf_cbeam]") {
         CHECK(std::string(probe_l.OFFT) == "GGG");
         CHECK_FALSE(probe_l.BIT);
         CHECK(probe_l.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_OFFT);
-        std::list<int> p_refA{1, 2};
+        std::vector<int> p_refA{1, 2};
         CHECK(probe_l.PA == p_refA);
-        std::list<int> p_refB{3, 4};
+        std::vector<int> p_refB{3, 4};
         CHECK(probe_l.PB == p_refB);
         CHECK(double(probe_l.W1A) == 0.);
         CHECK(double(probe_l.W2A) == -22.617);
@@ -249,8 +249,8 @@ TEST_CASE("BDF CBEAM roundtrip test (DCODE, OFFT) (reuse)", "[bdf_cbeam]") {
 
     long EID{7869}, PID{104010}, GA{76}, GB{153}, G0{13};
     std::string OFFT("GGG");
-    std::list<int> PA{1, 2};
-    std::list<int> PB{3, 4};
+    std::vector<int> PA{1, 2};
+    std::vector<int> PB{3, 4};
     double W1A{0.}, W2A{-22.617}, W3A{-339.25}, W1B{0.}, W2B{22.617}, W3B{0.};
     long SA{11}, SB{12};
 
@@ -293,9 +293,9 @@ TEST_CASE("BDF CBEAM roundtrip test (DCODE, OFFT) (reuse)", "[bdf_cbeam]") {
         CHECK(std::string(probe_l.OFFT) == "GGG");
         CHECK_FALSE(probe_l.BIT);
         CHECK(probe_l.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_OFFT);
-        std::list<int> p_refA{1, 2};
+        std::vector<int> p_refA{1, 2};
         CHECK(probe_l.PA == p_refA);
-        std::list<int> p_refB{3, 4};
+        std::vector<int> p_refB{3, 4};
         CHECK(probe_l.PB == p_refB);
         CHECK(double(probe_l.W1A) == 0.);
         CHECK(double(probe_l.W2A) == -22.617);
@@ -313,8 +313,8 @@ TEST_CASE("BDF CBEAM roundtrip test (DCODE, BIT)", "[bdf_cbeam]") {
 
     long EID{7869}, PID{104010}, GA{76}, GB{153}, G0{13};
     double BIT{.72};
-    std::list<int> PA{1, 2};
-    std::list<int> PB{3, 4};
+    std::vector<int> PA{1, 2};
+    std::vector<int> PB{3, 4};
     double W1A{0.}, W2A{-22.617}, W3A{-339.25}, W1B{0.}, W2B{22.617}, W3B{0.};
     long SA{11}, SB{12};
 
@@ -355,9 +355,9 @@ TEST_CASE("BDF CBEAM roundtrip test (DCODE, BIT)", "[bdf_cbeam]") {
         CHECK(double(probe_l.BIT) == .72);
         CHECK_FALSE(probe_l.OFFT);
         CHECK(probe_l.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_BIT);
-        std::list<int> p_refA{1, 2};
+        std::vector<int> p_refA{1, 2};
         CHECK(probe_l.PA == p_refA);
-        std::list<int> p_refB{3, 4};
+        std::vector<int> p_refB{3, 4};
         CHECK(probe_l.PB == p_refB);
         CHECK(double(probe_l.W1A) == 0.);
         CHECK(double(probe_l.W2A) == -22.617);
@@ -375,8 +375,8 @@ TEST_CASE("BDF CBEAM roundtrip test (DCODE, BIT) (reuse)", "[bdf_cbeam]") {
 
     long EID{7869}, PID{104010}, GA{76}, GB{153}, G0{13};
     double BIT(.72);
-    std::list<int> PA{1, 2};
-    std::list<int> PB{3, 4};
+    std::vector<int> PA{1, 2};
+    std::vector<int> PB{3, 4};
     double W1A{0.}, W2A{-22.617}, W3A{-339.25}, W1B{0.}, W2B{22.617}, W3B{0.};
     long SA{11}, SB{12};
 
@@ -419,9 +419,9 @@ TEST_CASE("BDF CBEAM roundtrip test (DCODE, BIT) (reuse)", "[bdf_cbeam]") {
         CHECK(double(probe_l.BIT) == .72);
         CHECK_FALSE(probe_l.OFFT);
         CHECK(probe_l.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_BIT);
-        std::list<int> p_refA{1, 2};
+        std::vector<int> p_refA{1, 2};
         CHECK(probe_l.PA == p_refA);
-        std::list<int> p_refB{3, 4};
+        std::vector<int> p_refB{3, 4};
         CHECK(probe_l.PB == p_refB);
         CHECK(double(probe_l.W1A) == 0.);
         CHECK(double(probe_l.W2A) == -22.617);
@@ -441,8 +441,8 @@ TEST_CASE("BDF CBEAM roundtrip test (DVEC, OFFT)", "[bdf_cbeam]") {
     double X1{111.}, X2{222.}, X3{333};
 
     std::string OFFT("GGG");
-    std::list<int> PA{1, 2};
-    std::list<int> PB{3, 4};
+    std::vector<int> PA{1, 2};
+    std::vector<int> PB{3, 4};
     double W1A{0.}, W2A{-22.617}, W3A{-339.25}, W1B{0.}, W2B{22.617}, W3B{0.};
     long SA{11}, SB{12};
 
@@ -483,9 +483,9 @@ TEST_CASE("BDF CBEAM roundtrip test (DVEC, OFFT)", "[bdf_cbeam]") {
         CHECK(std::string(probe_l.OFFT) == "GGG");
         CHECK_FALSE(probe_l.BIT);
         CHECK(probe_l.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_OFFT);
-        std::list<int> p_refA{1, 2};
+        std::vector<int> p_refA{1, 2};
         CHECK(probe_l.PA == p_refA);
-        std::list<int> p_refB{3, 4};
+        std::vector<int> p_refB{3, 4};
         CHECK(probe_l.PB == p_refB);
         CHECK(double(probe_l.W1A) == 0.);
         CHECK(double(probe_l.W2A) == -22.617);
@@ -504,8 +504,8 @@ TEST_CASE("BDF CBEAM roundtrip test (DVEC, OFFT) (reuse)", "[bdf_cbeam]") {
     long EID{7869}, PID{104010}, GA{76}, GB{153};
     double X1{111.}, X2{222.}, X3{333};
     std::string OFFT("GGG");
-    std::list<int> PA{1, 2};
-    std::list<int> PB{3, 4};
+    std::vector<int> PA{1, 2};
+    std::vector<int> PB{3, 4};
     double W1A{0.}, W2A{-22.617}, W3A{-339.25}, W1B{0.}, W2B{22.617}, W3B{0.};
     long SA{11}, SB{12};
 
@@ -548,9 +548,9 @@ TEST_CASE("BDF CBEAM roundtrip test (DVEC, OFFT) (reuse)", "[bdf_cbeam]") {
         CHECK(std::string(probe_l.OFFT) == "GGG");
         CHECK_FALSE(probe_l.BIT);
         CHECK(probe_l.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_OFFT);
-        std::list<int> p_refA{1, 2};
+        std::vector<int> p_refA{1, 2};
         CHECK(probe_l.PA == p_refA);
-        std::list<int> p_refB{3, 4};
+        std::vector<int> p_refB{3, 4};
         CHECK(probe_l.PB == p_refB);
         CHECK(double(probe_l.W1A) == 0.);
         CHECK(double(probe_l.W2A) == -22.617);
@@ -569,8 +569,8 @@ TEST_CASE("BDF CBEAM roundtrip test (DVEC, BIT)", "[bdf_cbeam]") {
     long EID{7869}, PID{104010}, GA{76}, GB{153};
     double X1{111.}, X2{222.}, X3{333};
     double BIT{.72};
-    std::list<int> PA{1, 2};
-    std::list<int> PB{3, 4};
+    std::vector<int> PA{1, 2};
+    std::vector<int> PB{3, 4};
     double W1A{0.}, W2A{-22.617}, W3A{-339.25}, W1B{0.}, W2B{22.617}, W3B{0.};
     long SA{11}, SB{12};
 
@@ -611,9 +611,9 @@ TEST_CASE("BDF CBEAM roundtrip test (DVEC, BIT)", "[bdf_cbeam]") {
         CHECK(double(probe_l.BIT) == .72);
         CHECK_FALSE(probe_l.OFFT);
         CHECK(probe_l.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_BIT);
-        std::list<int> p_refA{1, 2};
+        std::vector<int> p_refA{1, 2};
         CHECK(probe_l.PA == p_refA);
-        std::list<int> p_refB{3, 4};
+        std::vector<int> p_refB{3, 4};
         CHECK(probe_l.PB == p_refB);
         CHECK(double(probe_l.W1A) == 0.);
         CHECK(double(probe_l.W2A) == -22.617);
@@ -632,8 +632,8 @@ TEST_CASE("BDF CBEAM roundtrip test (DVEC, BIT) (reuse)", "[bdf_cbeam]") {
     long EID{7869}, PID{104010}, GA{76}, GB{153};
     double X1{111.}, X2{222.}, X3{333};
     double BIT(.72);
-    std::list<int> PA{1, 2};
-    std::list<int> PB{3, 4};
+    std::vector<int> PA{1, 2};
+    std::vector<int> PB{3, 4};
     double W1A{0.}, W2A{-22.617}, W3A{-339.25}, W1B{0.}, W2B{22.617}, W3B{0.};
     long SA{11}, SB{12};
 
@@ -676,9 +676,9 @@ TEST_CASE("BDF CBEAM roundtrip test (DVEC, BIT) (reuse)", "[bdf_cbeam]") {
         CHECK(double(probe_l.BIT) == .72);
         CHECK_FALSE(probe_l.OFFT);
         CHECK(probe_l.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_BIT);
-        std::list<int> p_refA{1, 2};
+        std::vector<int> p_refA{1, 2};
         CHECK(probe_l.PA == p_refA);
-        std::list<int> p_refB{3, 4};
+        std::vector<int> p_refB{3, 4};
         CHECK(probe_l.PB == p_refB);
         CHECK(double(probe_l.W1A) == 0.);
         CHECK(double(probe_l.W2A) == -22.617);

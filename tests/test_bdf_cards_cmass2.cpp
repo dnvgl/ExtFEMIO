@@ -50,9 +50,9 @@ TEST_CASE("BDF CMASS2 definitions. (Small Field Format)", "[bdf_cmass2]" ) {
         REQUIRE((long)probe.EID == 1);
         REQUIRE((double)probe.M == 3.);
         REQUIRE((long)probe.G1 == 32);
-        REQUIRE(probe.C1 == std::list<int>(1, 8));
+        REQUIRE(probe.C1 == std::vector<int>(1, 8));
         REQUIRE_FALSE(probe.G2);
-        REQUIRE(probe.C2 == std::list<int>());
+        REQUIRE(probe.C2 == std::vector<int>());
     }
 
     SECTION("full cmass2") {
@@ -66,9 +66,9 @@ TEST_CASE("BDF CMASS2 definitions. (Small Field Format)", "[bdf_cmass2]" ) {
         REQUIRE((long)probe.EID == 1);
         REQUIRE((double)probe.M == 3.);
         REQUIRE((long)probe.G1 == 32);
-        REQUIRE(probe.C1 == std::list<int>(1, 8));
+        REQUIRE(probe.C1 == std::vector<int>(1, 8));
         REQUIRE((long)probe.G2 == 43);
-        REQUIRE(probe.C2 == std::list<int>(1, 2));
+        REQUIRE(probe.C2 == std::vector<int>(1, 2));
     }
 
     SECTION("only second vals cmass2") {
@@ -82,9 +82,9 @@ TEST_CASE("BDF CMASS2 definitions. (Small Field Format)", "[bdf_cmass2]" ) {
         REQUIRE((long)probe.EID == 1);
         REQUIRE((double)probe.M == 3.);
         REQUIRE_FALSE(probe.G1);
-        REQUIRE(probe.C1 == std::list<int>());
+        REQUIRE(probe.C1 == std::vector<int>());
         REQUIRE((long)probe.G2 == 32);
-        REQUIRE(probe.C2 == std::list<int>({1, 2}));
+        REQUIRE(probe.C2 == std::vector<int>({1, 2}));
     }
 }
 
@@ -100,7 +100,7 @@ TEST_CASE("BDF CMASS2 types output.", "[bdf_cmass2,out]" ) {
 
     SECTION("reverse") {
         long EID(2), S1(6), S2(1);
-        std::list<int> C1({1, 2, 3}), C2({4, 5, 6});
+        std::vector<int> C1({1, 2, 3}), C2({4, 5, 6});
         double M(2.9);
         cmass2 probe(&EID, &M, &S1, &C1, &S2, &C2);
         test << probe;
@@ -112,7 +112,7 @@ TEST_CASE("BDF CMASS2 types output.", "[bdf_cmass2,out]" ) {
     SECTION("reverse part") {
         long EID(2), S1(6);
         double M(2.9);
-        std::list<int> C1({1, 2, 3});
+        std::vector<int> C1({1, 2, 3});
         cmass2 probe(&EID, &M, &S1, &C1);
         test << probe;
         REQUIRE(test.str() ==
@@ -123,14 +123,14 @@ TEST_CASE("BDF CMASS2 types output.", "[bdf_cmass2,out]" ) {
     SECTION("failed part") {
         long EID(0), S1(6);
         double M(2.9);
-        std::list<int> C1({1, 2, 3});
+        std::vector<int> C1({1, 2, 3});
         REQUIRE_THROWS(cmass2(&EID, &M, &S1, &C1));
     }
 
     SECTION("multiple") {
         long EID(2), S1(6);
         double M(2.9);
-        std::list<int> C1({1, 2, 3});
+        std::vector<int> C1({1, 2, 3});
         cmass2 probe;
         test << probe;
         test << probe(&EID, &M, &S1, &C1);

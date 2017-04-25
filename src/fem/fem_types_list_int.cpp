@@ -22,7 +22,7 @@ namespace {
 #include <regex>
 #endif
 
-#include <list>
+#include <vector>
 #include <sstream>
 #include <algorithm>
 
@@ -61,7 +61,7 @@ void entry_type<std::vector<int> >::operator() (
     std::vector<int> &value, std::string const &inp) const {
 
     double tmp_d;
-    std::list<int> tmp_l;
+    std::vector<int> tmp_l;
 
     if (! regex_match(inp, list_int_re)) {
         std::string msg("illegal input (""");

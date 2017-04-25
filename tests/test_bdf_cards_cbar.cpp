@@ -66,7 +66,7 @@ TEST_CASE("BDF CBAR definitions. (Small Field Format)", "[bdf_cbar]" ) {
         CHECK_FALSE(probe.G0);
         CHECK(probe.choose_dir_code == cbar::CHOOSE_DIR_CODE::has_DVEC);
         CHECK(probe.OFFT == "GGG");
-        std::list<int> p_ref;
+        std::vector<int> p_ref;
         CHECK(probe.PA == p_ref);
         CHECK(probe.PB == p_ref);
         CHECK((double)probe.W1A == 0.);
@@ -237,7 +237,7 @@ TEST_CASE("CBAR Roundtrip test (QRG sample 1 (long))", "[bdf_cbar_roundtrip_3]")
     long EID(2), PID(39), GA(7), GB(3);
     double X1(.6), X2(18), X3(1234.5);
     std::string OFFT("GGO");
-    list<int> PB{5, 1, 3};
+    vector<int> PB{5, 1, 3};
 
     cbar probe(&EID, &PID, &GA, &GB, &X1, &X2, &X3, &OFFT, nullptr, &PB);
 
@@ -270,7 +270,7 @@ TEST_CASE("CBAR Roundtrip test (QRG sample 1 (long))", "[bdf_cbar_roundtrip_3]")
         CHECK(probe_l.X2.value == 18);
         CHECK(probe_l.X3.value == 1234.5);
         CHECK(probe_l.OFFT.value == "GGO");
-        CHECK(probe_l.PB == list<int>({5, 1, 3}));
+        CHECK(probe_l.PB == vector<int>({5, 1, 3}));
     }
 }
 
@@ -281,7 +281,7 @@ TEST_CASE("CBAR Roundtrip test (QRG sample 1 (long)) (reuse)", "[bdf_cbar_roundt
     long EID(2), PID(39), GA(7), GB(3);
     double X1(.6), X2(18), X3(1234.5);
     std::string OFFT("GGO");
-    list<int> PB{5, 1, 3};
+    vector<int> PB{5, 1, 3};
 
     cbar probe;
     probe(&EID, &PID, &GA, &GB, &X1, &X2, &X3, &OFFT, nullptr, &PB);
@@ -316,7 +316,7 @@ TEST_CASE("CBAR Roundtrip test (QRG sample 1 (long)) (reuse)", "[bdf_cbar_roundt
         CHECK(probe_l.X2.value == 18);
         CHECK(probe_l.X3.value == 1234.5);
         CHECK(probe_l.OFFT.value == "GGO");
-        CHECK(probe_l.PB == list<int>({5, 1, 3}));
+        CHECK(probe_l.PB == vector<int>({5, 1, 3}));
     }
 }
 

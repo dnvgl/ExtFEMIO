@@ -21,18 +21,18 @@ namespace {
 using namespace dnvgl::extfem::bdf::header::case_control;
 
 displacement::displacement(
-std::list<describer*> const &_describers, restype const &res, long const &n) :
+std::vector<describer*> const &_describers, restype const &res, long const &n) :
 res(res), res_n(n) {
     for (auto p : _describers)
         describers.push_back(std::unique_ptr<describer>(p));
 }
 
 displacement::displacement(
-    std::list<describer*> const &describers, restype const &res) :
+    std::vector<describer*> const &describers, restype const &res) :
     displacement(describers, res, 0) {}
 
 displacement::displacement(
-    std::list<describer*> const &describers, long const &res) :
+    std::vector<describer*> const &describers, long const &res) :
     displacement(describers, restype::n, res) {}
 
 std::ostream &displacement::put(std::ostream &os) const {

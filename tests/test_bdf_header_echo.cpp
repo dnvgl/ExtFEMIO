@@ -80,7 +80,7 @@ TEST_CASE("BDF generate more 'ECHO' header entries", "[bdf_header,echo]") {
         case_control::echo probe(
         {new case_control::echo::punch(),
         new case_control::echo::sort(
-        std::list<case_control::echo::sort::cdni_entry>(
+            std::vector<case_control::echo::sort::cdni_entry>(
         {case_control::echo::sort::cdni_entry("MAT1"),
         case_control::echo::sort::cdni_entry("PARAM")}))});
         test << probe;
@@ -89,7 +89,7 @@ TEST_CASE("BDF generate more 'ECHO' header entries", "[bdf_header,echo]") {
 
     SECTION("ECHO = SORT (EXCEPT DMI, DMIG)") {
         case_control::echo probe(
-        {new case_control::echo::sort(std::list<case_control::echo::sort::cdni_entry>(
+        {new case_control::echo::sort(std::vector<case_control::echo::sort::cdni_entry>(
         {case_control::echo::sort::cdni_entry("DMI", true),
         case_control::echo::sort::cdni_entry("DMIG")}))});
         test << probe;

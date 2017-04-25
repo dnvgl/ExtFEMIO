@@ -42,15 +42,15 @@ using namespace dnvgl::extfem::bdf::type_bounds;
 
 TEST_CASE("BDF list types parsing.", "[bdf_types]") {
 
-    entry_type<std::list<int> > probe("dummy");
+    entry_type<std::vector<int> > probe("dummy");
 
     SECTION("' 1234   '") {
-        std::list<int> ref({1, 2, 3, 4});
+        std::vector<int> ref({1, 2, 3, 4});
         CHECK(probe("  1234  ").value == ref);
     }
 
     SECTION("' 1236   '") {
-        std::list<int> ref({1, 2, 3, 6});
+        std::vector<int> ref({1, 2, 3, 6});
         CHECK(probe(" 1236   ").value == ref);
     }
 
@@ -61,10 +61,10 @@ TEST_CASE("BDF list types parsing.", "[bdf_types]") {
 
 TEST_CASE("BDF list of int types output.", "[bdf_types]") {
 
-    entry_type<std::list<int> > obj("dummy");
+    entry_type<std::vector<int> > obj("dummy");
 
-    //std::list<int> inp({ 1, 2, 3, 4 });
-    entry_value<std::list<int> > lval({1, 2, 3, 4});
+    //std::vector<int> inp({ 1, 2, 3, 4 });
+    entry_value<std::vector<int> > lval({1, 2, 3, 4});
 
     std::ostringstream stream(std::ostringstream::ate);
 
@@ -82,7 +82,7 @@ TEST_CASE("BDF list of int types output.", "[bdf_types]") {
     }
 
     SECTION("SHORT ()") {
-        std::list<int> llval(lval.value);
+        std::vector<int> llval(lval.value);
         bdf::types::base::out_form = bdf::types::out_form_type::SHORT;
         CHECK(obj.format(&llval).size() == 8);
         CHECK(obj.format(&llval) == "    1234");

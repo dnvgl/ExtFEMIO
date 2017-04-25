@@ -109,8 +109,8 @@ void pbeaml::read(list<std::string> const & inp) {
         ++pos;
     }
 
-    // DIM.push_back(new list<dnvgl::extfem::bdf::double> >);
-    DIM.push_back(list<double>());
+    // DIM.push_back(new vector<dnvgl::extfem::bdf::double> >);
+    DIM.push_back(vector<double>());
     for (i = 0; i < dim_num; i++) {
         if (pos == inp.end()) goto invalid;
         DIM.front().push_back(form_DIM(*(pos++)));
@@ -130,8 +130,8 @@ void pbeaml::read(list<std::string> const & inp) {
     while (pos != inp.end()) {
         if (pos == inp.end()) goto end;
         j++;
-        // DIM.push_back(new list<dnvgl::extfem::bdf::types::entry_value<double> >);
-        DIM.push_back(list<double>());
+        // DIM.push_back(new vector<dnvgl::extfem::bdf::types::entry_value<double> >);
+        DIM.push_back(vector<double>());
         try {
             SO.push_back(form_SO(*(pos++)));
         } catch (errors::error) {

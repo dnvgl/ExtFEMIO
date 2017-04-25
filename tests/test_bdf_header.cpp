@@ -176,7 +176,7 @@ namespace ExportBDF{
 
     class BDF_Header {
     private:
-        std::list<std::unique_ptr<dnvgl::extfem::bdf::header::__base::entry> > entries;
+        std::vector<std::unique_ptr<dnvgl::extfem::bdf::header::__base::entry> > entries;
     public:
         BDF_Header(std::string const&);
         ~BDF_Header();
@@ -195,7 +195,7 @@ namespace ExportBDF{
         entries.push_back(std::make_unique<case_control::title>(title));
         entries.push_back(
             std::make_unique<case_control::echo>(
-                std::list<case_control::echo::describer*>{
+                std::vector<case_control::echo::describer*>{
                     new case_control::echo::none}));
     }
 
@@ -211,20 +211,20 @@ namespace ExportBDF{
         entries.push_back(std::make_unique<case_control::load>(load));
         entries.push_back(
             std::make_unique<case_control::displacement>(
-                std::list<case_control::displacement::describer*>{
+                std::vector<case_control::displacement::describer*>{
                     new case_control::displacement::print,
                         new case_control::displacement::punch,
                         new case_control::displacement::real},
                 case_control::displacement::restype::ALL));
         entries.push_back(
             std::make_unique<case_control::spcforces>(
-                std::list<case_control::spcforces::describer*>{
+                std::vector<case_control::spcforces::describer*>{
                     new case_control::spcforces::print,
                         new case_control::spcforces::nozprint},
                 case_control::spcforces::restype::ALL));
         entries.push_back(
             std::make_unique<case_control::stress>(
-                std::list<case_control::stress::describer*>{
+                std::vector<case_control::stress::describer*>{
                     new case_control::stress::sort1,
                         new case_control::stress::print,
                         new case_control::stress::real,

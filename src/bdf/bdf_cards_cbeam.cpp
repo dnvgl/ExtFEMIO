@@ -59,8 +59,8 @@ const entry_type<double> cbeam::form_BIT("BIT", bound<double>());
 const entry_type<std::string> cbeam::form_OFFT(
     "OFFT", bound<std::string>({
     "GGG", "BGG", "GGO", "BGO", "GOG", "BOG", "GOO", "BOO"}, "GGG"));
-const entry_type<list<int> > cbeam::form_PA("PA"); // maxelem=5, minval=1, maxval=6, uniq=True);
-const entry_type<list<int> > cbeam::form_PB("PB"); // maxelem=5, minval=1, maxval=6, uniq=True);
+const entry_type<vector<int> > cbeam::form_PA("PA"); // maxelem=5, minval=1, maxval=6, uniq=True);
+const entry_type<vector<int> > cbeam::form_PB("PB"); // maxelem=5, minval=1, maxval=6, uniq=True);
 const entry_type<double> cbeam::form_W1A(
     "W1A", bound<double>(nullptr, nullptr, &dc0)); // default=0.),
 const entry_type<double> cbeam::form_W2A(
@@ -92,8 +92,8 @@ cbeam::cbeam(list<std::string> const &inp) :
 cbeam::cbeam(long const *EID, long const *PID, long const *GA,
              long const *GB, double const *X1, double const *X2,
              double const *X3, std::string const *OFFT/*=nullptr*/,
-             std::list<int> const *PA/*=nullptr*/,
-             std::list<int> const *PB/*=nullptr*/,
+             vector<int> const *PA/*=nullptr*/,
+             vector<int> const *PB/*=nullptr*/,
              double const *W1A/*=nullptr*/,
              double const *W2A/*=nullptr*/,
              double const *W3A/*=nullptr*/,
@@ -120,7 +120,7 @@ cbeam::cbeam(long const *EID, long const *PID,
              double const *X2,
              double const *X3,
              double const *BIT,
-             std::list<int> const *PA/*=nullptr*/, std::list<int> const *PB/*=nullptr*/,
+             vector<int> const *PA/*=nullptr*/, vector<int> const *PB/*=nullptr*/,
              double const *W1A/*=nullptr*/, double const *W2A/*=nullptr*/,
              double const *W3A/*=nullptr*/, double const *W1B/*=nullptr*/,
              double const *W2B/*=nullptr*/, double const *W3B/*=nullptr*/,
@@ -141,7 +141,7 @@ cbeam::cbeam(long const *EID, long const *PID,
              long const *GA, long const *GB,
              long const *G0,
              std::string const *OFFT/*=nullptr*/,
-             std::list<int> const *PA/*=nullptr*/, std::list<int> const *PB/*=nullptr*/,
+             vector<int> const *PA/*=nullptr*/, vector<int> const *PB/*=nullptr*/,
              double const *W1A/*=nullptr*/, double const *W2A/*=nullptr*/,
              double const *W3A/*=nullptr*/, double const *W1B/*=nullptr*/,
              double const *W2B/*=nullptr*/, double const *W3B/*=nullptr*/,
@@ -162,7 +162,7 @@ cbeam::cbeam(long const *EID, long const *PID,
              long const *GA, long const *GB,
              long const *G0,
              double const *BIT,
-             std::list<int> const *PA/*=nullptr*/, std::list<int> const *PB/*=nullptr*/,
+             vector<int> const *PA/*=nullptr*/, vector<int> const *PB/*=nullptr*/,
              double const *W1A/*=nullptr*/, double const *W2A/*=nullptr*/,
              double const *W3A/*=nullptr*/, double const *W1B/*=nullptr*/,
              double const *W2B/*=nullptr*/, double const *W3B/*=nullptr*/,
@@ -323,12 +323,12 @@ void cbeam::collect_outdata(
     if (bool(PA) || bool(PB) || bool(W1A) || bool(W2A) || bool(W3A) ||
         bool(W1B) || bool(W2B) || bool(W3B) || bool(SA) || bool(SB))
         res.push_back(
-            unique_ptr<format_entry>(format<list<int> >(form_PA, PA)));
+            unique_ptr<format_entry>(format<vector<int> >(form_PA, PA)));
     else goto cont;
     if (bool(PB) || bool(W1A) || bool(W2A) || bool(W3A) || bool(W1B) ||
         bool(W2B) || bool(W3B) || bool(SA) || bool(SB))
         res.push_back(
-            unique_ptr<format_entry>(format<list<int> >(form_PB, PB)));
+            unique_ptr<format_entry>(format<vector<int> >(form_PB, PB)));
     else goto cont;
     if (bool(W1A) || bool(W2A) || bool(W3A) || bool(W1B) || bool(W2B) ||
         bool(W3B) || bool(SA) || bool(SB))
@@ -393,7 +393,7 @@ cards::__base::card const &cbeam::operator() (
     long const *GA, long const *GB,
     double const *X1, double const *X2, double const *X3,
     std::string const *OFFT/*=nullptr*/,
-    std::list<int> const *PA/*=nullptr*/, std::list<int> const *PB/*=nullptr*/,
+    vector<int> const *PA/*=nullptr*/, vector<int> const *PB/*=nullptr*/,
     double const *W1A/*=nullptr*/, double const *W2A/*=nullptr*/,
     double const *W3A/*=nullptr*/, double const *W1B/*=nullptr*/,
     double const *W2B/*=nullptr*/, double const *W3B/*=nullptr*/,
@@ -430,7 +430,7 @@ cards::__base::card const &cbeam::operator() (
     long const *GA, long const *GB,
     double const *X1, double const *X2, double const *X3,
     double const *BIT,
-    std::list<int> const *PA/*=nullptr*/, std::list<int> const *PB/*=nullptr*/,
+    vector<int> const *PA/*=nullptr*/, vector<int> const *PB/*=nullptr*/,
     double const *W1A/*=nullptr*/, double const *W2A/*=nullptr*/,
     double const *W3A/*=nullptr*/, double const *W1B/*=nullptr*/,
     double const *W2B/*=nullptr*/, double const *W3B/*=nullptr*/,
@@ -466,7 +466,7 @@ cards::__base::card const &cbeam::operator() (
     long const *EID, long const *PID,
     long const *GA, long const *GB, long const *G0,
     std::string const *OFFT/*=nullptr*/,
-    std::list<int> const *PA/*=nullptr*/, std::list<int> const *PB/*=nullptr*/,
+    vector<int> const *PA/*=nullptr*/, vector<int> const *PB/*=nullptr*/,
     double const *W1A/*=nullptr*/, double const *W2A/*=nullptr*/,
     double const *W3A/*=nullptr*/, double const *W1B/*=nullptr*/,
     double const *W2B/*=nullptr*/, double const *W3B/*=nullptr*/,
@@ -503,7 +503,7 @@ cards::__base::card const &cbeam::operator() (
     long const *EID, long const *PID,
     long const *GA, long const *GB, long const *G0,
     double const *BIT,
-    std::list<int> const *PA/*=nullptr*/, std::list<int> const *PB/*=nullptr*/,
+    vector<int> const *PA/*=nullptr*/, vector<int> const *PB/*=nullptr*/,
     double const *W1A/*=nullptr*/, double const *W2A/*=nullptr*/,
     double const *W3A/*=nullptr*/, double const *W1B/*=nullptr*/,
     double const *W2B/*=nullptr*/, double const *W3B/*=nullptr*/,

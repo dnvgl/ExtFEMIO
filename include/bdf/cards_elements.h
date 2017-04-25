@@ -446,8 +446,8 @@ namespace dnvgl {
                     entry_type<double> static const form_X3;
                     entry_type<double> static const form_BIT;
                     entry_type<std::string> static const form_OFFT;
-                    entry_type<std::list<int> > static const form_PA;
-                    entry_type<std::list<int> > static const form_PB;
+                    entry_type<std::vector<int> > static const form_PA;
+                    entry_type<std::vector<int> > static const form_PB;
                     entry_type<double> static const form_W1A;
                     entry_type<double> static const form_W2A;
                     entry_type<double> static const form_W3A;
@@ -544,7 +544,7 @@ namespace dnvgl {
                         through 6 with no embedded blanks.) Pin flags are
                         not allowed for beam p-elements.
                         */
-                    entry_value<std::list<int> > PA;
+                    entry_value<std::vector<int> > PA;
                     /** Pin flags for beam end `B`, respectively; used to
                         remove connections between the grid point and
                         selected degrees-offreedom of the beam. The
@@ -559,7 +559,7 @@ namespace dnvgl {
                         through 6 with no embedded blanks.) Pin flags are
                         not allowed for beam p-elements.
                         */
-                    entry_value<std::list<int> > PB;
+                    entry_value<std::vector<int> > PB;
                     /** *x* Components of offset vectors from the grid
                         points to the end points of the axis of the shear
                         center at beam end `A`. (Real; Default = 0.0)
@@ -616,7 +616,7 @@ namespace dnvgl {
                         double const *X2,
                         double const *X3,
                         std::string const *OFFT = nullptr,
-                        std::list<int> const *PA = nullptr, std::list<int> const *PB = nullptr,
+                        std::vector<int> const *PA = nullptr, std::vector<int> const *PB = nullptr,
                         double const *W1A = nullptr, double const *W2A = nullptr,
                         double const *W3A = nullptr, double const *W1B = nullptr,
                         double const *W2B = nullptr, double const *W3B = nullptr,
@@ -629,7 +629,7 @@ namespace dnvgl {
                         double const *X2,
                         double const *X3,
                         double const *BIT,
-                        std::list<int> const *PA = nullptr, std::list<int> const *PB = nullptr,
+                        std::vector<int> const *PA = nullptr, std::vector<int> const *PB = nullptr,
                         double const *W1A = nullptr, double const *W2A = nullptr,
                         double const *W3A = nullptr, double const *W1B = nullptr,
                         double const *W2B = nullptr, double const *W3B = nullptr,
@@ -640,7 +640,7 @@ namespace dnvgl {
                         long const *GA, long const *GB,
                         long const *G0,
                         std::string const *OFFT = nullptr,
-                        std::list<int> const *PA = nullptr, std::list<int> const *PB = nullptr,
+                        std::vector<int> const *PA = nullptr, std::vector<int> const *PB = nullptr,
                         double const *W1A = nullptr, double const *W2A = nullptr,
                         double const *W3A = nullptr, double const *W1B = nullptr,
                         double const *W2B = nullptr, double const *W3B = nullptr,
@@ -651,7 +651,7 @@ namespace dnvgl {
                         long const *GA, long const *GB,
                         long const *G0,
                         double const *BIT,
-                        std::list<int> const *PA = nullptr, std::list<int> const *PB = nullptr,
+                        std::vector<int> const *PA = nullptr, std::vector<int> const *PB = nullptr,
                         double const *W1A = nullptr, double const *W2A = nullptr,
                         double const *W3A = nullptr, double const *W1B = nullptr,
                         double const *W2B = nullptr, double const *W3B = nullptr,
@@ -670,7 +670,8 @@ namespace dnvgl {
                         double const *X2,
                         double const *X3,
                         std::string const *OFFT = nullptr,
-                        std::list<int> const *PA = nullptr, std::list<int> const *PB = nullptr,
+                        std::vector<int> const *PA = nullptr,
+                        std::vector<int> const *PB = nullptr,
                         double const *W1A = nullptr, double const *W2A = nullptr,
                         double const *W3A = nullptr, double const *W1B = nullptr,
                         double const *W2B = nullptr, double const *W3B = nullptr,
@@ -683,7 +684,8 @@ namespace dnvgl {
                         double const *X2,
                         double const *X3,
                         double const *BIT,
-                        std::list<int> const *PA = nullptr, std::list<int> const *PB = nullptr,
+                        std::vector<int> const *PA = nullptr,
+                        std::vector<int> const *PB = nullptr,
                         double const *W1A = nullptr, double const *W2A = nullptr,
                         double const *W3A = nullptr, double const *W1B = nullptr,
                         double const *W2B = nullptr, double const *W3B = nullptr,
@@ -694,7 +696,8 @@ namespace dnvgl {
                         long const *GA, long const *GB,
                         long const *G0,
                         std::string const *OFFT = nullptr,
-                        std::list<int> const *PA = nullptr, std::list<int> const *PB = nullptr,
+                        std::vector<int> const *PA = nullptr,
+                        std::vector<int> const *PB = nullptr,
                         double const *W1A = nullptr, double const *W2A = nullptr,
                         double const *W3A = nullptr, double const *W1B = nullptr,
                         double const *W2B = nullptr, double const *W3B = nullptr,
@@ -705,7 +708,8 @@ namespace dnvgl {
                         long const *GA, long const *GB,
                         long const *G0,
                         double const *BIT,
-                        std::list<int> const *PA = nullptr, std::list<int> const *PB = nullptr,
+                        std::vector<int> const *PA = nullptr,
+                        std::vector<int> const *PB = nullptr,
                         double const *W1A = nullptr, double const *W2A = nullptr,
                         double const *W3A = nullptr, double const *W1B = nullptr,
                         double const *W2B = nullptr, double const *W3B = nullptr,
@@ -758,8 +762,8 @@ namespace dnvgl {
                     entry_type<double> static const form_X2;
                     entry_type<double> static const form_X3;
                     entry_type<std::string> static const form_OFFT;
-                    entry_type<std::list<int> > static const form_PA;
-                    entry_type<std::list<int> > static const form_PB;
+                    entry_type<std::vector<int> > static const form_PA;
+                    entry_type<std::vector<int> > static const form_PB;
                     entry_type<double> static const form_W1A;
                     entry_type<double> static const form_W2A;
                     entry_type<double> static const form_W3A;
@@ -844,7 +848,7 @@ namespace dnvgl {
                         through 6 anywhere in the field with no embedded
                         blanks; Integer > 0.)
                         */
-                    entry_value<std::list<int> > PA;
+                    entry_value<std::vector<int> > PA;
                     /** Pin flags for bar ends `B`. Used to remove
                         connections between the grid point and selected
                         degrees-of-freedom of the bar. The
@@ -858,7 +862,7 @@ namespace dnvgl {
                         through 6 anywhere in the field with no embedded
                         blanks; Integer > 0.)
                         */
-                    entry_value<std::list<int> > PB;
+                    entry_value<std::vector<int> > PB;
                     /** *x* components of offset vectors \f$w_a\f$ and
                         \f$w_b\f$, respectively (see Figure 8-8) in
                         displacement coordinate systems (or in element
@@ -916,8 +920,8 @@ namespace dnvgl {
                          long const *GA, long const *GB,
                          double const *X1, double const *X2, double const *X3,
                          std::string const *OFFT = nullptr,
-                         std::list<int> const *PA = nullptr,
-                         std::list<int> const *PB = nullptr,
+                         std::vector<int> const *PA = nullptr,
+                         std::vector<int> const *PB = nullptr,
                          double const *W1A = nullptr, double const *W2A = nullptr,
                          double const *W3A = nullptr, double const *W1B = nullptr,
                          double const *W2B = nullptr, double const *W3B = nullptr);
@@ -925,8 +929,8 @@ namespace dnvgl {
                     cbar(long const *EID, long const *PID,
                          long const *GA, long const *GB, long const *G0,
                          std::string const *OFFT = nullptr,
-                         std::list<int> const *PA = nullptr,
-                         std::list<int> const *PB = nullptr,
+                         std::vector<int> const *PA = nullptr,
+                         std::vector<int> const *PB = nullptr,
                          double const *W1A = nullptr, double const *W2A = nullptr,
                          double const *W3A = nullptr, double const *W1B = nullptr,
                          double const *W2B = nullptr, double const *W3B = nullptr);
@@ -958,8 +962,8 @@ namespace dnvgl {
                         long const *GA, long const *GB,
                         long const *G0,
                         std::string const *OFFT = nullptr,
-                        std::list<int> const *PA = nullptr,
-                        std::list<int> const *PB = nullptr,
+                        std::vector<int> const *PA = nullptr,
+                        std::vector<int> const *PB = nullptr,
                         double const *W1A = nullptr, double const *W2A = nullptr,
                         double const *W3A = nullptr, double const *W1B = nullptr,
                         double const *W2B = nullptr, double const *W3B = nullptr);
@@ -989,8 +993,8 @@ namespace dnvgl {
                         long const *GA, long const *GB,
                         double const *X1, double const *X2, double const *X3,
                         std::string const *OFFT = nullptr,
-                        std::list<int> const *PA = nullptr,
-                        std::list<int> const *PB = nullptr,
+                        std::vector<int> const *PA = nullptr,
+                        std::vector<int> const *PB = nullptr,
                         double const *W1A = nullptr, double const *W2A = nullptr,
                         double const *W3A = nullptr, double const *W1B = nullptr,
                         double const *W2B = nullptr, double const *W3B = nullptr);

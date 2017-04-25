@@ -60,7 +60,7 @@ card(inp) {
 }
 
 load::load(long const *SID, double const *S,
-           list<double> const *Si, list<long> const *Li) :
+           vector<double> const *Si, vector<long> const *Li) :
            SID(*SID), S(*S), Si(), Li() {
     if (Si)
         copy(Si->begin(), Si->end(), back_inserter(this->Si));
@@ -70,7 +70,7 @@ load::load(long const *SID, double const *S,
 
 cards::__base::card const &load::operator() (
     long const *SID, double const *S,
-    list<double> const *Si, list<long> const *Li) {
+    vector<double> const *Si, vector<long> const *Li) {
 
     this->Si.clear();
     this->Li.clear();
