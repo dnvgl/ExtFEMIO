@@ -551,15 +551,9 @@ namespace dnvgl {
 
                     protected:
 
-                        l_geom();
+                        l_geom() = default;
 
-                        std::set<std::string> static const dimnum1;
-                        std::set<std::string> static const dimnum2;
-                        std::set<std::string> static const dimnum3;
-                        std::set<std::string> static const dimnum4;
-                        std::set<std::string> static const dimnum5;
-                        std::set<std::string> static const dimnum6;
-                        std::set<std::string> static const dimnum10;
+                        size_t get_dim(std::string const &TYPE) const;
                     };
                 }
 
@@ -601,14 +595,6 @@ namespace dnvgl {
                     bdf::types::entry_type<std::string> static const form_SO;
                     bdf::types::entry_type<double> static const form_X_XB;
 
-                    using l_geom::dimnum1;
-                    using l_geom::dimnum2;
-                    using l_geom::dimnum3;
-                    using l_geom::dimnum4;
-                    using l_geom::dimnum5;
-                    using l_geom::dimnum6;
-                    using l_geom::dimnum10;
-
                 public:
 
 
@@ -630,10 +616,10 @@ namespace dnvgl {
                         station *j* and end `B`. (Real > 0.0 for `GROUP` =
                         `MSCBML0`)
                         */
-                    std::vector<std::vector<double> > DIM;
+                    std::vector<std::vector<bdf::types::entry_value<double>>> DIM;
                     /** Nonstructural mass per unit length. (Default = 0.0)
                      */
-                    std::vector<double> NSM;
+                    std::vector<bdf::types::entry_value<double>> NSM;
                     /** Stress output request option for intermediate
                         station *j* and end `B`. (Character; Default =
                         `YES`):
@@ -644,21 +630,40 @@ namespace dnvgl {
 
                         - `NO` --- No stresses or forces are recovered.
                         */
-                    std::vector<std::string> SO;
+                    std::vector<bdf::types::entry_value<std::string>> SO;
                     /** `X(j)/XB` : Distance from end `A` to intermediate
                         station *j* in the element coordinate system
                         divided by the length of the element. (Real>0.0;
                         Default = 1.0)
                         */
-                    std::vector<double> X_XB;
+                    std::vector<bdf::types::entry_value<double>> X_XB;
+
+                    pbeaml();
 
                     pbeaml(std::list<std::string> const&);
+
+                    pbeaml(long const *PID, long const *MID,
+                           std::string const *GROUP,
+                           std::string const *TYPE,
+                           std::vector<std::vector<double>> const *DIM,
+                           std::vector<double> const *NSM,
+                           std::vector<std::string> const *SO,
+                           std::vector<double> const *X_XB);
 
                     types card_type() const override;
 
                     void read(std::list<std::string> const &) override;
 
                     card const &operator() (const std::list<std::string> &) override;
+
+                    card const &operator() (
+                        long const *PID, long const *MID,
+                        std::string const *GROUP,
+                        std::string const *TYPE,
+                        std::vector<std::vector<double>> const *DIM,
+                        std::vector<double> const *NSM,
+                        std::vector<std::string> const *SO,
+                        std::vector<double> const *X_XB);
 
                 private:
 
@@ -832,14 +837,6 @@ namespace dnvgl {
                     bdf::types::entry_type<std::string> static const form_TYPE;
                     bdf::types::entry_type<double> static const form_DIM;
                     bdf::types::entry_type<double> static const form_NSM;
-
-                    using l_geom::dimnum1;
-                    using l_geom::dimnum2;
-                    using l_geom::dimnum3;
-                    using l_geom::dimnum4;
-                    using l_geom::dimnum5;
-                    using l_geom::dimnum6;
-                    using l_geom::dimnum10;
 
                 public:
 

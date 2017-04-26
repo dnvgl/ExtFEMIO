@@ -690,8 +690,10 @@ cont:
 void pbeam::check_data() const {
     this->beam_prop::check_data();
     size_t base_size{A.size()};
-    if (I1.size() != base_size) throw errors::form_error("PBEAM", "wrong size for I1");
-    if (I2.size() != base_size) throw errors::form_error("PBEAM", "wrong size for I2");
+    if (I1.size() != base_size)
+        throw errors::form_error("PBEAM", "wrong size for I1");
+    if (I2.size() != base_size)
+        throw errors::form_error("PBEAM", "wrong size for I2");
     if (I12.size() && I12.size() != base_size)
         throw errors::form_error("PBEAM", "wrong size for I12");
     if (J.size() && J.size() != base_size)

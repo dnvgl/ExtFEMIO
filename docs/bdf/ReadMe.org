@@ -23,7 +23,7 @@
   | Element  | properties |                                                                                             |        |         |
   |          | =PSHELL=   | Properties for =CTRIA3=, and =CQUAD4=                                                       | ✓      | ✓       |
   |          | =PBEAM=    | Integral properties for =CBEAM=                                                             | ✓      | ✓       |
-  |          | =PBEAML=   | Properties for =CBEAM= describing cross section                                             | ✓      | ✗       |
+  |          | =PBEAML=   | Properties for =CBEAM= describing cross section                                             | ✓      | ✓       |
   |          | =PBAR=     | Integral properties for =CBAR=                                                              | ✓      | ✗       |
   |          | =PBARL=    | Properties for =CBAR= describing cross section                                              | ✓      | ✗       |
   |          | =PROD=     | Properties for =CROD=                                                                       | ✓      | ✗       |
@@ -61,3 +61,4 @@ at /A/ and /B/ end of beam.
   | =SUBTITLE=     | Output Subtitle                                  | ✗      | ✓       |
   | =SUBCASE=      | Subcase Delimiter                                | ✗      | ✓       |
   | =BEGIN= =BULK= | Case Control and Bulk Data Delimiter             | ✗      | ✓       |
+  |                |                                                  |        |         |

@@ -75,23 +75,10 @@ void pbarl::read(list<std::string> const &inp) {
     if (pos == inp.end()) goto invalid;
     form_TYPE.set_value(TYPE, *(pos++));
     if (pos == inp.end()) goto invalid;
-    if (dimnum1.find(TYPE.value) != dimnum1.end())
-        dim_num = 1;
-    else if (dimnum2.find(TYPE.value) != dimnum2.end())
-        dim_num = 2;
-    else if (dimnum3.find(TYPE.value) != dimnum3.end())
-        dim_num = 3;
-    else if (dimnum4.find(TYPE.value) != dimnum4.end())
-        dim_num = 4;
-    else if (dimnum5.find(TYPE.value) != dimnum5.end())
-        dim_num = 5;
-    else if (dimnum6.find(TYPE.value) != dimnum6.end())
-        dim_num = 6;
-    else if (dimnum10.find(TYPE.value) != dimnum10.end())
-        dim_num = 10;
-    else
+    dim_num = this->l_geom::get_dim(TYPE.value);
+    if (dim_num < 1)
         throw errors::parse_error(
-        "PBARL", "Unknown beam type " + TYPE.value + ".");
+            "PBARL", "Unknown beam type " + TYPE.value + ".");
 
     ++pos;
     for (i = 1; i < 4; i++) {

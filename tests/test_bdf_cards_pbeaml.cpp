@@ -33,8 +33,13 @@ static char THIS_FILE[] = __FILE__;
 
 using namespace std;
 
-using namespace dnvgl::extfem::bdf;
-using namespace dnvgl::extfem::bdf::cards;
+using namespace dnvgl::extfem;
+using namespace bdf;
+using namespace bdf::cards;
+using namespace bdf::cards::__base;
+
+using bdf::types::entry_type;
+using bdf::types::entry_value;
 
 TEST_CASE("BDF PBEAML definitions: Small Field Format (BAR).", "[bdf_pbeaml]") {
 
@@ -43,7 +48,7 @@ TEST_CASE("BDF PBEAML definitions: Small Field Format (BAR).", "[bdf_pbeaml]") {
             "PBEAML  104018  4               BAR\n",
             "           25.0   600.0\n"});
     list<std::string> lines;
-    __base::card::card_split(data, lines);
+    card::card_split(data, lines);
     pbeaml probe(lines);
 
     CHECK((long)probe.PID == 104018);
@@ -51,8 +56,12 @@ TEST_CASE("BDF PBEAML definitions: Small Field Format (BAR).", "[bdf_pbeaml]") {
     CHECK(probe.GROUP == "MSCBML0");
     CHECK(probe.TYPE == "BAR");
     CHECK(probe.DIM.size() == 1);
-    CHECK(probe.DIM.front() == vector<double>({25., 600.}));
-    CHECK(probe.NSM == vector<double>({0.}));
+    CHECK(probe.DIM[0].size() == 2);
+    for (size_t i = 0; i<probe.DIM[0].size(); i++ ) {
+        CHECK(double(probe.DIM[0][i]) == vector<double>({25., 600.})[i]);
+    }
+    CHECK(probe.NSM.size() == 1);
+    CHECK(double(probe.NSM[0]) == 0.);
     CHECK(probe.SO.size() == 0);
     CHECK(probe.X_XB.size() == 0);
 }
@@ -63,7 +72,7 @@ TEST_CASE("BDF PBEAML definitions: Small Field Format (BAR 2).", "[bdf_pbeaml]")
             "PBEAML       134       8            BAR\n",
             "            55.0   500.0\n"});
     list<std::string> lines;
-    __base::card::card_split(data, lines);
+    card::card_split(data, lines);
     pbeaml probe(lines);
 
     CHECK((long)probe.PID == 134);
@@ -71,8 +80,12 @@ TEST_CASE("BDF PBEAML definitions: Small Field Format (BAR 2).", "[bdf_pbeaml]")
     CHECK(probe.GROUP == "MSCBML0");
     CHECK(probe.TYPE == "BAR");
     CHECK(probe.DIM.size() == 1);
-    CHECK(probe.DIM.front() == vector<double>({55., 500.}));
-    CHECK(probe.NSM == vector<double>({0.}));
+    CHECK(probe.DIM[0].size() == 2);
+    for (size_t i = 0; i<probe.DIM[0].size(); i++ ) {
+        CHECK(double(probe.DIM[0][i]) == vector<double>({55., 500.})[i]);
+    }
+    CHECK(probe.NSM.size() == 1);
+    CHECK(double(probe.NSM[0]) == 0.);
     CHECK(probe.SO.size() == 0);
     CHECK(probe.X_XB.size() == 0);
 }
@@ -83,7 +96,7 @@ TEST_CASE("BDF PBEAML definitions: Small Field Format (L).", "[bdf_pbeaml]") {
             "PBEAML  104010  4               L\n",
             "           63.0   340.0    35.0    14.0\n"});
     list<std::string> lines;
-    __base::card::card_split(data, lines);
+    card::card_split(data, lines);
     pbeaml probe(lines);
 
     CHECK((long)probe.PID == 104010);
@@ -91,8 +104,12 @@ TEST_CASE("BDF PBEAML definitions: Small Field Format (L).", "[bdf_pbeaml]") {
     CHECK(probe.GROUP == "MSCBML0");
     CHECK(probe.TYPE == "L");
     CHECK(probe.DIM.size() == 1);
-    CHECK(probe.DIM.front() == vector<double>({63., 340., 35., 14.}));
-    CHECK(probe.NSM == vector<double>({0.}));
+    CHECK(probe.DIM[0].size() == 4);
+    for (size_t i = 0; i<probe.DIM[0].size(); i++ ) {
+        CHECK(double(probe.DIM[0][i]) == vector<double>(
+                  {63., 340., 35., 14.})[i]);
+    }
+    CHECK(double(probe.NSM[0]) == 0.);
     CHECK(probe.SO.size() == 0);
     CHECK(probe.X_XB.size() == 0);
 }
@@ -103,7 +120,7 @@ TEST_CASE("BDF PBEAML definitions: Small Field Format (T).", "[bdf_pbeaml]") {
             "PBEAML  101031  1               T\n",
             "          150.0   400.0    12.0    10.0\n"});
     list<std::string> lines;
-    __base::card::card_split(data, lines);
+    card::card_split(data, lines);
     pbeaml probe(lines);
 
     CHECK((long)probe.PID == 101031);
@@ -111,8 +128,12 @@ TEST_CASE("BDF PBEAML definitions: Small Field Format (T).", "[bdf_pbeaml]") {
     CHECK(probe.GROUP == "MSCBML0");
     CHECK(probe.TYPE == "T");
     CHECK(probe.DIM.size() == 1);
-    CHECK(probe.DIM.front() == vector<double>({150., 400., 12., 10.}));
-    CHECK(probe.NSM == vector<double>({0.}));
+    CHECK(probe.DIM[0].size() == 4);
+    for (size_t i = 0; i<probe.DIM[0].size(); i++ ) {
+        CHECK(double(probe.DIM[0][i]) == vector<double>(
+                  {150., 400., 12., 10.})[i]);
+    }
+    CHECK(double(probe.NSM[0]) == 0.);
     CHECK(probe.SO.size() == 0);
     CHECK(probe.X_XB.size() == 0);
 }
@@ -123,7 +144,7 @@ TEST_CASE("BDF PBEAML definitions: Small Field Format (I).", "[bdf_pbeaml]") {
             "PBEAML  104018  4               I\n",
             "           600.0   200.0   200.0    12.0    10.0    10.0\n"});
     list<std::string> lines;
-    __base::card::card_split(data, lines);
+    card::card_split(data, lines);
     pbeaml probe(lines);
 
     CHECK((long)probe.PID == 104018);
@@ -131,9 +152,12 @@ TEST_CASE("BDF PBEAML definitions: Small Field Format (I).", "[bdf_pbeaml]") {
     CHECK(probe.GROUP == "MSCBML0");
     CHECK(probe.TYPE == "I");
     CHECK(probe.DIM.size() == 1);
-    CHECK(probe.DIM.front() == vector<double>({
-                600., 200., 200., 12., 10., 10.}));
-    CHECK(probe.NSM == vector<double>({0.}));
+    CHECK(probe.DIM[0].size() == 6);
+    for (size_t i = 0; i<probe.DIM[0].size(); i++ ) {
+        CHECK(double(probe.DIM[0][i]) == vector<double>(
+                  {600., 200., 200., 12., 10., 10.})[i]);
+    }
+    CHECK(double(probe.NSM[0]) == 0.);
     CHECK(probe.SO.size() == 0);
     CHECK(probe.X_XB.size() == 0);
 }
@@ -144,15 +168,19 @@ TEST_CASE("BDF PBEAML definitions: Small Field Format (TUBE).", "[bdf_pbeaml]") 
             "PBEAML  104019  5               TUBE\n",
             "           600.0   500.0"});
     list<std::string> lines;
-    __base::card::card_split(data, lines);
+    card::card_split(data, lines);
     pbeaml probe(lines);
 
     CHECK((long)probe.PID == 104019);
     CHECK((long)probe.MID == 5);
     CHECK(probe.TYPE == "TUBE");
     CHECK(probe.DIM.size() == 1);
-    CHECK(probe.DIM.front() == vector<double>({600., 500.}));
-    CHECK(probe.NSM == vector<double>({0.}));
+    CHECK(probe.DIM[0].size() == 2);
+    for (size_t i = 0; i<probe.DIM[0].size(); i++ ) {
+        CHECK(double(probe.DIM[0][i]) == vector<double>(
+                  {600., 500.})[i]);
+    }
+    CHECK(double(probe.NSM[0]) == 0.);
     CHECK(probe.SO.size() == 0);
     CHECK(probe.X_XB.size() == 0);
 }
@@ -166,7 +194,7 @@ TEST_CASE("BDF PBEAML definitions: Small Field Format (T, tapered).", "[bdf_pbea
             "              7.     1.2     2.6             YES     0.6      6.     7.8        \n",
             "             5.6     2.3             YES                                        \n"});
     list<std::string> lines;
-    __base::card::card_split(data, lines);
+    card::card_split(data, lines);
     pbeaml probe(lines);
 
     CHECK((long)probe.PID == 99);
@@ -174,90 +202,140 @@ TEST_CASE("BDF PBEAML definitions: Small Field Format (T, tapered).", "[bdf_pbea
     CHECK(probe.GROUP == "MSCBML0");
     CHECK(probe.TYPE == "T");
     CHECK(probe.DIM.size() == 3);
-    auto pos = probe.DIM.begin();
-    CHECK(*pos == vector<double>({12., 14.8, 2.5, 2.6}));
-    pos++;
-    CHECK(*pos == vector<double>({6., 7., 1.2, 2.6}));
-    pos++;
-    CHECK(*pos == vector<double>({6., 7.8, 5.6, 2.3}));
-    CHECK(probe.NSM == vector<double>({0., 0., 0.}));
-    CHECK(probe.SO == vector<std::string>({"NO", "YES"}));
-    CHECK(probe.X_XB == vector<double>({.4, .6}));
+    for (size_t i = 0; i<probe.DIM.size(); i++ ) {
+        CHECK(probe.DIM[i].size() == 4);
+        for (size_t j = 0; i<probe.DIM[i].size(); i++ ) {
+            CHECK(double(probe.DIM[i][j]) == vector<vector<double>>(
+                      {{12., 14.8, 2.5, 2.6},
+                       {6., 7., 1.2, 2.6},
+                       {6., 7.8, 5.6, 2.3}})[i][j]);
+        }
+    }
+    CHECK(probe.NSM.size() == 3);
+    for (size_t i = 0; i<probe.NSM.size(); i++ ) {
+        CHECK(double(probe.NSM[i]) == vector<double>({0., 0., 0.})[i]);
+    }
+    CHECK(probe.SO.size() == 2);
+    for (size_t i = 0; i<probe.SO.size(); i++ ) {
+        CHECK(std::string(probe.SO[i]) == vector<std::string>({
+                    "NO", "YES"})[i]);
+    }
+    CHECK(probe.X_XB.size() == 2);
+    for (size_t i = 0; i<probe.X_XB.size(); i++ ) {
+        CHECK(double(probe.X_XB[i]) == vector<double>({.4, .6})[i]);
+    }
 }
 
-// TEST_CASE("BDF PBEAML roundtrip test", "[bdf_pbeaml]") {
-//     ostringstream test;
+TEST_CASE("BDF PBEAML invalid dim test", "[bdf_pbeaml]") {
+    ostringstream test;
 
-//     long PID{7869}, MID{104010};
-//     std::string GROUP("MSCBML0");
-//     std::string TYPE("I");
-//     vector<vector<double>> DIM{{1., 2., 3., 4., 5., 6.}};
-//     vector<double> NSM{77.};
-//     vector<std::string> SO{"NO"};
-//     vector<double> X_XB{};
+    long PID{7869}, MID{104010};
+    std::string GROUP("MSCBML0");
+    std::string TYPE("I");
+    vector<vector<double>> DIM{{1., 2., 3., 4., 5., 6., 7.}};
+    vector<double> NSM{77.};
+    vector<std::string> SO{"NO"};
+    vector<double> X_XB{};
 
-//     pbeaml probe(&PID, &MID, &GROUP, &TYPE,
-//                  &DIM, &NSM, &SO, &X_XB);
-//     test << probe;
+    CHECK_THROWS_AS(pbeaml(&PID, &MID, &GROUP, &TYPE,
+                           &DIM, &NSM, &SO, &X_XB), errors::form_error);
+}
 
-//     SECTION("check output") {
-//         CHECK(test.str() ==
-//               "PBEAML       7869  1040101.000+002.000+003.000+004.000+005.000+006.000+00\n"
-//               "        7.000+008.000+009.000+001.000+011.100+011.200+011.300+011.400+01\n"
-//               "        YESA    1.600+012.000+003.000+004.000+005.000+006.000+007.000+00\n"
-//               "        8.000+009.000+001.000+011.100+011.200+011.300+011.400+011.500+01\n"
-//               "        1.700+011.800+011.900+012.000+012.100+012.200+012.300+012.400+01\n"
-//               "        2.500+012.600+012.700+012.800+012.900+013.000+013.100+013.200+01\n");
-//     }
+TEST_CASE("BDF PBEAML roundtrip test", "[bdf_pbeaml]") {
+    ostringstream test;
 
-//     SECTION("check reading") {
-//         list<std::string> data;
-//         list<std::string> lines;
-//         std::string tmp;
-//         istringstream raw(test.str());
+    long PID{7869}, MID{104010};
+    std::string GROUP("MSCBML0");
+    std::string TYPE("I");
+    vector<vector<double>> DIM{{1., 2., 3., 4., 5., 6.}};
+    vector<double> NSM{77.};
+    vector<std::string> SO{"NO"};
+    vector<double> X_XB{};
 
-//         while (getline(raw, tmp))
-//             data.push_back(tmp);
-//         __base::card::card_split(data, lines);
-//         pbeaml probe_l(lines);
+    pbeaml probe(&PID, &MID, &GROUP, &TYPE,
+                 &DIM, &NSM, &SO, &X_XB);
+    test << probe;
 
-//         CHECK(long(probe_l.PID) == 7869);
-//         CHECK(long(probe_l.MID) == 104010);
-//         CHECK(probe.A == vector<double>({1., 2.}));
-//         CHECK(probe.I1 == vector<double>({2., 3.}));
-//         CHECK(probe.I2 == vector<double>({3., 4.}));
-//         CHECK(probe.I12 == vector<double>({4., 5.}));
-//         CHECK(probe.J == vector<double>({5., 6.}));
-//         CHECK(probe.NSM == vector<double>({6., 7.}));
-//         CHECK(probe.C1 == vector<double>({7., 8.}));
-//         CHECK(probe.C2 == vector<double>({8., 9.}));
-//         CHECK(probe.D1 == vector<double>({9., 10.}));
-//         CHECK(probe.D2 == vector<double>({10., 11.}));
-//         CHECK(probe.E1 == vector<double>({11., 12.}));
-//         CHECK(probe.E2 == vector<double>({12., 13.}));
-//         CHECK(probe.F1 == vector<double>({13., 14.}));
-//         CHECK(probe.F2 == vector<double>({14., 15.}));
-//         for (auto pos : probe.SO)
-//             CHECK(pos.value == "YESA");
-//         CHECK(probe.X_XB == vector<double> {16.});
-//         CHECK(double(probe.K1) == 17.);
-//         CHECK(double(probe.K2) == 18.);
-//         CHECK(double(probe.S1) == 19.);
-//         CHECK(double(probe.S2) == 20.);
-//         CHECK(double(probe.NSI_A) == 21.);
-//         CHECK(double(probe.NSI_B) == 22.);
-//         CHECK(double(probe.CW_A) == 23.);
-//         CHECK(double(probe.CW_B) == 24.);
-//         CHECK(double(probe.M1_A) == 25.);
-//         CHECK(double(probe.M2_A) == 26.);
-//         CHECK(double(probe.M1_B) == 27.);
-//         CHECK(double(probe.M2_B) == 28.);
-//         CHECK(double(probe.N1_A) == 29.);
-//         CHECK(double(probe.N2_A) == 30.);
-//         CHECK(double(probe.N1_B) == 31.);
-//         CHECK(double(probe.N2_B) == 32.);
-//     }
-// }
+    SECTION("check output") {
+        CHECK(test.str() ==
+              "PBEAML      7869  104010MSCBML0 I                                       \n"
+              "        1.000+002.000+003.000+004.000+005.000+006.000+007.700+01NO      \n");
+    }
+
+    SECTION("check reading") {
+        list<std::string> data;
+        list<std::string> lines;
+        std::string tmp;
+        istringstream raw(test.str());
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        card::card_split(data, lines);
+        pbeaml probe_l(lines);
+
+        CHECK(long(probe_l.PID) == 7869);
+        CHECK(long(probe_l.MID) == 104010);
+        CHECK(probe.DIM.size() == 1);
+        CHECK(probe.DIM[0].size() == 6);
+        for (size_t i = 0; i<probe.DIM[0].size(); i++ ) {
+            CHECK(double(probe.DIM[0][i]) == vector<double>({1., 2., 3., 4., 5., 6.})[i]);
+        }
+        CHECK(probe.NSM.size() == 1);
+        CHECK(double(probe.NSM[0]) == 77.);
+        CHECK(probe.SO.size() == 1);
+        CHECK(std::string(probe.SO[0]) == "NO");
+        CHECK(probe.X_XB.size() == 0);
+    }
+}
+
+TEST_CASE("BDF PBEAML roundtrip test (reuse)", "[bdf_pbeaml]") {
+    ostringstream test;
+
+    long PID{7869}, MID{104010};
+    std::string GROUP("MSCBML0");
+    std::string TYPE("I");
+    vector<vector<double>> DIM{{1., 2., 3., 4., 5., 6.}};
+    vector<double> NSM{77.};
+    vector<std::string> SO{"NO"};
+    vector<double> X_XB{};
+
+    pbeaml probe;
+    test << probe;
+    test << probe(&PID, &MID, &GROUP, &TYPE,
+                 &DIM, &NSM, &SO, &X_XB);
+
+    SECTION("check output") {
+        CHECK(test.str() ==
+              "PBEAML      7869  104010MSCBML0 I                                       \n"
+              "        1.000+002.000+003.000+004.000+005.000+006.000+007.700+01NO      \n");
+    }
+
+    SECTION("check reading") {
+        list<std::string> data;
+        list<std::string> lines;
+        std::string tmp;
+        istringstream raw(test.str());
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        card::card_split(data, lines);
+        pbeaml probe_l;
+        probe_l(lines);
+
+        CHECK(long(probe_l.PID) == 7869);
+        CHECK(long(probe_l.MID) == 104010);
+        CHECK(probe.DIM.size() == 1);
+        CHECK(probe.DIM[0].size() == 6);
+        for (size_t i = 0; i<probe.DIM[0].size(); i++ ) {
+            CHECK(double(probe.DIM[0][i]) == vector<double>({1., 2., 3., 4., 5., 6.})[i]);
+        }
+        CHECK(probe.NSM.size() == 1);
+        CHECK(double(probe.NSM[0]) == 77.);
+        CHECK(probe.SO.size() == 1);
+        CHECK(std::string(probe.SO[0]) == "NO");
+        CHECK(probe.X_XB.size() == 0);
+    }
+}
 
 // Local Variables:
 // mode: c++

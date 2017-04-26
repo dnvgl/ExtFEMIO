@@ -27,10 +27,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-namespace {
-    const double cd0 = 0., cd1 = 1.;
-}
-
 using namespace std;
 
 using namespace dnvgl::extfem;
@@ -38,6 +34,13 @@ using namespace bdf;
 using namespace cards;
 
 using bdf::types::entry_type;
+using bdf::types::entry_value;
+
+namespace {
+    const double cd0 = 0., cd1 = 1.;
+}
+
+bdf::types::card pbeaml::head = bdf::types::card("PBEAML");
 
 const entry_type<std::string> pbeaml::form_GROUP(
     "GROUP", bdf::type_bounds::bound<std::string>("MSCBML0"));
@@ -59,9 +62,38 @@ const entry_type<double> pbeaml::form_X_XB(
     &cd0, nullptr,
     &cd1));
 
+pbeaml::pbeaml() : beam_prop() {}
+
 pbeaml::pbeaml(const list<std::string> &inp) :
 beam_prop(inp) {
     this->pbeaml::read(inp);
+}
+
+pbeaml::pbeaml(long const *PID, long const *MID,
+               std::string const *GROUP,
+               std::string const *TYPE,
+               vector<vector<double>> const *DIM,
+               vector<double> const *NSM,
+               vector<std::string> const *SO,
+               vector<double> const *X_XB) :
+        beam_prop(PID, MID), GROUP(*GROUP), TYPE(*TYPE) {
+    this->DIM.resize(DIM->size());
+    for (size_t i = 0; i < DIM->size(); i++) {
+        this->DIM[i].resize((*DIM)[i].size(), entry_value<double>(nullptr));
+        for (size_t j = 0; j < (*DIM)[i].size(); j++)
+            this->DIM[i][j]((*DIM)[i][j]);
+    }
+    this->NSM.resize(NSM->size(), entry_value<double>(nullptr));
+    for (size_t i = 0; i < NSM->size(); i++)
+        this->NSM[i]((*NSM)[i]);
+    this->SO.resize(SO->size(), entry_value<std::string>(nullptr));
+    for (size_t i = 0; i < SO->size(); i++)
+        this->SO[i]((*SO)[i]);
+    this->X_XB.resize(X_XB->size(), entry_value<double>(nullptr));
+    for (size_t i = 0; i < X_XB->size(); i++)
+        this->X_XB[i]((*X_XB)[i]);
+    this->beam_prop::check_data();
+    this->pbeaml::check_data();
 }
 
 void pbeaml::read(list<std::string> const & inp) {
@@ -85,23 +117,10 @@ void pbeaml::read(list<std::string> const & inp) {
     if (pos == inp.end()) goto invalid;
     form_TYPE.set_value(TYPE, *(pos++));
     if (pos == inp.end()) goto invalid;
-    if (dimnum1.find(TYPE.value) != dimnum1.end())
-        dim_num = 1;
-    else if (dimnum2.find(TYPE.value) != dimnum2.end())
-        dim_num = 2;
-    else if (dimnum3.find(TYPE.value) != dimnum3.end())
-        dim_num = 3;
-    else if (dimnum4.find(TYPE.value) != dimnum4.end())
-        dim_num = 4;
-    else if (dimnum5.find(TYPE.value) != dimnum5.end())
-        dim_num = 5;
-    else if (dimnum6.find(TYPE.value) != dimnum6.end())
-        dim_num = 6;
-    else if (dimnum10.find(TYPE.value) != dimnum10.end())
-        dim_num = 10;
-    else
+    dim_num = this->l_geom::get_dim(TYPE.value);
+    if (dim_num < 1)
         throw errors::parse_error(
-        "PBEAML", "Unknown beam type " + TYPE.value + ".");
+            "PBEAML", "Unknown beam type " + TYPE.value + ".");
 
     ++pos;
     for (i = 1; i < 4; i++) {
@@ -110,7 +129,7 @@ void pbeaml::read(list<std::string> const & inp) {
     }
 
     // DIM.push_back(new vector<dnvgl::extfem::bdf::double> >);
-    DIM.push_back(vector<double>());
+    DIM.push_back(vector<bdf::types::entry_value<double>>());
     for (i = 0; i < dim_num; i++) {
         if (pos == inp.end()) goto invalid;
         DIM.front().push_back(form_DIM(*(pos++)));
@@ -131,7 +150,7 @@ void pbeaml::read(list<std::string> const & inp) {
         if (pos == inp.end()) goto end;
         j++;
         // DIM.push_back(new vector<dnvgl::extfem::bdf::types::entry_value<double> >);
-        DIM.push_back(vector<double>());
+        DIM.push_back(vector<bdf::types::entry_value<double>>());
         try {
             SO.push_back(form_SO(*(pos++)));
         } catch (errors::error) {
@@ -175,18 +194,84 @@ cards::types pbeaml::card_type() const {
 };
 
 void pbeaml::collect_outdata(
-    std::list<std::unique_ptr<format_entry> > &res) const {
-    throw std::not_implemented(__FILE__, __LINE__, "can't write PBEAML.");
+    list<unique_ptr<format_entry> > &res) const {
+    if (!PID) return;
+
+    auto pos_DIM(DIM.begin());
+    auto pos_NSM(NSM.begin());
+    auto pos_SO(SO.begin());
+    auto pos_X_XB(X_XB.begin());
+
+    res.push_back(unique_ptr<format_entry>(format(head)));
+
+    res.push_back(unique_ptr<format_entry>(format<long>(form_PID, PID)));
+    res.push_back(unique_ptr<format_entry>(format<long>(form_MID, MID)));
+
+    res.push_back(
+        bool(GROUP) ?
+        unique_ptr<format_entry>(format<std::string>(form_GROUP, GROUP)) :
+        unique_ptr<format_entry>(format(empty)));
+    res.push_back(unique_ptr<format_entry>(format<std::string>(form_TYPE, TYPE)));
+    for (auto i = 0;i<4;i++ )
+        res.push_back(unique_ptr<format_entry>(format(empty)));
+
+    for (size_t i{0}; i < pos_DIM->size(); i++)
+             res.push_back(unique_ptr<format_entry>(
+                               format<double>(form_DIM, (*pos_DIM)[i])));
+    pos_DIM++;
+    int cnt{0};
+    while (cnt < 13 &&
+           (pos_DIM != DIM.end() || pos_NSM != NSM.end() ||
+            pos_SO != SO.end() || pos_X_XB != X_XB.end())) {
+        cnt++;
+        if (pos_NSM != NSM.end()) {
+            res.push_back(
+                unique_ptr<format_entry>(
+                    format<double>(form_NSM, (*pos_NSM))));
+            pos_NSM++;
+        } else res.push_back(unique_ptr<format_entry>(format(empty)));
+        if (pos_DIM != DIM.end() || pos_NSM != NSM.end() ||
+            pos_SO != SO.end() || pos_X_XB != X_XB.end()) {
+            if (pos_SO != SO.end()) {
+                res.push_back(
+                    unique_ptr<format_entry>(
+                        format<std::string>(form_SO, (*pos_SO))));
+                pos_SO++;
+            } else res.push_back(unique_ptr<format_entry>(format(empty)));
+        }
+        if (pos_DIM != DIM.end() || pos_NSM != NSM.end() ||
+            pos_SO != SO.end() || pos_X_XB != X_XB.end()) {
+            if (pos_X_XB != X_XB.end()) {
+                res.push_back(
+                    unique_ptr<format_entry>(
+                        format<double>(form_X_XB, (*pos_X_XB))));
+                pos_X_XB++;
+            } else res.push_back(unique_ptr<format_entry>(format(empty)));
+        }
+    }
 }
 
 void pbeaml::check_data() const {
     this->beam_prop::check_data();
+    size_t base_size{DIM.size()};
+    size_t dim_num = this->l_geom::get_dim(TYPE.value);
+
+    if (base_size < 1)
+        throw errors::form_error("PBEAML", "requires at least one station");
+    if (NSM.size() != base_size)
+        throw errors::form_error("PBEAML", "wrong size for NSM");
+    if (SO.size() != base_size - 1 && SO.size() != base_size)
+        throw errors::form_error("PBEAML", "wrong size for SO");
+    if (X_XB.size() != base_size - 1)
+        throw errors::form_error("PBEAML", "wrong size for X/XB");
     if (GROUP) pbeaml::form_GROUP.check(GROUP);
     if (TYPE) pbeaml::form_TYPE.check(TYPE);
-    if (DIM.size() > 0)
-        for (auto pos : DIM)
-            for (auto ppos : pos)
-                pbeaml::form_DIM.check(ppos);
+    for (auto pos : DIM) {
+        if (pos.size() != dim_num)
+            throw errors::form_error("PBEAML", "wrong number of dimension in DIM");
+        for (auto ppos : pos)
+            pbeaml::form_DIM.check(ppos);
+    }
     if (NSM.size() > 0)
         for (auto pos : NSM)
             pbeaml::form_NSM.check(pos);
@@ -200,6 +285,37 @@ void pbeaml::check_data() const {
 
 cards::__base::card const &pbeaml::operator() (list<std::string> const &inp) {
     this->pbeaml::read(inp);
+    return *this;
+}
+
+cards::__base::card const &pbeaml::operator() (
+    long const *PID, long const *MID,
+    std::string const *GROUP,
+    std::string const *TYPE,
+    vector<vector<double>> const *DIM,
+    vector<double> const *NSM,
+    vector<std::string> const *SO,
+    vector<double> const *X_XB) {
+    this->beam_prop::operator() (PID, MID);
+    this->GROUP(GROUP);
+    this->TYPE(TYPE);
+    this->DIM.resize(DIM->size());
+    for (size_t i = 0; i < DIM->size(); i++) {
+        this->DIM[i].resize((*DIM)[i].size(), entry_value<double>(nullptr));
+        for (size_t j = 0; j < (*DIM)[i].size(); j++)
+            this->DIM[i][j]((*DIM)[i][j]);
+    }
+    this->NSM.resize(NSM->size(), entry_value<double>(nullptr));
+    for (size_t i = 0; i < NSM->size(); i++)
+        this->NSM[i]((*NSM)[i]);
+    this->SO.resize(SO->size(), entry_value<std::string>(nullptr));
+    for (size_t i = 0; i < SO->size(); i++)
+        this->SO[i]((*SO)[i]);
+    this->X_XB.resize(X_XB->size(), entry_value<double>(nullptr));
+    for (size_t i = 0; i < X_XB->size(); i++)
+        this->X_XB[i]((*X_XB)[i]);
+    this->beam_prop::check_data();
+    this->pbeaml::check_data();
     return *this;
 }
 

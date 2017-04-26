@@ -4,7 +4,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2017-04-24 Mo 12:42 -->
+<!-- 2017-04-26 Mi 15:07 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>C++ IO support for various FEM exchange file formats</title>
@@ -234,22 +234,22 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgaf847bc">1. Supported FEM file formats</a>
+<li><a href="#orgf142838">1. Supported FEM file formats</a>
 <ul>
-<li><a href="#org47e824b">1.1. NASTRAN Bulk Data Format (BDF)</a>
+<li><a href="#org3423729">1.1. NASTRAN Bulk Data Format (BDF)</a>
 <ul>
-<li><a href="#org193c4c8">1.1.1. BDF Cards supported</a>
+<li><a href="#org644f5b5">1.1.1. BDF Cards supported</a>
 <ul>
-<li><a href="#org7eaff12">1.1.1.1. Bulk Data</a></li>
-<li><a href="#org58208d0">1.1.1.2. Header Data</a></li>
+<li><a href="#org868abfe">1.1.1.1. Bulk Data</a></li>
+<li><a href="#org319d5b1">1.1.1.2. Header Data</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org267bb48">1.2. DNV GL Seasam Input Interface File (FEM)</a>
+<li><a href="#orgab2ff51">1.2. DNV GL Seasam Input Interface File (FEM)</a>
 <ul>
-<li><a href="#orga9ca7ec">1.2.1. FEM Cards supported</a></li>
-<li><a href="#org006c71e">1.2.2. Element Types in SESAM</a></li>
+<li><a href="#orgc81fe1d">1.2.1. FEM Cards supported</a></li>
+<li><a href="#orga92315a">1.2.2. Element Types in SESAM</a></li>
 </ul>
 </li>
 </ul>
@@ -258,8 +258,8 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-orgaf847bc" class="outline-2">
-<h2 id="orgaf847bc"><span class="section-number-2">1</span> Supported FEM file formats</h2>
+<div id="outline-container-orgf142838" class="outline-2">
+<h2 id="orgf142838"><span class="section-number-2">1</span> Supported FEM file formats</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Not all functionality defined for the exchange file formats is
@@ -273,16 +273,16 @@ the according directories in the <code>docs</code> subdirectory.
 </p>
 </div>
 
-<div id="outline-container-org47e824b" class="outline-3">
-<h3 id="org47e824b"><span class="section-number-3">1.1</span> NASTRAN Bulk Data Format (BDF)</h3>
+<div id="outline-container-org3423729" class="outline-3">
+<h3 id="org3423729"><span class="section-number-3">1.1</span> NASTRAN Bulk Data Format (BDF)</h3>
 <div class="outline-text-3" id="text-1-1">
 </div>
 
-<div id="outline-container-org193c4c8" class="outline-4">
-<h4 id="org193c4c8"><span class="section-number-4">1.1.1</span> BDF Cards supported</h4>
+<div id="outline-container-org644f5b5" class="outline-4">
+<h4 id="org644f5b5"><span class="section-number-4">1.1.1</span> BDF Cards supported</h4>
 <div class="outline-text-4" id="text-1-1-1">
-</div><div id="outline-container-org7eaff12" class="outline-5">
-<h5 id="org7eaff12"><span class="section-number-5">1.1.1.1</span> Bulk Data</h5>
+</div><div id="outline-container-org868abfe" class="outline-5">
+<h5 id="org868abfe"><span class="section-number-5">1.1.1.1</span> Bulk Data</h5>
 <div class="outline-text-5" id="text-1-1-1-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -427,7 +427,7 @@ the according directories in the <code>docs</code> subdirectory.
 <td class="org-left"><code>PBEAML</code></td>
 <td class="org-left">Properties for <code>CBEAM</code> describing cross section</td>
 <td class="org-left">✓</td>
-<td class="org-left">✗</td>
+<td class="org-left">✓</td>
 </tr>
 
 <tr>
@@ -548,8 +548,8 @@ the according directories in the <code>docs</code> subdirectory.
 </div>
 </div>
 
-<div id="outline-container-org58208d0" class="outline-5">
-<h5 id="org58208d0"><span class="section-number-5">1.1.1.2</span> Header Data</h5>
+<div id="outline-container-org319d5b1" class="outline-5">
+<h5 id="org319d5b1"><span class="section-number-5">1.1.1.2</span> Header Data</h5>
 <div class="outline-text-5" id="text-1-1-1-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -648,6 +648,13 @@ the according directories in the <code>docs</code> subdirectory.
 <td class="org-left">✗</td>
 <td class="org-left">✓</td>
 </tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -655,13 +662,13 @@ the according directories in the <code>docs</code> subdirectory.
 </div>
 </div>
 
-<div id="outline-container-org267bb48" class="outline-3">
-<h3 id="org267bb48"><span class="section-number-3">1.2</span> DNV GL Seasam Input Interface File (FEM)</h3>
+<div id="outline-container-orgab2ff51" class="outline-3">
+<h3 id="orgab2ff51"><span class="section-number-3">1.2</span> DNV GL Seasam Input Interface File (FEM)</h3>
 <div class="outline-text-3" id="text-1-2">
 </div>
 
-<div id="outline-container-orga9ca7ec" class="outline-4">
-<h4 id="orga9ca7ec"><span class="section-number-4">1.2.1</span> FEM Cards supported</h4>
+<div id="outline-container-orgc81fe1d" class="outline-4">
+<h4 id="orgc81fe1d"><span class="section-number-4">1.2.1</span> FEM Cards supported</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -1072,8 +1079,8 @@ the according directories in the <code>docs</code> subdirectory.
 </div>
 </div>
 
-<div id="outline-container-org006c71e" class="outline-4">
-<h4 id="org006c71e"><span class="section-number-4">1.2.2</span> Element Types in SESAM</h4>
+<div id="outline-container-orga92315a" class="outline-4">
+<h4 id="orga92315a"><span class="section-number-4">1.2.2</span> Element Types in SESAM</h4>
 <div class="outline-text-4" id="text-1-2-2">
 <p>
 Conventions for use of the interface file for the elements in SESAM
@@ -1093,7 +1100,7 @@ element types.
 </p>
 
 
-<table id="org37b496e" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="orgf34a236" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Table 1:</span> List of existing Element Types</caption>
 
 <colgroup>
@@ -2285,7 +2292,7 @@ springs are treated exactly in the same manner.
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Berthold Höllmann</p>
-<p class="date">Created: 2017-04-24 Mo 12:42</p>
+<p class="date">Created: 2017-04-26 Mi 15:07</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
