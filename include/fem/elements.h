@@ -463,10 +463,14 @@ namespace dnvgl {
 
 
                     public:
+
                         explicit elem(dnvgl::extfem::fem::cards::gelmnt1 const*);
+
                         explicit elem(dnvgl::extfem::fem::cards::gelref1 const*);
+
                         explicit elem(elem const*);
-                        virtual ~elem();
+
+                        ~elem();
 
                         cards::__base::card const &gelmnt1() const;
                         cards::__base::card const &gelref1() const;
@@ -563,18 +567,18 @@ namespace dnvgl {
 
                 class undef : public __base::elem {
                 public:
-                    undef ();
+                    undef () = default;
                     explicit undef(dnvgl::extfem::fem::cards::gelref1 const*);
                     long nnodes() const override;
                     el_types get_type() const override;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 2-D, 2 Node Beam
                  */
                 class beps : public __base::elem {
                 public:
-                    beps();
+                    beps() = default;
                     beps(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -614,12 +618,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Plane Constant Strain Triangle
                  */
                 class csta : public __base::elem {
                 public:
-                    csta();
+                    csta() = default;
                     csta(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -659,12 +663,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Rect. Plate. Bending Modes
                  */
                 class rpbq : public __base::elem {
                 public:
-                    rpbq();
+                    rpbq() = default;
                     rpbq(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -704,12 +708,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Plane Lin. Strain Triangle
                  */
                 class ilst : public __base::elem {
                 public:
-                    ilst();
+                    ilst() = default;
                     ilst(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -749,12 +753,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Plane Quadrilateral Membrane Element
                  */
                 class iqqe : public __base::elem {
                 public:
-                    iqqe();
+                    iqqe() = default;
                     iqqe(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -794,12 +798,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Plane Quadrilateral Membrane Element
                  */
                 class lqua : public __base::elem {
                 public:
-                    lqua();
+                    lqua() = default;
                     lqua(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -839,12 +843,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Truss Element
                  */
                 class tess : public __base::elem {
                 public:
-                    tess();
+                    tess() = default;
                     tess(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -884,12 +888,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 1-Noded Mass-Matrix
                  */
                 class gmas : public __base::elem {
                 public:
-                    gmas();
+                    gmas() = default;
                     gmas(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -929,12 +933,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 2-Noded Mass-Matrix
                  */
                 class glma : public __base::elem {
                 public:
-                    glma();
+                    glma() = default;
                     glma(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -974,12 +978,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 2-Noded Damping-Matrix
                  */
                 class glda : public __base::elem {
                 public:
-                    glda();
+                    glda() = default;
                     glda(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1019,12 +1023,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 3-D, 2 Node Beam
                  */
                 class beas : public __base::elem {
                 public:
-                    beas();
+                    beas() = default;
                     beas(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1064,12 +1068,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Axial Spring
                  */
                 class axis : public __base::elem {
                 public:
-                    axis();
+                    axis() = default;
                     axis(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1109,12 +1113,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Axial Damper
                  */
                 class axda : public __base::elem {
                 public:
-                    axda();
+                    axda() = default;
                     axda(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1154,12 +1158,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Spring to Ground
                  */
                 class gspr : public __base::elem {
                 public:
-                    gspr();
+                    gspr() = default;
                     gspr(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1199,12 +1203,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Damper to Ground
                  */
                 class gdam : public __base::elem {
                 public:
-                    gdam();
+                    gdam() = default;
                     gdam(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1244,12 +1248,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Isoparametric Hexahedron
                  */
                 class ihex : public __base::elem {
                 public:
-                    ihex();
+                    ihex() = default;
                     ihex(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1289,12 +1293,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Linear Hexahedron
                  */
                 class lhex : public __base::elem {
                 public:
-                    lhex();
+                    lhex() = default;
                     lhex(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1334,12 +1338,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Subparametric Curved Beam
                  */
                 class secb : public __base::elem {
                 public:
-                    secb();
+                    secb() = default;
                     secb(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1379,12 +1383,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Curved Beam
                  */
                 class btss : public __base::elem {
                 public:
-                    btss();
+                    btss() = default;
                     btss(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1424,12 +1428,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Flat Quadrilateral Thin Shell / Free Formulation Quadrilateral Shell
                  */
                 class fqus_ffq : public __base::fem_thin_shell {
                 public:
-                    fqus_ffq();
+                    fqus_ffq() = default;
                     fqus_ffq(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1469,12 +1473,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /**  Flat Triangular Thin Shell / Free Formulation Triangular Shell
                  */
                 class ftrs_fftr : public __base::fem_thin_shell {
                 public:
-                    ftrs_fftr();
+                    ftrs_fftr() = default;
                     ftrs_fftr(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1514,12 +1518,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Subparametric Curved Triangular Thick Shell
                  */
                 class scts : public __base::elem {
                 public:
-                    scts();
+                    scts() = default;
                     scts(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1559,12 +1563,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Subparam. Curved Triang. Thick Sandwich Elem.
                  */
                 class mcts : public __base::elem {
                 public:
-                    mcts();
+                    mcts() = default;
                     mcts(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1604,12 +1608,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Subparametric Curved Quadrilateral Thick Shell
                  */
                 class scqs : public __base::elem {
                 public:
-                    scqs();
+                    scqs() = default;
                     scqs(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1649,12 +1653,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Subparam. Curved Quadr. Thick Sandwich Elem.
                  */
                 class mcqs : public __base::elem {
                 public:
-                    mcqs();
+                    mcqs() = default;
                     mcqs(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1694,12 +1698,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Isoparametric Triangular Prism
                  */
                 class ipri : public __base::elem {
                 public:
-                    ipri();
+                    ipri() = default;
                     ipri(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1739,12 +1743,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Isoparametric Tetrahedron
                  */
                 class itet : public __base::elem {
                 public:
-                    itet();
+                    itet() = default;
                     itet(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1784,12 +1788,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Triangular Prism
                  */
                 class tpri : public __base::elem {
                 public:
-                    tpri();
+                    tpri() = default;
                     tpri(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1829,12 +1833,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Tetrahedron
                  */
                 class tetr : public __base::elem {
                 public:
-                    tetr();
+                    tetr() = default;
                     tetr(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1874,12 +1878,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Subparam. Layered Curved Triangular Thick Shell
                  */
                 class lcts : public __base::elem {
                 public:
-                    lcts();
+                    lcts() = default;
                     lcts(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1919,12 +1923,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Subparam. Layered Curved Quadrilat. Thick Shell
                  */
                 class lcqs : public __base::elem {
                 public:
-                    lcqs();
+                    lcqs() = default;
                     lcqs(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -1964,12 +1968,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 2nd Order Hexahed. Transition Elem., Solid / Shell
                  */
                 class trs1 : public __base::elem {
                 public:
-                    trs1();
+                    trs1() = default;
                     trs1(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2009,12 +2013,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 2nd Order Hexahed. Transition Elem., Solid / Shell
                  */
                 class trs2 : public __base::elem {
                 public:
-                    trs2();
+                    trs2() = default;
                     trs2(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2054,12 +2058,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 2nd Order Hexahed. Transition Elem., Solid / Shell
                  */
                 class trs3 : public __base::elem {
                 public:
-                    trs3();
+                    trs3() = default;
                     trs3(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2099,12 +2103,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Spring / Shim Element
                  */
                 class glsh : public __base::elem {
                 public:
-                    glsh();
+                    glsh() = default;
                     glsh(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2144,12 +2148,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Axisymmetric Constant Strain Triangle
                  */
                 class axcs : public __base::elem {
                 public:
-                    axcs();
+                    axcs() = default;
                     axcs(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2189,12 +2193,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Axisymmetric Quadrilateral
                  */
                 class axlq : public __base::elem {
                 public:
-                    axlq();
+                    axlq() = default;
                     axlq(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2234,12 +2238,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Axisymmetric Linear Strain Triangle
                  */
                 class axls : public __base::elem {
                 public:
-                    axls();
+                    axls() = default;
                     axls(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2279,12 +2283,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Axisymmetric Linear Strain Quadrilateral
                  */
                 class axqq : public __base::elem {
                 public:
-                    axqq();
+                    axqq() = default;
                     axqq(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2324,12 +2328,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Pile / Soil
                  */
                 class pils : public __base::elem {
                 public:
-                    pils();
+                    pils() = default;
                     pils(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2369,12 +2373,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Plane Cable-Bar Element
                  */
                 class pcab : public __base::elem {
                 public:
-                    pcab();
+                    pcab() = default;
                     pcab(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2414,12 +2418,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Plane Spring Element
                  */
                 class pspr : public __base::elem {
                 public:
-                    pspr();
+                    pspr() = default;
                     pspr(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2459,12 +2463,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 4-node Contact Element with triangular Shape
                  */
                 class adva_4 : public __base::elem {
                 public:
-                    adva_4();
+                    adva_4() = default;
                     adva_4(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2504,12 +2508,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 2-Noded Link Element
                  */
                 class adva_2 : public __base::elem {
                 public:
-                    adva_2();
+                    adva_2() = default;
                     adva_2(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2549,12 +2553,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 2-Noded Contact Element
                  */
                 class ctcp : public __base::elem {
                 public:
-                    ctcp();
+                    ctcp() = default;
                     ctcp(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2594,12 +2598,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 4-Noded Contact Element
                  */
                 class ctcl : public __base::elem {
                 public:
-                    ctcl();
+                    ctcl() = default;
                     ctcl(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2639,12 +2643,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 4-Noded Axisymmetric Contact Element
                  */
                 class ctal : public __base::elem {
                 public:
-                    ctal();
+                    ctal() = default;
                     ctal(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2684,12 +2688,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 6-Noded Contact Element
                  */
                 class ctcc : public __base::elem {
                 public:
-                    ctcc();
+                    ctcc() = default;
                     ctcc(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2729,12 +2733,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 6-Noded (3+3) Axisymmetric Contact Element
                  */
                 class ctaq : public __base::elem {
                 public:
-                    ctaq();
+                    ctaq() = default;
                     ctaq(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2774,12 +2778,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 8-Noded (4+4) Contact Element
                  */
                 class ctlq : public __base::elem {
                 public:
-                    ctlq();
+                    ctlq() = default;
                     ctlq(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2819,12 +2823,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 16-Noded (8+8) Contact Element
                  */
                 class ctcq : public __base::elem {
                 public:
-                    ctcq();
+                    ctcq() = default;
                     ctcq(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2864,12 +2868,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 18-Noded (9+9) Contact Element
                  */
                 class ctmq : public __base::elem {
                 public:
-                    ctmq();
+                    ctmq() = default;
                     ctmq(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2909,12 +2913,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** 9-Noded Shell Element
                  */
                 class hcqs : public __base::elem {
                 public:
-                    hcqs();
+                    hcqs() = default;
                     hcqs(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2954,12 +2958,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Semiloof Quadrilateral Curved Thin Shell (32 d.o.fs)
                  */
                 class slqs : public __base::elem {
                 public:
-                    slqs();
+                    slqs() = default;
                     slqs(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -2999,12 +3003,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Semiloof Triangular Curved Thin Shell (24 d.o.fs)
                  */
                 class slts : public __base::elem {
                 public:
-                    slts();
+                    slts() = default;
                     slts(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3044,12 +3048,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Semiloof Curved Beam (11 d.o.fs)
                  */
                 class slcb : public __base::elem {
                 public:
-                    slcb();
+                    slcb() = default;
                     slcb(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3089,12 +3093,12 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Matrix Element with arbitrary no. of nodes (/n/)
                  */
                 class matr : public __base::elem {
                 public:
-                    matr();
+                    matr() = default;
                     matr(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3134,7 +3138,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3143,7 +3147,7 @@ namespace dnvgl {
                  */
                 class ghex100 : public __base::elem {
                 public:
-                    ghex100();
+                    ghex100() = default;
                     ghex100(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3183,7 +3187,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3193,7 +3197,7 @@ namespace dnvgl {
                  */
                 class ghex101 : public __base::elem {
                 public:
-                    ghex101();
+                    ghex101() = default;
                     ghex101(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3233,7 +3237,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3243,7 +3247,7 @@ namespace dnvgl {
                  */
                 class ghex102 : public __base::elem {
                 public:
-                    ghex102();
+                    ghex102() = default;
                     ghex102(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3283,7 +3287,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3294,7 +3298,7 @@ namespace dnvgl {
                  */
                 class ghex103 : public __base::elem {
                 public:
-                    ghex103();
+                    ghex103() = default;
                     ghex103(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3334,7 +3338,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 23, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3344,7 +3348,7 @@ namespace dnvgl {
                  */
                 class ghex104 : public __base::elem {
                 public:
-                    ghex104();
+                    ghex104() = default;
                     ghex104(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3384,7 +3388,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3395,7 +3399,7 @@ namespace dnvgl {
                  */
                 class ghex105 : public __base::elem {
                 public:
-                    ghex105();
+                    ghex105() = default;
                     ghex105(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3435,7 +3439,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3446,7 +3450,7 @@ namespace dnvgl {
                  */
                 class ghex106 : public __base::elem {
                 public:
-                    ghex106();
+                    ghex106() = default;
                     ghex106(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3486,7 +3490,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3498,7 +3502,7 @@ namespace dnvgl {
                  */
                 class ghex107 : public __base::elem {
                 public:
-                    ghex107();
+                    ghex107() = default;
                     ghex107(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3538,7 +3542,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3548,7 +3552,7 @@ namespace dnvgl {
                  */
                 class ghex108 : public __base::elem {
                 public:
-                    ghex108();
+                    ghex108() = default;
                     ghex108(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3588,7 +3592,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3599,7 +3603,7 @@ namespace dnvgl {
                  */
                 class ghex109 : public __base::elem {
                 public:
-                    ghex109();
+                    ghex109() = default;
                     ghex109(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3639,7 +3643,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3650,7 +3654,7 @@ namespace dnvgl {
                  */
                 class ghex110 : public __base::elem {
                 public:
-                    ghex110();
+                    ghex110() = default;
                     ghex110(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3690,7 +3694,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3702,7 +3706,7 @@ namespace dnvgl {
                  */
                 class ghex111 : public __base::elem {
                 public:
-                    ghex111();
+                    ghex111() = default;
                     ghex111(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3742,7 +3746,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 23, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3753,7 +3757,7 @@ namespace dnvgl {
                  */
                 class ghex112 : public __base::elem {
                 public:
-                    ghex112();
+                    ghex112() = default;
                     ghex112(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3793,7 +3797,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3805,7 +3809,7 @@ namespace dnvgl {
                  */
                 class ghex113 : public __base::elem {
                 public:
-                    ghex113();
+                    ghex113() = default;
                     ghex113(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3845,7 +3849,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3857,7 +3861,7 @@ namespace dnvgl {
                  */
                 class ghex114 : public __base::elem {
                 public:
-                    ghex114();
+                    ghex114() = default;
                     ghex114(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3897,7 +3901,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 24, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3910,7 +3914,7 @@ namespace dnvgl {
                  */
                 class ghex115 : public __base::elem {
                 public:
-                    ghex115();
+                    ghex115() = default;
                     ghex115(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -3950,7 +3954,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -3960,7 +3964,7 @@ namespace dnvgl {
                  */
                 class ghex116 : public __base::elem {
                 public:
-                    ghex116();
+                    ghex116() = default;
                     ghex116(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4000,7 +4004,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4011,7 +4015,7 @@ namespace dnvgl {
                  */
                 class ghex117 : public __base::elem {
                 public:
-                    ghex117();
+                    ghex117() = default;
                     ghex117(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4051,7 +4055,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4062,7 +4066,7 @@ namespace dnvgl {
                  */
                 class ghex118 : public __base::elem {
                 public:
-                    ghex118();
+                    ghex118() = default;
                     ghex118(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4102,7 +4106,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4114,7 +4118,7 @@ namespace dnvgl {
                  */
                 class ghex119 : public __base::elem {
                 public:
-                    ghex119();
+                    ghex119() = default;
                     ghex119(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4154,7 +4158,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 23, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4165,7 +4169,7 @@ namespace dnvgl {
                  */
                 class ghex120 : public __base::elem {
                 public:
-                    ghex120();
+                    ghex120() = default;
                     ghex120(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4205,7 +4209,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4217,7 +4221,7 @@ namespace dnvgl {
                  */
                 class ghex121 : public __base::elem {
                 public:
-                    ghex121();
+                    ghex121() = default;
                     ghex121(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4257,7 +4261,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4269,7 +4273,7 @@ namespace dnvgl {
                  */
                 class ghex122 : public __base::elem {
                 public:
-                    ghex122();
+                    ghex122() = default;
                     ghex122(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4309,7 +4313,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4322,7 +4326,7 @@ namespace dnvgl {
                  */
                 class ghex123 : public __base::elem {
                 public:
-                    ghex123();
+                    ghex123() = default;
                     ghex123(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4362,7 +4366,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4373,7 +4377,7 @@ namespace dnvgl {
                  */
                 class ghex124 : public __base::elem {
                 public:
-                    ghex124();
+                    ghex124() = default;
                     ghex124(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4413,7 +4417,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4425,7 +4429,7 @@ namespace dnvgl {
                  */
                 class ghex125 : public __base::elem {
                 public:
-                    ghex125();
+                    ghex125() = default;
                     ghex125(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4465,7 +4469,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4477,7 +4481,7 @@ namespace dnvgl {
                  */
                 class ghex126 : public __base::elem {
                 public:
-                    ghex126();
+                    ghex126() = default;
                     ghex126(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4517,7 +4521,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4530,7 +4534,7 @@ namespace dnvgl {
                  */
                 class ghex127 : public __base::elem {
                 public:
-                    ghex127();
+                    ghex127() = default;
                     ghex127(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4570,7 +4574,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 23, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4582,7 +4586,7 @@ namespace dnvgl {
                  */
                 class ghex128 : public __base::elem {
                 public:
-                    ghex128();
+                    ghex128() = default;
                     ghex128(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4622,7 +4626,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4635,7 +4639,7 @@ namespace dnvgl {
                  */
                 class ghex129 : public __base::elem {
                 public:
-                    ghex129();
+                    ghex129() = default;
                     ghex129(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4675,7 +4679,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4688,7 +4692,7 @@ namespace dnvgl {
                  */
                 class ghex130 : public __base::elem {
                 public:
-                    ghex130();
+                    ghex130() = default;
                     ghex130(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4728,7 +4732,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 24, node 25, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4742,7 +4746,7 @@ namespace dnvgl {
                  */
                 class ghex131 : public __base::elem {
                 public:
-                    ghex131();
+                    ghex131() = default;
                     ghex131(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4782,7 +4786,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4792,7 +4796,7 @@ namespace dnvgl {
                  */
                 class ghex132 : public __base::elem {
                 public:
-                    ghex132();
+                    ghex132() = default;
                     ghex132(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4832,7 +4836,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4843,7 +4847,7 @@ namespace dnvgl {
                  */
                 class ghex133 : public __base::elem {
                 public:
-                    ghex133();
+                    ghex133() = default;
                     ghex133(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4883,7 +4887,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4894,7 +4898,7 @@ namespace dnvgl {
                  */
                 class ghex134 : public __base::elem {
                 public:
-                    ghex134();
+                    ghex134() = default;
                     ghex134(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4934,7 +4938,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4946,7 +4950,7 @@ namespace dnvgl {
                  */
                 class ghex135 : public __base::elem {
                 public:
-                    ghex135();
+                    ghex135() = default;
                     ghex135(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -4986,7 +4990,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 23, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -4997,7 +5001,7 @@ namespace dnvgl {
                  */
                 class ghex136 : public __base::elem {
                 public:
-                    ghex136();
+                    ghex136() = default;
                     ghex136(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5037,7 +5041,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5049,7 +5053,7 @@ namespace dnvgl {
                  */
                 class ghex137 : public __base::elem {
                 public:
-                    ghex137();
+                    ghex137() = default;
                     ghex137(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5089,7 +5093,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5101,7 +5105,7 @@ namespace dnvgl {
                  */
                 class ghex138 : public __base::elem {
                 public:
-                    ghex138();
+                    ghex138() = default;
                     ghex138(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5141,7 +5145,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5154,7 +5158,7 @@ namespace dnvgl {
                  */
                 class ghex139 : public __base::elem {
                 public:
-                    ghex139();
+                    ghex139() = default;
                     ghex139(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5194,7 +5198,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5205,7 +5209,7 @@ namespace dnvgl {
                  */
                 class ghex140 : public __base::elem {
                 public:
-                    ghex140();
+                    ghex140() = default;
                     ghex140(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5245,7 +5249,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5257,7 +5261,7 @@ namespace dnvgl {
                  */
                 class ghex141 : public __base::elem {
                 public:
-                    ghex141();
+                    ghex141() = default;
                     ghex141(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5297,7 +5301,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5309,7 +5313,7 @@ namespace dnvgl {
                  */
                 class ghex142 : public __base::elem {
                 public:
-                    ghex142();
+                    ghex142() = default;
                     ghex142(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5349,7 +5353,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5362,7 +5366,7 @@ namespace dnvgl {
                  */
                 class ghex143 : public __base::elem {
                 public:
-                    ghex143();
+                    ghex143() = default;
                     ghex143(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5402,7 +5406,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 23, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5414,7 +5418,7 @@ namespace dnvgl {
                  */
                 class ghex144 : public __base::elem {
                 public:
-                    ghex144();
+                    ghex144() = default;
                     ghex144(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5454,7 +5458,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5467,7 +5471,7 @@ namespace dnvgl {
                  */
                 class ghex145 : public __base::elem {
                 public:
-                    ghex145();
+                    ghex145() = default;
                     ghex145(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5507,7 +5511,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5520,7 +5524,7 @@ namespace dnvgl {
                  */
                 class ghex146 : public __base::elem {
                 public:
-                    ghex146();
+                    ghex146() = default;
                     ghex146(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5560,7 +5564,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 24, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5574,7 +5578,7 @@ namespace dnvgl {
                  */
                 class ghex147 : public __base::elem {
                 public:
-                    ghex147();
+                    ghex147() = default;
                     ghex147(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5614,7 +5618,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5625,7 +5629,7 @@ namespace dnvgl {
                  */
                 class ghex148 : public __base::elem {
                 public:
-                    ghex148();
+                    ghex148() = default;
                     ghex148(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5665,7 +5669,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5677,7 +5681,7 @@ namespace dnvgl {
                  */
                 class ghex149 : public __base::elem {
                 public:
-                    ghex149();
+                    ghex149() = default;
                     ghex149(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5717,7 +5721,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5729,7 +5733,7 @@ namespace dnvgl {
                  */
                 class ghex150 : public __base::elem {
                 public:
-                    ghex150();
+                    ghex150() = default;
                     ghex150(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5769,7 +5773,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5782,7 +5786,7 @@ namespace dnvgl {
                  */
                 class ghex151 : public __base::elem {
                 public:
-                    ghex151();
+                    ghex151() = default;
                     ghex151(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5822,7 +5826,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 23, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5834,7 +5838,7 @@ namespace dnvgl {
                  */
                 class ghex152 : public __base::elem {
                 public:
-                    ghex152();
+                    ghex152() = default;
                     ghex152(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5874,7 +5878,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5887,7 +5891,7 @@ namespace dnvgl {
                  */
                 class ghex153 : public __base::elem {
                 public:
-                    ghex153();
+                    ghex153() = default;
                     ghex153(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5927,7 +5931,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5940,7 +5944,7 @@ namespace dnvgl {
                  */
                 class ghex154 : public __base::elem {
                 public:
-                    ghex154();
+                    ghex154() = default;
                     ghex154(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -5980,7 +5984,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -5994,7 +5998,7 @@ namespace dnvgl {
                  */
                 class ghex155 : public __base::elem {
                 public:
-                    ghex155();
+                    ghex155() = default;
                     ghex155(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -6034,7 +6038,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6046,7 +6050,7 @@ namespace dnvgl {
                  */
                 class ghex156 : public __base::elem {
                 public:
-                    ghex156();
+                    ghex156() = default;
                     ghex156(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -6086,7 +6090,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6099,7 +6103,7 @@ namespace dnvgl {
                  */
                 class ghex157 : public __base::elem {
                 public:
-                    ghex157();
+                    ghex157() = default;
                     ghex157(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -6139,7 +6143,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6152,7 +6156,7 @@ namespace dnvgl {
                  */
                 class ghex158 : public __base::elem {
                 public:
-                    ghex158();
+                    ghex158() = default;
                     ghex158(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -6192,7 +6196,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6206,7 +6210,7 @@ namespace dnvgl {
                  */
                 class ghex159 : public __base::elem {
                 public:
-                    ghex159();
+                    ghex159() = default;
                     ghex159(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -6246,7 +6250,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 23, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6259,7 +6263,7 @@ namespace dnvgl {
                  */
                 class ghex160 : public __base::elem {
                 public:
-                    ghex160();
+                    ghex160() = default;
                     ghex160(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -6299,7 +6303,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 23, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6313,7 +6317,7 @@ namespace dnvgl {
                  */
                 class ghex161 : public __base::elem {
                 public:
-                    ghex161();
+                    ghex161() = default;
                     ghex161(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -6353,7 +6357,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 22, node 23, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6367,7 +6371,7 @@ namespace dnvgl {
                  */
                 class ghex162 : public __base::elem {
                 public:
-                    ghex162();
+                    ghex162() = default;
                     ghex162(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -6407,7 +6411,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 333 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 337 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** General Hexahedron, define with nodes 1 to 20, node 21, node 22, node 23, node 24, node 25, node 26, node 27 and node 27 present.
 
    Position of node in node array for element node numbers > 20:
@@ -6422,7 +6426,7 @@ namespace dnvgl {
                  */
                 class ghex163 : public __base::elem {
                 public:
-                    ghex163();
+                    ghex163() = default;
                     ghex163(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,
@@ -6462,7 +6466,7 @@ namespace dnvgl {
                     using elem::add;
                 };
                 
-#line 378 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
+#line 382 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.h"
                 /** Dispatch element class instance for `id`
                  */
                 void dispatch(

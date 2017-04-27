@@ -46,8 +46,8 @@ const entry_type<long> belfix::_form_TRANO(
 const entry_type<double> belfix::_form_A("A");
 
 belfix::belfix() :
-belfix(-1, n_opt::INVALID, 0,
-{0., 0., 0., 0., 0., 0.}) {}
+        belfix(-1, n_opt::INVALID, 0,
+               {0., 0., 0., 0., 0., 0.}) {}
 
 belfix::belfix(const std::vector<std::string> &inp, size_t const len) {
     belfix::read(inp, len);

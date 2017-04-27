@@ -81,8 +81,7 @@ void gtonp::read(const vector<std::string> &inp, size_t const len) {
         NLOBZ = {0};
 }
 
-gtonp::gtonp() :
-        gtonp(-1, 0., 0., 0., 0., 0., 0., 0., 0.) {}
+gtonp::gtonp() : gtonp(-1, 0., 0., 0., 0., 0., 0., 0., 0.) {}
 
 gtonp::gtonp(
     long const GEONO,

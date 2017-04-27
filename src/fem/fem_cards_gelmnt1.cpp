@@ -196,8 +196,7 @@ void gelmnt1::read(const vector<std::string> &inp, size_t const len) {
     }
 }
 
-gelmnt1::gelmnt1() :
-        gelmnt1(-1, 0, elements::el_types::INVALID, {}) {}
+gelmnt1::gelmnt1() : gelmnt1(-1, 0, elements::el_types::INVALID, {}) {}
 
 gelmnt1::gelmnt1(long const ELNOX,
                  long const ELNO,

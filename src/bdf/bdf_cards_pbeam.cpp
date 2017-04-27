@@ -125,8 +125,6 @@ beam_prop(inp) {
     this->pbeam::read(inp);
 }
 
-pbeam::pbeam() : beam_prop() {}
-
 pbeam::pbeam(long const *EID, long const *PID,
              vector<double> const *A,
              vector<double> const *I1,

@@ -54,11 +54,9 @@ void cards::__base::transno::set_transno(long const TRANSNO/*=0*/) {
     this->TRANSNO = TRANSNO;
 }
 
-cards::__base::transno::transno() :
-        card(), TRANSNO(-1) {}
+cards::__base::transno::transno() : card(), TRANSNO(-1) {}
 
-cards::__base::transno::transno(long const TRANSNO) :
-        card() {
+cards::__base::transno::transno(long const TRANSNO) : card() {
     set_transno(TRANSNO);
 }
 

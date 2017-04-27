@@ -51,17 +51,15 @@ entry_type<double> const load::form_Si("Si");
 entry_type<long> const load::form_Li(
     "Li", type_bounds::bound<long>(&cl1));
 
-load::load() :
-SID(nullptr), S(nullptr), Si(), Li() {}
+load::load() : SID(nullptr), S(nullptr), Si(), Li() {}
 
-load::load(list<std::string> const &inp) :
-card(inp) {
+load::load(list<std::string> const &inp) : card(inp) {
     this->load::read(inp);
 }
 
 load::load(long const *SID, double const *S,
            vector<double> const *Si, vector<long> const *Li) :
-           SID(*SID), S(*S), Si(), Li() {
+        card(), SID(*SID), S(*S), Si(), Li() {
     if (Si)
         copy(Si->begin(), Si->end(), back_inserter(this->Si));
     if (Li)

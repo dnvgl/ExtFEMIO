@@ -88,8 +88,7 @@ void tdsetnam::read(vector<std::string> const &inp, size_t const len) {
     }
 }
 
-tdsetnam::tdsetnam() :
-        tdsetnam(-1, 0, 0, 0, "", {}) {}
+tdsetnam::tdsetnam() : tdsetnam(-1, 0, 0, 0, "", {}) {}
 
 tdsetnam::tdsetnam(long const NFIELD, long const ISREF, long const CODNAM,
                    long const CODTXT, std::string const &SET_NAME,

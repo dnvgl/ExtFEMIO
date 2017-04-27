@@ -89,8 +89,7 @@ void tdload::read(vector<std::string> const &inp, size_t const len) {
     }
 }
 
-tdload::tdload() :
-        tdload(0, -1, 0, {}) {}
+tdload::tdload() : tdload(0, -1, 0, {}) {}
 
 tdload::tdload(long const NFIELD, long const ILREF, long const CODNAM,
                long const CODTXT, std::string const &SET_NAME,

@@ -144,9 +144,9 @@ namespace dnvgl {
  */
                     double YIELD;
 
-                    misosel(std::vector<std::string> const&, size_t const);
-
                     misosel();
+
+                    misosel(std::vector<std::string> const&, size_t const);
 
                     misosel(long const MATNO,
                             double const YOUNG,
@@ -315,9 +315,9 @@ namespace dnvgl {
                     */
                     double ALPHA2;
 
-                    morsmel(std::vector<std::string> const&, size_t const);
-
                     morsmel();
+
+                    morsmel(std::vector<std::string> const&, size_t const);
 
                     morsmel(long const MATNO,
                             double const Q1,

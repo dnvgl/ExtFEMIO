@@ -223,10 +223,14 @@ namespace dnvgl {
 
 
                     public:
+
                         explicit elem(dnvgl::extfem::fem::cards::gelmnt1 const*);
+
                         explicit elem(dnvgl::extfem::fem::cards::gelref1 const*);
+
                         explicit elem(elem const*);
-                        virtual ~elem();
+
+                        ~elem();
 
                         cards::__base::card const &gelmnt1() const;
                         cards::__base::card const &gelref1() const;
@@ -323,7 +327,7 @@ namespace dnvgl {
 
                 class undef : public __base::elem {
                 public:
-                    undef ();
+                    undef () = default;
                     explicit undef(dnvgl::extfem::fem::cards::gelref1 const*);
                     long nnodes() const override;
                     el_types get_type() const override;
@@ -334,7 +338,7 @@ namespace dnvgl {
                  */
                 class {{ elem }} : public __base::{{ vals.base }} {
                 public:
-                    {{ elem }}();
+                    {{ elem }}() = default;
                     {{ elem }}(
                         long const eleno, long const elident, long const el_add,
                         std::vector<long> const &nodes, long const matref,

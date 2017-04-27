@@ -54,11 +54,9 @@ void cards::__base::eccno::set_eccno(long const ECCNO/*=0*/) {
     this->ECCNO = ECCNO;
 }
 
-cards::__base::eccno::eccno() :
-        card(), ECCNO(-1) {}
+cards::__base::eccno::eccno() : card(), ECCNO(-1) {}
 
-cards::__base::eccno::eccno(long const ECCNO) :
-        card() {
+cards::__base::eccno::eccno(long const ECCNO) : card() {
     set_eccno(ECCNO);
 }
 

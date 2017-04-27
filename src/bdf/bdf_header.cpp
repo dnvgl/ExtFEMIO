@@ -22,10 +22,6 @@ namespace {
 
 using namespace dnvgl::extfem::bdf::header::__base;
 
-entry::entry() {}
-
-entry::~entry() {}
-
 // Local Variables:
 // mode: c++
 // coding: utf-8

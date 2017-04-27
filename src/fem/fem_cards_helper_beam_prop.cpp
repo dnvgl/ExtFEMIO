@@ -37,9 +37,6 @@ cards::__base::beam_prop::beam_prop(
     read(inp, len, is_gbeamg);
 }
 
-cards::__base::beam_prop::beam_prop() :
-        geoprop() {}
-
 cards::__base::beam_prop::beam_prop(
     long const GEONO, bool const is_gbeamg/*=false*/) {
     set_geono(GEONO, is_gbeamg);

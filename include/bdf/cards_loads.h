@@ -62,13 +62,9 @@ namespace dnvgl {
 
                     protected:
 
-                        void read(std::list<std::string> const &) override;
+                        momforce() = default;
 
-                        card const &operator() (const std::list<std::string> &) override;
-
-                        momforce();
-
-                        momforce(std::list<std::string> const &inp);
+                        explicit momforce(std::list<std::string> const &inp);
 
                         momforce(
                             long const *SID, long const *G, long const *CID,
@@ -76,13 +72,17 @@ namespace dnvgl {
                             double const *N1, double const *N2=nullptr,
                             double const *N3=nullptr);
 
-                        virtual format_entry *get_head() const = 0;
+                        card const &operator() (const std::list<std::string> &) override;
 
                         card const &operator() (
                             long const *SID, long const *G, long const *CID,
                             double const *F,
                             double const *N1, double const *N2=nullptr,
                             double const *N3=nullptr);
+
+                        void read(std::list<std::string> const &) override;
+
+                        virtual format_entry *get_head() const = 0;
 
                         void collect_outdata (
                             std::list<std::unique_ptr<format_entry> > &) const override;
@@ -121,9 +121,9 @@ vector.
 
                 public:
 
-                    force();
+                    force() = default;
 
-                    force(const std::list<std::string> &inp);
+                    explicit force(const std::list<std::string> &inp);
 
                     force(
                         long const *SID, long const *G, long const *CID,
@@ -173,9 +173,9 @@ vector.
 
                 public:
 
-                    moment();
+                    moment() = default;
 
-                    moment(const std::list<std::string> &inp);
+                    explicit moment(const std::list<std::string> &inp);
 
                     moment(
                         long const *SID, long const *G, long const *CID,
@@ -405,7 +405,7 @@ reference to a property entry.
 
                     cmass4();
 
-                    cmass4(std::list<std::string> const&);
+                    explicit cmass4(std::list<std::string> const&);
 
                     cmass4(long const *EID, double const *M,
                            long const *S1, long const *S2=nullptr);
@@ -545,6 +545,8 @@ Defines acceleration vectors for gravity or other acceleration loading.
 
                     explicit grav(std::list<std::string> const&);
 
+                    ~grav() = default;
+
                     grav(long const *SID, long const *CID,
                          double const *A,
                          double const *N1, double const*N2, double const *N3,
@@ -625,7 +627,7 @@ Defines a static load as a linear combination of load std::sets defined via
 
                     load();
 
-                    load(const std::list<std::string> &inp);
+                    explicit load(const std::list<std::string> &inp);
 
                     load(long const *SID, double const *S,
                          std::vector<double> const *Si,

@@ -61,8 +61,7 @@ void gnode::read(const vector<std::string> &inp, size_t const len) {
     _form_ODOF(ODOF, inp.at(4));
 }
 
-gnode::gnode() :
-        gnode(-1, 0, {}) {}
+gnode::gnode() : gnode(-1, 0, {}) {}
 
 gnode::gnode(
     long const NODEX, long const NODENO, long const NDOF,

@@ -62,8 +62,6 @@ const entry_type<double> pbeaml::form_X_XB(
     &cd0, nullptr,
     &cd1));
 
-pbeaml::pbeaml() : beam_prop() {}
-
 pbeaml::pbeaml(const list<std::string> &inp) :
 beam_prop(inp) {
     this->pbeaml::read(inp);

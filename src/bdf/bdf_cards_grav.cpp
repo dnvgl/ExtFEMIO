@@ -59,8 +59,8 @@ card(inp) {
 }
 
 grav::grav() :
-card(),
-SID(), CID(), A(), N1(), N2(), N3(), MB() {}
+        card(),
+        SID(), CID(), A(), N1(), N2(), N3(), MB() {}
 
 grav::grav(long const *SID, long const *CID, double const *A,
            double const *N1, double const *N2, double const *N3,

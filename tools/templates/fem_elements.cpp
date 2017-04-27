@@ -83,8 +83,6 @@ std::string dnvgl::extfem::fem::elements::name_elem(el_types const type) {
     return "";
 };
 
-undef::undef() {}
-
 long undef::nnodes() const {return -1;}
 
 el_types undef::get_type() const {return el_types::UNDEFINED;}
@@ -446,8 +444,6 @@ el_types {{ elem }}::get_type() const {return el_types::{{ elem|upper() }};}
 set<el_processor> const {{ elem }}::processors{
         {{ vals.procs|join(', ') }}
     };
-
-{{ elem }}::{{ elem }}() : {{ vals.base }}() {}
 
 {{ elem }}::{{ elem }}(
     long const eleno, long const elident, long const el_add,

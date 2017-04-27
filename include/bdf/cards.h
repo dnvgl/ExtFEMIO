@@ -407,6 +407,12 @@ namespace dnvgl {
 
                     public:
 
+                        card() = default;
+
+                        card(const std::list<std::string> &);
+
+                        ~card() = default;
+
                         friend format_entry
                         *::format(
                             std::unique_ptr<dnvgl::extfem::bdf::types::card>
@@ -430,10 +436,6 @@ namespace dnvgl {
                         static void
                         card_split(std::list<std::string> const &, std::list<std::string>&);
 
-                        card(const std::list<std::string> &);
-                        card();
-                        virtual ~card();
-
                         /**
                         * \brief returns the card type of the current card.
                         * \return Current card type.
@@ -448,7 +450,9 @@ namespace dnvgl {
 
                     std::list<std::string> content;
 
-                    unknown(const std::list<std::string> &inp);
+                    unknown() = default;
+
+                    explicit unknown(const std::list<std::string> &inp);
 
                     types card_type() const override;
 
@@ -526,9 +530,11 @@ namespace dnvgl {
 
                 public:
 
-                    enddata(const std::list<std::string> &);
+                    enddata() = default;
 
-                    enddata();
+                    explicit enddata(const std::list<std::string> &);
+
+                    ~enddata() = default;
 
                     types card_type() const override;
 
@@ -614,7 +620,7 @@ namespace dnvgl {
 
                     grid();
 
-                    grid(const std::list<std::string> &);
+                    explicit grid(const std::list<std::string> &);
 
                     grid(long const *ID, long const *CP,
                          double const *X1, double const *X2, double const *X3,
@@ -704,17 +710,22 @@ namespace dnvgl {
                         bdf::types::entry_value<long> MCSID;
 
                     protected:
+
+                        mat() = default;
+
                         mat(const std::list<std::string> &);
-                        mat();
+
                         mat(long *MID, double *RHO=nullptr,
                             double *TREF=nullptr, double *GE=nullptr,
                             double *ST=nullptr, double *SC=nullptr,
                             double *SS=nullptr, long *MCSID=nullptr);
+
                         void operator() (
                             long *MID, double *RHO=nullptr,
                             double *TREF=nullptr, double *GE=nullptr,
                             double *ST=nullptr, double *SC=nullptr,
                             double *SS=nullptr, long *MCSID=nullptr);
+
                         virtual void check_data() const override;
                     };
                 }
@@ -779,9 +790,9 @@ namespace dnvgl {
                      */
                     bdf::types::entry_value<double> A;
 
-                    mat1(const std::list<std::string> &);
-
                     mat1();
+
+                    explicit mat1(const std::list<std::string> &);
 
                     mat1(long *MID, double *E, double *G, double *NU,
                          double *RHO=nullptr,
@@ -889,9 +900,9 @@ namespace dnvgl {
                     bdf::types::entry_value<double> A2;
                     bdf::types::entry_value<double> A3;
 
-                    mat2(const std::list<std::string> &);
-
                     mat2();
+
+                    explicit mat2(const std::list<std::string> &);
 
                     mat2(long *MID,
                          double *G11, double *G12, double *G13, double *G22,
@@ -1001,12 +1012,14 @@ namespace dnvgl {
                     bdf::types::entry_value<std::complex<double> > CPLXVAL;
 
                 private:
-                    param();
 
-                    param(std::string const&);
+                    explicit param(std::string const&);
 
                 public:
-                    param(std::list<std::string> const&);
+
+                    param();
+
+                    explicit param(std::list<std::string> const&);
 
                     param(std::string const&, long const&);
 

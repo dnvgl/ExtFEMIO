@@ -63,59 +63,46 @@ std::ostream &spcforces::put(std::ostream &os) const {
     return os << std::endl;
 }
 
-spcforces::describer::describer() {}
-
-spcforces::print::print() {}
 std::string spcforces::print::str() const {
     return "PRINT";
 }
 
-spcforces::nozprint::nozprint() {}
 std::string spcforces::nozprint::str() const {
     return "NOZPRINT";
 }
 
-spcforces::sort2::sort2() {}
 std::string spcforces::sort2::str() const {
     return "SORT2";
 }
 
-spcforces::punch::punch() {}
 std::string spcforces::punch::str() const {
     return "PUNCH";
 }
 
-spcforces::imag::imag() {}
 std::string spcforces::imag::str() const {
     return "IMAG";
 }
 
-spcforces::phase::phase() {}
 std::string spcforces::phase::str() const {
     return "PHASE";
 }
 
-spcforces::psdf::psdf() {}
 std::string spcforces::psdf::str() const {
     return "PSDF";
 }
 
-spcforces::crms::crms() {}
 std::string spcforces::crms::str() const {
     return "CRMS";
 }
 
-spcforces::rpunch::rpunch() {}
 std::string spcforces::rpunch::str() const {
     return "RPUNCH";
 }
 
-spcforces::rall::rall() {}
 std::string spcforces::rall::str() const {
     return "RALL";
 }
 
-spcforces::norprint::norprint() {}
 std::string spcforces::norprint::str() const {
     return "NORPRINT";
 }

@@ -71,8 +71,7 @@ void glsec::read(vector<std::string> const &inp, size_t const len) {
         NLOBZ = {0};
 }
 
-glsec::glsec() :
-        glsec(-1, 0., 0., 0., 0., 0., 0., false) {}
+glsec::glsec() : glsec(-1, 0., 0., 0., 0., 0., 0., false) {}
 
 glsec::glsec(long const GEONO, double const HZ,
              double const TY, double const BY,

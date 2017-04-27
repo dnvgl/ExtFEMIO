@@ -72,7 +72,7 @@ void beuslo::read(vector<std::string> const &inp, size_t const len) {
 }
 
 beuslo::beuslo() :
-beuslo(-1, 0, false, 0, 0, 0, 0, 0, {}, {}) {}
+        beuslo(-1, 0, false, 0, 0, 0, 0, 0, {}, {}) {}
 
 beuslo::beuslo(
     long const LLC, long const LOTYP, bool const COMPLX, long const LAYER,

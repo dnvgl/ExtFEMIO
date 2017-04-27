@@ -63,8 +63,6 @@ const entry_type<long> mat::form_MCSID(
 
 mat::mat(const std::list<std::string> &inp) : card(inp) {}
 
-mat::mat() : card() {}
-
 mat::mat(long *MID, double *RHO/*=nullptr*/, double *TREF/*=nullptr*/,
          double *GE/*=nullptr*/, double *ST/*=nullptr*/, double *SC/*=nullptr*/,
          double *SS/*=nullptr*/, long *MCSID/*=nullptr*/) :

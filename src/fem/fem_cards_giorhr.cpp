@@ -85,11 +85,6 @@ void giorhr::read(vector<std::string> const &inp, size_t const len) {
         NLOBZ = {0};
 }
 
-giorhr::giorhr() :
-        beam_prop(),
-        HZ(), TY(), BT(), TT(), BB(), TB(), SFY(), SFZ(), RT(), RB(), 
-        NLOBYT(), NLOBYB(), NLOBZ() {}
-
 giorhr::giorhr(long const GEONO,
                double const HZ, double const TY, double const BT,
                double const TT, double const BB, double const TB,

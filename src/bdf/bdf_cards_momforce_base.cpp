@@ -56,10 +56,7 @@ entry_type<double> const momforce::form_N2(
 entry_type<double> const momforce::form_N3(
     "N3", bound<double>(nullptr, nullptr, &cd0));
 
-momforce::momforce() : card() {}
-
-momforce::momforce(list<std::string> const &inp) :
-card(inp) {
+momforce::momforce(list<std::string> const &inp) : card(inp) {
     this->momforce::read(inp);
 }
 
@@ -67,7 +64,8 @@ momforce::momforce(
     long const *SID, long const *G, long const *CID,
     double const *F,
     double const *N1, double const *N2, double const *N3) :
-    SID(*SID), G(*G), CID(*CID), F(*F), N1(N1), N2(N2), N3(N3) {
+        card(),
+        SID(*SID), G(*G), CID(*CID), F(*F), N1(N1), N2(N2), N3(N3) {
     this->momforce::check_data();
 }
 
@@ -151,10 +149,7 @@ card const &momforce::operator() (
     return *this;
 }
 
-force::force() : momforce() {}
-
-force::force(list<std::string> const &inp) :
-momforce(inp) {}
+force::force(list<std::string> const &inp) : momforce(inp) {}
 
 force::force(
     long const *SID, long const *G, long const *CID,
@@ -172,10 +167,7 @@ cards::types force::card_type() const {
     return types::FORCE;
 }
 
-moment::moment() : momforce() {}
-
-moment::moment(list<std::string> const &inp) :
-momforce(inp) {}
+moment::moment(list<std::string> const &inp) : momforce(inp) {}
 
 moment::moment(
     long const *SID, long const *G, long const *CID,

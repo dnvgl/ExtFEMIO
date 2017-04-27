@@ -22,8 +22,6 @@ namespace {
 using namespace dnvgl::extfem::bdf::type_bounds;
 using namespace __base;
 
-type_bound::~type_bound() {}
-
 bool type_bound::has_min() const {
     return _has_min;
 }

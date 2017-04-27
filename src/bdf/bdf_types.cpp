@@ -38,8 +38,6 @@ std::istringstream base::conv;
 
 base::base(const std::string &name) : name(name) {};
 
-base::~base() {}
-
 out_form_type base::out_form = out_form_type::SHORT;
 
 imbue_helper::imbue_helper(const std::locale &loc) : base("") {

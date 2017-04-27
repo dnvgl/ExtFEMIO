@@ -27,8 +27,6 @@ static char THIS_FILE[] = __FILE__;
 
 using namespace dnvgl::extfem::fem::type_bounds;
 
-base::~base() {};
-
 bool base::has_min() const {
     return _has_min;
 }
@@ -50,8 +48,7 @@ void base::got_default() {
 }
 
 
-base::base() :
-_has_min(false), _has_max(false), _has_default(false) {}
+base::base() : _has_min(false), _has_max(false), _has_default(false) {}
 
 bool base::has_default() const {
     return _has_default;

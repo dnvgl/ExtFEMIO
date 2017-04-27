@@ -39,6 +39,8 @@ namespace dnvgl {
 
                         explicit element(std::list<std::string> const &);
 
+                        ~element() = default;
+
                     protected:
 
                         card const &operator() (long const *EID);
@@ -352,7 +354,7 @@ namespace dnvgl {
 
                 public:
 
-                    cquad4();
+                    cquad4() = default;
 
                     explicit cquad4(std::list<std::string> const&);
 
@@ -607,7 +609,7 @@ namespace dnvgl {
 
                     cbeam();
 
-                    cbeam(std::list<std::string> const &inp);
+                    explicit cbeam(std::list<std::string> const &inp);
 
                     cbeam(
                         long const *EID, long const *PID,
@@ -912,9 +914,9 @@ namespace dnvgl {
                         */
                     entry_value<double> W3B;
 
-                    explicit cbar(std::list<std::string> const &inp);
-
                     cbar();
+
+                    explicit cbar(std::list<std::string> const &inp);
 
                     cbar(long const *EID, long const *PID,
                          long const *GA, long const *GB,
@@ -1052,7 +1054,7 @@ namespace dnvgl {
 
                     crod();
 
-                    crod(std::list<std::string> const &inp);
+                    explicit crod(std::list<std::string> const &inp);
 
                     crod(long const *EID, long const *PID,
                          long const *G1, long const *G2);

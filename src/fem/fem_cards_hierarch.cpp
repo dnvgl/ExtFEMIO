@@ -66,8 +66,7 @@ void hierarch::read(vector<std::string> const &inp, size_t const len) {
         IHSREFi.push_back(_form_IHSREF(inp.at(9 + i)));
 }
 
-hierarch::hierarch() :
-        hierarch(-1, 0, 0, 0, 0, 0, 0, {}) {}
+hierarch::hierarch() : hierarch(-1, 0, 0, 0, 0, 0, 0, {}) {}
 
 hierarch::hierarch(
     long const NFIELD, long const IHREF, long const ISELTY, long const INDSEL,

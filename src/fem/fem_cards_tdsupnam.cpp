@@ -88,8 +88,7 @@ void tdsupnam::read(vector<std::string> const &inp, size_t const len) {
     }
 }
 
-tdsupnam::tdsupnam() :
-        tdsupnam(-1, 0, 0, 0, {}, {}) {}
+tdsupnam::tdsupnam() : tdsupnam(-1, 0, 0, 0, {}, {}) {}
 
 tdsupnam::tdsupnam(long const NFIELD, long const IHREF, long const CODNAM,
                    long const CODTXT, std::string const &SUP_NAME,

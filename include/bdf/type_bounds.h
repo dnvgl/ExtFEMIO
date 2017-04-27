@@ -34,7 +34,7 @@ namespace dnvgl {
 
                     protected:
 
-                        virtual ~type_bound();
+                        virtual ~type_bound() = default;
 
                         bool has_min() const;
 

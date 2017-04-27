@@ -27,16 +27,18 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-namespace {
-    double const cd0 = 0.;
-}
-
 using namespace std;
 
 using namespace dnvgl::extfem;
 using namespace bdf;
 using namespace cards;
 using bdf::types::entry_type;;
+
+namespace {
+    double const cd0 = 0.;
+}
+
+bdf::types::card pbar::head = bdf::types::card("PBAR");
 
 entry_type<double> const pbar::form_A(
     "A", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
@@ -83,6 +85,21 @@ entry_type<double> const pbar::form_I12(
 pbar::pbar(list<std::string> const &inp) :
 bar_prop(inp) {
     this->pbar::read(inp);
+}
+
+pbar::pbar(long const *PID, long const *MID,
+           double const *A, double const *I1, double const *I2,
+           double const *J/*=nullptr*/, double const *NSM/*=nullptr*/,
+           double const *C1/*=nullptr*/, double const *C2/*=nullptr*/,
+           double const *D1/*=nullptr*/, double const *D2/*=nullptr*/,
+           double const *E1/*=nullptr*/, double const *E2/*=nullptr*/,
+           double const *F1/*=nullptr*/, double const *F2/*=nullptr*/,
+           double const *K1/*=nullptr*/, double const *K2/*=nullptr*/,
+           double const *I12/*=nullptr*/) :
+        bar_prop(PID, MID), A(A), I1(I1), I2(I2), J(J), NSM(NSM),
+        C1(C1), C2(C2), D1(D1), D2(D2), E1(E1), E2(E2), F1(F1), F2(F2),
+        K1(K1), K2(K2), I12(I12) {
+    this->pbar::check_data();
 }
 
 void pbar::read(list<std::string> const &inp) {
@@ -172,11 +189,146 @@ cards::types pbar::card_type() const {
 
 void pbar::collect_outdata(
     list<unique_ptr<format_entry> > &res) const {
-    throw not_implemented(__FILE__, __LINE__, "can't write PBAR.");
-}
+        if (!PID) return;
+
+    res.push_back(unique_ptr<format_entry>(format(head)));
+
+    res.push_back(unique_ptr<format_entry>(format<long>(form_PID, PID)));
+    res.push_back(unique_ptr<format_entry>(format<long>(form_MID, MID)));
+
+    res.push_back(unique_ptr<format_entry>(format<double>(form_A, A)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_I1, I1)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_I2, I2)));
+    if (bool(J) || bool(NSM) ||
+        bool(C1) || bool(C2) || bool(D1) || bool(D2) ||
+        bool(E1) || bool(E2) || bool(F1) || bool(F2) ||
+        bool(K1) || bool(K2) || bool(I12))
+        res.push_back(
+            bool(J) ?
+            unique_ptr<format_entry>(format<double>(form_J, J)) :
+            unique_ptr<format_entry>(format(empty)));
+    else goto cont;
+    if (bool(NSM) ||
+        bool(C1) || bool(C2) || bool(D1) || bool(D2) ||
+        bool(E1) || bool(E2) || bool(F1) || bool(F2) ||
+        bool(K1) || bool(K2) || bool(I12))
+        res.push_back(
+            bool(NSM) ?
+            unique_ptr<format_entry>(format<double>(form_NSM, NSM)) :
+            unique_ptr<format_entry>(format(empty)));
+    else goto cont;
+    if (bool(C1) || bool(C2) || bool(D1) || bool(D2) ||
+        bool(E1) || bool(E2) || bool(F1) || bool(F2) ||
+        bool(K1) || bool(K2) || bool(I12))
+        res.push_back(
+            bool(C1) ?
+            unique_ptr<format_entry>(format<double>(form_C1, C1)) :
+            unique_ptr<format_entry>(format(empty)));
+    else goto cont;
+    if (bool(C2) || bool(D1) || bool(D2) ||
+        bool(E1) || bool(E2) || bool(F1) || bool(F2) ||
+        bool(K1) || bool(K2) || bool(I12))
+        res.push_back(
+            bool(C2) ?
+            unique_ptr<format_entry>(format<double>(form_C2, C2)) :
+            unique_ptr<format_entry>(format(empty)));
+    else goto cont;
+    if (bool(D1) || bool(D2) ||
+        bool(E1) || bool(E2) || bool(F1) || bool(F2) ||
+        bool(K1) || bool(K2) || bool(I12))
+        res.push_back(
+            bool(D1) ?
+            unique_ptr<format_entry>(format<double>(form_D1, D1)) :
+            unique_ptr<format_entry>(format(empty)));
+    else goto cont;
+    if (bool(D2) ||
+        bool(E1) || bool(E2) || bool(F1) || bool(F2) ||
+        bool(K1) || bool(K2) || bool(I12))
+        res.push_back(
+            bool(D2) ?
+            unique_ptr<format_entry>(format<double>(form_D2, D2)) :
+            unique_ptr<format_entry>(format(empty)));
+    else goto cont;
+    if (bool(E1) || bool(E2) || bool(F1) || bool(F2) ||
+        bool(K1) || bool(K2) || bool(I12))
+        res.push_back(
+            bool(E1) ?
+            unique_ptr<format_entry>(format<double>(form_E1, E1)) :
+            unique_ptr<format_entry>(format(empty)));
+    else goto cont;
+    if (bool(E2) || bool(F1) || bool(F2) ||
+        bool(K1) || bool(K2) || bool(I12))
+        res.push_back(
+            bool(E2) ?
+            unique_ptr<format_entry>(format<double>(form_E2, E2)) :
+            unique_ptr<format_entry>(format(empty)));
+    else goto cont;
+    if (bool(F1) || bool(F2) ||
+        bool(K1) || bool(K2) || bool(I12))
+        res.push_back(
+            bool(F1) ?
+            unique_ptr<format_entry>(format<double>(form_F1, F1)) :
+            unique_ptr<format_entry>(format(empty)));
+    else goto cont;
+    if (bool(F2) ||
+        bool(K1) || bool(K2) || bool(I12))
+        res.push_back(
+            bool(F2) ?
+            unique_ptr<format_entry>(format<double>(form_F2, F2)) :
+            unique_ptr<format_entry>(format(empty)));
+    else goto cont;
+
+    if (bool(K1) || bool(K2) || bool(I12))
+        res.push_back(
+            bool(K1) ?
+            unique_ptr<format_entry>(format<double>(form_K1, K1)) :
+            unique_ptr<format_entry>(format(empty)));
+    else goto cont;
+    if (bool(K2) || bool(I12))
+        res.push_back(
+            bool(K2) ?
+            unique_ptr<format_entry>(format<double>(form_K2, K2)) :
+            unique_ptr<format_entry>(format(empty)));
+    else goto cont;
+    if (bool(I12))
+        res.push_back(unique_ptr<format_entry>(format<double>(form_I12, I12)));
+cont:
+    return;}
 
 cards::__base::card const &pbar::operator() (list<std::string> const &inp) {
     this->pbar::read(inp);
+    return *this;
+}
+
+cards::__base::card const &pbar::operator() (
+    long const *PID, long const *MID, double const *A,
+    double const *I1, double const *I2,
+    double const *J/*=nullptr*/, double const *NSM/*=nullptr*/,
+    double const *C1/*=nullptr*/, double const *C2/*=nullptr*/,
+    double const *D1/*=nullptr*/, double const *D2/*=nullptr*/,
+    double const *E1/*=nullptr*/, double const *E2/*=nullptr*/,
+    double const *F1/*=nullptr*/, double const *F2/*=nullptr*/,
+    double const *K1/*=nullptr*/, double const *K2/*=nullptr*/,
+    double const *I12/*=nullptr*/) {
+    this->bar_prop::operator()(PID, MID);
+    this->A(A);
+    this->I1(I1);
+    this->I2(I2);
+    this->J(J);
+    this->NSM(NSM);
+    this->C1(C1);
+    this->C2(C2);
+    this->D1(D1);
+    this->D2(D2);
+    this->E1(E1);
+    this->E2(E2);
+    this->F1(F1);
+    this->F2(F2);
+    this->K1(K1);
+    this->K2(K2);
+    this->I12(I12);
+    this->bar_prop::check_data();
+    this->pbar::check_data();
     return *this;
 }
 
@@ -205,5 +357,7 @@ void pbar::check_data() const {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j7 &&
+//  (make -C ../../cbuild test;
+//   ../../cbuild/tests/test_bdf_cards --use-colour no)"
 // End:

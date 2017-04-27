@@ -63,84 +63,66 @@ std::ostream &displacement::put(std::ostream &os) const {
     return os << std::endl;
 }
 
-displacement::describer::describer() {}
-
-displacement::sort1::sort1() {}
 std::string displacement::sort1::str() const {
     return "SORT1";
 }
 
-displacement::sort2::sort2() {}
 std::string displacement::sort2::str() const {
     return "SORT2";
 }
 
-displacement::print::print() {}
 std::string displacement::print::str() const {
     return "PRINT";
 }
 
-displacement::punch::punch() {}
 std::string displacement::punch::str() const {
     return "PUNCH";
 }
 
-displacement::plot::plot() {}
 std::string displacement::plot::str() const {
     return "PLOT";
 }
 
-displacement::real::real() {}
 std::string displacement::real::str() const {
     return "REAL";
 }
 
-displacement::imag::imag() {}
 std::string displacement::imag::str() const {
     return "IMAG";
 }
 
-displacement::phase::phase() {}
 std::string displacement::phase::str() const {
     return "PHASE";
 }
 
-displacement::psdf::psdf() {}
 std::string displacement::psdf::str() const {
     return "PSDF";
 }
 
-displacement::atoc::atoc() {}
 std::string displacement::atoc::str() const {
     return "ATOC";
 }
 
-displacement::crms::crms() {}
 std::string displacement::crms::str() const {
     return "CRMS";
 }
 
-displacement::rall::rall() {}
 std::string displacement::rall::str() const {
     return "RALL";
 }
 
-displacement::rprint::rprint() {}
 std::string displacement::rprint::str() const {
     return "RPRINT";
 }
 
-displacement::noprint::noprint() {}
 std::string displacement::noprint::str() const {
     return "NOPRINT";
 }
 
-displacement::rpunch::rpunch() {}
 std::string displacement::rpunch::str() const {
     return "rpunch";
 }
 
-displacement::cid::cid() {}
 std::string displacement::cid::str() const {
     return "CID";
 }

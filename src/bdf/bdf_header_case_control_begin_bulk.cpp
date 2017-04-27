@@ -21,8 +21,6 @@ namespace {
 
 using namespace dnvgl::extfem::bdf::header::case_control;
 
-begin_bulk::begin_bulk() {}
-
 std::ostream &begin_bulk::put(std::ostream &os) const {
     return os << "BEGIN BULK" << std::endl;
 }

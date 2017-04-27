@@ -25,8 +25,8 @@ namespace dnvgl {
                 namespace __base {
                     class entry : public extfem::__base::outline {
                     public:
-                        entry();
-                        virtual ~entry();
+                        entry() = default;
+                        virtual ~entry() = default;
                     };
                 }
 
@@ -174,7 +174,7 @@ namespace dnvgl {
 */
                     class cend : public __base::entry {
                     public:
-                        cend();
+                        cend() = default;
                     private:
                         std::ostream &put(std::ostream&) const override;
                     };
@@ -277,7 +277,7 @@ namespace dnvgl {
                     public:
                         class describer {
                         protected:
-                            describer();
+                            describer() = default;
                         public:
                             virtual ~describer() = default;
                             virtual std::string str() const = 0;
@@ -288,7 +288,7 @@ namespace dnvgl {
 */
                         class unsort : public describer {
                         public:
-                            unsort();
+                            unsort() = default;
                             ~unsort() override = default;
                             std::string str() const override;
                         };
@@ -318,7 +318,7 @@ namespace dnvgl {
 */
                                 explicit cdni_entry(
                                     std::string const &name, bool const except=false);
-                                virtual ~cdni_entry();
+                                virtual ~cdni_entry() = default;
                                 std::string str() const;
                             };
 
@@ -336,7 +336,7 @@ namespace dnvgl {
 */
                         class both : public describer {
                         public:
-                            both();
+                            both() = default;
                             ~both() override = default;
                             std::string str() const override;
                         };
@@ -344,7 +344,7 @@ namespace dnvgl {
 /// Neither sorted nor unsorted Bulk Data will be printed.
                         class none : public describer {
                         public:
-                            none();
+                            none() = default;
                             ~none() override = default;
                             std::string str() const override;
                         };
@@ -375,7 +375,7 @@ namespace dnvgl {
 */
                         class file : public describer {
                         public:
-                            file();
+                            file() = default;
                             ~file() override = default;
                             std::string str() const override;
                         };
@@ -529,7 +529,7 @@ namespace dnvgl {
                     public:
                         class describer {
                         protected:
-                            describer();
+                            describer() = default;
                         public:
                             virtual ~describer() = default;
                             virtual std::string str() const = 0;
@@ -541,7 +541,7 @@ namespace dnvgl {
 */
                         class sort1 : public describer {
                         public:
-                            sort1();
+                            sort1() = default;
                             ~sort1() override = default;
                             std::string str() const override;
                         };
@@ -551,7 +551,7 @@ namespace dnvgl {
 */
                         class sort2 : public describer {
                         public:
-                            sort2();
+                            sort2() = default;
                             ~sort2() override = default;
                             std::string str() const override;
                         };
@@ -559,7 +559,7 @@ namespace dnvgl {
 /// The printer will be the output medium.
                         class print : public describer {
                         public:
-                            print();
+                            print() = default;
                             ~print() override = default;
                             std::string str() const override;
                         };
@@ -567,7 +567,7 @@ namespace dnvgl {
 /// The punch file will be the output medium.
                         class punch : public describer {
                         public:
-                            punch();
+                            punch() = default;
                             ~punch() override = default;
                             std::string str() const override;
                         };
@@ -575,7 +575,7 @@ namespace dnvgl {
 /// Generates, but does not print, displacement data.
                         class plot : public describer {
                         public:
-                            plot();
+                            plot() = default;
                             ~plot() override = default;
                             std::string str() const override;
                         };
@@ -585,7 +585,7 @@ namespace dnvgl {
 */
                         class real : public describer {
                         public:
-                            real();
+                            real() = default;
                             ~real() override = default;
                             std::string str() const override;
                         };
@@ -595,7 +595,7 @@ namespace dnvgl {
 */
                         class imag : public describer {
                         public:
-                            imag();
+                            imag() = default;
                             ~imag() override = default;
                             std::string str() const override;
                         };
@@ -605,7 +605,7 @@ namespace dnvgl {
 */
                         class phase : public describer {
                         public:
-                            phase();
+                            phase() = default;
                             ~phase() override = default;
                             std::string str() const override;
                         };
@@ -617,7 +617,7 @@ namespace dnvgl {
 */
                         class psdf : public describer {
                         public:
-                            psdf();
+                            psdf() = default;
                             ~psdf() override = default;
                             std::string str() const override;
                         };
@@ -629,7 +629,7 @@ namespace dnvgl {
 */
                         class atoc : public describer {
                         public:
-                            atoc();
+                            atoc() = default;
                             ~atoc() override = default;
                             std::string str() const override;
                         };
@@ -641,7 +641,7 @@ namespace dnvgl {
 */
                         class crms : public describer {
                         public:
-                            crms();
+                            crms() = default;
                             ~crms() override = default;
                             std::string str() const override;
                         };
@@ -653,7 +653,7 @@ namespace dnvgl {
 */
                         class rall : public describer {
                         public:
-                            rall();
+                            rall() = default;
                             ~rall() override = default;
                             std::string str() const override;
                         };
@@ -661,7 +661,7 @@ namespace dnvgl {
 /// Writes random analysis results in the print file (Default)
                         class rprint : public describer {
                         public:
-                            rprint();
+                            rprint() = default;
                             ~rprint() override = default;
                             std::string str() const override;
                         };
@@ -669,7 +669,7 @@ namespace dnvgl {
 /// Disables the writing of random analysis results in the print file.
                         class noprint : public describer {
                         public:
-                            noprint();
+                            noprint() = default;
                             ~noprint() override = default;
                             std::string str() const override;
                         };
@@ -678,7 +678,7 @@ namespace dnvgl {
 /// Writes random analysis results in the punch file.
                         class rpunch : public describer {
                         public:
-                            rpunch();
+                            rpunch() = default;
                             ~rpunch() override = default;
                             std::string str() const override;
                         };
@@ -688,7 +688,7 @@ namespace dnvgl {
 */
                         class cid : public describer {
                         public:
-                            cid();
+                            cid() = default;
                             ~cid() override = default;
                             std::string str() const override;
                         };
@@ -919,7 +919,7 @@ SPCFORCES(PRINT, RALL, NORPRINT)=ALL
                     public:
                         class describer {
                         protected:
-                            describer();
+                            describer() = default;
                         public:
                             virtual ~describer() = default;
                             virtual std::string str() const = 0;
@@ -931,7 +931,7 @@ SPCFORCES(PRINT, RALL, NORPRINT)=ALL
 */
                         class sort1 : public describer {
                         public:
-                            sort1();
+                            sort1() = default;
                             std::string str() const override;
                         };
 
@@ -940,27 +940,27 @@ SPCFORCES(PRINT, RALL, NORPRINT)=ALL
 */
                         class sort2 : public describer {
                         public:
-                            sort2();
+                            sort2() = default;
                             std::string str() const override;
                         };
 
 /// The printer will be the output medium.
                         class print : public describer {
                         public:
-                            print();
+                            print() = default;
                             std::string str() const override;
                         };
 
 /// The punch file will be the output medium.
                         class punch : public describer {
                         public:
-                            punch();
+                            punch() = default;
                             std::string str() const override;
                         };
 /// Generates, but does not print, single-point forces of constraint.
                         class plot : public describer {
                         public:
-                            plot();
+                            plot() = default;
                             std::string str() const override;
                         };
 /** Requests rectangular format (real and imaginary) of complex
@@ -968,7 +968,7 @@ SPCFORCES(PRINT, RALL, NORPRINT)=ALL
 */
                         class real : public describer {
                         public:
-                            real();
+                            real() = default;
                             std::string str() const override;
                         };
 /** Requests rectangular format (real and imaginary) of complex
@@ -976,7 +976,7 @@ SPCFORCES(PRINT, RALL, NORPRINT)=ALL
 */
                         class imag : public describer {
                         public:
-                            imag();
+                            imag() = default;
                             std::string str() const override;
                         };
 
@@ -985,7 +985,7 @@ SPCFORCES(PRINT, RALL, NORPRINT)=ALL
 */
                         class phase : public describer {
                         public:
-                            phase();
+                            phase() = default;
                             std::string str() const override;
                         };
 
@@ -994,7 +994,7 @@ SPCFORCES(PRINT, RALL, NORPRINT)=ALL
 */
                         class nozprint : public describer {
                         public:
-                            nozprint();
+                            nozprint() = default;
                             std::string str() const override;
                         };
 
@@ -1005,7 +1005,7 @@ SPCFORCES(PRINT, RALL, NORPRINT)=ALL
 */
                         class psdf : public describer {
                         public:
-                            psdf();
+                            psdf() = default;
                             std::string str() const override;
                         };
 
@@ -1016,7 +1016,7 @@ SPCFORCES(PRINT, RALL, NORPRINT)=ALL
 */
                         class atoc : public describer {
                         public:
-                            atoc();
+                            atoc() = default;
                             std::string str() const override;
                         };
 
@@ -1027,7 +1027,7 @@ SPCFORCES(PRINT, RALL, NORPRINT)=ALL
 */
                         class crms : public describer {
                         public:
-                            crms();
+                            crms() = default;
                             std::string str() const override;
                         };
 
@@ -1037,28 +1037,28 @@ SPCFORCES(PRINT, RALL, NORPRINT)=ALL
 */
                         class rall : public describer {
                         public:
-                            rall();
+                            rall() = default;
                             std::string str() const override;
                         };
 
 /// Writes random analysis results in the print file. (Default)
                         class rprint : public describer {
                         public:
-                            rprint();
+                            rprint() = default;
                             std::string str() const override;
                         };
 
 /// Disables the writing of random analysis results in the print file.
                         class norprint : public describer {
                         public:
-                            norprint();
+                            norprint() = default;
                             std::string str() const override;
                         };
 
 /// Writes random analysis results in the punch file.
                         class rpunch : public describer {
                         public:
-                            rpunch();
+                            rpunch() = default;
                             std::string str() const override;
                         };
 /** Request to print output coordinate system ID in printed output
@@ -1066,7 +1066,7 @@ SPCFORCES(PRINT, RALL, NORPRINT)=ALL
 */
                         class cid : public describer {
                         public:
-                            cid();
+                            cid() = default;
                             std::string str() const override;
                         };
                         enum class restype{
@@ -1204,7 +1204,7 @@ Remarks:
                     public:
                         class describer {
                         protected:
-                            describer();
+                            describer() = default;
                         public:
                             virtual ~describer() = default;
                             virtual std::string str() const = 0;
@@ -1216,7 +1216,7 @@ Remarks:
 */
                         class sort1 : public describer {
                         public:
-                            sort1();
+                            sort1() = default;
                             std::string str() const override;
                         };
 
@@ -1225,28 +1225,28 @@ Remarks:
 */
                         class sort2 : public describer {
                         public:
-                            sort2();
+                            sort2() = default;
                             std::string str() const override;
                         };
 
 /// The printer will be the output medium.
                         class print : public describer {
                         public:
-                            print();
+                            print() = default;
                             std::string str() const override;
                         };
 
 /// The punch file will be the output medium.
                         class punch : public describer {
                         public:
-                            punch();
+                            punch() = default;
                             std::string str() const override;
                         };
 
 /// Generates stresses for requested set but no printer output.
                         class plot : public describer {
                         public:
-                            plot();
+                            plot() = default;
                             std::string str() const override;
                         };
 
@@ -1255,7 +1255,7 @@ Remarks:
 */
                         class real : public describer {
                         public:
-                            real();
+                            real() = default;
                             std::string str() const override;
                         };
 
@@ -1264,7 +1264,7 @@ Remarks:
 */
                         class imag : public describer {
                         public:
-                            imag();
+                            imag() = default;
                             std::string str() const override;
                         };
 
@@ -1273,7 +1273,7 @@ Remarks:
 */
                         class phase : public describer {
                         public:
-                            phase();
+                            phase() = default;
                             std::string str() const override;
                         };
 
@@ -1284,7 +1284,7 @@ Remarks:
     */
                         class psdf : public describer {
                         public:
-                            psdf();
+                            psdf() = default;
                             std::string str() const override;
                         };
 
@@ -1295,7 +1295,7 @@ Remarks:
 */
                         class atoc : public describer {
                         public:
-                            atoc();
+                            atoc() = default;
                             std::string str() const override;
                         };
 
@@ -1306,7 +1306,7 @@ Remarks:
 */
                         class crms : public describer {
                         public:
-                            crms();
+                            crms() = default;
                             std::string str() const override;
                         };
 
@@ -1316,14 +1316,14 @@ Remarks:
 */
                         class rall : public describer {
                         public:
-                            rall();
+                            rall() = default;
                             std::string str() const override;
                         };
 
 /// Requests von Mises stress.
                         class vonmises : public describer {
                         public:
-                            vonmises();
+                            vonmises() = default;
                             std::string str() const override;
                         };
 
@@ -1332,7 +1332,7 @@ Remarks:
 */
                         class maxs : public describer {
                         public:
-                            maxs();
+                            maxs() = default;
                             std::string str() const override;
                         };
 
@@ -1341,7 +1341,7 @@ Remarks:
 */
                         class shear : public describer {
                         public:
-                            shear();
+                            shear() = default;
                             std::string str() const override;
                         };
 
@@ -1351,7 +1351,7 @@ Remarks:
 */
                         class center : public describer {
                         public:
-                            center();
+                            center() = default;
                             std::string str() const override;
                         };
 
@@ -1360,7 +1360,7 @@ using strain gage approach with cubic bending correction.
 */
                         class cubic : public describer {
                         public:
-                            cubic();
+                            cubic() = default;
                             std::string str() const override;
                         };
 
@@ -1369,7 +1369,7 @@ using strain gage approach with cubic bending correction.
 */
                         class sgage : public describer {
                         public:
-                            sgage();
+                            sgage() = default;
                             std::string str() const override;
                         };
 
@@ -1378,7 +1378,7 @@ using strain gage approach with cubic bending correction.
 */
                         class corner : public describer {
                         public:
-                            corner();
+                            corner() = default;
                             std::string str() const override;
                         };
 
@@ -1387,28 +1387,28 @@ using strain gage approach with cubic bending correction.
 */
                         class bilin : public describer {
                         public:
-                            bilin();
+                            bilin() = default;
                             std::string str() const override;
                         };
 
 /// Writes random analysis results in the print file. (Default)
                         class rprint : public describer {
                         public:
-                            rprint();
+                            rprint() = default;
                             std::string str() const override;
                         };
 
 /// Disables the writing of random analysis results in the print file.
                         class norprint : public describer {
                         public:
-                            norprint();
+                            norprint() = default;
                             std::string str() const override;
                         };
 
 /// Writes random analysis results in the punch file.
                         class rpunch : public describer {
                         public:
-                            rpunch();
+                            rpunch() = default;
                             std::string str() const override;
                         };
 
@@ -1646,7 +1646,7 @@ Superelement identification number. (Integer>0)
 */
                     class begin_bulk : public __base::entry {
                     public:
-                        begin_bulk();
+                        begin_bulk() = default;
                     private:
                         std::ostream &put(std::ostream&) const override;
                     };

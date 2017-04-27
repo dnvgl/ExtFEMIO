@@ -68,8 +68,8 @@ namespace dnvgl {
         namespace __base {
             class outline {
             protected:
-                outline();
-                virtual ~outline();
+                outline() = default;
+                virtual ~outline() = default;
             public:
                 std::ostream &operator<<(std::ostream&) const;
                 friend std::ostream &::operator<<(

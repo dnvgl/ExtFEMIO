@@ -95,7 +95,7 @@ namespace dnvgl {
 
                     explicit base(const std::string&);
 
-                    virtual ~base();
+                    virtual ~base() = default;
 
                     virtual bdf_types type() const = 0;
 

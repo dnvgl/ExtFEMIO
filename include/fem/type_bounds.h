@@ -31,7 +31,7 @@ namespace dnvgl {
 
                 protected:
 
-                    ~base ();
+                    ~base () = default;
 
                     bool has_min() const;
 

@@ -32,8 +32,6 @@ namespace {
 
 const entry_type<long> property::form_PID("PID", bound<long>(&cl1));
 
-property::property() : card() {}
-
 property::property(long const *PID) : card(), PID(PID) {
     this->property::check_data();
 }

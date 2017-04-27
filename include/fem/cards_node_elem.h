@@ -1684,7 +1684,7 @@ namespace dnvgl {
 /// Number of integration points in beam web (optional)
                     long NLOBZ;
 
-                    giorhr();
+                    giorhr() = default;
                     giorhr(std::vector<std::string> const&, size_t const);
                     giorhr(long const GEONO,
                            double const HZ, double const TY, double const BT,
@@ -2713,15 +2713,11 @@ namespace dnvgl {
                           double const HZ, double const TY, double const BT,
                           double const B1, double const TT, double const BB,
                           double const B2, double const TB,
-                          double const SFY, double const SFZ) :
-                            gusyi(GEONO, HZ, TY, BT, B1, TT, BB, B2, TB,
-                                  SFY, SFZ, 0, 0, 0) {};
+                          double const SFY, double const SFZ);
                     gusyi(long const GEONO,
                           double const HZ, double const TY, double const BT,
                           double const B1, double const TT, double const BB,
-                          double const B2, double const TB) :
-                            gusyi(GEONO, HZ, TY, BT, B1, TT, BB, B2, TB,
-                                  1., 1., 0, 0, 0) {};
+                          double const B2, double const TB);
 
                     types card_type() const override;
 

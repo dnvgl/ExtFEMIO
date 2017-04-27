@@ -20,8 +20,6 @@ namespace {
 
 using namespace dnvgl::extfem::bdf::header::executive_control;;
 
-cend::cend() {}
-
 std::ostream &cend::put(std::ostream &os) const {
     return os << "CEND" << std::endl;
 }

@@ -57,8 +57,7 @@ void gelth::read(const vector<std::string> &inp, size_t const len) {
         NINT = {0};
 }
 
-gelth::gelth() :
-        gelth(-1, 0.) {}
+gelth::gelth() : gelth(-1, 0.) {}
 
 gelth::gelth(
     long const GEONO,

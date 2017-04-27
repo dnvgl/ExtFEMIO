@@ -55,10 +55,6 @@ ostream &echo::put(ostream &os) const {
     return os << endl;
 }
 
-echo::describer::describer() {}
-
-echo::unsort::unsort() {}
-
 string echo::unsort::str() const {
     return "UNSORT";
 }
@@ -87,8 +83,6 @@ echo::sort::cdni_entry::cdni_entry(
     std::string const &name, bool const except) :
         name(name), except(except) {}
 
-echo::sort::cdni_entry::~cdni_entry() {}
-
 string echo::sort::cdni_entry::str() const {
     std::string res("");
     if (except)
@@ -96,13 +90,9 @@ string echo::sort::cdni_entry::str() const {
     return res + name;
 }
 
-echo::both::both() {}
-
 string echo::both::str() const {
     return "BOTH";
 }
-
-echo::none::none() {}
 
 string echo::none::str() const {
     return "NONE";
@@ -137,8 +127,6 @@ string echo::punch::str() const {
     }
     return res.str();
 }
-
-echo::file::file() {}
 
 string echo::file::str() const {
     return "FILE";

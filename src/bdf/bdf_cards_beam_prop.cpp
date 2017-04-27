@@ -37,14 +37,8 @@ namespace {
    long const cl1 = 1;
 }
 
-// const entry_type<long> beam_base::form_PID(
-//     "PID", bound<long>(&cl1));
-
 const entry_type<long> beam_base::form_MID(
     "MID", bound<long>(&cl1, nullptr, nullptr, true));
-
-beam_base::beam_base() :
-        property() {}
 
 beam_base::beam_base(const std::list<std::string> &inp) :
         property(inp) {}
@@ -61,9 +55,6 @@ card const &beam_base::operator() (long const *PID, long const *MID) {
     this->MID(MID);
     return *this;
 }
-
-beam_prop::beam_prop() :
-        beam_base() {}
 
 beam_prop::beam_prop(const std::list<std::string> &inp) :
         beam_base(inp) {}

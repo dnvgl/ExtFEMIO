@@ -48,8 +48,7 @@ entry_type<double> const gchanr::_form_R("R");
 entry_type<long> const gchanr::_form_NLOBY("NLOBY");
 entry_type<long> const gchanr::_form_NLOBZ("NLOBZ");
 
-gchanr::gchanr() :
-        gchanr(-1, 0., 0., 0., 0., 0., 0., 0, 0.) {}
+gchanr::gchanr() : gchanr(-1, 0., 0., 0., 0., 0., 0., 0, 0.) {}
 
 gchanr::gchanr(vector<std::string> const &inp, size_t const len) :
         beam_prop(inp, len, false) {

@@ -35,8 +35,6 @@ using namespace cards;
 enddata::enddata(list<std::string> const &inp) :
 card(inp) {}
 
-enddata::enddata() : card() {}
-
 cards::types enddata::card_type() const {
     return types::ENDDATA;
 }

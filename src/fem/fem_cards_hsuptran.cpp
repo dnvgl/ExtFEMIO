@@ -67,8 +67,7 @@ void hsuptran::read(const vector<std::string> &inp, size_t const len) {
     T[3][3] = _form_T(inp.at(18));
 }
 
-hsuptran::hsuptran() :
-        hsuptran(-1, 0, nullptr) {}
+hsuptran::hsuptran() : hsuptran(-1, 0, nullptr) {}
 
 
 hsuptran::hsuptran(

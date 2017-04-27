@@ -64,8 +64,7 @@ void ident::read(const vector<std::string> &inp, size_t const len) {
     }
 }
 
-ident::ident() :
-        ident(-1, 0, mod_type::INVALID) {}
+ident::ident() : ident(-1, 0, mod_type::INVALID) {}
 
 ident::ident(
     long const SLEVEL, long const SELTYP, mod_type const SELMOD) :

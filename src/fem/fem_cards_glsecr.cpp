@@ -47,8 +47,7 @@ entry_type<double> const glsecr::_form_R("R");
 entry_type<long> const glsecr::_form_NLOBY("NLOBY");
 entry_type<long> const glsecr::_form_NLOBZ("NLOBZ");
 
-glsecr::glsecr() :
-        glsecr(-1, 0., 0., 0., 0., 0., 0., 0, 0.) {}
+glsecr::glsecr() : glsecr(-1, 0., 0., 0., 0., 0., 0., 0, 0.) {}
 
 glsecr::glsecr(const vector<std::string> &inp, size_t const len) :
         beam_prop(inp, len, false) {

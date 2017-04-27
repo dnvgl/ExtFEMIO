@@ -64,8 +64,7 @@ void hsupstat::read(const vector<std::string> &inp, size_t const len) {
     COMPLC = _form_COMPLC(inp.at(9));
 }
 
-hsupstat::hsupstat() :
-        hsupstat(-1, 0, 0, 0, 0, 0, 0, 0, 0) {}
+hsupstat::hsupstat() : hsupstat(-1, 0, 0, 0, 0, 0, 0, 0, 0) {}
 
 hsupstat::hsupstat(long const NFIELD, long const ISELTY, long const NIDOF,
                    long const NRDOF, long const NBAND, long const NELT,

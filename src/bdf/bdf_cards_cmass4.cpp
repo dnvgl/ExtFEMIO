@@ -51,8 +51,8 @@ entry_type<long> const cmass4::form_S1("S1");
 entry_type<long> const cmass4::form_S2("S2");
 
 cmass4::cmass4() :
-element(nullptr),
-M(nullptr), S1(nullptr), S2(nullptr) {}
+        element(nullptr),
+        M(nullptr), S1(nullptr), S2(nullptr) {}
 
 cmass4::cmass4(list<std::string> const &inp) :
 element(inp) {

@@ -173,9 +173,9 @@ namespace dnvgl {
                             std::vector<std::string>&);
 
                         card(std::vector<std::string> const&, size_t const) {};
-                        card();
+                        card() = default;
 
-                        virtual ~card();
+                        virtual ~card() = default;
 
                         virtual void read(
                             std::vector<std::string> const&, size_t const) = 0;
@@ -308,7 +308,7 @@ namespace dnvgl {
 
                     protected:
 
-                        beam_prop();
+                        beam_prop() = default;
                         beam_prop(long const GEONO, bool const=false);
                         beam_prop(
                             std::vector<std::string> const&, size_t const);

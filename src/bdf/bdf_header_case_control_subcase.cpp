@@ -22,15 +22,11 @@ using namespace dnvgl::extfem::bdf::header::case_control;
 
 long subcase::max_n = 0;
 
-subcase::subcase(long const &n) :
-n(n) {
+subcase::subcase(long const &n) : n(n) {
     max_n = std::max(n, max_n);
 }
 
-subcase::subcase() :
-n(max_n + 1) {
-    max_n += 1;
-}
+subcase::subcase() : n(++max_n) { }
 
 std::ostream &subcase::put(std::ostream &os) const {
     return os << "SUBCASE = " << this->n << std::endl;

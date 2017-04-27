@@ -94,10 +94,6 @@ unordered_map<std::string, cards::types> const cardtype_map({
         {"HIERARCH", cards::types::HIERARCH},
         {"BEUSLO", cards::types::BEUSLO}});
 
-cards::__base::card::card() {}
-
-cards::__base::card::~card() {}
-
 fem::types::empty const cards::__base::card::empty = fem::types::empty();
 
 fem::types::card const cards::__base::card::head = fem::types::card("<DUMMY>");

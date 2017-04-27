@@ -47,8 +47,7 @@ entry_type<double> const gdobo::_form_SFZ("SFZ");
 entry_type<long> const gdobo::_form_NLOBY("NLOBY");
 entry_type<long> const gdobo::_form_NLOBZ("NLOBZ");
 
-gdobo::gdobo() :
-        gdobo(-1, 0., 0., 0., 0., 0., 0., 0.) {}
+gdobo::gdobo() : gdobo(-1, 0., 0., 0., 0., 0., 0., 0.) {}
 
 gdobo::gdobo(vector<std::string> const &inp, size_t const len) :
         beam_prop(inp, len, false) {

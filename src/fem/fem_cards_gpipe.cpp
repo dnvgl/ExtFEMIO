@@ -71,8 +71,7 @@ void gpipe::read(vector<std::string> const &inp, size_t const len) {
         NRAD = {0};
 }
 
-gpipe::gpipe() :
-        gpipe(-1, 0., 0., 0., 0., 0.) {}
+gpipe::gpipe() : gpipe(-1, 0., 0., 0., 0., 0.) {}
 
 gpipe::gpipe(long const GEONO,
              double const DI, double const DY, double const T,

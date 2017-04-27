@@ -127,9 +127,8 @@ void gelref1::read(const vector<std::string> &inp, size_t const len) {
     }
 }
 
-gelref1::gelref1() :
-        gelref1(-1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                {}, {}, {}, {})  {}
+gelref1::gelref1() : gelref1(-1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                             {}, {}, {}, {}) {}
 
 gelref1::gelref1(
     long const ELNO, long const MATNO, long const ADDNO, long const INTNO,

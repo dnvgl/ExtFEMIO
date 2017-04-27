@@ -101,14 +101,12 @@ namespace dnvgl {
 
                     date();
 
-                    date(
-                        long const TYPE, long const SUBTYPE,
-                        long const NRECS, long const NBYTE,
-                        std::vector<std::string> const &CONT);
+                    date(long const TYPE, long const SUBTYPE,
+                         long const NRECS, long const NBYTE,
+                         std::vector<std::string> const &CONT);
 
-                    date(
-                        long const TYPE, long const SUBTYPE,
-                        std::vector<std::string> const &CONT);
+                    date(long const TYPE, long const SUBTYPE,
+                         std::vector<std::string> const &CONT);
 
                     types
                     card_type() const override;
@@ -168,9 +166,8 @@ namespace dnvgl {
 
                     ident();
 
-                    ident(
-                        long const SLEVEL, long const SELTYP,
-                        mod_type const SELMOD);
+                    ident(long const SLEVEL, long const SELTYP,
+                          mod_type const SELMOD);
 
                     types
                     card_type() const override;

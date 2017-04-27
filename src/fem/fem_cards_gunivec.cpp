@@ -44,8 +44,7 @@ gunivec::gunivec(const vector<std::string> &inp, size_t const len) :
     gunivec::read(inp, len);
 }
 
-gunivec::gunivec() :
-        gunivec(-1, 0., 0., 0.) {}
+gunivec::gunivec() : gunivec(-1, 0., 0., 0.) {}
 
 gunivec::gunivec(
     long const TRANSNO,

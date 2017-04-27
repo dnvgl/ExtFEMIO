@@ -16,7 +16,6 @@ namespace {
     char const cID_fem_cards_gbox[] _EXTFEMIO_UNUSED =
         "@(#) $Id$";
 }
-
 #include "fem/cards.h"
 #include "fem/types.h"
 
@@ -45,8 +44,6 @@ entry_type<double> const gbox::_form_SFY("SFY");
 entry_type<double> const gbox::_form_SFZ("SFZ");
 entry_type<long> const gbox::_form_NLOBY("NLOBY");
 entry_type<long> const gbox::_form_NLOBZ("NLOBZ");
-
-
 
 gbox::gbox() :
         gbox(-1, 0., 0., 0., 0., 0., 0., 0.) {}

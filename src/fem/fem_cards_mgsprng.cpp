@@ -62,8 +62,7 @@ void mgsprng::read(vector<std::string> const &inp, size_t const len) {
     }
 }
 
-mgsprng::mgsprng() :
-        mgsprng(-1, 0, {}) {}
+mgsprng::mgsprng() : mgsprng(-1, 0, {}) {}
 
 mgsprng::mgsprng(long const MATNO, long const NDOF,
                  vector<vector<double> > const &K) :

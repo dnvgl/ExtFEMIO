@@ -71,8 +71,7 @@ void misosel::read(vector<std::string> const &inp, size_t const len) {
     else
         YIELD = {0.};}
 
-misosel::misosel() :
-        misosel(-1, 0., 0., 0., 0., 0.) {}
+misosel::misosel() : misosel(-1, 0., 0., 0., 0., 0.) {}
 
 misosel::misosel(long const MATNO, double const YOUNG,
                  double const POISS, double const RHO,

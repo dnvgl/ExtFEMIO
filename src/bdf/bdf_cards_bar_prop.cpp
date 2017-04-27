@@ -30,8 +30,9 @@ using namespace type_bounds;
 
 using namespace cards::__base;
 
-bar_prop::bar_prop(const std::list<std::string> &inp) :
-        beam_base(inp) {}
+bar_prop::bar_prop(long const *PID, long const *MID) : beam_base(PID, MID) {}
+
+bar_prop::bar_prop(const std::list<std::string> &inp) : beam_base(inp) {}
 
 cards::types bar_prop::card_type() const {
     return types::BAR_PROP;

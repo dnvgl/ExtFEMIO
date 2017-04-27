@@ -67,8 +67,7 @@ void gelmnt2::read(const vector<std::string> &inp, size_t const len) {
         NOD.push_back(_form_NOD(inp.at(18 + i)));
 }
 
-gelmnt2::gelmnt2() :
-        gelmnt2(-1, 0, 0, 0, nullptr, 0, {}) {}
+gelmnt2::gelmnt2() : gelmnt2(-1, 0, 0, 0, nullptr, 0, {}) {}
 
 gelmnt2::gelmnt2(
     long const SUBNO, long const SLEVEL, long const STYPE, long const ADDNO,

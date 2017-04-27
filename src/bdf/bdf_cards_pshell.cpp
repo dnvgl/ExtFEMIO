@@ -76,8 +76,6 @@ const entry_type<long> pshell::form_MID4(
     "MID4",
     bdf::type_bounds::bound<long>(&cl1, nullptr, nullptr, true));
 
-pshell::pshell() : property() {}
-
 pshell::pshell(const std::list<std::string> &inp) :
         property(inp) {
     this->pshell::read(inp);

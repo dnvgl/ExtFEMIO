@@ -40,7 +40,7 @@ namespace dnvgl {
 
                     protected:
 
-                        property();
+                        property() = default;
 
                         explicit property(long const *PID);
 
@@ -150,7 +150,7 @@ namespace dnvgl {
                         */
                     bdf::types::entry_value<long> MID4;
 
-                    pshell();
+                    pshell() = default;
 
                     pshell(std::list<std::string> const&);
 
@@ -201,7 +201,7 @@ namespace dnvgl {
 
                         bdf::types::entry_type<long> static const form_MID;
 
-                        beam_base();
+                        beam_base() = default;
 
                         explicit beam_base(std::list<std::string> const&);
 
@@ -229,7 +229,7 @@ namespace dnvgl {
 
                         using __base::beam_base::operator();
 
-                        beam_prop();
+                        beam_prop() = default;
 
                         explicit beam_prop(std::list<std::string> const&);
 
@@ -475,7 +475,7 @@ namespace dnvgl {
                      */
                     bdf::types::entry_value<double> N2_B;
 
-                    pbeam();
+                    pbeam() = default;
 
                     pbeam(std::list<std::string> const&);
 
@@ -638,7 +638,7 @@ namespace dnvgl {
                         */
                     std::vector<bdf::types::entry_value<double>> X_XB;
 
-                    pbeaml();
+                    pbeaml() = default;
 
                     pbeaml(std::list<std::string> const&);
 
@@ -678,6 +678,10 @@ namespace dnvgl {
                     class bar_prop : public beam_base {
 
                     protected:
+
+                        bar_prop() = default;
+
+                        bar_prop(long const *PID, long const *MID);
 
                         bar_prop(std::list<std::string> const&);
 
@@ -790,13 +794,36 @@ namespace dnvgl {
                      */
                     bdf::types::entry_value<double> I12;
 
-                    pbar(std::list<std::string> const&);
+                    pbar() = default;
+
+                    explicit pbar(std::list<std::string> const&);
+
+                    pbar(long const *PID, long const *MID, double const *A,
+                         double const *I1, double const *I2,
+                         double const *J=nullptr, double const *NSM=nullptr,
+                         double const *C1=nullptr, double const *C2=nullptr,
+                         double const *D1=nullptr, double const *D2=nullptr,
+                         double const *E1=nullptr, double const *E2=nullptr,
+                         double const *F1=nullptr, double const *F2=nullptr,
+                         double const *K1=nullptr, double const *K2=nullptr,
+                         double const *I12=nullptr);
 
                     types card_type() const override;
 
                     void read(std::list<std::string> const &) override;
 
                     card const &operator() (const std::list<std::string> &) override;
+
+                    card const &operator() (
+                        long const *PID, long const *MID, double const *A,
+                        double const *I1, double const *I2,
+                        double const *J=nullptr, double const *NSM=nullptr,
+                        double const *C1=nullptr, double const *C2=nullptr,
+                        double const *D1=nullptr, double const *D2=nullptr,
+                        double const *E1=nullptr, double const *E2=nullptr,
+                        double const *F1=nullptr, double const *F2=nullptr,
+                        double const *K1=nullptr, double const *K2=nullptr,
+                        double const *I12=nullptr);
 
                 private:
 
@@ -925,7 +952,9 @@ namespace dnvgl {
                      */
                     bdf::types::entry_value<double> NSM;
 
-                    prod(std::list<std::string> const&);
+                    prod() = default;
+
+                    explicit prod(std::list<std::string> const&);
 
                     types card_type() const override;
 

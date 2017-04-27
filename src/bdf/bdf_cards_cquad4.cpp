@@ -39,10 +39,8 @@ using bdf::types::entry_type;
 
 bdf::types::card cquad4::head = bdf::types::card("CQUAD4");
 
-cquad4::cquad4() : shell() {}
-
 cquad4::cquad4(std::list<std::string> const &inp) :
-shell(inp) {
+        shell(inp) {
     this->cquad4::read(inp);
 }
 

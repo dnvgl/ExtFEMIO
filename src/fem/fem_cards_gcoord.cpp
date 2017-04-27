@@ -55,8 +55,7 @@ void gcoord::read(const vector<std::string> &inp, size_t const len) {
     ZCOORD = _form_ZCOORD(inp.at(4));
 }
 
-gcoord::gcoord() :
-        gcoord(-1, 0., 0., 0.) {}
+gcoord::gcoord() : gcoord(-1, 0., 0., 0.) {}
 
 gcoord::gcoord(
     long const NODENO,

@@ -23,7 +23,7 @@ namespace dnvgl {
 
             class string : public std::string {
             public:
-                string();
+                string() = default;
                 explicit string(const std::string& in);
                 string(size_t, char);
 

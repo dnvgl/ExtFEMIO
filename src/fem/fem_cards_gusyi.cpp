@@ -54,6 +54,21 @@ gusyi::gusyi(const vector<std::string> &inp, size_t const len) :
     gusyi::read(inp, len);
 }
 
+gusyi::gusyi(long const GEONO,
+             double const HZ, double const TY, double const BT,
+             double const B1, double const TT, double const BB,
+             double const B2, double const TB,
+             double const SFY, double const SFZ) :
+        gusyi(GEONO, HZ, TY, BT, B1, TT, BB, B2, TB,
+              SFY, SFZ, 0, 0, 0) {}
+
+gusyi::gusyi(long const GEONO,
+             double const HZ, double const TY, double const BT,
+             double const B1, double const TT, double const BB,
+             double const B2, double const TB) :
+        gusyi(GEONO, HZ, TY, BT, B1, TT, BB, B2, TB,
+              1., 1., 0, 0, 0) {}
+
 void gusyi::read(const vector<std::string> &inp, size_t const len) {
     std::string static const empty{"                "};
     if (len < 12)
@@ -84,8 +99,7 @@ void gusyi::read(const vector<std::string> &inp, size_t const len) {
         NLOBZ = {0};
 }
 
-gusyi::gusyi() :
-        gusyi(-1, 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.) {}
+gusyi::gusyi() : gusyi(-1, 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.) {}
 
 gusyi::gusyi(
     long const GEONO,
@@ -153,5 +167,7 @@ ostream &gusyi::put(ostream& os) const {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j7 &&
+//   (make -C ../../cbuild test ;
+//    ../../cbuild/tests/test_fem_cards --use-colour no)"
 // End:

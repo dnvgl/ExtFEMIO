@@ -27,9 +27,6 @@ static char THIS_FILE[] = __FILE__;
 
 using namespace dnvgl::extfem::string;
 
-string::string() :
-        std::string() {}
-
 string::string(const std::string& in) :
         std::string(in) {}
 

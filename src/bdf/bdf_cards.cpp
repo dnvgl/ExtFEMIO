@@ -176,10 +176,6 @@ void (*cards::error_report)(std::string const &) = &_stderr_report;
 
 cards::__base::card::card(list<std::string> const &inp) {}
 
-cards::__base::card::card() {}
-
-cards::__base::card::~card() {}
-
 bdf::types::empty cards::__base::card::empty = bdf::types::empty();
 
 set<char> const cards::__base::card::free_form_cont({'+', '*', ','});

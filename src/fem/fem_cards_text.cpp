@@ -67,8 +67,7 @@ void text::read(vector<std::string> const &inp, size_t const len) {
     }
 }
 
-text::text() :
-        text(-1, 0, 0, 0, {}) {}
+text::text() : text(-1, 0, 0, 0, {}) {}
 
 text::text(long const TYPE, long const SUBTYPE, long const NRECS,
            long const NBYTE, vector<std::string> const &CONT) :

@@ -54,11 +54,9 @@ void cards::__base::geoprop::set_geono(long const GEONO/*=0*/) {
     this->GEONO = GEONO;
 }
 
-cards::__base::geoprop::geoprop() :
-        card(), GEONO(-1) {}
+cards::__base::geoprop::geoprop() : card(), GEONO(-1) {}
 
-cards::__base::geoprop::geoprop(long const GEONO) :
-        card() {
+cards::__base::geoprop::geoprop(long const GEONO) : card() {
     set_geono(GEONO);
 }
 
