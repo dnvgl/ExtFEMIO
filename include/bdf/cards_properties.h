@@ -890,13 +890,25 @@ namespace dnvgl {
                         */
                     bdf::types::entry_value<double> NSM;
 
+                    pbarl() = default;
+
                     pbarl(std::list<std::string> const&);
+
+                    pbarl(long const *PID, long const *MID,
+                          std::string const *GROUP, std::string const *TYPE,
+                          std::vector<double> const *DIM,
+                          double const *NSM=nullptr);
 
                     types card_type() const override;
 
                     void read(std::list<std::string> const &) override;
 
-                    card const &operator() (const std::list<std::string> &) override;
+                    card const &operator() (std::list<std::string> const &) override;
+
+                    card const &operator() (
+                        long const *PID, long const *MID,
+                        std::string const *GROUP, std::string const *TYPE,
+                        std::vector<double> const *DIM, double const *NSM=nullptr);
 
                 private:
 

@@ -27,15 +27,17 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-namespace {
-    const double cd0 = 0;
-}
-
 using namespace std;
 
 using namespace dnvgl::extfem;
 using namespace bdf::cards;
 using bdf::types::entry_type;
+
+namespace {
+    const double cd0 = 0;
+}
+
+bdf::types::card pbarl::head = bdf::types::card("PBARL");
 
 entry_type<std::string> const pbarl::form_GROUP(
     "GROUP", bdf::type_bounds::bound<std::string>("MSCBML0"));
@@ -52,6 +54,15 @@ entry_type<double> const pbarl::form_NSM(
 pbarl::pbarl(list<std::string> const &inp) :
 bar_prop(inp) {
     this->pbarl::read(inp);
+}
+
+pbarl::pbarl(long const *PID, long const *MID,
+             std::string const *GROUP, std::string const *TYPE,
+             std::vector<double> const *DIM,
+             double const *NSM/*=nullptr*/) :
+        bar_prop(PID, MID), GROUP(GROUP), TYPE(TYPE), NSM(NSM) {
+    this->DIM.assign(DIM->begin(), DIM->end()),
+    this->pbarl::check_data();
 }
 
 void pbarl::read(list<std::string> const &inp) {
@@ -106,11 +117,44 @@ types pbarl::card_type() const {
 
 void pbarl::collect_outdata(
     list<std::unique_ptr<format_entry> > &res) const {
-    throw std::not_implemented(__FILE__, __LINE__, "can't write PBARL.");
+    if (!PID) return;
+
+    res.push_back(unique_ptr<format_entry>(format(head)));
+
+    res.push_back(unique_ptr<format_entry>(format<long>(form_PID, PID)));
+    res.push_back(unique_ptr<format_entry>(format<long>(form_MID, MID)));
+
+    res.push_back(
+        bool(GROUP) ?
+        unique_ptr<format_entry>(format<std::string>(form_GROUP, GROUP)) :
+        unique_ptr<format_entry>(format(empty)));
+    res.push_back(unique_ptr<format_entry>(format<std::string>(form_TYPE, TYPE)));
+    for (auto i = 0;i<4;i++ )
+        res.push_back(unique_ptr<format_entry>(format(empty)));
+    for (auto &pos : DIM)
+        res.push_back(unique_ptr<format_entry>(
+                          format<double>(form_DIM, &pos)));
+    if (bool(NSM))
+        res.push_back(
+            unique_ptr<format_entry>(
+                format<double>(form_NSM, NSM)));
 }
 
 bdf::cards::__base::card const &pbarl::operator()(list<std::string> const &inp) {
     this->pbarl::read(inp);
+    return *this;
+}
+
+bdf::cards::__base::card const &pbarl::operator() (
+    long const *PID, long const *MID,
+    std::string const *GROUP, std::string  const *TYPE,
+    vector<double> const *DIM, double const *NSM/*=nullptr*/) {
+    this->bar_prop::operator() (PID, MID);
+    this->GROUP(GROUP);
+    this->TYPE(TYPE);
+    this->DIM.assign(DIM->begin(), DIM->end());
+    this->NSM(NSM);
+    this->pbarl::check_data();
     return *this;
 }
 

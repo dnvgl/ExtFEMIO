@@ -5,7 +5,7 @@
    \brief Testing the BDF `PBARL` card class.
 
    Detailed description
-   */
+*/
 
 #include "extfem_misc.h"
 
@@ -33,139 +33,298 @@ static char THIS_FILE[] = __FILE__;
 
 using namespace std;
 
-using namespace dnvgl::extfem::bdf;
-using namespace dnvgl::extfem::bdf::cards;
+using namespace dnvgl::extfem;
+using namespace bdf;
+using namespace bdf::cards;
+using namespace bdf::cards::__base;
 
-TEST_CASE("BDF PBARL definitions.", "[bdf_PBARL]") {
+using bdf::types::entry_type;
+using bdf::types::entry_value;
 
-    SECTION("Small Field Format (BAR)") {
+TEST_CASE("BDF PBARL definitions; Small Field Format (BAR).", "[bdf_pbarl]") {
 
-        std::list<std::string> data({
+    std::list<std::string> data({
             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
             "PBARL   104018  4               BAR\n",
             "           25.0   600.0\n"});
-        std::list<std::string> lines;
-        __base::card::card_split(data, lines);
-        pbarl probe(lines);
+    std::list<std::string> lines;
+    card::card_split(data, lines);
+    pbarl probe(lines);
 
-        CHECK((long)probe.PID == 104018);
-        CHECK((long)probe.MID == 4);
-        CHECK(probe.GROUP == "MSCBML0");
-        CHECK(probe.TYPE == "BAR");
-        CHECK(probe.DIM.size() == 2);
-        CHECK(probe.DIM == vector<double>({25., 600.}));
-        CHECK((double)probe.NSM == 0.);
-    }
+    CHECK((long)probe.PID == 104018);
+    CHECK((long)probe.MID == 4);
+    CHECK(probe.GROUP == "MSCBML0");
+    CHECK(probe.TYPE == "BAR");
+    CHECK(probe.DIM.size() == 2);
+    CHECK(probe.DIM == vector<double>({25., 600.}));
+    CHECK((double)probe.NSM == 0.);
+}
 
 
-    SECTION("Small Field Format (BAR) (alt.)") {
+TEST_CASE("BDF PBARL definitions; Small Field Format (BAR) (alt.).", "[bdf_pbarl]") {
 
-        std::list<std::string> data({
+    std::list<std::string> data({
             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
             "PBARL        134       8            BAR\n",
             "            55.0   500.0"});
-        std::list<std::string> lines;
-        __base::card::card_split(data, lines);
-        pbarl probe(lines);
+    std::list<std::string> lines;
+    card::card_split(data, lines);
+    pbarl probe(lines);
 
-        CHECK((long)probe.PID == 134);
-        CHECK((long)probe.MID == 8);
-        CHECK(probe.GROUP == "MSCBML0");
-        CHECK(probe.TYPE == "BAR");
-        CHECK(probe.DIM == vector<double>({55., 500.}));
-        CHECK((double)probe.NSM == 0.);
-    }
+    CHECK((long)probe.PID == 134);
+    CHECK((long)probe.MID == 8);
+    CHECK(probe.GROUP == "MSCBML0");
+    CHECK(probe.TYPE == "BAR");
+    CHECK(probe.DIM == vector<double>({55., 500.}));
+    CHECK((double)probe.NSM == 0.);
+}
 
-    SECTION("Small Field Format (L)") {
+TEST_CASE("BDF PBARL definitions; Small Field Format (L).", "[bdf_pbarl]") {
 
-        std::list<std::string> data({
+    std::list<std::string> data({
             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
             "PBARL   104010  4               L\n",
             "           63.0   340.0    35.0    14.0\n"});
-        std::list<std::string> lines;
-        __base::card::card_split(data, lines);
-        pbarl probe(lines);
+    std::list<std::string> lines;
+    card::card_split(data, lines);
+    pbarl probe(lines);
 
-        CHECK((long)probe.PID == 104010);
-        CHECK((long)probe.MID == 4);
-        CHECK(probe.GROUP == "MSCBML0");
-        CHECK(probe.TYPE == "L");
-        CHECK(probe.DIM == vector<double>({63., 340., 35., 14.}));
-        CHECK((double)probe.NSM == 0.);
-    }
+    CHECK((long)probe.PID == 104010);
+    CHECK((long)probe.MID == 4);
+    CHECK(probe.GROUP == "MSCBML0");
+    CHECK(probe.TYPE == "L");
+    CHECK(probe.DIM == vector<double>({63., 340., 35., 14.}));
+    CHECK((double)probe.NSM == 0.);
+}
 
-    SECTION("Small Field Format (T)") {
+TEST_CASE("BDF PBARL definitions; Small Field Format (T).", "[bdf_pbarl]") {
 
-        std::list<std::string> data({
+    std::list<std::string> data({
             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
             "PBARL   101031  1               T\n",
             "          150.0   400.0    12.0    10.0\n"});
-        std::list<std::string> lines;
-        __base::card::card_split(data, lines);
-        pbarl probe(lines);
+    std::list<std::string> lines;
+    card::card_split(data, lines);
+    pbarl probe(lines);
 
-        CHECK((long)probe.PID == 101031);
-        CHECK((long)probe.MID == 1);
-        CHECK(probe.GROUP == "MSCBML0");
-        CHECK(probe.TYPE == "T");
-        CHECK(probe.DIM == vector<double>({150., 400., 12., 10.}));
-        CHECK((double)probe.NSM == 0.);
-    }
+    CHECK((long)probe.PID == 101031);
+    CHECK((long)probe.MID == 1);
+    CHECK(probe.GROUP == "MSCBML0");
+    CHECK(probe.TYPE == "T");
+    CHECK(probe.DIM == vector<double>({150., 400., 12., 10.}));
+    CHECK((double)probe.NSM == 0.);
+}
 
-    SECTION("Small Field Format (I)") {
+TEST_CASE("BDF PBARL definitions; Small Field Format (I).", "[bdf_pbarl]") {
 
-        std::list<std::string> data({
+    std::list<std::string> data({
             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
             "PBARL   104018  4               I\n",
             "           600.0   200.0   200.0    12.0    10.0    10.0\n"});
-        std::list<std::string> lines;
-        __base::card::card_split(data, lines);
-        pbarl probe(lines);
+    std::list<std::string> lines;
+    card::card_split(data, lines);
+    pbarl probe(lines);
 
-        CHECK((long)probe.PID == 104018);
-        CHECK((long)probe.MID == 4);
-        CHECK(probe.GROUP == "MSCBML0");
-        CHECK(probe.TYPE == "I");
-        CHECK(probe.DIM == vector<double>({
-            600., 200., 200., 12., 10., 10.}));
-        CHECK((double)probe.NSM == 0.);
-    }
+    CHECK((long)probe.PID == 104018);
+    CHECK((long)probe.MID == 4);
+    CHECK(probe.GROUP == "MSCBML0");
+    CHECK(probe.TYPE == "I");
+    CHECK(probe.DIM == vector<double>({
+                600., 200., 200., 12., 10., 10.}));
+    CHECK((double)probe.NSM == 0.);
+}
 
-    SECTION("Small Field Format (I) (alt)") {
+TEST_CASE("BDF PBARL definitions; Small Field Format (I) (alt).", "[bdf_pbarl]") {
 
-        std::list<std::string> data({
+    std::list<std::string> data({
             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
             "PBARL         39       6               I\n",
             "             14.      6.      .5      .5      .5      .5\n"});
-        std::list<std::string> lines;
-        __base::card::card_split(data, lines);
-        pbarl probe(lines);
+    std::list<std::string> lines;
+    card::card_split(data, lines);
+    pbarl probe(lines);
 
-        CHECK((long)probe.PID == 39);
-        CHECK((long)probe.MID == 6);
-        CHECK(probe.GROUP == "MSCBML0");
-        CHECK(probe.TYPE == "I");
-        CHECK(probe.DIM == vector<double>({
-            14., 6., .5, .5, .5, .5}));
-        CHECK((double)probe.NSM == 0.);
-    }
+    CHECK((long)probe.PID == 39);
+    CHECK((long)probe.MID == 6);
+    CHECK(probe.GROUP == "MSCBML0");
+    CHECK(probe.TYPE == "I");
+    CHECK(probe.DIM == vector<double>({14., 6., .5, .5, .5, .5}));
+    CHECK((double)probe.NSM == 0.);
+}
 
-    SECTION("Small Field Format (TUBE)") {
+TEST_CASE("BDF PBARL definitions; Small Field Format (TUBE).", "[bdf_pbarl]") {
 
-        std::list<std::string> data({
+    std::list<std::string> data({
             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
             "PBARL   104019  5               TUBE\n",
             "           600.0   500.0\n"});
-        std::list<std::string> lines;
-        __base::card::card_split(data, lines);
-        pbarl probe(lines);
+    std::list<std::string> lines;
+    card::card_split(data, lines);
+    pbarl probe(lines);
 
-        CHECK((long)probe.PID == 104019);
-        CHECK((long)probe.MID == 5);
-        CHECK(probe.GROUP == "MSCBML0");
-        CHECK(probe.TYPE == "TUBE");
-        CHECK(probe.DIM == vector<double>({600., 500.}));
-        CHECK((double)probe.NSM == 0.);
+    CHECK((long)probe.PID == 104019);
+    CHECK((long)probe.MID == 5);
+    CHECK(probe.GROUP == "MSCBML0");
+    CHECK(probe.TYPE == "TUBE");
+    CHECK(probe.DIM == vector<double>({600., 500.}));
+    CHECK((double)probe.NSM == 0.);
+}
+
+TEST_CASE("BDF PBARL roundtrip test", "[bdf_pbarl]") {
+    ostringstream test;
+
+    long PID{7869}, MID{104010};
+    std::string GROUP("MSCBML0");
+    std::string TYPE("I");
+    vector<double> DIM{1., 2., 3., 4., 5., 6.};
+    double NSM{77.};
+
+    pbarl probe(&PID, &MID, &GROUP, &TYPE,
+                &DIM, &NSM);
+    test << probe;
+
+    SECTION("check output") {
+        CHECK(test.str() ==
+              "PBARL       7869  104010MSCBML0 I                                       \n"
+              "        1.000+002.000+003.000+004.000+005.000+006.000+007.700+01\n");
+    }
+
+    SECTION("check reading") {
+        list<std::string> data;
+        list<std::string> lines;
+        std::string tmp;
+        istringstream raw(test.str());
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        card::card_split(data, lines);
+        pbarl probe_l(lines);
+
+        CHECK(long(probe_l.PID) == 7869);
+        CHECK(long(probe_l.MID) == 104010);
+        CHECK(probe.DIM.size() == 6);
+        for (size_t i = 0; i<probe.DIM.size(); i++ ) {
+            CHECK(double(probe.DIM[i]) == vector<double>({1., 2., 3., 4., 5., 6.})[i]);
+        }
+        CHECK(double(probe.NSM) == 77.);
+    }
+}
+
+TEST_CASE("BDF PBARL roundtrip test (reuse)", "[bdf_pbarl]") {
+    ostringstream test;
+
+    long PID{7869}, MID{104010};
+    std::string GROUP("MSCBML0");
+    std::string TYPE("I");
+    vector<double> DIM{1., 2., 3., 4., 5., 6.};
+    double NSM{77.};
+
+    pbarl probe;
+    test << probe;
+    test << probe(&PID, &MID, &GROUP, &TYPE,
+                  &DIM, &NSM);
+
+    SECTION("check output") {
+        CHECK(test.str() ==
+              "PBARL       7869  104010MSCBML0 I                                       \n"
+              "        1.000+002.000+003.000+004.000+005.000+006.000+007.700+01\n");
+    }
+
+    SECTION("check reading") {
+        list<std::string> data;
+        list<std::string> lines;
+        std::string tmp;
+        istringstream raw(test.str());
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        card::card_split(data, lines);
+        pbarl probe_l;
+        probe_l(lines);
+
+        CHECK(long(probe_l.PID) == 7869);
+        CHECK(long(probe_l.MID) == 104010);
+        CHECK(probe.DIM.size() == 6);
+        for (size_t i = 0; i<probe.DIM.size(); i++ ) {
+            CHECK(double(probe.DIM[i]) == vector<double>({1., 2., 3., 4., 5., 6.})[i]);
+        }
+        CHECK(double(probe.NSM) == 77.);
+    }
+}
+
+TEST_CASE("BDF PBARL roundtrip test (use default)", "[bdf_pbarl]") {
+    ostringstream test;
+
+    long PID{7869}, MID{104010};
+    std::string TYPE("I");
+    vector<double> DIM{1., 2., 3., 4., 5., 6.};
+
+    pbarl probe(&PID, &MID, nullptr, &TYPE, &DIM);
+    test << probe;
+
+    SECTION("check output") {
+        CHECK(test.str() ==
+              "PBARL       7869  104010        I                                       \n"
+              "        1.000+002.000+003.000+004.000+005.000+006.000+00\n");
+    }
+
+    SECTION("check reading") {
+        list<std::string> data;
+        list<std::string> lines;
+        std::string tmp;
+        istringstream raw(test.str());
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        card::card_split(data, lines);
+        pbarl probe_l(lines);
+
+        CHECK(long(probe_l.PID) == 7869);
+        CHECK(long(probe_l.MID) == 104010);
+        CHECK(probe.DIM.size() == 6);
+        for (size_t i = 0; i<probe.DIM.size(); i++ ) {
+            CHECK(double(probe.DIM[i]) == vector<double>({1., 2., 3., 4., 5., 6.})[i]);
+        }
+        CHECK_FALSE(probe.NSM);
+    }
+}
+
+TEST_CASE("BDF PBARL roundtrip test (use default) (reuse)", "[bdf_pbarl]") {
+    ostringstream test;
+
+    long PID{7869}, MID{104010};
+    std::string TYPE("I");
+    vector<double> DIM{1., 2., 3., 4., 5., 6.};
+
+    pbarl probe;
+    test << probe;
+    test << probe(&PID, &MID, nullptr, &TYPE, &DIM);
+
+    SECTION("check output") {
+        CHECK(test.str() ==
+              "PBARL       7869  104010        I                                       \n"
+              "        1.000+002.000+003.000+004.000+005.000+006.000+00\n");
+    }
+
+    SECTION("check reading") {
+        list<std::string> data;
+        list<std::string> lines;
+        std::string tmp;
+        istringstream raw(test.str());
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        card::card_split(data, lines);
+        pbarl probe_l;
+        probe_l(lines);
+
+        CHECK(long(probe_l.PID) == 7869);
+        CHECK(long(probe_l.MID) == 104010);
+        CHECK(probe.DIM.size() == 6);
+        for (size_t i = 0; i<probe.DIM.size(); i++ ) {
+            CHECK(double(probe.DIM[i]) == vector<double>({1., 2., 3., 4., 5., 6.})[i]);
+        }
+        CHECK_FALSE(probe.NSM);
     }
 }
 
@@ -174,7 +333,7 @@ TEST_CASE("BDF PBARL definitions.", "[bdf_PBARL]") {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&
-//    (make -C ../cbuild test;
+// compile-command: "make -C ../cbuild -j7 &&
+//    (make -C ../cbuild test ;
 //     ../cbuild/tests/test_bdf_cards --use-colour no)"
 // End:
