@@ -294,9 +294,9 @@ namespace dnvgl {
       \end{array}
       \right] = \left[
       \begin{array}{cccc}
-      T_{11}& T_{12}& T_{13}& T_{14}\                   \
-      T_{21}& T_{22}& T_{23}& T_{24}\                   \
-      T_{31}& T_{32}& T_{33}& T_{34}\                   \
+      T_{11}& T_{12}& T_{13}& T_{14}\\
+      T_{21}& T_{22}& T_{23}& T_{24}\\
+      T_{31}& T_{32}& T_{33}& T_{34}\\
       0& 0& 0& 1
       \end{array}
       \right] \times \left[
