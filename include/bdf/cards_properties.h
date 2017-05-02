@@ -224,8 +224,12 @@ namespace dnvgl {
                         using __base::beam_base::form_PID;
                         using __base::beam_base::form_MID;
 
+                    public:
+
                         using __base::beam_base::PID;
                         using __base::beam_base::MID;
+
+                    protected:
 
                         using __base::beam_base::operator();
 
@@ -686,6 +690,9 @@ namespace dnvgl {
                         bar_prop(std::list<std::string> const&);
 
                     public:
+
+                        using beam_base::PID;
+                        using beam_base::MID;
 
                         types card_type() const override;
                     };
