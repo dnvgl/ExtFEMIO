@@ -968,11 +968,20 @@ namespace dnvgl {
 
                     explicit prod(std::list<std::string> const&);
 
+                    prod(long *PID, long *MID,
+                         double *A, double *J=nullptr, double *C=nullptr,
+                         double *NSM=nullptr);
+
                     types card_type() const override;
 
                     void read(std::list<std::string> const &) override;
 
                     card const &operator() (const std::list<std::string> &) override;
+
+                    card const &operator() (
+                        long *PID, long *MID,
+                        double *A, double *J=nullptr, double *C=nullptr,
+                        double *NSM=nullptr);
 
                 private:
 

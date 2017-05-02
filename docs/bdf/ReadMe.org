@@ -26,7 +26,7 @@
   |          | =PBEAML=   | Properties for =CBEAM= describing cross section                                             | ✓      | ✓       |
   |          | =PBAR=     | Integral properties for =CBAR=                                                              | ✓      | ✓       |
   |          | =PBARL=    | Properties for =CBAR= describing cross section                                              | ✓      | ✓       |
-  |          | =PROD=     | Properties for =CROD=                                                                       | ✓      | ✗       |
+  |          | =PROD=     | Properties for =CROD=                                                                       | ✓      | ✓       |
   |          | =PELAS=    | Properties for =CELAS*=                                                                     | ✗      | ✗       |
   |----------+------------+---------------------------------------------------------------------------------------------+--------+---------|
   | Load     |            |                                                                                             |        |         |

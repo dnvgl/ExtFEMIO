@@ -125,9 +125,10 @@ void pbarl::collect_outdata(
     res.push_back(unique_ptr<format_entry>(format<long>(form_MID, MID)));
 
     res.push_back(
-        bool(GROUP) ?
-        unique_ptr<format_entry>(format<std::string>(form_GROUP, GROUP)) :
-        unique_ptr<format_entry>(format(empty)));
+        unique_ptr<format_entry>(
+            bool(GROUP) ?
+            format<std::string>(form_GROUP, GROUP) :
+            format(empty)));
     res.push_back(unique_ptr<format_entry>(format<std::string>(form_TYPE, TYPE)));
     for (auto i = 0;i<4;i++ )
         res.push_back(unique_ptr<format_entry>(format(empty)));

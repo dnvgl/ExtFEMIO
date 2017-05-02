@@ -27,18 +27,19 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-namespace {
-    const long cl1 = 1;
-    const double cd0 = 0.;
-}
-
 using namespace std;
 
 using namespace dnvgl::extfem;
 using namespace bdf;
 using namespace cards;
-
 using bdf::types::entry_type;
+
+namespace {
+    const long cl1 = 1;
+    const double cd0 = 0.;
+}
+
+bdf::types::card prod::head = bdf::types::card("PROD");
 
 // const entry_type<long> prod::form_PID(
 //     "PID", bdf::type_bounds::bound<long>(&cl1));
@@ -57,6 +58,12 @@ const entry_type<double> prod::form_NSM(
 prod::prod(list<std::string> const &inp) :
         property(inp) {
     this->prod::read(inp);
+}
+
+prod::prod(long *PID, long *MID,
+           double *A, double *J, double *C, double *NSM) :
+        property(PID), MID(MID), A(A), J(J), C(C), NSM(NSM) {
+    this->prod::check_data();
 }
 
 void prod::read(list<std::string> const &inp) {
@@ -97,7 +104,24 @@ cards::types prod::card_type() const {
 
 void prod::collect_outdata(
     list<std::unique_ptr<format_entry> > &res) const {
-    throw not_implemented(__FILE__, __LINE__, "can't write PROD.");
+        if (!PID) return;
+
+    res.push_back(unique_ptr<format_entry>(format(head)));
+
+    res.push_back(unique_ptr<format_entry>(format<long>(form_PID, PID)));
+    res.push_back(unique_ptr<format_entry>(format<long>(form_MID, MID)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_A, A)));
+    res.push_back(unique_ptr<format_entry>(
+                      bool(J) ?
+                      format<double>(form_J, J) :
+                      format(empty)));
+    if(bool(C) || bool(NSM))
+        res.push_back(
+            unique_ptr<format_entry>(
+                bool(C) ?
+                format<double>(form_C, C) :
+                format(empty)));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_NSM, NSM)));
 }
 
 void prod::check_data() const {
@@ -112,6 +136,19 @@ void prod::check_data() const {
 cards::__base::card const &prod::operator() (list<std::string> const &inp) {
     this->property::read(inp);
     this->prod::read(inp);
+    return *this;
+}
+
+cards::__base::card const &prod::operator() (
+    long *PID, long *MID,
+    double *A, double *J, double *C, double *NSM) {
+    this->property::operator()(PID);
+    this->MID(MID);
+    this->A(A);
+    this->J(J);
+    this->C(C);
+    this->NSM(NSM);
+    this->prod::check_data();
     return *this;
 }
 
