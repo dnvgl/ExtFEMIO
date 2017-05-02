@@ -68,6 +68,7 @@ pbarl::pbarl(long const *PID, long const *MID,
 void pbarl::read(list<std::string> const &inp) {
 
     size_t i;
+    size_t dim_num{0};
 
     auto pos = inp.begin();
 
@@ -85,7 +86,7 @@ void pbarl::read(list<std::string> const &inp) {
     if (pos == inp.end()) goto invalid;
     form_TYPE.set_value(TYPE, *(pos++));
     if (pos == inp.end()) goto invalid;
-    auto dim_num = this->l_geom::get_dim(TYPE.value);
+    dim_num = this->l_geom::get_dim(TYPE.value);
     if (dim_num < 1)
         throw errors::parse_error(
             "PBARL", "Unknown beam type " + TYPE.value + ".");
@@ -133,7 +134,7 @@ void pbarl::collect_outdata(
         res.push_back(unique_ptr<format_entry>(format(empty)));
     for (auto &pos : DIM)
         res.push_back(unique_ptr<format_entry>(
-                          format<double>(form_DIM, &pos)));
+                          format<double>(form_DIM, pos)));
     if (bool(NSM))
         res.push_back(
             unique_ptr<format_entry>(

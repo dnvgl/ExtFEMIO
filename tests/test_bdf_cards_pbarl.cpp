@@ -46,7 +46,7 @@ TEST_CASE("BDF PBARL definitions; Small Field Format (BAR).", "[bdf_pbarl]") {
     std::list<std::string> data({
             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
             "PBARL   104018  4               BAR\n",
-            "           25.0   600.0\n"});
+                "           25.0   600.0\n"});
     std::list<std::string> lines;
     card::card_split(data, lines);
     pbarl probe(lines);
@@ -56,7 +56,8 @@ TEST_CASE("BDF PBARL definitions; Small Field Format (BAR).", "[bdf_pbarl]") {
     CHECK(probe.GROUP == "MSCBML0");
     CHECK(probe.TYPE == "BAR");
     CHECK(probe.DIM.size() == 2);
-    CHECK(probe.DIM == vector<double>({25., 600.}));
+    CHECK(vector<double>(probe.DIM.begin(), probe.DIM.end()) ==
+          vector<double>({25., 600.}));
     CHECK((double)probe.NSM == 0.);
 }
 
@@ -66,7 +67,7 @@ TEST_CASE("BDF PBARL definitions; Small Field Format (BAR) (alt.).", "[bdf_pbarl
     std::list<std::string> data({
             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
             "PBARL        134       8            BAR\n",
-            "            55.0   500.0"});
+                "            55.0   500.0"});
     std::list<std::string> lines;
     card::card_split(data, lines);
     pbarl probe(lines);
@@ -75,7 +76,8 @@ TEST_CASE("BDF PBARL definitions; Small Field Format (BAR) (alt.).", "[bdf_pbarl
     CHECK((long)probe.MID == 8);
     CHECK(probe.GROUP == "MSCBML0");
     CHECK(probe.TYPE == "BAR");
-    CHECK(probe.DIM == vector<double>({55., 500.}));
+    CHECK(vector<double>(probe.DIM.begin(), probe.DIM.end()) ==
+          vector<double>({55., 500.}));
     CHECK((double)probe.NSM == 0.);
 }
 
@@ -84,7 +86,7 @@ TEST_CASE("BDF PBARL definitions; Small Field Format (L).", "[bdf_pbarl]") {
     std::list<std::string> data({
             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
             "PBARL   104010  4               L\n",
-            "           63.0   340.0    35.0    14.0\n"});
+                "           63.0   340.0    35.0    14.0\n"});
     std::list<std::string> lines;
     card::card_split(data, lines);
     pbarl probe(lines);
@@ -93,7 +95,8 @@ TEST_CASE("BDF PBARL definitions; Small Field Format (L).", "[bdf_pbarl]") {
     CHECK((long)probe.MID == 4);
     CHECK(probe.GROUP == "MSCBML0");
     CHECK(probe.TYPE == "L");
-    CHECK(probe.DIM == vector<double>({63., 340., 35., 14.}));
+    CHECK(vector<double>(probe.DIM.begin(), probe.DIM.end()) ==
+          vector<double>({63., 340., 35., 14.}));
     CHECK((double)probe.NSM == 0.);
 }
 
@@ -102,7 +105,7 @@ TEST_CASE("BDF PBARL definitions; Small Field Format (T).", "[bdf_pbarl]") {
     std::list<std::string> data({
             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
             "PBARL   101031  1               T\n",
-            "          150.0   400.0    12.0    10.0\n"});
+                "          150.0   400.0    12.0    10.0\n"});
     std::list<std::string> lines;
     card::card_split(data, lines);
     pbarl probe(lines);
@@ -111,7 +114,8 @@ TEST_CASE("BDF PBARL definitions; Small Field Format (T).", "[bdf_pbarl]") {
     CHECK((long)probe.MID == 1);
     CHECK(probe.GROUP == "MSCBML0");
     CHECK(probe.TYPE == "T");
-    CHECK(probe.DIM == vector<double>({150., 400., 12., 10.}));
+    CHECK(vector<double>(probe.DIM.begin(), probe.DIM.end()) ==
+          vector<double>({150., 400., 12., 10.}));
     CHECK((double)probe.NSM == 0.);
 }
 
@@ -120,7 +124,7 @@ TEST_CASE("BDF PBARL definitions; Small Field Format (I).", "[bdf_pbarl]") {
     std::list<std::string> data({
             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
             "PBARL   104018  4               I\n",
-            "           600.0   200.0   200.0    12.0    10.0    10.0\n"});
+                "           600.0   200.0   200.0    12.0    10.0    10.0\n"});
     std::list<std::string> lines;
     card::card_split(data, lines);
     pbarl probe(lines);
@@ -129,8 +133,9 @@ TEST_CASE("BDF PBARL definitions; Small Field Format (I).", "[bdf_pbarl]") {
     CHECK((long)probe.MID == 4);
     CHECK(probe.GROUP == "MSCBML0");
     CHECK(probe.TYPE == "I");
-    CHECK(probe.DIM == vector<double>({
-                600., 200., 200., 12., 10., 10.}));
+    CHECK(vector<double>(probe.DIM.begin(), probe.DIM.end()) ==
+          vector<double>({
+                  600., 200., 200., 12., 10., 10.}));
     CHECK((double)probe.NSM == 0.);
 }
 
@@ -139,7 +144,7 @@ TEST_CASE("BDF PBARL definitions; Small Field Format (I) (alt).", "[bdf_pbarl]")
     std::list<std::string> data({
             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
             "PBARL         39       6               I\n",
-            "             14.      6.      .5      .5      .5      .5\n"});
+                "             14.      6.      .5      .5      .5      .5\n"});
     std::list<std::string> lines;
     card::card_split(data, lines);
     pbarl probe(lines);
@@ -148,7 +153,8 @@ TEST_CASE("BDF PBARL definitions; Small Field Format (I) (alt).", "[bdf_pbarl]")
     CHECK((long)probe.MID == 6);
     CHECK(probe.GROUP == "MSCBML0");
     CHECK(probe.TYPE == "I");
-    CHECK(probe.DIM == vector<double>({14., 6., .5, .5, .5, .5}));
+    CHECK(vector<double>(probe.DIM.begin(), probe.DIM.end()) ==
+          vector<double>({14., 6., .5, .5, .5, .5}));
     CHECK((double)probe.NSM == 0.);
 }
 
@@ -157,7 +163,7 @@ TEST_CASE("BDF PBARL definitions; Small Field Format (TUBE).", "[bdf_pbarl]") {
     std::list<std::string> data({
             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
             "PBARL   104019  5               TUBE\n",
-            "           600.0   500.0\n"});
+                "           600.0   500.0\n"});
     std::list<std::string> lines;
     card::card_split(data, lines);
     pbarl probe(lines);
@@ -166,7 +172,8 @@ TEST_CASE("BDF PBARL definitions; Small Field Format (TUBE).", "[bdf_pbarl]") {
     CHECK((long)probe.MID == 5);
     CHECK(probe.GROUP == "MSCBML0");
     CHECK(probe.TYPE == "TUBE");
-    CHECK(probe.DIM == vector<double>({600., 500.}));
+    CHECK(vector<double>(probe.DIM.begin(), probe.DIM.end()) ==
+          vector<double>({600., 500.}));
     CHECK((double)probe.NSM == 0.);
 }
 
@@ -203,9 +210,8 @@ TEST_CASE("BDF PBARL roundtrip test", "[bdf_pbarl]") {
         CHECK(long(probe_l.PID) == 7869);
         CHECK(long(probe_l.MID) == 104010);
         CHECK(probe.DIM.size() == 6);
-        for (size_t i = 0; i<probe.DIM.size(); i++ ) {
-            CHECK(double(probe.DIM[i]) == vector<double>({1., 2., 3., 4., 5., 6.})[i]);
-        }
+        CHECK(vector<double>(probe.DIM.begin(), probe.DIM.end()) ==
+              vector<double>({1., 2., 3., 4., 5., 6.}));
         CHECK(double(probe.NSM) == 77.);
     }
 }
@@ -245,9 +251,8 @@ TEST_CASE("BDF PBARL roundtrip test (reuse)", "[bdf_pbarl]") {
         CHECK(long(probe_l.PID) == 7869);
         CHECK(long(probe_l.MID) == 104010);
         CHECK(probe.DIM.size() == 6);
-        for (size_t i = 0; i<probe.DIM.size(); i++ ) {
-            CHECK(double(probe.DIM[i]) == vector<double>({1., 2., 3., 4., 5., 6.})[i]);
-        }
+        CHECK(vector<double>(probe.DIM.begin(), probe.DIM.end()) ==
+              vector<double>({1., 2., 3., 4., 5., 6.}));
         CHECK(double(probe.NSM) == 77.);
     }
 }
@@ -282,9 +287,9 @@ TEST_CASE("BDF PBARL roundtrip test (use default)", "[bdf_pbarl]") {
         CHECK(long(probe_l.PID) == 7869);
         CHECK(long(probe_l.MID) == 104010);
         CHECK(probe.DIM.size() == 6);
-        for (size_t i = 0; i<probe.DIM.size(); i++ ) {
-            CHECK(double(probe.DIM[i]) == vector<double>({1., 2., 3., 4., 5., 6.})[i]);
-        }
+        CHECK(vector<double>(probe.DIM.begin(), probe.DIM.end()) ==
+              vector<double>({1., 2., 3., 4., 5., 6.}));
+
         CHECK_FALSE(probe.NSM);
     }
 }
@@ -321,9 +326,8 @@ TEST_CASE("BDF PBARL roundtrip test (use default) (reuse)", "[bdf_pbarl]") {
         CHECK(long(probe_l.PID) == 7869);
         CHECK(long(probe_l.MID) == 104010);
         CHECK(probe.DIM.size() == 6);
-        for (size_t i = 0; i<probe.DIM.size(); i++ ) {
-            CHECK(double(probe.DIM[i]) == vector<double>({1., 2., 3., 4., 5., 6.})[i]);
-        }
+        CHECK(vector<double>(probe.DIM.begin(), probe.DIM.end()) ==
+              vector<double>({1., 2., 3., 4., 5., 6.}));
         CHECK_FALSE(probe.NSM);
     }
 }

@@ -884,7 +884,7 @@ namespace dnvgl {
                     /** Cross-section dimensions. (Real > 0.0 for `GROUP` =
                         `MSCBML0`)
                         */
-                    std::vector<double> DIM;
+                    std::vector<bdf::types::entry_value<double>> DIM;
                     /** Nonstructural mass per unit length. `NSM` is
                         specified after the last `DIMi`. (Default = 0.0)
                         */

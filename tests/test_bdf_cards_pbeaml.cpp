@@ -57,9 +57,8 @@ TEST_CASE("BDF PBEAML definitions: Small Field Format (BAR).", "[bdf_pbeaml]") {
     CHECK(probe.TYPE == "BAR");
     CHECK(probe.DIM.size() == 1);
     CHECK(probe.DIM[0].size() == 2);
-    for (size_t i = 0; i<probe.DIM[0].size(); i++ ) {
-        CHECK(double(probe.DIM[0][i]) == vector<double>({25., 600.})[i]);
-    }
+    CHECK(vector<double>(probe.DIM[0].begin(), probe.DIM[0].end()) ==
+          vector<double>({25., 600.}));
     CHECK(probe.NSM.size() == 1);
     CHECK(double(probe.NSM[0]) == 0.);
     CHECK(probe.SO.size() == 0);
@@ -81,9 +80,8 @@ TEST_CASE("BDF PBEAML definitions: Small Field Format (BAR 2).", "[bdf_pbeaml]")
     CHECK(probe.TYPE == "BAR");
     CHECK(probe.DIM.size() == 1);
     CHECK(probe.DIM[0].size() == 2);
-    for (size_t i = 0; i<probe.DIM[0].size(); i++ ) {
-        CHECK(double(probe.DIM[0][i]) == vector<double>({55., 500.})[i]);
-    }
+    CHECK(vector<double>(probe.DIM[0].begin(), probe.DIM[0].end()) ==
+          vector<double>({55., 500.}));
     CHECK(probe.NSM.size() == 1);
     CHECK(double(probe.NSM[0]) == 0.);
     CHECK(probe.SO.size() == 0);
@@ -105,10 +103,8 @@ TEST_CASE("BDF PBEAML definitions: Small Field Format (L).", "[bdf_pbeaml]") {
     CHECK(probe.TYPE == "L");
     CHECK(probe.DIM.size() == 1);
     CHECK(probe.DIM[0].size() == 4);
-    for (size_t i = 0; i<probe.DIM[0].size(); i++ ) {
-        CHECK(double(probe.DIM[0][i]) == vector<double>(
-                  {63., 340., 35., 14.})[i]);
-    }
+    CHECK(vector<double>(probe.DIM[0].begin(), probe.DIM[0].end()) ==
+          vector<double>({63., 340., 35., 14.}));
     CHECK(double(probe.NSM[0]) == 0.);
     CHECK(probe.SO.size() == 0);
     CHECK(probe.X_XB.size() == 0);
@@ -129,10 +125,8 @@ TEST_CASE("BDF PBEAML definitions: Small Field Format (T).", "[bdf_pbeaml]") {
     CHECK(probe.TYPE == "T");
     CHECK(probe.DIM.size() == 1);
     CHECK(probe.DIM[0].size() == 4);
-    for (size_t i = 0; i<probe.DIM[0].size(); i++ ) {
-        CHECK(double(probe.DIM[0][i]) == vector<double>(
-                  {150., 400., 12., 10.})[i]);
-    }
+    CHECK(vector<double>(probe.DIM[0].begin(), probe.DIM[0].end()) ==
+          vector<double>({150., 400., 12., 10.}));
     CHECK(double(probe.NSM[0]) == 0.);
     CHECK(probe.SO.size() == 0);
     CHECK(probe.X_XB.size() == 0);
@@ -153,10 +147,8 @@ TEST_CASE("BDF PBEAML definitions: Small Field Format (I).", "[bdf_pbeaml]") {
     CHECK(probe.TYPE == "I");
     CHECK(probe.DIM.size() == 1);
     CHECK(probe.DIM[0].size() == 6);
-    for (size_t i = 0; i<probe.DIM[0].size(); i++ ) {
-        CHECK(double(probe.DIM[0][i]) == vector<double>(
-                  {600., 200., 200., 12., 10., 10.})[i]);
-    }
+    CHECK(vector<double>(probe.DIM[0].begin(), probe.DIM[0].end()) ==
+          vector<double>({600., 200., 200., 12., 10., 10.}));
     CHECK(double(probe.NSM[0]) == 0.);
     CHECK(probe.SO.size() == 0);
     CHECK(probe.X_XB.size() == 0);
@@ -176,10 +168,8 @@ TEST_CASE("BDF PBEAML definitions: Small Field Format (TUBE).", "[bdf_pbeaml]") 
     CHECK(probe.TYPE == "TUBE");
     CHECK(probe.DIM.size() == 1);
     CHECK(probe.DIM[0].size() == 2);
-    for (size_t i = 0; i<probe.DIM[0].size(); i++ ) {
-        CHECK(double(probe.DIM[0][i]) == vector<double>(
-                  {600., 500.})[i]);
-    }
+    CHECK(vector<double>(probe.DIM[0].begin(), probe.DIM[0].end()) ==
+          vector<double>({600., 500.}));
     CHECK(double(probe.NSM[0]) == 0.);
     CHECK(probe.SO.size() == 0);
     CHECK(probe.X_XB.size() == 0);
@@ -204,26 +194,21 @@ TEST_CASE("BDF PBEAML definitions: Small Field Format (T, tapered).", "[bdf_pbea
     CHECK(probe.DIM.size() == 3);
     for (size_t i = 0; i<probe.DIM.size(); i++ ) {
         CHECK(probe.DIM[i].size() == 4);
-        for (size_t j = 0; i<probe.DIM[i].size(); i++ ) {
-            CHECK(double(probe.DIM[i][j]) == vector<vector<double>>(
-                      {{12., 14.8, 2.5, 2.6},
-                       {6., 7., 1.2, 2.6},
-                       {6., 7.8, 5.6, 2.3}})[i][j]);
-        }
+        CHECK(vector<double>(probe.DIM[i].begin(), probe.DIM[i].end()) ==
+          vector<vector<double>>(
+              {{12., 14.8, 2.5, 2.6},
+                  {6., 7., 1.2, 2.6},
+                  {6., 7.8, 5.6, 2.3}})[i]);
     }
     CHECK(probe.NSM.size() == 3);
-    for (size_t i = 0; i<probe.NSM.size(); i++ ) {
-        CHECK(double(probe.NSM[i]) == vector<double>({0., 0., 0.})[i]);
-    }
+    CHECK(vector<double>(probe.NSM.begin(), probe.NSM.end()) ==
+          vector<double>({0., 0., 0.}));
     CHECK(probe.SO.size() == 2);
-    for (size_t i = 0; i<probe.SO.size(); i++ ) {
-        CHECK(std::string(probe.SO[i]) == vector<std::string>({
-                    "NO", "YES"})[i]);
-    }
+    CHECK(vector<std::string>(probe.SO.begin(), probe.SO.end()) ==
+          vector<std::string>({"NO", "YES"}));
     CHECK(probe.X_XB.size() == 2);
-    for (size_t i = 0; i<probe.X_XB.size(); i++ ) {
-        CHECK(double(probe.X_XB[i]) == vector<double>({.4, .6})[i]);
-    }
+    CHECK(vector<double>(probe.X_XB.begin(), probe.X_XB.end()) ==
+          vector<double>({.4, .6}));
 }
 
 TEST_CASE("BDF PBEAML invalid dim test", "[bdf_pbeaml]") {
@@ -277,9 +262,8 @@ TEST_CASE("BDF PBEAML roundtrip test", "[bdf_pbeaml]") {
         CHECK(long(probe_l.MID) == 104010);
         CHECK(probe.DIM.size() == 1);
         CHECK(probe.DIM[0].size() == 6);
-        for (size_t i = 0; i<probe.DIM[0].size(); i++ ) {
-            CHECK(double(probe.DIM[0][i]) == vector<double>({1., 2., 3., 4., 5., 6.})[i]);
-        }
+        CHECK(vector<double>(probe.DIM[0].begin(), probe.DIM[0].end()) ==
+              vector<double>({1., 2., 3., 4., 5., 6.}));
         CHECK(probe.NSM.size() == 1);
         CHECK(double(probe.NSM[0]) == 77.);
         CHECK(probe.SO.size() == 1);
@@ -326,9 +310,8 @@ TEST_CASE("BDF PBEAML roundtrip test (reuse)", "[bdf_pbeaml]") {
         CHECK(long(probe_l.MID) == 104010);
         CHECK(probe.DIM.size() == 1);
         CHECK(probe.DIM[0].size() == 6);
-        for (size_t i = 0; i<probe.DIM[0].size(); i++ ) {
-            CHECK(double(probe.DIM[0][i]) == vector<double>({1., 2., 3., 4., 5., 6.})[i]);
-        }
+        CHECK(vector<double>(probe.DIM[0].begin(), probe.DIM[0].end()) ==
+              vector<double>({1., 2., 3., 4., 5., 6.}));
         CHECK(probe.NSM.size() == 1);
         CHECK(double(probe.NSM[0]) == 77.);
         CHECK(probe.SO.size() == 1);
