@@ -402,78 +402,78 @@ void pbeam::collect_outdata(
     if (has_tail || I12.size()>0 || J.size()>0 || NSM.size()>0 ||
         C1.size()>0 || C2.size()>0 || D1.size()>0 || D2.size()>0 ||
         E1.size()>0 || E2.size()>0 || F1.size()>0 || F2.size()>0)
-        res.push_back(
-            (I12.size()>0) ?
-            unique_ptr<format_entry>(format<double>(form_I12, &(*pos_I12++))) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          I12.size()>0 ?
+                          format<double>(form_I12, &(*pos_I12++)) :
+                          format(empty)));
     else goto cont;
     if (has_tail || J.size()>0 || NSM.size()>0 ||
         C1.size()>0 || C2.size()>0 || D1.size()>0 || D2.size()>0 ||
         E1.size()>0 || E2.size()>0 || F1.size()>0 || F2.size()>0)
-        res.push_back(
-            J.size()>0 ?
-            unique_ptr<format_entry>(format<double>(form_J, &(*pos_J++))) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          J.size()>0 ?
+                          format<double>(form_J, &(*pos_J++)) :
+                          format(empty)));
     else goto cont;
     if (has_tail || NSM.size()>0 ||
         C1.size()>0 || C2.size()>0 || D1.size()>0 || D2.size()>0 ||
         E1.size()>0 || E2.size()>0 || F1.size()>0 || F2.size()>0)
-        res.push_back(
-            NSM.size()>0 ?
-            unique_ptr<format_entry>(format<double>(form_NSM, &(*pos_NSM++))) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          NSM.size()>0 ?
+                          format<double>(form_NSM, &(*pos_NSM++)) :
+                          format(empty)));
     else goto cont;
     if (has_tail || C1.size()>0 || C2.size()>0 || D1.size()>0 || D2.size()>0 ||
         E1.size()>0 || E2.size()>0 || F1.size()>0 || F2.size()>0)
-        res.push_back(
-            C1.size()>0 ?
-            unique_ptr<format_entry>(format<double>(form_C1, &(*pos_C1++))) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          C1.size()>0 ?
+                          format<double>(form_C1, &(*pos_C1++)) :
+                          format(empty)));
     else goto cont;
     if (has_tail || C2.size()>0 || D1.size()>0 || D2.size()>0 ||
         E1.size()>0 || E2.size()>0 || F1.size()>0 || F2.size()>0)
-        res.push_back(
-            C2.size()>0 ?
-            unique_ptr<format_entry>(format<double>(form_C2, &(*pos_C2++))) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          C2.size()>0 ?
+                          format<double>(form_C2, &(*pos_C2++)) :
+                          format(empty)));
     else goto cont;
     if (has_tail || D1.size()>0 || D2.size()>0 ||
         E1.size()>0 || E2.size()>0 || F1.size()>0 || F2.size()>0)
-        res.push_back(
-            D1.size()>0 ?
-            unique_ptr<format_entry>(format<double>(form_D1, &(*pos_D1++))) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          D1.size()>0 ?
+                          format<double>(form_D1, &(*pos_D1++)) :
+                          format(empty)));
     else goto cont;
     if (has_tail || D2.size()>0 ||
         E1.size()>0 || E2.size()>0 || F1.size()>0 || F2.size()>0)
-        res.push_back(
-            D2.size()>0 ?
-            unique_ptr<format_entry>(format<double>(form_D2, &(*pos_D2++))) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          D2.size()>0 ?
+                          format<double>(form_D2, &(*pos_D2++)) :
+                          format(empty)));
     else goto cont;
     if (has_tail || E1.size()>0 || E2.size()>0 || F1.size()>0 || F2.size()>0)
-        res.push_back(
-            E1.size()>0 ?
-            unique_ptr<format_entry>(format<double>(form_E1, &(*pos_E1++))) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          E1.size()>0 ?
+                          format<double>(form_E1, &(*pos_E1++)) :
+                          format(empty)));
     else goto cont;
     if (has_tail || E2.size()>0 || F1.size()>0 || F2.size()>0)
-        res.push_back(
-            E2.size()>0 ?
-            unique_ptr<format_entry>(format<double>(form_E2, &(*pos_E2++))) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          E2.size()>0 ?
+                          format<double>(form_E2, &(*pos_E2++)) :
+                          format(empty)));
     else goto cont;
     if (has_tail || F1.size()>0 || F2.size()>0)
-        res.push_back(
-            F1.size()>0 ?
-            unique_ptr<format_entry>(format<double>(form_F1, &(*pos_F1++))) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          F1.size()>0 ?
+                          format<double>(form_F1, &(*pos_F1++)) :
+                          format(empty)));
     else goto cont;
     if (has_tail || F2.size()>0)
-        res.push_back(
-            F2.size()>0 ?
-            unique_ptr<format_entry>(format<double>(form_F2, &(*pos_F2++))) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          F2.size()>0 ?
+                          format<double>(form_F2, &(*pos_F2++)) :
+                          format(empty)));
 
     while (pos_A != A.end()) {
         res.push_back(unique_ptr<format_entry>(format<std::string>(form_SO, (*pos_SO++))));
@@ -485,199 +485,199 @@ void pbeam::collect_outdata(
             pos_NSM != NSM.end() || pos_C1 != C1.end() || pos_C2 != C2.end() ||
             pos_D1 != D1.end() || pos_D2 != D2.end() || pos_E1 != E1.end() ||
             pos_E2 != E2.end() || pos_F1 != F1.end() || pos_F2 != F2.end())
-            res.push_back(
-                pos_I12 != I12.end() ?
-                unique_ptr<format_entry>(format<double>(form_I12, &(*pos_I12++))) :
-                unique_ptr<format_entry>(format(empty)));
+            res.push_back(unique_ptr<format_entry>(
+                              pos_I12 != I12.end() ?
+                              format<double>(form_I12, &(*pos_I12++)) :
+                              format(empty)));
         else continue;
         if (has_tail || pos_A != A.end() || pos_J != J.end() ||
             pos_NSM != NSM.end() || pos_C1 != C1.end() || pos_C2 != C2.end() ||
             pos_D1 != D1.end() || pos_D2 != D2.end() || pos_E1 != E1.end() ||
             pos_E2 != E2.end() || pos_F1 != F1.end() || pos_F2 != F2.end())
-            res.push_back(
-                pos_J != J.end() ?
-                unique_ptr<format_entry>(format<double>(form_J, &(*pos_J++))) :
-                unique_ptr<format_entry>(format(empty)));
+            res.push_back(unique_ptr<format_entry>(
+                              pos_J != J.end() ?
+                              format<double>(form_J, &(*pos_J++)) :
+                              format(empty)));
         else continue;
         if (has_tail || pos_A != A.end() ||
             pos_NSM != NSM.end() || pos_C1 != C1.end() || pos_C2 != C2.end() ||
             pos_D1 != D1.end() || pos_D2 != D2.end() || pos_E1 != E1.end() ||
             pos_E2 != E2.end() || pos_F1 != F1.end() || pos_F2 != F2.end())
-            res.push_back(
-                pos_NSM != NSM.end() ?
-                unique_ptr<format_entry>(format<double>(form_NSM, &(*pos_NSM++))) :
-                unique_ptr<format_entry>(format(empty)));
+            res.push_back(unique_ptr<format_entry>(
+                              pos_NSM != NSM.end() ?
+                              format<double>(form_NSM, &(*pos_NSM++)) :
+                              format(empty)));
         else continue;
         if (has_tail || pos_A != A.end() ||
             pos_C1 != C1.end() || pos_C2 != C2.end() ||
             pos_D1 != D1.end() || pos_D2 != D2.end() || pos_E1 != E1.end() ||
             pos_E2 != E2.end() || pos_F1 != F1.end() || pos_F2 != F2.end())
-            res.push_back(
-                pos_C1 != C1.end() ?
-                unique_ptr<format_entry>(format<double>(form_C1, &(*pos_C1++))) :
-                unique_ptr<format_entry>(format(empty)));
+            res.push_back(unique_ptr<format_entry>(
+                              pos_C1 != C1.end() ?
+                              format<double>(form_C1, &(*pos_C1++)) :
+                              format(empty)));
         else continue;
         if (has_tail || pos_A != A.end() ||
             pos_C2 != C2.end() ||
             pos_D1 != D1.end() || pos_D2 != D2.end() || pos_E1 != E1.end() ||
             pos_E2 != E2.end() || pos_F1 != F1.end() || pos_F2 != F2.end())
-            res.push_back(
-                pos_C2 != C2.end() ?
-                unique_ptr<format_entry>(format<double>(form_C2, &(*pos_C2++))) :
-                unique_ptr<format_entry>(format(empty)));
+            res.push_back(unique_ptr<format_entry>(
+                              pos_C2 != C2.end() ?
+                              format<double>(form_C2, &(*pos_C2++)) :
+                              format(empty)));
         else continue;
         if (has_tail || pos_A != A.end() ||
             pos_D1 != D1.end() || pos_D2 != D2.end() || pos_E1 != E1.end() ||
             pos_E2 != E2.end() || pos_F1 != F1.end() || pos_F2 != F2.end())
-            res.push_back(
-                pos_D1 != D1.end() ?
-                unique_ptr<format_entry>(format<double>(form_D1, &(*pos_D1++))) :
-                unique_ptr<format_entry>(format(empty)));
+            res.push_back(unique_ptr<format_entry>(
+                              pos_D1 != D1.end() ?
+                              format<double>(form_D1, &(*pos_D1++)) :
+                              format(empty)));
         else continue;
         if (has_tail || pos_A != A.end() ||
             pos_D2 != D2.end() || pos_E1 != E1.end() ||
             pos_E2 != E2.end() || pos_F1 != F1.end() || pos_F2 != F2.end())
-            res.push_back(
-                pos_D2 != D2.end() ?
-                unique_ptr<format_entry>(format<double>(form_D2, &(*pos_D2++))) :
-                unique_ptr<format_entry>(format(empty)));
+            res.push_back(unique_ptr<format_entry>(
+                              pos_D2 != D2.end() ?
+                              format<double>(form_D2, &(*pos_D2++)) :
+                              format(empty)));
         else continue;
         if (has_tail || pos_A != A.end() ||
             pos_E1 != E1.end() ||
             pos_E2 != E2.end() || pos_F1 != F1.end() || pos_F2 != F2.end())
-            res.push_back(
-                pos_E1 != E1.end() ?
-                unique_ptr<format_entry>(format<double>(form_E1, &(*pos_E1++))) :
-                unique_ptr<format_entry>(format(empty)));
+            res.push_back(unique_ptr<format_entry>(
+                              pos_E1 != E1.end() ?
+                              format<double>(form_E1, &(*pos_E1++)) :
+                              format(empty)));
         else continue;
         if (has_tail || pos_A != A.end() ||
             pos_E2 != E2.end() || pos_F1 != F1.end() || pos_F2 != F2.end())
-            res.push_back(
-                pos_E2 != E2.end() ?
-                unique_ptr<format_entry>(format<double>(form_E2, &(*pos_E2++))) :
-                unique_ptr<format_entry>(format(empty)));
+            res.push_back(unique_ptr<format_entry>(
+                              pos_E2 != E2.end() ?
+                              format<double>(form_E2, &(*pos_E2++)) :
+                              format(empty)));
         else continue;
         if (has_tail || pos_A != A.end() ||
             pos_F1 != F1.end() || pos_F2 != F2.end())
-            res.push_back(
-                pos_F1 != F1.end() ?
-                unique_ptr<format_entry>(format<double>(form_F1, &(*pos_F1++))) :
-                unique_ptr<format_entry>(format(empty)));
+            res.push_back(unique_ptr<format_entry>(
+                              pos_F1 != F1.end() ?
+                              format<double>(form_F1, &(*pos_F1++)) :
+                              format(empty)));
         else continue;
         if (has_tail || pos_A != A.end() || pos_F2 != F2.end())
-            res.push_back(
-                pos_F2 != F2.end() ?
-                unique_ptr<format_entry>(format<double>(form_F2, &(*pos_F2++))) :
-                unique_ptr<format_entry>(format(empty)));
+            res.push_back(unique_ptr<format_entry>(
+                              pos_F2 != F2.end() ?
+                              format<double>(form_F2, &(*pos_F2++)) :
+                              format(empty)));
     }
 
     if (bool(K1) || bool(K2) || bool(S1) || bool(S2) || bool(NSI_A) ||
         bool(NSI_B) || bool(CW_A) || bool(CW_B) || bool(M1_A) || bool(M2_A) ||
         bool(M1_B) || bool(M2_B) || bool(N1_A) || bool(N2_A) || bool(N1_B) ||
         bool(N2_B))
-        res.push_back(
-            bool(K1) ?
-            unique_ptr<format_entry>(format<double>(form_K1, K1)) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          bool(K1) ?
+                          format<double>(form_K1, K1) :
+                          format(empty)));
     else goto cont;
     if (bool(K2) || bool(S1) || bool(S2) || bool(NSI_A) || bool(NSI_B) ||
         bool(CW_A) || bool(CW_B) || bool(M1_A) || bool(M2_A) || bool(M1_B) ||
         bool(M2_B) || bool(N1_A) || bool(N2_A) || bool(N1_B) || bool(N2_B))
-        res.push_back(
-            bool(K2) ?
-            unique_ptr<format_entry>(format<double>(form_K2, K2)) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          bool(K2) ?
+                          format<double>(form_K2, K2) :
+                          format(empty)));
     else goto cont;
     if (bool(S1) || bool(S2) || bool(NSI_A) || bool(NSI_B) || bool(CW_A) ||
         bool(CW_B) || bool(M1_A) || bool(M2_A) || bool(M1_B) || bool(M2_B) ||
         bool(N1_A) || bool(N2_A) || bool(N1_B) || bool(N2_B))
-        res.push_back(
-            bool(S1) ?
-            unique_ptr<format_entry>(format<double>(form_S1, S1)) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          bool(S1) ?
+                          format<double>(form_S1, S1) :
+                          format(empty)));
     else goto cont;
     if (bool(S2) || bool(NSI_A) || bool(NSI_B) || bool(CW_A) || bool(CW_B) ||
         bool(M1_A) || bool(M2_A) || bool(M1_B) || bool(M2_B) || bool(N1_A) ||
         bool(N2_A) || bool(N1_B) || bool(N2_B))
-        res.push_back(
-            bool(S2) ?
-            unique_ptr<format_entry>(format<double>(form_S2, S2)) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          bool(S2) ?
+                          format<double>(form_S2, S2) :
+                          format(empty)));
     else goto cont;
     if (bool(NSI_A) || bool(NSI_B) || bool(CW_A) || bool(CW_B) || bool(M1_A) ||
         bool(M2_A) || bool(M1_B) || bool(M2_B) || bool(N1_A) || bool(N2_A) ||
         bool(N1_B) || bool(N2_B))
-        res.push_back(
-            bool(NSI_A) ?
-            unique_ptr<format_entry>(format<double>(form_NSI_A, NSI_A)) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          bool(NSI_A) ?
+                          format<double>(form_NSI_A, NSI_A) :
+                          format(empty)));
     else goto cont;
     if (bool(NSI_B) || bool(CW_A) || bool(CW_B) || bool(M1_A) || bool(M2_A) ||
         bool(M1_B) || bool(M2_B) || bool(N1_A) || bool(N2_A) || bool(N1_B) ||
         bool(N2_B))
-        res.push_back(
-            bool(NSI_B) ?
-            unique_ptr<format_entry>(format<double>(form_NSI_B, NSI_B)) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          bool(NSI_B) ?
+                          format<double>(form_NSI_B, NSI_B) :
+                          format(empty)));
     else goto cont;
     if (bool(CW_A) || bool(CW_B) || bool(M1_A) || bool(M2_A) || bool(M1_B) ||
         bool(M2_B) || bool(N1_A) || bool(N2_A) || bool(N1_B) || bool(N2_B))
-        res.push_back(
-            bool(CW_A) ?
-            unique_ptr<format_entry>(format<double>(form_CW_A, CW_A)) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          bool(CW_A) ?
+                          format<double>(form_CW_A, CW_A) :
+                          format(empty)));
     else goto cont;
     if (bool(CW_B) || bool(M1_A) || bool(M2_A) || bool(M1_B) || bool(M2_B) ||
         bool(N1_A) || bool(N2_A) || bool(N1_B) || bool(N2_B))
-        res.push_back(
-            bool(CW_B) ?
-            unique_ptr<format_entry>(format<double>(form_CW_B, CW_B)) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          bool(CW_B) ?
+                          format<double>(form_CW_B, CW_B) :
+                          format(empty)));
     else goto cont;
     if (bool(M1_A) || bool(M2_A) || bool(M1_B) || bool(M2_B) || bool(N1_A) ||
         bool(N2_A) || bool(N1_B) || bool(N2_B))
-        res.push_back(
-            bool(M1_A) ?
-            unique_ptr<format_entry>(format<double>(form_M1_A, M1_A)) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          bool(M1_A) ?
+                          format<double>(form_M1_A, M1_A) :
+                          format(empty)));
     else goto cont;
     if (bool(M2_A) || bool(M1_B) || bool(M2_B) || bool(N1_A) || bool(N2_A) ||
         bool(N1_B) || bool(N2_B))
-        res.push_back(
-            bool(M2_A) ?
-            unique_ptr<format_entry>(format<double>(form_M2_A, M2_A)) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          bool(M2_A) ?
+                          format<double>(form_M2_A, M2_A) :
+                          format(empty)));
     else goto cont;
     if (bool(M1_B) || bool(M2_B) || bool(N1_A) || bool(N2_A) || bool(N1_B) ||
         bool(N2_B))
-        res.push_back(
-            bool(M1_B) ?
-            unique_ptr<format_entry>(format<double>(form_M1_B, M1_B)) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          bool(M1_B) ?
+                          format<double>(form_M1_B, M1_B) :
+                          format(empty)));
     else goto cont;
     if (bool(M2_B) || bool(N1_A) || bool(N2_A) || bool(N1_B) || bool(N2_B))
-        res.push_back(
-            bool(M2_B) ?
-            unique_ptr<format_entry>(format<double>(form_M2_B, M2_B)) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          bool(M2_B) ?
+                          format<double>(form_M2_B, M2_B) :
+                          format(empty)));
     else goto cont;
     if (bool(N1_A) || bool(N2_A) || bool(N1_B) || bool(N2_B))
-        res.push_back(
-            bool(N1_A) ?
-            unique_ptr<format_entry>(format<double>(form_N1_A, N1_A)) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          bool(N1_A) ?
+                          format<double>(form_N1_A, N1_A) :
+                          format(empty)));
     else goto cont;
     if (bool(N2_A) || bool(N1_B) || bool(N2_B))
-        res.push_back(
-             bool(N2_A) ?
-             unique_ptr<format_entry>(format<double>(form_N2_A, N2_A)) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          bool(N2_A) ?
+                          format<double>(form_N2_A, N2_A) :
+                          format(empty)));
     else goto cont;
     if (bool(N1_B) || bool(N2_B))
-        res.push_back(
-            bool(N1_B) ?
-            unique_ptr<format_entry>(format<double>(form_N1_B, N1_B)) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          bool(N1_B) ?
+                          format<double>(form_N1_B, N1_B) :
+                          format(empty)));
     else goto cont;
     if (bool(N2_B))
         res.push_back(unique_ptr<format_entry>(format<double>(form_N2_B, N2_B)));

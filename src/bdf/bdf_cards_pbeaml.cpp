@@ -205,10 +205,10 @@ void pbeaml::collect_outdata(
     res.push_back(unique_ptr<format_entry>(format<long>(form_PID, PID)));
     res.push_back(unique_ptr<format_entry>(format<long>(form_MID, MID)));
 
-    res.push_back(
-        bool(GROUP) ?
-        unique_ptr<format_entry>(format<std::string>(form_GROUP, GROUP)) :
-        unique_ptr<format_entry>(format(empty)));
+    res.push_back(unique_ptr<format_entry>(
+                      bool(GROUP) ?
+                      format<std::string>(form_GROUP, GROUP) :
+                      format(empty)));
     res.push_back(unique_ptr<format_entry>(format<std::string>(form_TYPE, TYPE)));
     for (auto i = 0;i<4;i++ )
         res.push_back(unique_ptr<format_entry>(format(empty)));
@@ -222,29 +222,23 @@ void pbeaml::collect_outdata(
            (pos_DIM != DIM.end() || pos_NSM != NSM.end() ||
             pos_SO != SO.end() || pos_X_XB != X_XB.end())) {
         cnt++;
-        if (pos_NSM != NSM.end()) {
-            res.push_back(
-                unique_ptr<format_entry>(
-                    format<double>(form_NSM, (*pos_NSM))));
-            pos_NSM++;
-        } else res.push_back(unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          pos_NSM != NSM.end() ?
+                          format<double>(form_NSM, (*(pos_NSM++))) :
+                          format(empty)));
         if (pos_DIM != DIM.end() || pos_NSM != NSM.end() ||
             pos_SO != SO.end() || pos_X_XB != X_XB.end()) {
-            if (pos_SO != SO.end()) {
-                res.push_back(
-                    unique_ptr<format_entry>(
-                        format<std::string>(form_SO, (*pos_SO))));
-                pos_SO++;
-            } else res.push_back(unique_ptr<format_entry>(format(empty)));
+            res.push_back(unique_ptr<format_entry>(
+                              pos_SO != SO.end() ?
+                              format<std::string>(form_SO, (*(pos_SO++))) :
+                              format(empty)));
         }
         if (pos_DIM != DIM.end() || pos_NSM != NSM.end() ||
             pos_SO != SO.end() || pos_X_XB != X_XB.end()) {
-            if (pos_X_XB != X_XB.end()) {
-                res.push_back(
-                    unique_ptr<format_entry>(
-                        format<double>(form_X_XB, (*pos_X_XB))));
-                pos_X_XB++;
-            } else res.push_back(unique_ptr<format_entry>(format(empty)));
+            res.push_back(unique_ptr<format_entry>(
+                              pos_X_XB != X_XB.end() ?
+                              format<double>(form_X_XB, (*(pos_X_XB++))) :
+                              format(empty)));
         }
     }
 }

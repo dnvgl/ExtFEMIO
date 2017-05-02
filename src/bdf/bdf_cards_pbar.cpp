@@ -203,92 +203,92 @@ void pbar::collect_outdata(
         bool(C1) || bool(C2) || bool(D1) || bool(D2) ||
         bool(E1) || bool(E2) || bool(F1) || bool(F2) ||
         bool(K1) || bool(K2) || bool(I12))
-        res.push_back(
-            bool(J) ?
-            unique_ptr<format_entry>(format<double>(form_J, J)) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          bool(J) ?
+                          format<double>(form_J, J) :
+                          format(empty)));
     else goto cont;
     if (bool(NSM) ||
         bool(C1) || bool(C2) || bool(D1) || bool(D2) ||
         bool(E1) || bool(E2) || bool(F1) || bool(F2) ||
         bool(K1) || bool(K2) || bool(I12))
-        res.push_back(
-            bool(NSM) ?
-            unique_ptr<format_entry>(format<double>(form_NSM, NSM)) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          bool(NSM) ?
+                          format<double>(form_NSM, NSM) :
+                          format(empty)));
     else goto cont;
     if (bool(C1) || bool(C2) || bool(D1) || bool(D2) ||
         bool(E1) || bool(E2) || bool(F1) || bool(F2) ||
         bool(K1) || bool(K2) || bool(I12))
-        res.push_back(
-            bool(C1) ?
-            unique_ptr<format_entry>(format<double>(form_C1, C1)) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          bool(C1) ?
+                          format<double>(form_C1, C1) :
+                          format(empty)));
     else goto cont;
     if (bool(C2) || bool(D1) || bool(D2) ||
         bool(E1) || bool(E2) || bool(F1) || bool(F2) ||
         bool(K1) || bool(K2) || bool(I12))
-        res.push_back(
-            bool(C2) ?
-            unique_ptr<format_entry>(format<double>(form_C2, C2)) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          bool(C2) ?
+                          format<double>(form_C2, C2) :
+                          format(empty)));
     else goto cont;
     if (bool(D1) || bool(D2) ||
         bool(E1) || bool(E2) || bool(F1) || bool(F2) ||
         bool(K1) || bool(K2) || bool(I12))
-        res.push_back(
-            bool(D1) ?
-            unique_ptr<format_entry>(format<double>(form_D1, D1)) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          bool(D1) ?
+                          format<double>(form_D1, D1) :
+                          format(empty)));
     else goto cont;
     if (bool(D2) ||
         bool(E1) || bool(E2) || bool(F1) || bool(F2) ||
         bool(K1) || bool(K2) || bool(I12))
-        res.push_back(
-            bool(D2) ?
-            unique_ptr<format_entry>(format<double>(form_D2, D2)) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          bool(D2) ?
+                          format<double>(form_D2, D2) :
+                          format(empty)));
     else goto cont;
     if (bool(E1) || bool(E2) || bool(F1) || bool(F2) ||
         bool(K1) || bool(K2) || bool(I12))
-        res.push_back(
-            bool(E1) ?
-            unique_ptr<format_entry>(format<double>(form_E1, E1)) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          bool(E1) ?
+                          format<double>(form_E1, E1) :
+                          format(empty)));
     else goto cont;
     if (bool(E2) || bool(F1) || bool(F2) ||
         bool(K1) || bool(K2) || bool(I12))
-        res.push_back(
-            bool(E2) ?
-            unique_ptr<format_entry>(format<double>(form_E2, E2)) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          bool(E2) ?
+                          format<double>(form_E2, E2) :
+                          format(empty)));
     else goto cont;
     if (bool(F1) || bool(F2) ||
         bool(K1) || bool(K2) || bool(I12))
-        res.push_back(
-            bool(F1) ?
-            unique_ptr<format_entry>(format<double>(form_F1, F1)) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          bool(F1) ?
+                          format<double>(form_F1, F1) :
+                          format(empty)));
     else goto cont;
     if (bool(F2) ||
         bool(K1) || bool(K2) || bool(I12))
-        res.push_back(
-            bool(F2) ?
-            unique_ptr<format_entry>(format<double>(form_F2, F2)) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          bool(F2) ?
+                          format<double>(form_F2, F2) :
+                          format(empty)));
     else goto cont;
 
     if (bool(K1) || bool(K2) || bool(I12))
-        res.push_back(
-            bool(K1) ?
-            unique_ptr<format_entry>(format<double>(form_K1, K1)) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          bool(K1) ?
+                          format<double>(form_K1, K1) :
+                          format(empty)));
     else goto cont;
     if (bool(K2) || bool(I12))
-        res.push_back(
-            bool(K2) ?
-            unique_ptr<format_entry>(format<double>(form_K2, K2)) :
-            unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          bool(K2) ?
+                          format<double>(form_K2, K2) :
+                          format(empty)));
     else goto cont;
     if (bool(I12))
         res.push_back(unique_ptr<format_entry>(format<double>(form_I12, I12)));

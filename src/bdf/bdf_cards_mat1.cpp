@@ -173,8 +173,7 @@ cards::types mat1::card_type() const {
 
 void mat1::collect_outdata(
     list<unique_ptr<format_entry> > &res) const {
-    if (!bool(MID))
-        return;
+    if (!bool(MID)) return;
     res.push_back(unique_ptr<format_entry>(format(head)));
 
     res.push_back(unique_ptr<format_entry>(format<long>(form_MID, MID)));
@@ -195,22 +194,22 @@ void mat1::collect_outdata(
         res.push_back(unique_ptr<format_entry>(format(empty)));
     res.push_back(unique_ptr<format_entry>(format<double>(form_GE, GE)));
     if (bool(ST) || bool(SC) || bool(SS) || bool(MCSID))
-        if (bool(ST))
-            res.push_back(unique_ptr<format_entry>(format<double>(form_ST, ST)));
-        else
-            res.push_back(unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          bool(ST) ?
+                          format<double>(form_ST, ST) :
+                          format(empty)));
     else goto finish;
     if (bool(SC) || bool(SS) || bool(MCSID))
-        if (bool(SC))
-            res.push_back(unique_ptr<format_entry>(format<double>(form_SC, SC)));
-        else
-            res.push_back(unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          bool(SC) ?
+                          format<double>(form_SC, SC) :
+                          format(empty)));
     else goto finish;
     if (bool(SS) || bool(MCSID))
-        if (bool(SS))
-            res.push_back(unique_ptr<format_entry>(format<double>(form_SS, SS)));
-        else
-            res.push_back(unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          bool(SS) ?
+                          format<double>(form_SS, SS) :
+                          format(empty)));
     else goto finish;
     if (bool(MCSID))
         res.push_back(unique_ptr<format_entry>(format<long>(form_MCSID, MCSID)));

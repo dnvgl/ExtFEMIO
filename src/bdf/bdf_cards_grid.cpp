@@ -151,24 +151,24 @@ void grid::collect_outdata(
     res.push_back(unique_ptr<format_entry>(format(head)));
 
     res.push_back(unique_ptr<format_entry>(format<long>(form_ID, ID)));
-    if (bool(CP))
-        res.push_back(unique_ptr<format_entry>(format<long>(form_CP, CP)));
-    else
-        res.push_back(unique_ptr<format_entry>(format(empty)));
+    res.push_back(unique_ptr<format_entry>(
+                      bool(CP) ?
+                      format<long>(form_CP, CP) :
+                      format(empty)));
     res.push_back(unique_ptr<format_entry>(format<double>(form_X1, X1)));
     res.push_back(unique_ptr<format_entry>(format<double>(form_X2, X2)));
     res.push_back(unique_ptr<format_entry>(format<double>(form_X3, X3)));
     if (bool(CD) || bool(PS) || bool(SEID)) {
-        if (bool(CD))
-            res.push_back(unique_ptr<format_entry>(format<long>(form_CD, CD)));
-        else
-            res.push_back(unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          bool(CD) ?
+                          format<long>(form_CD, CD) :
+                          format(empty)));
     } else goto finish;
     if (bool(PS) || bool(SEID)) {
-        if (bool(PS))
-            res.push_back(unique_ptr<format_entry>(format<vector<int>>(form_PS, PS)));
-        else
-            res.push_back(unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          bool(PS) ?
+                          format<vector<int>>(form_PS, PS) :
+                          format(empty)));
     } else goto finish;
     if (bool(SEID))
         res.push_back(unique_ptr<format_entry>(format<long>(form_SEID, SEID)));
