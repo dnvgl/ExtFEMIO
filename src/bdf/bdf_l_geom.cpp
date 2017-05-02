@@ -40,7 +40,7 @@ namespace {
     const std::set<std::string> dimnum10({"DBOX"});
 }
 
-size_t l_geom::get_dim(std::string const &TYPE) const {
+size_t l_geom::get_dim(std::string const &TYPE) {
     if (dimnum1.find(TYPE) != dimnum1.end())
         return 1;
     else if (dimnum2.find(TYPE) != dimnum2.end())

@@ -553,7 +553,7 @@ namespace dnvgl {
 
                         l_geom() = default;
 
-                        size_t get_dim(std::string const &TYPE) const;
+                        static size_t get_dim(std::string const &TYPE);
                     };
                 }
 

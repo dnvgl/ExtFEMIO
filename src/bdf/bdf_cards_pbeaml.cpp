@@ -96,7 +96,6 @@ pbeaml::pbeaml(long const *PID, long const *MID,
 
 void pbeaml::read(list<std::string> const & inp) {
 
-    size_t dim_num;
     size_t i, j{0};
 
     auto pos = inp.begin();
@@ -115,7 +114,7 @@ void pbeaml::read(list<std::string> const & inp) {
     if (pos == inp.end()) goto invalid;
     form_TYPE.set_value(TYPE, *(pos++));
     if (pos == inp.end()) goto invalid;
-    dim_num = this->l_geom::get_dim(TYPE.value);
+    auto dim_num = this->l_geom::get_dim(TYPE.value);
     if (dim_num < 1)
         throw errors::parse_error(
             "PBEAML", "Unknown beam type " + TYPE.value + ".");
@@ -216,7 +215,7 @@ void pbeaml::collect_outdata(
     for (size_t i{0}; i < pos_DIM->size(); i++)
              res.push_back(unique_ptr<format_entry>(
                                format<double>(form_DIM, (*pos_DIM)[i])));
-    pos_DIM++;
+    ++pos_DIM;
     int cnt{0};
     while (cnt < 13 &&
            (pos_DIM != DIM.end() || pos_NSM != NSM.end() ||

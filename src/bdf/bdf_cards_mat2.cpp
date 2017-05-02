@@ -16,7 +16,6 @@ namespace {
         "@(#) $Id$";
 }
 
-#include <vector>
 #include <memory>
 
 #include "bdf/cards.h"
