@@ -230,7 +230,7 @@ namespace dnvgl {
 
                         explicit elem(elem const*);
 
-                        ~elem();
+                        virtual ~elem();
 
                         cards::__base::card const &gelmnt1() const;
                         cards::__base::card const &gelref1() const;
