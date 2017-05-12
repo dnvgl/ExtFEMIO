@@ -214,32 +214,36 @@ void pbeaml::collect_outdata(
         res.push_back(unique_ptr<format_entry>(format(empty)));
 
     for (size_t i{0}; i < pos_DIM->size(); i++)
-             res.push_back(unique_ptr<format_entry>(
-                               format<double>(form_DIM, (*pos_DIM)[i])));
-    ++pos_DIM;
-    int cnt{0};
-    while (cnt < 13 &&
-           (pos_DIM != DIM.end() || pos_NSM != NSM.end() ||
-            pos_SO != SO.end() || pos_X_XB != X_XB.end())) {
-        cnt++;
         res.push_back(unique_ptr<format_entry>(
-                          pos_NSM != NSM.end() ?
-                          format<double>(form_NSM, (*(pos_NSM++))) :
-                          format(empty)));
-        if (pos_DIM != DIM.end() || pos_NSM != NSM.end() ||
-            pos_SO != SO.end() || pos_X_XB != X_XB.end()) {
+                          format<double>(form_DIM, (*pos_DIM)[i])));
+    ++pos_DIM;
+    res.push_back(unique_ptr<format_entry>(
+                      pos_NSM != NSM.end() ?
+                      format<double>(form_NSM, (*(pos_NSM++))) :
+                      format(empty)));
+    int cnt{0};
+    while (cnt < 13 && pos_DIM != DIM.end()) {
+        cnt++;
+        if (pos_SO != SO.end()) {
             res.push_back(unique_ptr<format_entry>(
                               pos_SO != SO.end() ?
                               format<std::string>(form_SO, (*(pos_SO++))) :
                               format(empty)));
         }
-        if (pos_DIM != DIM.end() || pos_NSM != NSM.end() ||
-            pos_SO != SO.end() || pos_X_XB != X_XB.end()) {
+        if (pos_X_XB != X_XB.end()) {
             res.push_back(unique_ptr<format_entry>(
                               pos_X_XB != X_XB.end() ?
                               format<double>(form_X_XB, (*(pos_X_XB++))) :
                               format(empty)));
         }
+        for (size_t i{0}; i < pos_DIM->size(); i++)
+            res.push_back(unique_ptr<format_entry>(
+                              format<double>(form_DIM, (*pos_DIM)[i])));
+        ++pos_DIM;
+        res.push_back(unique_ptr<format_entry>(
+                          pos_NSM != NSM.end() ?
+                          format<double>(form_NSM, (*(pos_NSM++))) :
+                          format(empty)));
     }
 }
 

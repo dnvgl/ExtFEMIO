@@ -107,7 +107,8 @@ add_executable(test_bdf_cards
   test_bdf_cards_force.cpp
   test_bdf_cards_moment.cpp
   test_bdf_cards_load.cpp
-  test_bdf_cards_param.cpp)
+  test_bdf_cards_param.cpp
+  test_bdf_cards_comment.cpp)
 target_link_libraries(test_bdf_cards ${EXTFEM_BDF_LIBS})
 my_add_test(test_bdf_cards)
 

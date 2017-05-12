@@ -44,6 +44,7 @@ TEST_CASE("Checking extra string functions", "[extfem::string]") {
         CHECK(extfem::string::string(" \txxx\t ").trim() == "xxx");
         CHECK(extfem::string::string(" \tXXX\t ").trim() == "XXX");
         CHECK(extfem::string::string("ABCDabcd").trim() == "ABCDabcd");
+        CHECK(extfem::string::string("A\n").trim("\n") == "A");
     }
 
     SECTION("checking lower functionality") {

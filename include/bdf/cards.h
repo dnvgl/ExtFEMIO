@@ -1,5 +1,5 @@
 /**
-   \file bdf/cards.h
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
    \brief Classes for the different Nastran BDF cards.
@@ -41,6 +41,7 @@ namespace dnvgl {
             namespace cards {
                 typedef std::pair<bdf::types::base const*, void const*>
                 format_entry;
+                class comment;
             }
         }
     }
@@ -51,6 +52,9 @@ dnvgl::extfem::bdf::cards::format_entry
 
 dnvgl::extfem::bdf::cards::format_entry
 *format(const std::unique_ptr<dnvgl::extfem::bdf::types::empty>&);
+
+dnvgl::extfem::bdf::cards::format_entry
+*format(const std::string&);
 
 template <class _Ty>
 dnvgl::extfem::bdf::cards::format_entry
@@ -65,6 +69,9 @@ dnvgl::extfem::bdf::cards::format_entry
 namespace dnvgl {
     namespace extfem {
         namespace bdf {
+
+            void reset_statics();
+
             namespace cards {
 
                 void extern(*note_report)(std::string const &);
@@ -366,7 +373,8 @@ namespace dnvgl {
                     BEAM_PROP, //!< base class for beam property description
                     CAXIFi, //!< Defines an axisymmetric fluid element that
                     //!< connects i = 2, 3, or 4 fluid points.
-                    UNKNOWN, //!< undknown card
+                    COMMENT, //!< comment lines
+                    UNKNOWN //!< unknown card
                 };
 
                 namespace __base {
@@ -448,7 +456,7 @@ namespace dnvgl {
 
                 public:
 
-                    std::list<std::string> content;
+                    std::vector<std::string> content;
 
                     unknown() = default;
 
@@ -461,6 +469,59 @@ namespace dnvgl {
                     card const &operator()(std::list<std::string> const &) override;
 
                 private:
+
+                    void collect_outdata(
+                        std::list<std::unique_ptr<format_entry> >&) const override;
+
+                    void check_data() const override;
+                };
+
+                class comment : public __base::card {
+
+                public:
+
+                     /*!
+                       Comment test
+                      */
+                    std::list<std::string> content;
+
+                     /*! Syntax extension to BDF recognized by
+                       ExtFEMIO: if one of 235, 315, 355, 390, or 460
+                       appears in a comment the value shall be used as
+                       yield stress for the next material definition.
+                      */
+                    static double *yield;
+
+                     /*!
+                       Regular expression to identify yield stress
+                       definitions in comments.
+                     */
+#ifdef HAVE_BOOST_REGEX_HPP
+                    boost::regex
+#else
+                    std::regex
+#endif
+                    static find_yield;
+
+                    comment() = default;
+
+                    explicit comment(std::list<std::string> const &inp);
+
+                    explicit comment(std::vector<std::string> const &inp);
+
+                    explicit comment(std::string const *content);
+
+                    types card_type() const override;
+
+                    card const &operator()(std::list<std::string> const &inp) override;
+
+                    card const &operator()(std::vector<std::string> const &content);
+
+                    card const &operator()(std::string const *content);
+
+                private:
+
+                    void read(std::list<std::string> const &inp) override;
 
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> >&) const override;
@@ -500,6 +561,12 @@ dnvgl::extfem::bdf::cards::format_entry
     return new dnvgl::extfem::bdf::cards::format_entry(
         static_cast<dnvgl::extfem::bdf::types::base const*>(&formatter),
         static_cast<void const*>(&val));
+}
+
+dnvgl::extfem::bdf::cards::format_entry inline
+*format(std::string const &val) {
+    return new dnvgl::extfem::bdf::cards::format_entry(
+        nullptr, static_cast<void const*>(&val));
 }
 
 namespace dnvgl {

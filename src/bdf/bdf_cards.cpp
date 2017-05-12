@@ -1,5 +1,5 @@
 /**
-   \file bdf/bdf_cards.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
    \brief Base definition for Nastran BDF cards.
@@ -166,6 +166,13 @@ namespace {
         {"SPLINE5", cards::types::SPLINE5}});
 }
 
+void dnvgl::extfem::bdf::reset_statics() {
+    if (cards::comment::yield) {
+        delete cards::comment::yield;
+        cards::comment::yield = nullptr;
+    }
+}
+
 void (*cards::note_report)(std::string const &) = &_stdout_report;
 
 void (*cards::info_report)(std::string const &) = &_stderr_report;
@@ -194,6 +201,11 @@ std::string cards::__base::card::format_outlist(
 
     try {
         for (auto &p : en) {
+            if (!p->first) {
+                res << "$ " << *(static_cast<std::string const*>(p->second));
+                if (p != en.back()) res << endl;
+                continue;
+            }
             if (++i > 9) {
                 i = 2;
                 res << endl << bdf::types::card("").format(nullptr);
@@ -227,6 +239,11 @@ void cards::__base::card::card_split(
 
     res.clear();
 
+    if (inp.front()[0] == '$') {
+        res.assign(inp.begin(), inp.end());
+        return;
+    }
+
     bool first{true};
 
     for (auto pos=inp.begin(); pos!=inp.end(); ++pos) {
@@ -234,8 +251,9 @@ void cards::__base::card::card_split(
         // Free Field Format
         if (head.find(',') != std::string::npos) {
             if (first) {
-                res.push_back(string::string(
-                                  head.substr(0, head.find(','))).trim("*"));
+                res.push_back(
+                    string::string(
+                        head.substr(0, head.find(','))).trim("*"));
             }
             auto tmp(string::string(*pos).trim(" \t\n"));
             tmp = string::string(tmp.substr(tmp.find(',') + 1));
@@ -317,6 +335,11 @@ void cards::dispatch(
 
     if (inp.empty()) {
         res = make_unique<unknown>(inp);
+        return;
+    }
+
+    if (inp.front()[0] == '$') {
+        res = make_unique<comment>(inp);
         return;
     }
 
@@ -486,6 +509,9 @@ void cards::dispatch(
             res = make_unique<__base::element>(inp);
             break;
             /// These are not real card types, they can't be returned
+        case types::COMMENT:
+            res = make_unique<comment>(inp);
+            break;
         case types::UNKNOWN:
         case types::BEAM_PROP:
         case types::BAR_PROP:
@@ -499,7 +525,7 @@ void cards::dispatch(
 }
 
 unknown::unknown(list<std::string> const &inp) :
-        card(inp), content(inp) {};
+        card(inp), content(inp.begin(), inp.end()) {};
 
 cards::types unknown::card_type() const {
     return types::UNKNOWN;
@@ -526,6 +552,6 @@ cards::__base::card const &unknown::operator()(list<std::string> const &inp) {
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
 // compile-command: "make -C ../../cbuild -j7 &&
-//                   (make -C ../../cbuild test;
-//                    ../../cbuild/tests/test_bdf_cards --use-colour no)"
+//   (make -C ../../cbuild test;
+//    ../../cbuild/tests/test_bdf_cards --use-colour no)"
 // End:

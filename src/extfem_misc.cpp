@@ -1,5 +1,5 @@
 /**
-   \file extfem_misc.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
    \brief Implementation of some base extfem functionality.
@@ -11,6 +11,7 @@
 
 #include "extfem_misc.h"
 #include "config.h"
+#include "svnversion.h"
 
 // ID:
 namespace {

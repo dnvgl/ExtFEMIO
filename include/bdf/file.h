@@ -1,5 +1,5 @@
 /**
-   \file bdf/file.h
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
    \brief Processing BDF files.
@@ -35,8 +35,6 @@ namespace dnvgl {
                     std::istream &data;
 
                 public:
-
-                    std::string last_comment;
 
                     bool eof() const;
 

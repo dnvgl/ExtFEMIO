@@ -27,6 +27,17 @@ if (COMMAND cotire)
   cotire(extfemio)
 endif()
 
+# a custom target that is always built
+ADD_CUSTOM_TARGET(revisiontag ALL)
+
+# creates svnversion.h using cmake script
+ADD_CUSTOM_COMMAND(TARGET revisiontag COMMAND ${CMAKE_COMMAND}
+   -DSOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR}
+   -P ${CMAKE_SOURCE_DIR}/CMake/getsvn.cmake)
+
+# explicitly say that the executable depends on custom target
+add_dependencies(extfemio revisiontag)
+
 # Make sure the compiler can find include files for our Hello library
 # when other libraries or executables link to Hello
 target_include_directories (extfemio PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
