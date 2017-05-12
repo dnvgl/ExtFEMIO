@@ -61,4 +61,3 @@ at /A/ and /B/ end of beam.
   | =SUBTITLE=     | Output Subtitle                                  | ✗      | ✓       |
   | =SUBCASE=      | Subcase Delimiter                                | ✗      | ✓       |
   | =BEGIN= =BULK= | Case Control and Bulk Data Delimiter             | ✗      | ✓       |
-  |                |                                                  |        |         |
