@@ -37,7 +37,7 @@
 
 % Hyperlinks (required, but should be loaded last)
 \usepackage[pagebackref=true]{hyperref}%
-\hypersetup{pageanchor=false,%
+\hypersetup{pageanchor=true,%
             colorlinks=true,%
             linkcolor=blue,%
             citecolor=blue,%
