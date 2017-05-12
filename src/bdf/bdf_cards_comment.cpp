@@ -34,7 +34,7 @@ using namespace cards::__base;
 
 using bdf::types::entry_type;
 
-double *comment::comment::yield{nullptr};
+double *comment::yield{nullptr};
 
 #ifdef HAVE_BOOST_REGEX_HPP
 boost::regex
@@ -83,7 +83,7 @@ namespace {
 
 comment::comment(std::list<std::string> const &inp) :
         card(), content() {
-    this->read(inp);
+    this->comment::read(inp);
 }
 
 comment::comment(std::vector<std::string> const &content) :
