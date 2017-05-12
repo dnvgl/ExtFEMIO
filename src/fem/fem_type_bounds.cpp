@@ -1,11 +1,11 @@
 /**
-   \file fem/fem_type_bounds.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
    \brief Implementation of type bounds for Seasam FEM IO.
 
    Detailed description
-   */
+*/
 // ReSharper disable once CppUnusedIncludeDirective
 #include "StdAfx.h"
 

@@ -1,12 +1,11 @@
 /**
-   \file tests/test_bdf_header.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
    \brief Tests for NASTRAN bulk data file headers.
 
    Detailed description
 */
-
 #include "extfem_misc.h"
 
 // ID:

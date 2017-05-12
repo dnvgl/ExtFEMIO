@@ -1,5 +1,5 @@
 /**
-   \file bdf/cards_elements.h
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
    \brief Definitions for BDF element type cards.

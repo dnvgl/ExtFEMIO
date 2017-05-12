@@ -1,5 +1,5 @@
 /**
-   \file bdf/type_bounds.h
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright © 2015 by DNV GL SE
 

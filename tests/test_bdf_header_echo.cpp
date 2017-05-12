@@ -1,12 +1,11 @@
 /**
-   \file tests/test_bdf_header_echo.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
    \brief Testing BDF header ECHO entry
 
    Detailed description
-   */
-
+*/
 #include "extfem_misc.h"
 
 // ID:

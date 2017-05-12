@@ -1,10 +1,10 @@
 /**
-  \file config.h
-  \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
-  \copyright Copyright © 2016 by DNV GL SE
-  \brief config defines from CMake.
+   \file
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2016 by DNV GL SE
+   \brief config defines from CMake.
 
-  Detailed description
+   Detailed description
 */
 
 //* ID: $Id$

@@ -12,7 +12,7 @@
 */
 
 /**
-   \file fem/elements.h
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015, 2016 by DNV GL SE
    \brief Element card representation for Sesam FEM.

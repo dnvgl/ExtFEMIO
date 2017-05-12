@@ -1,5 +1,5 @@
 /**
-   \file bdf2bdf.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
    \brief Simple test program: copy bdf file to bdf file via ExtFEMIO library.

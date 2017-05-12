@@ -1,12 +1,11 @@
 /**
-   \file tests/test_bdf_types.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
    \brief Testing of definitions for Nastran Bulk data entry types.
 
    Detailed description
 */
-
 #include "extfem_misc.h"
 
 // ID:

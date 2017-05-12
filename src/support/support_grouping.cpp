@@ -1,5 +1,5 @@
 /**
-   \file support_grouping.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
    \brief Implement base functionality for processing grouping information for

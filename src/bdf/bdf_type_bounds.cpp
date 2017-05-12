@@ -1,11 +1,11 @@
 /**
-   \file bdf_type_bounds.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
    \brief Implementation for boundaries for BDF types.
 
    Classes help ensure values in correct range.
-   */
+*/
 // ReSharper disable once CppUnusedIncludeDirective
 #include "StdAfx.h"
 

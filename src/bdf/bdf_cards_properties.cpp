@@ -1,5 +1,5 @@
 /**
-   \file bdf/bdf_cards_properties.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2017 by DNV GL SE
    \brief Base property capabilities for BDF.

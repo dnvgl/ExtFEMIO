@@ -1,11 +1,11 @@
 /**
-   \file bdf_header_case_control_spcforces.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
    \brief Support for BDF SPCFORCES case control entries.
 
    Detailed description
-   */
+*/
 #include "StdAfx.h"
 
 #include "extfem_misc.h"

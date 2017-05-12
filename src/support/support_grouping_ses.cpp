@@ -1,5 +1,5 @@
 /**
-   \file support_grouping_ses.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
    \brief Read FE grouping from Nastran session file;

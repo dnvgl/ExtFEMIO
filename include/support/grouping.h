@@ -1,10 +1,10 @@
 /**
-  \file grouping.h
-  \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
-  \copyright Copyright © 2016 by DNV GL SE
-  \brief Classes for processing external grouping information for FE files.
+   \file
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2016 by DNV GL SE
+   \brief Classes for processing external grouping information for FE files.
 
-  Detailed description
+   Detailed description
 */
 
 // ID: $Id$

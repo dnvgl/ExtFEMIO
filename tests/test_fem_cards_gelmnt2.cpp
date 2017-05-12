@@ -1,12 +1,11 @@
 /**
-   \file tests/test_fem_cards_gelmnt2.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
    \brief Testing the FEM `GELMNT2` class.
 
    Detailed description
 */
-
 #include "extfem_misc.h"
 
 // ID:

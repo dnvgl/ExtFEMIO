@@ -1,10 +1,10 @@
 /**
-  \file fem/cards_bounds.h
-  \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
-  \copyright Copyright © 2017 by DNV GL SE
-  \brief Boundary Conditions, Loads and Point Masses.
+   \file
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2017 by DNV GL SE
+   \brief Boundary Conditions, Loads and Point Masses.
 
-  Detailed description
+   Detailed description
 */
 
 // ID: $Id$

@@ -1,5 +1,5 @@
 /**
-   \file fem/fem_types_int.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
    \brief Definitions for SESAM FEM data entry types.

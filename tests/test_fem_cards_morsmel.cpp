@@ -1,12 +1,11 @@
 /**
-   \file tests/test_fem_cards_morsmel.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
    \brief Testing IO for Sesam FEM `MORSMEL` cards.
 
    Detailed description
 */
-
 #include "extfem_misc.h"
 
 // ID:

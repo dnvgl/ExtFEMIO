@@ -1,5 +1,5 @@
 /**
-   \file bdf_cards_element.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
    \brief Common definitions for Nastran BDF element describing cards.

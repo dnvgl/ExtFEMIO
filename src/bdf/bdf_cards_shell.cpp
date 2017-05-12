@@ -1,11 +1,11 @@
 /**
-   \file bdf/bdf_cards_shell.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
    \brief Common definitions for Nastran BDF CTRIA3 and CQUAD4 cards.
 
    Detailed description
-   */
+*/
 #include "StdAfx.h"
 
 #include "extfem_misc.h"

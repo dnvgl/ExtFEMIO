@@ -1,10 +1,10 @@
 /**
-\file bdf/bdf_cards_mat.cpp
-\author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
-\copyright Copyright © 2016 by DNV GL SE
-\brief Common definitions for Nastran BDF MAT1 and MAT2 cards.
+   \file
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2016 by DNV GL SE
+   \brief Common definitions for Nastran BDF MAT1 and MAT2 cards.
 
-Detailed description
+   Detailed description
 */
 #include "StdAfx.h"
 

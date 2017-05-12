@@ -1,5 +1,5 @@
 /**
-   \file bdf/bdf_cards_cmass2.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
    \brief Definitions for Nastran BDF CMASS2 cards.

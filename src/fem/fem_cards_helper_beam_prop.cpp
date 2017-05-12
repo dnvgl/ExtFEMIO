@@ -1,5 +1,5 @@
 /**
-   \file fem_cards_helper_beam_prop.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2017 by DNV GL SE
    \brief Implementing fem::cards::__base::beam_prop class.

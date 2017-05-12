@@ -1,12 +1,11 @@
 /**
-   \file tests/test_bdf_cards_cbar.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
    \brief Testing the BDF `CBAR` card class.
 
    Detailed description
 */
-
 #include "extfem_misc.h"
 #include "bdf/cards_elements.h"
 

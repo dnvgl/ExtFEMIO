@@ -1,5 +1,5 @@
 /**
-   \file tests/test_fem_cards_bsell.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
    \brief Testing the FEM `BSELL` class.

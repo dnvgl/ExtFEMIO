@@ -1,12 +1,11 @@
 /**
-   \file tests/test_fem_cards_bldep.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
    \brief Testing IO for Sesam FEM `BLDEP` cards.
 
    Detailed description
 */
-
 #include "extfem_misc.h"
 
 // ID:
@@ -38,7 +37,7 @@ using namespace dnvgl::extfem::fem::cards;
 
 TEST_CASE("FEM BLDEP definitions.", "[fem_bldep]" ) {
 
-    vector<std::string> lines; 
+    vector<std::string> lines;
     size_t len;
 
     SECTION("BLDEP (1)") {

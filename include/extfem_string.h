@@ -1,5 +1,5 @@
 /**
-   \file extfem_string.h
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
    \brief Helper functions for string manipulation.
@@ -18,6 +18,7 @@
 #define _EXTFEM_STRING_H_
 
 namespace dnvgl {
+///@ingroup extfem
     namespace extfem {
         namespace string {
 
@@ -27,7 +28,7 @@ namespace dnvgl {
                 explicit string(const std::string& in);
                 string(size_t, char);
 
-// http://stackoverflow.com/questions/1798112/removing-leading-and-trailing-spaces-from-a-string
+ /// <http://stackoverflow.com/questions/1798112/removing-leading-and-trailing-spaces-from-a-string>
                 string trim(const std::string &whitespace = " \t") const;
 
                 string upper();

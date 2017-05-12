@@ -1,12 +1,11 @@
 /**
-   \file tests/test_fem_cards_tdsupnam.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
    \brief Testing input and output for Sesam FEM `TDSUPNAM` cards.
 
    Detailed description
-   */
-
+*/
 #include "extfem_misc.h"
 
 // ID:

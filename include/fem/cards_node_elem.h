@@ -1,10 +1,10 @@
 /**
-  \file fem/cards_node_elem.h
-  \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
-  \copyright Copyright © 2017 by DNV GL SE
-  \brief Nodal Data and Element Geometry Definition
+   \file
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2017 by DNV GL SE
+   \brief Nodal Data and Element Geometry Definition
 
-  Detailed description
+   Detailed description
 */
 
 // ID: $Id$

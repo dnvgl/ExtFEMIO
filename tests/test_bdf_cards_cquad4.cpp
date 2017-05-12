@@ -1,5 +1,5 @@
 /**
-   \file tests/test_bdf_cards_cquad4.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
    \brief Testing the BDF `CQUAD4` cards classes.

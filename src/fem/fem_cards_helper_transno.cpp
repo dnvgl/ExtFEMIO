@@ -1,5 +1,5 @@
 /**
-   \file fem_cards_helper_transno.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2017 by DNV GL SE
    \brief Implementing the fem::cards::__base::transno class.

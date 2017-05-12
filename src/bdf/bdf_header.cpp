@@ -1,5 +1,5 @@
 /**
-   \file bdf/bdf_header.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
    \brief General implentation for BDF header entries.

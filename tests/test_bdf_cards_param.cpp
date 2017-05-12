@@ -1,12 +1,11 @@
 /**
-   \file tests/test_bdf_cards_param.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
    \brief Generate bulk param entries.
 
    Detailed description
-   */
-
+*/
 #include "extfem_misc.h"
 
 // ID:

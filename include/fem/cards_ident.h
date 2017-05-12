@@ -1,10 +1,10 @@
 /**
-  \file fem/cards_indent.h
-  \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
-  \copyright Copyright © 2017 by DNV GL SE
-  \brief Identification data for Superelements and Text Data.
+   \file
+   \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
+   \copyright Copyright © 2017 by DNV GL SE
+   \brief Identification data for Superelements and Text Data.
 
-  Detailed description
+   Detailed description
 */
 
 // ID: $Id$

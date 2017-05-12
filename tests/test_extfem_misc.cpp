@@ -1,5 +1,5 @@
 /**
-   \file tests/test_extfem_misc.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
    \brief Tests for genaral helper functions.

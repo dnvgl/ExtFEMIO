@@ -1,12 +1,11 @@
 /**
-   \file tests/test_fem_float.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
    \brief Tests for FEM float types.
 
    Detailed description
-   */
-
+*/
 #include "extfem_misc.h"
 
 // ID:

@@ -1,12 +1,11 @@
 /**
-   \file test_support_grouping_csv.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
    \brief Testing reading CSV files from NAPA BDF export.
 
    Detailed description
 */
-
 #include "extfem_misc.h"
 
 // ID:

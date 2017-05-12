@@ -1,11 +1,11 @@
 /**
-   \file bdf/bdf_cards_mat1.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
    \brief Definitions for Nastran BDF MAT1 cards.
 
    Detailed description
-   */
+*/
 #include "StdAfx.h"
 
 #include "extfem_misc.h"

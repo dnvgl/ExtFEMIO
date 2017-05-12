@@ -1,5 +1,5 @@
 /**
-   \file fem/type_bounds.h
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
    \brief Define boundaries for fem cards.

@@ -1,12 +1,11 @@
 /**
-   \file tests/test_bdf_cards_grav.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
    \brief Testing the BDF `GRAV` card class.
 
    Detailed description
 */
-
 #include "extfem_misc.h"
 #include "bdf/cards_loads.h"
 

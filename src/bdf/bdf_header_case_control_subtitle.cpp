@@ -1,11 +1,11 @@
 /**
-   \file bdf/bdf_header_case_control_subtitle.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
    \brief Implementation for BDF SUBTILE case control entry.
 
    Detailed description
-   */
+*/
 #include "StdAfx.h"
 
 #include "extfem_misc.h"

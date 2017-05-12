@@ -1,5 +1,5 @@
 /**
-   \file fem/fem_cards_hsuptran.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
    \brief Processing Sesam FEM `HSUPTRAN` cards.

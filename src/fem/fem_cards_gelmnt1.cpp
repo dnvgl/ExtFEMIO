@@ -1,5 +1,5 @@
 /**
-   \file fem/fem_cards_gelmnt1.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
    \brief Processing Sesam FEM `GELMNT1` cards.

@@ -1,5 +1,5 @@
 /**
-   \file bdf/types.h
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
    \brief Definitions for Nastran Bulk data entry types.

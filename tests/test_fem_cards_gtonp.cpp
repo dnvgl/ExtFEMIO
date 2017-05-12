@@ -1,5 +1,5 @@
 /**
-   \file test_fem_cards_gtonp.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2017 by DNV GL SE
    \brief Testing IO for Sesam FEM `GTONP` cards.

@@ -1,5 +1,5 @@
 /**
-   \file fem/cards.h
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
    \brief Classes for the different Sesame FEM cards.

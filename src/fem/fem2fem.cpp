@@ -1,5 +1,5 @@
 /**
-   \file fem/fem2fem.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
    \brief Simple test program: copy fem file to fem file via ExtFEMIO library.

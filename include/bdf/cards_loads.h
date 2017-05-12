@@ -1,5 +1,5 @@
 /**
-   \file bdf/cards_loads.h
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
    \brief Classes for the different Nastran BDF cards dealing with loads.

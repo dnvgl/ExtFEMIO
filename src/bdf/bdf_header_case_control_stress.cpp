@@ -1,5 +1,5 @@
 /**
-   \file bdf_header_case_control_stress.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
    \brief Implementation of BDF file header STRESS entries

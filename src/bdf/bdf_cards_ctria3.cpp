@@ -1,5 +1,5 @@
 /**
-   \file bdf/bdf_cards_ctria3.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
    \brief Definitions for Nastran BDF CTRIA3 cards.

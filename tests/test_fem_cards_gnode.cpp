@@ -1,12 +1,11 @@
 /**
-   \file tests/test_fem_cards_gnode.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
    \brief Testing IO for Sesam FEM `GNODE` cards.
 
    Detailed description
-   */
-
+*/
 #include "extfem_misc.h"
 
 // ID:

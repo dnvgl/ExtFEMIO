@@ -1,5 +1,5 @@
 /**
-   \file fem/fem_types_bool.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
    \brief Implemention of bool boundaries for Sesam FEM IO.

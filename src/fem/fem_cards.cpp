@@ -1,5 +1,5 @@
 /**
-   \file fem/fem_cards.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
    \brief Base definitions for Sesam FEM cards.

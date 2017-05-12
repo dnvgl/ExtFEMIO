@@ -1,5 +1,5 @@
 /**
-   \file tests/test_bdf_header_spcforces.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
    \brief Test of BDF SPCFORCES case control entries.

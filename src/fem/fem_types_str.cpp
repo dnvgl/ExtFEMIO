@@ -1,5 +1,5 @@
 /**
-   \file fem/fem_types_str.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
    \brief Processing of string entries from Sesam FEM files.

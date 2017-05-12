@@ -1,5 +1,5 @@
 /**
-   \file my_c++14.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
    \brief Definitions for helper functions.

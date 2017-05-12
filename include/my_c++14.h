@@ -1,5 +1,5 @@
 /**
-   \file my_c++14.h
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
    \brief Backporting of some C++-14 functionality.

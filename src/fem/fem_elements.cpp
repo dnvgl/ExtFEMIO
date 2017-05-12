@@ -12,7 +12,7 @@
  */
 
 /**
-   \file fem/fem_elements.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015,2016,2017 by DNV GL SE
    \brief Common definitions for FEM elements.

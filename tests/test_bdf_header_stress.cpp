@@ -1,12 +1,11 @@
 /**
-   \file test_bdf_header_stress.cpp
+   \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2016 by DNV GL SE
    \brief Testing of STRESS case control entry.
 
    Detailed description
-   */
-
+*/
 #include "extfem_misc.h"
 
 // ID:
