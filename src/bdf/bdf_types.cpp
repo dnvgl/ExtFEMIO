@@ -31,16 +31,18 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem;
 using namespace bdf::types;
 
-std::istringstream base::conv;
+istringstream base::conv;
 
 base::base(const std::string &name) : name(name) {};
 
 out_form_type base::out_form = out_form_type::SHORT;
 
-imbue_helper::imbue_helper(const std::locale &loc) : base("") {
+imbue_helper::imbue_helper(const locale &loc) : base("") {
     conv.imbue(loc);
 }
 
@@ -58,21 +60,21 @@ bdf_types card::type() const {
     return bdf_types::None;
 }
 
-/// std::set input and output locale for conv and outp
-static imbue_helper _imbue_helper(std::locale::classic());
+/// set input and output locale for conv and outp
+static imbue_helper _imbue_helper(locale::classic());
 
 std::string card::format(const void* d) const {
-    std::ostringstream outp;
+    ostringstream outp;
 
-    outp << resetiosflags(std::ios::adjustfield);
+    outp << resetiosflags(ios::adjustfield);
     switch (out_form) {
     case out_form_type::LONG:
-        outp << setiosflags(std::ios::left) << std::setfill(' ')
-            << std::setw(8) << (name + "*");
+        outp << setiosflags(ios::left) << setfill(' ')
+            << setw(8) << (name + "*");
         break;
     case out_form_type::SHORT:
-        outp << setiosflags(std::ios_base::left) << std::setfill(' ')
-            << std::setw(8) << name;
+        outp << setiosflags(ios_base::left) << setfill(' ')
+            << setw(8) << name;
         break;
     case out_form_type::FREE:
         outp << name;
@@ -86,15 +88,15 @@ empty::empty() : base("<empty>") {}
 
 bdf_types empty::type() const {
     return bdf_types::None;
-};
+}
 
 std::string empty::format(const void* d) const {
-    std::ostringstream outp;
+    ostringstream outp;
 
     switch (out_form) {
     case out_form_type::LONG:
     case out_form_type::SHORT:
-        outp << std::setfill(' ') << std::setw(long(out_form)) << " ";
+        outp << setfill(' ') << setw(long(out_form)) << " ";
         break;
     case out_form_type::FREE:
         break;

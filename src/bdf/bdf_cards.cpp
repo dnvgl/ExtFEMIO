@@ -6,7 +6,6 @@
 
    Detailed description
 */
-
 #include "StdAfx.h"
 
 #include "extfem_misc.h"
@@ -201,11 +200,6 @@ std::string cards::__base::card::format_outlist(
 
     try {
         for (auto &p : en) {
-            if (!p->first) {
-                res << "$ " << *(static_cast<std::string const*>(p->second));
-                if (p != en.back()) res << endl;
-                continue;
-            }
             if (++i > 9) {
                 i = 2;
                 res << endl << bdf::types::card("").format(nullptr);

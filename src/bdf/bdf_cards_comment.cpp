@@ -92,8 +92,7 @@ comment::comment(std::vector<std::string> const &content) :
 }
 
 comment::comment(std::string const *content) :
-        card(),
-        content(list<std::string>({*content})) {}
+        card(), content(list<std::string>({*content})) {}
 
 cards::types comment::card_type() const {
     return cards::types::COMMENT;
@@ -139,15 +138,25 @@ void comment::read(std::list<std::string> const &inp) {
 
 void comment::collect_outdata(
     std::list<std::unique_ptr<format_entry> > &res) const {
-    if (this->content.size() == 0) return;
+    // Do not use!!
+    NOT_IMPLEMENTED("DO NOT USE");
+}
 
-    for (auto &pos : this->content)
-        res.push_back(unique_ptr<format_entry>(format(pos)));
+ostream &comment::put(ostream &os) const {
+    if (this->content.size() == 0) return os;
+    std::string marker;
+    for (auto pos : content) {
+        marker = "$ ";
+        std::string tmp(pos.begin(), pos.end());
+        do {
+            os << marker << tmp.substr(0, 78) << endl;
+            marker = "$+";
+        } while ((pos.size() > 78) && (tmp = tmp.erase(0, 78)).size() > 0);
+    }
+    return os;
 }
 
 void comment::check_data() const {}
-
-
 
 // Local Variables:
 // mode: c++

@@ -53,18 +53,15 @@ dnvgl::extfem::bdf::cards::format_entry
 dnvgl::extfem::bdf::cards::format_entry
 *format(const std::unique_ptr<dnvgl::extfem::bdf::types::empty>&);
 
+template <class _Ty>
 dnvgl::extfem::bdf::cards::format_entry
-*format(const std::string&);
+*format(dnvgl::extfem::bdf::types::entry_type<_Ty> const&,
+        _Ty const*);
 
 template <class _Ty>
 dnvgl::extfem::bdf::cards::format_entry
-*format(const dnvgl::extfem::bdf::types::entry_type<_Ty>&,
-        const _Ty *);
-
-template <class _Ty>
-dnvgl::extfem::bdf::cards::format_entry
-*format(const dnvgl::extfem::bdf::types::entry_type<_Ty>&,
-        const dnvgl::extfem::bdf::types::entry_value<_Ty>&);
+*format(dnvgl::extfem::bdf::types::entry_type<_Ty> const&,
+        dnvgl::extfem::bdf::types::entry_value<_Ty> const&);
 
 namespace dnvgl {
     namespace extfem {
@@ -513,18 +510,23 @@ namespace dnvgl {
 
                     types card_type() const override;
 
-                    card const &operator()(std::list<std::string> const &inp) override;
+                    card const &operator()(
+                        std::list<std::string> const &inp) override;
 
-                    card const &operator()(std::vector<std::string> const &content);
+                    card const &operator()(
+                        std::vector<std::string> const &content);
 
                     card const &operator()(std::string const *content);
 
                 private:
 
+                    std::ostream &put(std::ostream&) const override;
+
                     void read(std::list<std::string> const &inp) override;
 
                     void collect_outdata(
-                        std::list<std::unique_ptr<format_entry> >&) const override;
+                        std::list<std::unique_ptr<format_entry> >&)
+                        const override;
 
                     void check_data() const override;
                 };
@@ -548,7 +550,7 @@ inline dnvgl::extfem::bdf::cards::format_entry
 template <class _Ty> inline
 dnvgl::extfem::bdf::cards::format_entry
 *format(dnvgl::extfem::bdf::types::entry_type<_Ty> const &formatter,
-               _Ty const *val) {
+        _Ty const *val) {
     return new dnvgl::extfem::bdf::cards::format_entry(
         static_cast<dnvgl::extfem::bdf::types::base const*>(&formatter),
         static_cast<void const*>(val));
@@ -561,12 +563,6 @@ dnvgl::extfem::bdf::cards::format_entry
     return new dnvgl::extfem::bdf::cards::format_entry(
         static_cast<dnvgl::extfem::bdf::types::base const*>(&formatter),
         static_cast<void const*>(&val));
-}
-
-dnvgl::extfem::bdf::cards::format_entry inline
-*format(std::string const &val) {
-    return new dnvgl::extfem::bdf::cards::format_entry(
-        nullptr, static_cast<void const*>(&val));
 }
 
 namespace dnvgl {

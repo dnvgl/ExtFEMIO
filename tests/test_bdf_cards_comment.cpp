@@ -45,7 +45,8 @@ TEST_CASE("BDF COMMENT yield stress definition.", "[bdf_comment]") {
 #endif
             m;
         CHECK(regex_search(std::string("$ 235"), m, comment::find_yield));
-        CHECK(regex_search(std::string("$ Yield: 315 test"), m, comment::find_yield));
+        CHECK(regex_search(
+                  std::string("$ Yield: 315 test"), m, comment::find_yield));
         CHECK(regex_search(std::string("$ 355"), m, comment::find_yield));
         CHECK(regex_search(std::string("$ 390"), m, comment::find_yield));
         CHECK(regex_search(std::string("$ 460"), m, comment::find_yield));
@@ -89,7 +90,8 @@ TEST_CASE("BDF COMMENT definitions; long comment (2).", "[bdf_comment]") {
     CHECK(probe.content == list<std::string>({"a12345a"}));
 }
 
-TEST_CASE("BDF COMMENT definitions; one line.", "[bdf_comment]") {
+TEST_CASE("BDF COMMENT definitions; one line.",
+          "[bdf_comment]") {
 
     std::list<std::string> data({
             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
@@ -101,7 +103,8 @@ TEST_CASE("BDF COMMENT definitions; one line.", "[bdf_comment]") {
     CHECK(probe.content == list<std::string>({"foo"}));
 }
 
-TEST_CASE("BDF COMMENT definitions; with yield stress (235).", "[bdf_comment]") {
+TEST_CASE("BDF COMMENT definitions; with yield stress (235).",
+          "[bdf_comment]") {
 
     std::list<std::string> data({
             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
@@ -114,7 +117,8 @@ TEST_CASE("BDF COMMENT definitions; with yield stress (235).", "[bdf_comment]") 
     CHECK((comment::yield && *comment::yield == 235.));
 }
 
-TEST_CASE("BDF COMMENT definitions; with yield stress (315).", "[bdf_comment]") {
+TEST_CASE("BDF COMMENT definitions; with yield stress (315).",
+          "[bdf_comment]") {
 
     std::list<std::string> data({
             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
@@ -129,7 +133,8 @@ TEST_CASE("BDF COMMENT definitions; with yield stress (315).", "[bdf_comment]") 
     CHECK((comment::yield && *comment::yield == 315.));
 }
 
-TEST_CASE("BDF COMMENT definitions; with yield stress (355).", "[bdf_comment]") {
+TEST_CASE("BDF COMMENT definitions; with yield stress (355).",
+          "[bdf_comment]") {
 
     std::list<std::string> data({
             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
@@ -143,7 +148,8 @@ TEST_CASE("BDF COMMENT definitions; with yield stress (355).", "[bdf_comment]") 
     CHECK((comment::yield && *comment::yield == 355.));
 }
 
-TEST_CASE("BDF COMMENT definitions; with yield stress (390).", "[bdf_comment]") {
+TEST_CASE("BDF COMMENT definitions; with yield stress (390).",
+          "[bdf_comment]") {
 
     std::list<std::string> data({
             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
@@ -157,7 +163,8 @@ TEST_CASE("BDF COMMENT definitions; with yield stress (390).", "[bdf_comment]") 
     CHECK((comment::yield && *comment::yield == 390.));
 }
 
-TEST_CASE("BDF COMMENT definitions; with yield stress (460).", "[bdf_comment]") {
+TEST_CASE("BDF COMMENT definitions; with yield stress (460).",
+          "[bdf_comment]") {
 
     std::list<std::string> data({
             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
@@ -195,7 +202,7 @@ TEST_CASE("BDF COMMENT roundtrip test", "[bdf_comment]") {
         card::card_split(data, lines);
         comment probe_l(lines);
 
-        CHECK(probe.content == list<std::string>({""}));
+        CHECK(probe_l.content == list<std::string>({""}));
     }
 }
 
@@ -294,6 +301,88 @@ TEST_CASE("BDF COMMENT roundtrip test; two lines (reuse).", "[bdf_comment]") {
         CHECK(probe_l.content == list<std::string>({
                     "This is a test",
                     "one two"}));
+        CHECK(probe_l.yield == nullptr);
+        CHECK(comment::yield == nullptr);
+    }
+}
+
+TEST_CASE("BDF COMMENT roundtrip test; long line.", "[bdf_comment]") {
+    ostringstream test;
+
+    vector<std::string> content{
+        // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
+        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean "
+        "commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus"};
+
+    comment probe(content);
+    test << probe;
+
+    reset_statics();
+
+    SECTION("check output") {
+        CHECK(test.str() ==
+        // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
+        "$ Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligul\n"
+        "$+a eget dolor. Aenean massa. Cum sociis natoque penatibus\n");
+    }
+
+    SECTION("check reading") {
+        list<std::string> data;
+        list<std::string> lines;
+        std::string tmp;
+        istringstream raw(test.str());
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        card::card_split(data, lines);
+        comment probe_l(lines);
+
+        CHECK(probe_l.content == list<std::string>({
+                    "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. "
+                    "Aenean commodo ligula eget dolor. Aenean massa. Cum "
+                    "sociis natoque penatibus"}));
+        CHECK(probe_l.yield == nullptr);
+        CHECK(comment::yield == nullptr);
+    }
+}
+
+TEST_CASE("BDF COMMENT roundtrip test; long line (reuse).", "[bdf_comment]") {
+    ostringstream test;
+
+    vector<std::string> content{
+        // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
+        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean "
+        "commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus"};
+
+    comment probe;
+    test << probe;
+    test << probe(content);
+
+    reset_statics();
+
+    SECTION("check output") {
+        CHECK(test.str() ==
+        // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
+        "$ Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligul\n"
+        "$+a eget dolor. Aenean massa. Cum sociis natoque penatibus\n");
+    }
+
+    SECTION("check reading") {
+        list<std::string> data;
+        list<std::string> lines;
+        std::string tmp;
+        istringstream raw(test.str());
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        card::card_split(data, lines);
+        comment probe_l;
+        probe_l(lines);
+
+        CHECK(probe_l.content == list<std::string>({
+                    "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. "
+                    "Aenean commodo ligula eget dolor. Aenean massa. Cum "
+                    "sociis natoque penatibus"}));
         CHECK(probe_l.yield == nullptr);
         CHECK(comment::yield == nullptr);
     }
