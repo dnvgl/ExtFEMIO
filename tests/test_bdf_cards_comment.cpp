@@ -126,6 +126,7 @@ TEST_CASE("BDF COMMENT definitions; with yield stress (315).", "[bdf_comment]") 
     CHECK(probe.content == list<std::string>({
                 "yield stress for the following material definition:315"}));
     CHECK((probe.yield && *probe.yield == 315.));
+    CHECK((comment::yield && *comment::yield == 315.));
 }
 
 TEST_CASE("BDF COMMENT definitions; with yield stress (355).", "[bdf_comment]") {
@@ -139,6 +140,7 @@ TEST_CASE("BDF COMMENT definitions; with yield stress (355).", "[bdf_comment]") 
 
     CHECK(probe.content == list<std::string>({"yield stress: 355"}));
     CHECK((probe.yield && *probe.yield == 355.));
+    CHECK((comment::yield && *comment::yield == 355.));
 }
 
 TEST_CASE("BDF COMMENT definitions; with yield stress (390).", "[bdf_comment]") {
@@ -152,20 +154,22 @@ TEST_CASE("BDF COMMENT definitions; with yield stress (390).", "[bdf_comment]") 
 
     CHECK(probe.content == list<std::string>({"390"}));
     CHECK((probe.yield && *probe.yield == 390.));
+    CHECK((comment::yield && *comment::yield == 390.));
 }
 
-// TEST_CASE("BDF COMMENT definitions; with yield stress (460).", "[bdf_comment]") {
+TEST_CASE("BDF COMMENT definitions; with yield stress (460).", "[bdf_comment]") {
 
-//     std::list<std::string> data({
-//             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
-//             "$ 460"});
-//     std::list<std::string> lines;
-//     card::card_split(data, lines);
-//     comment probe(lines);
+    std::list<std::string> data({
+            // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
+            "$ 460"});
+    std::list<std::string> lines;
+    card::card_split(data, lines);
+    comment probe(lines);
 
-//     CHECK(probe.content == list<std::string>({"460"}));
-//     CHECK((probe.yield && *probe.yield == 460.));
-// }
+    CHECK(probe.content == list<std::string>({"460"}));
+    CHECK((probe.yield && *probe.yield == 460.));
+    CHECK((comment::yield && *comment::yield == 460.));
+}
 
 TEST_CASE("BDF COMMENT roundtrip test", "[bdf_comment]") {
     ostringstream test;
@@ -256,6 +260,7 @@ TEST_CASE("BDF COMMENT roundtrip test; two lines.", "[bdf_comment]") {
                     "This is a test",
                     "one two"}));
         CHECK(probe_l.yield == nullptr);
+        CHECK(comment::yield == nullptr);
     }
 }
 
@@ -290,6 +295,7 @@ TEST_CASE("BDF COMMENT roundtrip test; two lines (reuse).", "[bdf_comment]") {
                     "This is a test",
                     "one two"}));
         CHECK(probe_l.yield == nullptr);
+        CHECK(comment::yield == nullptr);
     }
 }
 
