@@ -41,23 +41,23 @@ TEST_CASE("FEM BEUSLO definitions. (Small Field Format)", "[fem_beuslo]" ) {
         vector<std::string> data({
                 // 345678|234567890123456|234567890123456|234567890123456|234567890123456
                 "BEUSLO   1.000000000e+00 1.000000000e+00 0.000000000e+00 0.00000000E+00 \n",
-                    "         1.000000000e+00 4.000000000e+00 0.000000000e+00 2.00000000E+00 \n",
-                    "         1.66046816E+04  3.86669189E+03  3.86368091E+03  1.62054932E+04 \n"});
+                "         1.000000000e+00 4.000000000e+00 0.000000000e+00 2.00000000E+00 \n",
+                "         1.66046816E+04  3.86669189E+03  3.86368091E+03  1.62054932E+04 \n"});
         vector<std::string> lines;
         size_t len{__base::card::card_split(data, data.size(), lines)};
         beuslo probe(lines, len);
 
-        REQUIRE(probe.LLC == 1);
-        REQUIRE(probe.LOTYP == 1);
-        REQUIRE(probe.COMPLX == false);
-        REQUIRE(probe.LAYER == 0);
-        REQUIRE(probe.ELNO == 1);
-        REQUIRE(probe.NDOF == 4);
-        REQUIRE(probe.INTNO == 0);
-        REQUIRE(probe.SIDE == 2);
-        REQUIRE(probe.RLOADi == std::vector<double>({
+        CHECK(probe.LLC == 1);
+        CHECK(probe.LOTYP == 1);
+        CHECK(probe.COMPLX == false);
+        CHECK(probe.LAYER == 0);
+        CHECK(probe.ELNO == 1);
+        CHECK(probe.NDOF == 4);
+        CHECK(probe.INTNO == 0);
+        CHECK(probe.SIDE == 2);
+        CHECK(probe.RLOADi == std::vector<double>({
                     1.66046816e+4, 3.86669189e+3, 3.86368091e+3, 1.62054932e+4}));
-        REQUIRE(probe.ILOADi == std::vector<double>({}));
+        CHECK(probe.ILOADi == std::vector<double>({}));
     }
 }
 
@@ -91,14 +91,14 @@ TEST_CASE("FEM BEUSLO types output.", "[fem_beuslo,out]" ) {
         beuslo probe;
 
         test << probe;
-        REQUIRE(test.str() == "");
+        CHECK(test.str() == "");
     }
 
     SECTION("write (fixed, verbose)") {
         beuslo probe(1,  2, false, 3, 4, 5, 6, 2, {7., 8., 9., 10., 11.});
 
         test << probe;
-        REQUIRE(test.str() == ref_r);
+        CHECK(test.str() == ref_r);
     }
 
     SECTION("write (real, verbose)") {
@@ -106,18 +106,18 @@ TEST_CASE("FEM BEUSLO types output.", "[fem_beuslo,out]" ) {
                      SIDE, RLOADi);
 
         test << probe;
-        REQUIRE(test.str() == ref_r);
+        CHECK(test.str() == ref_r);
     }
 
     SECTION("write (real, verbose, fail 1)") {
-        REQUIRE_THROWS(
+        CHECK_THROWS(
             beuslo(LLC,  LOTYP, COMPLX, LAYER, ELNO, NDOF+1, INTNO,
                          SIDE, RLOADi));
     }
 
     SECTION("write (real, verbose, fail 2)") {
         COMPLX = true;
-        REQUIRE_THROWS(
+        CHECK_THROWS(
             beuslo(LLC,  LOTYP, COMPLX, LAYER, ELNO, NDOF, INTNO,
                    SIDE, RLOADi));
     }
@@ -126,11 +126,11 @@ TEST_CASE("FEM BEUSLO types output.", "[fem_beuslo,out]" ) {
         beuslo probe(LLC,  LOTYP, LAYER, ELNO, NDOF, INTNO,
                      SIDE, RLOADi);
         test << probe;
-        REQUIRE(test.str() == ref_r);
+        CHECK(test.str() == ref_r);
     }
 
     SECTION("write (real, impl. COMPLX, fail)") {
-        REQUIRE_THROWS(
+        CHECK_THROWS(
             beuslo(LLC,  LOTYP, LAYER, ELNO, NDOF+1, INTNO,
                    SIDE, RLOADi));
     }
@@ -139,12 +139,12 @@ TEST_CASE("FEM BEUSLO types output.", "[fem_beuslo,out]" ) {
         beuslo probe(LLC,  LOTYP, COMPLX, LAYER, ELNO, INTNO,
                      SIDE, RLOADi);
         test << probe;
-        REQUIRE(test.str() == ref_r);
+        CHECK(test.str() == ref_r);
     }
 
     SECTION("write (real, impl. NDOF, fails)") {
         COMPLX = true;
-        REQUIRE_THROWS(
+        CHECK_THROWS(
             beuslo(LLC,  LOTYP, COMPLX, LAYER, ELNO, INTNO,
                    SIDE, RLOADi));
     }
@@ -153,7 +153,7 @@ TEST_CASE("FEM BEUSLO types output.", "[fem_beuslo,out]" ) {
         beuslo probe(LLC,  LOTYP, LAYER, ELNO, INTNO,
                      SIDE, RLOADi);
         test << probe;
-        REQUIRE(test.str() == ref_r);
+        CHECK(test.str() == ref_r);
     }
 
     SECTION("write (complex, verbose)") {
@@ -161,18 +161,18 @@ TEST_CASE("FEM BEUSLO types output.", "[fem_beuslo,out]" ) {
         beuslo probe(LLC,  LOTYP, COMPLX, LAYER, ELNO, NDOF, INTNO,
                      SIDE, RLOADi, ILOADi);
         test << probe;
-        REQUIRE(test.str() == ref_c);
+        CHECK(test.str() == ref_c);
     }
 
     SECTION("write (complex, verbose, fails 1)") {
-        REQUIRE_THROWS(
+        CHECK_THROWS(
             beuslo(LLC,  LOTYP, COMPLX, LAYER, ELNO, NDOF, INTNO,
                    SIDE, RLOADi, ILOADi));
     }
 
     SECTION("write (complex, verbose, fails 2)") {
         COMPLX = true;
-        REQUIRE_THROWS(
+        CHECK_THROWS(
             beuslo(LLC,  LOTYP, COMPLX, LAYER, ELNO, NDOF+1, INTNO,
                    SIDE, RLOADi, ILOADi));
     }
@@ -180,7 +180,7 @@ TEST_CASE("FEM BEUSLO types output.", "[fem_beuslo,out]" ) {
     SECTION("write (complex, verbose, fails 3)") {
         COMPLX = true;
         std::vector<double> ILOADi_l({12., 13., 14., 15., 16., 17.});
-        REQUIRE_THROWS(
+        CHECK_THROWS(
             beuslo(LLC,  LOTYP, COMPLX, LAYER, ELNO, NDOF+1, INTNO,
                    SIDE, RLOADi, ILOADi_l));
     }
@@ -189,19 +189,19 @@ TEST_CASE("FEM BEUSLO types output.", "[fem_beuslo,out]" ) {
         beuslo probe(LLC,  LOTYP, LAYER, ELNO, NDOF, INTNO,
                      SIDE, RLOADi, ILOADi);
         test << probe;
-        REQUIRE(test.str() == ref_c);
+        CHECK(test.str() == ref_c);
     }
 
     SECTION("write (complex, impl. COMPLX, fails 1)") {
         std::vector<double> RLOADi_l({12., 13., 14., 15., 16., 17.});
-        REQUIRE_THROWS(
+        CHECK_THROWS(
             beuslo(LLC,  LOTYP, LAYER, ELNO, NDOF, INTNO,
                    SIDE, RLOADi_l, ILOADi));
     }
 
     SECTION("write (complex, impl. COMPLX, fails 2)") {
         std::vector<double> ILOADi_l({12., 13., 14., 15., 16., 17.});
-        REQUIRE_THROWS(
+        CHECK_THROWS(
             beuslo(LLC,  LOTYP, LAYER, ELNO, NDOF, INTNO,
                    SIDE, RLOADi, ILOADi_l));
     }
@@ -212,11 +212,11 @@ TEST_CASE("FEM BEUSLO types output.", "[fem_beuslo,out]" ) {
                      SIDE, RLOADi, ILOADi);
 
         test << probe;
-        REQUIRE(test.str() == ref_c);
+        CHECK(test.str() == ref_c);
     }
 
     SECTION("write (complex, impl. NDOF, fails 1)") {
-        REQUIRE_THROWS(
+        CHECK_THROWS(
             beuslo(LLC,  LOTYP, COMPLX, LAYER, ELNO, INTNO,
                    SIDE, RLOADi, ILOADi));
     }
@@ -224,7 +224,7 @@ TEST_CASE("FEM BEUSLO types output.", "[fem_beuslo,out]" ) {
     SECTION("write (complex, impl. NDOF, fails 1)") {
         COMPLX = true;
         std::vector<double> ILOADi_l({12., 13., 14., 15., 16., 17.});
-        REQUIRE_THROWS(
+        CHECK_THROWS(
             beuslo(LLC,  LOTYP, COMPLX, LAYER, ELNO, INTNO,
                    SIDE, RLOADi, ILOADi_l));
     }
@@ -233,12 +233,12 @@ TEST_CASE("FEM BEUSLO types output.", "[fem_beuslo,out]" ) {
         beuslo probe(LLC,  LOTYP, LAYER, ELNO, INTNO,
                      SIDE, RLOADi, ILOADi);
         test << probe;
-        REQUIRE(test.str() == ref_c);
+        CHECK(test.str() == ref_c);
     }
 
     SECTION("write (complex, impl. NDOF, COMPLX, fails)") {
         std::vector<double> ILOADi_l({12., 13., 14., 15., 16., 17.});
-        REQUIRE_THROWS(
+        CHECK_THROWS(
             beuslo(LLC,  LOTYP, LAYER, ELNO, INTNO,
                    SIDE, RLOADi, ILOADi_l));
     }
@@ -252,50 +252,50 @@ TEST_CASE("FEM BEUSLO conversion from own output.", "[fem_beuslo,in/out]") {
         vector<std::string> data({
                 // 345678|234567890123456|234567890123456|234567890123456|234567890123456
                 "BEUSLO  +1.000000000e+00+2.000000000e+00           +0.00+3.000000000e+00\n",
-                    "        +4.000000000e+00+5.000000000e+00+6.000000000e+00+2.000000000e+00\n",
-                    "        +7.000000000e+00+8.000000000e+00+9.000000000e+00+1.000000000e+01\n",
-                    "        +1.100000000e+01\n"});
+                "        +4.000000000e+00+5.000000000e+00+6.000000000e+00+2.000000000e+00\n",
+                "        +7.000000000e+00+8.000000000e+00+9.000000000e+00+1.000000000e+01\n",
+                "        +1.100000000e+01\n"});
         vector<std::string> lines;
         len = __base::card::card_split(data, data.size(), lines);
         beuslo probe(lines, len);
 
-        REQUIRE(probe.LLC == 1);
-        REQUIRE(probe.LOTYP == 2);
-        REQUIRE_FALSE(probe.COMPLX);
-        REQUIRE(probe.LAYER == 3);
-        REQUIRE(probe.ELNO == 4);
-        REQUIRE(probe.NDOF == 5);
-        REQUIRE(probe.INTNO == 6);
-        REQUIRE(probe.SIDE == 2);
-        REQUIRE(probe.RLOADi.size() == 5);
-        REQUIRE(probe.RLOADi == std::vector<double>({7., 8., 9., 10., 11.}));
-        REQUIRE(probe.ILOADi.size() == 0);
+        CHECK(probe.LLC == 1);
+        CHECK(probe.LOTYP == 2);
+        CHECK_FALSE(probe.COMPLX);
+        CHECK(probe.LAYER == 3);
+        CHECK(probe.ELNO == 4);
+        CHECK(probe.NDOF == 5);
+        CHECK(probe.INTNO == 6);
+        CHECK(probe.SIDE == 2);
+        CHECK(probe.RLOADi.size() == 5);
+        CHECK(probe.RLOADi == std::vector<double>({7., 8., 9., 10., 11.}));
+        CHECK(probe.ILOADi.size() == 0);
     }
 
     SECTION("BEUSLO (own output, r + i)") {
         vector<std::string> data({
                 // 345678|234567890123456|234567890123456|234567890123456|234567890123456
                 "BEUSLO  +1.000000000e+00+2.000000000e+00           +1.00+3.000000000e+00\n",
-                    "        +4.000000000e+00+5.000000000e+00+6.000000000e+00+2.000000000e+00\n",
-                    "        +7.000000000e+00+8.000000000e+00+9.000000000e+00+1.000000000e+01\n",
-                    "        +1.100000000e+01+1.200000000e+01+1.300000000e+01+1.400000000e+01\n",
-                    "        +1.500000000e+01+1.600000000e+01\n"});
+                "        +4.000000000e+00+5.000000000e+00+6.000000000e+00+2.000000000e+00\n",
+                "        +7.000000000e+00+8.000000000e+00+9.000000000e+00+1.000000000e+01\n",
+                "        +1.100000000e+01+1.200000000e+01+1.300000000e+01+1.400000000e+01\n",
+                "        +1.500000000e+01+1.600000000e+01\n"});
         vector<std::string> lines;
         len = __base::card::card_split(data, data.size(), lines);
         beuslo probe(lines, len);
 
-        REQUIRE(probe.LLC == 1);
-        REQUIRE(probe.LOTYP == 2);
-        REQUIRE(probe.COMPLX);
-        REQUIRE(probe.LAYER == 3);
-        REQUIRE(probe.ELNO == 4);
-        REQUIRE(probe.NDOF == 5);
-        REQUIRE(probe.INTNO == 6);
-        REQUIRE(probe.SIDE == 2);
-        REQUIRE(probe.RLOADi.size() == 5);
-        REQUIRE(probe.RLOADi == std::vector<double>({7., 8., 9., 10., 11.}));
-        REQUIRE(probe.ILOADi.size() == 5);
-        REQUIRE(probe.ILOADi == std::vector<double>({12., 13., 14., 15., 16.}));
+        CHECK(probe.LLC == 1);
+        CHECK(probe.LOTYP == 2);
+        CHECK(probe.COMPLX);
+        CHECK(probe.LAYER == 3);
+        CHECK(probe.ELNO == 4);
+        CHECK(probe.NDOF == 5);
+        CHECK(probe.INTNO == 6);
+        CHECK(probe.SIDE == 2);
+        CHECK(probe.RLOADi.size() == 5);
+        CHECK(probe.RLOADi == std::vector<double>({7., 8., 9., 10., 11.}));
+        CHECK(probe.ILOADi.size() == 5);
+        CHECK(probe.ILOADi == std::vector<double>({12., 13., 14., 15., 16.}));
     }
 }
 

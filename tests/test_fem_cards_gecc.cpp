@@ -48,14 +48,14 @@ TEST_CASE("FEM GECC definitions.", "[fem_gecc]") {
                 "GECC     1.00000000e+000 2.00000000e+000 1.00000000e+000 3.00000000e+000\n", 
                 "         1.34000000e+002\n"});
         len = __base::card::card_split(data, data.size(), lines);
-        REQUIRE(len == 9);
+        CHECK(len == 9);
         gecc probe(lines, len);
 
-        REQUIRE(probe.ECCNO == 1);
-        REQUIRE(probe.IOPT == gecc::ecc_opt::XYZ);
-        REQUIRE(probe.EX == 1.);
-        REQUIRE(probe.EY == 3.);
-        REQUIRE(probe.EZ == 134.);
+        CHECK(probe.ECCNO == 1);
+        CHECK(probe.IOPT == gecc::ecc_opt::XYZ);
+        CHECK(probe.EX == 1.);
+        CHECK(probe.EY == 3.);
+        CHECK(probe.EZ == 134.);
     }
 
     SECTION("GECC (2)") {
@@ -63,52 +63,52 @@ TEST_CASE("FEM GECC definitions.", "[fem_gecc]") {
                 "GECC     1.000000000e+00 2.000000000e+00 1.000000000e+00 3.000000000e+00\n", 
                 "         1.34000000e+002\n"});
         len = __base::card::card_split(data, data.size(), lines);
-        REQUIRE(len == 9);
+        CHECK(len == 9);
         gecc probe(lines, len);
 
-        REQUIRE(probe.ECCNO == 1);
-        REQUIRE(probe.IOPT == gecc::ecc_opt::XYZ);
-        REQUIRE(probe.EX == 1.);
-        REQUIRE(probe.EY == 3.);
-        REQUIRE(probe.EZ == 134.);
+        CHECK(probe.ECCNO == 1);
+        CHECK(probe.IOPT == gecc::ecc_opt::XYZ);
+        CHECK(probe.EX == 1.);
+        CHECK(probe.EY == 3.);
+        CHECK(probe.EZ == 134.);
     }
 
     SECTION("GECC (3)") {
         vector<std::string> data({
-            "GECC    +1.000000000e+00+2.000000000e+00+1.000000000e+00+3.000000000e+00\n", 
-            "        +1.340000000e+02\n"});
+                "GECC    +1.000000000e+00+2.000000000e+00+1.000000000e+00+3.000000000e+00\n", 
+                "        +1.340000000e+02\n"});
         len = __base::card::card_split(data, data.size(), lines);
-        REQUIRE(len == 9);
+        CHECK(len == 9);
         gecc probe(lines, len);
 
-        REQUIRE(probe.ECCNO == 1);
-        REQUIRE(probe.IOPT == gecc::ecc_opt::XYZ);
-        REQUIRE(probe.EX == 1.);
-        REQUIRE(probe.EY == 3.);
-        REQUIRE(probe.EZ == 134.);
+        CHECK(probe.ECCNO == 1);
+        CHECK(probe.IOPT == gecc::ecc_opt::XYZ);
+        CHECK(probe.EX == 1.);
+        CHECK(probe.EY == 3.);
+        CHECK(probe.EZ == 134.);
     }
 
     SECTION("GECC (4)") {
         vector<std::string> data({
                 "GECC     1.00000000e+000 1.00000000e+000 1.00000000e+000\n"});
         len = __base::card::card_split(data, data.size(), lines);
-        REQUIRE(len == 5);
+        CHECK(len == 5);
         gecc probe(lines, len);
 
-        REQUIRE(probe.ECCNO == 1);
-        REQUIRE(probe.IOPT == gecc::ecc_opt::Z_ONLY);
-        REQUIRE(probe.EX == 0.);
-        REQUIRE(probe.EY == 0.);
-        REQUIRE(probe.EZ == 1.);
+        CHECK(probe.ECCNO == 1);
+        CHECK(probe.IOPT == gecc::ecc_opt::Z_ONLY);
+        CHECK(probe.EX == 0.);
+        CHECK(probe.EY == 0.);
+        CHECK(probe.EZ == 1.);
     }
 
     SECTION("GECC check") {
         vector<std::string> data({
-            "GECC    +1.000000000e+00+1.000000000e+00+3.000000000e+00+1.340000000e+02\n"});
+                "GECC    +1.000000000e+00+1.000000000e+00+3.000000000e+00+1.340000000e+02\n"});
         len = __base::card::card_split(data, data.size(), lines);
         gecc probe(lines, len);
 
-        REQUIRE_THROWS_AS(probe(lines, len), errors::usage_error);
+        CHECK_THROWS_AS(probe(lines, len), errors::usage_error);
     }
 }
 
@@ -123,13 +123,13 @@ TEST_CASE("FEM GECC types output.", "[fem_gecc,out]") {
     SECTION("empty") {
         gecc probe;
         test << probe;
-        REQUIRE(test.str() == "");
+        CHECK(test.str() == "");
     }
 
     SECTION("const") {
         gecc probe(1, 1., 3., 134.);
         test << probe;
-        REQUIRE(test.str() ==
+        CHECK(test.str() ==
               "GECC    +1.000000000e+00+2.000000000e+00+1.000000000e+00+3.000000000e+00\n"
               "        +1.340000000e+02\n");
     }
@@ -137,7 +137,7 @@ TEST_CASE("FEM GECC types output.", "[fem_gecc,out]") {
     SECTION("simple") {
         gecc probe(ECCNO, gecc::ecc_opt::XYZ, EX, EY, EZ);
         test << probe;
-        REQUIRE(test.str() ==
+        CHECK(test.str() ==
               "GECC    +1.000000000e+00+2.000000000e+00+1.000000000e+00+3.000000000e+00\n"
               "        +1.340000000e+02\n");
     }
@@ -145,7 +145,7 @@ TEST_CASE("FEM GECC types output.", "[fem_gecc,out]") {
     SECTION("vector") {
         gecc probe(ECCNO, std::vector<double>({EX, EY, EZ}));
         test << probe;
-        REQUIRE(test.str() ==
+        CHECK(test.str() ==
               "GECC    +1.000000000e+00+2.000000000e+00+1.000000000e+00+3.000000000e+00\n"
               "        +1.340000000e+02\n");
     }
@@ -153,7 +153,7 @@ TEST_CASE("FEM GECC types output.", "[fem_gecc,out]") {
     SECTION("const (default eccno)") {
         gecc probe(1., 3., 134.);
         test << probe;
-        REQUIRE(test.str() ==
+        CHECK(test.str() ==
               "GECC    +1.000000000e+00+2.000000000e+00+1.000000000e+00+3.000000000e+00\n"
               "        +1.340000000e+02\n");
     }
@@ -161,7 +161,7 @@ TEST_CASE("FEM GECC types output.", "[fem_gecc,out]") {
     SECTION("simple (default eccno)") {
         gecc probe(EX, EY, EZ);
         test << probe;
-        REQUIRE(test.str() ==
+        CHECK(test.str() ==
               "GECC    +1.000000000e+00+2.000000000e+00+1.000000000e+00+3.000000000e+00\n"
               "        +1.340000000e+02\n");
     }
@@ -169,7 +169,7 @@ TEST_CASE("FEM GECC types output.", "[fem_gecc,out]") {
     SECTION("vector (default eccno)") {
         gecc probe(std::vector<double>({EX, EY, EZ}));
         test << probe;
-        REQUIRE(test.str() ==
+        CHECK(test.str() ==
               "GECC    +1.000000000e+00+2.000000000e+00+1.000000000e+00+3.000000000e+00\n"
               "        +1.340000000e+02\n");
     }
@@ -177,7 +177,7 @@ TEST_CASE("FEM GECC types output.", "[fem_gecc,out]") {
     SECTION("simple (z_only)") {
         gecc probe(22, EZ);
         test << probe;
-        REQUIRE(test.str() ==
+        CHECK(test.str() ==
               "GECC    +2.200000000e+01+1.000000000e+00+1.340000000e+02\n");
     }
 
@@ -185,7 +185,7 @@ TEST_CASE("FEM GECC types output.", "[fem_gecc,out]") {
         elements::__base::elem::reset();
         gecc probe(EZ);
         test << probe;
-        REQUIRE(test.str() ==
+        CHECK(test.str() ==
               "GECC    +1.000000000e+00+1.000000000e+00+1.340000000e+02\n");
     }
 
@@ -198,7 +198,7 @@ TEST_CASE("FEM GECC types output.", "[fem_gecc,out]") {
         gecc probe6(std::vector<double>({0., 0., -1.}));
         gecc probe7(1.);
         test << probe1 << probe2 << probe3 << probe4 << probe5 << probe6 << probe7;
-        REQUIRE(test.str() ==
+        CHECK(test.str() ==
               "GECC    +1.000000000e+00+2.000000000e+00+1.000000000e+00+0.000000000e+00\n"
               "        +0.000000000e+00\n"
               "GECC    +2.000000000e+00+2.000000000e+00+0.000000000e+00+1.000000000e+00\n"
@@ -223,7 +223,7 @@ TEST_CASE("FEM GECC types output.", "[fem_gecc,out]") {
         gecc probe6(0., 0., -1.);
         gecc probe7(1.);
         test << probe1 << probe2 << probe3 << probe4 << probe5 << probe6 << probe7;
-        REQUIRE(test.str() ==
+        CHECK(test.str() ==
               "GECC    +1.000000000e+00+2.000000000e+00+1.000000000e+00+0.000000000e+00\n"
               "        +0.000000000e+00\n"
               "GECC    +2.000000000e+00+2.000000000e+00+0.000000000e+00+1.000000000e+00\n"
@@ -251,11 +251,11 @@ TEST_CASE("FEM GECC conversion from own output.", "[fem_gecc,in/out]") {
         auto len = __base::card::card_split(data, data.size(), lines);
         gecc probe(lines, len);
 
-        REQUIRE(probe.ECCNO == 1);
-        REQUIRE(probe.IOPT == gecc::ecc_opt::XYZ);
-        REQUIRE(probe.EX == 1.);
-        REQUIRE(probe.EY == 3.);
-        REQUIRE(probe.EZ == 134.);
+        CHECK(probe.ECCNO == 1);
+        CHECK(probe.IOPT == gecc::ecc_opt::XYZ);
+        CHECK(probe.EX == 1.);
+        CHECK(probe.EY == 3.);
+        CHECK(probe.EZ == 134.);
     }
 }
 

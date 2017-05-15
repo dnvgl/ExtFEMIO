@@ -48,57 +48,57 @@ namespace {
 
 TEST_CASE("BDF types are compared: Checking 'entry_type<long>.type' against 'Int'.", "[bdf_types]" ) {
     entry_type<long> obj_int("d_int");
-    REQUIRE(entry_type<long>("dummy int").type() == bdf_types::Int);
+    CHECK(entry_type<long>("dummy int").type() == bdf_types::Int);
 }
 
 TEST_CASE("BDF types are compared: Checking 'entry_type<long>->type' against 'Int'.", "[bdf_types]" ) {
     entry_type<long> obj_int("d_int");
-    REQUIRE(obj_int.type() == bdf_types::Int);
+    CHECK(obj_int.type() == bdf_types::Int);
 }
 
 TEST_CASE("BDF types are compared: Checking 'entry_type<double>.type' against 'Float'.", "[bdf_types]" ) {
-    REQUIRE(entry_type<double>("dummy float").type() == bdf_types::Float);
+    CHECK(entry_type<double>("dummy float").type() == bdf_types::Float);
 }
 
 TEST_CASE("BDF types are compared: Checking 'entry_type<double>->type' against 'Float'.", "[bdf_types]" ) {
     entry_type<double> obj_float("d_float");
-    REQUIRE(obj_float.type() == bdf_types::Float);
+    CHECK(obj_float.type() == bdf_types::Float);
 }
 
 TEST_CASE("BDF types are compared: Checking 'bdf_list.type' against 'List'.", "[bdf_types]" ) {
-    REQUIRE(entry_type<std::vector<int> >("dummy").type() == bdf_types::List);
+    CHECK(entry_type<std::vector<int> >("dummy").type() == bdf_types::List);
 }
 
 TEST_CASE("BDF types are compared: Checking 'bdf_list->type' against 'List'.", "[bdf_types]" ) {
     entry_type<std::vector<int> > obj_list("d_dque");
-    REQUIRE(obj_list.type() == bdf_types::List);
+    CHECK(obj_list.type() == bdf_types::List);
 }
 
 TEST_CASE("BDF types are compared: Checking 'bdf_complex->type' against 'Complex'.", "[bdf_types]" ) {
     entry_type<std::complex<double> > obj_cplx("d_cplx");
-    REQUIRE(obj_cplx.type() == bdf_types::Complex);
+    CHECK(obj_cplx.type() == bdf_types::Complex);
 }
 
 TEST_CASE("BDF types are compared: Comparing 'entry_type<long>' with 'entry_type<double>'.", "[bdf_types]" ) {
-    REQUIRE(
+    CHECK(
         entry_type<long>("dummy int") < entry_type<double>("dummy float"));
-    REQUIRE(
+    CHECK(
         (entry_type<double>("dummy float") > entry_type<long>("dummy int")));
-    REQUIRE(
+    CHECK(
         (entry_type<long>("dummy int") != entry_type<double>("dummy float")));
 }
 
 TEST_CASE("BDF types are compared: Comparing '*entry_type<long>' with '*entry_type<double>'.", "[bdf_types]" ) {
     entry_type<long> obj_int("d_int");
     entry_type<double> obj_float("d_float");
-    REQUIRE(obj_int < obj_float);
+    CHECK(obj_int < obj_float);
 }
 
 TEST_CASE("Testing bdf entry values: Simple integer value.", "[bdf_types]" ) {
     entry_type<long> obj_int("dummy1");
     entry_value<long> val_int;
     obj_int.set_value(val_int, "3");
-    REQUIRE((long)val_int == 3);
+    CHECK((long)val_int == 3);
 }
 
 TEST_CASE("Testing bdf entry values: Simple integer value with default.", "[bdf_types]" ) {
@@ -107,14 +107,14 @@ TEST_CASE("Testing bdf entry values: Simple integer value with default.", "[bdf_
         bdf::type_bounds::bound<long>(nullptr, nullptr, &cl1));
     entry_value<long> val_int;
     obj_int_l.set_value(val_int, "");
-    REQUIRE((long)val_int == 1);
+    CHECK((long)val_int == 1);
 }
 
 TEST_CASE("Testing bdf entry values: Simple float value.", "[bdf_types]" ) {
     entry_type<double> obj_float("dummy2");
     entry_value<double> val_float;
     obj_float.set_value(val_float, "3.");
-    REQUIRE((double)val_float == 3.);
+    CHECK((double)val_float == 3.);
 }
 
 TEST_CASE("Testing bdf entry values: Simple float value with default.", "[bdf_types]" ) {
@@ -123,15 +123,15 @@ TEST_CASE("Testing bdf entry values: Simple float value with default.", "[bdf_ty
         bdf::type_bounds::bound<double>(nullptr, nullptr, &cf1));
     entry_value<double> val_float;
     obj_float_l.set_value(val_float, "");
-    REQUIRE((double)val_float == 1.);
+    CHECK((double)val_float == 1.);
 }
 
 TEST_CASE("Testing bdf entry values: Simple int list value.", "[bdf_types]" ) {
     entry_type<std::vector<int> > obj_list("dummy 3");
     entry_value<std::vector<int> > val_list;
     obj_list.set_value(val_list, "123");
-    REQUIRE(val_list == vector<int>({1, 2, 3}));
-    // TODO: REQUIRE(vector<int>({1, 2, 3}) == val_list);
+    CHECK(val_list == vector<int>({1, 2, 3}));
+    // TODO: CHECK(vector<int>({1, 2, 3}) == val_list);
 }
 
 

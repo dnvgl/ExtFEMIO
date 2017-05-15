@@ -46,10 +46,10 @@ TEST_CASE("BDF CMASS4 definitions. (Small Field Format)", "[bdf_cmass4]" ) {
     cmass4 probe(lines);
 
     SECTION("first cmass4") {
-        REQUIRE((long)probe.EID == 1);
-        REQUIRE((double)probe.M == 3.);
-        REQUIRE((long)probe.S1 == 32);
-        REQUIRE((long)probe.S2 == 33);
+        CHECK((long)probe.EID == 1);
+        CHECK((double)probe.M == 3.);
+        CHECK((long)probe.S1 == 32);
+        CHECK((long)probe.S2 == 33);
     }
 }
 
@@ -60,7 +60,7 @@ TEST_CASE("BDF CMASS4 types output.", "[bdf_cmass4,out]" ) {
     SECTION("empty") {
         cmass4 probe;
         test << probe;
-        REQUIRE(test.str() == "");
+        CHECK(test.str() == "");
     }
 
     SECTION("reverse") {
@@ -68,7 +68,7 @@ TEST_CASE("BDF CMASS4 types output.", "[bdf_cmass4,out]" ) {
         double M(2.9);
         cmass4 probe(&EID, &M, &S1, &S2);
         test << probe;
-        REQUIRE(test.str() ==
+        CHECK(test.str() ==
                 // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
                 "CMASS4         22.900+00       6       1\n");
     }
@@ -78,7 +78,7 @@ TEST_CASE("BDF CMASS4 types output.", "[bdf_cmass4,out]" ) {
         double M(2.9);
         cmass4 probe(&EID, &M, &S1);
         test << probe;
-        REQUIRE(test.str() ==
+        CHECK(test.str() ==
                 // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
                 "CMASS4         22.900+00       6\n");
     }
@@ -86,7 +86,7 @@ TEST_CASE("BDF CMASS4 types output.", "[bdf_cmass4,out]" ) {
     SECTION("failed part") {
         long EID(0), S1(6);
         double M(2.9);
-        REQUIRE_THROWS(cmass4(&EID, &M, &S1));
+        CHECK_THROWS(cmass4(&EID, &M, &S1));
     }
 
     SECTION("multiple") {
@@ -98,7 +98,7 @@ TEST_CASE("BDF CMASS4 types output.", "[bdf_cmass4,out]" ) {
         EID++;
         test << probe(&EID, &M, &S1);
         test << probe;
-        REQUIRE(test.str() ==
+        CHECK(test.str() ==
                 // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
                 "CMASS4         13.000+00       2\n"
                 "CMASS4         23.000+00       2\n"

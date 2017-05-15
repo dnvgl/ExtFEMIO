@@ -50,16 +50,16 @@ TEST_CASE("FEM GCHAN definitions.", "[fem_gchan]" ) {
         len = __base::card::card_split(data, data.size(), lines);
         gchan probe(lines, len);
 
-        REQUIRE(probe.GEONO == 5);
-        REQUIRE(probe.HZ == 466.);
-        REQUIRE(probe.TY == 14.5);
-        REQUIRE(probe.BY == 125);
-        REQUIRE(probe.TZ == 16.);
-        REQUIRE(probe.SFY == 1.);
-        REQUIRE(probe.SFZ == 1.);
-        REQUIRE(probe.K == 1);
-        REQUIRE(probe.NLOBY == 5);
-        REQUIRE(probe.NLOBZ == 5);
+        CHECK(probe.GEONO == 5);
+        CHECK(probe.HZ == 466.);
+        CHECK(probe.TY == 14.5);
+        CHECK(probe.BY == 125);
+        CHECK(probe.TZ == 16.);
+        CHECK(probe.SFY == 1.);
+        CHECK(probe.SFZ == 1.);
+        CHECK(probe.K == 1);
+        CHECK(probe.NLOBY == 5);
+        CHECK(probe.NLOBZ == 5);
     }
 
     SECTION("GCHAN (2)") {
@@ -71,16 +71,16 @@ TEST_CASE("FEM GCHAN definitions.", "[fem_gchan]" ) {
         len = __base::card::card_split(data, data.size(), lines);
         gchan probe(lines, len);
 
-        REQUIRE(probe.GEONO == 5);
-        REQUIRE(probe.HZ == 466.);
-        REQUIRE(probe.TY == 14.5);
-        REQUIRE(probe.BY == 125);
-        REQUIRE(probe.TZ == 16.);
-        REQUIRE(probe.SFY == 14.5);
-        REQUIRE(probe.SFZ == 1.);
-        REQUIRE(probe.K == 1);
-        REQUIRE(probe.NLOBY == 0);
-        REQUIRE(probe.NLOBZ == 0);
+        CHECK(probe.GEONO == 5);
+        CHECK(probe.HZ == 466.);
+        CHECK(probe.TY == 14.5);
+        CHECK(probe.BY == 125);
+        CHECK(probe.TZ == 16.);
+        CHECK(probe.SFY == 14.5);
+        CHECK(probe.SFZ == 1.);
+        CHECK(probe.K == 1);
+        CHECK(probe.NLOBY == 0);
+        CHECK(probe.NLOBZ == 0);
     }
 
     SECTION("GCHAN (3)") {
@@ -92,16 +92,16 @@ TEST_CASE("FEM GCHAN definitions.", "[fem_gchan]" ) {
         len = __base::card::card_split(data, data.size(), lines);
         gchan probe(lines, len);
 
-        REQUIRE(probe.GEONO == 1);
-        REQUIRE(probe.HZ == 2.);
-        REQUIRE(probe.TY == 3.);
-        REQUIRE(probe.BY == 4.);
-        REQUIRE(probe.TZ == 5.);
-        REQUIRE(probe.SFY == 6.);
-        REQUIRE(probe.SFZ == 7.);
-        REQUIRE(probe.K == 8.);
-        REQUIRE(probe.NLOBY == 9);
-        REQUIRE(probe.NLOBZ == 10);
+        CHECK(probe.GEONO == 1);
+        CHECK(probe.HZ == 2.);
+        CHECK(probe.TY == 3.);
+        CHECK(probe.BY == 4.);
+        CHECK(probe.TZ == 5.);
+        CHECK(probe.SFY == 6.);
+        CHECK(probe.SFZ == 7.);
+        CHECK(probe.K == 8.);
+        CHECK(probe.NLOBY == 9);
+        CHECK(probe.NLOBZ == 10);
     }
 
     SECTION("GCHAN (4)") {
@@ -114,16 +114,16 @@ TEST_CASE("FEM GCHAN definitions.", "[fem_gchan]" ) {
         len = __base::card::card_split(data, data.size(), lines);
         gchan probe(lines, len);
 
-        REQUIRE(probe.GEONO == 1);
-        REQUIRE(probe.HZ == 2.);
-        REQUIRE(probe.TY == 3.);
-        REQUIRE(probe.BY == 4);
-        REQUIRE(probe.TZ == 5.);
-        REQUIRE(probe.SFY == 6.);
-        REQUIRE(probe.SFZ == 7.);
-        REQUIRE(probe.K == 8.);
-        REQUIRE(probe.NLOBY == 9);
-        REQUIRE(probe.NLOBZ == 10);
+        CHECK(probe.GEONO == 1);
+        CHECK(probe.HZ == 2.);
+        CHECK(probe.TY == 3.);
+        CHECK(probe.BY == 4);
+        CHECK(probe.TZ == 5.);
+        CHECK(probe.SFY == 6.);
+        CHECK(probe.SFZ == 7.);
+        CHECK(probe.K == 8.);
+        CHECK(probe.NLOBY == 9);
+        CHECK(probe.NLOBZ == 10);
     }
 
     SECTION("GCHAN (5)") {
@@ -136,16 +136,16 @@ TEST_CASE("FEM GCHAN definitions.", "[fem_gchan]" ) {
         len = __base::card::card_split(data, data.size(), lines);
         gchan probe(lines, len);
 
-        REQUIRE(probe.GEONO == 1);
-        REQUIRE(probe.HZ == .100000001);
-        REQUIRE(probe.TY == .00999999978);
-        REQUIRE(probe.BY == .00999999978);
-        REQUIRE(probe.TZ == .00999999978);
-        REQUIRE(probe.SFY == 1.);
-        REQUIRE(probe.SFZ == 1.);
-        REQUIRE(probe.K == 1);
-        REQUIRE(probe.NLOBY == 0);
-        REQUIRE(probe.NLOBZ == 0);
+        CHECK(probe.GEONO == 1);
+        CHECK(probe.HZ == .100000001);
+        CHECK(probe.TY == .00999999978);
+        CHECK(probe.BY == .00999999978);
+        CHECK(probe.TZ == .00999999978);
+        CHECK(probe.SFY == 1.);
+        CHECK(probe.SFZ == 1.);
+        CHECK(probe.K == 1);
+        CHECK(probe.NLOBY == 0);
+        CHECK(probe.NLOBZ == 0);
     }
 }
 
@@ -158,61 +158,61 @@ TEST_CASE("FEM GCHAN types output.", "[fem_gchan,out]" ) {
     SECTION("empty") {
         gchan probe;
         test << probe;
-        REQUIRE(test.str() == "");
+        CHECK(test.str() == "");
     }
 
     SECTION("simple") {
         gchan probe(1, 2., 3., 4., 5., 6., 7., 8, 9, 10);
         test << probe;
-        REQUIRE(test.str() ==
-                "GCHAN   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
-                "        +5.000000000e+00+6.000000000e+00+7.000000000e+00\n"
-                "        +8.000000000e+00+9.000000000e+00+1.000000000e+01\n");
+        CHECK(test.str() ==
+              "GCHAN   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
+              "        +5.000000000e+00+6.000000000e+00+7.000000000e+00\n"
+              "        +8.000000000e+00+9.000000000e+00+1.000000000e+01\n");
     }
 
     SECTION("default NLOB*") {
         gchan probe(1, 2., 3., 4., 5., 6., 7., 8);
         test << probe;
-        REQUIRE(test.str() ==
-                "GCHAN   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
-                "        +5.000000000e+00+6.000000000e+00+7.000000000e+00\n"
-                "        +8.000000000e+00\n");
+        CHECK(test.str() ==
+              "GCHAN   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
+              "        +5.000000000e+00+6.000000000e+00+7.000000000e+00\n"
+              "        +8.000000000e+00\n");
     }
 
     SECTION("default SF*, NLOB*") {
         gchan probe(1, 2., 3., 4., 5., 6);
         test << probe;
-        REQUIRE(test.str() ==
-                "GCHAN   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
-                "        +5.000000000e+00+1.000000000e+00+1.000000000e+00\n"
-                "        +6.000000000e+00\n");
+        CHECK(test.str() ==
+              "GCHAN   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
+              "        +5.000000000e+00+1.000000000e+00+1.000000000e+00\n"
+              "        +6.000000000e+00\n");
     }
 
     SECTION("simple (instance)") {
         gchan probe;
         test << probe(1, 2., 3., 4., 5., 6., 7., 8, 9, 10);
-        REQUIRE(test.str() ==
-                "GCHAN   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
-                "        +5.000000000e+00+6.000000000e+00+7.000000000e+00\n"
-                "        +8.000000000e+00+9.000000000e+00+1.000000000e+01\n");
+        CHECK(test.str() ==
+              "GCHAN   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
+              "        +5.000000000e+00+6.000000000e+00+7.000000000e+00\n"
+              "        +8.000000000e+00+9.000000000e+00+1.000000000e+01\n");
     }
 
     SECTION("default NLOB* (instance)") {
         gchan probe;
         test << probe(1, 2., 3., 4., 5., 6., 7., 8);
-        REQUIRE(test.str() ==
-                "GCHAN   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
-                "        +5.000000000e+00+6.000000000e+00+7.000000000e+00\n"
-                "        +8.000000000e+00\n");
+        CHECK(test.str() ==
+              "GCHAN   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
+              "        +5.000000000e+00+6.000000000e+00+7.000000000e+00\n"
+              "        +8.000000000e+00\n");
     }
 
     SECTION("default SF*, NLOB* (instance)") {
         gchan probe;
         test << probe(1, 2., 3., 4., 5., 6);
-        REQUIRE(test.str() ==
-                "GCHAN   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
-                "        +5.000000000e+00+1.000000000e+00+1.000000000e+00\n"
-                "        +6.000000000e+00\n");
+        CHECK(test.str() ==
+              "GCHAN   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
+              "        +5.000000000e+00+1.000000000e+00+1.000000000e+00\n"
+              "        +6.000000000e+00\n");
     }
 }
 
@@ -231,16 +231,16 @@ TEST_CASE("FEM GCHAN conversion from own output.", "[fem_gchan,in/out]") {
         len = __base::card::card_split(data, data.size(), lines);
         gchan probe(lines, len);
 
-        REQUIRE(probe.GEONO == 1);
-        REQUIRE(probe.HZ == 2.);
-        REQUIRE(probe.TY == 3.);
-        REQUIRE(probe.BY == 4);
-        REQUIRE(probe.TZ == 5.);
-        REQUIRE(probe.SFY == 6.);
-        REQUIRE(probe.SFZ == 7.);
-        REQUIRE(probe.K == 8.);
-        REQUIRE(probe.NLOBY == 9);
-        REQUIRE(probe.NLOBZ == 10);
+        CHECK(probe.GEONO == 1);
+        CHECK(probe.HZ == 2.);
+        CHECK(probe.TY == 3.);
+        CHECK(probe.BY == 4);
+        CHECK(probe.TZ == 5.);
+        CHECK(probe.SFY == 6.);
+        CHECK(probe.SFZ == 7.);
+        CHECK(probe.K == 8.);
+        CHECK(probe.NLOBY == 9);
+        CHECK(probe.NLOBZ == 10);
     }
 
     SECTION("GCHAN (2)") {
@@ -252,16 +252,16 @@ TEST_CASE("FEM GCHAN conversion from own output.", "[fem_gchan,in/out]") {
         len = __base::card::card_split(data, data.size(), lines);
         gchan probe(lines, len);
 
-        REQUIRE(probe.GEONO == 1);
-        REQUIRE(probe.HZ == 2.);
-        REQUIRE(probe.TY == 3.);
-        REQUIRE(probe.BY == 4);
-        REQUIRE(probe.TZ == 5.);
-        REQUIRE(probe.SFY == 6.);
-        REQUIRE(probe.SFZ == 7.);
-        REQUIRE(probe.K == 8.);
-        REQUIRE(probe.NLOBY == 0);
-        REQUIRE(probe.NLOBZ == 0);
+        CHECK(probe.GEONO == 1);
+        CHECK(probe.HZ == 2.);
+        CHECK(probe.TY == 3.);
+        CHECK(probe.BY == 4);
+        CHECK(probe.TZ == 5.);
+        CHECK(probe.SFY == 6.);
+        CHECK(probe.SFZ == 7.);
+        CHECK(probe.K == 8.);
+        CHECK(probe.NLOBY == 0);
+        CHECK(probe.NLOBZ == 0);
     }
 }
 

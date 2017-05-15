@@ -5,7 +5,7 @@
    \brief Testing IO for Sesam FEM `GECCEN` cards.
 
    Detailed description
-   */
+*/
 
 #include "extfem_misc.h"
 
@@ -45,47 +45,47 @@ TEST_CASE("FEM GECCEN definitions.", "[fem_geccen]") {
 
     SECTION("GECCEN (1)") {
         vector<std::string> data({
-            "GECCEN   1.00000000e+000 1.00000000e+000 3.00000000e+000 1.34000000e+002\n"});
+                "GECCEN   1.00000000e+000 1.00000000e+000 3.00000000e+000 1.34000000e+002\n"});
         len = __base::card::card_split(data, data.size(), lines);
         geccen probe(lines, len);
 
-        REQUIRE(probe.ECCNO == 1);
-        REQUIRE(probe.EX == 1.);
-        REQUIRE(probe.EY == 3.);
-        REQUIRE(probe.EZ == 134.);
+        CHECK(probe.ECCNO == 1);
+        CHECK(probe.EX == 1.);
+        CHECK(probe.EY == 3.);
+        CHECK(probe.EZ == 134.);
     }
 
     SECTION("GECCEN (2)") {
         vector<std::string> data({
-            "GECCEN   1.000000000e+00 1.000000000e+00 3.000000000e+00 1.34000000e+02 \n"});
+                "GECCEN   1.000000000e+00 1.000000000e+00 3.000000000e+00 1.34000000e+02 \n"});
         len = __base::card::card_split(data, data.size(), lines);
         geccen probe(lines, len);
 
-        REQUIRE(probe.ECCNO == 1);
-        REQUIRE(probe.EX == 1.);
-        REQUIRE(probe.EY == 3.);
-        REQUIRE(probe.EZ == 134.);
+        CHECK(probe.ECCNO == 1);
+        CHECK(probe.EX == 1.);
+        CHECK(probe.EY == 3.);
+        CHECK(probe.EZ == 134.);
     }
 
     SECTION("GECCEN (3)") {
         vector<std::string> data({
-            "GECCEN  +1.000000000e+00+1.000000000e+00+3.000000000e+00+1.340000000e+02\n"});
+                "GECCEN  +1.000000000e+00+1.000000000e+00+3.000000000e+00+1.340000000e+02\n"});
         len = __base::card::card_split(data, data.size(), lines);
         geccen probe(lines, len);
 
-        REQUIRE(probe.ECCNO == 1);
-        REQUIRE(probe.EX == 1.);
-        REQUIRE(probe.EY == 3.);
-        REQUIRE(probe.EZ == 134.);
+        CHECK(probe.ECCNO == 1);
+        CHECK(probe.EX == 1.);
+        CHECK(probe.EY == 3.);
+        CHECK(probe.EZ == 134.);
     }
 
     SECTION("GECCEN check") {
         vector<std::string> data({
-            "GECCEN  +1.000000000e+00+1.000000000e+00+3.000000000e+00+1.340000000e+02\n"});
+                "GECCEN  +1.000000000e+00+1.000000000e+00+3.000000000e+00+1.340000000e+02\n"});
         len = __base::card::card_split(data, data.size(), lines);
         geccen probe(lines, len);
 
-        REQUIRE_THROWS_AS(probe(lines, len), errors::usage_error);
+        CHECK_THROWS_AS(probe(lines, len), errors::usage_error);
     }
 }
 
@@ -100,48 +100,48 @@ TEST_CASE("FEM GECCEN types output.", "[fem_geccen,out]") {
     SECTION("empty") {
         geccen probe;
         test << probe;
-        REQUIRE(test.str() == "");
+        CHECK(test.str() == "");
     }
 
     SECTION("const") {
         geccen probe(1, 1., 3., 134.);
         test << probe;
-        REQUIRE(test.str() ==
+        CHECK(test.str() ==
               "GECCEN  +1.000000000e+00+1.000000000e+00+3.000000000e+00+1.340000000e+02\n");
     }
 
     SECTION("simple") {
         geccen probe(ECCNO, EX, EY, EZ);
         test << probe;
-        REQUIRE(test.str() ==
+        CHECK(test.str() ==
               "GECCEN  +1.000000000e+00+1.000000000e+00+3.000000000e+00+1.340000000e+02\n");
     }
 
     SECTION("vector") {
         geccen probe(ECCNO, vector<double>({EX, EY, EZ}));
         test << probe;
-        REQUIRE(test.str() ==
+        CHECK(test.str() ==
               "GECCEN  +1.000000000e+00+1.000000000e+00+3.000000000e+00+1.340000000e+02\n");
     }
 
     SECTION("const (default eccno)") {
         geccen probe(1., 3., 134.);
         test << probe;
-        REQUIRE(test.str() ==
+        CHECK(test.str() ==
               "GECCEN  +1.000000000e+00+1.000000000e+00+3.000000000e+00+1.340000000e+02\n");
     }
 
     SECTION("simple (default eccno)") {
         geccen probe(EX, EY, EZ);
         test << probe;
-        REQUIRE(test.str() ==
+        CHECK(test.str() ==
               "GECCEN  +1.000000000e+00+1.000000000e+00+3.000000000e+00+1.340000000e+02\n");
     }
 
     SECTION("vector (default eccno)") {
         geccen probe(vector<double>({EX, EY, EZ}));
         test << probe;
-        REQUIRE(test.str() ==
+        CHECK(test.str() ==
               "GECCEN  +1.000000000e+00+1.000000000e+00+3.000000000e+00+1.340000000e+02\n");
     }
 
@@ -153,7 +153,7 @@ TEST_CASE("FEM GECCEN types output.", "[fem_geccen,out]") {
         geccen probe5(vector<double>({0., -1., 0.}));
         geccen probe6(vector<double>({0., 0., -1.}));
         test << probe1 << probe2 << probe3 << probe4 << probe5 << probe6;
-        REQUIRE(test.str() ==
+        CHECK(test.str() ==
               "GECCEN  +1.000000000e+00+1.000000000e+00+0.000000000e+00+0.000000000e+00\n"
               "GECCEN  +2.000000000e+00+0.000000000e+00+1.000000000e+00+0.000000000e+00\n"
               "GECCEN  +3.000000000e+00+0.000000000e+00+0.000000000e+00+1.000000000e+00\n"
@@ -170,7 +170,7 @@ TEST_CASE("FEM GECCEN types output.", "[fem_geccen,out]") {
         geccen probe5(0., -1., 0.);
         geccen probe6(0., 0., -1.);
         test << probe1 << probe2 << probe3 << probe4 << probe5 << probe6;
-        REQUIRE(test.str() ==
+        CHECK(test.str() ==
               "GECCEN  +1.000000000e+00+1.000000000e+00+0.000000000e+00+0.000000000e+00\n"
               "GECCEN  +2.000000000e+00+0.000000000e+00+1.000000000e+00+0.000000000e+00\n"
               "GECCEN  +3.000000000e+00+0.000000000e+00+0.000000000e+00+1.000000000e+00\n"
@@ -186,14 +186,14 @@ TEST_CASE("FEM GECCEN conversion from own output.", "[fem_geccen,in/out]") {
 
     SECTION("GECCEN") {
         vector<std::string> data({
-            "GECCEN  +1.000000000e+00+1.000000000e+00+3.000000000e+00+1.340000000e+02\n"});
+                "GECCEN  +1.000000000e+00+1.000000000e+00+3.000000000e+00+1.340000000e+02\n"});
         size_t len = __base::card::card_split(data, data.size(), lines);
         geccen probe(lines, len);
 
-        REQUIRE(probe.ECCNO == 1);
-        REQUIRE(probe.EX == 1.);
-        REQUIRE(probe.EY == 3.);
-        REQUIRE(probe.EZ == 134.);
+        CHECK(probe.ECCNO == 1);
+        CHECK(probe.EX == 1.);
+        CHECK(probe.EY == 3.);
+        CHECK(probe.EZ == 134.);
     }
 }
 

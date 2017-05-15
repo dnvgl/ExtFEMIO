@@ -46,12 +46,12 @@ TEST_CASE("BDF CMASS2 definitions. (Small Field Format)", "[bdf_cmass2]" ) {
         __base::card::card_split(data, lines);
         cmass2 probe(lines);
 
-        REQUIRE((long)probe.EID == 1);
-        REQUIRE((double)probe.M == 3.);
-        REQUIRE((long)probe.G1 == 32);
-        REQUIRE(probe.C1 == std::vector<int>(1, 8));
-        REQUIRE_FALSE(probe.G2);
-        REQUIRE(probe.C2 == std::vector<int>());
+        CHECK((long)probe.EID == 1);
+        CHECK((double)probe.M == 3.);
+        CHECK((long)probe.G1 == 32);
+        CHECK(probe.C1 == std::vector<int>(1, 8));
+        CHECK_FALSE(probe.G2);
+        CHECK(probe.C2 == std::vector<int>());
     }
 
     SECTION("full cmass2") {
@@ -62,12 +62,12 @@ TEST_CASE("BDF CMASS2 definitions. (Small Field Format)", "[bdf_cmass2]" ) {
         __base::card::card_split(data, lines);
         cmass2 probe(lines);
 
-        REQUIRE((long)probe.EID == 1);
-        REQUIRE((double)probe.M == 3.);
-        REQUIRE((long)probe.G1 == 32);
-        REQUIRE(probe.C1 == std::vector<int>(1, 8));
-        REQUIRE((long)probe.G2 == 43);
-        REQUIRE(probe.C2 == std::vector<int>(1, 2));
+        CHECK((long)probe.EID == 1);
+        CHECK((double)probe.M == 3.);
+        CHECK((long)probe.G1 == 32);
+        CHECK(probe.C1 == std::vector<int>(1, 8));
+        CHECK((long)probe.G2 == 43);
+        CHECK(probe.C2 == std::vector<int>(1, 2));
     }
 
     SECTION("only second vals cmass2") {
@@ -78,12 +78,12 @@ TEST_CASE("BDF CMASS2 definitions. (Small Field Format)", "[bdf_cmass2]" ) {
         __base::card::card_split(data, lines);
         cmass2 probe(lines);
 
-        REQUIRE((long)probe.EID == 1);
-        REQUIRE((double)probe.M == 3.);
-        REQUIRE_FALSE(probe.G1);
-        REQUIRE(probe.C1 == std::vector<int>());
-        REQUIRE((long)probe.G2 == 32);
-        REQUIRE(probe.C2 == std::vector<int>({1, 2}));
+        CHECK((long)probe.EID == 1);
+        CHECK((double)probe.M == 3.);
+        CHECK_FALSE(probe.G1);
+        CHECK(probe.C1 == std::vector<int>());
+        CHECK((long)probe.G2 == 32);
+        CHECK(probe.C2 == std::vector<int>({1, 2}));
     }
 }
 
@@ -94,7 +94,7 @@ TEST_CASE("BDF CMASS2 types output.", "[bdf_cmass2,out]" ) {
     SECTION("empty") {
         cmass2 probe;
         test << probe;
-        REQUIRE(test.str() == "");
+        CHECK(test.str() == "");
     }
 
     SECTION("reverse") {
@@ -103,7 +103,7 @@ TEST_CASE("BDF CMASS2 types output.", "[bdf_cmass2,out]" ) {
         double M(2.9);
         cmass2 probe(&EID, &M, &S1, &C1, &S2, &C2);
         test << probe;
-        REQUIRE(test.str() ==
+        CHECK(test.str() ==
                 // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
                 "CMASS2         22.900+00       6     123       1     456\n");
     }
@@ -114,7 +114,7 @@ TEST_CASE("BDF CMASS2 types output.", "[bdf_cmass2,out]" ) {
         std::vector<int> C1({1, 2, 3});
         cmass2 probe(&EID, &M, &S1, &C1);
         test << probe;
-        REQUIRE(test.str() ==
+        CHECK(test.str() ==
                 // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
                 "CMASS2         22.900+00       6     123\n");
     }
@@ -123,7 +123,7 @@ TEST_CASE("BDF CMASS2 types output.", "[bdf_cmass2,out]" ) {
         long EID(0), S1(6);
         double M(2.9);
         std::vector<int> C1({1, 2, 3});
-        REQUIRE_THROWS(cmass2(&EID, &M, &S1, &C1));
+        CHECK_THROWS(cmass2(&EID, &M, &S1, &C1));
     }
 
     SECTION("multiple") {
@@ -136,7 +136,7 @@ TEST_CASE("BDF CMASS2 types output.", "[bdf_cmass2,out]" ) {
         EID++;
         test << probe(&EID, &M, &S1, &C1);
         test << probe;
-        REQUIRE(test.str() ==
+        CHECK(test.str() ==
                 // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
                 "CMASS2         22.900+00       6     123\n"
                 "CMASS2         32.900+00       6     123\n"
