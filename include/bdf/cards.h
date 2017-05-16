@@ -489,17 +489,6 @@ namespace dnvgl {
                     */
                     static double *yield;
 
-                     /*!
-                       Regular expression to identify yield stress
-                       definitions in comments.
-                     */
-#ifdef HAVE_BOOST_REGEX_HPP
-                    boost::regex
-#else
-                    std::regex
-#endif
-                    static find_yield;
-
                     comment();
 
                     ~comment();
@@ -541,6 +530,22 @@ namespace dnvgl {
                         const override;
 
                     void check_data() const override;
+
+                protected:
+                    /*!
+                       Regular expression to identify yield stress
+                       definitions in comments.
+                     */
+#ifdef HAVE_BOOST_REGEX_HPP
+                    boost::regex
+#else
+                    std::regex
+#endif
+                    static find_yield;
+
+                private:
+
+                    void static to_yield(std::string const);
                 };
             }
         }

@@ -37,6 +37,11 @@ using namespace bdf::cards::__base;
 using bdf::types::entry_type;
 using bdf::types::entry_value;
 
+class test_comment : public comment {
+public:
+    using comment::find_yield;
+};
+
 TEST_CASE("BDF COMMENT yield stress definition.", "[bdf_comment]") {
 #ifdef HAVE_BOOST_REGEX_HPP
         boost::smatch
@@ -44,12 +49,12 @@ TEST_CASE("BDF COMMENT yield stress definition.", "[bdf_comment]") {
         std::smatch
 #endif
             m;
-        CHECK(regex_search(std::string("$ 235"), m, comment::find_yield));
+        CHECK(regex_search(std::string("$ 235"), m, test_comment::find_yield));
         CHECK(regex_search(
-                  std::string("$ Yield: 315 test"), m, comment::find_yield));
-        CHECK(regex_search(std::string("$ 355"), m, comment::find_yield));
-        CHECK(regex_search(std::string("$ 390"), m, comment::find_yield));
-        CHECK(regex_search(std::string("$ 460"), m, comment::find_yield));
+                  std::string("$ Yield: 315 test"), m, test_comment::find_yield));
+        CHECK(regex_search(std::string("$ 355"), m, test_comment::find_yield));
+        CHECK(regex_search(std::string("$ 390"), m, test_comment::find_yield));
+        CHECK(regex_search(std::string("$ 460"), m, test_comment::find_yield));
 }
 
 TEST_CASE("BDF COMMENT definitions; empty comment.", "[bdf_comment]") {

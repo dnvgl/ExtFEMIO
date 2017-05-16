@@ -52,34 +52,32 @@ comment::find_yield("(?:^(?:.*[^[:digit:]])?((?:3(?:[15]5|90)|235|460))"
 #endif
     );
 
-namespace {
-    void comment_to_yield(std::string const inp) {
-        // Noch ein Zusatzwunsch zum Material. Der Name sollte auch
-        // mit übernommen werden. Und wenn der Name 235 oder 315 oder
-        // 355 oder 390 oder 460 als substring enthält dann diesen
-        // Wert als yield stress übernehmen.
+void comment::to_yield(std::string const inp) {
+    // Noch ein Zusatzwunsch zum Material. Der Name sollte auch
+    // mit übernommen werden. Und wenn der Name 235 oder 315 oder
+    // 355 oder 390 oder 460 als substring enthält dann diesen
+    // Wert als yield stress übernehmen.
 #ifdef HAVE_BOOST_REGEX_HPP
-        boost::smatch
+    boost::smatch
 #else
         std::smatch
 #endif
-            m;
-        if (regex_search(inp, m, comment::find_yield)) {
-            if (comment::yield != nullptr) {
-                delete comment::yield;
-                comment::yield = nullptr;
-            }
-            if (m[1] == "235")
-                comment::yield = new double(235.);
-            else if (m[1] == "315")
-                comment::yield = new double(315.);
-            else if (m[1] == "355")
-                comment::yield = new double(355.);
-            else if (m[1] == "390")
-                comment::yield = new double(390.);
-            else if (m[1] == "460")
-                comment::yield = new double(460.);
+        m;
+    if (regex_search(inp, m, comment::find_yield)) {
+        if (comment::yield != nullptr) {
+            delete comment::yield;
+            comment::yield = nullptr;
         }
+        if (m[1] == "235")
+            comment::yield = new double(235.);
+        else if (m[1] == "315")
+            comment::yield = new double(315.);
+        else if (m[1] == "355")
+            comment::yield = new double(355.);
+        else if (m[1] == "390")
+            comment::yield = new double(390.);
+        else if (m[1] == "460")
+            comment::yield = new double(460.);
     }
 }
 
@@ -167,7 +165,7 @@ void comment::read(std::list<std::string> const &inp) {
     for (auto &pos : inp) {
         pos.size();
 
-        comment_to_yield(pos);
+        comment::to_yield(pos);
         tmp_str.assign(pos.substr(pos[1] == ' ' ? 2 : 1));
         if (this->content.size() == 0)
             this->content.push_back(tmp_str);
