@@ -22,6 +22,8 @@ namespace {
 #include <regex>
 #endif
 
+#include <cmath>
+
 #include "bdf/cards.h"
 
 using namespace std;
@@ -81,34 +83,79 @@ namespace {
     }
 }
 
+comment::comment() :
+        card(), content(), __yield(nullptr) {}
+
+comment::~comment() {
+ if (yield != nullptr)
+     delete this->__yield;
+}
+
 comment::comment(std::list<std::string> const &inp) :
-        card(), content() {
+        card(), content(), __yield(nullptr) {
     this->comment::read(inp);
 }
 
-comment::comment(std::vector<std::string> const &content) :
-        card(), content() {
-    this->content.assign(content.begin(), content.end());
+comment::comment(std::vector<std::string> const &content,
+                 double *yield/*=nullptr*/) :
+        card(), content(content.begin(), content.end()), __yield(nullptr) {
+    if (yield != nullptr) {
+        if (comment::yield == nullptr)
+            comment::yield = new double();
+        *comment::yield = *yield;
+        this->__yield = new double(*yield);
+    }
 }
 
-comment::comment(std::string const *content) :
-        card(), content(list<std::string>({*content})) {}
+comment::comment(std::string const *content,
+                 double *yield/*=nullptr*/) :
+        card(), content(list<std::string>({*content})), __yield(nullptr) {
+    if (yield != nullptr) {
+        if (comment::yield == nullptr)
+            comment::yield = new double();
+        *comment::yield = *yield;
+        this->__yield = new double(*yield);
+    }
+}
 
 cards::types comment::card_type() const {
     return cards::types::COMMENT;
 }
 
 card const &comment::operator() (std::list<std::string> const &inp) {
+    if (this->__yield != nullptr)
+        delete this->__yield;
+    this->__yield = nullptr;
     this->read(inp);
     return *this;
 }
 
-card const &comment::operator() (std::vector<std::string> const &content) {
+card const &comment::operator() (std::vector<std::string> const &content,
+                 double *yield/*=nullptr*/) {
+    if (this->__yield != nullptr)
+        delete this->__yield;
+    this->__yield = nullptr;
+    if (yield != nullptr) {
+        if (comment::yield == nullptr)
+            comment::yield = new double();
+        *comment::yield = *yield;
+        this->__yield = new double(*yield);
+    }
     this->content.assign(content.begin(), content.end());
     return *this;
 }
 
-card const &comment::operator()(std::string const *content) {
+card const &comment::operator()(std::string const *content,
+                 double *yield/*=nullptr*/) {
+    if (this->__yield != nullptr)
+        delete this->__yield;
+    this->__yield = nullptr;
+    if (yield != nullptr) {
+        if (comment::yield == nullptr)
+            comment::yield = new double();
+        *comment::yield = *yield;
+        this->__yield = new double(*yield);
+    }
     this->content.push_back(*content);
     return *this;
 }
@@ -143,7 +190,6 @@ void comment::collect_outdata(
 }
 
 ostream &comment::put(ostream &os) const {
-    if (this->content.size() == 0) return os;
     std::string marker;
     for (auto pos : content) {
         marker = "$ ";
@@ -153,6 +199,8 @@ ostream &comment::put(ostream &os) const {
             marker = "$+";
         } while ((pos.size() > 78) && (tmp = tmp.erase(0, 78)).size() > 0);
     }
+    if (this->__yield != nullptr)
+        os << "$ YIELD: " << round(*this->__yield) << endl;
     return os;
 }
 

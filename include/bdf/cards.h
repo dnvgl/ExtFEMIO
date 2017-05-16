@@ -477,16 +477,16 @@ namespace dnvgl {
 
                 public:
 
-                     /*!
-                       Comment test
-                      */
+                    /*!
+                      Comment test
+                    */
                     std::list<std::string> content;
 
-                     /*! Syntax extension to BDF recognized by
-                       ExtFEMIO: if one of 235, 315, 355, 390, or 460
-                       appears in a comment the value shall be used as
-                       yield stress for the next material definition.
-                      */
+                    /*! Syntax extension to BDF recognized by
+                      ExtFEMIO: if one of 235, 315, 355, 390, or 460
+                      appears in a comment the value shall be used as
+                      yield stress for the next material definition.
+                    */
                     static double *yield;
 
                      /*!
@@ -500,13 +500,17 @@ namespace dnvgl {
 #endif
                     static find_yield;
 
-                    comment() = default;
+                    comment();
+
+                    ~comment();
 
                     explicit comment(std::list<std::string> const &inp);
 
-                    explicit comment(std::vector<std::string> const &inp);
+                    explicit comment(std::vector<std::string> const &inp,
+                        double *yield=nullptr);
 
-                    explicit comment(std::string const *content);
+                    explicit comment(std::string const *content,
+                        double *yield=nullptr);
 
                     types card_type() const override;
 
@@ -514,11 +518,19 @@ namespace dnvgl {
                         std::list<std::string> const &inp) override;
 
                     card const &operator()(
-                        std::vector<std::string> const &content);
+                        std::vector<std::string> const &content,
+                        double *yield=nullptr);
 
-                    card const &operator()(std::string const *content);
+                    card const &operator()(std::string const *content,
+                        double *yield=nullptr);
 
                 private:
+
+                    /*!
+                      Store yield stress on a per comment base to
+                      allow correct output.
+                    */
+                    double *__yield;
 
                     std::ostream &put(std::ostream&) const override;
 

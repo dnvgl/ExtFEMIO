@@ -388,6 +388,165 @@ TEST_CASE("BDF COMMENT roundtrip test; long line (reuse).", "[bdf_comment]") {
     }
 }
 
+TEST_CASE("BDF COMMENT roundtrip test; only yield stress.", "[bdf_comment]") {
+    ostringstream test;
+
+    vector<std::string> content;
+    double *yield = new double(315.);
+
+    comment probe(content, yield);
+    test << probe;
+
+    reset_statics();
+
+    SECTION("check output") {
+        CHECK(test.str() ==
+        // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
+        "$ YIELD: 315\n");
+    }
+
+    SECTION("check reading") {
+        list<std::string> data;
+        list<std::string> lines;
+        std::string tmp;
+        istringstream raw(test.str());
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        card::card_split(data, lines);
+        comment probe_l(lines);
+
+        CHECK(probe_l.content == list<std::string>({"YIELD: 315"}));
+        CHECK(*probe_l.yield == 315.);
+        CHECK(*comment::yield == 315.);
+    }
+}
+
+TEST_CASE("BDF COMMENT roundtrip test; only yield stress (reuse).",
+          "[bdf_comment]") {
+    ostringstream test;
+
+    vector<std::string> content;
+    double *yield = new double(315.);
+
+    comment probe;
+    test << probe;
+    test << probe(content, yield);
+
+    reset_statics();
+
+    SECTION("check output") {
+        CHECK(test.str() ==
+        // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
+        "$ YIELD: 315\n");
+    }
+
+    SECTION("check reading") {
+        list<std::string> data;
+        list<std::string> lines;
+        std::string tmp;
+        istringstream raw(test.str());
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        card::card_split(data, lines);
+        comment probe_l;
+        probe_l(lines);
+
+        CHECK(probe_l.content == list<std::string>({"YIELD: 315"}));
+        CHECK(*probe_l.yield == 315.);
+        CHECK(*comment::yield == 315.);
+    }
+}
+
+TEST_CASE("BDF COMMENT roundtrip test; yield stress and comment.",
+          "[bdf_comment]") {
+    ostringstream test;
+
+    vector<std::string> content{
+        // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
+        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean "
+        "commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus"};
+    double *yield = new double(315.);
+
+    comment probe(content, yield);
+    test << probe;
+
+    reset_statics();
+
+    SECTION("check output") {
+        CHECK(test.str() ==
+              // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
+              "$ Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligul\n"
+              "$+a eget dolor. Aenean massa. Cum sociis natoque penatibus\n"
+              "$ YIELD: 315\n");
+    }
+
+    SECTION("check reading") {
+        list<std::string> data;
+        list<std::string> lines;
+        std::string tmp;
+        istringstream raw(test.str());
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        card::card_split(data, lines);
+        comment probe_l(lines);
+
+        CHECK(probe_l.content == list<std::string>({
+                    "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean "
+                    "commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus",
+                    "YIELD: 315"}));
+        CHECK(*probe_l.yield == 315.);
+        CHECK(*comment::yield == 315.);
+    }
+}
+
+TEST_CASE("BDF COMMENT roundtrip test; yield stress and comment (reuse).",
+          "[bdf_comment]") {
+    ostringstream test;
+
+    vector<std::string> content{
+        // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
+        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean "
+        "commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus"};
+    double *yield = new double(315.);
+
+    comment probe;
+    test << probe;
+    test << probe(content, yield);
+
+    reset_statics();
+
+    SECTION("check output") {
+        CHECK(test.str() ==
+              // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
+              "$ Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligul\n"
+              "$+a eget dolor. Aenean massa. Cum sociis natoque penatibus\n"
+              "$ YIELD: 315\n");
+    }
+
+    SECTION("check reading") {
+        list<std::string> data;
+        list<std::string> lines;
+        std::string tmp;
+        istringstream raw(test.str());
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        card::card_split(data, lines);
+        comment probe_l;
+        probe_l(lines);
+
+        CHECK(probe_l.content == list<std::string>({
+                    "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean "
+                    "commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus",
+                    "YIELD: 315"}));
+        CHECK(*probe_l.yield == 315.);
+        CHECK(*comment::yield == 315.);
+    }
+}
+
 // Local Variables:
 // mode: c++
 // coding: utf-8
