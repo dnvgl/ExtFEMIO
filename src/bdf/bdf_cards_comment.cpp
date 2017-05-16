@@ -202,6 +202,12 @@ ostream &comment::put(ostream &os) const {
     return os;
 }
 
+void comment::clear_yield() {
+    if (comment::yield != nullptr)
+        delete comment::yield;
+    comment::yield = nullptr;
+}
+
 void comment::check_data() const {}
 
 // Local Variables:

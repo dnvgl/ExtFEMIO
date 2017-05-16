@@ -513,6 +513,8 @@ namespace dnvgl {
                     card const &operator()(std::string const *content,
                         double *yield=nullptr);
 
+                    void static clear_yield();
+
                 private:
 
                     /*!

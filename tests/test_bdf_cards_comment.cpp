@@ -136,6 +136,11 @@ TEST_CASE("BDF COMMENT definitions; with yield stress (315).",
                 "yield stress for the following material definition:315"}));
     CHECK((probe.yield && *probe.yield == 315.));
     CHECK((comment::yield && *comment::yield == 315.));
+
+    comment::clear_yield();
+
+    CHECK(probe.yield == nullptr);
+    CHECK(comment::yield == nullptr);
 }
 
 TEST_CASE("BDF COMMENT definitions; with yield stress (355).",
