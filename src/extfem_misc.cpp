@@ -11,7 +11,6 @@
 
 #include "extfem_misc.h"
 #include "config.h"
-#include "svnversion.h"
 
 // ID:
 namespace {
