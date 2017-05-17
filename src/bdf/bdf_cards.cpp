@@ -291,7 +291,7 @@ std::ostream &operator<< (std::ostream& os, cards::types cardtype) {
     case cards::types::UNKNOWN: return os << "UNKNOWN";
     // omit default case to trigger compiler warning for missing cases
     };
-    return os << static_cast<std::uint16_t>(cardtype);
+    return os << static_cast<size_t>(cardtype);
 }
 
 
