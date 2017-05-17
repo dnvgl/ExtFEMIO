@@ -39,6 +39,7 @@ namespace dnvgl {
     namespace extfem {
         namespace bdf {
             namespace cards {
+                enum class types;
                 typedef std::pair<bdf::types::base const*, void const*>
                 format_entry;
                 class comment;
@@ -46,6 +47,9 @@ namespace dnvgl {
         }
     }
 }
+
+std::ostream &operator<< (
+    std::ostream& os, dnvgl::extfem::bdf::cards::types const cardtype);
 
 dnvgl::extfem::bdf::cards::format_entry
 *format(const std::unique_ptr<dnvgl::extfem::bdf::types::card> &);
@@ -442,9 +446,9 @@ namespace dnvgl {
                         card_split(std::list<std::string> const &, std::list<std::string>&);
 
                         /**
-                        * \brief returns the card type of the current card.
-                        * \return Current card type.
-                        */
+                         * \brief returns the card type of the current card.
+                         * \return Current card type.
+                         */
                         virtual types card_type() const = 0;
                     };
                 }
@@ -496,10 +500,10 @@ namespace dnvgl {
                     explicit comment(std::list<std::string> const &inp);
 
                     explicit comment(std::vector<std::string> const &inp,
-                        double *yield=nullptr);
+                                     double *yield=nullptr);
 
                     explicit comment(std::string const *content,
-                        double *yield=nullptr);
+                                     double *yield=nullptr);
 
                     types card_type() const override;
 
@@ -511,7 +515,7 @@ namespace dnvgl {
                         double *yield=nullptr);
 
                     card const &operator()(std::string const *content,
-                        double *yield=nullptr);
+                                           double *yield=nullptr);
 
                     void static clear_yield();
 
@@ -535,9 +539,9 @@ namespace dnvgl {
 
                 protected:
                     /*!
-                       Regular expression to identify yield stress
-                       definitions in comments.
-                     */
+                      Regular expression to identify yield stress
+                      definitions in comments.
+                    */
 #ifdef HAVE_BOOST_REGEX_HPP
                     boost::regex
 #else
@@ -719,9 +723,9 @@ namespace dnvgl {
                     card const &operator()(const std::list<std::string> &) override;
 
                     card const &operator()(long const *ID, long const *CP,
-                         double const *X1, double const *X2, double const *X3,
-                         long const *CD, std::vector<int> const *PS,
-                         long const *SEID);
+                                           double const *X1, double const *X2, double const *X3,
+                                           long const *CD, std::vector<int> const *PS,
+                                           long const *SEID);
 
                     card const &operator()(
                         long const &ID, long const &CP,

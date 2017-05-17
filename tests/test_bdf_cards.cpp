@@ -48,6 +48,14 @@ using namespace input;
 using bdf::types::entry_type;
 using bdf::types::entry_value;
 
+TEST_CASE("BDF test card enum output", "bdf_cards") {
+    std::ostringstream test;
+
+    test << cards::types::CCRSFIL << " " << cards::types::MAT1;
+
+    CHECK(test.str() == "CCRSFIL MAT1");
+}
+
 TEST_CASE("BDF file reader.", "[bdf_cards]" ) {
 
     std::string s(
