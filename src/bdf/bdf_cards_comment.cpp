@@ -108,7 +108,18 @@ comment::comment(std::vector<std::string> const &content,
 
 comment::comment(std::string const *content,
                  double *yield/*=nullptr*/) :
-        card(), content(list<std::string>({*content})), __yield(nullptr) {
+        card(), content({*content}), __yield(nullptr) {
+    if (yield != nullptr) {
+        if (comment::yield == nullptr)
+            comment::yield = new double();
+        *comment::yield = *yield;
+        this->__yield = new double(*yield);
+    }
+}
+
+comment::comment(std::string const &content,
+                 double *yield/*=nullptr*/) :
+        card(), content({content}), __yield(nullptr) {
     if (yield != nullptr) {
         if (comment::yield == nullptr)
             comment::yield = new double();
@@ -141,6 +152,21 @@ card const &comment::operator() (std::vector<std::string> const &content,
         this->__yield = new double(*yield);
     }
     this->content.assign(content.begin(), content.end());
+    return *this;
+}
+
+card const &comment::operator()(std::string const &content,
+                 double *yield/*=nullptr*/) {
+    if (this->__yield != nullptr)
+        delete this->__yield;
+    this->__yield = nullptr;
+    if (yield != nullptr) {
+        if (comment::yield == nullptr)
+            comment::yield = new double();
+        *comment::yield = *yield;
+        this->__yield = new double(*yield);
+    }
+    this->content.push_back(content);
     return *this;
 }
 

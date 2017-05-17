@@ -505,6 +505,9 @@ namespace dnvgl {
                     explicit comment(std::string const *content,
                                      double *yield=nullptr);
 
+                    explicit comment(std::string const &content,
+                                     double *yield=nullptr);
+
                     types card_type() const override;
 
                     card const &operator()(
@@ -515,6 +518,9 @@ namespace dnvgl {
                         double *yield=nullptr);
 
                     card const &operator()(std::string const *content,
+                                           double *yield=nullptr);
+
+                    card const &operator()(std::string const &content,
                                            double *yield=nullptr);
 
                     void static clear_yield();

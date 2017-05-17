@@ -316,6 +316,42 @@ TEST_CASE("BDF COMMENT roundtrip test; two lines (reuse).", "[bdf_comment]") {
     }
 }
 
+TEST_CASE("BDF COMMENT roundtrip test; two lines (2).", "[bdf_comment]") {
+    ostringstream test;
+
+    std::string content{"This is a test"};
+
+    comment probe(content);
+    probe("one two");
+    test << probe;
+
+    reset_statics();
+
+    SECTION("check output") {
+        CHECK(test.str() ==
+              "$ This is a test\n"
+              "$ one two\n");
+    }
+
+    SECTION("check reading") {
+        list<std::string> data;
+        list<std::string> lines;
+        std::string tmp;
+        istringstream raw(test.str());
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        card::card_split(data, lines);
+        comment probe_l(lines);
+
+        CHECK(probe_l.content == list<std::string>({
+                    "This is a test",
+                    "one two"}));
+        CHECK(probe_l.yield == nullptr);
+        CHECK(comment::yield == nullptr);
+    }
+}
+
 TEST_CASE("BDF COMMENT roundtrip test; long line.", "[bdf_comment]") {
     ostringstream test;
 
