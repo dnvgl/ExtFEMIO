@@ -323,10 +323,10 @@ namespace dnvgl {
                             };
 
                         private:
-                            std::vector<cdni_entry> cdni;
+                            std::vector<std::shared_ptr<cdni_entry>> cdni;
 
                         public:
-                            explicit sort(std::vector<cdni_entry> const &);
+                            explicit sort(std::vector<std::shared_ptr<cdni_entry>> const&);
                             ~sort() override;
                             std::string str() const override;
                         };
@@ -381,10 +381,12 @@ namespace dnvgl {
                         };
 
                     protected:
-                        std::vector<describer*> oper;
+                        std::vector<std::shared_ptr<describer>> oper;
 
                     public:
-                        explicit echo(std::vector<describer*> const &oper={});
+                        explicit echo(
+                            std::vector<std::shared_ptr<describer>>
+                            const &oper={});
                         ~echo() override;
                     private:
                         std::ostream &put(std::ostream&) const override;
@@ -794,13 +796,13 @@ namespace dnvgl {
 */
                             n};
                     private:
-                        std::vector<std::unique_ptr<describer> > describers;
+                        std::vector<std::shared_ptr<describer> > describers;
                         restype res;
                         long res_n;
-                        displacement(std::vector<describer*> const &, restype const &res, long const &);
+                        displacement(std::vector<std::shared_ptr<describer>> const &, restype const res, long const);
                     public:
-                        displacement(std::vector<describer*> const &, restype const &res=restype::NONE);
-                        displacement(std::vector<describer*> const &, long const &);
+                        displacement(std::vector<std::shared_ptr<describer>> const &, restype const res=restype::NONE);
+                        displacement(std::vector<std::shared_ptr<describer>> const &, long const);
                     private:
                         std::ostream &put(std::ostream&) const override;
                     };
@@ -1083,13 +1085,13 @@ SPCFORCES(PRINT, RALL, NORPRINT)=ALL
 */
                             n};
                     private:
-                        std::vector<std::unique_ptr<describer> > describers;
+                        std::vector<std::shared_ptr<describer> > describers;
                         restype res;
                         long res_n;
-                        spcforces(std::vector<describer*> const &, restype const &res, long const &);
+                        spcforces(std::vector<std::shared_ptr<describer>> const &, restype const res, long const);
                     public:
-                        spcforces(std::vector<describer*> const &, restype const &res=restype::NONE);
-                        spcforces(std::vector<describer*> const &, long const &res);
+                        spcforces(std::vector<std::shared_ptr<describer>> const &, restype const res=restype::NONE);
+                        spcforces(std::vector<std::shared_ptr<describer>> const &, long const res);
                     private:
                         std::ostream &put(std::ostream&) const override;
                     };
@@ -1424,13 +1426,16 @@ using strain gage approach with cubic bending correction.
 /// No element stress will be output.
                             NONE};
                     private:
-                        std::vector<std::unique_ptr<describer> > describers;
+                        std::vector<std::shared_ptr<describer> > describers;
                         restype res;
                         long res_n;
-                        stress(std::vector<describer*> const &, restype const &, long const &);
+                        stress(std::vector<std::shared_ptr<describer>> const &,
+                               restype const, long const);
                     public:
-                        stress(std::vector<describer*> const &, restype const &res=restype::NONE);
-                        stress(std::vector<describer*> const &, long const &);
+                        stress(std::vector<std::shared_ptr<describer>> const &,
+                               restype const res=restype::NONE);
+                        stress(std::vector<std::shared_ptr<describer>> const &,
+                               long const);
                     private:
                         std::ostream &put(std::ostream&) const override;
                     };
@@ -1481,7 +1486,7 @@ LOAD=15
                         long n;
 
                     public:
-                        load(long const &);
+                        load(long const);
                     private:
                         std::ostream &put(std::ostream&) const override;
                     };
@@ -1575,7 +1580,7 @@ SUBCASE=101
                     public:
 
                         subcase();
-                        subcase(long const &);
+                        subcase(long const);
                     private:
                         std::ostream &put(std::ostream&) const override;
                     };
@@ -1659,12 +1664,12 @@ Superelement identification number. (Integer>0)
 
 #endif // _HEADER_H_
 
-/*
-  Local Variables:
-  mode: c++
-  c-file-style: "dnvgl"
-  indent-tabs-mode: nil
-  compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
-  coding: utf-8
-  End:
- */
+// Local Variables:
+// mode: c++
+// c-file-style: "dnvgl"
+// indent-tabs-mode: nil
+// compile-command: "make -C ../../cbuild -j8&&
+//  (make -C ../../cbuild test;
+//   ../../cbuild/tests/test_bdf_header --use-colour no)"
+// coding: utf-8
+// End:

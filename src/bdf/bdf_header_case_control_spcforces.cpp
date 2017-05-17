@@ -18,24 +18,28 @@ namespace {
 
 #include "bdf/header.h"
 
+using namespace std;
+
 using namespace dnvgl::extfem::bdf::header::case_control;
 
 spcforces::spcforces(
-    std::vector<describer*> const &_describers, restype const &res, long const &n) :
+    vector<shared_ptr<describer>> const &describers,
+    restype const res, long const n) :
     res(res), res_n(n) {
-    for (auto p : _describers)
-        describers.push_back(std::unique_ptr<describer>(p));
+    for (auto p : describers)
+        this->describers.push_back(shared_ptr<describer>(p));
 }
 
 spcforces::spcforces(
-    std::vector<describer*> const &describers, restype const &res) :
+    vector<shared_ptr<describer>> const &describers,
+    restype const res) :
     spcforces(describers, res, 0) {}
 
 spcforces::spcforces(
-    std::vector<describer*> const &describers, long const &res) :
+    vector<shared_ptr<describer>> const &describers, long const res) :
     spcforces(describers, restype::n, res) {}
 
-std::ostream &spcforces::put(std::ostream &os) const {
+ostream &spcforces::put(ostream &os) const {
     os << "SPCFORCES";
     if (this->describers.size() > 0) {
         bool first = true;
@@ -60,7 +64,7 @@ std::ostream &spcforces::put(std::ostream &os) const {
         os << " = NONE";
         break;
     }
-    return os << std::endl;
+    return os << endl;
 }
 
 std::string spcforces::print::str() const {
@@ -112,5 +116,7 @@ std::string spcforces::norprint::str() const {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j7 &&
+//   (make -C ../../cbuild test ;
+//    ../../cbuild/tests/test_bdf_header --use-colour no)"
 // End:

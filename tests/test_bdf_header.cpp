@@ -46,7 +46,7 @@ using namespace dnvgl::extfem::bdf::header;
 
 TEST_CASE("BDF generate 'SOL' header entries", "[bdf_header,sol]") {
 
-    std::ostringstream test;
+    ostringstream test;
 
     SECTION("sol 101") {
         executive_control::sol probe(101);
@@ -63,7 +63,7 @@ TEST_CASE("BDF generate 'SOL' header entries", "[bdf_header,sol]") {
 
 TEST_CASE("BDF generate 'CEND' header entries", "[bdf_header,cend]") {
 
-    std::ostringstream test;
+    ostringstream test;
 
     SECTION("cend") {
         executive_control::cend probe;
@@ -74,7 +74,7 @@ TEST_CASE("BDF generate 'CEND' header entries", "[bdf_header,cend]") {
 
 TEST_CASE("BDF generate 'TITLE' header entries", "[bdf_header,title]") {
 
-    std::ostringstream test;
+    ostringstream test;
 
     SECTION("") {
         case_control::title probe("text");
@@ -85,7 +85,7 @@ TEST_CASE("BDF generate 'TITLE' header entries", "[bdf_header,title]") {
 
 TEST_CASE("BDF generate 'ECHO' header entries", "[bdf_header,echo]") {
 
-    std::ostringstream test;
+    ostringstream test;
 
     SECTION("default") {
         case_control::echo probe;
@@ -94,12 +94,12 @@ TEST_CASE("BDF generate 'ECHO' header entries", "[bdf_header,echo]") {
     }
 
     SECTION("NONE") {
-        case_control::echo probe({new case_control::echo::none});
+        case_control::echo probe({make_shared<case_control::echo::none>()});
         test << probe;
         CHECK(test.str() == "ECHO = NONE\n");
     }
     SECTION("BOTH") {
-        case_control::echo probe({new case_control::echo::both});
+        case_control::echo probe({make_shared<case_control::echo::both>()});
         test << probe;
         CHECK(test.str() == "ECHO = BOTH\n");
     }
@@ -107,7 +107,7 @@ TEST_CASE("BDF generate 'ECHO' header entries", "[bdf_header,echo]") {
 
 TEST_CASE("BDF generate 'BEGIN BULK' header entries", "[bdf_header,begin bulk]") {
 
-    std::ostringstream test;
+    ostringstream test;
 
     SECTION("1") {
         case_control::begin_bulk probe;
@@ -118,7 +118,7 @@ TEST_CASE("BDF generate 'BEGIN BULK' header entries", "[bdf_header,begin bulk]")
 
 TEST_CASE("BDF generate 'SUBCASE' header entries", "[bdf_header,subcase]") {
 
-    std::ostringstream test;
+    ostringstream test;
 
     SECTION("1") {
         case_control::subcase probe(1);
@@ -135,7 +135,7 @@ TEST_CASE("BDF generate 'SUBCASE' header entries", "[bdf_header,subcase]") {
 
 TEST_CASE("BDF generate 'SUBTITLE' header entries", "[bdf_header,subtitle]") {
 
-    std::ostringstream test;
+    ostringstream test;
 
     SECTION("1") {
         case_control::subtitle probe("LC 1");
@@ -146,7 +146,7 @@ TEST_CASE("BDF generate 'SUBTITLE' header entries", "[bdf_header,subtitle]") {
 
 TEST_CASE("BDF generate 'LOAD' header entries", "[bdf_header,load]") {
 
-    std::ostringstream test;
+    ostringstream test;
 
     SECTION("1") {
         case_control::load probe(1);
@@ -161,41 +161,41 @@ TEST_CASE("BDF generate 'LOAD' header entries", "[bdf_header,load]") {
     }
 
     SECTION("ptr") {
-        std::unique_ptr<__base::entry> probe = std::make_unique<case_control::load>(15);
+        shared_ptr<__base::entry> probe = make_shared<case_control::load>(15);
         test << *probe;
         CHECK(test.str() == "LOAD = 15\n");
     }
 }
 
 namespace ExportBDF{ class BDF_Header; }
-std::ostream&
-    operator<<(std::ostream &, const ExportBDF::BDF_Header&);
+ostream&
+    operator<<(ostream &, const ExportBDF::BDF_Header&);
 
 namespace ExportBDF{
 
     class BDF_Header {
     private:
-        std::vector<std::unique_ptr<dnvgl::extfem::bdf::header::__base::entry> > entries;
+        vector<shared_ptr<dnvgl::extfem::bdf::header::__base::entry> > entries;
     public:
         BDF_Header(std::string const&);
         ~BDF_Header();
         void add_LC(long const &lc_num, long const &id, std::string const &title);
-        std::ostream const &operator<<(std::ostream&) const;
-        friend std::ostream&
-        ::operator<<(std::ostream &, const BDF_Header&);
+        ostream const &operator<<(ostream&) const;
+        friend ostream&
+        ::operator<<(ostream &, const BDF_Header&);
     };
 
     BDF_Header::BDF_Header(std::string const &title) {
         using namespace dnvgl::extfem::bdf::header;
         entries.push_back(
-            std::make_unique<executive_control::sol>(
+            make_shared<executive_control::sol>(
                 executive_control::sol::sol_no_type::SESTATIC));
-        entries.push_back(std::make_unique<executive_control::cend>());
-        entries.push_back(std::make_unique<case_control::title>(title));
+        entries.push_back(make_shared<executive_control::cend>());
+        entries.push_back(make_shared<case_control::title>(title));
         entries.push_back(
-            std::make_unique<case_control::echo>(
-                std::vector<case_control::echo::describer*>{
-                    new case_control::echo::none}));
+            make_shared<case_control::echo>(
+                vector<shared_ptr<case_control::echo::describer>>{
+                    make_shared<case_control::echo::none>()}));
     }
 
     BDF_Header::~BDF_Header() {
@@ -205,39 +205,39 @@ namespace ExportBDF{
     void BDF_Header::add_LC(long const &this_case, long const &load,
                             std::string const &title) {
         using namespace dnvgl::extfem::bdf::header;
-        entries.push_back(std::make_unique<case_control::subcase>(this_case));
-        entries.push_back(std::make_unique<case_control::subtitle>(title));
-        entries.push_back(std::make_unique<case_control::load>(load));
+        entries.push_back(make_shared<case_control::subcase>(this_case));
+        entries.push_back(make_shared<case_control::subtitle>(title));
+        entries.push_back(make_shared<case_control::load>(load));
         entries.push_back(
-            std::make_unique<case_control::displacement>(
-                std::vector<case_control::displacement::describer*>{
-                    new case_control::displacement::print,
-                        new case_control::displacement::punch,
-                        new case_control::displacement::real},
+            make_shared<case_control::displacement>(
+                vector<shared_ptr<case_control::displacement::describer>>{
+                    make_shared<case_control::displacement::print>(),
+                    make_shared<case_control::displacement::punch>(),
+                    make_shared<case_control::displacement::real>()},
                 case_control::displacement::restype::ALL));
         entries.push_back(
-            std::make_unique<case_control::spcforces>(
-                std::vector<case_control::spcforces::describer*>{
-                    new case_control::spcforces::print,
-                        new case_control::spcforces::nozprint},
+            make_shared<case_control::spcforces>(
+                vector<shared_ptr<case_control::spcforces::describer>>{
+                    make_shared<case_control::spcforces::print>(),
+                    make_shared<case_control::spcforces::nozprint>()},
                 case_control::spcforces::restype::ALL));
         entries.push_back(
-            std::make_unique<case_control::stress>(
-                std::vector<case_control::stress::describer*>{
-                    new case_control::stress::sort1,
-                        new case_control::stress::print,
-                        new case_control::stress::real,
-                        new case_control::stress::vonmises,
-                        new case_control::stress::center},
+            make_shared<case_control::stress>(
+                vector<shared_ptr<case_control::stress::describer>>{
+                    make_shared<case_control::stress::sort1>(),
+                    make_shared<case_control::stress::print>(),
+                    make_shared<case_control::stress::real>(),
+                    make_shared<case_control::stress::vonmises>(),
+                    make_shared<case_control::stress::center>()},
                 case_control::stress::restype::ALL));
     }
 
-    std::ostream const &BDF_Header::operator<< (std::ostream &os) const {
+    ostream const &BDF_Header::operator<< (ostream &os) const {
         return os << this;
     }
 }
 
-std::ostream &operator<<(std::ostream &os, const ExportBDF::BDF_Header &entry) {
+ostream &operator<<(ostream &os, const ExportBDF::BDF_Header &entry) {
     for (auto const &p : entry.entries)
         os << *p;
     os << case_control::begin_bulk();
@@ -246,7 +246,7 @@ std::ostream &operator<<(std::ostream &os, const ExportBDF::BDF_Header &entry) {
 
 TEST_CASE("Sample Header", "[bdf_header]") {
 
-    std::ostringstream test;
+    ostringstream test;
 
     ExportBDF::BDF_Header probe("test case");
 
@@ -288,5 +288,7 @@ TEST_CASE("Sample Header", "[bdf_header]") {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
+// compile-command: "make -C ../cbuild -j7 &&
+//   (make -C ../cbuild test ;
+//    ../cbuild/tests/test_bdf_header --use-colour no)"
 // End:

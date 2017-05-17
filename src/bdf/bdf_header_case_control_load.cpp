@@ -20,7 +20,7 @@ namespace {
 
 using namespace dnvgl::extfem::bdf::header::case_control;
 
-load::load(long const &n) : n(n) {}
+load::load(long const n) : n(n) {}
 
 std::ostream &load::put(std::ostream &os) const {
     os << "LOAD = " << this->n;

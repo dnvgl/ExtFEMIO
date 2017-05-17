@@ -22,7 +22,7 @@ using namespace dnvgl::extfem::bdf::header::case_control;
 
 long subcase::max_n = 0;
 
-subcase::subcase(long const &n) : n(n) {
+subcase::subcase(long const n) : n(n) {
     max_n = std::max(n, max_n);
 }
 

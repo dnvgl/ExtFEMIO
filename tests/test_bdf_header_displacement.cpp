@@ -30,6 +30,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::header;
 
@@ -45,9 +47,9 @@ TEST_CASE("BDF generate 'DISPLACEMENT' header entries", "[bdf_header,displacemen
 
     SECTION("bdf sample") {
         case_control::displacement probe({
-            new case_control::displacement::print,
-            new case_control::displacement::punch,
-            new case_control::displacement::real},
+            make_shared<case_control::displacement::print>(),
+            make_shared<case_control::displacement::punch>(),
+            make_shared<case_control::displacement::real>()},
             case_control::displacement::restype::ALL);
         test << probe;
         CHECK(test.str() == "DISPLACEMENT(PRINT, PUNCH, REAL) = ALL\n");

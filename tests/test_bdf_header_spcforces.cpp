@@ -31,12 +31,14 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::header;
 
 TEST_CASE("BDF generate 'SPCFORCES' header entries", "[bdf_header,spcforces]") {
 
-    std::ostringstream test;
+    ostringstream test;
 
     SECTION("default") {
         case_control::spcforces probe({});
@@ -52,8 +54,8 @@ TEST_CASE("BDF generate 'SPCFORCES' header entries", "[bdf_header,spcforces]") {
 
     SECTION("NOZPRINT") {
         case_control::spcforces probe({
-            new case_control::spcforces::print,
-            new case_control::spcforces::nozprint
+                make_shared<case_control::spcforces::print>(),
+                make_shared<case_control::spcforces::nozprint>()
         }, case_control::spcforces::restype::ALL);
         test << probe;
         CHECK(test.str() == "SPCFORCES(PRINT, NOZPRINT) = ALL\n");
@@ -67,10 +69,10 @@ TEST_CASE("BDF generate 'SPCFORCES' header entries", "[bdf_header,spcforces]") {
 
     SECTION("IMAG") {
         case_control::spcforces probe({
-            new case_control::spcforces::sort2,
-            new case_control::spcforces::punch,
-            new case_control::spcforces::print,
-            new case_control::spcforces::imag
+            make_shared<case_control::spcforces::sort2>(),
+            make_shared<case_control::spcforces::punch>(),
+            make_shared<case_control::spcforces::print>(),
+            make_shared<case_control::spcforces::imag>()
         }, case_control::spcforces::restype::ALL);
         test << probe;
         CHECK(test.str() == "SPCFORCES(SORT2, PUNCH, PRINT, IMAG) = ALL\n");
@@ -78,7 +80,7 @@ TEST_CASE("BDF generate 'SPCFORCES' header entries", "[bdf_header,spcforces]") {
 
     SECTION("PHASE") {
         case_control::spcforces probe({
-            new case_control::spcforces::phase
+            make_shared<case_control::spcforces::phase>()
         }, case_control::spcforces::restype::NONE);
         test << probe;
         CHECK(test.str() == "SPCFORCES(PHASE) = NONE\n");
@@ -86,11 +88,11 @@ TEST_CASE("BDF generate 'SPCFORCES' header entries", "[bdf_header,spcforces]") {
 
     SECTION("SORT2") {
         case_control::spcforces probe({
-            new case_control::spcforces::sort2,
-            new case_control::spcforces::print,
-            new case_control::spcforces::psdf,
-            new case_control::spcforces::crms,
-            new case_control::spcforces::rpunch
+            make_shared<case_control::spcforces::sort2>(),
+            make_shared<case_control::spcforces::print>(),
+            make_shared<case_control::spcforces::psdf>(),
+            make_shared<case_control::spcforces::crms>(),
+            make_shared<case_control::spcforces::rpunch>()
         }, 20);
         test << probe;
         CHECK(test.str() == "SPCFORCES(SORT2, PRINT, PSDF, CRMS, RPUNCH) = 20\n");
@@ -98,9 +100,9 @@ TEST_CASE("BDF generate 'SPCFORCES' header entries", "[bdf_header,spcforces]") {
 
     SECTION("PRINT") {
         case_control::spcforces probe({
-            new case_control::spcforces::print,
-            new case_control::spcforces::rall,
-            new case_control::spcforces::norprint
+            make_shared<case_control::spcforces::print>(),
+            make_shared<case_control::spcforces::rall>(),
+            make_shared<case_control::spcforces::norprint>()
         }, case_control::spcforces::restype::ALL);
         test << probe;
         CHECK(test.str() == "SPCFORCES(PRINT, RALL, NORPRINT) = ALL\n");
@@ -113,5 +115,7 @@ TEST_CASE("BDF generate 'SPCFORCES' header entries", "[bdf_header,spcforces]") {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&make -C ../cbuild test"
+// compile-command: "make -C ../cbuild -j7 &&
+//   (make -C ../cbuild test ;
+//    ../cbuild/tests/test_bdf_header --use-colour no)"
 // End:

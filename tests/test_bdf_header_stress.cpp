@@ -30,6 +30,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::header;
 
@@ -57,20 +59,20 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
 
     SECTION("15") {
         case_control::stress probe({
-            new case_control::stress::sort1,
-            new case_control::stress::print,
-            new case_control::stress::punch,
-            new case_control::stress::phase}, 15);
+            make_shared<case_control::stress::sort1>(),
+            make_shared<case_control::stress::print>(),
+            make_shared<case_control::stress::punch>(),
+            make_shared<case_control::stress::phase>()}, 15);
         test << probe;
         CHECK(test.str() == "STRESS(SORT1, PRINT, PUNCH, PHASE) = 15\n");
     }
 
     SECTION("20") {
         case_control::stress probe({
-            new case_control::stress::print,
-            new case_control::stress::psdf,
-            new case_control::stress::crms,
-            new case_control::stress::rpunch},
+            make_shared<case_control::stress::print>(),
+            make_shared<case_control::stress::psdf>(),
+            make_shared<case_control::stress::crms>(),
+            make_shared<case_control::stress::rpunch>()},
             20);
         test << probe;
         CHECK(test.str() == "STRESS(PRINT, PSDF, CRMS, RPUNCH) = 20\n");
@@ -78,9 +80,9 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
 
     SECTION("RALL etc") {
         case_control::stress probe({
-            new case_control::stress::print,
-            new case_control::stress::rall,
-            new case_control::stress::norprint},
+            make_shared<case_control::stress::print>(),
+            make_shared<case_control::stress::rall>(),
+            make_shared<case_control::stress::norprint>()},
             case_control::stress::restype::ALL);
         test << probe;
         CHECK(test.str() == "STRESS(PRINT, RALL, NORPRINT) = ALL\n");
@@ -88,7 +90,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
 
     SECTION("SORT1") {
         case_control::stress probe({
-            new case_control::stress::sort1},
+            make_shared<case_control::stress::sort1>()},
             case_control::stress::restype::ALL);
         test << probe;
         CHECK(test.str() == "STRESS(SORT1) = ALL\n");
@@ -96,7 +98,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
 
     SECTION("SORT2") {
         case_control::stress probe({
-            new case_control::stress::sort2},
+            make_shared<case_control::stress::sort2>()},
             case_control::stress::restype::ALL);
         test << probe;
         CHECK(test.str() == "STRESS(SORT2) = ALL\n");
@@ -104,7 +106,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
 
     SECTION("PRINT") {
         case_control::stress probe({
-            new case_control::stress::print},
+            make_shared<case_control::stress::print>()},
             case_control::stress::restype::ALL);
         test << probe;
         CHECK(test.str() == "STRESS(PRINT) = ALL\n");
@@ -112,7 +114,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
 
     SECTION("PUNCH") {
         case_control::stress probe({
-            new case_control::stress::punch},
+            make_shared<case_control::stress::punch>()},
             case_control::stress::restype::ALL);
         test << probe;
         CHECK(test.str() == "STRESS(PUNCH) = ALL\n");
@@ -120,7 +122,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
 
     SECTION("PLOT") {
         case_control::stress probe({
-            new case_control::stress::plot},
+            make_shared<case_control::stress::plot>()},
             case_control::stress::restype::ALL);
         test << probe;
         CHECK(test.str() == "STRESS(PLOT) = ALL\n");
@@ -128,7 +130,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
 
     SECTION("REAL") {
         case_control::stress probe({
-            new case_control::stress::real},
+            make_shared<case_control::stress::real>()},
             case_control::stress::restype::ALL);
         test << probe;
         CHECK(test.str() == "STRESS(REAL) = ALL\n");
@@ -136,7 +138,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
 
     SECTION("IMAG") {
         case_control::stress probe({
-            new case_control::stress::imag},
+            make_shared<case_control::stress::imag>()},
             case_control::stress::restype::ALL);
         test << probe;
         CHECK(test.str() == "STRESS(IMAG) = ALL\n");
@@ -144,7 +146,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
 
     SECTION("PHASE") {
         case_control::stress probe({
-            new case_control::stress::phase},
+            make_shared<case_control::stress::phase>()},
             case_control::stress::restype::ALL);
         test << probe;
         CHECK(test.str() == "STRESS(PHASE) = ALL\n");
@@ -152,9 +154,9 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
 
     SECTION("PSDF") {
         case_control::stress probe({
-            new case_control::stress::print,
-            new case_control::stress::rall,
-            new case_control::stress::norprint},
+            make_shared<case_control::stress::print>(),
+            make_shared<case_control::stress::rall>(),
+            make_shared<case_control::stress::norprint>()},
             case_control::stress::restype::ALL);
         test << probe;
         CHECK(test.str() == "STRESS(PRINT, RALL, NORPRINT) = ALL\n");
@@ -162,7 +164,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
 
     SECTION("ATOC") {
         case_control::stress probe({
-            new case_control::stress::atoc},
+            make_shared<case_control::stress::atoc>()},
             case_control::stress::restype::ALL);
         test << probe;
         CHECK(test.str() == "STRESS(ATOC) = ALL\n");
@@ -170,7 +172,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
 
     SECTION("CRMS") {
         case_control::stress probe({
-            new case_control::stress::crms},
+            make_shared<case_control::stress::crms>()},
             case_control::stress::restype::ALL);
         test << probe;
         CHECK(test.str() == "STRESS(CRMS) = ALL\n");
@@ -178,7 +180,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
 
     SECTION("RALL") {
         case_control::stress probe({
-            new case_control::stress::rall},
+            make_shared<case_control::stress::rall>()},
             case_control::stress::restype::ALL);
         test << probe;
         CHECK(test.str() == "STRESS(RALL) = ALL\n");
@@ -186,7 +188,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
 
     SECTION("VONMISES") {
         case_control::stress probe({
-            new case_control::stress::vonmises},
+            make_shared<case_control::stress::vonmises>()},
             case_control::stress::restype::ALL);
         test << probe;
         CHECK(test.str() == "STRESS(VONMISES) = ALL\n");
@@ -194,7 +196,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
 
     SECTION("MAXS") {
         case_control::stress probe({
-            new case_control::stress::maxs},
+            make_shared<case_control::stress::maxs>()},
             case_control::stress::restype::ALL);
         test << probe;
         CHECK(test.str() == "STRESS(MAXS) = ALL\n");
@@ -202,7 +204,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
 
     SECTION("SHEAR") {
         case_control::stress probe({
-            new case_control::stress::shear},
+            make_shared<case_control::stress::shear>()},
             case_control::stress::restype::ALL);
         test << probe;
         CHECK(test.str() == "STRESS(SHEAR) = ALL\n");
@@ -210,7 +212,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
 
     SECTION("CENTER") {
         case_control::stress probe({
-            new case_control::stress::center},
+            make_shared<case_control::stress::center>()},
             case_control::stress::restype::ALL);
         test << probe;
         CHECK(test.str() == "STRESS(CENTER) = ALL\n");
@@ -218,7 +220,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
 
     SECTION("CUBIC") {
         case_control::stress probe({
-            new case_control::stress::cubic},
+            make_shared<case_control::stress::cubic>()},
             case_control::stress::restype::ALL);
         test << probe;
         CHECK(test.str() == "STRESS(CUBIC) = ALL\n");
@@ -226,7 +228,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
 
     SECTION("SGAGE") {
         case_control::stress probe({
-            new case_control::stress::sgage},
+            make_shared<case_control::stress::sgage>()},
             case_control::stress::restype::ALL);
         test << probe;
         CHECK(test.str() == "STRESS(SGAGE) = ALL\n");
@@ -234,7 +236,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
 
     SECTION("CORNER") {
         case_control::stress probe({
-            new case_control::stress::corner},
+            make_shared<case_control::stress::corner>()},
             case_control::stress::restype::ALL);
         test << probe;
         CHECK(test.str() == "STRESS(CORNER) = ALL\n");
@@ -242,7 +244,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
 
     SECTION("BILIN") {
         case_control::stress probe({
-            new case_control::stress::bilin},
+            make_shared<case_control::stress::bilin>()},
             case_control::stress::restype::ALL);
         test << probe;
         CHECK(test.str() == "STRESS(BILIN) = ALL\n");
@@ -250,7 +252,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
 
     SECTION("RPRINT") {
         case_control::stress probe({
-            new case_control::stress::rprint},
+            make_shared<case_control::stress::rprint>()},
             case_control::stress::restype::ALL);
         test << probe;
         CHECK(test.str() == "STRESS(RPRINT) = ALL\n");
@@ -258,7 +260,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
 
     SECTION("NORPRINT") {
         case_control::stress probe({
-            new case_control::stress::norprint},
+            make_shared<case_control::stress::norprint>()},
             case_control::stress::restype::ALL);
         test << probe;
         CHECK(test.str() == "STRESS(NORPRINT) = ALL\n");
@@ -266,7 +268,7 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
 
     SECTION("RPUNCH") {
         case_control::stress probe({
-            new case_control::stress::rpunch},
+            make_shared<case_control::stress::rpunch>()},
             case_control::stress::restype::ALL);
         test << probe;
         CHECK(test.str() == "STRESS(RPUNCH) = ALL\n");
@@ -290,7 +292,6 @@ TEST_CASE("BDF generate 'STRESS' header entries", "[bdf_header,stress]") {
         CHECK(test.str() == "STRESS = NONE\n");
     }
 }
-
 
 // Local Variables:
 // mode: c++
