@@ -1432,7 +1432,7 @@ using strain gage approach with cubic bending correction.
                         stress(std::vector<std::shared_ptr<describer>> const &,
                                restype const, long const);
                     public:
-                        stress(std::vector<std::shared_ptr<describer>> const &,
+                        explicit stress(std::vector<std::shared_ptr<describer>> const &,
                                restype const res=restype::NONE);
                         stress(std::vector<std::shared_ptr<describer>> const &,
                                long const);
