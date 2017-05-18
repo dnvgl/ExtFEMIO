@@ -51,7 +51,7 @@ cards::types beam_base::card_type() const {
 }
 
 card const &beam_base::operator() (long const *PID, long const *MID) {
-    this->PID(PID);
+    this->property::operator() (PID);
     this->MID(MID);
     return *this;
 }

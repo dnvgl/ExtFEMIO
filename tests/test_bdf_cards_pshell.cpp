@@ -34,6 +34,7 @@ using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::cards;
 
 TEST_CASE("BDF PSHELL definitions (Small Field Format).", "[bdf_pshell]") {
+    pshell::resetIds();
 
     std::list<std::string> data({
             "PSHELL  1       4         23.00 4               4\n"});
@@ -72,6 +73,7 @@ TEST_CASE("BDF PSHELL definitions (reuse) (Small Field Format).", "[bdf_pshell]"
 }
 
 TEST_CASE("BDF PSHELL definitions (Large Field Format).", "[bdf_pshell]") {
+    pshell::resetIds();
 
     std::list<std::string> data({
             "PSHELL* 1               4                 23.00         4               \n",
@@ -113,6 +115,7 @@ TEST_CASE("BDF PSHELL definitions (reuse) (Large Field Format).", "[bdf_pshell]"
 }
 
 TEST_CASE("BDF PSHELL definitions (Free Field Format).", "[bdf_pshell]") {
+    pshell::resetIds();
 
     std::list<std::string> data({"PSHELL,1,4,23.00,4,,4\n"});
     std::list<std::string> lines;
@@ -148,6 +151,7 @@ TEST_CASE("BDF PSHELL definitions (reuse) (Free Field Format).", "[bdf_pshell]")
 }
 
 TEST_CASE("BDF PSHELL roundtrip test", "[bdf_pshell]") {
+    pshell::resetIds();
     std::ostringstream test;
 
     long PID{7869};
@@ -173,6 +177,7 @@ TEST_CASE("BDF PSHELL roundtrip test", "[bdf_pshell]") {
     }
 
     SECTION("check reading") {
+        pshell::resetIds();
         std::list<std::string> data;
         std::list<std::string> lines;
         std::string tmp;
@@ -198,6 +203,7 @@ TEST_CASE("BDF PSHELL roundtrip test", "[bdf_pshell]") {
 }
 
 TEST_CASE("BDF PSHELL roundtrip test (reuse)", "[bdf_pshell]") {
+    pshell::resetIds();
     std::ostringstream test;
 
     long PID{7869};
@@ -224,6 +230,7 @@ TEST_CASE("BDF PSHELL roundtrip test (reuse)", "[bdf_pshell]") {
     }
 
     SECTION("check reading") {
+        pshell::resetIds();
         std::list<std::string> data;
         std::list<std::string> lines;
         std::string tmp;

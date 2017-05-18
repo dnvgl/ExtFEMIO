@@ -57,6 +57,7 @@ TEST_CASE("BDF PBEAM definitions (Small Field Format).", "[bdf_pbeam]") {
 }
 
 TEST_CASE("BDF PBEAM definitions (Small Field Format 2).", "[bdf_pbeam]") {
+    pbeam::resetIds();
 
     std::list<std::string> data({
             //       PID     MID     A       I1      I2      I12     J
@@ -106,6 +107,7 @@ TEST_CASE("BDF PBEAM definitions (Free Field Format 1).", "[bdf_pbeam]") {
 }
 
 TEST_CASE("BDF PBEAM definitions (Free Field Format 2).", "[bdf_pbeam]") {
+    pbeam::resetIds();
 
     std::list<std::string> data({
             "PBEAM,1,2,3.,4.,5.,6.,7.,8.,9.,10.,11.,12.,13.,14.,15.,16.,\n",
@@ -234,6 +236,7 @@ TEST_CASE("BDF PBEAM definitions (Tapered Beam).", "[bdf_pbeam]") {
 }
 
 TEST_CASE("BDF PBEAM roundtrip test", "[bdf_pbeam]") {
+    pbeam::resetIds();
     std::ostringstream test;
 
     long EID{7869}, PID{104010};
@@ -288,6 +291,7 @@ TEST_CASE("BDF PBEAM roundtrip test", "[bdf_pbeam]") {
     }
 
     SECTION("check reading") {
+        pbeam::resetIds();
         std::list<std::string> data;
         std::list<std::string> lines;
         std::string tmp;
@@ -338,6 +342,8 @@ TEST_CASE("BDF PBEAM roundtrip test", "[bdf_pbeam]") {
 }
 
 TEST_CASE("BDF PBEAM roundtrip test (reuse)", "[bdf_pbeam]") {
+    pbarl::resetIds();
+
     std::ostringstream test;
 
     long EID{7869}, PID{104010};
@@ -393,6 +399,7 @@ TEST_CASE("BDF PBEAM roundtrip test (reuse)", "[bdf_pbeam]") {
     }
 
     SECTION("check reading") {
+        pbeam::resetIds();
         std::list<std::string> data;
         std::list<std::string> lines;
         std::string tmp;
@@ -444,6 +451,7 @@ TEST_CASE("BDF PBEAM roundtrip test (reuse)", "[bdf_pbeam]") {
 }
 
 TEST_CASE("BDF PBEAM roundtrip test (no taper)", "[bdf_pbeam]") {
+    pbeam::resetIds();
     std::ostringstream test;
 
     long EID{7869}, PID{104010};
@@ -494,6 +502,7 @@ TEST_CASE("BDF PBEAM roundtrip test (no taper)", "[bdf_pbeam]") {
     }
 
     SECTION("check reading") {
+        pbeam::resetIds();
         std::list<std::string> data;
         std::list<std::string> lines;
         std::string tmp;
@@ -542,6 +551,8 @@ TEST_CASE("BDF PBEAM roundtrip test (no taper)", "[bdf_pbeam]") {
 }
 
 TEST_CASE("BDF PBEAM roundtrip test (no taper) (reuse)", "[bdf_pbeam]") {
+    pbarl::resetIds();
+
     std::ostringstream test;
 
     long EID{7869}, PID{104010};
@@ -642,6 +653,7 @@ TEST_CASE("BDF PBEAM roundtrip test (no taper) (reuse)", "[bdf_pbeam]") {
 }
 
 TEST_CASE("BDF PBEAM roundtrip test (minimal)", "[bdf_pbeam]") {
+    pbeam::resetIds();
     std::ostringstream test;
 
     long EID{7869}, PID{104010};
@@ -659,6 +671,7 @@ TEST_CASE("BDF PBEAM roundtrip test (minimal)", "[bdf_pbeam]") {
     }
 
     SECTION("check reading") {
+        pbeam::resetIds();
         std::list<std::string> data;
         std::list<std::string> lines;
         std::string tmp;
@@ -707,6 +720,8 @@ TEST_CASE("BDF PBEAM roundtrip test (minimal)", "[bdf_pbeam]") {
 }
 
 TEST_CASE("BDF PBEAM roundtrip test (minimal) (reuse)", "[bdf_pbeam]") {
+    pbarl::resetIds();
+
     std::ostringstream test;
 
     long EID{7869}, PID{104010};
@@ -774,6 +789,7 @@ TEST_CASE("BDF PBEAM roundtrip test (minimal) (reuse)", "[bdf_pbeam]") {
 }
 
 TEST_CASE("BDF PBEAM roundtrip test (N2_B only)", "[bdf_pbeam]") {
+    pbeam::resetIds();
     std::ostringstream test;
 
     long EID{7869}, PID{104010};
@@ -798,6 +814,7 @@ TEST_CASE("BDF PBEAM roundtrip test (N2_B only)", "[bdf_pbeam]") {
     }
 
     SECTION("check reading") {
+        pbeam::resetIds();
         std::list<std::string> data;
         std::list<std::string> lines;
         std::string tmp;
@@ -846,6 +863,8 @@ TEST_CASE("BDF PBEAM roundtrip test (N2_B only)", "[bdf_pbeam]") {
 }
 
 TEST_CASE("BDF PBEAM roundtrip test (N2_B only) (reuse)", "[bdf_pbeam]") {
+    pbarl::resetIds();
+
     std::ostringstream test;
 
     long EID{7869}, PID{104010};

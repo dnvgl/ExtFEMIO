@@ -16,6 +16,7 @@
 #include <memory>
 #include <list>
 #include <vector>
+#include <unordered_set>
 
 // ReSharper disable once CppUnusedIncludeDirective
 #include "bdf/cards.h"
@@ -53,6 +54,17 @@ namespace dnvgl {
                         card const &operator() (const std::list<std::string> &) override;
 
                         card const &operator() (long const*);
+
+                    protected:
+
+                        std::unordered_set<long> static used_pid;
+                        long static max_id;
+
+                    public:
+
+                        long static nextId();
+
+                        void static resetIds();
                     };
                 }
 

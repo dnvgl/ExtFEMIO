@@ -133,6 +133,7 @@ TEST_CASE("BDF PBEAML definitions: Small Field Format (T).", "[bdf_pbeaml]") {
 }
 
 TEST_CASE("BDF PBEAML definitions: Small Field Format (I).", "[bdf_pbeaml]") {
+    pbeaml::resetIds();
 
     list<std::string> data({
             "PBEAML  104018  4               I\n",
@@ -212,6 +213,7 @@ TEST_CASE("BDF PBEAML definitions: Small Field Format (T, tapered).", "[bdf_pbea
 }
 
 TEST_CASE("BDF PBEAML invalid dim test", "[bdf_pbeaml]") {
+    pbeaml::resetIds();
     ostringstream test;
 
     long PID{7869}, MID{104010};
@@ -227,6 +229,7 @@ TEST_CASE("BDF PBEAML invalid dim test", "[bdf_pbeaml]") {
 }
 
 TEST_CASE("BDF PBEAML roundtrip test", "[bdf_pbeaml]") {
+    pbeaml::resetIds();
     ostringstream test;
 
     long PID{7869}, MID{104010};
@@ -249,6 +252,7 @@ TEST_CASE("BDF PBEAML roundtrip test", "[bdf_pbeaml]") {
     }
 
     SECTION("check reading") {
+        pbeaml::resetIds();
         list<std::string> data;
         list<std::string> lines;
         std::string tmp;
@@ -274,6 +278,8 @@ TEST_CASE("BDF PBEAML roundtrip test", "[bdf_pbeaml]") {
 }
 
 TEST_CASE("BDF PBEAML roundtrip test (reuse)", "[bdf_pbeaml]") {
+    pbarl::resetIds();
+
     ostringstream test;
 
     long PID{7869}, MID{104010};
@@ -321,6 +327,7 @@ TEST_CASE("BDF PBEAML roundtrip test (reuse)", "[bdf_pbeaml]") {
 }
 
 TEST_CASE("BDF PBEAML roundtrip test, multiple stations", "[bdf_pbeaml]") {
+    pbeaml::resetIds();
     ostringstream test;
 
     long PID{7869}, MID{104010};
@@ -345,6 +352,7 @@ TEST_CASE("BDF PBEAML roundtrip test, multiple stations", "[bdf_pbeaml]") {
     }
 
     SECTION("check reading") {
+        pbeaml::resetIds();
         list<std::string> data;
         list<std::string> lines;
         std::string tmp;
@@ -375,6 +383,8 @@ TEST_CASE("BDF PBEAML roundtrip test, multiple stations", "[bdf_pbeaml]") {
 }
 
 TEST_CASE("BDF PBEAML roundtrip test, multiple stations (reuse)", "[bdf_pbeaml]") {
+    pbarl::resetIds();
+
     ostringstream test;
 
     long PID{7869}, MID{104010};

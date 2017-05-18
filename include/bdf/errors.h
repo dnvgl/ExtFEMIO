@@ -83,6 +83,11 @@ namespace dnvgl {
                 public:
                     parse_error(const std::string&, const std::string &);
                 };
+
+                class usage_error : public error {
+                public:
+                    usage_error(const std::string&, const std::string &);
+                };
             }
         }
     }
