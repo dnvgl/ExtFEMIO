@@ -716,8 +716,9 @@ namespace dnvgl {
 
                     grid(long const *ID, long const *CP,
                          double const *X1, double const *X2, double const *X3,
-                         long const *CD, std::vector<int> const *PS,
-                         long const *SEID);
+                         long const *CD=nullptr,
+                         std::vector<int> const *PS=nullptr,
+                         long const *SEID=nullptr);
 
                     grid(long const &ID, long const &CP,
                          double const &X1, double const &X2, double const &X3);
@@ -728,10 +729,12 @@ namespace dnvgl {
 
                     card const &operator()(const std::list<std::string> &) override;
 
-                    card const &operator()(long const *ID, long const *CP,
-                                           double const *X1, double const *X2, double const *X3,
-                                           long const *CD, std::vector<int> const *PS,
-                                           long const *SEID);
+                    card const &operator()(
+                        long const *ID, long const *CP,
+                        double const *X1, double const *X2, double const *X3,
+                        long const *CD=nullptr,
+                        std::vector<int> const *PS=nullptr,
+                        long const *SEID=nullptr);
 
                     card const &operator()(
                         long const &ID, long const &CP,

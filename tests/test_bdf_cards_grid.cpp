@@ -290,7 +290,7 @@ TEST_CASE("FEMIO-43: BDF import failed") {
     }
 }
 
-TEST_CASE("BDF GRID types roundtrip test.", "[bdf_grid_roudtrip]") {
+TEST_CASE("BDF GRID types roundtrip test.", "[bdf_grid]") {
 
     ostringstream test;
 
@@ -331,7 +331,7 @@ TEST_CASE("BDF GRID types roundtrip test.", "[bdf_grid_roudtrip]") {
     }
 }
 
-TEST_CASE("BDF GRID types roundtrip test (reuse).", "[bdf_grid_roudtrip_reuse]") {
+TEST_CASE("BDF GRID types roundtrip test (reuse).", "[bdf_grid_reuse]") {
 
     ostringstream test;
 
@@ -375,7 +375,7 @@ TEST_CASE("BDF GRID types roundtrip test (reuse).", "[bdf_grid_roudtrip_reuse]")
     }
 }
 
-TEST_CASE("BDF GRID types roundtrip test 2.", "[bdf_grid_roudtrip]") {
+TEST_CASE("BDF GRID types roundtrip test 2.", "[bdf_grid]") {
 
     ostringstream test;
 
@@ -414,7 +414,48 @@ TEST_CASE("BDF GRID types roundtrip test 2.", "[bdf_grid_roudtrip]") {
     }
 }
 
-TEST_CASE("BDF GRID types roundtrip test 3.", "[bdf_grid_roudtrip]") {
+TEST_CASE("BDF GRID types roundtrip test 2 (reuse).", "[bdf_grid]") {
+
+    ostringstream test;
+
+    long ID{2};
+    long CP{3};
+    double X1{1.}, X2{ -2.}, X3{3.};
+    vector<int> PS{3, 1, 6};
+
+    grid probe;
+    test << probe;
+    test << probe(&ID, &CP, &X1, &X2, &X3, nullptr, &PS, nullptr);
+
+    SECTION("check output") {
+       CHECK(test.str() == ("GRID           2       31.000+00-2.00+003.000+00"
+                             "             316\n"));
+    }
+
+    SECTION("check reading") {
+        std::list<std::string> data;
+        std::list<std::string> lines;
+        std::string tmp;
+        std::istringstream raw(test.str());
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        __base::card::card_split(data, lines);
+        grid probe_l;
+        probe_l(lines);
+
+        CHECK(probe_l.ID.value == 2);
+        CHECK(probe_l.CP.value == 3);
+        CHECK(probe_l.X1.value == 1.);
+        CHECK(probe_l.X2.value == -2.);
+        CHECK(probe_l.X3.value == 3.);
+        CHECK_FALSE(probe_l.CD);
+        CHECK(probe_l.PS.value == vector<int>({3, 1, 6}));
+        CHECK(probe_l.SEID.value == 0);
+    }
+}
+
+TEST_CASE("BDF GRID types roundtrip test 3.", "[bdf_grid]") {
 
     ostringstream test;
 
@@ -447,7 +488,7 @@ TEST_CASE("BDF GRID types roundtrip test 3.", "[bdf_grid_roudtrip]") {
     }
 }
 
-TEST_CASE("BDF GRID types roundtrip test 3 (reuse).", "[bdf_grid_roudtrip_reuse]") {
+TEST_CASE("BDF GRID types roundtrip test 3 (reuse).", "[bdf_grid_reuse]") {
 
     ostringstream test;
 
@@ -482,7 +523,7 @@ TEST_CASE("BDF GRID types roundtrip test 3 (reuse).", "[bdf_grid_roudtrip_reuse]
     }
 }
 
-TEST_CASE("BDF GRID types roundtrip test 4.", "[bdf_grid_roudtrip]") {
+TEST_CASE("BDF GRID types roundtrip test 4.", "[bdf_grid]") {
 
     ostringstream test;
 
@@ -492,6 +533,45 @@ TEST_CASE("BDF GRID types roundtrip test 4.", "[bdf_grid_roudtrip]") {
 
     grid probe(&ID, nullptr, &X1, &X2, &X3, nullptr, &PS, nullptr);
     test << probe;
+
+    SECTION("check reading") {
+        CHECK(test.str() == ("GRID           2        1.000+00-2.00+003.000+00"
+                             "             316\n"));
+    }
+
+    SECTION("check reading") {
+        std::list<std::string> data;
+        std::list<std::string> lines;
+        std::string tmp;
+        std::istringstream raw(test.str());
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        __base::card::card_split(data, lines);
+        grid probe_l(lines);
+
+        CHECK(probe_l.ID.value == 2);
+        CHECK(probe_l.CP.value == 0);
+        CHECK(probe_l.X1.value == 1.);
+        CHECK(probe_l.X2.value == -2.);
+        CHECK(probe_l.X3.value == 3.);
+        CHECK_FALSE(probe_l.CD);
+        CHECK(probe_l.PS.value == vector<int>({3, 1, 6}));
+        CHECK(probe_l.SEID.value == 0);
+    }
+}
+
+TEST_CASE("BDF GRID types roundtrip test 4 (reuse).", "[bdf_grid]") {
+
+    ostringstream test;
+
+    long ID{2};
+    double X1{1.}, X2{ -2.}, X3{3.};
+    vector<int> PS{3, 1, 6};
+
+    grid probe;
+    test << probe;
+    test << probe(&ID, nullptr, &X1, &X2, &X3, nullptr, &PS, nullptr);
 
     SECTION("check reading") {
         CHECK(test.str() == ("GRID           2        1.000+00-2.00+003.000+00"
@@ -517,6 +597,83 @@ TEST_CASE("BDF GRID types roundtrip test 4.", "[bdf_grid_roudtrip]") {
         CHECK(probe_l.X3.value == 3.);
         CHECK_FALSE(probe_l.CD);
         CHECK(probe_l.PS.value == vector<int>({3, 1, 6}));
+        CHECK(probe_l.SEID.value == 0);
+    }
+}
+
+TEST_CASE("BDF GRID types roundtrip test (minimum args).", "[bdf_grid]") {
+
+    ostringstream test;
+
+    long ID{2};
+    double X1{1.}, X2{-2.}, X3{3.};
+
+    grid probe(&ID, nullptr, &X1, &X2, &X3);
+    test << probe;
+
+    SECTION("check reading") {
+        CHECK(test.str() == (
+                  "GRID           2        1.000+00-2.00+003.000+00\n"));
+    }
+
+    SECTION("check reading") {
+        std::list<std::string> data;
+        std::list<std::string> lines;
+        std::string tmp;
+        std::istringstream raw(test.str());
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        __base::card::card_split(data, lines);
+        grid probe_l(lines);
+
+        CHECK(probe_l.ID.value == 2);
+        CHECK(probe_l.CP.value == 0);
+        CHECK(probe_l.X1.value == 1.);
+        CHECK(probe_l.X2.value == -2.);
+        CHECK(probe_l.X3.value == 3.);
+        CHECK_FALSE(probe_l.CD);
+        CHECK(probe_l.PS.value == vector<int>({}));
+        CHECK(probe_l.SEID.value == 0);
+    }
+}
+
+TEST_CASE("BDF GRID types roundtrip test (minimum args) (reuse).",
+          "[bdf_grid]") {
+
+    ostringstream test;
+
+    long ID{2};
+    double X1{1.}, X2{-2.}, X3{3.};
+
+    grid probe;
+    test << probe;
+    test << probe(&ID, nullptr, &X1, &X2, &X3);
+
+    SECTION("check reading") {
+        CHECK(test.str() == (
+                  "GRID           2        1.000+00-2.00+003.000+00\n"));
+    }
+
+    SECTION("check reading") {
+        std::list<std::string> data;
+        std::list<std::string> lines;
+        std::string tmp;
+        std::istringstream raw(test.str());
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        __base::card::card_split(data, lines);
+        grid probe_l;
+        probe_l(lines);
+
+        CHECK(probe_l.ID.value == 2);
+        CHECK(probe_l.CP.value == 0);
+        CHECK(probe_l.X1.value == 1.);
+        CHECK(probe_l.X2.value == -2.);
+        CHECK(probe_l.X3.value == 3.);
+        CHECK_FALSE(probe_l.CD);
+        CHECK(probe_l.PS.value == vector<int>({}));
         CHECK(probe_l.SEID.value == 0);
     }
 }
