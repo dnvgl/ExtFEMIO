@@ -36,6 +36,7 @@ namespace dnvgl {
     namespace extfem {
         namespace fem {
             namespace cards {
+                enum class types;
                 namespace __base {
                     class card;
                 }
@@ -45,6 +46,9 @@ namespace dnvgl {
         }
     }
 }
+
+std::ostream &operator<< (
+    std::ostream&, dnvgl::extfem::fem::cards::types const);
 
 namespace dnvgl {
     namespace extfem {

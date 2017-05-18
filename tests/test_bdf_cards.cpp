@@ -49,11 +49,624 @@ using bdf::types::entry_type;
 using bdf::types::entry_value;
 
 TEST_CASE("BDF test card enum output", "bdf_cards") {
+
     std::ostringstream test;
 
-    test << cards::types::CCRSFIL << " " << cards::types::MAT1;
+    SECTION("multiple entries"){
+        test << cards::types::CCRSFIL << " " << cards::types::MAT1;
+        CHECK(test.str() == "CCRSFIL MAT1");
+    }
 
-    CHECK(test.str() == "CCRSFIL MAT1");
+    SECTION("output GRID") {
+        test << cards::types::GRID;
+        CHECK(test.str() == "GRID");
+    }
+
+    SECTION("output CBAR") {
+        test << cards::types::CBAR;
+        CHECK(test.str() == "CBAR");
+    }
+
+    SECTION("output CBEAM") {
+        test << cards::types::CBEAM;
+        CHECK(test.str() == "CBEAM");
+    }
+
+    SECTION("output CBEND") {
+        test << cards::types::CBEND;
+        CHECK(test.str() == "CBEND");
+    }
+
+    SECTION("output CONROD") {
+        test << cards::types::CONROD;
+        CHECK(test.str() == "CONROD");
+    }
+
+    SECTION("output CROD") {
+        test << cards::types::CROD;
+        CHECK(test.str() == "CROD");
+    }
+
+    SECTION("output CTUBE") {
+        test << cards::types::CTUBE;
+        CHECK(test.str() == "CTUBE");
+    }
+
+    SECTION("output PBAR") {
+        test << cards::types::PBAR;
+        CHECK(test.str() == "PBAR");
+    }
+
+    SECTION("output PBARL") {
+        test << cards::types::PBARL;
+        CHECK(test.str() == "PBARL");
+    }
+
+    SECTION("output PBEAM") {
+        test << cards::types::PBEAM;
+        CHECK(test.str() == "PBEAM");
+    }
+
+    SECTION("output PBEAML") {
+        test << cards::types::PBEAML;
+        CHECK(test.str() == "PBEAML");
+    }
+
+    SECTION("output PROD") {
+        test << cards::types::PROD;
+        CHECK(test.str() == "PROD");
+    }
+
+    SECTION("output CQUAD") {
+        test << cards::types::CQUAD;
+        CHECK(test.str() == "CQUAD");
+    }
+
+    SECTION("output CQUAD4") {
+        test << cards::types::CQUAD4;
+        CHECK(test.str() == "CQUAD4");
+    }
+
+    SECTION("output CQUAD8") {
+        test << cards::types::CQUAD8;
+        CHECK(test.str() == "CQUAD8");
+    }
+
+    SECTION("output CQUADR") {
+        test << cards::types::CQUADR;
+        CHECK(test.str() == "CQUADR");
+    }
+
+    SECTION("output CSHEAR") {
+        test << cards::types::CSHEAR;
+        CHECK(test.str() == "CSHEAR");
+    }
+
+    SECTION("output CTRIA3") {
+        test << cards::types::CTRIA3;
+        CHECK(test.str() == "CTRIA3");
+    }
+
+    SECTION("output CTRIA6") {
+        test << cards::types::CTRIA6;
+        CHECK(test.str() == "CTRIA6");
+    }
+
+    SECTION("output CTRIAR") {
+        test << cards::types::CTRIAR;
+        CHECK(test.str() == "CTRIAR");
+    }
+
+    SECTION("output PSHELL") {
+        test << cards::types::PSHELL;
+        CHECK(test.str() == "PSHELL");
+    }
+
+    SECTION("output CHEXA") {
+        test << cards::types::CHEXA;
+        CHECK(test.str() == "CHEXA");
+    }
+
+    SECTION("output CPENTA") {
+        test << cards::types::CPENTA;
+        CHECK(test.str() == "CPENTA");
+    }
+
+    SECTION("output CTETRA") {
+        test << cards::types::CTETRA;
+        CHECK(test.str() == "CTETRA");
+    }
+
+    SECTION("output CBUSH") {
+        test << cards::types::CBUSH;
+        CHECK(test.str() == "CBUSH");
+    }
+
+    SECTION("output CBUSH1D") {
+        test << cards::types::CBUSH1D;
+        CHECK(test.str() == "CBUSH1D");
+    }
+
+    SECTION("output CELAS1") {
+        test << cards::types::CELAS1;
+        CHECK(test.str() == "CELAS1");
+    }
+
+    SECTION("output CELAS2") {
+        test << cards::types::CELAS2;
+        CHECK(test.str() == "CELAS2");
+    }
+
+    SECTION("output CELAS3") {
+        test << cards::types::CELAS3;
+        CHECK(test.str() == "CELAS3");
+    }
+
+    SECTION("output CELAS4") {
+        test << cards::types::CELAS4;
+        CHECK(test.str() == "CELAS4");
+    }
+
+    SECTION("output GENEL") {
+        test << cards::types::GENEL;
+        CHECK(test.str() == "GENEL");
+    }
+
+    SECTION("output GMINTC") {
+        test << cards::types::GMINTC;
+        CHECK(test.str() == "GMINTC");
+    }
+
+    SECTION("output GMINTS") {
+        test << cards::types::GMINTS;
+        CHECK(test.str() == "GMINTS");
+    }
+
+    SECTION("output CCONEAX") {
+        test << cards::types::CCONEAX;
+        CHECK(test.str() == "CCONEAX");
+    }
+
+    SECTION("output CQUADX") {
+        test << cards::types::CQUADX;
+        CHECK(test.str() == "CQUADX");
+    }
+
+    SECTION("output CTRIAX") {
+        test << cards::types::CTRIAX;
+        CHECK(test.str() == "CTRIAX");
+    }
+
+    SECTION("output CTRIAX6") {
+        test << cards::types::CTRIAX6;
+        CHECK(test.str() == "CTRIAX6");
+    }
+
+    SECTION("output RBAR") {
+        test << cards::types::RBAR;
+        CHECK(test.str() == "RBAR");
+    }
+
+    SECTION("output RBAR1") {
+        test << cards::types::RBAR1;
+        CHECK(test.str() == "RBAR1");
+    }
+
+    SECTION("output RBE1") {
+        test << cards::types::RBE1;
+        CHECK(test.str() == "RBE1");
+    }
+
+    SECTION("output RBE2") {
+        test << cards::types::RBE2;
+        CHECK(test.str() == "RBE2");
+    }
+
+    SECTION("output RBE3") {
+        test << cards::types::RBE3;
+        CHECK(test.str() == "RBE3");
+    }
+
+    SECTION("output RJOINT") {
+        test << cards::types::RJOINT;
+        CHECK(test.str() == "RJOINT");
+    }
+
+    SECTION("output RROD") {
+        test << cards::types::RROD;
+        CHECK(test.str() == "RROD");
+    }
+
+    SECTION("output RSPLINE") {
+        test << cards::types::RSPLINE;
+        CHECK(test.str() == "RSPLINE");
+    }
+
+    SECTION("output RSSCON") {
+        test << cards::types::RSSCON;
+        CHECK(test.str() == "RSSCON");
+    }
+
+    SECTION("output RTRPLT") {
+        test << cards::types::RTRPLT;
+        CHECK(test.str() == "RTRPLT");
+    }
+
+    SECTION("output RTRPLT1") {
+        test << cards::types::RTRPLT1;
+        CHECK(test.str() == "RTRPLT1");
+    }
+
+    SECTION("output CMASS1") {
+        test << cards::types::CMASS1;
+        CHECK(test.str() == "CMASS1");
+    }
+
+    SECTION("output CMASS2") {
+        test << cards::types::CMASS2;
+        CHECK(test.str() == "CMASS2");
+    }
+
+    SECTION("output CMASS3") {
+        test << cards::types::CMASS3;
+        CHECK(test.str() == "CMASS3");
+    }
+
+    SECTION("output CMASS4") {
+        test << cards::types::CMASS4;
+        CHECK(test.str() == "CMASS4");
+    }
+
+    SECTION("output CONM1") {
+        test << cards::types::CONM1;
+        CHECK(test.str() == "CONM1");
+    }
+
+    SECTION("output CONM2") {
+        test << cards::types::CONM2;
+        CHECK(test.str() == "CONM2");
+    }
+
+    SECTION("output CDAMP1") {
+        test << cards::types::CDAMP1;
+        CHECK(test.str() == "CDAMP1");
+    }
+
+    SECTION("output CDAMP2") {
+        test << cards::types::CDAMP2;
+        CHECK(test.str() == "CDAMP2");
+    }
+
+    SECTION("output CDAMP3") {
+        test << cards::types::CDAMP3;
+        CHECK(test.str() == "CDAMP3");
+    }
+
+    SECTION("output CDAMP4") {
+        test << cards::types::CDAMP4;
+        CHECK(test.str() == "CDAMP4");
+    }
+
+    SECTION("output CDAMP5") {
+        test << cards::types::CDAMP5;
+        CHECK(test.str() == "CDAMP5");
+    }
+
+    SECTION("output CVISC") {
+        test << cards::types::CVISC;
+        CHECK(test.str() == "CVISC");
+    }
+
+    SECTION("output CAABSF") {
+        test << cards::types::CAABSF;
+        CHECK(test.str() == "CAABSF");
+    }
+
+    SECTION("output CAXIF2") {
+        test << cards::types::CAXIF2;
+        CHECK(test.str() == "CAXIF2");
+    }
+
+    SECTION("output CAXIF3") {
+        test << cards::types::CAXIF3;
+        CHECK(test.str() == "CAXIF3");
+    }
+
+    SECTION("output CAXIF4") {
+        test << cards::types::CAXIF4;
+        CHECK(test.str() == "CAXIF4");
+    }
+
+    SECTION("output CFLUID2") {
+        test << cards::types::CFLUID2;
+        CHECK(test.str() == "CFLUID2");
+    }
+
+    SECTION("output CFLUID3") {
+        test << cards::types::CFLUID3;
+        CHECK(test.str() == "CFLUID3");
+    }
+
+    SECTION("output CFLUID4") {
+        test << cards::types::CFLUID4;
+        CHECK(test.str() == "CFLUID4");
+    }
+
+    SECTION("output CHACAB") {
+        test << cards::types::CHACAB;
+        CHECK(test.str() == "CHACAB");
+    }
+
+    SECTION("output CHACBR") {
+        test << cards::types::CHACBR;
+        CHECK(test.str() == "CHACBR");
+    }
+
+    SECTION("output CSLOT3") {
+        test << cards::types::CSLOT3;
+        CHECK(test.str() == "CSLOT3");
+    }
+
+    SECTION("output CSLOT4") {
+        test << cards::types::CSLOT4;
+        CHECK(test.str() == "CSLOT4");
+    }
+
+    SECTION("output CHBDYE") {
+        test << cards::types::CHBDYE;
+        CHECK(test.str() == "CHBDYE");
+    }
+
+    SECTION("output CHBDYG") {
+        test << cards::types::CHBDYG;
+        CHECK(test.str() == "CHBDYG");
+    }
+
+    SECTION("output CHBDYP") {
+        test << cards::types::CHBDYP;
+        CHECK(test.str() == "CHBDYP");
+    }
+
+    SECTION("output CDUM1") {
+        test << cards::types::CDUM1;
+        CHECK(test.str() == "CDUM1");
+    }
+
+    SECTION("output CDUM2") {
+        test << cards::types::CDUM2;
+        CHECK(test.str() == "CDUM2");
+    }
+
+    SECTION("output CDUM3") {
+        test << cards::types::CDUM3;
+        CHECK(test.str() == "CDUM3");
+    }
+
+    SECTION("output CDUM4") {
+        test << cards::types::CDUM4;
+        CHECK(test.str() == "CDUM4");
+    }
+
+    SECTION("output CDUM5") {
+        test << cards::types::CDUM5;
+        CHECK(test.str() == "CDUM5");
+    }
+
+    SECTION("output CDUM6") {
+        test << cards::types::CDUM6;
+        CHECK(test.str() == "CDUM6");
+    }
+
+    SECTION("output CDUM7") {
+        test << cards::types::CDUM7;
+        CHECK(test.str() == "CDUM7");
+    }
+
+    SECTION("output CDUM8") {
+        test << cards::types::CDUM8;
+        CHECK(test.str() == "CDUM8");
+    }
+
+    SECTION("output CDUM9") {
+        test << cards::types::CDUM9;
+        CHECK(test.str() == "CDUM9");
+    }
+
+    SECTION("output PLOTEL") {
+        test << cards::types::PLOTEL;
+        CHECK(test.str() == "PLOTEL");
+    }
+
+    SECTION("output CGAP") {
+        test << cards::types::CGAP;
+        CHECK(test.str() == "CGAP");
+    }
+
+    SECTION("output CRAC2D") {
+        test << cards::types::CRAC2D;
+        CHECK(test.str() == "CRAC2D");
+    }
+
+    SECTION("output CRAC3D") {
+        test << cards::types::CRAC3D;
+        CHECK(test.str() == "CRAC3D");
+    }
+
+    SECTION("output CAERO1") {
+        test << cards::types::CAERO1;
+        CHECK(test.str() == "CAERO1");
+    }
+
+    SECTION("output CAERO2") {
+        test << cards::types::CAERO2;
+        CHECK(test.str() == "CAERO2");
+    }
+
+    SECTION("output CAERO3") {
+        test << cards::types::CAERO3;
+        CHECK(test.str() == "CAERO3");
+    }
+
+    SECTION("output CAERO4") {
+        test << cards::types::CAERO4;
+        CHECK(test.str() == "CAERO4");
+    }
+
+    SECTION("output CAERO5") {
+        test << cards::types::CAERO5;
+        CHECK(test.str() == "CAERO5");
+    }
+
+    SECTION("output SPLINE1") {
+        test << cards::types::SPLINE1;
+        CHECK(test.str() == "SPLINE1");
+    }
+
+    SECTION("output SPLINE2") {
+        test << cards::types::SPLINE2;
+        CHECK(test.str() == "SPLINE2");
+    }
+
+    SECTION("output SPLINE3") {
+        test << cards::types::SPLINE3;
+        CHECK(test.str() == "SPLINE3");
+    }
+
+    SECTION("output SPLINE4") {
+        test << cards::types::SPLINE4;
+        CHECK(test.str() == "SPLINE4");
+    }
+
+    SECTION("output SPLINE5") {
+        test << cards::types::SPLINE5;
+        CHECK(test.str() == "SPLINE5");
+    }
+
+    SECTION("output MAT1") {
+        test << cards::types::MAT1;
+        CHECK(test.str() == "MAT1");
+    }
+
+    SECTION("output MAT2") {
+        test << cards::types::MAT2;
+        CHECK(test.str() == "MAT2");
+    }
+
+    SECTION("output GRAV") {
+        test << cards::types::GRAV;
+        CHECK(test.str() == "GRAV");
+    }
+
+    SECTION("output FORCE") {
+        test << cards::types::FORCE;
+        CHECK(test.str() == "FORCE");
+    }
+
+    SECTION("output LOAD") {
+        test << cards::types::LOAD;
+        CHECK(test.str() == "LOAD");
+    }
+
+    SECTION("output MOMENT") {
+        test << cards::types::MOMENT;
+        CHECK(test.str() == "MOMENT");
+    }
+
+    SECTION("output ENDDATA") {
+        test << cards::types::ENDDATA;
+        CHECK(test.str() == "ENDDATA");
+    }
+
+    SECTION("output CDAMP1D") {
+        test << cards::types::CDAMP1D;
+        CHECK(test.str() == "CDAMP1D");
+    }
+
+    SECTION("output CDAMP2D") {
+        test << cards::types::CDAMP2D;
+        CHECK(test.str() == "CDAMP2D");
+    }
+
+    SECTION("output CELAS1D") {
+        test << cards::types::CELAS1D;
+        CHECK(test.str() == "CELAS1D");
+    }
+
+    SECTION("output CELAS2D") {
+        test << cards::types::CELAS2D;
+        CHECK(test.str() == "CELAS2D");
+    }
+
+    SECTION("output CBUTT") {
+        test << cards::types::CBUTT;
+        CHECK(test.str() == "CBUTT");
+    }
+
+    SECTION("output COMBWLD") {
+        test << cards::types::COMBWLD;
+        CHECK(test.str() == "COMBWLD");
+    }
+
+    SECTION("output CCRSFIL") {
+        test << cards::types::CCRSFIL;
+        CHECK(test.str() == "CCRSFIL");
+    }
+
+    SECTION("output CFILLET") {
+        test << cards::types::CFILLET;
+        CHECK(test.str() == "CFILLET");
+    }
+
+    SECTION("output CSPOT") {
+        test << cards::types::CSPOT;
+        CHECK(test.str() == "CSPOT");
+    }
+
+    SECTION("output RBE3D") {
+        test << cards::types::RBE3D;
+        CHECK(test.str() == "RBE3D");
+    }
+
+    SECTION("output PARAM") {
+        test << cards::types::PARAM;
+        CHECK(test.str() == "PARAM");
+    }
+
+    SECTION("output ELEMENT") {
+        test << cards::types::ELEMENT;
+        CHECK(test.str() == "ELEMENT");
+    }
+
+    SECTION("output BEAM_BASE") {
+        test << cards::types::BEAM_BASE;
+        CHECK(test.str() == "BEAM_BASE");
+    }
+
+    SECTION("output BAR_PROP") {
+        test << cards::types::BAR_PROP;
+        CHECK(test.str() == "BAR_PROP");
+    }
+
+    SECTION("output BEAM_PROP") {
+        test << cards::types::BEAM_PROP;
+        CHECK(test.str() == "BEAM_PROP");
+    }
+
+    SECTION("output CAXIFi") {
+        test << cards::types::CAXIFi;
+        CHECK(test.str() == "CAXIFi");
+    }
+
+    SECTION("output COMMENT") {
+        test << cards::types::COMMENT;
+        CHECK(test.str() == "COMMENT");
+    }
+
+    SECTION("output UNKNOWN") {
+        test << cards::types::UNKNOWN;
+        CHECK(test.str() == "UNKNOWN");
+    }
+
 }
 
 TEST_CASE("BDF file reader.", "[bdf_cards]" ) {

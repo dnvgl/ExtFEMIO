@@ -94,6 +94,58 @@ unordered_map<std::string, cards::types> const cardtype_map({
         {"HIERARCH", cards::types::HIERARCH},
         {"BEUSLO", cards::types::BEUSLO}});
 
+std::ostream &operator<< (
+    std::ostream &os, cards::types const cardtype) {
+    switch (cardtype) {
+    case cards::types::UNKNOWN: return os << "UNKNOWN";
+    case cards::types::DATE: return os << "DATE";
+    case cards::types::GCOORD: return os << "GCOORD";
+    case cards::types::GNODE: return os << "GNODE";
+    case cards::types::IDENT: return os << "IDENT";
+    case cards::types::IEND: return os << "IEND";
+    case cards::types::GELMNT1: return os << "GELMNT1";
+    case cards::types::GELREF1: return os << "GELREF1";
+    case cards::types::GBARM: return os << "GBARM";
+    case cards::types::GBEAMG: return os << "GBEAMG";
+    case cards::types::GECC: return os << "GECC";
+    case cards::types::GECCEN: return os << "GECCEN";
+    case cards::types::GELTH: return os << "GELTH";
+    case cards::types::GBOX: return os << "GBOX";
+    case cards::types::GCHAN: return os << "GCHAN";
+    case cards::types::GCHANR: return os << "GCHANR";
+    case cards::types::GDOBO: return os << "GDOBO";
+    case cards::types::GIORH: return os << "GIORH";
+    case cards::types::GIORHR: return os << "GIORHR";
+    case cards::types::GLSEC: return os << "GLSEC";
+    case cards::types::GLSECR: return os << "GLSECR";
+    case cards::types::GPIPE: return os << "GPIPE";
+    case cards::types::GTONP: return os << "GTONP";
+    case cards::types::GUSYI: return os << "GUSYI";
+    case cards::types::BELFIX: return os << "BELFIX";
+    case cards::types::BLDEP: return os << "BLDEP";
+    case cards::types::BNBCD: return os << "BNBCD";
+    case cards::types::BNDISPL: return os << "BNDISPL";
+    case cards::types::BNLOAD: return os << "BNLOAD";
+    case cards::types::MGSPRNG: return os << "MGSPRNG";
+    case cards::types::GSETMEMB: return os << "GSETMEMB";
+    case cards::types::GUNIVEC: return os << "GUNIVEC";
+    case cards::types::MISOSEL: return os << "MISOSEL";
+    case cards::types::MORSMEL: return os << "MORSMEL";
+    case cards::types::TDSETNAM: return os << "TDSETNAM";
+    case cards::types::TDSUPNAM: return os << "TDSUPNAM";
+    case cards::types::TEXT: return os << "TEXT";
+    case cards::types::TDLOAD: return os << "TDLOAD";
+    case cards::types::BSELL: return os << "BSELL";
+    case cards::types::GELMNT2: return os << "GELMNT2";
+    case cards::types::HSUPSTAT: return os << "HSUPSTAT";
+    case cards::types::HSUPTRAN: return os << "HSUPTRAN";
+    case cards::types::HIERARCH: return os << "HIERARCH";
+    case cards::types::BEUSLO: return os << "BEUSLO";
+    // omit default case to trigger compiler warning for missing cases
+    }
+    return os << static_cast<size_t>(cardtype);
+}
+
 fem::types::empty const cards::__base::card::empty = fem::types::empty();
 
 fem::types::card const cards::__base::card::head = fem::types::card("<DUMMY>");

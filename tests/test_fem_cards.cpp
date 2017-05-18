@@ -43,9 +43,234 @@ using namespace dnvgl::extfem::fem;
 using namespace dnvgl::extfem::fem::cards;
 using namespace dnvgl::extfem::fem::input;
 
+TEST_CASE("Output card names", "[fem_cards]") {
+
+    std::ostringstream test;
+
+    SECTION("output UNKNOWN") {
+        test << cards::types::UNKNOWN;
+        CHECK(test.str() == "UNKNOWN");
+    }
+
+    SECTION("output DATE") {
+        test << cards::types::DATE;
+        CHECK(test.str() == "DATE");
+    }
+
+    SECTION("output GCOORD") {
+        test << cards::types::GCOORD;
+        CHECK(test.str() == "GCOORD");
+    }
+
+    SECTION("output GNODE") {
+        test << cards::types::GNODE;
+        CHECK(test.str() == "GNODE");
+    }
+
+    SECTION("output IDENT") {
+        test << cards::types::IDENT;
+        CHECK(test.str() == "IDENT");
+    }
+
+    SECTION("output IEND") {
+        test << cards::types::IEND;
+        CHECK(test.str() == "IEND");
+    }
+
+    SECTION("output GELMNT1") {
+        test << cards::types::GELMNT1;
+        CHECK(test.str() == "GELMNT1");
+    }
+
+    SECTION("output GELREF1") {
+        test << cards::types::GELREF1;
+        CHECK(test.str() == "GELREF1");
+    }
+
+    SECTION("output GBARM") {
+        test << cards::types::GBARM;
+        CHECK(test.str() == "GBARM");
+    }
+
+    SECTION("output GBEAMG") {
+        test << cards::types::GBEAMG;
+        CHECK(test.str() == "GBEAMG");
+    }
+
+    SECTION("output GECC") {
+        test << cards::types::GECC;
+        CHECK(test.str() == "GECC");
+    }
+
+    SECTION("output GECCEN") {
+        test << cards::types::GECCEN;
+        CHECK(test.str() == "GECCEN");
+    }
+
+    SECTION("output GELTH") {
+        test << cards::types::GELTH;
+        CHECK(test.str() == "GELTH");
+    }
+
+    SECTION("output GBOX") {
+        test << cards::types::GBOX;
+        CHECK(test.str() == "GBOX");
+    }
+
+    SECTION("output GCHAN") {
+        test << cards::types::GCHAN;
+        CHECK(test.str() == "GCHAN");
+    }
+
+    SECTION("output GCHANR") {
+        test << cards::types::GCHANR;
+        CHECK(test.str() == "GCHANR");
+    }
+
+    SECTION("output GDOBO") {
+        test << cards::types::GDOBO;
+        CHECK(test.str() == "GDOBO");
+    }
+
+    SECTION("output GIORH") {
+        test << cards::types::GIORH;
+        CHECK(test.str() == "GIORH");
+    }
+
+    SECTION("output GIORHR") {
+        test << cards::types::GIORHR;
+        CHECK(test.str() == "GIORHR");
+    }
+
+    SECTION("output GLSEC") {
+        test << cards::types::GLSEC;
+        CHECK(test.str() == "GLSEC");
+    }
+
+    SECTION("output GLSECR") {
+        test << cards::types::GLSECR;
+        CHECK(test.str() == "GLSECR");
+    }
+
+    SECTION("output GPIPE") {
+        test << cards::types::GPIPE;
+        CHECK(test.str() == "GPIPE");
+    }
+
+    SECTION("output GTONP") {
+        test << cards::types::GTONP;
+        CHECK(test.str() == "GTONP");
+    }
+
+    SECTION("output GUSYI") {
+        test << cards::types::GUSYI;
+        CHECK(test.str() == "GUSYI");
+    }
+
+    SECTION("output BELFIX") {
+        test << cards::types::BELFIX;
+        CHECK(test.str() == "BELFIX");
+    }
+
+    SECTION("output BLDEP") {
+        test << cards::types::BLDEP;
+        CHECK(test.str() == "BLDEP");
+    }
+
+    SECTION("output BNBCD") {
+        test << cards::types::BNBCD;
+        CHECK(test.str() == "BNBCD");
+    }
+
+    SECTION("output BNDISPL") {
+        test << cards::types::BNDISPL;
+        CHECK(test.str() == "BNDISPL");
+    }
+
+    SECTION("output BNLOAD") {
+        test << cards::types::BNLOAD;
+        CHECK(test.str() == "BNLOAD");
+    }
+
+    SECTION("output MGSPRNG") {
+        test << cards::types::MGSPRNG;
+        CHECK(test.str() == "MGSPRNG");
+    }
+
+    SECTION("output GSETMEMB") {
+        test << cards::types::GSETMEMB;
+        CHECK(test.str() == "GSETMEMB");
+    }
+
+    SECTION("output GUNIVEC") {
+        test << cards::types::GUNIVEC;
+        CHECK(test.str() == "GUNIVEC");
+    }
+
+    SECTION("output MISOSEL") {
+        test << cards::types::MISOSEL;
+        CHECK(test.str() == "MISOSEL");
+    }
+
+    SECTION("output MORSMEL") {
+        test << cards::types::MORSMEL;
+        CHECK(test.str() == "MORSMEL");
+    }
+
+    SECTION("output TDSETNAM") {
+        test << cards::types::TDSETNAM;
+        CHECK(test.str() == "TDSETNAM");
+    }
+
+    SECTION("output TDSUPNAM") {
+        test << cards::types::TDSUPNAM;
+        CHECK(test.str() == "TDSUPNAM");
+    }
+
+    SECTION("output TEXT") {
+        test << cards::types::TEXT;
+        CHECK(test.str() == "TEXT");
+    }
+
+    SECTION("output TDLOAD") {
+        test << cards::types::TDLOAD;
+        CHECK(test.str() == "TDLOAD");
+    }
+
+    SECTION("output BSELL") {
+        test << cards::types::BSELL;
+        CHECK(test.str() == "BSELL");
+    }
+
+    SECTION("output GELMNT2") {
+        test << cards::types::GELMNT2;
+        CHECK(test.str() == "GELMNT2");
+    }
+
+    SECTION("output HSUPSTAT") {
+        test << cards::types::HSUPSTAT;
+        CHECK(test.str() == "HSUPSTAT");
+    }
+
+    SECTION("output HSUPTRAN") {
+        test << cards::types::HSUPTRAN;
+        CHECK(test.str() == "HSUPTRAN");
+    }
+
+    SECTION("output HIERARCH") {
+        test << cards::types::HIERARCH;
+        CHECK(test.str() == "HIERARCH");
+    }
+
+    SECTION("output BEUSLO") {
+        test << cards::types::BEUSLO;
+        CHECK(test.str() == "BEUSLO");
+    }
+}
+
 TEST_CASE("Split FEM dataset", "[datasets, split]") {
 
-    SECTION("Checkn icomplete lines") {
+    SECTION("Check incomplete lines") {
         vector<std::string> data({
                 // 345678|234567890123456|234567890123456|234567890123456|234567890123456
                 "GCHAN     1.00000000E+00  1.00000001E-01  9.99999978E-03  9.99999978E-03\n",
