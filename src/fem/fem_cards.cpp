@@ -94,8 +94,7 @@ unordered_map<std::string, cards::types> const cardtype_map({
         {"HIERARCH", cards::types::HIERARCH},
         {"BEUSLO", cards::types::BEUSLO}});
 
-std::ostream &operator<< (
-    std::ostream &os, cards::types const cardtype) {
+std::ostream &operator<< (ostream &os, cards::types const cardtype) {
     switch (cardtype) {
     case cards::types::UNKNOWN: return os << "UNKNOWN";
     case cards::types::DATE: return os << "DATE";

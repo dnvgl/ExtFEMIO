@@ -165,7 +165,7 @@ namespace {
         {"SPLINE5", cards::types::SPLINE5}});
 }
 
-std::ostream &operator<< (std::ostream& os, cards::types cardtype) {
+std::ostream &operator<< (ostream& os, cards::types const cardtype) {
     switch (cardtype) {
     case cards::types::GRID: return os << "GRID";
     case cards::types::CBAR: return os << "CBAR";
