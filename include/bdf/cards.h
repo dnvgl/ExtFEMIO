@@ -57,12 +57,12 @@ dnvgl::extfem::bdf::cards::format_entry
 dnvgl::extfem::bdf::cards::format_entry
 *format(const std::unique_ptr<dnvgl::extfem::bdf::types::empty>&);
 
-template <class _Ty>
+template <typename _Ty>
 dnvgl::extfem::bdf::cards::format_entry
 *format(dnvgl::extfem::bdf::types::entry_type<_Ty> const&,
         _Ty const*);
 
-template <class _Ty>
+template <typename _Ty>
 dnvgl::extfem::bdf::cards::format_entry
 *format(dnvgl::extfem::bdf::types::entry_type<_Ty> const&,
         dnvgl::extfem::bdf::types::entry_value<_Ty> const&);
@@ -391,65 +391,47 @@ namespace dnvgl {
    Format cards.
 */
                         static const std::set<char> free_form_cont;
-
                         static const std::map<std::string, types> cardtype_map;
 
                     protected:
 
                         static dnvgl::extfem::bdf::types::empty empty;
-
                         static bdf::types::card head;
-
                         static std::string format_outlist(
                             const std::list<std::unique_ptr<format_entry> >&);
-
                         std::ostream &put(std::ostream&) const override;
-
                         virtual void collect_outdata(
                             std::list<std::unique_ptr<format_entry> >&) const = 0;
-
                         virtual card const &operator()(std::list<std::string> const &) = 0;
-
                         virtual void read(std::list<std::string> const &) = 0;
-
-                        virtual void check_data() const = 0;
+                        virtual void check_data() = 0;
 
                     public:
 
                         card() = default;
-
                         card(const std::list<std::string> &);
-
                         ~card() = default;
-
-                        friend format_entry
-                        *::format(
+                        friend format_entry *::format(
                             std::unique_ptr<dnvgl::extfem::bdf::types::card>
                             const &);
-
-                        friend format_entry
-                        *::format(
+                        friend format_entry *::format(
                             std::unique_ptr<
                             dnvgl::extfem::bdf::types::empty> const&);
-
-                        template <class _Ty> friend format_entry
-                        *::format(
+                        template <typename _Ty> friend format_entry *::format(
                             dnvgl::extfem::bdf::types::entry_type<_Ty> const&,
                             _Ty const*);
-
-                        template <class _Ty> friend format_entry
-                        *::format(
+                        template <typename _Ty> friend format_entry *::format(
                             dnvgl::extfem::bdf::types::entry_type<_Ty> const&,
                             dnvgl::extfem::bdf::types::entry_value<_Ty> const&);
-
-                        static void
-                        card_split(std::list<std::string> const &, std::list<std::string>&);
-
+                        static void card_split(
+                            std::list<std::string> const &,
+                            std::list<std::string>&);
                         /**
                          * \brief returns the card type of the current card.
                          * \return Current card type.
                          */
                         virtual types card_type() const = 0;
+                        void static reset();
                     };
                 }
 
@@ -458,23 +440,17 @@ namespace dnvgl {
                 public:
 
                     std::vector<std::string> content;
-
                     unknown() = default;
-
                     explicit unknown(const std::list<std::string> &inp);
-
                     types card_type() const override;
-
                     void read(const std::list<std::string> &inp) override;
-
                     card const &operator()(std::list<std::string> const &) override;
 
                 private:
 
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> >&) const override;
-
-                    void check_data() const override;
+                    void check_data() override;
                 };
 
                 class comment : public __base::card {
@@ -485,44 +461,36 @@ namespace dnvgl {
                       Comment test
                     */
                     std::list<std::string> content;
-
                     /*! Syntax extension to BDF recognized by
                       ExtFEMIO: if one of 235, 315, 355, 390, or 460
                       appears in a comment the value shall be used as
                       yield stress for the next material definition.
                     */
                     static double *yield;
-
                     comment();
-
                     ~comment();
-
                     explicit comment(std::list<std::string> const &inp);
-
-                    explicit comment(std::vector<std::string> const &inp,
-                                     double *yield=nullptr);
-
-                    explicit comment(std::string const *content,
-                                     double *yield=nullptr);
-
-                    explicit comment(std::string const &content,
-                                     double *yield=nullptr);
-
+                    explicit comment(
+                        std::vector<std::string> const &inp,
+                        double *yield=nullptr);
+                    explicit comment(
+                        std::string const *content,
+                        double *yield=nullptr);
+                    explicit comment(
+                        std::string const &content,
+                        double *yield=nullptr);
                     types card_type() const override;
-
                     card const &operator()(
                         std::list<std::string> const &inp) override;
-
                     card const &operator()(
                         std::vector<std::string> const &content,
                         double *yield=nullptr);
-
-                    card const &operator()(std::string const *content,
-                                           double *yield=nullptr);
-
-                    card const &operator()(std::string const &content,
-                                           double *yield=nullptr);
-
+                    card const &operator()(
+                        std::string const *content,
+                        double *yield=nullptr);
+                    card const &operator()(
+                        std::string const &content,
+                        double *yield=nullptr);
                     void static clear_yield();
 
                 private:
@@ -532,16 +500,12 @@ namespace dnvgl {
                       allow correct output.
                     */
                     double *__yield;
-
                     std::ostream &put(std::ostream&) const override;
-
                     void read(std::list<std::string> const &inp) override;
-
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> >&)
                         const override;
-
-                    void check_data() const override;
+                    void check_data() override;
 
                 protected:
                     /*!
@@ -576,7 +540,7 @@ inline dnvgl::extfem::bdf::cards::format_entry
         static_cast<dnvgl::extfem::bdf::types::base const*>(&formatter), nullptr);
 }
 
-template <class _Ty> inline
+template <typename _Ty> inline
 dnvgl::extfem::bdf::cards::format_entry
 *format(dnvgl::extfem::bdf::types::entry_type<_Ty> const &formatter,
         _Ty const *val) {
@@ -585,7 +549,7 @@ dnvgl::extfem::bdf::cards::format_entry
         static_cast<void const*>(val));
 }
 
-template <class _Ty> inline
+template <typename _Ty> inline
 dnvgl::extfem::bdf::cards::format_entry
 *format(dnvgl::extfem::bdf::types::entry_type<_Ty> const &formatter,
         dnvgl::extfem::bdf::types::entry_value<_Ty> const &val) {
@@ -598,8 +562,6 @@ namespace dnvgl {
     namespace extfem {
         namespace bdf {
             namespace cards {
-
-
 
 /// Handle Nastran Bulk `ENDDATA` entries.
 /** # Bulk Data Delimiter
@@ -617,29 +579,22 @@ namespace dnvgl {
                 private:
 
                     static bdf::types::card head;
-
                     using __base::card::format_outlist;
 
                 public:
 
                     enddata() = default;
-
                     explicit enddata(const std::list<std::string> &);
-
                     ~enddata() = default;
-
                     types card_type() const override;
-
                     void read(std::list<std::string> const &) override;
-
                     card const &operator()(std::list<std::string> const &) override;
 
                 private:
 
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> >&) const override;
-
-                    void check_data() const override;
+                    void check_data() override;
                 };
 
 /// Handle Nastran Bulk `GRID` entries.
@@ -659,17 +614,15 @@ namespace dnvgl {
                 private:
 
                     static bdf::types::card head;
-
                     using __base::card::format_outlist;
-
-                    static const bdf::types::entry_type<long> form_ID;
-                    static const bdf::types::entry_type<long> form_CP;
-                    static const bdf::types::entry_type<double> form_X1;
-                    static const bdf::types::entry_type<double> form_X2;
-                    static const bdf::types::entry_type<double> form_X3;
-                    static const bdf::types::entry_type<long> form_CD;
-                    static const bdf::types::entry_type<std::vector<int> > form_PS;
-                    static const bdf::types::entry_type<long> form_SEID;
+                    static bdf::types::entry_type<long> form_ID;
+                    static bdf::types::entry_type<long> form_CP;
+                    static bdf::types::entry_type<double> form_X1;
+                    static bdf::types::entry_type<double> form_X2;
+                    static bdf::types::entry_type<double> form_X3;
+                    static bdf::types::entry_type<long> form_CD;
+                    static bdf::types::entry_type<std::vector<int> > form_PS;
+                    static bdf::types::entry_type<long> form_SEID;
 
                 public:
 
@@ -711,31 +664,23 @@ namespace dnvgl {
                     bdf::types::entry_value<long> SEID;
 
                     grid();
-
                     explicit grid(const std::list<std::string> &);
-
                     grid(long const *ID, long const *CP,
                          double const *X1, double const *X2, double const *X3,
                          long const *CD=nullptr,
                          std::vector<int> const *PS=nullptr,
                          long const *SEID=nullptr);
-
                     grid(long const &ID, long const &CP,
                          double const &X1, double const &X2, double const &X3);
-
                     types card_type() const override;
-
                     void read(const std::list<std::string> &) override;
-
                     card const &operator()(const std::list<std::string> &) override;
-
                     card const &operator()(
                         long const *ID, long const *CP,
                         double const *X1, double const *X2, double const *X3,
                         long const *CD=nullptr,
                         std::vector<int> const *PS=nullptr,
                         long const *SEID=nullptr);
-
                     card const &operator()(
                         long const &ID, long const &CP,
                         double const &X1, double const &X2, double const &X3);
@@ -744,8 +689,7 @@ namespace dnvgl {
 
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> >&) const override;
-
-                    void check_data() const override;
+                    void check_data() override;
                 };
 
                 namespace __base {
@@ -754,16 +698,16 @@ namespace dnvgl {
 
                     protected:
 
-                        static const bdf::types::entry_type<long> form_MID;
-                        static const bdf::types::entry_type<double> form_G;
-                        static const bdf::types::entry_type<double> form_RHO;
-                        static const bdf::types::entry_type<double> form_A;
-                        static const bdf::types::entry_type<double> form_TREF;
-                        static const bdf::types::entry_type<double> form_GE;
-                        static const bdf::types::entry_type<double> form_ST;
-                        static const bdf::types::entry_type<double> form_SC;
-                        static const bdf::types::entry_type<double> form_SS;
-                        static const bdf::types::entry_type<long> form_MCSID;
+                        static bdf::types::entry_type<long> form_MID;
+                        static bdf::types::entry_type<double> form_G;
+                        static bdf::types::entry_type<double> form_RHO;
+                        static bdf::types::entry_type<double> form_A;
+                        static bdf::types::entry_type<double> form_TREF;
+                        static bdf::types::entry_type<double> form_GE;
+                        static bdf::types::entry_type<double> form_ST;
+                        static bdf::types::entry_type<double> form_SC;
+                        static bdf::types::entry_type<double> form_SS;
+                        static bdf::types::entry_type<long> form_MCSID;
 
                     public:
 
@@ -807,21 +751,17 @@ namespace dnvgl {
                     protected:
 
                         mat() = default;
-
                         mat(const std::list<std::string> &);
-
                         mat(long *MID, double *RHO=nullptr,
                             double *TREF=nullptr, double *GE=nullptr,
                             double *ST=nullptr, double *SC=nullptr,
                             double *SS=nullptr, long *MCSID=nullptr);
-
                         void operator() (
                             long *MID, double *RHO=nullptr,
                             double *TREF=nullptr, double *GE=nullptr,
                             double *ST=nullptr, double *SC=nullptr,
                             double *SS=nullptr, long *MCSID=nullptr);
-
-                        virtual void check_data() const override;
+                        virtual void check_data() override;
                     };
                 }
 
@@ -843,9 +783,7 @@ namespace dnvgl {
                 private:
 
                     static bdf::types::card head;
-
                     using __base::card::format_outlist;
-
                     using __base::mat::form_MID;
                     using __base::mat::form_G;
                     using __base::mat::form_RHO;
@@ -856,11 +794,10 @@ namespace dnvgl {
                     using __base::mat::form_SC;
                     using __base::mat::form_SS;
                     using __base::mat::form_MCSID;
-
                     // static const dnvgl::extfem::bdf::types::entry_type<long> form_MID;
-                    static const bdf::types::entry_type<double> form_E;
+                    static bdf::types::entry_type<double> form_E;
                     // static const dnvgl::extfem::bdf::types::entry_type<double> form_G;
-                    static const bdf::types::entry_type<double> form_NU;
+                    static bdf::types::entry_type<double> form_NU;
                     // static const dnvgl::extfem::bdf::types::entry_type<double> form_RHO;
                     // static const dnvgl::extfem::bdf::types::entry_type<double> form_A;
                     // static const dnvgl::extfem::bdf::types::entry_type<double> form_TREF;
@@ -884,44 +821,32 @@ namespace dnvgl {
                     /** Thermal expansion coefficient. (Real)
                      */
                     bdf::types::entry_value<double> A;
-
                     mat1();
-
                     explicit mat1(const std::list<std::string> &);
-
                     mat1(long *MID, double *E, double *G, double *NU,
-                         double *RHO=nullptr,
-                         double *A=nullptr,
-                         double *TREF=nullptr,
-                         double *GE=nullptr,
-                         double *ST=nullptr,
-                         double *SC=nullptr,
-                         double *SS=nullptr,
-                         long *MCSID=nullptr);
-
+                         double *RHO=nullptr, double *A=nullptr,
+                         double *TREF=nullptr, double *GE=nullptr,
+                         double *ST=nullptr, double *SC=nullptr,
+                         double *SS=nullptr, long *MCSID=nullptr);
                     card const &operator() (
                         long *MID, double *E, double *G, double *NU,
                         double *RHO=nullptr, double *A=nullptr,
                         double *TREF=nullptr, double *GE=nullptr,
                         double *ST=nullptr, double *SC=nullptr,
                         double *SS=nullptr, long *MCSID=nullptr);
-
                     /**
                      * \brief returns the card type of the current card.
                      * \return Current card type.
                      */
                     types card_type() const override;
-
                     void read(std::list<std::string> const &) override;
-
                     card const &operator()(std::list<std::string> const &) override;
 
                 private:
 
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> >&) const override;
-
-                    void check_data() const override;
+                    void check_data() override;
                 };
 
 /// Handle Nastran Bulk MAT2 entries.
@@ -954,9 +879,7 @@ namespace dnvgl {
                 private:
 
                     static bdf::types::card head;
-
                     using __base::card::format_outlist;
-
                     using __base::mat::form_MID;
                     using __base::mat::form_G;
                     using __base::mat::form_RHO;
@@ -967,17 +890,16 @@ namespace dnvgl {
                     using __base::mat::form_SC;
                     using __base::mat::form_SS;
                     using __base::mat::form_MCSID;
-
-                    // static const bdf::types::entry_type<long> form_MID;
-                    // static const bdf::types::entry_type<double> form_G;
-                    // static const bdf::types::entry_type<double> form_RHO;
-                    // static const bdf::types::entry_type<double> form_A;
-                    // static const bdf::types::entry_type<double> form_TREF;
-                    // static const bdf::types::entry_type<double> form_GE;
-                    // static const bdf::types::entry_type<double> form_ST;
-                    // static const bdf::types::entry_type<double> form_SC;
-                    // static const bdf::types::entry_type<double> form_SS;
-                    // static const bdf::types::entry_type<long> form_MCSID;
+                    // static bdf::types::entry_type<long> form_MID;
+                    // static bdf::types::entry_type<double> form_G;
+                    // static bdf::types::entry_type<double> form_RHO;
+                    // static bdf::types::entry_type<double> form_A;
+                    // static bdf::types::entry_type<double> form_TREF;
+                    // static bdf::types::entry_type<double> form_GE;
+                    // static bdf::types::entry_type<double> form_ST;
+                    // static bdf::types::entry_type<double> form_SC;
+                    // static bdf::types::entry_type<double> form_SS;
+                    // static bdf::types::entry_type<long> form_MCSID;
 
                 public:
 
@@ -994,11 +916,8 @@ namespace dnvgl {
                     bdf::types::entry_value<double> A1;
                     bdf::types::entry_value<double> A2;
                     bdf::types::entry_value<double> A3;
-
                     mat2();
-
                     explicit mat2(const std::list<std::string> &);
-
                     mat2(long *MID,
                          double *G11, double *G12, double *G13, double *G22,
                          double *G23, double *G33,
@@ -1008,7 +927,6 @@ namespace dnvgl {
                          double *ST=nullptr, double *SC=nullptr,
                          double *SS=nullptr,
                          long *MCSID=nullptr);
-
                     card const &operator() (
                         long *MID,
                         double *G11, double *G12, double *G13, double *G22,
@@ -1019,19 +937,15 @@ namespace dnvgl {
                         double *ST=nullptr, double *SC=nullptr,
                         double *SS=nullptr,
                         long *MCSID=nullptr);
-
                     types card_type() const override;
-
                     void read(std::list<std::string> const &) override;
-
                     card const &operator()(std::list<std::string> const &) override;
 
                 private:
 
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> >&) const override;
-
-                    void check_data() const override;
+                    void check_data() override;
                 };
 
 /// Handle Nastran Bulk PARAM entries.
@@ -1066,21 +980,17 @@ namespace dnvgl {
                 private:
 
                     static bdf::types::card head;
-
                     using __base::card::format_outlist;
-
-                    static const bdf::types::entry_type<std::string> form_N;
-                    static const bdf::types::entry_type<long> form_IVAL;
-                    static const bdf::types::entry_type<double> form_RVAL;
-                    static const bdf::types::entry_type<std::string> form_CVAL;
-                    static const bdf::types::entry_type<std::complex<double> > form_CPLXVAL;
+                    static bdf::types::entry_type<std::string> form_N;
+                    static bdf::types::entry_type<long> form_IVAL;
+                    static bdf::types::entry_type<double> form_RVAL;
+                    static bdf::types::entry_type<std::string> form_CVAL;
+                    static bdf::types::entry_type<std::complex<double> > form_CPLXVAL;
 
                 public:
 
                     enum class value_type {is_CHAR, is_INT, is_REAL, is_CPLX};
-
                     value_type value_type;
-
                     /** Parameter name (one to eight alphanumeric
                         characters, the first of which is alphabetic).
                     */
@@ -1113,31 +1023,21 @@ namespace dnvgl {
                 public:
 
                     param();
-
                     explicit param(std::list<std::string> const&);
-
-                    param(std::string const&, long const&);
-
-                    param(std::string const&, double const&);
-
-                    param(std::string const&, std::string const&);
-
-                    param(std::string const&, std::complex<double> const&);
-
-                    param(std::string const&, double const&, double const&);
-
+                    param(std::string&, long);
+                    param(std::string&, double);
+                    param(std::string&, std::string&);
+                    param(std::string&, std::complex<double>&);
+                    param(std::string&, double, double);
                     types card_type() const override;
-
                     void read(std::list<std::string> const &) override;
-
                     card const &operator()(std::list<std::string> const &) override;
 
                 private:
 
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> >&) const override;
-
-                    void check_data() const override;
+                    void check_data() override;
                 };
             }
         }

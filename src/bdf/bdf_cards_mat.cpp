@@ -28,10 +28,7 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-namespace {
-    const long cl0 = 0, cl1 = 1;
-    const double cd0 = 0., cd05 = 0.5, cd_1 = -1.;
-}
+using namespace std;
 
 using namespace dnvgl::extfem::bdf;
 
@@ -40,28 +37,72 @@ using namespace type_bounds;
 
 using namespace cards::__base;
 
-const entry_type<long> mat::form_MID(
-    "MID", bound<long>(&cl1));
-const entry_type<double> mat::form_G(
-    "G", bound<double>(&cd0, nullptr, nullptr, true));
-const entry_type<double> mat::form_RHO(
-    "RHO", bound<double>(nullptr, nullptr, nullptr, true));
-const entry_type<double> mat::form_A(
-    "A", bound<double>(nullptr, nullptr, nullptr, true));
-const entry_type<double> mat::form_TREF(
-    "TREF", bound<double>(nullptr, nullptr, nullptr, true));
-const entry_type<double> mat::form_GE(
-    "GE", bound<double>(nullptr, nullptr, nullptr, true));
-const entry_type<double> mat::form_ST(
-    "ST", bound<double>(&cd0, nullptr, nullptr, true));
-const entry_type<double> mat::form_SC(
-    "SC", bound<double>(&cd0, nullptr, nullptr, true));
-const entry_type<double> mat::form_SS(
-    "SS", bound<double>(&cd0, nullptr, nullptr, true));
-const entry_type<long> mat::form_MCSID(
-    "MCSID", bound<long>(&cl0, nullptr, nullptr, true));
+namespace {
+    auto const cl0_ = make_shared<long>(0);
+    auto const cl1_ = make_shared<long>(1);
+    auto const cd0_ = make_shared<double>(0.);
+    auto const cd05_ = make_shared<double>(0.5);
+    auto const cd_1_ = make_shared<double>(-1.);
 
-mat::mat(const std::list<std::string> &inp) : card(inp) {}
+    auto const cl0 = cl0_.get();
+    auto const cl1 = cl1_.get();
+    auto const cd0 = cd0_.get();
+    auto const cd05 = cd05_.get();
+    auto const cd_1 = cd_1_.get();
+
+    auto const bound_MID_ = make_shared<bound<long>>(cl1);
+    auto const bound_MID = bound_MID_.get();
+}
+entry_type<long> mat::form_MID("MID", bound_MID);
+namespace {
+    auto const bound_G_ = make_shared<bound<double>>(cd0, nullptr, nullptr, true);
+    auto const bound_G = bound_G_.get();
+}
+entry_type<double> mat::form_G("G", bound_G);
+namespace {
+    auto const bound_RHO_ = make_shared<bound<double>>(cd0, nullptr, nullptr, true);
+    auto const bound_RHO = bound_RHO_.get();
+}
+entry_type<double> mat::form_RHO("RHO", bound_RHO);
+namespace {
+    auto const bound_A_ = make_shared<bound<double>>(cd0, nullptr, nullptr, true);
+    auto const bound_A = bound_A_.get();
+}
+entry_type<double> mat::form_A("A", bound_A);
+namespace {
+    auto const bound_TREF_ = make_shared<bound<double>>(
+        cd0, nullptr, nullptr, true);
+    auto const bound_TREF = bound_TREF_.get();
+}
+entry_type<double> mat::form_TREF("TREF", bound_TREF);
+namespace {
+    auto const bound_GE_ = make_shared<bound<double>>(cd0, nullptr, nullptr, true);
+    auto const bound_GE = bound_GE_.get();
+}
+entry_type<double> mat::form_GE("GE", bound_GE);
+namespace {
+    auto const bound_ST_ = make_shared<bound<double>>(cd0, nullptr, nullptr, true);
+    auto const bound_ST = bound_ST_.get();
+}
+entry_type<double> mat::form_ST("ST", bound_ST);
+namespace {
+    auto const bound_SC_ = make_shared<bound<double>>(cd0, nullptr, nullptr, true);
+    auto const bound_SC = bound_SC_.get();
+}
+entry_type<double> mat::form_SC("SC", bound_SC);
+namespace {
+    auto const bound_SS_ = make_shared<bound<double>>(cd0, nullptr, nullptr, true);
+    auto const bound_SS = bound_SS_.get();
+}
+entry_type<double> mat::form_SS("SS", bound_SS);
+namespace {
+    auto const bound_MCSID_ = make_shared<bound<long>>(
+        cl0, nullptr, nullptr, true);
+    auto const bound_MCSID = bound_MCSID_.get();
+}
+entry_type<long> mat::form_MCSID("MCSID", bound_MCSID);
+
+mat::mat(const list<std::string> &inp) : card(inp) {}
 
 mat::mat(long *MID, double *RHO/*=nullptr*/, double *TREF/*=nullptr*/,
          double *GE/*=nullptr*/, double *ST/*=nullptr*/, double *SC/*=nullptr*/,
@@ -88,7 +129,7 @@ void mat::operator() (
     return;
 }
 
-void mat::check_data() const {
+void mat::check_data() {
     if (MID) mat::form_MID.check(MID);
     if (RHO) mat::form_RHO.check(RHO);
     if (TREF) mat::form_TREF.check(TREF);

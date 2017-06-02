@@ -16,10 +16,10 @@ namespace {
         "@(#) $Id$";
 }
 
+#include <memory>
+
 #include "bdf/cards.h"
 #include "bdf/errors.h"
-
-#include <memory>
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
@@ -30,26 +30,44 @@ static char THIS_FILE[] = __FILE__;
 using namespace std;
 
 using namespace dnvgl::extfem;
-using namespace bdf::cards;
+using namespace bdf;
+using namespace cards;
 using bdf::types::entry_type;
+using bdf::type_bounds::bound;
 
 namespace {
-    const double cd0 = 0;
+    auto const cd0_ = make_shared<double>(0.);
+    auto const cd0 = cd0_.get();
 }
 
 bdf::types::card pbarl::head = bdf::types::card("PBARL");
 
-entry_type<std::string> const pbarl::form_GROUP(
-    "GROUP", bdf::type_bounds::bound<std::string>("MSCBML0"));
-entry_type<std::string> const pbarl::form_TYPE(
-    "TYPE", bdf::type_bounds::bound<std::string>({
-    "T", "TW", "I", "L", "ROD", "TUBE", "CHAN", "BOX", "BAR", "CROSS",
-    "H", "T1", "I1", "CHAN1", "Z", "CHAN2", "T2", "BOX1", "HEXA",
-    "HAT", "HAT1", "DBOX"}));
-entry_type<double> const pbarl::form_DIM(
-    "DIM", bdf::type_bounds::bound<double>(&cd0));
-entry_type<double> const pbarl::form_NSM(
-    "NSM", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
+namespace {
+    std::string name{"MSCBML0"};
+    auto const bound_GROUP_ = make_shared<bound<std::string>>(
+        nullptr, nullptr, &name);
+    auto const bound_GROUP = bound_GROUP_.get();
+}
+entry_type<std::string> pbarl::form_GROUP("GROUP", bound_GROUP);
+namespace {
+    set<std::string> const allowed({"T", "TW", "I", "L", "ROD", "TUBE",
+                "CHAN", "BOX", "BAR", "CROSS", "H", "T1", "I1",
+                "CHAN1", "Z", "CHAN2", "T2", "BOX1", "HEXA", "HAT",
+                "HAT1", "DBOX"});
+    auto const bound_TYPE_ = make_shared<bound<std::string>>(allowed);
+    auto const bound_TYPE = bound_TYPE_.get();
+}
+entry_type<std::string> pbarl::form_TYPE("TYPE", bound_TYPE);
+namespace {
+    auto const bound_DIM_ = make_shared<bound<double>>(cd0);
+    auto const bound_DIM = bound_DIM_.get();
+}
+entry_type<double> pbarl::form_DIM("DIM", bound_DIM);
+namespace {
+    auto const bound_NSM_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
+    auto const bound_NSM = bound_NSM_.get();
+}
+entry_type<double> pbarl::form_NSM("NSM", bound_NSM);
 
 pbarl::pbarl(list<std::string> const &inp) :
 bar_prop(inp) {
@@ -111,7 +129,7 @@ invalid:
 end:;
 }
 
-types pbarl::card_type() const {
+cards::types pbarl::card_type() const {
     return types::PBARL;
 };
 
@@ -159,7 +177,7 @@ bdf::cards::__base::card const &pbarl::operator() (
     return *this;
 }
 
-void pbarl::check_data() const {
+void pbarl::check_data() {
     this->bar_prop::check_data();
     if (GROUP) pbarl::form_GROUP.check(GROUP);
     if (TYPE) pbarl::form_TYPE.check(TYPE);

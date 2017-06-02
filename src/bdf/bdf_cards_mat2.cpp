@@ -221,7 +221,7 @@ void mat2::collect_outdata(
 finish:return;
 }
 
-void mat2::check_data() const {
+void mat2::check_data() {
     this->mat::check_data();
     if (A1) mat::form_A.check(A1);
     if (A2) mat::form_A.check(A2);

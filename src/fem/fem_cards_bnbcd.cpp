@@ -115,14 +115,14 @@ cards::__base::card const &bnbcd::operator() (
 cards::__base::card const &bnbcd::operator() (
     long const NODENO,
     std::vector<fix_key> const &FIX) {
-    return (*this)(NODENO, long(FIX.size()), FIX);
+    return this->bnbcd::operator()(NODENO, long(FIX.size()), FIX);
 }
 
 cards::__base::card const &bnbcd::operator() (
     long const NODENO,
     fix_key const FIX1, fix_key const FIX2, fix_key const FIX3,
     fix_key const FIX4, fix_key const FIX5, fix_key const FIX6) {
-    return (*this)(NODENO, 6, std::vector<fix_key>({
+    return this->bnbcd::operator()(NODENO, 6, std::vector<fix_key>({
                 FIX1, FIX2, FIX3, FIX4, FIX5, FIX6}));
 }
 
@@ -130,7 +130,7 @@ cards::__base::card const &bnbcd::operator() (
     long const NODENO,
     bool const FIX1, bool const FIX2, bool const FIX3,
     bool const FIX4, bool const FIX5, bool const FIX6) {
-    return (*this)(NODENO, 6, std::vector<fix_key>({
+    return this->bnbcd::operator()(NODENO, 6, std::vector<fix_key>({
                 fix_key_conv(FIX1), fix_key_conv(FIX2), fix_key_conv(FIX3),
                 fix_key_conv(FIX4), fix_key_conv(FIX5), fix_key_conv(FIX6)}));
 }

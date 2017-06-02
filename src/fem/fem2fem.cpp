@@ -27,7 +27,7 @@ namespace {
 
 #include "fem2fem_args.h"
 
-#include "bdf/cards.h"
+#include "fem/cards.h"
 
 using std::cout;
 using std::endl;
@@ -397,7 +397,7 @@ main (int argc, char **argv) {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&
+// compile-command: "make -C ../../cbuild -j7 &&
 //    (make -C ../../cbuild test;
 //     ../../cbuild/tests/test_fem_cards --use-colour no)"
 // End:

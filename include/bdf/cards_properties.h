@@ -31,7 +31,7 @@ namespace dnvgl {
 
                     protected:
 
-                        bdf::types::entry_type<long> static const form_PID;
+                        bdf::types::entry_type<long> static form_PID;
 
                     public:
 
@@ -49,7 +49,7 @@ namespace dnvgl {
 
                         virtual void read(std::list<std::string> const&) override;
 
-                        virtual void check_data() const override;
+                        virtual void check_data() override;
 
                         card const &operator() (const std::list<std::string> &) override;
 
@@ -92,16 +92,16 @@ namespace dnvgl {
 
                     using __base::property::form_PID;
 
-                    bdf::types::entry_type<long> static const form_MID1;
-                    bdf::types::entry_type<double> static const form_T;
-                    bdf::types::entry_type<long> static const form_MID2;
-                    bdf::types::entry_type<double> static const form_12I_T__3; // 12 I / T**3
-                    bdf::types::entry_type<long> static const form_MID3;
-                    bdf::types::entry_type<double> static const form_TS_T; // TS / T
-                    bdf::types::entry_type<double> static const form_NSM;
-                    bdf::types::entry_type<double> static const form_Z1;
-                    bdf::types::entry_type<double> static const form_Z2;
-                    bdf::types::entry_type<long> static const form_MID4;
+                    bdf::types::entry_type<long> static form_MID1;
+                    bdf::types::entry_type<double> static form_T;
+                    bdf::types::entry_type<long> static form_MID2;
+                    bdf::types::entry_type<double> static form_12I_T__3; // 12 I / T**3
+                    bdf::types::entry_type<long> static form_MID3;
+                    bdf::types::entry_type<double> static form_TS_T; // TS / T
+                    bdf::types::entry_type<double> static form_NSM;
+                    bdf::types::entry_type<double> static form_Z1;
+                    bdf::types::entry_type<double> static form_Z2;
+                    bdf::types::entry_type<long> static form_MID4;
 
                 public:
 
@@ -199,7 +199,7 @@ namespace dnvgl {
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> > &res) const override;
 
-                    void check_data() const override;
+                    void check_data() override;
                 };
 
                 namespace __base {
@@ -211,7 +211,7 @@ namespace dnvgl {
 
                         using __base::property::PID;
 
-                        bdf::types::entry_type<long> static const form_MID;
+                        bdf::types::entry_type<long> static form_MID;
 
                         beam_base() = default;
 
@@ -299,38 +299,38 @@ namespace dnvgl {
                     using __base::property::form_PID;
                     using __base::beam_base::form_MID;
 
-                    bdf::types::entry_type<double> static const form_A;
-                    bdf::types::entry_type<double> static const form_I1;
-                    bdf::types::entry_type<double> static const form_I2;
-                    bdf::types::entry_type<double> static const form_I12;
-                    bdf::types::entry_type<double> static const form_J;
-                    bdf::types::entry_type<double> static const form_NSM;
-                    bdf::types::entry_type<double> static const form_C1;
-                    bdf::types::entry_type<double> static const form_C2;
-                    bdf::types::entry_type<double> static const form_D1;
-                    bdf::types::entry_type<double> static const form_D2;
-                    bdf::types::entry_type<double> static const form_E1;
-                    bdf::types::entry_type<double> static const form_E2;
-                    bdf::types::entry_type<double> static const form_F1;
-                    bdf::types::entry_type<double> static const form_F2;
-                    bdf::types::entry_type<std::string> static const form_SO;
-                    bdf::types::entry_type<double> static const form_X_XB;
-                    bdf::types::entry_type<double> static const form_K1;
-                    bdf::types::entry_type<double> static const form_K2;
-                    bdf::types::entry_type<double> static const form_S1;
-                    bdf::types::entry_type<double> static const form_S2;
-                    bdf::types::entry_type<double> static const form_NSI_A;
-                    bdf::types::entry_type<double> static const form_NSI_B;
-                    bdf::types::entry_type<double> static const form_CW_A;
-                    bdf::types::entry_type<double> static const form_CW_B;
-                    bdf::types::entry_type<double> static const form_M1_A;
-                    bdf::types::entry_type<double> static const form_M2_A;
-                    bdf::types::entry_type<double> static const form_M1_B;
-                    bdf::types::entry_type<double> static const form_M2_B;
-                    bdf::types::entry_type<double> static const form_N1_A;
-                    bdf::types::entry_type<double> static const form_N2_A;
-                    bdf::types::entry_type<double> static const form_N1_B;
-                    bdf::types::entry_type<double> static const form_N2_B;
+                    bdf::types::entry_type<double> static form_A;
+                    bdf::types::entry_type<double> static form_I1;
+                    bdf::types::entry_type<double> static form_I2;
+                    bdf::types::entry_type<double> static form_I12;
+                    bdf::types::entry_type<double> static form_J;
+                    bdf::types::entry_type<double> static form_NSM;
+                    bdf::types::entry_type<double> static form_C1;
+                    bdf::types::entry_type<double> static form_C2;
+                    bdf::types::entry_type<double> static form_D1;
+                    bdf::types::entry_type<double> static form_D2;
+                    bdf::types::entry_type<double> static form_E1;
+                    bdf::types::entry_type<double> static form_E2;
+                    bdf::types::entry_type<double> static form_F1;
+                    bdf::types::entry_type<double> static form_F2;
+                    bdf::types::entry_type<std::string> static form_SO;
+                    bdf::types::entry_type<double> static form_X_XB;
+                    bdf::types::entry_type<double> static form_K1;
+                    bdf::types::entry_type<double> static form_K2;
+                    bdf::types::entry_type<double> static form_S1;
+                    bdf::types::entry_type<double> static form_S2;
+                    bdf::types::entry_type<double> static form_NSI_A;
+                    bdf::types::entry_type<double> static form_NSI_B;
+                    bdf::types::entry_type<double> static form_CW_A;
+                    bdf::types::entry_type<double> static form_CW_B;
+                    bdf::types::entry_type<double> static form_M1_A;
+                    bdf::types::entry_type<double> static form_M2_A;
+                    bdf::types::entry_type<double> static form_M1_B;
+                    bdf::types::entry_type<double> static form_M2_B;
+                    bdf::types::entry_type<double> static form_N1_A;
+                    bdf::types::entry_type<double> static form_N2_A;
+                    bdf::types::entry_type<double> static form_N1_B;
+                    bdf::types::entry_type<double> static form_N2_B;
 
                 public:
 
@@ -559,7 +559,7 @@ namespace dnvgl {
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> > &res) const override;
 
-                    void check_data() const override;
+                    void check_data() override;
                 };
 
                 namespace __base {
@@ -604,12 +604,12 @@ namespace dnvgl {
                     using __base::property::form_PID;
                     using __base::beam_base::form_MID;
 
-                    bdf::types::entry_type<std::string> static const form_GROUP;
-                    bdf::types::entry_type<std::string> static const form_TYPE;
-                    bdf::types::entry_type<double> static const form_DIM;
-                    bdf::types::entry_type<double> static const form_NSM;
-                    bdf::types::entry_type<std::string> static const form_SO;
-                    bdf::types::entry_type<double> static const form_X_XB;
+                    bdf::types::entry_type<std::string> static form_GROUP;
+                    bdf::types::entry_type<std::string> static form_TYPE;
+                    bdf::types::entry_type<double> static form_DIM;
+                    bdf::types::entry_type<double> static form_NSM;
+                    bdf::types::entry_type<std::string> static form_SO;
+                    bdf::types::entry_type<double> static form_X_XB;
 
                 public:
 
@@ -686,7 +686,7 @@ namespace dnvgl {
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> > &res) const override;
 
-                    void check_data() const override;
+                    void check_data() override;
                 };
 
                 namespace __base {
@@ -738,22 +738,22 @@ namespace dnvgl {
                     using __base::property::form_PID;
                     using __base::beam_base::form_MID;
 
-                    bdf::types::entry_type<double> static const form_A;
-                    bdf::types::entry_type<double> static const form_I1;
-                    bdf::types::entry_type<double> static const form_I2;
-                    bdf::types::entry_type<double> static const form_J;
-                    bdf::types::entry_type<double> static const form_NSM;
-                    bdf::types::entry_type<double> static const form_C1;
-                    bdf::types::entry_type<double> static const form_C2;
-                    bdf::types::entry_type<double> static const form_D1;
-                    bdf::types::entry_type<double> static const form_D2;
-                    bdf::types::entry_type<double> static const form_E1;
-                    bdf::types::entry_type<double> static const form_E2;
-                    bdf::types::entry_type<double> static const form_F1;
-                    bdf::types::entry_type<double> static const form_F2;
-                    bdf::types::entry_type<double> static const form_K1;
-                    bdf::types::entry_type<double> static const form_K2;
-                    bdf::types::entry_type<double> static const form_I12;
+                    bdf::types::entry_type<double> static form_A;
+                    bdf::types::entry_type<double> static form_I1;
+                    bdf::types::entry_type<double> static form_I2;
+                    bdf::types::entry_type<double> static form_J;
+                    bdf::types::entry_type<double> static form_NSM;
+                    bdf::types::entry_type<double> static form_C1;
+                    bdf::types::entry_type<double> static form_C2;
+                    bdf::types::entry_type<double> static form_D1;
+                    bdf::types::entry_type<double> static form_D2;
+                    bdf::types::entry_type<double> static form_E1;
+                    bdf::types::entry_type<double> static form_E2;
+                    bdf::types::entry_type<double> static form_F1;
+                    bdf::types::entry_type<double> static form_F2;
+                    bdf::types::entry_type<double> static form_K1;
+                    bdf::types::entry_type<double> static form_K2;
+                    bdf::types::entry_type<double> static form_I12;
 
                 public:
 
@@ -849,7 +849,7 @@ namespace dnvgl {
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> > &res) const override;
 
-                    void check_data() const override;
+                    void check_data() override;
                 };
 
                 /// Handle Nastran Bulk `PBARL` entries.
@@ -879,10 +879,10 @@ namespace dnvgl {
                     using __base::property::form_PID;
                     using __base::beam_base::form_MID;
 
-                    bdf::types::entry_type<std::string> static const form_GROUP;
-                    bdf::types::entry_type<std::string> static const form_TYPE;
-                    bdf::types::entry_type<double> static const form_DIM;
-                    bdf::types::entry_type<double> static const form_NSM;
+                    bdf::types::entry_type<std::string> static form_GROUP;
+                    bdf::types::entry_type<std::string> static form_TYPE;
+                    bdf::types::entry_type<double> static form_DIM;
+                    bdf::types::entry_type<double> static form_NSM;
 
                 public:
 
@@ -934,7 +934,7 @@ namespace dnvgl {
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> > &res) const override;
 
-                    void check_data() const override;
+                    void check_data() override;
                 };
 
                 /// Handle Nastran Bulk `PROD` entries.
@@ -958,11 +958,11 @@ namespace dnvgl {
 
                     using __base::property::form_PID;
 
-                    bdf::types::entry_type<long> static const form_MID;
-                    bdf::types::entry_type<double> static const form_A;
-                    bdf::types::entry_type<double> static const form_J;
-                    bdf::types::entry_type<double> static const form_C;
-                    bdf::types::entry_type<double> static const form_NSM;
+                    bdf::types::entry_type<long> static form_MID;
+                    bdf::types::entry_type<double> static form_A;
+                    bdf::types::entry_type<double> static form_J;
+                    bdf::types::entry_type<double> static form_C;
+                    bdf::types::entry_type<double> static form_NSM;
 
                 public:
 
@@ -1007,7 +1007,7 @@ namespace dnvgl {
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> > &res) const override;
 
-                    void check_data() const override;
+                    void check_data() override;
                 };
                 //         pelas
             }

@@ -44,23 +44,21 @@ cquad4::cquad4(std::list<std::string> const &inp) :
     this->cquad4::read(inp);
 }
 
-cquad4::cquad4(long const *EID, long const *PID,
-               long const *G1, long const *G2, long const *G3, long const *G4,
-               double const *THETA/*=nullptr*/,
-               double const *ZOFFS/*=nullptr*/,
-               long const *TFLAG/*=nullptr*/,
-               double const *T1/*=nullptr*/, double const *T2/*=nullptr*/,
-               double const *T3/*=nullptr*/, double const *T4/*=nullptr*/) :
+cquad4::cquad4(long *EID, long *PID, long *G1, long *G2, long *G3, long *G4,
+               double *THETA/*=nullptr*/, double *ZOFFS/*=nullptr*/,
+               long *TFLAG/*=nullptr*/,
+               double *T1/*=nullptr*/, double *T2/*=nullptr*/,
+               double *T3/*=nullptr*/, double *T4/*=nullptr*/) :
         shell(EID, PID, G1, G2, G3, G3, THETA,ZOFFS, TFLAG,
               T1, T2, T3, T4) {}
 
-cquad4::cquad4(long const *EID, long const *PID,
-               long const *G1, long const *G2, long const *G3, long const *G4,
-               long const *MCID,
-               double const *ZOFFS/*=nullptr*/,
-               long const *TFLAG/*=nullptr*/,
-               double const *T1/*=nullptr*/, double const *T2/*=nullptr*/,
-               double const *T3/*=nullptr*/, double const *T4/*=nullptr*/) :
+cquad4::cquad4(long *EID, long *PID,
+               long *G1, long *G2, long *G3, long *G4,
+               long *MCID,
+               double *ZOFFS/*=nullptr*/,
+               long *TFLAG/*=nullptr*/,
+               double *T1/*=nullptr*/, double *T2/*=nullptr*/,
+               double *T3/*=nullptr*/, double *T4/*=nullptr*/) :
         shell(EID, PID, G1, G2, G3, G4, MCID, ZOFFS, TFLAG,
               T1, T2, T3, T4) {}
 

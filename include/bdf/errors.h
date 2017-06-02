@@ -23,12 +23,11 @@ namespace dnvgl {
         namespace bdf {
             namespace errors {
 
-                class error : std::exception {
+                class error : public std::exception {
                 protected:
                     std::string msg;
                     std::string name;
                     std::string err_class;
-
                     std::string get_msg() const;
                 public:
                     error(

@@ -46,23 +46,20 @@ shell(inp) {
     this->ctria3::read(inp);
 }
 
-ctria3::ctria3(long const *EID, long const *PID,
-               long const *G1, long const *G2, long const *G3,
-               double const *THETA/*=nullptr*/,
-               double const *ZOFFS/*=nullptr*/,
-               long const *TFLAG/*=nullptr*/,
-               double const *T1/*=nullptr*/, double const *T2/*=nullptr*/,
-               double const *T3/*=nullptr*/) :
+ctria3::ctria3(long *EID, long *PID,
+               long *G1, long *G2, long *G3,
+               double *THETA/*=nullptr*/, double *ZOFFS/*=nullptr*/,
+               long *TFLAG/*=nullptr*/,
+               double *T1/*=nullptr*/, double *T2/*=nullptr*/,
+               double *T3/*=nullptr*/) :
         shell(EID, PID, G1, G2, G3, nullptr, THETA,ZOFFS, TFLAG,
               T1, T2, T3, nullptr) {}
 
-ctria3::ctria3(long const *EID, long const *PID,
-               long const *G1, long const *G2, long const *G3,
-               long const *MCID,
-               double const *ZOFFS/*=nullptr*/,
-               long const *TFLAG/*=nullptr*/,
-               double const *T1/*=nullptr*/, double const *T2/*=nullptr*/,
-               double const *T3/*=nullptr*/) :
+ctria3::ctria3(long *EID, long *PID,
+               long *G1, long *G2, long *G3,
+               long *MCID, double *ZOFFS/*=nullptr*/, long *TFLAG/*=nullptr*/,
+               double *T1/*=nullptr*/, double *T2/*=nullptr*/,
+               double *T3/*=nullptr*/) :
         shell(EID, PID, G1, G2, G3, nullptr, MCID, ZOFFS, TFLAG,
               T1, T2, T3, nullptr) {}
 
@@ -124,8 +121,7 @@ void ctria3::read(std::list<std::string> const &inp) {
         form_G1.set_value(G1, *(pos++));
         form_PID.set_value(PID, *(pos));
         if (!PID)
-            PID(EID);
-        // form_EID.set_value(EID, *pos);
+            PID(&EID.value);
         break;
     default:
         throw errors::parse_error(

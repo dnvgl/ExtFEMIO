@@ -40,12 +40,19 @@ using namespace cards::__base;
 using bdf::types::entry_type;
 
 namespace {
-    const long cl1 = 1;
+    auto const cl0_ = make_shared<long>(0);
+    auto const cl1_ = make_shared<long>(1);
+    auto const cl0 = cl0_.get();
+    auto const cl1 = cl1_.get();
 }
 
 bdf::types::card element::head = bdf::types::card("<INVALID>");
 
-const entry_type<long> element::form_EID("EID", bound<long>(&cl1));
+namespace {
+    auto const bound_EID_ = make_shared<bound_unique<long>>(cl1, nullptr, cl0);
+    auto const bound_EID = bound_EID_.get();
+}
+entry_type<long> element::form_EID("EID", bound_EID);
 
 element::element() : cards::__base::card() {}
 
@@ -54,7 +61,7 @@ card(inp) {
     this->element::read(inp);
 }
 
-element::element(long const *EID) : card(), EID(EID) {
+element::element(long *EID) : card(), EID(EID) {
     if (EID) form_EID.check(this->EID);
 }
 
@@ -69,8 +76,8 @@ void element::collect_outdata(
     throw not_implemented(__FILE__, __LINE__, "can't write write generic ELEMENT.");
 }
 
-void element::check_data() const {
-    if (EID) form_EID.check(EID);
+void element::check_data() {
+    if (EID) this->EID = form_EID.check(this->EID);
 }
 
 void element::read(list<std::string> const &inp) {
@@ -91,6 +98,12 @@ cards::__base::card const &element::operator()(list<std::string> const &inp) {
     this->element::read(inp);
     return *this;
 }
+
+void element::reset() {
+    __base::card::reset();
+    form_EID.reset();
+}
+
 
 // Local Variables:
 // mode: c++

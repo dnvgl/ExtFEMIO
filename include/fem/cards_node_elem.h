@@ -120,12 +120,14 @@ namespace dnvgl {
                         long const GEONO,
                         double const HZ, double const BT, double const BB,
                         double const SFY, double const SFZ) {
-                        return (*this)(GEONO, HZ, BT, BB, SFY, SFZ, 0, 0);
+                        return this->gbarm::operator()(
+                            GEONO, HZ, BT, BB, SFY, SFZ, 0, 0);
                     };
                     card const inline &operator() (
                         long const GEONO,
                         double const HZ, double const BT, double const BB) {
-                        return (*this)(GEONO, HZ, BT, BB, 1., 1., 0, 0);
+                        return this->gbarm::operator()(
+                            GEONO, HZ, BT, BB, 1., 1., 0, 0);
                     };
 
                 protected:
@@ -398,13 +400,15 @@ namespace dnvgl {
                         double const HZ, double const TY, double const TB,
                         double const TT, double const BY,
                         double const SFY, double const SFZ) {
-                        return (*this)(GEONO, HZ, TY, TB, TT, BY, SFY, SFZ, 0, 0);
+                        return this->gbox::operator()(
+                            GEONO, HZ, TY, TB, TT, BY, SFY, SFZ, 0, 0);
                     };
                     card const inline &operator() (
                         long const GEONO,
                         double const HZ, double const TY, double const TB,
                         double const TT, double const BY) {
-                        return (*this)(GEONO, HZ, TY, TB, TT, BY, 1., 1., 0, 0);
+                        return this->gbox::operator()(
+                            GEONO, HZ, TY, TB, TT, BY, 1., 1., 0, 0);
                     };
 
                 protected:
@@ -533,13 +537,15 @@ namespace dnvgl {
                         double const HZ, double const TY, double const BY,
                         double const TZ, double const SFY, double const SFZ,
                         long const K) {
-                        return (*this)(GEONO, HZ, TY, BY, TZ, SFY, SFZ, K, 0, 0);
+                        return this->gchan::operator()(
+                            GEONO, HZ, TY, BY, TZ, SFY, SFZ, K, 0, 0);
                     };
                     card const inline &operator() (
                         long const GEONO,
                         double const HZ, double const TY, double const BY,
                         double const TZ, long const K) {
-                        return (*this)(GEONO, HZ, TY, BY, TZ, 1., 1., K, 0, 0);
+                        return this->gchan::operator()(
+                            GEONO, HZ, TY, BY, TZ, 1., 1., K, 0, 0);
                     };
 
                 protected:
@@ -669,13 +675,15 @@ namespace dnvgl {
                         double const HZ, double const TY, double const BY,
                         double const TZ, double const SFY, double const SFZ,
                         long const K, double const R) {
-                        return (*this)(GEONO, HZ, TY, BY, TZ, SFY, SFZ, K, R, 0, 0);
+                        return this->gchanr::operator()(
+                            GEONO, HZ, TY, BY, TZ, SFY, SFZ, K, R, 0, 0);
                     };
                     card const inline &operator() (
                         long const GEONO,
                         double const HZ, double const TY, double const BY,
                         double const TZ, long const K, double const R) {
-                        return (*this)(GEONO, HZ, TY, BY, TZ, 1., 1., K, R, 0, 0);
+                        return this->gchanr::operator()(
+                            GEONO, HZ, TY, BY, TZ, 1., 1., K, R, 0, 0);
                     };
                 protected:
                     std::ostream &put(std::ostream&) const override;
@@ -858,14 +866,15 @@ namespace dnvgl {
                         double const HZ, double const TY, double const BY,
                         double const TT, double const TB,
                         double const SFY, double const SFZ) {
-                        return (*this)(GEONO, HZ, TY, BY, TT, TB, SFY, SFZ,
-                                       0, 0);
+                        return this->gdobo::operator()(
+                            GEONO, HZ, TY, BY, TT, TB, SFY, SFZ, 0, 0);
                     };
                     card const &operator() (
                         long const GEONO,
                         double const HZ, double const TY, double const BY,
                         double const TT, double const TB) {
-                        return (*this)(GEONO, HZ, TY, BY, TT, TB, 1., 1., 0, 0);
+                        return this->gdobo::operator()(
+                            GEONO, HZ, TY, BY, TT, TB, 1., 1., 0, 0);
                     };
 
                 protected:
@@ -965,29 +974,33 @@ namespace dnvgl {
                     card const &operator() (
                         long const ECCNO,
                         double const EX, double const EY, double const EZ) {
-                        return (*this)(ECCNO, ecc_opt::XYZ, EX, EY, EZ);
+                        return this->gecc::operator()(
+                            ECCNO, ecc_opt::XYZ, EX, EY, EZ);
                     };
                     card const &operator() (
                         long const ECCNO, std::vector<double> const &pos) {
-                        return (*this)(
+                        return this->gecc::operator()(
                             ECCNO, ecc_opt::XYZ,
                             pos.at(0), pos.at(1), pos.at(2));
                     };
                     card const &operator() (
                         double const EX, double const EY, double const EZ) {
-                        return (*this)(0, ecc_opt::XYZ, EX, EY, EZ);
+                        return this->gecc::operator()(
+                            0, ecc_opt::XYZ, EX, EY, EZ);
                     };
                     card const &operator() (
                         std::vector<double> const &pos) {
-                        return (*this)(
+                        return this->gecc::operator()(
                             0, ecc_opt::XYZ, pos.at(0), pos.at(1), pos.at(2));
                     };
                     card const &operator() (
                         long const ECCNO, double const EZ) {
-                        return (*this)(ECCNO, ecc_opt::Z_ONLY, 0., 0., EZ);
+                        return this->gecc::operator()(
+                            ECCNO, ecc_opt::Z_ONLY, 0., 0., EZ);
                     };
                     card const &operator() (double const EZ) {
-                        return (*this)(0, ecc_opt::Z_ONLY, 0., 0., EZ);
+                        return this->gecc::operator()(
+                            0, ecc_opt::Z_ONLY, 0., 0., EZ);
                     };
 
                 protected:
@@ -1569,15 +1582,15 @@ namespace dnvgl {
                         double const HZ, double const TY, double const BT,
                         double const TT, double const BB, double const TB,
                         double const SFY, double const SFZ) {
-                        return (*this)(GEONO, HZ, TY, BT, TT, BB, TB, SFY, SFZ,
-                                       0, 0, 0);
+                        return this->giorh::operator()(
+                            GEONO, HZ, TY, BT, TT, BB, TB, SFY, SFZ, 0, 0, 0);
                     };
                     card const inline &operator() (
                         long const GEONO,
                         double const HZ, double const TY, double const BT,
                         double const TT, double const BB, double const TB) {
-                        return (*this)(GEONO, HZ, TY, BT, TT, BB, TB, 1., 1.,
-                                       0, 0, 0);
+                        return this->giorh::operator()(
+                            GEONO, HZ, TY, BT, TT, BB, TB, 1., 1., 0, 0, 0);
                     };
 
                 protected:
@@ -1723,16 +1736,18 @@ namespace dnvgl {
                         double const TT, double const BB, double const TB,
                         double const SFY, double const SFZ,
                         double RT, double RB) {
-                        return (*this)(GEONO, HZ, TY, BT, TT, BB, TB, SFY, SFZ,
-                                       RT, RB, 0, 0, 0);
+                        return this->giorhr::operator()(
+                            GEONO, HZ, TY, BT, TT, BB, TB, SFY, SFZ, RT, RB, 0,
+                            0, 0);
                     };
                     card const inline &operator() (
                         long const GEONO,
                         double const HZ, double const TY, double const BT,
                         double const TT, double const BB, double const TB,
                         double RT, double RB) {
-                        return (*this)(GEONO, HZ, TY, BT, TT, BB, TB, 1., 1.,
-                                       RT, RB, 0, 0, 0);
+                        return this->giorhr::operator()(
+                            GEONO, HZ, TY, BT, TT, BB, TB, 1., 1., RT, RB,
+                            0, 0, 0);
                     };
 
                 protected:
@@ -1865,15 +1880,16 @@ namespace dnvgl {
                         double const TZ,
                         double const SFY, double const SFZ,
                         bool const K) {
-                        return (*this)(GEONO, HZ, TY, BY, TZ, SFY, SFZ, K,
-                                       0, 0);
+                        return this->glsec::operator()(
+                            GEONO, HZ, TY, BY, TZ, SFY, SFZ, K, 0, 0);
                     };
                     card const inline &operator() (
                         long const GEONO,
                         double const HZ, double const TY, double const BY,
                         double const TZ,
                         bool const K) {
-                        return (*this)(GEONO, HZ, TY, BY, TZ, 1., 1., K, 0, 0);
+                        return this->glsec::operator()(
+                            GEONO, HZ, TY, BY, TZ, 1., 1., K, 0, 0);
                     };
 
                 protected:
@@ -2014,16 +2030,16 @@ namespace dnvgl {
                         double const BY, double const TZ,
                         double const SFY, double const SFZ,
                         long const K, double const R) {
-                        return (*this)(GEONO, HZ, TY, BY, TZ, SFY, SFZ, K, R,
-                                       0, 0);
+                        return this->glsecr::operator()(
+                            GEONO, HZ, TY, BY, TZ, SFY, SFZ, K, R, 0, 0);
                     };
                     card const inline &operator() (
                         long const GEONO,
                         double const HZ, double const TY,
                         double const BY, double const TZ,
                         long const K, double const R) {
-                        return (*this)(GEONO, HZ, TY, BY, TZ, 1., 1., K, R,
-                                       0, 0);
+                        return this->glsecr::operator()(
+                            GEONO, HZ, TY, BY, TZ, 1., 1., K, R, 0, 0);
                     };
 
                 protected:
@@ -2207,12 +2223,14 @@ namespace dnvgl {
                         long const GEONO,
                         double const DI, double const DY, double const T,
                         double const SFY, double const SFZ) {
-                        return (*this)(GEONO, DI, DY, T, SFY, SFZ, 0, 0);
+                        return this->gpipe::operator()(
+                            GEONO, DI, DY, T, SFY, SFZ, 0, 0);
                     };
                     card const inline &operator() (
                         long const GEONO,
                         double const DI, double const DY, double const T) {
-                        return (*this)(GEONO, DI, DY, T, 1., 1., 0, 0);
+                        return this->gpipe::operator()(
+                            GEONO, DI, DY, T, 1., 1., 0, 0);
                     };
 
                 protected:
@@ -2504,15 +2522,15 @@ namespace dnvgl {
                         double HZ, double TY, double BT, double TT, double BP,
                         double TP,
                         double SFY, double SFZ) {
-                        return (*this)(GEONO, HZ, TY, BT, TT, BP, TP, SFY, SFZ,
-                                       0, 0, 0);
+                        return this->gtonp::operator()(
+                            GEONO, HZ, TY, BT, TT, BP, TP, SFY, SFZ, 0, 0, 0);
                     };
                     card const inline &operator() (
                         long GEONO,
                         double HZ, double TY, double BT, double TT, double BP,
                         double TP) {
-                        return (*this)(GEONO, HZ, TY, BT, TT, BP, TP, 1., 1.,
-                                       0, 0, 0);
+                        return this->gtonp::operator()(
+                            GEONO, HZ, TY, BT, TT, BP, TP, 1., 1., 0, 0, 0);
                     };
 
                 protected:
@@ -2736,16 +2754,18 @@ namespace dnvgl {
                         double const BT, double const B1, double const TT,
                         double const BB, double const B2, double const TB,
                         double const SFY, double const SFZ) {
-                        return (*this)(GEONO, HZ, TY, BT, B1, TT, BB, B2, TB,
-                                       SFY, SFZ, 0, 0, 0);
+                        return this->gusyi::operator()(
+                            GEONO, HZ, TY, BT, B1, TT, BB, B2, TB,
+                            SFY, SFZ, 0, 0, 0);
                     };
                     card const inline &operator() (
                         long const GEONO,
                         double const HZ, double const TY,
                         double const BT, double const B1, double const TT,
                         double const BB, double const B2, double const TB) {
-                        return (*this)(GEONO, HZ, TY, BT, B1, TT, BB, B2, TB,
-                                       1., 1., 0, 0, 0);
+                        return this->gusyi::operator()(
+                            GEONO, HZ, TY, BT, B1, TT, BB, B2, TB,
+                            1., 1., 0, 0, 0);
                     };
 
                 protected:

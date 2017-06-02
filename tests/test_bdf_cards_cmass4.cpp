@@ -83,10 +83,12 @@ TEST_CASE("BDF CMASS4 types output.", "[bdf_cmass4,out]" ) {
                 "CMASS4         22.900+00       6\n");
     }
 
-    SECTION("failed part") {
+    SECTION("Auto generate ID") {
+        cmass4::reset();
         long EID(0), S1(6);
         double M(2.9);
-        CHECK_THROWS(cmass4(&EID, &M, &S1));
+        cmass4 probe(&EID, &M, &S1);
+        CHECK(long(probe.EID) == 1);
     }
 
     SECTION("multiple") {

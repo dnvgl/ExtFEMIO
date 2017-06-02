@@ -37,14 +37,6 @@ using namespace std;
 using namespace dnvgl::extfem::bdf;
 using namespace cards;
 
-CATCH_TRANSLATE_EXCEPTION(std::exception& ex) {
-    return ex.what();
-}
-
-CATCH_TRANSLATE_EXCEPTION(errors::error& ex) {
-    return ex.what();
-}
-
 TEST_CASE("BDF CBAR definitions. (Small Field Format)", "[bdf_cbar]" ) {
 
     std::list<std::string> data({

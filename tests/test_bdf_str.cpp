@@ -33,14 +33,15 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem;
 using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::types;
 
 TEST_CASE("BDF str types parsing.", "[bdf_types]") {
 
-    const char* _allowed[3] = {"ONE", "TWO", "THREE"};
-    const std::set<std::string> allowed(_allowed, _allowed + 3);
+    set<std::string> const allowed({"ONE", "TWO", "THREE"});
     type_bounds::bound<std::string> str_allowed(allowed);
     type_bounds::bound<std::string> str_allowed_default(allowed, "ONE");
 
@@ -50,22 +51,22 @@ TEST_CASE("BDF str types parsing.", "[bdf_types]") {
     }
 
     SECTION("'ONE     '") {
-        entry_type<std::string> obj("dummy", str_allowed);
+        entry_type<std::string> obj("dummy", &str_allowed);
         CHECK(obj("ONE     ") == "ONE");
     }
 
     SECTION("'FOUR        '") {
-        entry_type<std::string> obj("dummy", str_allowed);
+        entry_type<std::string> obj("dummy", &str_allowed);
         CHECK_THROWS(obj("FOUR    "));
     }
 
     SECTION("'            '") {
-        entry_type<std::string> obj("dummy", str_allowed);
+        entry_type<std::string> obj("dummy", &str_allowed);
         CHECK_THROWS(obj("        "));
     }
 
     SECTION("'            ', 1") {
-        entry_type<std::string> obj("dummy", str_allowed_default);
+        entry_type<std::string> obj("dummy", &str_allowed_default);
         CHECK(obj("        ") == "ONE");
     }
 }
@@ -124,7 +125,7 @@ TEST_CASE("BDF list of str types output.", "[bdf_types]") {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&
+// compile-command: "make -C ../cbuild -j7 &&
 //    (make -C ../cbuild test;
 //     ../cbuild/tests/test_bdf_str --use-colour no)"
 // End:

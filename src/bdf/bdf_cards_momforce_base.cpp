@@ -27,11 +27,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-namespace {
-    long const cl0 = 0, cl1 = 1;
-    double const cd0 = 0.;
-}
-
 using namespace std;
 
 using namespace dnvgl::extfem;
@@ -40,21 +35,48 @@ using namespace cards;
 using namespace cards::__base;
 
 using bdf::types::entry_type;
-using namespace type_bounds;
+using type_bounds::bound;
 
-entry_type<long> const momforce::form_SID(
-    "SID", bound<long>(&cl1));
-entry_type<long> const momforce::form_G(
-    "G", bound<long>(&cl1));
-entry_type<long> const momforce::form_CID(
-    "CID", bound<long>(&cl0, nullptr, &cl0));
-entry_type<double> const momforce::form_F("F");
-entry_type<double> const momforce::form_N1(
-    "N1", bound<double>(nullptr, nullptr, &cd0));
-entry_type<double> const momforce::form_N2(
-    "N2", bound<double>(nullptr, nullptr, &cd0));
-entry_type<double> const momforce::form_N3(
-    "N3", bound<double>(nullptr, nullptr, &cd0));
+namespace {
+    auto const cl0_ = make_shared<long>(0);
+    auto const cl1_ = make_shared<long>(1);
+    auto const cd0_ = make_shared<double>(0.);
+    auto const cl0 = cl0_.get();
+    auto const cl1 = cl1_.get();
+    auto const cd0 = cd0_.get();
+}
+
+namespace {
+    auto const bound_SID_ = make_shared<bound<long>>(cl1);
+    auto const bound_SID = bound_SID_.get();
+}
+entry_type<long> momforce::form_SID("SID", bound_SID);
+namespace {
+    auto const bound_G_ = make_shared<bound<long>>(cl1);
+    auto const bound_G = bound_G_.get();
+}
+entry_type<long> momforce::form_G("G", bound_G);
+namespace {
+    auto const bound_CID_ = make_shared<bound<long>>(cl0, nullptr, cl0);
+    auto const bound_CID = bound_CID_.get();
+}
+entry_type<long> momforce::form_CID("CID", bound_CID);
+entry_type<double> momforce::form_F("F");
+namespace {
+    auto const bound_N1_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
+    auto const bound_N1 = bound_N1_.get();
+}
+entry_type<double> momforce::form_N1("N1", bound_N1);
+namespace {
+    auto const bound_N2_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
+    auto const bound_N2 = bound_N2_.get();
+}
+entry_type<double> momforce::form_N2("N2", bound_N2);
+namespace {
+    auto const bound_N3_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
+    auto const bound_N3 = bound_N3_.get();
+}
+entry_type<double> momforce::form_N3("N3", bound_N3);
 
 momforce::momforce(list<std::string> const &inp) : card(inp) {
     this->momforce::read(inp);
@@ -133,7 +155,7 @@ void momforce::collect_outdata(
     return;
 }
 
-void momforce::check_data() const {
+void momforce::check_data() {
     if (SID) momforce::form_SID.check(SID);
     if (G) momforce::form_G.check(G);
     if (CID) momforce::form_CID.check(CID);

@@ -40,24 +40,48 @@ using namespace std;
 using namespace dnvgl::extfem;
 using namespace bdf;
 using namespace cards;
+using namespace type_bounds;
+
+using bdf::types::entry_type;
 
 bdf::types::card grid::head = bdf::types::card("GRID");
 
-const bdf::types::entry_type<long> grid::form_ID(
-    "ID", bdf::type_bounds::bound<long>(&cl1, &cl1e8));
-const bdf::types::entry_type<long> grid::form_CP(
-    "CP", bdf::type_bounds::bound<long>(&cl0, nullptr, nullptr, true));
-const bdf::types::entry_type<double> grid::form_X1(
-    "X1", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
-const bdf::types::entry_type<double> grid::form_X2(
-    "X2", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
-const bdf::types::entry_type<double> grid::form_X3(
-    "X3", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
-const bdf::types::entry_type<long> grid::form_CD(
-    "CD", bdf::type_bounds::bound<long>(&cl_1, nullptr, nullptr, true));
-const bdf::types::entry_type<vector<int> > grid::form_PS("PS");
-const bdf::types::entry_type<long> grid::form_SEID(
-    "SEID", bdf::type_bounds::bound<long>(&cl_1, nullptr, &cl0));
+namespace {
+    auto const bound_ID_ = make_shared<bound<long>>(&cl1, &cl1e8);
+    auto const bound_ID = bound_ID_.get();
+}
+entry_type<long> grid::form_ID("ID", bound_ID);
+namespace {
+    auto const bound_CP_ = make_shared<bound<long>>(&cl0, nullptr, nullptr, true);
+    auto const bound_CP = bound_CP_.get();
+}
+entry_type<long> grid::form_CP("CP", bound_CP);
+namespace {
+    auto const bound_X1_ = make_shared<bound<double>>(nullptr, nullptr, &cd0);
+    auto const bound_X1 = bound_X1_.get();
+}
+entry_type<double> grid::form_X1("X1", bound_X1);
+namespace {
+    auto const bound_X2_ = make_shared<bound<double>>(nullptr, nullptr, &cd0);
+    auto const bound_X2 = bound_X2_.get();
+}
+entry_type<double> grid::form_X2("X2", bound_X2);
+namespace {
+    auto const bound_X3_ = make_shared<bound<double>>(nullptr, nullptr, &cd0);
+    auto const bound_X3 = bound_X3_.get();
+}
+entry_type<double> grid::form_X3("X3", bound_X3);
+namespace {
+    auto const bound_CD_ = make_shared<bound<long>>(&cl_1, nullptr, nullptr, true);
+    auto const bound_CD = bound_CD_.get();
+}
+entry_type<long> grid::form_CD("CD", bound_CD);
+entry_type<vector<int>> grid::form_PS("PS");
+namespace {
+    auto const bound_SEID_ = make_shared<bound<long>>(&cl_1, nullptr, &cl0);
+    auto const bound_SEID = bound_SEID_.get();
+}
+entry_type<long> grid::form_SEID("SEID", bound_SEID);
 
 grid::grid() : card(), ID(), CP(), X1(), X2(), X3(),
 CD(), PS(), SEID() {}
@@ -175,7 +199,7 @@ void grid::collect_outdata(
 finish:return;
 }
 
-void grid::check_data() const {
+void grid::check_data() {
     if (ID) form_ID.check(ID);
     if (CP) form_CP.check(CP);
     if (X1) form_X1.check(X1);

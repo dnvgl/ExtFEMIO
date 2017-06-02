@@ -29,11 +29,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-namespace {
-   long const cl0 = 0;
-   long const cl1 = 1;
-}
-
 using namespace std;
 
 using dnvgl::extfem::bdf::types::entry_type;
@@ -42,16 +37,30 @@ using dnvgl::extfem::bdf::types::entry_value;
 using namespace dnvgl::extfem;
 using namespace bdf;
 using namespace cards;
+using namespace type_bounds;
 
-entry_type<long> const grav::form_SID(
-    "SID", type_bounds::bound<long>(&cl1));
-entry_type<long> const grav::form_CID(
-    "CID", type_bounds::bound<long>(&cl0));
-entry_type<double> const grav::form_A("A");
-entry_type<double> const grav::form_Ni("Ni");
-entry_type<long> const grav::form_MB(
-    "MB",
-    type_bounds::bound<long>(nullptr, nullptr, &cl0));
+namespace {
+    auto const cl0_ = make_shared<long>(0);
+    auto const cl1_ = make_shared<long>(1);
+    auto const cl0 = cl0_.get();
+    auto const cl1 = cl1_.get();
+
+    auto const bound_SID_ = make_shared<bound<long>>(cl1);
+    auto const bound_SID = bound_SID_.get();
+}
+entry_type<long> grav::form_SID("SID", bound_SID);
+namespace {
+    auto const bound_CID_ = make_shared<bound<long>>(cl0);
+    auto const bound_CID = bound_CID_.get();
+}
+entry_type<long> grav::form_CID("CID", bound_CID);
+entry_type<double> grav::form_A("A");
+entry_type<double> grav::form_Ni("Ni");
+namespace {
+    auto const bound_MB_ = make_shared<bound<long>>(nullptr, nullptr, cl0);
+    auto const bound_MB = bound_MB_.get();
+}
+entry_type<long> grav::form_MB("MB", bound_MB);
 
 grav::grav(list<std::string> const &inp) :
 card(inp) {
@@ -155,7 +164,7 @@ void grav::collect_outdata(
         res.push_back(unique_ptr<format_entry>(format<long>(form_MB, MB)));
 }
 
-void grav::check_data() const {
+void grav::check_data() {
     if (SID) form_SID.check(SID);
     if (CID) form_CID.check(CID);
     if (A) form_A.check(A);

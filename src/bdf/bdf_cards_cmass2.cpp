@@ -30,12 +30,6 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
-namespace {
-   long const cl1 = 1;
-   long const cl0 = 0;
-   double const cd0 = 0.;
-}
-
 using namespace std;
 
 using namespace dnvgl::extfem;
@@ -46,15 +40,23 @@ using namespace cards::__base;
 
 using bdf::types::entry_type;
 
-// entry_type<long> const cmass2::form_EID(
+// entry_type<long> cmass2::form_EID(
 //    "EID", bdf::type_bounds::bound<long>(&cl1));
-entry_type<double> const cmass2::form_M("M");
-entry_type<long> const cmass2::form_G1(
-   "G1", bound<long>(nullptr, nullptr, nullptr, true));
-entry_type<vector<int> > const cmass2::form_C1("C1");
-entry_type<long> const cmass2::form_G2(
-   "G2", bound<long>(nullptr, nullptr, nullptr, true));
-entry_type<vector<int> > const cmass2::form_C2("C2");
+entry_type<double> cmass2::form_M("M");
+namespace {
+    auto const bound_G1_ = make_shared<bound<long>>(
+        nullptr, nullptr, nullptr, true);
+    auto const bound_G1 = bound_G1_.get();
+}
+entry_type<long> cmass2::form_G1("G1", bound_G1);
+entry_type<vector<int>> cmass2::form_C1("C1");
+namespace {
+    auto const bound_G2_ = make_shared<bound<long>>(
+        nullptr, nullptr, nullptr, true);
+    auto const bound_G2 = bound_G2_.get();
+}
+entry_type<long> cmass2::form_G2("G2", bound_G2);
+entry_type<vector<int> > cmass2::form_C2("C2");
 
 cmass2::cmass2() :
    element(nullptr),
@@ -66,9 +68,9 @@ element(inp) {
     this->cmass2::read(inp);
 }
 
-cmass2::cmass2(long const *EID, double const *M,
-               long const *G1, vector<int> const *C1,
-               long const *G2/*=nullptr*/, vector<int> const *C2/*=nullptr*/) :
+cmass2::cmass2(long *EID, double *M,
+               long *G1, vector<int> *C1,
+               long *G2/*=nullptr*/, vector<int> *C2/*=nullptr*/) :
                element(EID),
                M(M), G1(G1), C1(C1), G2(G2), C2(C2) {
     if (long(this->EID) < 1l || long(this->EID) > 100000000l)
@@ -157,7 +159,7 @@ cards::__base::card const &cmass2::operator()(list<std::string> const &inp) {
     return *this;
 }
 
-void cmass2::check_data() const {
+void cmass2::check_data() {
     this->element::check_data();
     if(M)  form_M.check(M);
     if(G1) form_G1.check(G1);

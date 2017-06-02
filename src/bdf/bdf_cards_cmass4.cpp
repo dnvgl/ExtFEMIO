@@ -44,11 +44,11 @@ using namespace dnvgl::extfem;
 using namespace bdf;
 using namespace cards;
 
-// entry_type<long> const cmass4::form_EID(
+// entry_type<long> cmass4::form_EID(
 //    "EID", bdf::type_bounds::bound<long>(&cl1));
-entry_type<double> const cmass4::form_M("M");
-entry_type<long> const cmass4::form_S1("S1");
-entry_type<long> const cmass4::form_S2("S2");
+entry_type<double> cmass4::form_M("M");
+entry_type<long> cmass4::form_S1("S1");
+entry_type<long> cmass4::form_S2("S2");
 
 cmass4::cmass4() :
         element(nullptr),
@@ -59,10 +59,8 @@ element(inp) {
     this->cmass4::read(inp);
 }
 
-cmass4::cmass4(long const *EID, double const *M,
-               long const *S1, long const *S2/*=nullptr*/) :
-               element(EID),
-               M(M), S1(S1), S2(S2) {
+cmass4::cmass4(long *EID, double *M, long *S1, long *S2/*=nullptr*/) :
+               element(EID), M(M), S1(S1), S2(S2) {
     this->cmass4::check_data();
 }
 
@@ -121,7 +119,7 @@ void cmass4::collect_outdata(
     return;
 }
 
-void cmass4::check_data() const {
+void cmass4::check_data() {
     this->element::check_data();
     if(M) form_M.check(M);
     if(S1) form_S1.check(S1);

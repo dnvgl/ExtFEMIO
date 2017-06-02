@@ -119,11 +119,13 @@ TEST_CASE("BDF CMASS2 types output.", "[bdf_cmass2,out]" ) {
                 "CMASS2         22.900+00       6     123\n");
     }
 
-    SECTION("failed part") {
+    SECTION("auto number EID") {
+        cmass2::reset();
         long EID(0), S1(6);
         double M(2.9);
         std::vector<int> C1({1, 2, 3});
-        CHECK_THROWS(cmass2(&EID, &M, &S1, &C1));
+        cmass2 probe(&EID, &M, &S1, &C1);
+        CHECK(long(probe.EID) == 1);
     }
 
     SECTION("multiple") {

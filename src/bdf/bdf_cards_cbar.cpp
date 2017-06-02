@@ -26,9 +26,6 @@ namespace {
 #undef W2A
 #endif
 
-#define DEB_OUT std::cerr << __FILE__ << ":" << __LINE__ << std::endl
-
-
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -45,40 +42,84 @@ using namespace cards;
 using bdf::types::entry_type;
 
 namespace {
-   long const cl1 = 1;
-   double const cd0 = 0.;
+    auto const cl1_ = make_shared<long>(1);
+    auto const cd0_ = make_shared<double>(0.);
+    auto const cl1 = cl1_.get();
+    auto const cd0 = cd0_.get();
 }
 
 bdf::types::card cbar::head = bdf::types::card("CBAR");
 
-// entry_type<long> const cbar::form_EID(
-//    "EID", bound<long>(&cl1));
-entry_type<long> const cbar::form_PID("PID");
-entry_type<long> const cbar::form_GA("GA");
-entry_type<long> const cbar::form_GB("GB");
-entry_type<double> const cbar::form_X1("X1");
-entry_type<long> const cbar::form_G0("G0", bound<long>(&cl1));
-entry_type<double> const cbar::form_X2(
-    "X2", bound<double>(nullptr, nullptr, nullptr, true));
-entry_type<double> const cbar::form_X3(
-    "X3", bound<double>(nullptr, nullptr, nullptr, true));
-entry_type<std::string> const cbar::form_OFFT(
-    "OFFT", bound<std::string>({
-    "GGG", "BGG", "GGO", "BGO", "GOG", "BOG", "GOO", "BOO"}, "GGG"));
-entry_type<vector<int> > const cbar::form_PA("PA");
-entry_type<vector<int> > const cbar::form_PB("PB");
-entry_type<double> const cbar::form_W1A(
-    "W1A", bound<double>(nullptr, nullptr, &cd0));
-entry_type<double> const cbar::form_W2A(
-    "W2A", bound<double>(nullptr, nullptr, &cd0));
-entry_type<double> const cbar::form_W3A(
-    "W3A", bound<double>(nullptr, nullptr, &cd0));
-entry_type<double> const cbar::form_W1B(
-    "W1B", bound<double>(nullptr, nullptr, &cd0));
-entry_type<double> const cbar::form_W2B(
-    "W2B", bound<double>(nullptr, nullptr, &cd0));
-entry_type<double> const cbar::form_W3B(
-    "W3B", bound<double>(nullptr, nullptr, &cd0));
+// entry_type<long> cbar::form_EID(
+//    "EID", bound<long>(cl1));
+entry_type<long> cbar::form_PID("PID");
+entry_type<long> cbar::form_GA("GA");
+entry_type<long> cbar::form_GB("GB");
+entry_type<double> cbar::form_X1("X1");
+namespace {
+    auto const bound_G0_ = make_shared<bound<long>>(cl1);
+    auto const bound_G0 = bound_G0_.get();
+}
+entry_type<long> cbar::form_G0("G0", bound_G0);
+namespace {
+    auto const bound_X2_ = make_shared<bound<double>>(
+        nullptr, nullptr, nullptr, true);
+    auto const bound_X2 = bound_X2_.get();
+}
+entry_type<double> cbar::form_X2("X2", bound_X2);
+namespace {
+    auto const bound_X3_ = make_shared<bound<double>>(
+        nullptr, nullptr, nullptr, true);
+    auto const bound_X3 = bound_X3_.get();
+}
+entry_type<double> cbar::form_X3("X3", bound_X3);
+namespace {
+    set<std::string> allowed{
+        "GGG", "BGG", "GGO", "BGO", "GOG", "BOG", "GOO", "BOO"};
+    std::string default_val("GGG");
+    auto const bound_OFFT_ = make_shared<bound<std::string>>(
+        allowed, default_val);
+    auto const bound_OFFT = bound_OFFT_.get();
+}
+entry_type<std::string> cbar::form_OFFT("OFFT", bound_OFFT);
+entry_type<vector<int>> cbar::form_PA("PA");
+entry_type<vector<int>> cbar::form_PB("PB");
+namespace {
+    auto const bound_W1A_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
+    // default=0.
+    auto const bound_W1A = bound_W1A_.get();
+}
+entry_type<double> cbar::form_W1A("W1A", bound_W1A);
+namespace {
+    auto const bound_W2A_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
+    // default=0.
+    auto const bound_W2A = bound_W2A_.get();
+}
+entry_type<double> cbar::form_W2A("W2A", bound_W2A);
+namespace {
+    auto const bound_W3A_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
+    // default=0.
+    auto const bound_W3A = bound_W3A_.get();
+}
+entry_type<double> cbar::form_W3A("W3A", bound_W3A);
+namespace {
+    auto const bound_W1B_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
+    // default=0.
+    auto const bound_W1B = bound_W1B_.get();
+}
+entry_type<double> cbar::form_W1B("W1B", bound_W1B);
+namespace {
+    auto const bound_W2B_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
+    // default=0.
+    auto const bound_W2B = bound_W2B_.get();
+}
+entry_type<double> cbar::form_W2B("W2B", bound_W2B);
+namespace {
+    auto const bound_W3B_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
+    // default=0.
+    auto const bound_W3B = bound_W3B_.get();
+}
+entry_type<double> cbar::form_W3B("W3B", bound_W3B);
 
 cbar::cbar(list<std::string> const &inp) :
 element(inp) {
@@ -95,15 +136,12 @@ cbar::cbar() :
         W1B(nullptr), W2B(nullptr), W3B(nullptr) {}
 
 cbar::cbar(
-    long const *EID, long const *PID,
-    long const *GA, long const *GB,
-    double const *X1, double const *X2, double const *X3,
-    std::string const *OFFT,
-    vector<int> const *PA,
-    vector<int> const *PB,
-    double const *W1A, double const *W2A,
-    double const *W3A, double const *W1B,
-    double const *W2B, double const *W3B) :
+    long *EID, long *PID, long *GA, long *GB,
+    double *X1, double *X2, double *X3,
+    std::string *OFFT,
+    vector<int> *PA, vector<int> *PB,
+    double *W1A, double *W2A, double *W3A,
+    double *W1B, double *W2B, double *W3B) :
     element(EID),
     choose_dir_code(CHOOSE_DIR_CODE::has_DVEC), PID(*PID),
     GA(*GA), GB(*GB), X1(*X1), G0(nullptr), X2(*X2), X3(*X3),
@@ -115,13 +153,13 @@ cbar::cbar(
 }
 
 cbar::cbar(
-    long const *EID, long const *PID,
-    long const *GA, long const *GB, long const *G0,
-    std::string const *OFFT,
-    vector<int> const *PA, vector<int> const *PB,
-    double const *W1A, double const *W2A,
-    double const *W3A, double const *W1B,
-    double const *W2B, double const *W3B) :
+    long *EID, long *PID,
+    long *GA, long *GB, long *G0,
+    std::string *OFFT,
+    vector<int> *PA, vector<int> *PB,
+    double *W1A, double *W2A,
+    double *W3A, double *W1B,
+    double *W2B, double *W3B) :
     element(EID),
     choose_dir_code(CHOOSE_DIR_CODE::has_DCODE), PID(*PID),
     GA(*GA), GB(*GB), X1(), G0(*G0), X2(), X3(),
@@ -320,7 +358,7 @@ cont:
     return;
 }
 
-void cbar::check_data() const {
+void cbar::check_data() {
     this->element::check_data();
     if (PID) cbar::form_PID.check(this->PID);
     if (GA) cbar::form_GA.check(this->GA);
@@ -345,7 +383,7 @@ void cbar::check_data() const {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&
+// compile-command: "make -C ../../cbuild -j7 &&
 //    (make -C ../../cbuild test;
 //     ../../cbuild/tests/test_bdf_cards --use-colour no)"
 // End:

@@ -26,6 +26,8 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem::bdf;
 
 using types::entry_type;
@@ -34,13 +36,15 @@ using namespace type_bounds;
 using namespace cards::__base;
 
 namespace {
-   long const cl1 = 1;
+    auto const cl1_ = make_shared<long>(1);
+    auto const cl1 = cl1_.get();
+
+    auto const MID_bound_ = make_shared<bound<long>>(cl1, nullptr, nullptr, true);
+    auto const MID_bound = MID_bound_.get();
 }
+entry_type<long> beam_base::form_MID("MID", MID_bound);
 
-const entry_type<long> beam_base::form_MID(
-    "MID", bound<long>(&cl1, nullptr, nullptr, true));
-
-beam_base::beam_base(const std::list<std::string> &inp) :
+beam_base::beam_base(const list<std::string> &inp) :
         property(inp) {}
 
 beam_base::beam_base(long const *PID, long const *MID) :
@@ -56,7 +60,7 @@ card const &beam_base::operator() (long const *PID, long const *MID) {
     return *this;
 }
 
-beam_prop::beam_prop(const std::list<std::string> &inp) :
+beam_prop::beam_prop(const list<std::string> &inp) :
         beam_base(inp) {}
 
 beam_prop::beam_prop(long const *PID, long const *MID) :

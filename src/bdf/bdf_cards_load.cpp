@@ -34,7 +34,8 @@ using namespace std;
 using namespace rel_ops;
 
 namespace {
-   long const cl1 = 1;
+    auto const cl1_ = make_shared<long>(1);
+    auto const cl1 = cl1_.get();
 }
 
 using namespace dnvgl::extfem;
@@ -43,13 +44,20 @@ using namespace cards;
 
 using bdf::types::entry_type;
 using bdf::types::entry_value;
+using type_bounds::bound;
 
-entry_type<long> const load::form_SID(
-    "SID", type_bounds::bound<long>(&cl1));
-entry_type<double> const load::form_S("S");
-entry_type<double> const load::form_Si("Si");
-entry_type<long> const load::form_Li(
-    "Li", type_bounds::bound<long>(&cl1));
+namespace {
+    auto const bound_SID_ = make_shared<bound<long>>(cl1);
+    auto const bound_SID = bound_SID_.get();
+}
+entry_type<long> load::form_SID("SID", bound_SID);
+entry_type<double> load::form_S("S");
+entry_type<double> load::form_Si("Si");
+namespace {
+    auto const bound_Li_ = make_shared<bound<long>>(cl1);
+    auto const bound_Li = bound_Li_.get();
+}
+entry_type<long> load::form_Li("Li", bound_Li);
 
 load::load() : SID(nullptr), S(nullptr), Si(), Li() {}
 
@@ -134,7 +142,7 @@ void load::collect_outdata(
     return;
 }
 
-void load::check_data() const {
+void load::check_data() {
     if (SID) load::form_SID.check(SID);
     if (S) load::form_S.check(S);
     if (Si.size())

@@ -39,16 +39,27 @@ using namespace cards;
 using bdf::types::entry_type;
 
 namespace {
-    const long cl0 = 0, cl1 = 1;
-    const double cd0 = 0., cd05 = 0.5, cd_1 = -1.;
+    auto const cd0_ = make_shared<double>(0.);
+    auto const cd0 = cd0_.get();
+    auto const cd05_ = make_shared<double>(0.5);
+    auto const cd05 = cd05_.get();
+    auto const cd_1_ = make_shared<double>(-1.);
+    auto const cd_1 = cd_1_.get();
 }
 
 bdf::types::card mat1::head = bdf::types::card("MAT1");
 
-const entry_type<double> mat1::form_E(
-    "E", bound<double>(&cd0, nullptr, nullptr, true));
-const entry_type<double> mat1::form_NU(
-    "NU", bound<double>(&cd_1, &cd05, nullptr, true));
+namespace {
+    auto const bound_E_ = make_shared<bound<double>>(
+        cd0, nullptr, nullptr, true);
+    auto const bound_E = bound_E_.get();
+}
+entry_type<double> mat1::form_E("E", bound_E);
+namespace {
+    auto const bound_NU_ = make_shared<bound<double>>(cd_1, cd05, nullptr, true);
+    auto const bound_NU = bound_NU_.get();
+}
+entry_type<double> mat1::form_NU("NU", bound_NU);
 
 mat1::mat1(list<std::string> const &inp) :
 mat(inp) {
@@ -217,7 +228,7 @@ void mat1::collect_outdata(
 finish:return;
 }
 
-void mat1::check_data() const {
+void mat1::check_data() {
     this->mat::check_data();
     if (E) mat1::form_E.check(E);
     if (NU) mat1::form_NU.check(NU);

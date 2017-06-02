@@ -211,12 +211,9 @@ TEST_CASE("BDF PBEAM definitions (Tapered Beam).", "[bdf_pbeam]") {
     CHECK(probe.E2 == vector<double>({0., 0.}));
     CHECK(probe.F1 == vector<double>({0., 0.}));
     CHECK(probe.F2 == vector<double>({0., 0.}));
-    vector<dnvgl::extfem::bdf::types::entry_value<std::string> > ref(1);
-    dnvgl::extfem::bdf::types::entry_type<std::string> tmp("tmp");
-    tmp.set_value(ref.front(), "YES");
-    CHECK(probe.SO == ref);
+    CHECK(vector<std::string>(probe.SO.begin(), probe.SO.end()) ==
+          vector<string>(1, "YES"));
     CHECK(probe.X_XB == vector<double>({1.}));
-
     CHECK(double(probe.K1) == 1.);
     CHECK(double(probe.K2) == 1.);
     CHECK(double(probe.S1) == 1.1);

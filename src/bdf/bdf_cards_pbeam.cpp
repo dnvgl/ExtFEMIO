@@ -40,85 +40,180 @@ using namespace bdf;
 using namespace cards;
 
 using bdf::types::entry_type;
+using bdf::type_bounds::bound;
 
 namespace {
-    const double cd0 = 0., cd1 = 1.;
+    auto const cd0_ = make_shared<double>(0.);
+    auto const cd1_ = make_shared<double>(1.);
+    auto const cd0 = cd0_.get();
+    auto const cd1 = cd1_.get();
+     // const double cd0 = 0., cd1 = 1.;
 }
 
 bdf::types::card pbeam::head = bdf::types::card("PBEAM");
 
-const entry_type<double> pbeam::form_A("A");
-const entry_type<double> pbeam::form_I1("I1");
-const entry_type<double> pbeam::form_I2("I2");
-const entry_type<double> pbeam::form_I12(
-    "I12", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-const entry_type<double> pbeam::form_J(
-    "J", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-const entry_type<double> pbeam::form_NSM(
-    "NSM", bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-const entry_type<double> pbeam::form_C1(
-    "C1", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
-const entry_type<double> pbeam::form_C2(
-    "C2", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
-const entry_type<double> pbeam::form_D1(
-    "D1", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
-const entry_type<double> pbeam::form_D2(
-    "D2", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
-const entry_type<double> pbeam::form_E1(
-    "E1", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
-const entry_type<double> pbeam::form_E2(
-    "E2", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
-const entry_type<double> pbeam::form_F1(
-    "F1", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
-const entry_type<double> pbeam::form_F2(
-    "F2", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
+entry_type<double> pbeam::form_A("A");
+entry_type<double> pbeam::form_I1("I1");
+entry_type<double> pbeam::form_I2("I2");
+namespace {
+    auto const bound_I12_ = make_shared<bound<double>>(
+        nullptr, nullptr, nullptr, true);
+    auto const bound_I12 = bound_I12_.get();
+}
+entry_type<double> pbeam::form_I12("I12", bound_I12);
+namespace {
+    auto const bound_J_ = make_shared<bound<double>>(
+        nullptr, nullptr, nullptr, true);
+    auto const bound_J = bound_J_.get();
+}
+entry_type<double> pbeam::form_J("J", bound_J);
+namespace {
+    auto const bound_NSM_ = make_shared<bound<double>>(
+        nullptr, nullptr, nullptr, true);
+    auto const bound_NSM = bound_NSM_.get();
+}
+entry_type<double> pbeam::form_NSM("NSM", bound_NSM);
+namespace {
+    auto const bound_C1_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
+    auto const bound_C1 = bound_C1_.get();
+}
+entry_type<double> pbeam::form_C1("C1", bound_C1);
+namespace {
+    auto const bound_C2_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
+    auto const bound_C2 = bound_C2_.get();
+}
+entry_type<double> pbeam::form_C2("C2", bound_C2);
+namespace {
+    auto const bound_D1_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
+    auto const bound_D1 = bound_D1_.get();
+}
+entry_type<double> pbeam::form_D1("D1", bound_D1);
+namespace {
+    auto const bound_D2_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
+    auto const bound_D2 = bound_D2_.get();
+}
+entry_type<double> pbeam::form_D2("D2", bound_D2);
+namespace {
+    auto const bound_E1_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
+    auto const bound_E1 = bound_E1_.get();
+}
+entry_type<double> pbeam::form_E1("E1", bound_E1);
+namespace {
+    auto const bound_E2_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
+    auto const bound_E2 = bound_E2_.get();
+}
+entry_type<double> pbeam::form_E2("E2", bound_E2);
+namespace {
+    auto const bound_F1_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
+    auto const bound_F1 = bound_F1_.get();
+}
+entry_type<double> pbeam::form_F1("F1", bound_F1);
+namespace {
+    auto const bound_F2_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
+    auto const bound_F2 = bound_F2_.get();
+}
+entry_type<double> pbeam::form_F2("F2", bound_F2);
 // fields that might appear more than once
 namespace {
-    const std::set<std::string> SO_set({"YES", "YESA", "NO"});
+    set<std::string> const SO_set({"YES", "YESA", "NO"});
+    auto const bound_SO_ = make_shared<bound<std::string>>(SO_set);
+    auto const bound_SO = bound_SO_.get();
 }
-const entry_type<std::string> pbeam::form_SO(
-    "SO", bdf::type_bounds::bound<std::string>(SO_set));
-const entry_type<double> pbeam::form_X_XB(
-    "X/XB", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
+entry_type<std::string> pbeam::form_SO("SO", bound_SO);
+namespace {
+    auto const bound_X_XB_ = make_shared<bound<double>>(cd0, nullptr, cd1);
+    auto const bound_X_XB = bound_X_XB_.get();
+}
+entry_type<double> pbeam::form_X_XB("X/XB", bound_X_XB);
 // fields_finish
-const entry_type<double> pbeam::form_K1(
-    "K1", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd1));
-const entry_type<double> pbeam::form_K2(
-    "K2", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd1));
-const entry_type<double> pbeam::form_S1(
-    "S1", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
-const entry_type<double> pbeam::form_S2(
-    "S2", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
-const entry_type<double> pbeam::form_NSI_A(
-    "NSI_A", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
-const entry_type<double> pbeam::form_NSI_B(
-    "NSI_B",
-    bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-const entry_type<double> pbeam::form_CW_A(
-    "CW_A", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
-const entry_type<double> pbeam::form_CW_B(
-    "CW_B",
-    bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-const entry_type<double> pbeam::form_M1_A(
-    "M1_A", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
-const entry_type<double> pbeam::form_M2_A(
-    "M2_A", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
-const entry_type<double> pbeam::form_M1_B(
-    "M1_B",
-    bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-const entry_type<double> pbeam::form_M2_B(
-    "M2_B",
-    bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-const entry_type<double> pbeam::form_N1_A(
-    "N1_A", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
-const entry_type<double> pbeam::form_N2_A(
-    "N2_A", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
-const entry_type<double> pbeam::form_N1_B(
-    "N1_B",
-    bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-const entry_type<double> pbeam::form_N2_B(
-    "N2_B",
-    bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+namespace {
+    auto const bound_K1_ = make_shared<bound<double>>(nullptr, nullptr, cd1);
+    auto const bound_K1 = bound_K1_.get();
+}
+entry_type<double> pbeam::form_K1("K1", bound_K1);
+namespace {
+    auto const bound_K2_ = make_shared<bound<double>>(nullptr, nullptr, cd1);
+    auto const bound_K2 = bound_K2_.get();
+}
+entry_type<double> pbeam::form_K2("K2", bound_K2);
+namespace {
+    auto const bound_S1_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
+    auto const bound_S1 = bound_S1_.get();
+}
+entry_type<double> pbeam::form_S1("S1", bound_S1);
+namespace {
+    auto const bound_S2_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
+    auto const bound_S2 = bound_S2_.get();
+}
+entry_type<double> pbeam::form_S2("S2", bound_S2);
+namespace {
+    auto const bound_NSI_A_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
+    auto const bound_NSI_A = bound_NSI_A_.get();
+}
+entry_type<double> pbeam::form_NSI_A("NSI_A", bound_NSI_A);
+namespace {
+    auto const bound_NSI_B_ = make_shared<bound<double>>(
+        nullptr, nullptr, nullptr, true);
+    auto const bound_NSI_B = bound_NSI_B_.get();
+}
+entry_type<double> pbeam::form_NSI_B("NSI_B", bound_NSI_B);
+namespace {
+    auto const bound_CW_A_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
+    auto const bound_CW_A = bound_CW_A_.get();
+}
+entry_type<double> pbeam::form_CW_A("CW_A", bound_CW_A);
+namespace {
+    auto const bound_CW_B_ = make_shared<bound<double>>(
+        nullptr, nullptr, nullptr, true);
+    auto const bound_CW_B = bound_CW_B_.get();
+}
+entry_type<double> pbeam::form_CW_B("CW_B", bound_CW_B);
+namespace {
+    auto const bound_M1_A_ = make_shared<bound<double>>(
+        nullptr, nullptr, nullptr, true);
+    auto const bound_M1_A = bound_M1_A_.get();
+}
+entry_type<double> pbeam::form_M1_A("M1_A", bound_M1_A);
+namespace {
+    auto const bound_M2_A_ = make_shared<bound<double>>(
+        nullptr, nullptr, nullptr, true);
+    auto const bound_M2_A = bound_M2_A_.get();
+}
+entry_type<double> pbeam::form_M2_A("M2_A", bound_M2_A);
+namespace {
+    auto const bound_M1_B_ = make_shared<bound<double>>(
+        nullptr, nullptr, nullptr, true);
+    auto const bound_M1_B = bound_M1_B_.get();
+}
+entry_type<double> pbeam::form_M1_B("M1_B", bound_M1_B);
+namespace {
+    auto const bound_M2_B_ = make_shared<bound<double>>(
+        nullptr, nullptr, nullptr, true);
+    auto const bound_M2_B = bound_M2_B_.get();
+}
+entry_type<double> pbeam::form_M2_B("M2_B", bound_M2_B);
+namespace {
+    auto const bound_N1_A_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
+    auto const bound_N1_A = bound_N1_A_.get();
+}
+entry_type<double> pbeam::form_N1_A("N1_A", bound_N1_A);
+namespace {
+    auto const bound_N2_A_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
+    auto const bound_N2_A = bound_N2_A_.get();
+}
+entry_type<double> pbeam::form_N2_A("N2_A", bound_N2_A);
+namespace {
+    auto const bound_N1_B_ = make_shared<bound<double>>(
+        nullptr, nullptr, nullptr, true);
+    auto const bound_N1_B = bound_N1_B_.get();
+}
+entry_type<double> pbeam::form_N1_B("N1_B", bound_N1_B);
+namespace {
+    auto const bound_N2_B_ = make_shared<bound<double>>(
+        nullptr, nullptr, nullptr, true);
+    auto const bound_N2_B = bound_N2_B_.get();
+}
+entry_type<double> pbeam::form_N2_B("N2_B",bound_N2_B);
 
 pbeam::pbeam(list<std::string> const &inp) :
 beam_prop(inp) {
@@ -685,7 +780,7 @@ cont:
     return;
 }
 
-void pbeam::check_data() const {
+void pbeam::check_data() {
     this->beam_prop::check_data();
     size_t base_size{A.size()};
     if (I1.size() != base_size)
@@ -720,7 +815,7 @@ void pbeam::check_data() const {
     if (base_size && X_XB.size() != base_size-1)
         throw errors::form_error("PBEAM", "wrong size for X_XB");
 
-    if (A.size()>0) for (auto pos : A) pbeam::form_A.check(pos);
+    if (A.size()>0) for (auto const pos : A) pbeam::form_A.check(pos);
     if (I1.size()>0) for (auto pos : I1) pbeam::form_I1.check(pos);
     if (I2.size()>0) for (auto pos : I2) pbeam::form_I2.check(pos);
     if (I12.size()>0) for (auto pos : I12) pbeam::form_I12.check(pos);

@@ -661,7 +661,7 @@ void unknown::collect_outdata(
     throw errors::error("UNKNOWN", "can't write UNKNOWN.");
 }
 
-void unknown::check_data() const {}
+void unknown::check_data() {}
 
 void unknown::read(list<std::string> const &inp) {
 }
@@ -669,6 +669,9 @@ void unknown::read(list<std::string> const &inp) {
 cards::__base::card const &unknown::operator()(list<std::string> const &inp) {
     this->unknown::read(inp);
     return *this;
+}
+
+void cards::__base::card::reset() {
 }
 
 // Local Variables:

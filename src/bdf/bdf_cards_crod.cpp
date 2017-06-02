@@ -38,26 +38,39 @@ using namespace cards::__base;
 using bdf::types::entry_type;
 
 namespace {
-   long const cl1 = 1;
+    auto const cl1_ = make_shared<long>(1);
+    auto const cl1 = cl1_.get();
 }
 
 bdf::types::card crod::head = bdf::types::card("CROD");
 
-// const entry_type<long> crod::form_EID(
-//    "EID", bdf::type_bounds::bound<long>(&cl1));
-const entry_type<long> crod::form_PID(
-    "PID", bound<long>(&cl1, nullptr, nullptr, true));
-const entry_type<long> crod::form_G1("G1", bound<long>(&cl1));
-const entry_type<long> crod::form_G2("G2", bound<long>(&cl1));
+// entry_type<long> crod::form_EID(
+//    "EID", bdf::type_bounds::bound_unique<long>(&cl1));
+namespace{
+    auto const bound_PID_ = make_shared<bound<long>>(
+        cl1, nullptr, nullptr, true);
+    auto const bound_PID = bound_PID_.get();
+}
+entry_type<long> crod::form_PID("PID", bound_PID);
+namespace{
+    auto const bound_G1_ = make_shared<bound<long>>(cl1);
+    auto const bound_G1 = bound_G1_.get();
+}
+entry_type<long> crod::form_G1("G1", bound_G1);
+namespace{
+    auto const bound_G2_ = make_shared<bound<long>>(cl1);
+    auto const bound_G2 = bound_G2_.get();
+}
+entry_type<long> crod::form_G2("G2", bound_G2);
 
 crod::crod() : element(), PID(nullptr), G1(), G2() {}
 
 crod::crod(list<std::string> const &inp) :
-element(inp) {
+        element(inp) {
     this->crod::read(inp);
 }
 
-crod::crod(long const* EID, long const* PID, long const* G1, long const* G2) :
+crod::crod(long *EID, long *PID, long *G1, long *G2) :
         element(EID), PID(PID ? PID : EID), G1(G1), G2(G2) {
     this->crod::check_data();
 }
@@ -87,7 +100,8 @@ void crod::read(list<std::string> const &inp) {
         throw errors::parse_error(
             "CROD", "Illegal number of entries for CROD");
     }
-    if (!PID) PID(EID);
+    if (!PID) PID(&EID.value);
+         // &long(EID));
 }
 
 card const& crod::operator() (
@@ -115,7 +129,7 @@ void crod::collect_outdata(
     res.push_back(unique_ptr<format_entry>(format<long>(form_G2, G2)));
 }
 
-void crod::check_data() const {
+void crod::check_data() {
     this->element::check_data();
     if (PID) form_PID.check(this->PID);
     if (G1) form_G1.check(this->G1);

@@ -17,35 +17,34 @@ namespace {
         "@(#) $Id$";
 }
 
-#include "bdf/type_bounds.h"
+#include "bdf/types.h"
 
 using namespace dnvgl::extfem::bdf::type_bounds;
-using namespace __base;
 
-bool type_bound::has_min() const {
+bool __base::type_bound::has_min() const {
     return _has_min;
 }
 
-void type_bound::got_min() {
+void __base::type_bound::got_min() {
     _has_min = true;
 }
 
-bool type_bound::has_max() const {
+bool __base::type_bound::has_max() const {
     return _has_max;
 }
 
-void type_bound::got_max() {
+void __base::type_bound::got_max() {
     _has_max = true;
 }
 
-void type_bound::got_default() {
+void __base::type_bound::got_default() {
     _has_default = true;
 }
 
-type_bound::type_bound() :
+__base::type_bound::type_bound() :
 _has_min(false), _has_max(false), _has_default(false) {}
 
-bool type_bound::has_default() const {
+bool __base::type_bound::has_default() const {
     return _has_default;
 }
 
@@ -54,5 +53,7 @@ bool type_bound::has_default() const {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j7&&
+//   (make -C ../../cbuild test;
+//    ../../cbuild/tests/test_bdf_bounds --use-colour no)"
 // End:

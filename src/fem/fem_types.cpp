@@ -1,4 +1,4 @@
-/**
+/*!
    \file
    \author Berthold Höllmann <berthold.hoellmann@dnvgl.com>
    \copyright Copyright © 2015 by DNV GL SE
@@ -30,7 +30,7 @@ __base::b_type::b_type(const std::string &name) : name(name) {}
 
 std::istringstream __base::b_type::conv;
 
-/// std::set input and output locale for conv
+//! std::set input and output locale for conv
 static __base::imbue_helper _imbue_helper(std::locale::classic());
 
 __base::imbue_helper::imbue_helper(std::locale const &loc) : b_type("") {

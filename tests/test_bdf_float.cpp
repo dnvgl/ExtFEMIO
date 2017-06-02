@@ -27,6 +27,8 @@ namespace {
 #include "config.h"
 #endif
 
+#include <memory>
+
 #include "bdf/types.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
@@ -35,18 +37,23 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+using namespace std;
+
 using namespace dnvgl::extfem;
 using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::types;
 using namespace dnvgl::extfem::bdf::type_bounds;
 
 namespace {
-    const double cd0 = 0.;
+    auto const cd0_ = make_shared<double>(0.);
+    auto const cd0 = cd0_.get();
 }
 
 TEST_CASE("BDF float types parsing.", "[bdf_types]") {
 
-    entry_type<double> probe("dummy", bound<double>(nullptr, nullptr, &cd0));
+    auto const bound_dummy_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
+    auto const bound_dummy = bound_dummy_.get();
+    entry_type<double> probe("dummy", bound_dummy);
 
     SECTION("'   1.   '") {
         CHECK(probe("   1.   ").value == 1.);
@@ -65,12 +72,14 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]") {
     }
 
     SECTION("'  -1.   ', min 0.") {
-        entry_type<double> probe1("dummy", bound<double>(&cd0, nullptr, &cd0));
+        auto const bound_dummy_ = make_shared<bound<double>>(cd0, nullptr, cd0);
+        auto const bound_dummy = bound_dummy_.get();
+        entry_type<double> probe1("dummy", bound_dummy);
         CHECK_THROWS(probe1("  -1.   "));
     }
 
     SECTION("Quick Reference") {
-        std::vector<std::string> samples;
+        vector<std::string> samples;
         CHECK(probe("   7.0  ").value == 7.);
         CHECK(probe("   7.   ").value == 7.);
         CHECK(probe("   .7   ").value == .7);
@@ -109,7 +118,9 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]") {
     }
 
     SECTION("'        ', no default") {
-        entry_type<double> probel("dummy", bound<double>(nullptr, nullptr, nullptr));
+        auto const bound_dummy = make_shared<bound<double>>(
+            nullptr, nullptr, nullptr);
+        entry_type<double> probel("dummy", bound_dummy.get());
         CHECK_THROWS(probel("        "));
     }
 
@@ -150,8 +161,9 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]") {
     }
 
     SECTION("'        '") {
-        entry_type<double> probe_l(
-            "probe", bound<double>(nullptr, nullptr, nullptr, true));
+        auto const bound_probe_l = make_shared<bound<double>>(
+            nullptr, nullptr, nullptr, true);
+        entry_type<double> probe_l("probe", bound_probe_l.get());
         CHECK_FALSE(probe_l("        "));
     }
 }
@@ -296,7 +308,7 @@ TEST_CASE("Negative zero", "[bdf_types]") {
 // mode: c++
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&
+// compile-command: "make -C ../cbuild -j7 &&
 //    (make -C ../cbuild test;
 //     ../cbuild/tests/test_bdf_float --use-colour no)"
 // coding: utf-8

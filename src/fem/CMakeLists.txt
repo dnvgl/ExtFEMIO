@@ -96,6 +96,11 @@ if (COMMAND cotire)
     COTIRE_CXX_PREFIX_HEADER_INIT "${CMAKE_SOURCE_DIR}/src/StdAfx.h")
 endif()
 
+set (EXTFEM_LIBS extfemio_bdf extfemio ${BOOST_LIBS})
+set (EXTFEM_BDF_LIBS extfemio_bdf extfemio ${BOOST_LIBS})
+set (EXTFEM_FEM_LIBS extfemio_fem extfemio ${BOOST_LIBS})
+set (EXTFEM_SUPPORT_LIBS extfemio_support extfemio ${BOOST_LIBS})
+
 target_include_directories (extfemio_fem PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/include ${CMAKE_SOURCE_DIR}/src)
 

@@ -29,10 +29,15 @@ using namespace cards::__base;
 using types::entry_type;
 
 namespace {
-   const long cl1 = 1;
+    auto const cl1_ = make_shared<long>(1);
+    auto const cl1 = cl1_.get();
 }
 
-const entry_type<long> property::form_PID("PID", bound<long>(&cl1));
+namespace {
+    auto const bound_PID_ = make_shared<bound<long>>(cl1);
+    auto const bound_PID = bound_PID_.get();
+}
+entry_type<long> property::form_PID("PID", bound_PID);
 
 property::property(long const *PID) : card(), PID(PID) {
     if (property::used_pid.find(*PID) != property::used_pid.end()) {
@@ -50,7 +55,7 @@ property::property(list<std::string> const &inp) : card(inp) {
     property::used_pid.insert(PID);
 }
 
-void property::read(std::list<std::string> const &inp) {
+void property::read(list<std::string> const &inp) {
     auto pos = inp.begin();
 
     if (inp.size() < 2)
@@ -60,7 +65,7 @@ void property::read(std::list<std::string> const &inp) {
     form_PID.set_value(PID, *(++pos));
 }
 
-void property::check_data() const {
+void property::check_data() {
     if (PID) property::form_PID.check(PID);
 }
 

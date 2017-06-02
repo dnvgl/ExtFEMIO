@@ -15,6 +15,7 @@ set(LIBEXTFEMIO_BDF_SOURCES
   bdf_types_float.cpp
   bdf_types_int.cpp
   bdf_types_list_int.cpp
+  bdf_entry_type.cpp
   bdf_file.cpp
   bdf_l_geom.cpp
   bdf_errors.cpp
@@ -74,7 +75,9 @@ set(LIBEXTFEMIO_BDF_HEADERS
   ${CMAKE_SOURCE_DIR}/include/bdf/file.h
   ${CMAKE_SOURCE_DIR}/include/bdf/header.h
   ${CMAKE_SOURCE_DIR}/include/bdf/type_bounds.h
-  ${CMAKE_SOURCE_DIR}/include/bdf/types.h)
+  ${CMAKE_SOURCE_DIR}/include/bdf/types.h
+  ${CMAKE_SOURCE_DIR}/include/bdf/entry_type.h
+  ${CMAKE_SOURCE_DIR}/include/bdf/entry_value.h)
 add_library (extfemio_bdf STATIC
   ${LIBEXTFEMIO_BDF_SOURCES}
   ${LIBEXTFEMIO_BDF_HEADERS})

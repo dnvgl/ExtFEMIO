@@ -49,7 +49,7 @@ void enddata::collect_outdata(
     return;
 }
 
-void enddata::check_data() const {
+void enddata::check_data() {
 }
 
 cards::__base::card const &enddata::operator()(list<std::string> const &inp) {

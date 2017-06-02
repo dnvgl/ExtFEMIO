@@ -104,31 +104,40 @@ TEST_CASE("BDF PARAM types output.", "[bdf_param,out]") {
     std::ostringstream test;
 
     SECTION("output int") {
-        param probe("int", long(123));
+        std::string name{"int"};
+        long val{123};
+        param probe(name, val);
         test << probe;
         CHECK(test.str() == "PARAM   INT          123\n");
     }
 
     SECTION("output char") {
-        param probe("chr", "123");
+        std::string name{"chr"}, val{"123"};
+        param probe(name, val);
         test << probe;
         CHECK(test.str() == "PARAM   CHR     123     \n");
     }
 
     SECTION("output double") {
-        param probe("dble", 123e1);
+        std::string name{"dble"};
+        double val{123e1};
+        param probe(name, val);
         test << probe;
         CHECK(test.str() == "PARAM   DBLE    1.230+03\n");
     }
 
     SECTION("output complex 1") {
-        param probe("cmplx", 1e1, 1e1);
+        std::string name{"cmplx"};
+        double val1{1e1}, val2{1e1};
+        param probe(name, val1, val2);
         test << probe;
         CHECK(test.str() == "PARAM   CMPLX   1.000+011.000+01\n");
     }
 
     SECTION("output complex 2") {
-        param probe("cmplx", std::complex<double>(1e1, 1e1));
+        std::string name{"cmplx"};
+        std::complex<double> val(1e1, 1e1);
+        param probe(name, val);
         test << probe;
         CHECK(test.str() == "PARAM   CMPLX   1.000+011.000+01\n");
     }
@@ -139,7 +148,7 @@ TEST_CASE("BDF PARAM types output.", "[bdf_param,out]") {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&
+// compile-command: "make -C ../cbuild -j7&&
 //    (make -C ../cbuild test;
 //     ../cbuild/tests/test_bdf_cards --use-colour no)"
 // End:

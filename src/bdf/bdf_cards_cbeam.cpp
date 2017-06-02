@@ -38,45 +38,105 @@ using namespace cards;
 using bdf::types::entry_type;
 
 namespace {
-    const long lc1 = 1;
-    const double dc0 = 0.;
+    auto const cl1_ = make_shared<long>(1);
+    auto const cd0_ = make_shared<double>(0.);
+    auto const cl1 = cl1_.get();
+    auto const cd0 = cd0_.get();
 }
 
 bdf::types::card cbeam::head = bdf::types::card("CBEAM");
 
-// const entry_type<long> cbeam::form_EID(
-//    "EID", bound<long>(&lc1));
-const entry_type<long> cbeam::form_PID("PID");
-const entry_type<long> cbeam::form_GA("GA");
-const entry_type<long> cbeam::form_GB("GB");
-const entry_type<double> cbeam::form_X1("X1");
-const entry_type<long> cbeam::form_G0("G0", bound<long>(&lc1));
-const entry_type<double> cbeam::form_X2(
-    "X2", bound<double>(nullptr, nullptr, nullptr, true));
-const entry_type<double> cbeam::form_X3(
-    "X3", bound<double>(nullptr, nullptr, nullptr, true));
-const entry_type<double> cbeam::form_BIT("BIT", bound<double>());
-const entry_type<std::string> cbeam::form_OFFT(
-    "OFFT", bound<std::string>({
-    "GGG", "BGG", "GGO", "BGO", "GOG", "BOG", "GOO", "BOO"}, "GGG"));
-const entry_type<vector<int> > cbeam::form_PA("PA"); // maxelem=5, minval=1, maxval=6, uniq=True);
-const entry_type<vector<int> > cbeam::form_PB("PB"); // maxelem=5, minval=1, maxval=6, uniq=True);
-const entry_type<double> cbeam::form_W1A(
-    "W1A", bound<double>(nullptr, nullptr, &dc0)); // default=0.),
-const entry_type<double> cbeam::form_W2A(
-    "W2A", bound<double>(nullptr, nullptr, &dc0)); // default=0.),
-const entry_type<double> cbeam::form_W3A(
-    "W3A", bound<double>(nullptr, nullptr, &dc0)); // default=0.),
-const entry_type<double> cbeam::form_W1B(
-    "W1B", bound<double>(nullptr, nullptr, &dc0)); // default=0.),
-const entry_type<double> cbeam::form_W2B(
-    "W2B", bound<double>(nullptr, nullptr, &dc0)); // default=0.),
-const entry_type<double> cbeam::form_W3B(
-    "W3B", bound<double>(nullptr, nullptr, &dc0)); // default=0.),
-const entry_type<long> cbeam::form_SA(
-    "SA", bound<long>(&lc1, nullptr, nullptr, true)); // minval=1, default=None)
-const entry_type<long> cbeam::form_SB(
-    "SB", bound<long>(&lc1, nullptr, nullptr, true)); // minval=1, default=None)
+// entry_type<long> cbeam::form_EID(
+//    "EID", bound<long>(cl1));
+entry_type<long> cbeam::form_PID("PID");
+entry_type<long> cbeam::form_GA("GA");
+entry_type<long> cbeam::form_GB("GB");
+entry_type<double> cbeam::form_X1("X1");
+namespace {
+    auto const bound_G0_ =
+        make_shared<bound<long>>(cl1);
+    auto const bound_G0 = bound_G0_.get();
+}
+entry_type<long> cbeam::form_G0("G0", bound_G0);
+namespace {
+    auto const bound_X2_ = make_shared<bound<double>>(
+        nullptr, nullptr, nullptr, true);
+    auto const bound_X2 = bound_X2_.get();
+}
+entry_type<double> cbeam::form_X2("X2", bound_X2);
+namespace {
+    auto const bound_X3_ = make_shared<bound<double>>(
+        nullptr, nullptr, nullptr, true);
+    auto const bound_X3 = bound_X3_.get();
+}
+entry_type<double> cbeam::form_X3("X3", bound_X3);
+namespace {
+    auto const bound_BIT_ = make_shared<bound<double>>();
+    auto const bound_BIT = bound_BIT_.get();
+}
+entry_type<double> cbeam::form_BIT("BIT", bound_BIT);
+namespace {
+    std::set<std::string> allowed{
+        "GGG", "BGG", "GGO", "BGO", "GOG", "BOG", "GOO", "BOO"};
+    std::string std_val("GGG");
+    auto const bound_OFFT_ = make_shared<bound<std::string>>(allowed, std_val);
+    auto const bound_OFFT = bound_OFFT_.get();
+}
+entry_type<std::string> cbeam::form_OFFT("OFFT", bound_OFFT);
+entry_type<vector<int>> cbeam::form_PA("PA"); // maxelem=5, minval=1, maxval=6, uniq=True);
+entry_type<vector<int>> cbeam::form_PB("PB"); // maxelem=5, minval=1, maxval=6, uniq=True);
+namespace {
+    auto const bound_W1A_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
+    // default=0.
+    auto const bound_W1A = bound_W1A_.get();
+}
+entry_type<double> cbeam::form_W1A("W1A", bound_W1A);
+namespace {
+    auto const bound_W2A_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
+    // default=0.
+    auto const bound_W2A = bound_W2A_.get();
+}
+entry_type<double> cbeam::form_W2A("W2A", bound_W2A);
+namespace {
+    auto const bound_W3A_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
+    // default=0.
+    auto const bound_W3A = bound_W3A_.get();
+}
+entry_type<double> cbeam::form_W3A("W3A", bound_W3A);
+namespace {
+    auto const bound_W1B_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
+    // default=0.
+    auto const bound_W1B = bound_W1B_.get();
+}
+entry_type<double> cbeam::form_W1B("W1B", bound_W1B);
+namespace {
+    auto const bound_W2B_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
+    // default=0.
+    auto const bound_W2B = bound_W2B_.get();
+}
+entry_type<double> cbeam::form_W2B("W2B", bound_W2B);
+namespace {
+    auto const bound_W3B_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
+    // default=0.
+    auto const bound_W3B = bound_W3B_.get();
+}
+entry_type<double> cbeam::form_W3B("W3B", bound_W3B);
+namespace {
+    auto const bound_SA_ = make_shared<bound<long>>(
+        cl1, nullptr, nullptr, true);
+    // default=0.
+    auto const bound_SA = bound_SA_.get();
+}
+entry_type<long> cbeam::form_SA(
+    "SA", bound_SA); // minval=1, default=None)
+namespace {
+    auto const bound_SB_ = make_shared<bound<long>>(
+        cl1, nullptr, nullptr, true);
+    // default=0.
+    auto const bound_SB = bound_SB_.get();
+}
+entry_type<long> cbeam::form_SB(
+    "SB", bound_SB); // minval=1, default=None)
 
 /**
  * \brief 
@@ -89,19 +149,14 @@ cbeam::cbeam(list<std::string> const &inp) :
     this->cbeam::read(inp);
 }
 
-cbeam::cbeam(long const *EID, long const *PID, long const *GA,
-             long const *GB, double const *X1, double const *X2,
-             double const *X3, std::string const *OFFT/*=nullptr*/,
-             vector<int> const *PA/*=nullptr*/,
-             vector<int> const *PB/*=nullptr*/,
-             double const *W1A/*=nullptr*/,
-             double const *W2A/*=nullptr*/,
-             double const *W3A/*=nullptr*/,
-             double const *W1B/*=nullptr*/,
-             double const *W2B/*=nullptr*/,
-             double const *W3B/*=nullptr*/,
-             long const *SA/*=nullptr*/,
-             long const *SB/*=nullptr*/) :
+cbeam::cbeam(long *EID, long *PID, long *GA, long *GB,
+             double *X1, double *X2, double *X3,
+             std::string *OFFT/*=nullptr*/,
+             vector<int> *PA/*=nullptr*/, vector<int> *PB/*=nullptr*/,
+             double *W1A/*=nullptr*/, double *W2A/*=nullptr*/,
+             double *W3A/*=nullptr*/, double *W1B/*=nullptr*/,
+             double *W2B/*=nullptr*/, double *W3B/*=nullptr*/,
+             long *SA/*=nullptr*/, long *SB/*=nullptr*/) :
         element(EID), choose_dir_code(CHOOSE_DIR_CODE::has_DVEC),
         choose_offt_bit(CHOOSE_OFFT_BIT::has_OFFT), PID(PID),
         GA(GA), GB(GB), X1(X1), G0(nullptr/*G0*/), X2(X2), X3(X3),
@@ -114,17 +169,14 @@ cbeam::cbeam(long const *EID, long const *PID, long const *GA,
     this->cbeam::check_data();
 }
 
-cbeam::cbeam(long const *EID, long const *PID,
-             long const *GA, long const *GB,
-             double const *X1,
-             double const *X2,
-             double const *X3,
-             double const *BIT,
-             vector<int> const *PA/*=nullptr*/, vector<int> const *PB/*=nullptr*/,
-             double const *W1A/*=nullptr*/, double const *W2A/*=nullptr*/,
-             double const *W3A/*=nullptr*/, double const *W1B/*=nullptr*/,
-             double const *W2B/*=nullptr*/, double const *W3B/*=nullptr*/,
-             long const *SA/*=nullptr*/, long const *SB/*=nullptr*/) :
+cbeam::cbeam(long *EID, long *PID, long *GA, long *GB,
+             double *X1, double *X2, double *X3,
+             double *BIT,
+             vector<int> *PA/*=nullptr*/, vector<int> *PB/*=nullptr*/,
+             double *W1A/*=nullptr*/, double *W2A/*=nullptr*/,
+             double *W3A/*=nullptr*/, double *W1B/*=nullptr*/,
+             double *W2B/*=nullptr*/, double *W3B/*=nullptr*/,
+             long *SA/*=nullptr*/, long *SB/*=nullptr*/) :
         element(EID), choose_dir_code(CHOOSE_DIR_CODE::has_DVEC),
         choose_offt_bit(CHOOSE_OFFT_BIT::has_BIT), PID(PID),
         GA(GA), GB(GB), X1(X1), G0(nullptr/*G0*/), X2(X2), X3(X3),
@@ -137,15 +189,13 @@ cbeam::cbeam(long const *EID, long const *PID,
     this->cbeam::check_data();
 }
 
-cbeam::cbeam(long const *EID, long const *PID,
-             long const *GA, long const *GB,
-             long const *G0,
-             std::string const *OFFT/*=nullptr*/,
-             vector<int> const *PA/*=nullptr*/, vector<int> const *PB/*=nullptr*/,
-             double const *W1A/*=nullptr*/, double const *W2A/*=nullptr*/,
-             double const *W3A/*=nullptr*/, double const *W1B/*=nullptr*/,
-             double const *W2B/*=nullptr*/, double const *W3B/*=nullptr*/,
-             long const *SA/*=nullptr*/, long const *SB/*=nullptr*/) :
+cbeam::cbeam(long *EID, long *PID, long *GA, long *GB, long *G0,
+             std::string *OFFT/*=nullptr*/,
+             vector<int> *PA/*=nullptr*/, vector<int> *PB/*=nullptr*/,
+             double *W1A/*=nullptr*/, double *W2A/*=nullptr*/,
+             double *W3A/*=nullptr*/, double *W1B/*=nullptr*/,
+             double *W2B/*=nullptr*/, double *W3B/*=nullptr*/,
+             long *SA/*=nullptr*/, long *SB/*=nullptr*/) :
         element(EID), choose_dir_code(CHOOSE_DIR_CODE::has_DCODE),
         choose_offt_bit(CHOOSE_OFFT_BIT::has_OFFT), PID(PID),
         GA(GA), GB(GB), X1(nullptr/*X1*/), G0(G0), X2(nullptr/*X2*/), X3(nullptr/*X3*/),
@@ -158,15 +208,13 @@ cbeam::cbeam(long const *EID, long const *PID,
     this->cbeam::check_data();
 }
 
-cbeam::cbeam(long const *EID, long const *PID,
-             long const *GA, long const *GB,
-             long const *G0,
-             double const *BIT,
-             vector<int> const *PA/*=nullptr*/, vector<int> const *PB/*=nullptr*/,
-             double const *W1A/*=nullptr*/, double const *W2A/*=nullptr*/,
-             double const *W3A/*=nullptr*/, double const *W1B/*=nullptr*/,
-             double const *W2B/*=nullptr*/, double const *W3B/*=nullptr*/,
-             long const *SA/*=nullptr*/, long const *SB/*=nullptr*/) :
+cbeam::cbeam(long *EID, long *PID, long *GA, long *GB, long *G0,
+             double *BIT,
+             vector<int> *PA/*=nullptr*/, vector<int> *PB/*=nullptr*/,
+             double *W1A/*=nullptr*/, double *W2A/*=nullptr*/,
+             double *W3A/*=nullptr*/, double *W1B/*=nullptr*/,
+             double *W2B/*=nullptr*/, double *W3B/*=nullptr*/,
+             long *SA/*=nullptr*/, long *SB/*=nullptr*/) :
         element(EID), choose_dir_code(CHOOSE_DIR_CODE::has_DCODE),
         choose_offt_bit(CHOOSE_OFFT_BIT::has_BIT), PID(PID),
         GA(GA), GB(GB), X1(nullptr/*X1*/), G0(G0), X2(nullptr/*X2*/), X3(nullptr/*X3*/),
@@ -365,7 +413,7 @@ cards::__base::card const &cbeam::operator()(list<std::string> const &inp) {
     return *this;
 }
 
-void cbeam::check_data() const {
+void cbeam::check_data() {
     this->element::check_data();
     if (PID) form_PID.check(this->PID);
     if (GA) form_GA.check(this->GA);
@@ -541,7 +589,7 @@ cards::__base::card const &cbeam::operator() (
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&
+// compile-command: "make -C ../../cbuild -j7 &&
 //    (make -C ../../cbuild test;
 //     ../../cbuild/tests/test_bdf_cards --use-colour no)"
 // End:

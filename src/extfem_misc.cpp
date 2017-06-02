@@ -39,6 +39,10 @@ std::not_implemented::not_implemented(
     errorMessage = msg.str();
 }
 
+std::not_implemented::not_implemented(
+    const char* fname, const size_t& line, const std::string &error) :
+        not_implemented(fname, line, error.c_str()) {}
+
 const char* std::not_implemented::what() const _EXTFEMIO_NOEXCEPT {
     return errorMessage.c_str();
 }

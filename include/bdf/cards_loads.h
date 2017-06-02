@@ -29,13 +29,13 @@ namespace dnvgl {
 
                     protected:
 
-                        entry_type<long> static const form_SID;
-                        entry_type<long> static const form_G;
-                        entry_type<long> static const form_CID;
-                        entry_type<double> static const form_F;
-                        entry_type<double> static const form_N1;
-                        entry_type<double> static const form_N2;
-                        entry_type<double> static const form_N3;
+                        entry_type<long> static form_SID;
+                        entry_type<long> static form_G;
+                        entry_type<long> static form_CID;
+                        entry_type<double> static form_F;
+                        entry_type<double> static form_N1;
+                        entry_type<double> static form_N2;
+                        entry_type<double> static form_N3;
 
                     public:
 
@@ -87,7 +87,7 @@ namespace dnvgl {
                         void collect_outdata (
                             std::list<std::unique_ptr<format_entry> > &) const override;
 
-                        void check_data() const override;
+                        void check_data() override;
                     };
                 }
 
@@ -266,12 +266,12 @@ Defines a scalar mass element without reference to a property entry.
 
                     using __base::element::form_EID;
 
-                    // entry_type<long> static const form_EID;
-                    entry_type<double> static const form_M;
-                    entry_type<long> static const form_G1;
-                    entry_type<long> static const form_G2;
-                    entry_type<std::vector<int>> static const form_C1;
-                    entry_type<std::vector<int>> static const form_C2;
+                    // entry_type<long> static form_EID;
+                    entry_type<double> static form_M;
+                    entry_type<long> static form_G1;
+                    entry_type<long> static form_G2;
+                    entry_type<std::vector<int>> static form_C1;
+                    entry_type<std::vector<int>> static form_C2;
 
                 public:
                     // /** Unique element identification number. (0 < Integer
@@ -307,10 +307,10 @@ Defines a scalar mass element without reference to a property entry.
 
                     explicit cmass2(std::list<std::string> const&);
 
-                    cmass2(long const *EID, double const *M,
-                           long const *G1, std::vector<int> const *C1,
-                           long const *G2=nullptr,
-                           std::vector<int> const *C2=nullptr);
+                    cmass2(long *EID, double *M,
+                           long *G1, std::vector<int> *C1,
+                           long *G2=nullptr,
+                           std::vector<int> *C2=nullptr);
 
                     card const &operator() (
                         long const *EID, double const *M,
@@ -329,7 +329,7 @@ Defines a scalar mass element without reference to a property entry.
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> >&) const override;
 
-                    void check_data() const override;
+                    void check_data() override;
                 };
 
 /// Handle Nastran Bulk CMASS4 entries.
@@ -377,10 +377,10 @@ reference to a property entry.
 
                     using __base::element::form_EID;
 
-                    // entry_type<long> // static const form_EID;
-                    entry_type<double> static const form_M;
-                    entry_type<long> static const form_S1;
-                    entry_type<long> static const form_S2;
+                    // entry_type<long> // static form_EID;
+                    entry_type<double> static form_M;
+                    entry_type<long> static form_S1;
+                    entry_type<long> static form_S2;
 
                 public:
                     // /** Unique element identification number. (0 < Integer
@@ -407,8 +407,7 @@ reference to a property entry.
 
                     explicit cmass4(std::list<std::string> const&);
 
-                    cmass4(long const *EID, double const *M,
-                           long const *S1, long const *S2=nullptr);
+                    cmass4(long *EID, double *M, long *S1, long *S2=nullptr);
 
                     card const &operator() (
                         long const *EID, double const *M,
@@ -425,7 +424,7 @@ reference to a property entry.
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> >&) const override;
 
-                    void check_data() const override;
+                    void check_data() override;
                 };
 
 /// Handle Nastran Bulk GRAV entries.
@@ -501,11 +500,11 @@ Defines acceleration vectors for gravity or other acceleration loading.
 
                     using __base::card::format_outlist;
 
-                    entry_type<long> static const form_SID;
-                    entry_type<long> static const form_CID;
-                    entry_type<double> static const form_A;
-                    entry_type<double> static const form_Ni;
-                    entry_type<long> static const form_MB;
+                    entry_type<long> static form_SID;
+                    entry_type<long> static form_CID;
+                    entry_type<double> static form_A;
+                    entry_type<double> static form_Ni;
+                    entry_type<long> static form_MB;
 
                 public:
 /// Set identification number. (Integer > 0)
@@ -580,7 +579,7 @@ Defines acceleration vectors for gravity or other acceleration loading.
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> >&) const override;
 
-                    void check_data() const override;
+                    void check_data() override;
                 };
 
 /// Handle Nastran Bulk `LOAD` entries.
@@ -607,10 +606,10 @@ Defines a static load as a linear combination of load std::sets defined via
 
                     using __base::card::format_outlist;
 
-                    entry_type<long> static const form_SID;
-                    entry_type<double> static const form_S;
-                    entry_type<double> static const form_Si;
-                    entry_type<long> static const form_Li;
+                    entry_type<long> static form_SID;
+                    entry_type<double> static form_S;
+                    entry_type<double> static form_Si;
+                    entry_type<long> static form_Li;
 
                 public:
 
@@ -649,7 +648,7 @@ Defines a static load as a linear combination of load std::sets defined via
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> > &res) const override;
 
-                    void check_data() const override;
+                    void check_data() override;
                 };
             }
         }

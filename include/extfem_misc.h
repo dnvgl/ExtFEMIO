@@ -19,6 +19,7 @@
 #include <string>
 // ReSharper restore CppUnusedIncludeDirective
 #include <exception>
+#include "extfem_misc.h"
 
 #if defined(_MSC_VER) & _MSC_VER < 1900
 #define _EXTFEMIO_NOEXCEPT
@@ -77,6 +78,10 @@ namespace std {
         explicit not_implemented(
             const char* fname, const size_t& line,
             const char* error=nullptr);
+
+        explicit not_implemented(
+            const char* fname, const size_t& line,
+            const std::string &error);
 
         /// Provided for compatibility with std::exception.
         const char* what() const _EXTFEMIO_NOEXCEPT override;

@@ -32,28 +32,44 @@ using namespace std;
 using namespace dnvgl::extfem;
 using namespace bdf;
 using namespace cards;
+using namespace type_bounds;
+using type_bounds::bound;
 using bdf::types::entry_type;
 
 namespace {
-    const long cl1 = 1;
-    const double cd0 = 0.;
+    auto const cl1_ = make_shared<long>(1);
+    auto const cd0_ = make_shared<double>(0.);
+    auto const cl1 = cl1_.get();
+    auto const cd0 = cd0_.get();
 }
 
 bdf::types::card prod::head = bdf::types::card("PROD");
 
 // const entry_type<long> prod::form_PID(
-//     "PID", bdf::type_bounds::bound<long>(&cl1));
-const entry_type<long> prod::form_MID(
-    "MID", bdf::type_bounds::bound<long>(&cl1));
-const entry_type<double> prod::form_A("A");
-const entry_type<double> prod::form_J(
-    "J",
-    bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
-const entry_type<double> prod::form_C(
-    "C", bdf::type_bounds::bound<double>(nullptr, nullptr, &cd0));
-const entry_type<double> prod::form_NSM(
-    "NSM",
-    bdf::type_bounds::bound<double>(nullptr, nullptr, nullptr, true));
+//     "PID", bound<long>(cl1));
+namespace {
+    auto const bound_MID_ = make_shared<bound<long>>(cl1);
+    auto const bound_MID = bound_MID_.get();
+}
+entry_type<long> prod::form_MID("MID", bound_MID);
+entry_type<double> prod::form_A("A");
+namespace {
+    auto const bound_J_ = make_shared<bound<double>>(
+        nullptr, nullptr, nullptr, true);
+    auto const bound_J = bound_J_.get();
+    }
+entry_type<double> prod::form_J("J", bound_J);
+namespace {
+    auto const bound_C_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
+    auto const bound_C = bound_C_.get();
+}
+entry_type<double> prod::form_C("C", bound_C);
+namespace {
+    auto const bound_NSM_ = make_shared<bound<double>>(
+        nullptr, nullptr, nullptr, true);
+    auto const bound_NSM = bound_NSM_.get();
+}
+entry_type<double> prod::form_NSM("NSM", bound_NSM);
 
 prod::prod(list<std::string> const &inp) :
         property(inp) {
@@ -103,7 +119,7 @@ cards::types prod::card_type() const {
 }
 
 void prod::collect_outdata(
-    list<std::unique_ptr<format_entry> > &res) const {
+    list<unique_ptr<format_entry> > &res) const {
         if (!PID) return;
 
     res.push_back(unique_ptr<format_entry>(format(head)));
@@ -124,7 +140,7 @@ void prod::collect_outdata(
     res.push_back(unique_ptr<format_entry>(format<double>(form_NSM, NSM)));
 }
 
-void prod::check_data() const {
+void prod::check_data() {
     this->property::check_data();
     if (MID) prod::form_MID.check(MID);
     if (A) prod::form_A.check(A);

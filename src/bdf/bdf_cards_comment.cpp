@@ -235,7 +235,7 @@ void comment::clear_yield() {
     comment::yield = nullptr;
 }
 
-void comment::check_data() const {}
+void comment::check_data() {}
 
 // Local Variables:
 // mode: c++
