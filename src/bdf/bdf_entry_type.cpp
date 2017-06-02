@@ -20,7 +20,8 @@ namespace {
 
 using namespace std;
 
-using namespace dnvgl::extfem::bdf::types;
+using namespace dnvgl::extfem::bdf;
+using namespace types;
 
 template <typename _Ty>
 const bdf_types entry_type<_Ty>::_type =
