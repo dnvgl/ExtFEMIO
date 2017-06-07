@@ -34,25 +34,39 @@ namespace {
 }
 
 namespace {
-    auto const bound_PID_ = make_shared<bound<long>>(cl1);
+    auto const bound_PID_ = make_shared<bound_unique<long>>(cl1);
     auto const bound_PID = bound_PID_.get();
 }
 entry_type<long> property::form_PID("PID", bound_PID);
 
-property::property(long const *PID) : card(), PID(PID) {
-    if (property::used_pid.find(*PID) != property::used_pid.end()) {
-        throw errors::usage_error("PROPERTY", "Non unique id.");
-    }
-    this->property::check_data();
-    property::used_pid.insert(*PID);
-}
+property::property() : card() {}
 
 property::property(list<std::string> const &inp) : card(inp) {
     this->property::read(inp);
-    if (property::used_pid.find(PID) != property::used_pid.end()) {
-        throw errors::usage_error("PROPERTY", "Non unique id.");
-    }
-    property::used_pid.insert(PID);
+}
+
+property::property(long const *PID) : card(), PID(PID) {
+    this->PID = form_PID.check(this->PID);
+}
+
+card const &property::operator() (long const *PID) {
+    this->PID(PID);
+    this->property::check_data();
+    return *this;
+}
+
+card const &property::operator() (list<std::string> const &inp) {
+    this->property::read(inp);
+    return *this;
+}
+
+void property::collect_outdata(
+    list<unique_ptr<format_entry> >&) const {
+    NOT_IMPLEMENTED("Can't write write generic PROPERTY.");
+}
+
+void property::check_data() {
+    this->PID = property::form_PID.check(this->PID);
 }
 
 void property::read(list<std::string> const &inp) {
@@ -65,42 +79,13 @@ void property::read(list<std::string> const &inp) {
     form_PID.set_value(PID, *(++pos));
 }
 
-void property::check_data() {
-    if (PID) property::form_PID.check(PID);
+cards::types property::card_type() const {
+    return types::PROPERTY;
 }
 
-card const &property::operator() (list<std::string> const &inp) {
-    this->property::read(inp);
-    if (property::used_pid.find(PID) != property::used_pid.end()) {
-        throw errors::usage_error("PROPERTY", "Non unique id.");
-    }
-    property::used_pid.insert(PID);
-    return *this;
-}
-
-card const &property::operator() (long const *PID) {
-    if (property::used_pid.find(*PID) != property::used_pid.end()) {
-        throw errors::usage_error("PROPERTY", "Non unique id.");
-    }
-    property::used_pid.insert(*PID);
-    this->PID(PID);
-    this->property::check_data();
-    return *this;
-}
-
-unordered_set<long> property::used_pid;
-
-long property::max_id{0};
-
-long property::nextId() {
-    while (property::used_pid.find(++property::max_id) != property::used_pid.end()) {}
-    used_pid.insert(property::max_id);
-    return property::max_id;
-}
-
-void property::resetIds() {
-    property::used_pid.clear();
-    property::max_id = {0};
+void property::reset() {
+    __base::card::reset();
+    form_PID.reset();
 }
 
 // Local Variables:

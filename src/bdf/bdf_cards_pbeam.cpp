@@ -270,8 +270,6 @@ pbeam::pbeam(long const *EID, long const *PID,
         this->SO.clear();
         this->X_XB.clear();
     }
-
-    this->beam_prop::check_data();
     this->pbeam::check_data();
 }
 
@@ -781,7 +779,6 @@ cont:
 }
 
 void pbeam::check_data() {
-    this->beam_prop::check_data();
     size_t base_size{A.size()};
     if (I1.size() != base_size)
         throw errors::form_error("PBEAM", "wrong size for I1");
@@ -815,7 +812,7 @@ void pbeam::check_data() {
     if (base_size && X_XB.size() != base_size-1)
         throw errors::form_error("PBEAM", "wrong size for X_XB");
 
-    if (A.size()>0) for (auto const pos : A) pbeam::form_A.check(pos);
+    if (A.size()>0) for (auto pos : A) pbeam::form_A.check(pos);
     if (I1.size()>0) for (auto pos : I1) pbeam::form_I1.check(pos);
     if (I2.size()>0) for (auto pos : I2) pbeam::form_I2.check(pos);
     if (I12.size()>0) for (auto pos : I12) pbeam::form_I12.check(pos);
@@ -919,7 +916,6 @@ bdf::cards::__base::card const &pbeam::operator() (
     this->N2_A(N2_A);
     this->N1_B(N1_B);
     this->N2_B(N2_B);
-    this->beam_base::check_data();
     this->pbeam::check_data();
     return *this;
 }

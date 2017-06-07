@@ -165,7 +165,6 @@ cbeam::cbeam(long *EID, long *PID, long *GA, long *GB,
         W1A(W1A), W2A(W2A), W3A(W3A),
         W1B(W1B), W2B(W2B), W3B(W3B),
         SA(SA), SB(SB) {
-    this->element::check_data();
     this->cbeam::check_data();
 }
 
@@ -185,7 +184,6 @@ cbeam::cbeam(long *EID, long *PID, long *GA, long *GB,
         W1A(W1A), W2A(W2A), W3A(W3A),
         W1B(W1B), W2B(W2B), W3B(W3B),
         SA(SA), SB(SB) {
-    this->element::check_data();
     this->cbeam::check_data();
 }
 
@@ -204,7 +202,6 @@ cbeam::cbeam(long *EID, long *PID, long *GA, long *GB, long *G0,
         W1A(W1A), W2A(W2A), W3A(W3A),
         W1B(W1B), W2B(W2B), W3B(W3B),
         SA(SA), SB(SB) {
-    this->element::check_data();
     this->cbeam::check_data();
 }
 
@@ -223,7 +220,6 @@ cbeam::cbeam(long *EID, long *PID, long *GA, long *GB, long *G0,
         W1A(W1A), W2A(W2A), W3A(W3A),
         W1B(W1B), W2B(W2B), W3B(W3B),
         SA(SA), SB(SB) {
-    this->element::check_data();
     this->cbeam::check_data();
 }
 
@@ -414,7 +410,6 @@ cards::__base::card const &cbeam::operator()(list<std::string> const &inp) {
 }
 
 void cbeam::check_data() {
-    this->element::check_data();
     if (PID) form_PID.check(this->PID);
     if (GA) form_GA.check(this->GA);
     if (GB) form_GB.check(this->GB);
@@ -468,7 +463,6 @@ cards::__base::card const &cbeam::operator() (
     this->W3B(W3B);
     this->SA(SA);
     this->SB(SB);
-    this->element::check_data();
     this->cbeam::check_data();
     return *this;
 }
@@ -505,7 +499,6 @@ cards::__base::card const &cbeam::operator() (
     this->W3B(W3B);
     this->SA(SA);
     this->SB(SB);
-    this->element::check_data();
     this->cbeam::check_data();
     return *this;
 }
@@ -522,7 +515,6 @@ cards::__base::card const &cbeam::operator() (
     this->element::operator() (EID);
     choose_dir_code = CHOOSE_DIR_CODE::has_DCODE;
     choose_offt_bit = CHOOSE_OFFT_BIT::has_OFFT;
-    this->element::operator() (EID);
     this->PID(PID);
     this->GA(GA);
     this->GB(GB);
@@ -542,7 +534,6 @@ cards::__base::card const &cbeam::operator() (
     this->W3B(W3B);
     this->SA(SA);
     this->SB(SB);
-    this->element::check_data();
     this->cbeam::check_data();
     return *this;
 }
@@ -559,7 +550,6 @@ cards::__base::card const &cbeam::operator() (
     this->element::operator() (EID);
     choose_dir_code = CHOOSE_DIR_CODE::has_DCODE;
     choose_offt_bit = CHOOSE_OFFT_BIT::has_BIT;
-    this->element::operator() (EID);
     this->PID(PID);
     this->GA(GA);
     this->GB(GB);
@@ -579,7 +569,6 @@ cards::__base::card const &cbeam::operator() (
     this->W3B(W3B);
     this->SA(SA);
     this->SB(SB);
-    this->element::check_data();
     this->cbeam::check_data();
     return *this;
 }

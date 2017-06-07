@@ -119,7 +119,7 @@ TEST_CASE("BDF PBARL definitions; Small Field Format (T).", "[bdf_pbarl]") {
 }
 
 TEST_CASE("BDF PBARL definitions; Small Field Format (I).", "[bdf_pbarl]") {
-    pbarl::resetIds();
+    pbarl::reset();
 
     std::list<std::string> data({
             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
@@ -178,7 +178,7 @@ TEST_CASE("BDF PBARL definitions; Small Field Format (TUBE).", "[bdf_pbarl]") {
 }
 
 TEST_CASE("BDF PBARL roundtrip test", "[bdf_pbarl]") {
-    property::resetIds();
+    property::reset();
 
     ostringstream test;
 
@@ -199,7 +199,7 @@ TEST_CASE("BDF PBARL roundtrip test", "[bdf_pbarl]") {
     }
 
     SECTION("check reading") {
-        pbarl::resetIds();
+        pbarl::reset();
         list<std::string> data;
         list<std::string> lines;
         std::string tmp;
@@ -220,7 +220,7 @@ TEST_CASE("BDF PBARL roundtrip test", "[bdf_pbarl]") {
 }
 
 TEST_CASE("BDF PBARL roundtrip test (reuse)", "[bdf_pbarl]") {
-    property::resetIds();
+    property::reset();
 
     ostringstream test;
 
@@ -263,7 +263,7 @@ TEST_CASE("BDF PBARL roundtrip test (reuse)", "[bdf_pbarl]") {
 }
 
 TEST_CASE("BDF PBARL roundtrip test (use default)", "[bdf_pbarl]") {
-    pbarl::resetIds();
+    pbarl::reset();
     ostringstream test;
 
     long PID{7869}, MID{104010};
@@ -280,7 +280,7 @@ TEST_CASE("BDF PBARL roundtrip test (use default)", "[bdf_pbarl]") {
     }
 
     SECTION("check reading") {
-        pbarl::resetIds();
+        pbarl::reset();
         list<std::string> data;
         list<std::string> lines;
         std::string tmp;
@@ -302,7 +302,7 @@ TEST_CASE("BDF PBARL roundtrip test (use default)", "[bdf_pbarl]") {
 }
 
 TEST_CASE("BDF PBARL roundtrip test (use default) (reuse)", "[bdf_pbarl]") {
-    pbarl::resetIds();
+    pbarl::reset();
 
     ostringstream test;
 

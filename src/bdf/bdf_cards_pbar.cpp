@@ -371,13 +371,13 @@ cards::__base::card const &pbar::operator() (
     this->K1(K1);
     this->K2(K2);
     this->I12(I12);
-    this->bar_prop::check_data();
+    // this->bar_prop::check_data();
     this->pbar::check_data();
     return *this;
 }
 
 void pbar::check_data() {
-    this->bar_prop::check_data();
+    // this->bar_prop::check_data();
     if (A) pbar::form_A.check(A);
     if (I1) pbar::form_I1.check(I1);
     if (I2) pbar::form_I2.check(I2);

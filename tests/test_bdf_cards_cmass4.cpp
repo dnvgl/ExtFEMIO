@@ -54,6 +54,7 @@ TEST_CASE("BDF CMASS4 definitions. (Small Field Format)", "[bdf_cmass4]" ) {
 }
 
 TEST_CASE("BDF CMASS4 types output.", "[bdf_cmass4,out]" ) {
+    cmass4::reset();
 
     std::ostringstream test;
 

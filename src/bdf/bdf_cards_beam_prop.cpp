@@ -44,6 +44,8 @@ namespace {
 }
 entry_type<long> beam_base::form_MID("MID", MID_bound);
 
+beam_base::beam_base() : property() {}
+
 beam_base::beam_base(const list<std::string> &inp) :
         property(inp) {}
 

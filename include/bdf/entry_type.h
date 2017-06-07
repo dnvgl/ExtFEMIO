@@ -30,7 +30,8 @@ namespace dnvgl {
                                bdf::type_bounds::bound<_Ty> *bounds);
                     bdf_types type() const;
                     entry_value<_Ty> check(entry_value<_Ty> &val);
-                    entry_value<_Ty> check(_Ty val);
+                    entry_value<_Ty> check(_Ty &val);
+                    entry_value<_Ty> check(_Ty *val);
                     void reset();
                     void set_value(
                         entry_value<_Ty> &val, const std::string &inp);
@@ -59,6 +60,15 @@ namespace dnvgl {
                 }
 
                 template <typename _Ty>
+                entry_value<_Ty> entry_type<_Ty>::check(_Ty *val) {
+                    if (val == nullptr) {
+                        _Ty res = 0;
+                        return check(res);
+                    } else
+                        return this->entry_type<_Ty>::check(*val);
+                }
+
+                template <typename _Ty>
                 entry_value<_Ty> entry_type<_Ty>::check(entry_value<_Ty> &val) {
                     if (bounds && !bounds->is_allowed(val.value)) {
                         throw errors::str_error(
@@ -69,7 +79,7 @@ namespace dnvgl {
                 }
 
                 template <typename _Ty>
-                entry_value<_Ty> entry_type<_Ty>::check(_Ty val) {
+                entry_value<_Ty> entry_type<_Ty>::check(_Ty &val) {
                     if (bounds && (!bounds->in_bounds(val))) {
                         std::ostringstream msg("!", std::ostringstream::ate);
                         msg << val << "! Value not in list of allowed range.";
@@ -112,6 +122,7 @@ namespace dnvgl {
                 }
 
 
+///@{
 /// Integer value.
 #ifdef HAVE_BOOST_REGEX_HPP
                 extern const boost::regex int_re;
@@ -152,7 +163,7 @@ namespace dnvgl {
                             throw errors::int_error(
                                 name, "empty entry without default");
                         val.is_value = true;
-                        val = this->bounds->get_default();
+                        val.value = this->bounds->get_default();
                         return;
                     } else {
                         if (! regex_match(inp, int_re)) {
@@ -225,7 +236,9 @@ namespace dnvgl {
                     entry_value<long> tmp(val);
                     return format(tmp);
                 }
+///@}
 
+///@{
 /// Real value.
 #ifdef HAVE_BOOST_REGEX_HPP
                 extern const boost::regex float_exp_re;
@@ -251,7 +264,7 @@ namespace dnvgl {
 
                 template <> inline
                 entry_value<double>
-                entry_type<double>::check(double val) {
+                entry_type<double>::check(double &val) {
                     std::ostringstream msg("!", std::ostringstream::ate);
                     if (bounds && !bounds->in_bounds(val)) {
                         std::ostringstream msg("!", std::ostringstream::ate);
@@ -415,8 +428,10 @@ namespace dnvgl {
                         return this->format(val);
                     }
                 }
+///@}
 
-                /// String value.
+///@{
+/// String value.
                 template <> inline
                 entry_value<std::string> entry_type<std::string>::check(
                     entry_value<std::string> &val) {
@@ -434,7 +449,8 @@ namespace dnvgl {
                     std::string sval = extfem::string::string(inp).trim();
                     if (sval.length() == 0)
                         sval = string::string(bounds->get_default());
-                    return check(entry_value<std::string>(sval, true));
+                    entry_value<std::string> res(sval, true);
+                    return check(res);
                 }
 
                 template <> inline
@@ -502,8 +518,10 @@ namespace dnvgl {
                     entry_value<std::string> tmp(val);
                     return format(tmp);
                 }
+///@}
 
-                /// List of integers.
+///@{
+/// List of integers.
 #ifdef HAVE_BOOST_REGEX_HPP
                 extern const boost::regex list_int_re;
 #else
@@ -657,7 +675,7 @@ namespace dnvgl {
                             conv >> c_imag;
                         } else
                             c_imag = 0.;
-                        val = std::complex<double>(c_real, c_imag);
+                        val.value = std::complex<double>(c_real, c_imag);
                     }
                     val.is_value = true;
                     return;
@@ -823,6 +841,7 @@ namespace dnvgl {
                     entry_value<std::complex<double> > tmp(val);
                     return format(tmp);
                 }
+///@}
             }
         }
     }

@@ -71,7 +71,8 @@ crod::crod(list<std::string> const &inp) :
 }
 
 crod::crod(long *EID, long *PID, long *G1, long *G2) :
-        element(EID), PID(PID ? PID : EID), G1(G1), G2(G2) {
+        element(EID), G1(G1), G2(G2) {
+    this->PID(PID ? *PID : long(this->element::EID));
     this->crod::check_data();
 }
 
@@ -107,10 +108,7 @@ void crod::read(list<std::string> const &inp) {
 card const& crod::operator() (
     long const* EID, long const* PID, long const* G1, long const* G2) {
     this->element::operator()(EID);
-    if (PID)
-        this->PID(PID);
-    else
-        this->PID(EID);
+    this->PID(PID ? PID : EID);
     this->G1(G1);
     this->G2(G2);
     this->crod::check_data();
@@ -130,7 +128,7 @@ void crod::collect_outdata(
 }
 
 void crod::check_data() {
-    this->element::check_data();
+    // this->element::check_data();
     if (PID) form_PID.check(this->PID);
     if (G1) form_G1.check(this->G1);
     if (G2) form_G2.check(this->G2);

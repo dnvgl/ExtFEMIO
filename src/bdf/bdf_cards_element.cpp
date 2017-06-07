@@ -46,23 +46,18 @@ namespace {
     auto const cl1 = cl1_.get();
 }
 
-bdf::types::card element::head = bdf::types::card("<INVALID>");
-
 namespace {
     auto const bound_EID_ = make_shared<bound_unique<long>>(cl1, nullptr, cl0);
     auto const bound_EID = bound_EID_.get();
 }
 entry_type<long> element::form_EID("EID", bound_EID);
 
-element::element() : cards::__base::card() {}
-
-element::element(list<std::string> const &inp) :
-card(inp) {
+element::element(list<std::string> const &inp) : card(inp) {
     this->element::read(inp);
 }
 
 element::element(long *EID) : card(), EID(EID) {
-    if (EID) form_EID.check(this->EID);
+    this->element::check_data();
 }
 
 card const &element::operator() (long const *EID) {
@@ -71,13 +66,18 @@ card const &element::operator() (long const *EID) {
     return *this;
 }
 
+card const &element::operator() (list<std::string> const &inp) {
+    this->element::read(inp);
+    return *this;
+}
+
 void element::collect_outdata(
     list<unique_ptr<format_entry> >&) const {
-    throw not_implemented(__FILE__, __LINE__, "can't write write generic ELEMENT.");
+    NOT_IMPLEMENTED("Can't write write generic ELEMENT.");
 }
 
 void element::check_data() {
-    if (EID) this->EID = form_EID.check(this->EID);
+    this->EID = element::form_EID.check(this->EID);
 }
 
 void element::read(list<std::string> const &inp) {
@@ -92,11 +92,6 @@ void element::read(list<std::string> const &inp) {
 
 cards::types element::card_type() const {
     return types::ELEMENT;
-}
-
-cards::__base::card const &element::operator()(list<std::string> const &inp) {
-    this->element::read(inp);
-    return *this;
 }
 
 void element::reset() {

@@ -141,7 +141,7 @@ void prod::collect_outdata(
 }
 
 void prod::check_data() {
-    this->property::check_data();
+    // this->property::check_data();
     if (MID) prod::form_MID.check(MID);
     if (A) prod::form_A.check(A);
     if (J) prod::form_J.check(J);

@@ -57,8 +57,8 @@ namespace dnvgl {
                         const _Ty *_default = nullptr,
                         const bool allow_empty = false);
                     explicit bound(std::set<std::string> const&);
-                    explicit bound(std::set<std::string> const&,
-                                   std::string const&);
+                    explicit bound(
+                        std::set<std::string> const&, std::string const&);
                     void set_min(const _Ty inp);
                     void set_max(const _Ty inp);
                     void set_default(const _Ty inp);
@@ -180,9 +180,9 @@ namespace dnvgl {
                 public:
                     virtual ~bound_unique() = default;
                     explicit bound_unique(
-                        const _Ty *_min = nullptr, const _Ty *_max = nullptr,
-                        const _Ty *_default = nullptr,
-                        const bool allow_empty = false) :
+                        const _Ty *_min=nullptr, const _Ty *_max=nullptr,
+                        const _Ty *_default=nullptr,
+                        const bool allow_empty=false) :
                             bound<_Ty>(_min, _max, _default, allow_empty),
                             max_used_id{_min ? *_min-1 : -1}, used_id{} {};
                     bool virtual in_bounds(_Ty &val) override {
@@ -190,18 +190,21 @@ namespace dnvgl {
                             val = max_used_id += 1;
                         }
                         if (used_id.find(val) != used_id.end()) {
-                            do {
-                                val = max_used_id += 1;
+                            do { val = max_used_id += 1;
                             } while(used_id.find(max_used_id) != used_id.end());
                         }
+                        used_id.insert(val);
                         return this->bound<_Ty>::in_bounds(val);
+                    }
+                    bool virtual in_bounds(
+                        dnvgl::extfem::bdf::types::entry_value<_Ty> &val) override {
+                        return in_bounds(val.value);
                     }
                     void virtual reset() override {
                         max_used_id = this->has_min() ? this->min_val - 1 : -1;
                         used_id.clear();
                     };
                 };
-
             }
         }
     }

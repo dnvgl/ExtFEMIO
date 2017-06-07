@@ -227,13 +227,21 @@ TEST_CASE("Test unique ids", "bdf_unique_id") {
     val2 = form_val.check(val2);
     CHECK(long(val1) == 1);
     CHECK(long(val2) == 2);
+    val1 = form_val.check(val1);
+    val2 = form_val.check(val2);
+    CHECK(long(val1) == 3);
+    CHECK(long(val2) == 4);
+    val1 = form_val.check(0);
+    val2 = form_val.check(0);
+    CHECK(long(val1) == 5);
+    CHECK(long(val2) == 6);
 }
 
 // Local Variables:
 // mode: c++
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&
+// compile-command: "make -C ../cbuild -j7 &&
 //   (make -C ../cbuild test;
 //    ../cbuild/tests/test_bdf_bounds --use-colour no)"
 // coding: utf-8

@@ -88,6 +88,7 @@ TEST_CASE("BDF CMASS2 definitions. (Small Field Format)", "[bdf_cmass2]" ) {
 }
 
 TEST_CASE("BDF CMASS2 types output.", "[bdf_cmass2,out]" ) {
+    cmass2::reset();
 
     std::ostringstream test;
 

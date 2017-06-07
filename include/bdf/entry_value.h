@@ -24,10 +24,11 @@ namespace dnvgl {
                 public:
                     _Ty value;
                     bool is_value;
-                    entry_value(const _Ty value, const bool is_value=true);
+                    explicit entry_value(const _Ty value, const bool is_value=true);
                     explicit entry_value(const _Ty *value);
-                    entry_value();
-                    entry_value(const entry_value<_Ty>&) = default;
+                    explicit entry_value();
+                    entry_value(entry_value<_Ty> const&) = default;
+                    entry_value<_Ty> &operator= (const _Ty &other);
                     bool operator== (const _Ty &other) const;
                     bool operator< (const _Ty &other) const;
                     bool operator|| (
@@ -58,6 +59,13 @@ namespace dnvgl {
                 template <typename _Ty>
                 entry_value<_Ty>::entry_value() :
                         value(_Ty()), is_value(false) {}
+
+                template <typename _Ty>
+                entry_value<_Ty> &entry_value<_Ty>::operator= (const _Ty &other) {
+                    this->entry_value<_Ty>::operator() (other);
+                    return *this;
+                }
+
 
                 template <typename _Ty>
                 bool entry_value<_Ty>::operator== (const _Ty &other) const {

@@ -51,11 +51,11 @@ entry_type<long> cmass4::form_S1("S1");
 entry_type<long> cmass4::form_S2("S2");
 
 cmass4::cmass4() :
-        element(nullptr),
+        element(),
         M(nullptr), S1(nullptr), S2(nullptr) {}
 
 cmass4::cmass4(list<std::string> const &inp) :
-element(inp) {
+        element(inp) {
     this->cmass4::read(inp);
 }
 
@@ -120,7 +120,6 @@ void cmass4::collect_outdata(
 }
 
 void cmass4::check_data() {
-    this->element::check_data();
     if(M) form_M.check(M);
     if(S1) form_S1.check(S1);
     if(S2) form_S2.check(S2);

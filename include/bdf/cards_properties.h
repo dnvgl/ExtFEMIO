@@ -27,8 +27,8 @@ namespace dnvgl {
             namespace cards {
                 namespace __base {
 
+                    /// Base class for properties.
                     class property : public __base::card {
-
                     protected:
 
                         bdf::types::entry_type<long> static form_PID;
@@ -38,33 +38,22 @@ namespace dnvgl {
                         /** Property identification number. (Integer > 0)
                          */
                         bdf::types::entry_value<long> PID;
-
-                    protected:
-
-                        property() = default;
-
-                        explicit property(long const *PID);
-
                         explicit property(std::list<std::string> const&);
-
-                        virtual void read(std::list<std::string> const&) override;
-
-                        virtual void check_data() override;
-
-                        card const &operator() (const std::list<std::string> &) override;
-
-                        card const &operator() (long const*);
+                        ~property() = default;
+                        void static reset();
 
                     protected:
 
-                        std::unordered_set<long> static used_pid;
-                        long static max_id;
-
-                    public:
-
-                        long static nextId();
-
-                        void static resetIds();
+                        property();
+                        explicit property(long const *PID);
+                        virtual card const &operator() (long const *PID);
+                        virtual card const &operator() (
+                            const std::list<std::string> &) override;
+                        virtual void read(std::list<std::string> const&) override;
+                        virtual void check_data() override;
+                        virtual types card_type() const override;
+                        virtual void collect_outdata(
+                            std::list<std::unique_ptr<format_entry>>&) const override;
                     };
                 }
 
@@ -213,7 +202,7 @@ namespace dnvgl {
 
                         bdf::types::entry_type<long> static form_MID;
 
-                        beam_base() = default;
+                        beam_base();
 
                         explicit beam_base(std::list<std::string> const&);
 
@@ -909,7 +898,7 @@ namespace dnvgl {
                         */
                     bdf::types::entry_value<double> NSM;
 
-                    pbarl() = default;
+                    pbarl();
 
                     pbarl(std::list<std::string> const&);
 

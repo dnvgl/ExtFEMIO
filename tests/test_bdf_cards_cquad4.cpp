@@ -81,6 +81,7 @@ TEST_CASE("BDF CQUAD4 definitions. (Large Field Format)", "[bdf_cquad4]") {
 }
 
 TEST_CASE("BDF CQUAD4 types output.", "[bdf_cquad4,out]") {
+    cquad4::reset();
 
     ostringstream test;
 
@@ -185,6 +186,7 @@ TEST_CASE("BDF CQUAD4 types output.", "[bdf_cquad4,out]") {
 }
 
 TEST_CASE("BDF CQUAD4 types output (reuse).", "[bdf_cquad4,out,reuse]") {
+    cquad4::reset();
 
     ostringstream test;
 

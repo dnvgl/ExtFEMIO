@@ -120,7 +120,7 @@ namespace {
 }
 entry_type<double> shell::form_T4("T4", bound_T4);
 
-shell::shell() : element(nullptr), choose_mcid_theta() {}
+shell::shell() : element(), choose_mcid_theta() {}
 
 shell::shell(const list<std::string> &inp) :
     element(inp), choose_mcid_theta(CHOOSE_MCID_THETA::UNDEF) {
@@ -205,19 +205,19 @@ cards::__base::card const &shell::operator() (
 }
 
 void shell::check_data() {
-    this->element::check_data();
-    if (PID) form_PID.check(this->PID);
-    if (G1) form_G1.check(this->G1);
-    if (G2) form_G2.check(this->G2);
-    if (G3) form_G3.check(this->G3);
-    if (G4) form_G4.check(this->G4);
-    if (THETA) form_THETA.check(this->THETA);
-    if (ZOFFS) form_ZOFFS.check(this->ZOFFS);
-    if (TFLAG) form_TFLAG.check(this->TFLAG);
-    if (T1) form_T1.check(this->T1);
-    if (T2) form_T2.check(this->T2);
-    if (T3) form_T3.check(this->T3);
-    if (T4) form_T4.check(this->T4);
+    // this->element::check_data();
+    if (this->PID) form_PID.check(this->PID);
+    if (this->G1) form_G1.check(this->G1);
+    if (this->G2) form_G2.check(this->G2);
+    if (this->G3) form_G3.check(this->G3);
+    if (this->G4) form_G4.check(this->G4);
+    if (this->THETA) form_THETA.check(this->THETA);
+    if (this->ZOFFS) form_ZOFFS.check(this->ZOFFS);
+    if (this->TFLAG) form_TFLAG.check(this->TFLAG);
+    if (this->T1) form_T1.check(this->T1);
+    if (this->T2) form_T2.check(this->T2);
+    if (this->T3) form_T3.check(this->T3);
+    if (this->T4) form_T4.check(this->T4);
 }
 // Local Variables:
 // mode: c++

@@ -367,6 +367,8 @@ namespace dnvgl {
                     PARAM, //!< Parameter
                     ELEMENT, //!< # Internal Data
                     //!< base class for elements
+                    PROPERTY, //!< # Internal Data
+                    //!< base class for property
                     BEAM_BASE, //!< base class for beam/bar property
                     //!< description
                     BAR_PROP, //!< base class for bar property
@@ -1046,6 +1048,7 @@ namespace dnvgl {
 
 // ReSharper disable once CppUnusedIncludeDirective
 #include "bdf/cards_properties.h"
+#include "bdf/cards_elements.h"
 
 namespace dnvgl {
     namespace extfem {

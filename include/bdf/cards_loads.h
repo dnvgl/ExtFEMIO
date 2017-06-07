@@ -29,36 +29,36 @@ namespace dnvgl {
 
                     protected:
 
-                        entry_type<long> static form_SID;
-                        entry_type<long> static form_G;
-                        entry_type<long> static form_CID;
-                        entry_type<double> static form_F;
-                        entry_type<double> static form_N1;
-                        entry_type<double> static form_N2;
-                        entry_type<double> static form_N3;
+                        bdf::types::entry_type<long> static form_SID;
+                        bdf::types::entry_type<long> static form_G;
+                        bdf::types::entry_type<long> static form_CID;
+                        bdf::types::entry_type<double> static form_F;
+                        bdf::types::entry_type<double> static form_N1;
+                        bdf::types::entry_type<double> static form_N2;
+                        bdf::types::entry_type<double> static form_N3;
 
                     public:
 
 /// Load std::set identification number. (Integer > 0)
-                        entry_value<long> SID;
+                        bdf::types::entry_value<long> SID;
 /// Grid point identification number. (Integer > 0)
-                        entry_value<long> G;
+                        bdf::types::entry_value<long> G;
 /// Coordinate system identification number. (Integer > 0; Default = 0)
-                        entry_value<long> CID;
+                        bdf::types::entry_value<long> CID;
 ///Scale factor. (Real)
-                        entry_value<double> F;
+                        bdf::types::entry_value<double> F;
 /** *x* components of a vector measured in coordinate system defined
     by `CID`. (Real; at least one `Ni` ≠ 0.0.)
 */
-                        entry_value<double> N1;
+                        bdf::types::entry_value<double> N1;
 /** *y* components of a vector measured in coordinate system defined
     by `CID`. (Real; at least one `Ni` ≠ 0.0.)
 */
-                        entry_value<double> N2;
+                        bdf::types::entry_value<double> N2;
 /** *z* components of a vector measured in coordinate system defined
     by `CID`. (Real; at least one `Ni` ≠ 0.0.)
 */
-                        entry_value<double> N3;
+                        bdf::types::entry_value<double> N3;
 
                     protected:
 
@@ -266,37 +266,37 @@ Defines a scalar mass element without reference to a property entry.
 
                     using __base::element::form_EID;
 
-                    // entry_type<long> static form_EID;
-                    entry_type<double> static form_M;
-                    entry_type<long> static form_G1;
-                    entry_type<long> static form_G2;
-                    entry_type<std::vector<int>> static form_C1;
-                    entry_type<std::vector<int>> static form_C2;
+                    // bdf::types::entry_type<long> static form_EID;
+                    bdf::types::entry_type<double> static form_M;
+                    bdf::types::entry_type<long> static form_G1;
+                    bdf::types::entry_type<long> static form_G2;
+                    bdf::types::entry_type<std::vector<int>> static form_C1;
+                    bdf::types::entry_type<std::vector<int>> static form_C2;
 
                 public:
                     // /** Unique element identification number. (0 < Integer
                     //     < 100,000,000)
                     //  */
-                    // dnvgl::extfem::bdf::types::entry_value<long> EID;
+                    // dnvgl::extfem::bdf::types::bdf::types::entry_value<long> EID;
                     /** Value of the scalar mass. (Real)
                      */
-                    entry_value<double> M;
+                    bdf::types::entry_value<double> M;
                     /** Geometric grid or scalar point identification
                         number. (Integer > 0)
                     */
-                    entry_value<long> G1;
+                    bdf::types::entry_value<long> G1;
                     /** Component number. (0 < Integer < 6; blank or zero
                         if scalar point)
                     */
-                    entry_value<std::vector<int>> C1;
+                    bdf::types::entry_value<std::vector<int>> C1;
                     /** Geometric grid or scalar point identification
                         number. (Integer > 0)
                     */
-                    entry_value<long> G2;
+                    bdf::types::entry_value<long> G2;
                     /** Component number. (0 < Integer < 6; blank or zero
                         if scalar point)
                     */
-                    entry_value<std::vector<int>> C2;
+                    bdf::types::entry_value<std::vector<int>> C2;
 
                 private:
                     explicit cmass2(std::string const&) = delete;
@@ -377,27 +377,27 @@ reference to a property entry.
 
                     using __base::element::form_EID;
 
-                    // entry_type<long> // static form_EID;
-                    entry_type<double> static form_M;
-                    entry_type<long> static form_S1;
-                    entry_type<long> static form_S2;
+                    // bdf::types::entry_type<long> // static form_EID;
+                    bdf::types::entry_type<double> static form_M;
+                    bdf::types::entry_type<long> static form_S1;
+                    bdf::types::entry_type<long> static form_S2;
 
                 public:
                     // /** Unique element identification number. (0 < Integer
                     //     < 100,000,000)
                     //  */
-                    // dnvgl::extfem::bdf::types::entry_value<long> EID;
+                    // dnvgl::extfem::bdf::types::bdf::types::entry_value<long> EID;
                     /** Scalar mass value. (Real)
                      */
-                    entry_value<double> M;
+                    bdf::types::entry_value<double> M;
                     /** Scalar point identification numbers. (Integer > 0;
                         S1 ≠ S2 )
                     */
-                    entry_value<long> S1;
+                    bdf::types::entry_value<long> S1;
                     /** Scalar point identification numbers. (Integer > 0;
                         S1 ≠ S2 )
                     */
-                    entry_value<long> S2;
+                    bdf::types::entry_value<long> S2;
                 private:
                     explicit cmass4(std::string const&) = delete;
 
@@ -500,31 +500,31 @@ Defines acceleration vectors for gravity or other acceleration loading.
 
                     using __base::card::format_outlist;
 
-                    entry_type<long> static form_SID;
-                    entry_type<long> static form_CID;
-                    entry_type<double> static form_A;
-                    entry_type<double> static form_Ni;
-                    entry_type<long> static form_MB;
+                    bdf::types::entry_type<long> static form_SID;
+                    bdf::types::entry_type<long> static form_CID;
+                    bdf::types::entry_type<double> static form_A;
+                    bdf::types::entry_type<double> static form_Ni;
+                    bdf::types::entry_type<long> static form_MB;
 
                 public:
 /// Set identification number. (Integer > 0)
-                    entry_value<long> SID;
+                    bdf::types::entry_value<long> SID;
 /// Coordinate system identification number. (Integer > 0; Default = 0)
-                    entry_value<long> CID;
+                    bdf::types::entry_value<long> CID;
 /// Acceleration vector scale factor. (Real)
-                    entry_value<double> A;
+                    bdf::types::entry_value<double> A;
 /** Acceleration vector components measured in coordinate system CID.
     (Real; at least one Ni ≠ 0.0)
 */
-                    entry_value<double> N1;
+                    bdf::types::entry_value<double> N1;
 /** Acceleration vector components measured in coordinate system CID.
     (Real; at least one Ni ≠ 0.0)
 */
-                    entry_value<double> N2;
+                    bdf::types::entry_value<double> N2;
 /** Acceleration vector components measured in coordinate system CID.
     (Real; at least one Ni ≠ 0.0)
 */
-                    entry_value<double> N3;
+                    bdf::types::entry_value<double> N3;
 /** Indicates whether the CID coordinate system is defined in the main
     Bulk Data Section (`MB` = -1) or the partitioned superelement Bulk
     Data Section (`MB` = 0). Coordinate systems referenced in the main
@@ -532,7 +532,7 @@ Defines acceleration vectors for gravity or other acceleration loading.
     assembly basic coordinate system. See Remark 10. (Integer; Default
     = 0)
 */
-                    entry_value<long> MB;
+                    bdf::types::entry_value<long> MB;
 
                 private:
 
@@ -606,17 +606,17 @@ Defines a static load as a linear combination of load std::sets defined via
 
                     using __base::card::format_outlist;
 
-                    entry_type<long> static form_SID;
-                    entry_type<double> static form_S;
-                    entry_type<double> static form_Si;
-                    entry_type<long> static form_Li;
+                    bdf::types::entry_type<long> static form_SID;
+                    bdf::types::entry_type<double> static form_S;
+                    bdf::types::entry_type<double> static form_Si;
+                    bdf::types::entry_type<long> static form_Li;
 
                 public:
 
 /// Load std::set identification number. (Integer > 0)
-                    entry_value<long> SID;
+                    bdf::types::entry_value<long> SID;
 /// Overall scale factor. (Real)
-                    entry_value<double> S;
+                    bdf::types::entry_value<double> S;
 /// Scale factor on `Li`. (Real)
                     std::vector<double> Si;
 /** Load std::set identification numbers defined on entry types listed

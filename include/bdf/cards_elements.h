@@ -18,64 +18,57 @@
 namespace dnvgl {
     namespace extfem {
         namespace bdf {
-
-            using types::entry_value;
-            using types::entry_type;
-
             namespace cards {
                 namespace __base {
 
                     /// Base class for elements.
-                    class element : public card {
+                    class element : public __base::card {
                     protected:
-                        static bdf::types::card head;
-                        entry_type<long> static form_EID;
 
-                        element();
-                        explicit element(long *EID);
+                        bdf::types::entry_type<long> static form_EID;
 
                     public:
 
-                        explicit element(std::list<std::string> const &);
+                        /** Element identification number. (Integer > 0)
+                         */
+                        bdf::types::entry_value<long> EID;
+                        explicit element(std::list<std::string> const&);
                         ~element() = default;
                         void static reset();
 
                     protected:
 
-                        card const &operator() (long const *EID);
+                        element() {};
+                        explicit element(long *EID);
+                        virtual card const &operator() (long const *EID);
                         virtual card const &operator() (
-                            const std::list<std::string> &) override;
+                            const std::list<std::string>&) override;
+                        virtual void read(std::list<std::string> const&) override;
+                        virtual void check_data() override;
+                        virtual types card_type() const override;
                         virtual void collect_outdata(
-                            std::list<std::unique_ptr<format_entry> >&) const override;
-                        void check_data() override;
-                        void read(std::list<std::string> const &) override;
-                        types card_type() const override;
-
-                    public:
-                        /** Element identification number. (Integer > 0)
-                         */
-                        entry_value<long> EID;
+                            std::list<std::unique_ptr<format_entry>>&) const override;
                     };
 
                     /// Base class for `ctria3` and `cquad4`.
-                    class shell : public element {
+                    class shell : public __base::element {
 
                     protected:
 
-                        // entry_type<long> static form_EID;
-                        entry_type<long> static form_PID;
-                        entry_type<long> static form_G1;
-                        entry_type<long> static form_G2;
-                        entry_type<long> static form_G3;
-                        entry_type<long> static form_G4;
-                        entry_type<long> static form_MCID;
-                        entry_type<double> static form_THETA;
-                        entry_type<double> static form_ZOFFS;
-                        entry_type<long> static form_TFLAG;
-                        entry_type<double> static form_T1;
-                        entry_type<double> static form_T2;
-                        entry_type<double> static form_T3;
-                        entry_type<double> static form_T4;
+                        // bdf::types::entry_type<long> static form_EID;
+                        bdf::types::entry_type<long> static form_PID;
+                        bdf::types::entry_type<long> static form_G1;
+                        bdf::types::entry_type<long> static form_G2;
+                        bdf::types::entry_type<long> static form_G3;
+                        bdf::types::entry_type<long> static form_G4;
+                        bdf::types::entry_type<long> static form_MCID;
+                        bdf::types::entry_type<double> static form_THETA;
+                        bdf::types::entry_type<double> static form_ZOFFS;
+                        bdf::types::entry_type<long> static form_TFLAG;
+                        bdf::types::entry_type<double> static form_T1;
+                        bdf::types::entry_type<double> static form_T2;
+                        bdf::types::entry_type<double> static form_T3;
+                        bdf::types::entry_type<double> static form_T4;
 
                         shell(std::list<std::string> const &);
                         shell(long *);
@@ -92,33 +85,33 @@ namespace dnvgl {
 
                         // /** Element identification number. (Integer > 0)
                         //  */
-                        // entry_value<long> EID;
+                        // bdf::types::entry_value<long> EID;
                         /** Property identification number of a `PSHELL`,
                             `PCOMP` or `PLPLANE` entry. (Integer > 0; Default =
                             `EID`)
                             */
-                        entry_value<long> PID;
+                        bdf::types::entry_value<long> PID;
                         /** Grid point identification numbers of first
                             connection point. (Integers > 0, all unique)
                             */
-                        entry_value<long> G1;
+                        bdf::types::entry_value<long> G1;
                         /** Grid point identification numbers of second
                             connection point. (Integers > 0, all unique)
                             */
-                        entry_value<long> G2;
+                        bdf::types::entry_value<long> G2;
                         /** Grid point identification numbers of third
                             connection point. (Integers > 0, all unique)
                             */
-                        entry_value<long> G3;
+                        bdf::types::entry_value<long> G3;
                         /** Grid point identification numbers of fourth
                             connection point. (Integers > 0, all unique)
                             */
-                        entry_value<long> G4;
+                        bdf::types::entry_value<long> G4;
                         /** Material property orientation angle in degrees.
                             `THETA` is ignored for hyperelastic elements.
                             (Real; Default = 0.0)
                             */
-                        entry_value<double> THETA;
+                        bdf::types::entry_value<double> THETA;
                         /** Material coordinate system identification number.
                             The x-axis of the material coordinate system is
                             determined by projecting the x-axis of the `MCID`
@@ -128,16 +121,16 @@ namespace dnvgl {
                             hyperelastic elements. (Integer > 0; if blank, then
                             `THETA` = 0.0 is assumed.)
                             */
-                        entry_value<long> MCID;
+                        bdf::types::entry_value<long> MCID;
                         /** Offset from the surface of grid points to the
                             element reference plane. `ZOFFS` is ignored for
                             hyperelastic elements. (Real)
                             */
-                        entry_value<double> ZOFFS;
+                        bdf::types::entry_value<double> ZOFFS;
                         /** An integer flag, signifying the meaning of the `Ti`
                             values. (Integer 0, 1, or blank)
                             */
-                        entry_value<long> TFLAG;
+                        bdf::types::entry_value<long> TFLAG;
                         /** Membrane thickness of element at grid point G1. If
                             `TFLAG` zero or blank, then `T1` is actual user
                             specified thickness. (Real > 0.0 or blank, not all
@@ -146,7 +139,7 @@ namespace dnvgl {
                             0.0 or blank; not all zero. Default = 1.0) `T1` is
                             ignored for hyperelastic elements.
                             */
-                        entry_value<double> T1;
+                        bdf::types::entry_value<double> T1;
                         /** Membrane thickness of element at grid point G2. If
                             `TFLAG` zero or blank, then `T2` is actual user
                             specified thickness. (Real > 0.0 or blank, not all
@@ -155,7 +148,7 @@ namespace dnvgl {
                             0.0 or blank; not all zero. Default = 1.0) `T2` is
                             ignored for hyperelastic elements.
                             */
-                        entry_value<double> T2;
+                        bdf::types::entry_value<double> T2;
                         /** Membrane thickness of element at grid point G3. If
                             `TFLAG` zero or blank, then `T3` is actual user
                             specified thickness. (Real > 0.0 or blank, not all
@@ -164,7 +157,7 @@ namespace dnvgl {
                             0.0 or blank; not all zero. Default = 1.0) `T3` is
                             ignored for hyperelastic elements.
                             */
-                        entry_value<double> T3;
+                        bdf::types::entry_value<double> T3;
                         /** Membrane thickness of element at grid point G4. If
                             `TFLAG` zero or blank, then `T4` is actual user
                             specified thickness. (Real > 0.0 or blank, not all
@@ -173,7 +166,7 @@ namespace dnvgl {
                             0.0 or blank; not all zero. Default = 1.0) `T4` is
                             ignored for hyperelastic elements.
                             */
-                        entry_value<double> T4;
+                        bdf::types::entry_value<double> T4;
 
                     protected:
 
@@ -421,26 +414,26 @@ namespace dnvgl {
                     using __base::element::form_EID;
                     using __base::card::format_outlist;
 
-                    // entry_type<long> static form_EID;
-                    entry_type<long> static form_PID;
-                    entry_type<long> static form_GA;
-                    entry_type<long> static form_GB;
-                    entry_type<double> static form_X1;
-                    entry_type<long> static form_G0;
-                    entry_type<double> static form_X2;
-                    entry_type<double> static form_X3;
-                    entry_type<double> static form_BIT;
-                    entry_type<std::string> static form_OFFT;
-                    entry_type<std::vector<int> > static form_PA;
-                    entry_type<std::vector<int> > static form_PB;
-                    entry_type<double> static form_W1A;
-                    entry_type<double> static form_W2A;
-                    entry_type<double> static form_W3A;
-                    entry_type<double> static form_W1B;
-                    entry_type<double> static form_W2B;
-                    entry_type<double> static form_W3B;
-                    entry_type<long> static form_SA;
-                    entry_type<long> static form_SB;
+                    // bdf::types::entry_type<long> static form_EID;
+                    bdf::types::entry_type<long> static form_PID;
+                    bdf::types::entry_type<long> static form_GA;
+                    bdf::types::entry_type<long> static form_GB;
+                    bdf::types::entry_type<double> static form_X1;
+                    bdf::types::entry_type<long> static form_G0;
+                    bdf::types::entry_type<double> static form_X2;
+                    bdf::types::entry_type<double> static form_X3;
+                    bdf::types::entry_type<double> static form_BIT;
+                    bdf::types::entry_type<std::string> static form_OFFT;
+                    bdf::types::entry_type<std::vector<int> > static form_PA;
+                    bdf::types::entry_type<std::vector<int> > static form_PB;
+                    bdf::types::entry_type<double> static form_W1A;
+                    bdf::types::entry_type<double> static form_W2A;
+                    bdf::types::entry_type<double> static form_W3A;
+                    bdf::types::entry_type<double> static form_W1B;
+                    bdf::types::entry_type<double> static form_W2B;
+                    bdf::types::entry_type<double> static form_W3B;
+                    bdf::types::entry_type<long> static form_SA;
+                    bdf::types::entry_type<long> static form_SB;
 
                 public:
 
@@ -468,53 +461,53 @@ namespace dnvgl {
                     // /** Unique element identification number. (0 <
                     //     Integer < 100,000,000)
                     // */
-                    // entry_value<long> EID;
+                    // bdf::types::entry_value<long> EID;
                     using __base::element::EID;
                     /** Property identification number of `PBEAM`, `PBCOMP`
                         or `PBEAML` entry. (Integer > 0; Default = `EID`)
                         */
-                    entry_value<long> PID;
+                    bdf::types::entry_value<long> PID;
                     /** First grid point identification numbers of
                         connection points. (Integer > 0)
                         */
-                    entry_value<long> GA;
+                    bdf::types::entry_value<long> GA;
                     /** Second grid point identification numbers of
                         connection points. (Integer > 0)
                         */
-                    entry_value<long> GB;
+                    bdf::types::entry_value<long> GB;
                     /** First components of orientation vector , from `GA`,
                         in the displacement coordinate system at `GA`
                         (default), or in the basic coordinate system.
                         (Real)
                         */
-                    entry_value<double> X1;
+                    bdf::types::entry_value<double> X1;
                     /** Alternate method to supply the orientation vector
                         using grid point `G0`. Direction of is from `GA` to
                         G0. is then transferred to End `A`. (Integer > 0;
                         or `GB`)
                         */
-                    entry_value<long> G0;
+                    bdf::types::entry_value<long> G0;
                     /** Second components of orientation vector , from
                         `GA`, in the displacement coordinate system at `GA`
                         (default), or in the basic coordinate system.
                         (Real)
                         */
-                    entry_value<double> X2;
+                    bdf::types::entry_value<double> X2;
                     /** Third components of orientation vector , from `GA`,
                         in the displacement coordinate system at `GA`
                         (default), or in the basic coordinate system.
                         (Real)
                         */
-                    entry_value<double> X3;
+                    bdf::types::entry_value<double> X3;
                     /** Built-in twist of the cross-sectional axes about
                         the beam axis at end `B` relative to end `A`. For
                         beam p-elements only. (Real; Default = 0.0)
                         */
-                    entry_value<double> BIT;
+                    bdf::types::entry_value<double> BIT;
                     /** Offset vector interpretation flag. (Character or
                         blank)
                         */
-                    entry_value<std::string> OFFT;
+                    bdf::types::entry_value<std::string> OFFT;
                     /** Pin flags for beam end `A`, respectively; used to
                         remove connections between the grid point and
                         selected degrees-offreedom of the beam. The
@@ -529,7 +522,7 @@ namespace dnvgl {
                         through 6 with no embedded blanks.) Pin flags are
                         not allowed for beam p-elements.
                         */
-                    entry_value<std::vector<int> > PA;
+                    bdf::types::entry_value<std::vector<int> > PA;
                     /** Pin flags for beam end `B`, respectively; used to
                         remove connections between the grid point and
                         selected degrees-offreedom of the beam. The
@@ -544,51 +537,51 @@ namespace dnvgl {
                         through 6 with no embedded blanks.) Pin flags are
                         not allowed for beam p-elements.
                         */
-                    entry_value<std::vector<int> > PB;
+                    bdf::types::entry_value<std::vector<int> > PB;
                     /** *x* Components of offset vectors from the grid
                         points to the end points of the axis of the shear
                         center at beam end `A`. (Real; Default = 0.0)
                         */
-                    entry_value<double> W1A;
+                    bdf::types::entry_value<double> W1A;
                     /** *y* Components of offset vectors from the grid
                         points to the end points of the axis of the shear
                         center at beam end `A`. (Real; Default = 0.0)
                         */
-                    entry_value<double> W2A;
+                    bdf::types::entry_value<double> W2A;
                     /** *z* Components of offset vectors from the grid
                         points to the end points of the axis of the shear
                         center at beam end `A`. (Real; Default = 0.0)
                         */
-                    entry_value<double> W3A;
+                    bdf::types::entry_value<double> W3A;
                     /** *x* Components of offset vectors from the grid
                         points to the end points of the axis of the shear
                         center at beam end `B`. (Real; Default = 0.0)
                         */
-                    entry_value<double> W1B;
+                    bdf::types::entry_value<double> W1B;
                     /** *y* Components of offset vectors from the grid
                         points to the end points of the axis of the shear
                         center at beam end `B`. (Real; Default = 0.0)
                         */
-                    entry_value<double> W2B;
+                    bdf::types::entry_value<double> W2B;
                     /** *z* Components of offset vectors from the grid
                         points to the end points of the axis of the shear
                         center at beam end `B`. (Real; Default = 0.0)
                         */
-                    entry_value<double> W3B;
+                    bdf::types::entry_value<double> W3B;
                     /** Scalar or grid point identification numbers for the
                         end `A`. The degrees-of-freedom at these points are
                         the warping variables . `SA` and `SB` cannot be
                         specified for beam p-elements. (Integers > 0 or
                         blank)
                         */
-                    entry_value<long> SA;
+                    bdf::types::entry_value<long> SA;
                     /** Scalar or grid point identification numbers for the
                         end `B`. The degrees-of-freedom at these points are
                         the warping variables . `SA` and `SB` cannot be
                         specified for beam p-elements. (Integers > 0 or
                         blank)
                         */
-                    entry_value<long> SB;
+                    bdf::types::entry_value<long> SB;
 
                     cbeam();
 
@@ -732,23 +725,23 @@ namespace dnvgl {
                     using __base::element::form_EID;
                     using __base::card::format_outlist;
 
-                    // entry_type<long> static form_EID;
-                    entry_type<long> static form_PID;
-                    entry_type<long> static form_GA;
-                    entry_type<long> static form_GB;
-                    entry_type<double> static form_X1;
-                    entry_type<long> static form_G0;
-                    entry_type<double> static form_X2;
-                    entry_type<double> static form_X3;
-                    entry_type<std::string> static form_OFFT;
-                    entry_type<std::vector<int> > static form_PA;
-                    entry_type<std::vector<int> > static form_PB;
-                    entry_type<double> static form_W1A;
-                    entry_type<double> static form_W2A;
-                    entry_type<double> static form_W3A;
-                    entry_type<double> static form_W1B;
-                    entry_type<double> static form_W2B;
-                    entry_type<double> static form_W3B;
+                    // bdf::types::entry_type<long> static form_EID;
+                    bdf::types::entry_type<long> static form_PID;
+                    bdf::types::entry_type<long> static form_GA;
+                    bdf::types::entry_type<long> static form_GB;
+                    bdf::types::entry_type<double> static form_X1;
+                    bdf::types::entry_type<long> static form_G0;
+                    bdf::types::entry_type<double> static form_X2;
+                    bdf::types::entry_type<double> static form_X3;
+                    bdf::types::entry_type<std::string> static form_OFFT;
+                    bdf::types::entry_type<std::vector<int> > static form_PA;
+                    bdf::types::entry_type<std::vector<int> > static form_PB;
+                    bdf::types::entry_type<double> static form_W1A;
+                    bdf::types::entry_type<double> static form_W2A;
+                    bdf::types::entry_type<double> static form_W3A;
+                    bdf::types::entry_type<double> static form_W1B;
+                    bdf::types::entry_type<double> static form_W2B;
+                    bdf::types::entry_type<double> static form_W3B;
 
                 public:
 
@@ -769,51 +762,51 @@ namespace dnvgl {
                     // /** Unique element identification number. (0 <
                     //     Integer < 100,000,000)
                     // */
-                    // entry_value<long> EID;
+                    // bdf::types::entry_value<long> EID;
                     /** Property identification number of a `PBAR` or
                         `PBARL` entry. (Integer > 0 or blank*; Default =
                         `EID` unless `BAROR` entry has nonzero entry in
                         field 3.)
                         */
-                    entry_value<long> PID;
+                    bdf::types::entry_value<long> PID;
                     /** Grid point identification numbers of connection
                         point at `A` side of beam. (Integer > 0; `GA` ≠
                         `GB` )
                         */
-                    entry_value<long> GA;
+                    bdf::types::entry_value<long> GA;
                     /** Grid point identification numbers of connection
                         point at `B` side of beam. (Integer > 0; `GA` ≠
                         `GB` )
                         */
-                    entry_value<long> GB;
+                    bdf::types::entry_value<long> GB;
                     /** *x* components of orientation vector *v* , from
                         `GA`, in the displacement coordinate system at `GA`
                         (default), or in the basic coordinate system. See
                         Remark 8. (Real)
                         */
-                    entry_value<double> X1;
+                    bdf::types::entry_value<double> X1;
                     /** Alternate method to supply the orientation
                         vector *v* using grid point `G0`. The direction of
                         *v* is from `GA` to `G0`. 'v* is then translated to
                         End `A`. (Integer > 0; `G0` ≠ `GA` or `GB`)
                         */
-                    entry_value<long> G0;
+                    bdf::types::entry_value<long> G0;
                     /** *y* components of orientation vector *v* , from
                         `GA`, in the displacement coordinate system at `GA`
                         (default), or in the basic coordinate system. See
                         Remark 8. (Real)
                         */
-                    entry_value<double> X2;
+                    bdf::types::entry_value<double> X2;
                     /** *z* components of orientation vector *v* , from
                         `GA`, in the displacement coordinate system at `GA`
                         (default), or in the basic coordinate system. See
                         Remark 8. (Real)
                         */
-                    entry_value<double> X3;
+                    bdf::types::entry_value<double> X3;
                     /** Offset vector interpretation flag. (character or
                         blank) See Remark 8.
                         */
-                    entry_value<std::string> OFFT;
+                    bdf::types::entry_value<std::string> OFFT;
                     /** Pin flags for bar ends `A`. Used to remove
                         connections between the grid point and selected
                         degrees-of-freedom of the bar. The
@@ -827,7 +820,7 @@ namespace dnvgl {
                         through 6 anywhere in the field with no embedded
                         blanks; Integer > 0.)
                         */
-                    entry_value<std::vector<int> > PA;
+                    bdf::types::entry_value<std::vector<int> > PA;
                     /** Pin flags for bar ends `B`. Used to remove
                         connections between the grid point and selected
                         degrees-of-freedom of the bar. The
@@ -841,7 +834,7 @@ namespace dnvgl {
                         through 6 anywhere in the field with no embedded
                         blanks; Integer > 0.)
                         */
-                    entry_value<std::vector<int> > PB;
+                    bdf::types::entry_value<std::vector<int> > PB;
                     /** *x* components of offset vectors \f$w_a\f$ and
                         \f$w_b\f$, respectively (see Figure 8-8) in
                         displacement coordinate systems (or in element
@@ -849,7 +842,7 @@ namespace dnvgl {
                         field), at point `GA`. See Remark 7. and 8. (Real;
                         Default = 0.0)
                         */
-                    entry_value<double> W1A;
+                    bdf::types::entry_value<double> W1A;
                     /** *y* components of offset vectors \f$w_a\f$ and
                         \f$w_b\f$, respectively (see Figure 8-8) in
                         displacement coordinate systems (or in element
@@ -857,7 +850,7 @@ namespace dnvgl {
                         field), at point `GA`. See Remark 7. and 8. (Real;
                         Default = 0.0)
                         */
-                    entry_value<double> W2A;
+                    bdf::types::entry_value<double> W2A;
                     /** *z* components of offset vectors \f$w_a\f$ and
                         \f$w_b\f$, respectively (see Figure 8-8) in
                         displacement coordinate systems (or in element
@@ -865,7 +858,7 @@ namespace dnvgl {
                         field), at point `GA`. See Remark 7. and 8. (Real;
                         Default = 0.0)
                         */
-                    entry_value<double> W3A;
+                    bdf::types::entry_value<double> W3A;
                     /** *x* components of offset vectors \f$w_a\f$ and
                         \f$w_b\f$, respectively (see Figure 8-8) in
                         displacement coordinate systems (or in element
@@ -873,7 +866,7 @@ namespace dnvgl {
                         field), at point `GB`. See Remark 7. and 8. (Real;
                         Default = 0.0)
                         */
-                    entry_value<double> W1B;
+                    bdf::types::entry_value<double> W1B;
                     /** *y* components of offset vectors \f$w_a\f$ and
                         \f$w_b\f$, respectively (see Figure 8-8) in
                         displacement coordinate systems (or in element
@@ -881,7 +874,7 @@ namespace dnvgl {
                         field), at point `GB`. See Remark 7. and 8. (Real;
                         Default = 0.0)
                         */
-                    entry_value<double> W2B;
+                    bdf::types::entry_value<double> W2B;
                     /** *z* components of offset vectors \f$w_a\f$ and
                         \f$w_b\f$, respectively (see Figure 8-8) in
                         displacement coordinate systems (or in element
@@ -889,7 +882,7 @@ namespace dnvgl {
                         field), at point `GB`. See Remark 7. and 8. (Real;
                         Default = 0.0)
                         */
-                    entry_value<double> W3B;
+                    bdf::types::entry_value<double> W3B;
 
                     cbar();
 
@@ -1005,28 +998,28 @@ namespace dnvgl {
                     using __base::element::form_EID;
                     using __base::card::format_outlist;
 
-                    // entry_type<long> static form_EID;
-                    entry_type<long> static form_PID;
-                    entry_type<long> static form_G1;
-                    entry_type<long> static form_G2;
+                    // bdf::types::entry_type<long> static form_EID;
+                    bdf::types::entry_type<long> static form_PID;
+                    bdf::types::entry_type<long> static form_G1;
+                    bdf::types::entry_type<long> static form_G2;
 
                 public:
 
                     // /** Element identification number. (Integer > 0)
                     //  */
-                    // entry_value<long> EID;
+                    // bdf::types::entry_value<long> EID;
                     /** Property identification number of a `PROD` entry.
                         (Integer > 0; Default = `EID`)
                         */
-                    entry_value<long> PID;
+                    bdf::types::entry_value<long> PID;
                     /** Grid point identification number of first connection
                         point. (Integer > 0; `G1` ≠ `G2`)
                         */
-                    entry_value<long> G1;
+                    bdf::types::entry_value<long> G1;
                     /** Grid point identification number of second connection
                         point. (Integer > 0; `G1` ≠ `G2`)
                         */
-                    entry_value<long> G2;
+                    bdf::types::entry_value<long> G2;
 
                     crod();
 

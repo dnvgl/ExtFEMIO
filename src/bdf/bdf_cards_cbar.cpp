@@ -127,7 +127,7 @@ element(inp) {
 }
 
 cbar::cbar() :
-        element(nullptr),
+        element(),
         choose_dir_code(CHOOSE_DIR_CODE::UNDEF), PID(nullptr),
         GA(nullptr), GB(nullptr), X1(nullptr), G0(nullptr), X2(nullptr), X3(nullptr),
         OFFT(nullptr),
@@ -167,7 +167,7 @@ cbar::cbar(
     PA(PA), PB(PB),
     W1A(W1A), W2A(W2A), W3A(W3A),
     W1B(W1B), W2B(W2B), W3B(W3B) {
-    this->element::check_data();
+    // this->element::check_data();
     this->cbar::check_data();
 }
 
@@ -262,7 +262,7 @@ cards::__base::card const& cbar::operator()(
     this->W1B(W1B);
     this->W2B(W2B);
     this->W3B(W3B);
-    this->element::check_data();
+    // this->element::check_data();
     this->cbar::check_data();
     return *this;
 }
@@ -359,7 +359,7 @@ cont:
 }
 
 void cbar::check_data() {
-    this->element::check_data();
+    // this->element::check_data();
     if (PID) cbar::form_PID.check(this->PID);
     if (GA) cbar::form_GA.check(this->GA);
     if (GB) cbar::form_GB.check(this->GB);

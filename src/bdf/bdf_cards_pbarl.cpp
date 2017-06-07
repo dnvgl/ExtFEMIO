@@ -69,6 +69,8 @@ namespace {
 }
 entry_type<double> pbarl::form_NSM("NSM", bound_NSM);
 
+pbarl::pbarl() : bar_prop() {}
+
 pbarl::pbarl(list<std::string> const &inp) :
 bar_prop(inp) {
     this->pbarl::read(inp);
@@ -178,7 +180,6 @@ bdf::cards::__base::card const &pbarl::operator() (
 }
 
 void pbarl::check_data() {
-    this->bar_prop::check_data();
     if (GROUP) pbarl::form_GROUP.check(GROUP);
     if (TYPE) pbarl::form_TYPE.check(TYPE);
     if (DIM.size()>0) for (auto pos : DIM) pbarl::form_DIM.check(pos);

@@ -226,7 +226,7 @@ void pshell::collect_outdata(
 }
 
 void pshell::check_data() {
-    this->property::check_data();
+    // this->property::check_data();
     if (MID1) form_MID1.check(this->MID1);
     if (T) form_T.check(this->T);
     if (MID2) form_MID2.check(this->MID2);

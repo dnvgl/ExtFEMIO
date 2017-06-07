@@ -34,7 +34,7 @@ using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::cards;
 
 TEST_CASE("BDF PBAR definitions: Free Field Format (generic).", "[bdf_pbar]") {
-    pbar::resetIds();
+    pbar::reset();
 
     std::list<std::string> data({
             "PBAR,1,2,3.,4.,5.,6.,7.,,9.,10.,11.,12.,13.,14.,15.,16.,17.,18.,19.\n"});
@@ -94,7 +94,7 @@ TEST_CASE("BDF PBAR definitions: Small Field Format 1.", "[bdf_pbar]") {
 
 TEST_CASE("BDF PBAR definitions: Small Field Format 2.", "[bdf_pbar]") {
 
-    pbar::resetIds();
+    pbar::reset();
 
     std::list<std::string> data({
             // 234567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567
@@ -125,7 +125,7 @@ TEST_CASE("BDF PBAR definitions: Small Field Format 2.", "[bdf_pbar]") {
 }
 
 TEST_CASE("BDF PBAR roundtrip test", "[bdf_pbar]") {
-    pbar::resetIds();
+    pbar::reset();
 
     std::ostringstream test;
 
@@ -153,7 +153,7 @@ TEST_CASE("BDF PBAR roundtrip test", "[bdf_pbar]") {
     test << probe;
 
     SECTION("check output") {
-        pbar::resetIds();
+        pbar::reset();
         CHECK(test.str() ==
               "PBAR        7869  1040101.000+002.000+003.000+005.000+006.000+007.000+00\n"
               "        8.000+009.000+001.000+011.100+011.200+011.300+011.400+011.700+01\n"
@@ -161,7 +161,7 @@ TEST_CASE("BDF PBAR roundtrip test", "[bdf_pbar]") {
     }
 
     SECTION("check reading") {
-        pbar::resetIds();
+        pbar::reset();
         std::list<std::string> data;
         std::list<std::string> lines;
         std::string tmp;
@@ -194,7 +194,7 @@ TEST_CASE("BDF PBAR roundtrip test", "[bdf_pbar]") {
 }
 
 TEST_CASE("BDF PBAR roundtrip test (reuse)", "[bdf_pbar]") {
-    pbar::resetIds();
+    pbar::reset();
 
     std::ostringstream test;
 
@@ -263,7 +263,7 @@ TEST_CASE("BDF PBAR roundtrip test (reuse)", "[bdf_pbar]") {
 }
 
 TEST_CASE("BDF PBAR roundtrip test minimal", "[bdf_pbar]") {
-    pbar::resetIds();
+    pbar::reset();
 
     std::ostringstream test;
 
@@ -281,7 +281,7 @@ TEST_CASE("BDF PBAR roundtrip test minimal", "[bdf_pbar]") {
     }
 
     SECTION("check reading") {
-        pbar::resetIds();
+        pbar::reset();
         std::list<std::string> data;
         std::list<std::string> lines;
         std::string tmp;
@@ -314,7 +314,7 @@ TEST_CASE("BDF PBAR roundtrip test minimal", "[bdf_pbar]") {
 }
 
 TEST_CASE("BDF PBAR roundtrip test minimal (reuse)", "[bdf_pbar]") {
-    pbar::resetIds();
+    pbar::reset();
 
     std::ostringstream test;
 
@@ -328,13 +328,13 @@ TEST_CASE("BDF PBAR roundtrip test minimal (reuse)", "[bdf_pbar]") {
     test << probe(&PID, &MID, &A, &I1, &I2);
 
     SECTION("check output") {
-        pbar::resetIds();
+        pbar::reset();
         CHECK(test.str() ==
               "PBAR        7869  1040101.000+002.000+003.000+00\n");
     }
 
     SECTION("check reading") {
-        pbar::resetIds();
+        pbar::reset();
         std::list<std::string> data;
         std::list<std::string> lines;
         std::string tmp;

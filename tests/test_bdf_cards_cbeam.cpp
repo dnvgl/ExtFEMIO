@@ -182,6 +182,7 @@ TEST_CASE("BDF CBEAM definitions (OFFT default). (Small Field Format), dircode",
 }
 
 TEST_CASE("BDF CBEAM roundtrip test (DCODE, OFFT)", "[bdf_cbeam]") {
+    cbeam::reset();
     std::ostringstream test;
 
     long EID{7869}, PID{104010}, GA{76}, GB{153}, G0{13};
@@ -206,6 +207,7 @@ TEST_CASE("BDF CBEAM roundtrip test (DCODE, OFFT)", "[bdf_cbeam]") {
     }
 
     SECTION("check reading") {
+        cbeam::reset();
         std::list<std::string> data;
         std::list<std::string> lines;
         std::string tmp;
@@ -244,6 +246,7 @@ TEST_CASE("BDF CBEAM roundtrip test (DCODE, OFFT)", "[bdf_cbeam]") {
 }
 
 TEST_CASE("BDF CBEAM roundtrip test (DCODE, OFFT) (reuse)", "[bdf_cbeam]") {
+    cbeam::reset();
     std::ostringstream test;
 
     long EID{7869}, PID{104010}, GA{76}, GB{153}, G0{13};
@@ -269,6 +272,7 @@ TEST_CASE("BDF CBEAM roundtrip test (DCODE, OFFT) (reuse)", "[bdf_cbeam]") {
     }
 
     SECTION("check reading") {
+        cbeam::reset();
         std::list<std::string> data;
         std::list<std::string> lines;
         std::string tmp;
@@ -308,6 +312,7 @@ TEST_CASE("BDF CBEAM roundtrip test (DCODE, OFFT) (reuse)", "[bdf_cbeam]") {
 }
 
 TEST_CASE("BDF CBEAM roundtrip test (DCODE, BIT)", "[bdf_cbeam]") {
+    cbeam::reset();
     std::ostringstream test;
 
     long EID{7869}, PID{104010}, GA{76}, GB{153}, G0{13};
@@ -332,6 +337,7 @@ TEST_CASE("BDF CBEAM roundtrip test (DCODE, BIT)", "[bdf_cbeam]") {
     }
 
     SECTION("check reading") {
+        cbeam::reset();
         std::list<std::string> data;
         std::list<std::string> lines;
         std::string tmp;
@@ -370,6 +376,7 @@ TEST_CASE("BDF CBEAM roundtrip test (DCODE, BIT)", "[bdf_cbeam]") {
 }
 
 TEST_CASE("BDF CBEAM roundtrip test (DCODE, BIT) (reuse)", "[bdf_cbeam]") {
+    cbeam::reset();
     std::ostringstream test;
 
     long EID{7869}, PID{104010}, GA{76}, GB{153}, G0{13};
@@ -395,6 +402,7 @@ TEST_CASE("BDF CBEAM roundtrip test (DCODE, BIT) (reuse)", "[bdf_cbeam]") {
     }
 
     SECTION("check reading") {
+        cbeam::reset();
         std::list<std::string> data;
         std::list<std::string> lines;
         std::string tmp;
@@ -434,6 +442,7 @@ TEST_CASE("BDF CBEAM roundtrip test (DCODE, BIT) (reuse)", "[bdf_cbeam]") {
 }
 
 TEST_CASE("BDF CBEAM roundtrip test (DVEC, OFFT)", "[bdf_cbeam]") {
+    cbeam::reset();
     std::ostringstream test;
 
     long EID{7869}, PID{104010}, GA{76}, GB{153};
@@ -460,6 +469,7 @@ TEST_CASE("BDF CBEAM roundtrip test (DVEC, OFFT)", "[bdf_cbeam]") {
     }
 
     SECTION("check reading") {
+        cbeam::reset();
         std::list<std::string> data;
         std::list<std::string> lines;
         std::string tmp;
@@ -498,6 +508,7 @@ TEST_CASE("BDF CBEAM roundtrip test (DVEC, OFFT)", "[bdf_cbeam]") {
 }
 
 TEST_CASE("BDF CBEAM roundtrip test (DVEC, OFFT) (reuse)", "[bdf_cbeam]") {
+    cbeam::reset();
     std::ostringstream test;
 
     long EID{7869}, PID{104010}, GA{76}, GB{153};
@@ -524,6 +535,7 @@ TEST_CASE("BDF CBEAM roundtrip test (DVEC, OFFT) (reuse)", "[bdf_cbeam]") {
     }
 
     SECTION("check reading") {
+        cbeam::reset();
         std::list<std::string> data;
         std::list<std::string> lines;
         std::string tmp;
@@ -563,6 +575,7 @@ TEST_CASE("BDF CBEAM roundtrip test (DVEC, OFFT) (reuse)", "[bdf_cbeam]") {
 }
 
 TEST_CASE("BDF CBEAM roundtrip test (DVEC, BIT)", "[bdf_cbeam]") {
+    cbeam::reset();
     std::ostringstream test;
 
     long EID{7869}, PID{104010}, GA{76}, GB{153};
@@ -588,6 +601,7 @@ TEST_CASE("BDF CBEAM roundtrip test (DVEC, BIT)", "[bdf_cbeam]") {
     }
 
     SECTION("check reading") {
+        cbeam::reset();
         std::list<std::string> data;
         std::list<std::string> lines;
         std::string tmp;
@@ -626,6 +640,7 @@ TEST_CASE("BDF CBEAM roundtrip test (DVEC, BIT)", "[bdf_cbeam]") {
 }
 
 TEST_CASE("BDF CBEAM roundtrip test (DVEC, BIT) (reuse)", "[bdf_cbeam]") {
+    cbeam::reset();
     std::ostringstream test;
 
     long EID{7869}, PID{104010}, GA{76}, GB{153};
@@ -652,6 +667,7 @@ TEST_CASE("BDF CBEAM roundtrip test (DVEC, BIT) (reuse)", "[bdf_cbeam]") {
     }
 
     SECTION("check reading") {
+        cbeam::reset();
         std::list<std::string> data;
         std::list<std::string> lines;
         std::string tmp;

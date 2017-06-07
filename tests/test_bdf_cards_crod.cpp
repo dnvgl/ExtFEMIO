@@ -34,6 +34,17 @@ static char THIS_FILE[] = __FILE__;
 using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::cards;
 
+TEST_CASE("BDF CROD default EID.", "[bdf_crod]") {
+    crod::reset();
+    long G1{1}, G2{2};
+    crod probe(nullptr, nullptr, &G1, &G2);
+    CHECK(long(probe.EID) == 1);
+    CHECK(long(probe.PID) == 1);
+    crod probe2(nullptr, nullptr, &G1, &G2);
+    CHECK(long(probe2.EID) == 2);
+    CHECK(long(probe2.PID) == 2);
+}
+
 TEST_CASE("BDF CROD definitions. (Free Field Format)", "[bdf_crod]") {
 
     std::list<std::string> data({"CROD,222,13,14,15\n"});
@@ -99,6 +110,7 @@ TEST_CASE("BDF CROD definitions. (Small Field Format) (default PID)",
 }
 
 TEST_CASE("BDF CROD roundtrip test.", "[bdf_crod]") {
+    crod::reset();
     std::ostringstream test;
 
     long EID{7869}, PID{104010}, G1{76}, G2{153};
@@ -130,6 +142,7 @@ TEST_CASE("BDF CROD roundtrip test.", "[bdf_crod]") {
 }
 
 TEST_CASE("BDF CROD roundtrip test (reuse).", "[bdf_crod]") {
+    crod::reset();
     std::ostringstream test;
 
     long EID{7869}, PID{104010}, G1{76}, G2{153};
@@ -163,6 +176,7 @@ TEST_CASE("BDF CROD roundtrip test (reuse).", "[bdf_crod]") {
 }
 
 TEST_CASE("BDF CROD roundtrip test. (default PID)", "[bdf_crod]") {
+    crod::reset();
     std::ostringstream test;
 
     long EID{7869}, G1{76}, G2{153};
@@ -194,6 +208,7 @@ TEST_CASE("BDF CROD roundtrip test. (default PID)", "[bdf_crod]") {
 }
 
 TEST_CASE("BDF CROD roundtrip test (reuse) (default PID).", "[bdf_crod]") {
+    crod::reset();
     std::ostringstream test;
 
     long EID{7869}, G1{76}, G2{153};

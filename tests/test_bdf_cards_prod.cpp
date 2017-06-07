@@ -41,7 +41,7 @@ using bdf::types::entry_type;
 using bdf::types::entry_value;
 
 TEST_CASE("BDF PROD definitions; Free Field Format 1.", "[bdf_prod]") {
-    prod::resetIds();
+    prod::reset();
 
     std::list<std::string> data({
             "PROD,1,2,3.,4.,5.,6.\n"});
@@ -61,7 +61,7 @@ TEST_CASE("BDF PROD definitions; Free Field Format 1.", "[bdf_prod]") {
 }
 
 TEST_CASE("BDF PROD definitions; Free Field Format 2.", "[bdf_prod]") {
-    prod::resetIds();
+    prod::reset();
 
     std::list<std::string> data({
             "PROD,1,2,3.,4.,5.\n"});
@@ -81,7 +81,7 @@ TEST_CASE("BDF PROD definitions; Free Field Format 2.", "[bdf_prod]") {
 }
 
 TEST_CASE("BDF PROD definitions; Free Field Format 3.", "[bdf_prod]") {
-    prod::resetIds();
+    prod::reset();
 
     std::list<std::string> data({
             "PROD,1,2,3.,4.\n"});
@@ -141,7 +141,7 @@ TEST_CASE("BDF PROD definitions; Small Field Format 2.", "[bdf_prod]") {
 }
 
 TEST_CASE("BDF PROD roundtrip test", "[bdf_prod]") {
-    prod::resetIds();
+    prod::reset();
     ostringstream test;
 
     long PID{17};
@@ -161,7 +161,7 @@ TEST_CASE("BDF PROD roundtrip test", "[bdf_prod]") {
     }
 
     SECTION("check reading") {
-        prod::resetIds();
+        prod::reset();
         list<std::string> data;
         list<std::string> lines;
         std::string tmp;
@@ -182,7 +182,7 @@ TEST_CASE("BDF PROD roundtrip test", "[bdf_prod]") {
 }
 
 TEST_CASE("BDF PROD roundtrip test (reuse)", "[bdf_prod]") {
-    pbarl::resetIds();
+    pbarl::reset();
 
     ostringstream test;
 
@@ -224,7 +224,7 @@ TEST_CASE("BDF PROD roundtrip test (reuse)", "[bdf_prod]") {
 }
 
 TEST_CASE("BDF PROD roundtrip test (A only)", "[bdf_prod]") {
-    prod::resetIds();
+    prod::reset();
     ostringstream test;
 
     long PID{17};
@@ -240,7 +240,7 @@ TEST_CASE("BDF PROD roundtrip test (A only)", "[bdf_prod]") {
     }
 
     SECTION("check reading") {
-        prod::resetIds();
+        prod::reset();
         list<std::string> data;
         list<std::string> lines;
         std::string tmp;
@@ -261,7 +261,7 @@ TEST_CASE("BDF PROD roundtrip test (A only)", "[bdf_prod]") {
 }
 
 TEST_CASE("BDF PROD roundtrip test (A only) (reuse)", "[bdf_prod]") {
-    pbarl::resetIds();
+    pbarl::reset();
 
     ostringstream test;
 

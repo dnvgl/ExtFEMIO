@@ -112,7 +112,6 @@ pbeaml::pbeaml(long const *PID, long const *MID,
     this->X_XB.resize(X_XB->size(), entry_value<double>(nullptr));
     for (size_t i = 0; i < X_XB->size(); i++)
         this->X_XB[i]((*X_XB)[i]);
-    this->beam_prop::check_data();
     this->pbeaml::check_data();
 }
 
@@ -270,7 +269,6 @@ void pbeaml::collect_outdata(
 }
 
 void pbeaml::check_data() {
-    this->beam_prop::check_data();
     size_t base_size{DIM.size()};
     size_t dim_num = this->l_geom::get_dim(TYPE.value);
 
@@ -332,7 +330,6 @@ cards::__base::card const &pbeaml::operator() (
     this->X_XB.resize(X_XB->size(), entry_value<double>(nullptr));
     for (size_t i = 0; i < X_XB->size(); i++)
         this->X_XB[i]((*X_XB)[i]);
-    this->beam_prop::check_data();
     this->pbeaml::check_data();
     return *this;
 }

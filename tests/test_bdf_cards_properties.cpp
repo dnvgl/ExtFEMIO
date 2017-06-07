@@ -42,8 +42,8 @@ using namespace bdf::cards::__base;
 using bdf::types::entry_type;
 using bdf::types::entry_value;
 
-TEST_CASE("Test id generation.", "[bdf_properties]") {
-    property::resetIds();
+TEST_CASE("Test id generation (properties).", "[bdf_properties]") {
+    property::reset();
 
     pbar xPbar;
     prod xPshell;
@@ -65,19 +65,22 @@ TEST_CASE("Test id generation.", "[bdf_properties]") {
         PID = {1};
         MID = {2};
         A = {3.};
-        CHECK_THROWS(prod(&PID, &MID, &A));
+        prod xProd(&PID, &MID, &A);
+        long val{xProd.PID};
+        CHECK(val == 3);
     }
 
     SECTION("New property id. (1)") {
-        CHECK(prod::nextId() == 3);
+        prod xProd(nullptr, &MID, &A);
+        CHECK(long(xProd.PID) == 3);
     }
 
     SECTION("New property id. (2)") {
-        PID = {3};
+        PID = {2};
         MID1 = {2};
         T = {3.};
         xPshell(&PID, &MID1, &T);
-        CHECK(prod::nextId() == 4);
+        CHECK(long(xPshell.PID) == 3);
     }
 
     SECTION("New property id. (3)") {
@@ -85,7 +88,8 @@ TEST_CASE("Test id generation.", "[bdf_properties]") {
         MID1 = {2};
         T = {3.};
         xPshell(&PID, &MID1, &T);
-        CHECK(prod::nextId() == 3);
+        prod xProd(nullptr, &MID, &A);
+        CHECK(long(xProd.PID) == 3);
     }
 // pelas
 

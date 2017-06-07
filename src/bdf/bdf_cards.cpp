@@ -283,6 +283,7 @@ std::ostream &operator<< (ostream& os, cards::types const cardtype) {
     case cards::types::RBE3D: return os << "RBE3D";
     case cards::types::PARAM: return os << "PARAM";
     case cards::types::ELEMENT: return os << "ELEMENT";
+    case cards::types::PROPERTY: return os << "PROPERTY";
     case cards::types::BEAM_BASE: return os << "BEAM_BASE";
     case cards::types::BAR_PROP: return os << "BAR_PROP";
     case cards::types::BEAM_PROP: return os << "BEAM_PROP";
@@ -633,13 +634,16 @@ void cards::dispatch(
         case types::SPLINE5:
             res = make_unique<__base::element>(inp);
             break;
+        case types::PROPERTY:
+        case types::BEAM_PROP:
+        case types::BAR_PROP:
+            res = make_unique<__base::property>(inp);
+            break;
             /// These are not real card types, they can't be returned
         case types::COMMENT:
             res = make_unique<comment>(inp);
             break;
         case types::UNKNOWN:
-        case types::BEAM_PROP:
-        case types::BAR_PROP:
         case types::BEAM_BASE:
         case types::CAXIFi:
             res = make_unique<unknown>(inp);

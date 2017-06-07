@@ -19,6 +19,8 @@ FUNCTION(my_add_test inp)
   endif()
   add_test(NAME ${NAME}
     COMMAND ${COMMAND} --break --reporter junit --out ${COMMAND}_junit.xml)
+  # Timeout after 5 seconds to catch enless loops.
+  set_tests_properties(${NAME} PROPERTIES TIMEOUT 5.)
 ENDFUNCTION()
 
 if(DEFINED ENV{TEAMCITY_VERSION})
@@ -84,6 +86,8 @@ my_add_test(test_bdf_types)
 
 add_executable(test_bdf_cards
   test_bdf_cards.cpp
+  test_bdf_cards_properties.cpp
+  test_bdf_cards_elements.cpp
   test_bdf_cards_cbar.cpp
   test_bdf_cards_cbeam.cpp
   test_bdf_cards_cquad4.cpp
@@ -97,7 +101,6 @@ add_executable(test_bdf_cards
   test_bdf_cards_grid.cpp
   test_bdf_cards_mat1.cpp
   test_bdf_cards_mat2.cpp
-  test_bdf_cards_properties.cpp
   test_bdf_cards_pbar.cpp
   test_bdf_cards_pbarl.cpp
   test_bdf_cards_pbeam.cpp

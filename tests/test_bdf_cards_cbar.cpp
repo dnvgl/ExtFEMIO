@@ -70,6 +70,7 @@ TEST_CASE("BDF CBAR definitions. (Small Field Format)", "[bdf_cbar]" ) {
 }
 
 TEST_CASE("CBAR Roundtrip test 1 (dir code).", "[bdf_cbar_roundtrip_1]") {
+    cbar::reset();
 
     std::stringstream test;
 
@@ -84,6 +85,7 @@ TEST_CASE("CBAR Roundtrip test 1 (dir code).", "[bdf_cbar_roundtrip_1]") {
     }
 
     SECTION("check reading") {
+        cbar::reset();
         std::list<std::string> data;
         std::list<std::string> lines;
         std::string tmp;
@@ -104,6 +106,8 @@ TEST_CASE("CBAR Roundtrip test 1 (dir code).", "[bdf_cbar_roundtrip_1]") {
 
 TEST_CASE("CBAR Roundtrip test 1 (dir code) (reuse).", "[bdf_cbar_roundtrip_1_reuse]") {
 
+    cbar::reset();
+
     std::stringstream test;
 
     long EID(1), PID(2), GA(3), GB(4), G0(5);
@@ -118,6 +122,7 @@ TEST_CASE("CBAR Roundtrip test 1 (dir code) (reuse).", "[bdf_cbar_roundtrip_1_re
     }
 
     SECTION("check reading") {
+        cbar::reset();
         list<std::string> data;
         list<std::string> lines;
         std::string tmp;
@@ -138,6 +143,7 @@ TEST_CASE("CBAR Roundtrip test 1 (dir code) (reuse).", "[bdf_cbar_roundtrip_1_re
 }
 
 TEST_CASE("CBAR Roundtrip test (QRG sample 1)", "[bdf_cbar_roundtrip_2]"){
+    cbar::reset();
 
     ostringstream test;
 
@@ -157,6 +163,7 @@ TEST_CASE("CBAR Roundtrip test (QRG sample 1)", "[bdf_cbar_roundtrip_2]"){
     }
 
     SECTION("check reading") {
+        cbar::reset();
         list<std::string> data;
         list<std::string> lines;
         std::string tmp;
@@ -179,6 +186,7 @@ TEST_CASE("CBAR Roundtrip test (QRG sample 1)", "[bdf_cbar_roundtrip_2]"){
 }
 
 TEST_CASE("CBAR Roundtrip test (QRG sample 1) (reuse)", "[bdf_cbar_roundtrip_2_reuse]"){
+    cbar::reset();
 
     std::ostringstream test;
 
@@ -199,6 +207,7 @@ TEST_CASE("CBAR Roundtrip test (QRG sample 1) (reuse)", "[bdf_cbar_roundtrip_2_r
     }
 
     SECTION("check reading") {
+        cbar::reset();
         std::list<std::string> data;
         std::list<std::string> lines;
         std::string tmp;
@@ -222,6 +231,7 @@ TEST_CASE("CBAR Roundtrip test (QRG sample 1) (reuse)", "[bdf_cbar_roundtrip_2_r
 }
 
 TEST_CASE("CBAR Roundtrip test (QRG sample 1 (long))", "[bdf_cbar_roundtrip_3]") {
+    cbar::reset();
 
     std::ostringstream test;
 
@@ -243,6 +253,7 @@ TEST_CASE("CBAR Roundtrip test (QRG sample 1 (long))", "[bdf_cbar_roundtrip_3]")
     }
 
     SECTION("check reading") {
+        cbar::reset();
         std::list<std::string> data;
         std::list<std::string> lines;
         std::string tmp;
@@ -265,7 +276,9 @@ TEST_CASE("CBAR Roundtrip test (QRG sample 1 (long))", "[bdf_cbar_roundtrip_3]")
     }
 }
 
-TEST_CASE("CBAR Roundtrip test (QRG sample 1 (long)) (reuse)", "[bdf_cbar_roundtrip_3_reuse]") {
+TEST_CASE("CBAR Roundtrip test (QRG sample 1 (long)) (reuse)",
+          "[bdf_cbar_roundtrip_3_reuse]") {
+        cbar::reset();
 
     std::ostringstream test;
 
@@ -288,6 +301,7 @@ TEST_CASE("CBAR Roundtrip test (QRG sample 1 (long)) (reuse)", "[bdf_cbar_roundt
     }
 
     SECTION("check reading") {
+        cbar::reset();
         std::list<std::string> data;
         std::list<std::string> lines;
         std::string tmp;
@@ -312,6 +326,7 @@ TEST_CASE("CBAR Roundtrip test (QRG sample 1 (long)) (reuse)", "[bdf_cbar_roundt
 }
 
 TEST_CASE("CBAR Roundtrip test (dir code all elements)", "[bdf_cbar_roundtrip_4]") {
+    cbar::reset();
 
     std::ostringstream test;
 
@@ -331,6 +346,7 @@ TEST_CASE("CBAR Roundtrip test (dir code all elements)", "[bdf_cbar_roundtrip_4]
     }
 
     SECTION("check reading") {
+        cbar::reset();
         std::list<std::string> data;
         std::list<std::string> lines;
         std::string tmp;
@@ -352,6 +368,7 @@ TEST_CASE("CBAR Roundtrip test (dir code all elements)", "[bdf_cbar_roundtrip_4]
 
 TEST_CASE("CBAR Roundtrip test (dir code all elements) (reuse)",
           "[bdf_cbar_roundtrip_4_reuse]") {
+    cbar::reset();
 
     std::ostringstream test;
 
@@ -371,6 +388,7 @@ TEST_CASE("CBAR Roundtrip test (dir code all elements) (reuse)",
     }
 
     SECTION("check reading") {
+        cbar::reset();
         std::list<std::string> data;
         std::list<std::string> lines;
         std::string tmp;
@@ -392,6 +410,7 @@ TEST_CASE("CBAR Roundtrip test (dir code all elements) (reuse)",
 
 TEST_CASE("CBAR Roundtrip test (dir code all elements) (large)",
           "[bdf_cbar_roundtrip_5]") {
+    cbar::reset();
 
     std::ostringstream test;
     long EID(123456789), PID(2), GA(3), GB(4), G0(5);
@@ -413,6 +432,7 @@ TEST_CASE("CBAR Roundtrip test (dir code all elements) (large)",
     }
 
     SECTION("check reading") {
+        cbar::reset();
         std::list<std::string> data;
         std::list<std::string> lines;
         std::string tmp;
@@ -435,6 +455,7 @@ TEST_CASE("CBAR Roundtrip test (dir code all elements) (large)",
 
 TEST_CASE("CBAR Roundtrip test (dir code all elements) (large) (reuse)",
           "[bdf_cbar_roundtrip_5_reuse]") {
+    cbar::reset();
 
     std::ostringstream test;
     long EID(123456789), PID(2), GA(3), GB(4), G0(5);
@@ -457,6 +478,7 @@ TEST_CASE("CBAR Roundtrip test (dir code all elements) (large) (reuse)",
     }
 
     SECTION("check reading") {
+        cbar::reset();
         std::list<std::string> data;
         std::list<std::string> lines;
         std::string tmp;
@@ -479,6 +501,7 @@ TEST_CASE("CBAR Roundtrip test (dir code all elements) (large) (reuse)",
 }
 
 TEST_CASE("CBAR Roundtrip test dir code all large (ptr)", "[bdf_cbar_roundtrip_6]") {
+    cbar::reset();
 
     std::ostringstream test;
 
@@ -503,6 +526,7 @@ TEST_CASE("CBAR Roundtrip test dir code all large (ptr)", "[bdf_cbar_roundtrip_6
     }
 
     SECTION("check reading") {
+        cbar::reset();
         std::list<std::string> data;
         std::list<std::string> lines;
         std::string tmp;
@@ -526,6 +550,7 @@ TEST_CASE("CBAR Roundtrip test dir code all large (ptr)", "[bdf_cbar_roundtrip_6
 
 TEST_CASE("CBAR Roundtrip test dir code all large (ptr) (reuse)",
           "[bdf_cbar_roundtrip_6_reuse]") {
+    cbar::reset();
 
     std::ostringstream test;
 
@@ -551,6 +576,7 @@ TEST_CASE("CBAR Roundtrip test dir code all large (ptr) (reuse)",
     }
 
     SECTION("check reading") {
+        cbar::reset();
         std::list<std::string> data;
         std::list<std::string> lines;
         std::string tmp;

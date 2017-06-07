@@ -182,6 +182,7 @@ TEST_CASE("BDF CTRIA3 check limits reuse.", "[bdf_ctria3]") {
 }
 
 TEST_CASE("BDF CTRIA3 roundtrip 1.", "[bdf_ctria3_roundtrip]") {
+    ctria3::reset();
 
     ostringstream test;
 
@@ -206,6 +207,7 @@ TEST_CASE("BDF CTRIA3 roundtrip 1.", "[bdf_ctria3_roundtrip]") {
     }
 
     SECTION("check reading") {
+        ctria3::reset();
         std::list<std::string> data;
         std::list<std::string> lines;
         std::string tmp;
@@ -223,6 +225,7 @@ TEST_CASE("BDF CTRIA3 roundtrip 1.", "[bdf_ctria3_roundtrip]") {
 }
 
 TEST_CASE("BDF CTRIA3 types output 2.", "[bdf_ctria3,out]") {
+    ctria3::reset();
 
     ostringstream test;
 
@@ -252,6 +255,7 @@ TEST_CASE("BDF CTRIA3 types output 3.", "[bdf_ctria3,out]") {
     ostringstream test;
 
     SECTION("check output") {
+        ctria3::reset();
         long EID{111};
         long PID{203};
         long G1{31};
@@ -272,6 +276,7 @@ TEST_CASE("BDF CTRIA3 types output 3.", "[bdf_ctria3,out]") {
 }
 
 TEST_CASE("BDF CTRIA3 types output 4.", "[bdf_ctria3,out]") {
+    ctria3::reset();
 
     ostringstream test;
 
@@ -296,6 +301,7 @@ TEST_CASE("BDF CTRIA3 types output 4.", "[bdf_ctria3,out]") {
 }
 
 TEST_CASE("BDF CTRIA3 types output 5.", "[bdf_ctria3,out]") {
+    ctria3::reset();
 
     ostringstream test;
 
@@ -318,6 +324,7 @@ TEST_CASE("BDF CTRIA3 types output 5.", "[bdf_ctria3,out]") {
 }
 
 TEST_CASE("BDF CTRIA types output (reuse).", "[bdf_ctria3,out,resue]") {
+    ctria3::reset();
 
     ostringstream test;
 
