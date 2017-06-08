@@ -50,6 +50,7 @@ namespace {
     auto const bound_EID_ = make_shared<bound_unique<long>>(cl1, nullptr, cl0);
     auto const bound_EID = bound_EID_.get();
 }
+
 entry_type<long> element::form_EID("EID", bound_EID);
 
 element::element(list<std::string> const &inp) : card(inp) {

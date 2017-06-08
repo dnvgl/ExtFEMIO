@@ -25,7 +25,6 @@ namespace dnvgl {
             namespace type_bounds {
                 namespace __base {
                     class type_bound {
-                    private:
                         bool _has_min = false;
                         bool _has_max = false;
                         bool _has_default = false;
@@ -45,15 +44,16 @@ namespace dnvgl {
                 template <typename _Ty>
                 class bound : public __base::type_bound {
                 protected:
-                    _Ty min_val;
-                    _Ty max_val;
-                    std::set<std::string> allowed;
-                    _Ty default_val;
+                    _Ty min_val = _Ty();
+                    _Ty max_val = _Ty();
+                    std::set<std::string> allowed = {};
+                    _Ty default_val = _Ty();
                     bool allow_empty = false;
                 public:
+                    bound() = default;
                     virtual ~bound() = default;
                     explicit bound(
-                        const _Ty *_min=nullptr, const _Ty *_max=nullptr,
+                        const _Ty *_min, const _Ty *_max=nullptr,
                         const _Ty *_default=nullptr,
                         const bool allow_empty=false);
                     explicit bound(std::set<std::string> const&);
@@ -73,7 +73,7 @@ namespace dnvgl {
 
                 template <typename _Ty>
                 bound<_Ty>::bound(
-                    const _Ty *_min/*=nullptr*/, const _Ty *_max/*=nullptr*/,
+                    const _Ty *_min, const _Ty *_max/*=nullptr*/,
                     const _Ty *_default/*=nullptr*/,
                     const bool allow_empty/*=false*/) :
                         allowed(), allow_empty(allow_empty) {
@@ -174,13 +174,13 @@ namespace dnvgl {
 
                 template <typename _Ty>
                 class bound_unique : public bound<_Ty> {
-                    _Ty max_used_id;
+                    _Ty max_used_id = _Ty();
                     std::unordered_set<_Ty> used_id;
                     bound_unique() = default;
                 public:
                     virtual ~bound_unique() = default;
                     explicit bound_unique(
-                        const _Ty *_min=nullptr, const _Ty *_max=nullptr,
+                        const _Ty *_min, const _Ty *_max=nullptr,
                         const _Ty *_default=nullptr,
                         const bool allow_empty=false) :
                             bound<_Ty>(_min, _max, _default, allow_empty),
