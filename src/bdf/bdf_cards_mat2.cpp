@@ -54,16 +54,11 @@ cards::__base::card const &mat2::operator() (const list<std::string> &inp) {
     return *this;
 }
 
-mat2::mat2() : mat(nullptr), G11(nullptr), G12(nullptr),
-    G13(nullptr), G22(nullptr), G23(nullptr), G33(nullptr),
-    A1(nullptr), A2(nullptr), A3(nullptr) {}
-
 mat2::mat2(long *MID, double *G11, double *G12, double *G13,
            double *G22, double *G23, double *G33, double *RHO,
            double *A1, double *A2, double *A3, double *TREF,
            double *GE, double *ST/*=nullptr*/, double *SC/*=nullptr*/,
            double *SS/*=nullptr*/, long *MCSID/*=nullptr*/) :
-
         mat(MID, RHO, TREF, GE, ST, SC, SS, MCSID),
         G11(G11),G12(G12), G13(G13), G22(G22),
         G23(G23), G33(G33), A1(A1), A2(A2), A3(A3) {

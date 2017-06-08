@@ -34,9 +34,6 @@ entry_type<double> param::form_RVAL("RVAL");
 entry_type<std::string> param::form_CVAL("CVAL");
 entry_type<complex<double> > param::form_CPLXVAL("CPLXVAL");
 
-param::param() : card(), value_type(), IVAL(), RVAL(), CVAL(), CPLXVAL() {
-}
-
 param::param(std::string const &n) : param() {
     N = string::string(n).upper();
     this->param::check_data();

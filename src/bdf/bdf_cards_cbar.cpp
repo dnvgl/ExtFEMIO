@@ -122,18 +122,9 @@ namespace {
 entry_type<double> cbar::form_W3B("W3B", bound_W3B);
 
 cbar::cbar(list<std::string> const &inp) :
-element(inp) {
+        element(inp) {
     this->cbar::read(inp);
 }
-
-cbar::cbar() :
-        element(),
-        choose_dir_code(CHOOSE_DIR_CODE::UNDEF), PID(nullptr),
-        GA(nullptr), GB(nullptr), X1(nullptr), G0(nullptr), X2(nullptr), X3(nullptr),
-        OFFT(nullptr),
-        PA(nullptr), PB(nullptr),
-        W1A(nullptr), W2A(nullptr), W3A(nullptr),
-        W1B(nullptr), W2B(nullptr), W3B(nullptr) {}
 
 cbar::cbar(
     long *EID, long *PID, long *GA, long *GB,

@@ -26,9 +26,9 @@ namespace dnvgl {
                 namespace __base {
                     class type_bound {
                     private:
-                        bool _has_min;
-                        bool _has_max;
-                        bool _has_default;
+                        bool _has_min = false;
+                        bool _has_max = false;
+                        bool _has_default = false;
                     protected:
                         virtual ~type_bound() = default;
                         bool has_min() const;
@@ -37,7 +37,7 @@ namespace dnvgl {
                         void got_max();
                         void got_default();
                     public:
-                        type_bound();
+                        type_bound() = default;
                         bool has_default() const;
                     };
                 }
@@ -49,13 +49,13 @@ namespace dnvgl {
                     _Ty max_val;
                     std::set<std::string> allowed;
                     _Ty default_val;
-                    bool allow_empty;
+                    bool allow_empty = false;
                 public:
                     virtual ~bound() = default;
                     explicit bound(
-                        const _Ty *_min = nullptr, const _Ty *_max = nullptr,
-                        const _Ty *_default = nullptr,
-                        const bool allow_empty = false);
+                        const _Ty *_min=nullptr, const _Ty *_max=nullptr,
+                        const _Ty *_default=nullptr,
+                        const bool allow_empty=false);
                     explicit bound(std::set<std::string> const&);
                     explicit bound(
                         std::set<std::string> const&, std::string const&);
@@ -174,9 +174,9 @@ namespace dnvgl {
 
                 template <typename _Ty>
                 class bound_unique : public bound<_Ty> {
-                private:
                     _Ty max_used_id;
                     std::unordered_set<_Ty> used_id;
+                    bound_unique() = default;
                 public:
                     virtual ~bound_unique() = default;
                     explicit bound_unique(

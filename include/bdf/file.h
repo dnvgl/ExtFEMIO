@@ -25,28 +25,20 @@ namespace dnvgl {
     namespace extfem {
         namespace bdf {
             namespace input {
-
                 class bdf_file {
-
-                private:
-
                     static const std::set<char> cont_chars;
                     std::string cur_line;
                     std::istream &data;
-
+                    bdf_file() = default;
                 public:
-
-                    bool eof() const;
-
+                    ~bdf_file() = default;
                     explicit bdf_file(std::istream&);
-
+                    bool eof() const;
                     void get(std::list<std::string>& oContent);
-
                     /** actual byte position (hopefully no bdf > 2Gybte will be
                         readin....)
                         */
                     std::streampos size() const;
-
                     /** actual byte position (hopefully no bdf > 2Gybte will be
                         readin....)
                         */

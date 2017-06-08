@@ -25,6 +25,8 @@ namespace dnvgl {
                     dnvgl::extfem::bdf::type_bounds::bound<_Ty> *bounds;
                     static const bdf_types _type;
                 public:
+                    entry_type() = default;
+                    ~entry_type() = default;
                     explicit entry_type(const std::string& cs);
                     entry_type(const std::string &name,
                                bdf::type_bounds::bound<_Ty> *bounds);
@@ -223,8 +225,7 @@ namespace dnvgl {
                 template <> inline
                 std::string entry_type<long>::format(const void *v) const {
                     if (!v)
-                        return dnvgl::extfem::bdf::types::
-                            empty().format(nullptr);
+                        return empty().format(nullptr);
                     else {
                         entry_value<long> val(static_cast<long const*>(v));
                         return this->format(val);

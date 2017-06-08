@@ -36,12 +36,10 @@ namespace {
     auto const cl0_ = make_shared<long>(0);
     auto const cl1_ = make_shared<long>(1);
     auto const cd0_ = make_shared<double>(0.);
-    auto const cd1_ = make_shared<double>(1.);
 
     auto const cl0 = cl0_.get();
     auto const cl1 = cl1_.get();
     auto const cd0 = cd0_.get();
-    auto const cd1 = cd1_.get();
 }
 
 using namespace cards::__base;
@@ -119,8 +117,6 @@ namespace {
     auto const bound_T4 = bound_T4_.get();
 }
 entry_type<double> shell::form_T4("T4", bound_T4);
-
-shell::shell() : element(), choose_mcid_theta() {}
 
 shell::shell(const list<std::string> &inp) :
     element(inp), choose_mcid_theta(CHOOSE_MCID_THETA::UNDEF) {

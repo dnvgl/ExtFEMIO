@@ -39,8 +39,6 @@ using bdf::types::entry_type;
 
 bdf::types::card ctria3::head = bdf::types::card("CTRIA3");
 
-ctria3::ctria3() : shell() {}
-
 ctria3::ctria3(std::list<std::string> const &inp) :
 shell(inp) {
     this->ctria3::read(inp);

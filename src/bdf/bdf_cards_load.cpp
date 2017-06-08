@@ -59,8 +59,6 @@ namespace {
 }
 entry_type<long> load::form_Li("Li", bound_Li);
 
-load::load() : SID(nullptr), S(nullptr), Si(), Li() {}
-
 load::load(list<std::string> const &inp) : card(inp) {
     this->load::read(inp);
 }

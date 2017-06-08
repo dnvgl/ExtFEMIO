@@ -41,9 +41,6 @@ void __base::type_bound::got_default() {
     _has_default = true;
 }
 
-__base::type_bound::type_bound() :
-_has_min(false), _has_max(false), _has_default(false) {}
-
 bool __base::type_bound::has_default() const {
     return _has_default;
 }

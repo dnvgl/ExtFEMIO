@@ -83,9 +83,6 @@ namespace {
 }
 entry_type<long> grid::form_SEID("SEID", bound_SEID);
 
-grid::grid() : card(), ID(), CP(), X1(), X2(), X3(),
-CD(), PS(), SEID() {}
-
 grid::grid(list<std::string> const &inp) :
 card(inp) {
     this->grid::read(inp);

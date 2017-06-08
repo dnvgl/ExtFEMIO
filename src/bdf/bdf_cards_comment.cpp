@@ -82,9 +82,6 @@ void comment::to_yield(std::string const inp) {
     }
 }
 
-comment::comment() :
-        card(), content(), __yield(nullptr) {}
-
 comment::~comment() {
  if (yield != nullptr)
      delete this->__yield;

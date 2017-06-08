@@ -141,9 +141,6 @@ entry_type<long> cbeam::form_SB(
 /**
  * \brief 
  */
-cbeam::cbeam() : element(), choose_dir_code(), choose_offt_bit() {
-}
-
 cbeam::cbeam(list<std::string> const &inp) :
         element(inp) {
     this->cbeam::read(inp);

@@ -58,11 +58,6 @@ namespace {
 entry_type<long> cmass2::form_G2("G2", bound_G2);
 entry_type<vector<int> > cmass2::form_C2("C2");
 
-cmass2::cmass2() :
-        element(),
-        M(nullptr), G1(nullptr), C1(nullptr),
-        G2(nullptr), C2(nullptr) {}
-
 cmass2::cmass2(list<std::string> const &inp) :
 element(inp) {
     this->cmass2::read(inp);

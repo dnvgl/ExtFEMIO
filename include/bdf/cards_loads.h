@@ -63,30 +63,23 @@ namespace dnvgl {
                     protected:
 
                         momforce() = default;
-
+                        ~momforce() = default;
                         explicit momforce(std::list<std::string> const &inp);
-
                         momforce(
                             long const *SID, long const *G, long const *CID,
                             double const *F,
                             double const *N1, double const *N2=nullptr,
                             double const *N3=nullptr);
-
                         card const &operator() (const std::list<std::string> &) override;
-
                         card const &operator() (
                             long const *SID, long const *G, long const *CID,
                             double const *F,
                             double const *N1, double const *N2=nullptr,
                             double const *N3=nullptr);
-
                         void read(std::list<std::string> const &) override;
-
                         virtual format_entry *get_head() const = 0;
-
                         void collect_outdata (
                             std::list<std::unique_ptr<format_entry> > &) const override;
-
                         void check_data() override;
                     };
                 }
@@ -105,10 +98,7 @@ vector.
 */
                 class force : public __base::momforce {
 
-                private:
-
                     static bdf::types::card head;
-
                     using __base::momforce::form_SID;
                     using __base::momforce::form_G;
                     using __base::momforce::form_CID;
@@ -116,30 +106,25 @@ vector.
                     using __base::momforce::form_N1;
                     using __base::momforce::form_N2;
                     using __base::momforce::form_N3;
-
                     using __base::card::format_outlist;
 
                 public:
 
                     force() = default;
-
+                    ~force() = default;
                     explicit force(const std::list<std::string> &inp);
-
                     force(
                         long const *SID, long const *G, long const *CID,
                         double const *F,
                         double const *N1, double const *N2=nullptr,
                         double const *N3=nullptr);
-
                     types card_type() const override;
-
                     using momforce::read;
                     using momforce::operator();
 
                 private:
 
                     format_entry *get_head() const override;
-
                     using momforce::collect_outdata;
                 };
 
@@ -157,10 +142,7 @@ vector.
 */
                 class moment : public __base::momforce {
 
-                private:
-
                     static bdf::types::card head;
-
                     using __base::momforce::form_SID;
                     using __base::momforce::form_G;
                     using __base::momforce::form_CID;
@@ -168,30 +150,25 @@ vector.
                     using __base::momforce::form_N1;
                     using __base::momforce::form_N2;
                     using __base::momforce::form_N3;
-
                     using __base::card::format_outlist;
 
                 public:
 
                     moment() = default;
-
+                    ~moment() = default;
                     explicit moment(const std::list<std::string> &inp);
-
                     moment(
                         long const *SID, long const *G, long const *CID,
                         double const *F,
                         double const *N1, double const *N2=nullptr,
                         double const *N3=nullptr);
-
                     types card_type() const override;
-
                     using momforce::read;
                     using momforce::operator();
 
                 private:
 
                     format_entry *get_head() const override;
-
                     using momforce::collect_outdata;
                 };
 
@@ -261,11 +238,8 @@ Defines a scalar mass element without reference to a property entry.
                 class cmass2 : public __base::element {
 
                     bdf::types::card static head;
-
                     using __base::card::format_outlist;
-
                     using __base::element::form_EID;
-
                     // bdf::types::entry_type<long> static form_EID;
                     bdf::types::entry_type<double> static form_M;
                     bdf::types::entry_type<long> static form_G1;
@@ -303,32 +277,26 @@ Defines a scalar mass element without reference to a property entry.
 
                 public:
 
-                    cmass2();
-
+                    cmass2() = default;
+                    ~cmass2() = default;
                     explicit cmass2(std::list<std::string> const&);
-
                     cmass2(long *EID, double *M,
                            long *G1, std::vector<int> *C1,
                            long *G2=nullptr,
                            std::vector<int> *C2=nullptr);
-
                     card const &operator() (
                         long const *EID, double const *M,
                         long const *G1, std::vector<int> const *C1,
                         long const *G2=nullptr,
                         std::vector<int> const *C2=nullptr);
-
                     types card_type() const override;
-
                     void read(std::list<std::string> const &) override;
-
                     card const &operator() (const std::list<std::string> &) override;
 
                 private:
 
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> >&) const override;
-
                     void check_data() override;
                 };
 
@@ -371,18 +339,17 @@ reference to a property entry.
 */
 
                 class cmass4 : public __base::element {
+
                     bdf::types::card static head;
-
                     using __base::card::format_outlist;
-
                     using __base::element::form_EID;
-
                     // bdf::types::entry_type<long> // static form_EID;
                     bdf::types::entry_type<double> static form_M;
                     bdf::types::entry_type<long> static form_S1;
                     bdf::types::entry_type<long> static form_S2;
 
                 public:
+
                     // /** Unique element identification number. (0 < Integer
                     //     < 100,000,000)
                     //  */
@@ -398,32 +365,28 @@ reference to a property entry.
                         S1 ≠ S2 )
                     */
                     bdf::types::entry_value<long> S2;
+
                 private:
+
                     explicit cmass4(std::string const&) = delete;
 
                 public:
 
-                    cmass4();
-
+                    cmass4() = default;
+                    ~cmass4() = default;
                     explicit cmass4(std::list<std::string> const&);
-
                     cmass4(long *EID, double *M, long *S1, long *S2=nullptr);
-
                     card const &operator() (
                         long const *EID, double const *M,
                         long const *S1, long const *S2=nullptr);
-
                     types card_type() const override;
-
                     void read(std::list<std::string> const &) override;
-
                     card const &operator() (const std::list<std::string> &) override;
 
                 private:
 
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> >&) const override;
-
                     void check_data() override;
                 };
 
@@ -497,9 +460,7 @@ Defines acceleration vectors for gravity or other acceleration loading.
                 class grav : public __base::card {
 
                     bdf::types::card static head;
-
                     using __base::card::format_outlist;
-
                     bdf::types::entry_type<long> static form_SID;
                     bdf::types::entry_type<long> static form_CID;
                     bdf::types::entry_type<double> static form_A;
@@ -507,6 +468,7 @@ Defines acceleration vectors for gravity or other acceleration loading.
                     bdf::types::entry_type<long> static form_MB;
 
                 public:
+
 /// Set identification number. (Integer > 0)
                     bdf::types::entry_value<long> SID;
 /// Coordinate system identification number. (Integer > 0; Default = 0)
@@ -540,45 +502,35 @@ Defines acceleration vectors for gravity or other acceleration loading.
 
                 public:
 
-                    grav();
-
-                    explicit grav(std::list<std::string> const&);
-
+                    grav() = default;
                     ~grav() = default;
-
+                    explicit grav(std::list<std::string> const&);
                     grav(long const *SID, long const *CID,
                          double const *A,
                          double const *N1, double const*N2, double const *N3,
                          long const *MB=nullptr);
-
                     grav(long const *SID, long const *CID,
                          double const *A,
                          std::vector<double> const *N,
                          long const *MB=nullptr);
-
                     card const &operator() (
                         long const *SID, long const *CID,
                         double const *A,
                         std::vector<double> const *N,
                         long const *MB=nullptr);
-
                     card const &operator() (
                         long const *SID, long const *CID,
                         double const *A,
                         double const *N1, double const*N2, double const *N3,
                         long const *MB=nullptr);
-
                     types card_type() const override;
-
                     void read(std::list<std::string> const &) override;
-
                     card const &operator() (const std::list<std::string> &) override;
 
                 private:
 
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> >&) const override;
-
                     void check_data() override;
                 };
 
@@ -600,12 +552,8 @@ Defines a static load as a linear combination of load std::sets defined via
 
                 class load : public __base::card {
 
-                private:
-
                     bdf::types::card static head;
-
                     using __base::card::format_outlist;
-
                     bdf::types::entry_type<long> static form_SID;
                     bdf::types::entry_type<double> static form_S;
                     bdf::types::entry_type<double> static form_Si;
@@ -623,31 +571,24 @@ Defines a static load as a linear combination of load std::sets defined via
     above. (Integer > 0)
 */
                     std::vector<long> Li;
-
-                    load();
-
+                    load() = default;
+                    ~load() = default;
                     explicit load(const std::list<std::string> &inp);
-
                     load(long const *SID, double const *S,
                          std::vector<double> const *Si,
                          std::vector<long> const *Li);
-
                     card const &operator() (
                         long const *SID, double const *S,
                         std::vector<double> const *Si,
                         std::vector<long> const *Li);
-
                     types card_type() const override;
-
                     void read(std::list<std::string> const &) override;
-
                     card const &operator() (const std::list<std::string> &) override;
 
                 private:
 
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> > &res) const override;
-
                     void check_data() override;
                 };
             }

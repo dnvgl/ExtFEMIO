@@ -50,10 +50,6 @@ entry_type<double> cmass4::form_M("M");
 entry_type<long> cmass4::form_S1("S1");
 entry_type<long> cmass4::form_S2("S2");
 
-cmass4::cmass4() :
-        element(),
-        M(nullptr), S1(nullptr), S2(nullptr) {}
-
 cmass4::cmass4(list<std::string> const &inp) :
         element(inp) {
     this->cmass4::read(inp);

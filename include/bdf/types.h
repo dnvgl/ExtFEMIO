@@ -93,6 +93,7 @@ namespace dnvgl {
                 protected:
                     static const bdf_types _type;
                     static std::istringstream conv;
+                    base() = default;
                 private:
                     static bool first;
                 public:
@@ -118,16 +119,20 @@ namespace dnvgl {
                     all classes derived from base.
                 */
                 class imbue_helper : public base {
+                    imbue_helper() = default;
                 public:
                     explicit imbue_helper(const std::locale &loc);
+                    ~imbue_helper() = default;
                     bdf_types type() const override;
                     std::string format(const void*) const override;
                 };
 
                 //! Card title
                 class card : public base {
+                    card() = default;
                 public:
                     explicit card(const std::string &name);
+                    ~card() = default;
                     bdf_types type() const override;
                     std::string format(const void*) const override;
                 };
@@ -136,6 +141,7 @@ namespace dnvgl {
                 class empty : public base {
                 public:
                     empty();
+                    ~empty() = default;
                     bdf_types type() const override;
                     std::string format(const void*) const override;
                 };

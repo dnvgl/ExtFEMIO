@@ -143,13 +143,11 @@ namespace dnvgl {
 /// Nonlinear static and transient analysis
                             NONLIN  =400};
                         sol_no_type sol_no;
+                        ~sol() = default;
                         explicit sol(sol_no_type const &sol_no=sol_no_type::SESTATIC);
                         explicit sol(long const&);
-
                     private:
-
                         std::ostream &put(std::ostream&) const override;
-
                         class sol_no_type_conv {
                         public:
                             static sol_no_type from_long(long const&);
@@ -175,6 +173,7 @@ namespace dnvgl {
                     class cend : public __base::entry {
                     public:
                         cend() = default;
+                        ~cend() = default;
                     private:
                         std::ostream &put(std::ostream&) const override;
                     };
@@ -206,6 +205,7 @@ namespace dnvgl {
 */
                     class title : public __base::entry {
                     public:
+                        ~title() = default;
                         explicit title(std::string const&);
                         std::string name;
                     private:
@@ -321,10 +321,8 @@ namespace dnvgl {
                                 virtual ~cdni_entry() = default;
                                 std::string str() const;
                             };
-
                         private:
                             std::vector<std::shared_ptr<cdni_entry>> cdni;
-
                         public:
                             explicit sort(std::vector<std::shared_ptr<cdni_entry>> const&);
                             ~sort() override;
@@ -359,10 +357,8 @@ namespace dnvgl {
     punch file with updated design model entries.
 */
                                 NEWBULK};
-
                         private:
                             std::vector<option_type> options;
-
                         public:
                             explicit punch(std::vector<option_type> const &options={});
                             ~punch() override = default;
@@ -379,10 +375,8 @@ namespace dnvgl {
                             ~file() override = default;
                             std::string str() const override;
                         };
-
                     protected:
                         std::vector<std::shared_ptr<describer>> oper;
-
                     public:
                         explicit echo(
                             std::vector<std::shared_ptr<describer>>
@@ -1432,6 +1426,7 @@ using strain gage approach with cubic bending correction.
                         stress(std::vector<std::shared_ptr<describer>> const &,
                                restype const, long const);
                     public:
+                        ~stress() = default;
                         explicit stress(std::vector<std::shared_ptr<describer>> const &,
                                restype const res=restype::NONE);
                         stress(std::vector<std::shared_ptr<describer>> const &,
@@ -1487,6 +1482,7 @@ LOAD=15
 
                     public:
                         load(long const);
+                        ~load() override = default;
                     private:
                         std::ostream &put(std::ostream&) const override;
                     };
@@ -1533,6 +1529,7 @@ Any character string.
 
                     public:
                         subtitle(std::string const &);
+                        ~subtitle() override = default;
                     private:
                         std::ostream &put(std::ostream&) const override;
                     };
@@ -1572,14 +1569,12 @@ SUBCASE=101
                          */
                         long n;
                         std::string subtitle;
-
                     private:
                         /// Maximum n used yet, use for automatic selection of n
                         long static max_n;
-
                     public:
-
                         subcase();
+                        ~subcase() override = default;
                         subcase(long const);
                     private:
                         std::ostream &put(std::ostream&) const override;
@@ -1652,6 +1647,7 @@ Superelement identification number. (Integer>0)
                     class begin_bulk : public __base::entry {
                     public:
                         begin_bulk() = default;
+                        ~begin_bulk() = default;
                     private:
                         std::ostream &put(std::ostream&) const override;
                     };

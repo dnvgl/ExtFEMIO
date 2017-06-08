@@ -148,9 +148,6 @@ void mat1::read(list<std::string> const &inp) {
     }
 }
 
-mat1::mat1() : mat(nullptr),
-               E{nullptr}, G{nullptr}, NU{nullptr}, A{nullptr} {}
-
 mat1::mat1(long *MID, double *E, double *G, double *NU, double *RHO,
            double *A, double *TREF, double *GE, double *ST,
            double *SC, double *SS, long *MCSID) :

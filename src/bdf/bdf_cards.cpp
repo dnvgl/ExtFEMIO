@@ -405,9 +405,8 @@ void cards::__base::card::card_split(
             first = false;
             // Long Field Format
         } else {
-            if (first) {
+            if (first)
                 res.push_back(string::string(head).trim("\t\n*"));
-            }
             if (head.length() > 0 && head.back() == '*') {
                 std::string tmp(pos->length() > 8 ? pos->substr(8) : "");
                 tmp.resize(64, ' ');

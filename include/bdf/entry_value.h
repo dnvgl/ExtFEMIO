@@ -22,11 +22,12 @@ namespace dnvgl {
                 template <typename _Ty>
                 class entry_value {
                 public:
-                    _Ty value;
-                    bool is_value;
+                    _Ty value = _Ty();
+                    bool is_value = false;
+                    entry_value() = default;
+                    ~entry_value() = default;
                     explicit entry_value(const _Ty value, const bool is_value=true);
                     explicit entry_value(const _Ty *value);
-                    explicit entry_value();
                     entry_value(entry_value<_Ty> const&) = default;
                     entry_value<_Ty> &operator= (const _Ty &other);
                     bool operator== (const _Ty &other) const;
@@ -55,10 +56,6 @@ namespace dnvgl {
                         this->value = *value;
                     }
                 }
-
-                template <typename _Ty>
-                entry_value<_Ty>::entry_value() :
-                        value(_Ty()), is_value(false) {}
 
                 template <typename _Ty>
                 entry_value<_Ty> &entry_value<_Ty>::operator= (const _Ty &other) {

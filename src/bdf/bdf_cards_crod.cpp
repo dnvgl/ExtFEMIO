@@ -63,8 +63,6 @@ namespace{
 }
 entry_type<long> crod::form_G2("G2", bound_G2);
 
-crod::crod() : element(), PID(nullptr), G1(), G2() {}
-
 crod::crod(list<std::string> const &inp) :
         element(inp) {
     this->crod::read(inp);
