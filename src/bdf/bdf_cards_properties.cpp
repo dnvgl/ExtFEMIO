@@ -27,6 +27,7 @@ using namespace type_bounds;
 using namespace cards::__base;
 
 using types::entry_type;
+using cards::format_entry;
 
 namespace {
     auto const cl1_ = make_shared<long>(1);
@@ -38,8 +39,6 @@ namespace {
     auto const bound_PID = bound_PID_.get();
 }
 entry_type<long> property::form_PID("PID", bound_PID);
-
-property::property() : card() {}
 
 property::property(list<std::string> const &inp) : card(inp) {
     this->property::read(inp);

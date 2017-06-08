@@ -44,7 +44,8 @@ namespace dnvgl {
 
                     protected:
 
-                        property();
+                        property() = default;
+
                         explicit property(long const *PID);
                         virtual card const &operator() (long const *PID);
                         virtual card const &operator() (
@@ -153,7 +154,7 @@ namespace dnvgl {
 
                     pshell() = default;
 
-                    pshell(std::list<std::string> const&);
+                    explicit pshell(std::list<std::string> const&);
 
                     pshell(
                         long const *PID, long const *MID1, double const *T = nullptr,
@@ -202,7 +203,7 @@ namespace dnvgl {
 
                         bdf::types::entry_type<long> static form_MID;
 
-                        beam_base();
+                        beam_base() = default;
 
                         explicit beam_base(std::list<std::string> const&);
 
@@ -482,7 +483,7 @@ namespace dnvgl {
 
                     pbeam() = default;
 
-                    pbeam(std::list<std::string> const&);
+                    explicit pbeam(std::list<std::string> const&);
 
                     pbeam(long const *EID, long const *PID,
                           std::vector<double> const *A,
@@ -645,7 +646,7 @@ namespace dnvgl {
 
                     pbeaml() = default;
 
-                    pbeaml(std::list<std::string> const&);
+                    explicit pbeaml(std::list<std::string> const&);
 
                     pbeaml(long const *PID, long const *MID,
                            std::string const *GROUP,
@@ -688,7 +689,7 @@ namespace dnvgl {
 
                         bar_prop(long const *PID, long const *MID);
 
-                        bar_prop(std::list<std::string> const&);
+                        explicit bar_prop(std::list<std::string> const&);
 
                     public:
 
@@ -898,9 +899,9 @@ namespace dnvgl {
                         */
                     bdf::types::entry_value<double> NSM;
 
-                    pbarl();
+                    pbarl() = default;
 
-                    pbarl(std::list<std::string> const&);
+                    explicit pbarl(std::list<std::string> const&);
 
                     pbarl(long const *PID, long const *MID,
                           std::string const *GROUP, std::string const *TYPE,

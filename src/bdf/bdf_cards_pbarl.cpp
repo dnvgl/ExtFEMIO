@@ -69,8 +69,6 @@ namespace {
 }
 entry_type<double> pbarl::form_NSM("NSM", bound_NSM);
 
-pbarl::pbarl() : bar_prop() {}
-
 pbarl::pbarl(list<std::string> const &inp) :
 bar_prop(inp) {
     this->pbarl::read(inp);

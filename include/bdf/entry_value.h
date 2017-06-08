@@ -129,7 +129,7 @@ namespace dnvgl {
                 template <> inline
                 entry_value<std::string>::entry_value(
                     const std::string *value) :
-                        value(""), is_value(value != nullptr) {
+                        value(""), is_value(bool(value != nullptr)) {
                     if (is_value) this->value = *value;
                 }
 

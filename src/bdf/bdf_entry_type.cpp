@@ -26,25 +26,22 @@ using namespace dnvgl::extfem::bdf;
 using namespace types;
 
 template <typename _Ty>
-const bdf_types entry_type<_Ty>::_type =
-    types::bdf_types::None;
-template <>
-const bdf_types entry_type<long>::_type =
-    types::bdf_types::Int;
-template <>
-const bdf_types entry_type<double>::_type =
-    types::bdf_types::Float;
-template <>
-const bdf_types entry_type<std::string>::_type =
-    types::bdf_types::Str;
-template <>
-const bdf_types entry_type<std::complex<double>>::_type =
-    types::bdf_types::Complex;
-template <>
-const bdf_types entry_type<std::vector<int>>::_type =
-    types::bdf_types::List;
+const bdf_types entry_type<_Ty>::_type = bdf_types::None;
 
+template <>
+const bdf_types entry_type<long>::_type = bdf_types::Int;
 
+template <>
+const bdf_types entry_type<double>::_type = bdf_types::Float;
+
+template <>
+const bdf_types entry_type<std::string>::_type = bdf_types::Str;
+
+template <>
+const bdf_types entry_type<std::complex<double>>::_type = bdf_types::Complex;
+
+template <>
+const bdf_types entry_type<std::vector<int>>::_type = bdf_types::List;
 
 // Local Variables:
 // mode: c++
