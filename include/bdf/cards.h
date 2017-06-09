@@ -711,9 +711,11 @@ namespace dnvgl {
                         bdf::types::entry_value<long> MCSID;
                     protected:
                         mat() = default;
+                    public:
                         ~mat() = default;
-                        mat(const std::list<std::string> &);
-                        mat(long *MID, double *RHO=nullptr,
+                    protected:
+                        explicit mat(const std::list<std::string> &);
+                        explicit mat(long *MID, double *RHO=nullptr,
                             double *TREF=nullptr, double *GE=nullptr,
                             double *ST=nullptr, double *SC=nullptr,
                             double *SS=nullptr, long *MCSID=nullptr);

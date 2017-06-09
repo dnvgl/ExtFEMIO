@@ -30,20 +30,15 @@ namespace dnvgl {
                     /// Base class for properties.
                     class property : public __base::card {
                     protected:
-
                         bdf::types::entry_type<long> static form_PID;
-
                     public:
-
                         /** Property identification number. (Integer > 0)
                          */
                         bdf::types::entry_value<long> PID;
                         explicit property(std::list<std::string> const&);
                         ~property() = default;
                         void static reset();
-
                     protected:
-
                         property() = default;
                         explicit property(long const *PID);
                         virtual card const &operator() (long const *PID);
@@ -72,7 +67,6 @@ namespace dnvgl {
                 */
                 class pshell : public __base::property {
                     // Handle Nastran Bulk PSHELL entries.
-
                     bdf::types::card static head;
                     using __base::card::format_outlist;
                     using __base::property::form_PID;
@@ -86,9 +80,7 @@ namespace dnvgl {
                     bdf::types::entry_type<double> static form_Z1;
                     bdf::types::entry_type<double> static form_Z2;
                     bdf::types::entry_type<long> static form_MID4;
-
                 public:
-
                     using __base::property::PID;
                     bdf::types::entry_value<long> MID1;
                     /** Default membrane thickness for `Ti` on the
@@ -170,9 +162,7 @@ namespace dnvgl {
                         long const *MID4 = nullptr);
                     void read(std::list<std::string> const&) override;
                     card const &operator() (const std::list<std::string> &) override;
-
                 private:
-
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> > &res) const override;
                     void check_data() override;
@@ -180,20 +170,18 @@ namespace dnvgl {
 
                 namespace __base {
                     class beam_base : public property {
-
                     protected:
-
                         using __base::property::form_PID;
                         using __base::property::PID;
                         bdf::types::entry_type<long> static form_MID;
                         beam_base() = default;
+                    public:
                         ~beam_base() = default;
+                    protected:
                         explicit beam_base(std::list<std::string> const&);
                         beam_base(long const *PID, long const *MID);
                         virtual card const &operator() (long const *PID, long const *MID);
-
                     public:
-
                         /// Material identification number. (Integer > 0)
                         bdf::types::entry_value<long> MID;
                         virtual types card_type() const override;
@@ -202,25 +190,20 @@ namespace dnvgl {
                     class beam_prop : public beam_base {
                         // base class for beam property classes.
                     protected:
-
                         using __base::beam_base::form_PID;
                         using __base::beam_base::form_MID;
-
                     public:
-
                         using __base::beam_base::PID;
                         using __base::beam_base::MID;
-
                     protected:
-
                         using __base::beam_base::operator();
                         beam_prop() = default;
+                    public:
                         ~beam_prop() = default;
+                    protected:
                         explicit beam_prop(std::list<std::string> const&);
                         beam_prop(long const *PID, long const *MID);
-
                     public:
-
                         types card_type() const override;
                     };
                 }
@@ -257,7 +240,6 @@ namespace dnvgl {
                 */
                 class pbeam : public __base::beam_prop {
                     // Handle Nastran Bulk PBEAM entries.
-
                     bdf::types::card static head;
                     using __base::card::format_outlist;
                     using __base::property::form_PID;
@@ -294,9 +276,7 @@ namespace dnvgl {
                     bdf::types::entry_type<double> static form_N2_A;
                     bdf::types::entry_type<double> static form_N1_B;
                     bdf::types::entry_type<double> static form_N2_B;
-
                 public:
-
                     using __base::property::PID;
                     using __base::beam_base::MID;
                     // fields that might appear more than once
@@ -508,9 +488,7 @@ namespace dnvgl {
                         double const *M1_B=nullptr, double const *M2_B=nullptr,
                         double const *N1_A=nullptr, double const *N2_A=nullptr,
                         double const *N1_B=nullptr, double const *N2_B=nullptr);
-
                 private:
-
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> > &res) const override;
                     void check_data() override;
@@ -518,9 +496,7 @@ namespace dnvgl {
 
                 namespace __base {
                     class l_geom {
-
                     protected:
-
                         l_geom() = default;
                         ~l_geom() = default;
                         static size_t get_dim(std::string const &TYPE);
@@ -548,7 +524,6 @@ namespace dnvgl {
                 */
                 class pbeaml : public __base::beam_prop, private __base::l_geom {
                     // Handle Nastran Bulk PBEAML entries.
-
                     bdf::types::card static head;
                     using __base::card::format_outlist;
                     using __base::property::form_PID;
@@ -559,9 +534,7 @@ namespace dnvgl {
                     bdf::types::entry_type<double> static form_NSM;
                     bdf::types::entry_type<std::string> static form_SO;
                     bdf::types::entry_type<double> static form_X_XB;
-
                 public:
-
                     using __base::property::PID;
                     using __base::beam_base::MID;
                     /** Cross-section group. (Character; Default =
@@ -621,9 +594,7 @@ namespace dnvgl {
                         std::vector<double> const *NSM,
                         std::vector<std::string> const *SO,
                         std::vector<double> const *X_XB);
-
                 private:
-
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> > &res) const override;
                     void check_data() override;
@@ -632,16 +603,14 @@ namespace dnvgl {
                 namespace __base {
                     /// Base class for `pbar` and `pbarl`.
                     class bar_prop : public beam_base {
-
                     protected:
-
                         bar_prop() = default;
+                    public:
                         ~bar_prop() = default;
+                    protected:
                         bar_prop(long const *PID, long const *MID);
                         explicit bar_prop(std::list<std::string> const&);
-
                     public:
-
                         using beam_base::PID;
                         using beam_base::MID;
                         types card_type() const override;
@@ -666,7 +635,6 @@ namespace dnvgl {
                 */
 
                 class pbar : public __base::bar_prop {
-
                     bdf::types::card static head;
                     using __base::card::format_outlist;
                     using __base::property::form_PID;
@@ -687,9 +655,7 @@ namespace dnvgl {
                     bdf::types::entry_type<double> static form_K1;
                     bdf::types::entry_type<double> static form_K2;
                     bdf::types::entry_type<double> static form_I12;
-
                 public:
-
                     using __base::property::PID;
                     using __base::beam_base::MID;
                     /** Area of bar coss section. (Real; Default = 0.0)
@@ -769,9 +735,7 @@ namespace dnvgl {
                         double const *F1=nullptr, double const *F2=nullptr,
                         double const *K1=nullptr, double const *K2=nullptr,
                         double const *I12=nullptr);
-
                 private:
-
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> > &res) const override;
                     void check_data() override;
@@ -794,7 +758,6 @@ namespace dnvgl {
                 |         | `DIM9` | *etc.*   | `NSM`   |        |        |        |        |        |    |
                 */
                 class pbarl : public __base::bar_prop, private __base::l_geom {
-
                     bdf::types::card static head;
                     using __base::card::format_outlist;
                     using __base::property::form_PID;
@@ -803,9 +766,7 @@ namespace dnvgl {
                     bdf::types::entry_type<std::string> static form_TYPE;
                     bdf::types::entry_type<double> static form_DIM;
                     bdf::types::entry_type<double> static form_NSM;
-
                 public:
-
                     using __base::property::PID;
                     using __base::beam_base::MID;
                     /** Cross-section group. (Character; Default =
@@ -841,9 +802,7 @@ namespace dnvgl {
                         long const *PID, long const *MID,
                         std::string const *GROUP, std::string const *TYPE,
                         std::vector<double> const *DIM, double const *NSM=nullptr);
-
                 private:
-
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> > &res) const override;
                     void check_data() override;
@@ -861,7 +820,6 @@ namespace dnvgl {
                 | `PROD`  | `PID` | `MID` | `A` | `J` | `C` | `NSM` |   |   |    |
                 */
                 class prod : public __base::property {
-
                     bdf::types::card static head;
                     using __base::card::format_outlist;
                     using __base::property::form_PID;
@@ -870,9 +828,7 @@ namespace dnvgl {
                     bdf::types::entry_type<double> static form_J;
                     bdf::types::entry_type<double> static form_C;
                     bdf::types::entry_type<double> static form_NSM;
-
                 public:
-
                     using __base::property::PID;
                     bdf::types::entry_value<long> MID;
                     /** Area of the rod. (Real)
@@ -901,9 +857,7 @@ namespace dnvgl {
                         long *PID, long *MID,
                         double *A, double *J=nullptr, double *C=nullptr,
                         double *NSM=nullptr);
-
                 private:
-
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> > &res) const override;
                     void check_data() override;

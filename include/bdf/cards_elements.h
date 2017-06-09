@@ -24,37 +24,30 @@ namespace dnvgl {
                     /// Base class for elements.
                     class element : public __base::card {
                     protected:
-
                         bdf::types::entry_type<long> static form_EID;
-
                     public:
-
                         /** Element identification number. (Integer > 0)
                          */
                         bdf::types::entry_value<long> EID;
                         explicit element(std::list<std::string> const&);
                         ~element() = default;
                         void static reset();
-
                     protected:
-
                         element() = default;
                         explicit element(long *EID);
                         virtual card const &operator() (long const *EID);
-                        virtual card const &operator() (
+                        card const &operator() (
                             const std::list<std::string>&) override;
-                        virtual void read(std::list<std::string> const&) override;
-                        virtual void check_data() override;
-                        virtual types card_type() const override;
-                        virtual void collect_outdata(
+                        void read(std::list<std::string> const&) override;
+                        void check_data() override;
+                        types card_type() const override;
+                        void collect_outdata(
                             std::list<std::unique_ptr<format_entry>>&) const override;
                     };
 
                     /// Base class for `ctria3` and `cquad4`.
                     class shell : public __base::element {
-
                     protected:
-
                         // bdf::types::entry_type<long> static form_EID;
                         bdf::types::entry_type<long> static form_PID;
                         bdf::types::entry_type<long> static form_G1;
@@ -69,20 +62,14 @@ namespace dnvgl {
                         bdf::types::entry_type<double> static form_T2;
                         bdf::types::entry_type<double> static form_T3;
                         bdf::types::entry_type<double> static form_T4;
-
-                        shell(std::list<std::string> const &);
-                        shell(long *);
-
+                        explicit shell(std::list<std::string> const &);
+                        explicit shell(long *);
                         void check_data() override;
-
                     public:
-
                         enum class CHOOSE_MCID_THETA {
                             has_MCID, has_THETA, UNDEF
                         };
-
                         CHOOSE_MCID_THETA choose_mcid_theta;
-
                         // /** Element identification number. (Integer > 0)
                         //  */
                         // bdf::types::entry_value<long> EID;
@@ -167,11 +154,11 @@ namespace dnvgl {
                             ignored for hyperelastic elements.
                             */
                         bdf::types::entry_value<double> T4;
-
                     protected:
-
                         shell() = default;
+                    public:
                         ~shell() = default;
+                    protected:
                         shell(long *EID, long *PID,
                               long *G1, long *G2, long *G3, long *G4,
                               double *THETA, double *ZOFFS, long *TFLAG,
@@ -215,7 +202,6 @@ namespace dnvgl {
                     |          |       | `TFLAG` | `T1` | `T2` | `T3` |                   |         |   |    |
                     */
                 class ctria3 : public __base::shell {
-
                     static bdf::types::card head;
                     using __base::element::form_EID;
                     using __base::shell::form_PID;
@@ -232,9 +218,7 @@ namespace dnvgl {
                     using __base::shell::form_T3;
                     using __base::shell::form_T4;
                     using __base::card::format_outlist;
-
                 public:
-
                     ctria3() = default;
                     ~ctria3() = default;
                     explicit ctria3(std::list<std::string> const&);
@@ -267,9 +251,7 @@ namespace dnvgl {
                         long const *TFLAG=nullptr,
                         double const *T1=nullptr, double const *T2=nullptr,
                         double const *T3=nullptr);
-
                 private:
-
                     using shell::put;
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> >&) const override;
@@ -289,7 +271,6 @@ namespace dnvgl {
                     |          | `TFLAG` | `T1`  | `T2` | `T3` | `T4` |      |                   |         |    |
                     */
                 class cquad4 : public __base::shell {
-
                     static bdf::types::card head;
                     using __base::element::form_EID;
                     using __base::shell::form_PID;
@@ -306,9 +287,7 @@ namespace dnvgl {
                     using __base::shell::form_T3;
                     using __base::shell::form_T4;
                     using __base::card::format_outlist;
-
                 public:
-
                     cquad4() = default;
                     ~cquad4() = default;
                     explicit cquad4(std::list<std::string> const&);
@@ -346,9 +325,7 @@ namespace dnvgl {
                         long const *TFLAG=nullptr,
                         double const *T1=nullptr, double const *T2=nullptr,
                         double const *T3=nullptr, double const *T4=nullptr) override;
-
                 private:
-
                     using shell::put;
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> >&) const override;
@@ -376,7 +353,6 @@ namespace dnvgl {
                     |         | `SA`  | `SB`  |       |       |       |       |       |               |    |
                     */
                 class cbeam : public __base::element {
-
                     static bdf::types::card head;
                     using __base::element::form_EID;
                     using __base::card::format_outlist;
@@ -400,9 +376,7 @@ namespace dnvgl {
                     bdf::types::entry_type<double> static form_W3B;
                     bdf::types::entry_type<long> static form_SA;
                     bdf::types::entry_type<long> static form_SB;
-
                 public:
-
                     /** Flag to store whether direction node or direction
                         vector was std::set for cross section direction.
                         */
@@ -636,9 +610,7 @@ namespace dnvgl {
                         double const *W3A=nullptr, double const *W1B=nullptr,
                         double const *W2B=nullptr, double const *W3B=nullptr,
                         long const *SA=nullptr, long const *SB=nullptr);
-
                 private:
-
                     using card::put;
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> >&) const override;
@@ -665,7 +637,6 @@ namespace dnvgl {
                     |         | `PA`  | `PB`  | `W1A` | `W2A` | `W3A` | `W1B` | `W2B` | `W3B`  |    |
                     */
                 class cbar : public __base::element {
-
                     static bdf::types::card head;
                     using __base::element::form_EID;
                     using __base::card::format_outlist;
@@ -686,9 +657,7 @@ namespace dnvgl {
                     bdf::types::entry_type<double> static form_W1B;
                     bdf::types::entry_type<double> static form_W2B;
                     bdf::types::entry_type<double> static form_W3B;
-
                 public:
-
                     types card_type() const override;
                     /** Flag to store whether direction node or direction
                         vector was std::set for cross section direction.
@@ -904,9 +873,7 @@ namespace dnvgl {
                         double const *W1A=nullptr, double const *W2A=nullptr,
                         double const *W3A=nullptr, double const *W1B=nullptr,
                         double const *W2B=nullptr, double const *W3B=nullptr);
-
                 private:
-
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> >&) const override;
                     void check_data() override;
@@ -924,7 +891,6 @@ namespace dnvgl {
                     | `CROD`  | `EID` | `PID` | `G1` | `G2` |   |   |   |   |    |
                     */
                 class crod : public __base::element {
-
                     static bdf::types::card head;
                     using __base::element::form_EID;
                     using __base::card::format_outlist;
@@ -932,9 +898,7 @@ namespace dnvgl {
                     bdf::types::entry_type<long> static form_PID;
                     bdf::types::entry_type<long> static form_G1;
                     bdf::types::entry_type<long> static form_G2;
-
                 public:
-
                     // /** Element identification number. (Integer > 0)
                     //  */
                     // bdf::types::entry_value<long> EID;
@@ -972,11 +936,9 @@ namespace dnvgl {
                     card const &operator() (
                         long const *EID, long const *PID,
                         long const *G1, long const *G2);
-
                 private:
-
                     void collect_outdata(
-                        std::list<std::unique_ptr<format_entry> >&) const override;
+                        std::list<std::unique_ptr<format_entry>>&) const override;
                     void check_data() override;
                 };
                 // celas
