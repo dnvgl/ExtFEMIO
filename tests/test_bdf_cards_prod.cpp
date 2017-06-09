@@ -181,6 +181,44 @@ TEST_CASE("BDF PROD roundtrip test", "[bdf_prod]") {
     }
 }
 
+TEST_CASE("BDF PROD roundtrip test (minimal)", "[bdf_prod]") {
+    prod::reset();
+    ostringstream test;
+
+    long PID{17};
+    long MID{23};
+    double A{42.6};
+
+    prod probe(&PID, &MID, &A);
+    test << probe;
+
+    SECTION("check output") {
+        CHECK(test.str() ==
+              // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
+              "PROD          17      234.260+01\n");
+    }
+
+    SECTION("check reading") {
+        prod::reset();
+        list<std::string> data;
+        list<std::string> lines;
+        std::string tmp;
+        istringstream raw(test.str());
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        card::card_split(data, lines);
+        prod probe_l(lines);
+
+        CHECK(long(probe_l.PID) == 17);
+        CHECK(long(probe_l.MID) == 23);
+        CHECK(double(probe_l.A) == 42.6);
+        CHECK_FALSE(bool(probe_l.J));
+        CHECK_FALSE(bool(probe_l.C));
+        CHECK_FALSE(bool(probe_l.NSM));
+    }
+}
+
 TEST_CASE("BDF PROD roundtrip test (reuse)", "[bdf_prod]") {
     pbarl::reset();
 
@@ -236,7 +274,7 @@ TEST_CASE("BDF PROD roundtrip test (A only)", "[bdf_prod]") {
 
     SECTION("check output") {
         CHECK(test.str() ==
-              "PROD          17      234.260+01         0.00+00\n");
+              "PROD          17      234.260+01\n");
     }
 
     SECTION("check reading") {
@@ -275,7 +313,7 @@ TEST_CASE("BDF PROD roundtrip test (A only) (reuse)", "[bdf_prod]") {
 
     SECTION("check output") {
         CHECK(test.str() ==
-              "PROD          17      234.260+01         0.00+00\n");
+              "PROD          17      234.260+01\n");
     }
 
     SECTION("check reading") {
@@ -304,7 +342,7 @@ TEST_CASE("BDF PROD roundtrip test (A only) (reuse)", "[bdf_prod]") {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&
+// compile-command: "make -C ../cbuild -j7 &&
 //    (make -C ../cbuild test;
 //     ../cbuild/tests/test_bdf_cards --use-colour no)"
 // End:

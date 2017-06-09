@@ -60,7 +60,7 @@ namespace {
     }
 entry_type<double> prod::form_J("J", bound_J);
 namespace {
-    auto const bound_C_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
+    auto const bound_C_ = make_shared<bound<double>>(nullptr, nullptr, cd0, true);
     auto const bound_C = bound_C_.get();
 }
 entry_type<double> prod::form_C("C", bound_C);
@@ -127,6 +127,7 @@ void prod::collect_outdata(
     res.push_back(unique_ptr<format_entry>(format<long>(form_PID, PID)));
     res.push_back(unique_ptr<format_entry>(format<long>(form_MID, MID)));
     res.push_back(unique_ptr<format_entry>(format<double>(form_A, A)));
+    if(bool(J) || bool(C) || bool(NSM))
     res.push_back(unique_ptr<format_entry>(
                       bool(J) ?
                       format<double>(form_J, J) :
@@ -137,7 +138,8 @@ void prod::collect_outdata(
                 bool(C) ?
                 format<double>(form_C, C) :
                 format(empty)));
-    res.push_back(unique_ptr<format_entry>(format<double>(form_NSM, NSM)));
+    if(bool(NSM))
+        res.push_back(unique_ptr<format_entry>(format<double>(form_NSM, NSM)));
 }
 
 void prod::check_data() {
