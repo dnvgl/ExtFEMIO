@@ -39,12 +39,14 @@ using bdf::types::entry_type;
 using type_bounds::bound;
 
 namespace {
+    auto const cl0_ = make_shared<long>(0);
     auto const cl1_ = make_shared<long>(1);
     auto const cl_1_ = make_shared<long>(-1);
     auto const cd0_ = make_shared<double>(0.);
     auto const cd1_ = make_shared<double>(1.);
     auto const cd833_ = make_shared<double>(.833333);
 
+    auto const cl0 = cl0_.get();
     auto const cl1 = cl1_.get();
     auto const cl_1 = cl_1_.get();
     auto const cd0 = cd0_.get();
@@ -58,13 +60,13 @@ bdf::types::card pshell::head = bdf::types::card("PSHELL");
 //     "PID", bound<long>(cl1));
 namespace {
     auto const bound_MID1_ = make_shared<bound<long>>(
-        cl1, nullptr, nullptr, true);
+        cl0, nullptr, nullptr, true);
     auto const bound_MID1 = bound_MID1_.get();
 }
 entry_type<long> pshell::form_MID1("MID1", bound_MID1);
 namespace {
     auto const bound_T_ = make_shared<bound<double>>(
-        nullptr, nullptr, nullptr, true);
+        cd0, nullptr, nullptr, true);
     auto const bound_T = bound_T_.get();
 }
 entry_type<double> pshell::form_T("T", bound_T);
@@ -74,9 +76,9 @@ namespace {
     auto const bound_MID2 = bound_MID2_.get();
 }
 entry_type<long> pshell::form_MID2("MID2", bound_MID2);
-
 namespace {
-    auto const bound_12I_T__3_ = make_shared<bound<double>>(cd0, nullptr, cd1);
+    auto const bound_12I_T__3_ = make_shared<bound<double>>(
+        cd0, nullptr, cd1, true);
     auto const bound_12I_T__3 = bound_12I_T__3_.get();
 }
 entry_type<double> pshell::form_12I_T__3("12I/T**3", bound_12I_T__3);
@@ -87,7 +89,8 @@ namespace {
 }
 entry_type<long> pshell::form_MID3("MID3", bound_MID3);
 namespace {
-    auto const bound_TS_T_ = make_shared<bound<double>>(cd0, nullptr, cd833);
+    auto const bound_TS_T_ = make_shared<bound<double>>(
+        cd0, nullptr, cd833, true);
     auto const bound_TS_T = bound_TS_T_.get();
 }
 entry_type<double> pshell::form_TS_T("TS/T", bound_TS_T);
@@ -214,15 +217,25 @@ void pshell::collect_outdata(
 
     res.push_back(unique_ptr<format_entry>(format<long>(form_PID, PID)));
     res.push_back(unique_ptr<format_entry>(format<long>(form_MID1, MID1)));
-    res.push_back(unique_ptr<format_entry>(format<double>(form_T, T)));
-    res.push_back(unique_ptr<format_entry>(format<long>(form_MID2, MID2)));
-    res.push_back(unique_ptr<format_entry>(format<double>(form_12I_T__3, x12I_T__3)));
-    res.push_back(unique_ptr<format_entry>(format<long>(form_MID3, MID3)));
-    res.push_back(unique_ptr<format_entry>(format<double>(form_TS_T, TS_T)));
-    res.push_back(unique_ptr<format_entry>(format<double>(form_NSM, NSM)));
-    res.push_back(unique_ptr<format_entry>(format<double>(form_Z1, Z1)));
-    res.push_back(unique_ptr<format_entry>(format<double>(form_Z2, Z2)));
-    res.push_back(unique_ptr<format_entry>(format<long>(form_MID4, MID4)));
+    if(T || MID2 || x12I_T__3 || MID3 || TS_T || NSM || Z1 || Z2 || MID4)
+        res.push_back(unique_ptr<format_entry>(format<double>(form_T, T)));
+    if(MID2 || x12I_T__3 || MID3 || TS_T || NSM || Z1 || Z2 || MID4)
+        res.push_back(unique_ptr<format_entry>(format<long>(form_MID2, MID2)));
+    if(x12I_T__3 || MID3 || TS_T || NSM || Z1 || Z2 || MID4)
+        res.push_back(unique_ptr<format_entry>(
+                          format<double>(form_12I_T__3, x12I_T__3)));
+    if(MID3 || TS_T || NSM || Z1 || Z2 || MID4)
+        res.push_back(unique_ptr<format_entry>(format<long>(form_MID3, MID3)));
+    if(TS_T || NSM || Z1 || Z2 || MID4)
+        res.push_back(unique_ptr<format_entry>(format<double>(form_TS_T, TS_T)));
+    if(NSM || Z1 || Z2 || MID4)
+        res.push_back(unique_ptr<format_entry>(format<double>(form_NSM, NSM)));
+    if(Z1 || Z2 || MID4)
+        res.push_back(unique_ptr<format_entry>(format<double>(form_Z1, Z1)));
+    if(Z2 || MID4)
+        res.push_back(unique_ptr<format_entry>(format<double>(form_Z2, Z2)));
+    if(MID4)
+        res.push_back(unique_ptr<format_entry>(format<long>(form_MID4, MID4)));
 }
 
 void pshell::check_data() {

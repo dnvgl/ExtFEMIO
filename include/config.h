@@ -12,7 +12,7 @@
 #ifndef _CONFIG_H_
 #define _CONFIG_H_
 
-#define ExtFEMIO_VERSION "0.6.0"
+#define ExtFEMIO_VERSION "0.6.1"
 
 #endif // _CONFIG_H_
 

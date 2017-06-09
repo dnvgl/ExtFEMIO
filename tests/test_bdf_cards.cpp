@@ -1077,7 +1077,7 @@ TEST_CASE("BDF_Dispatch", "[cards]") {
     CHECK(static_cast<pshell*>(current.get())->MID1.value == 4);
     CHECK(static_cast<pshell*>(current.get())->T.value == 23.);
     CHECK(static_cast<pshell*>(current.get())->MID2.value == 4);
-    CHECK(static_cast<pshell*>(current.get())->x12I_T__3.value == 1.);
+    CHECK_FALSE(bool(static_cast<pshell*>(current.get())->x12I_T__3));
     CHECK(static_cast<pshell*>(current.get())->MID3.value == 4);
     current.reset();
 

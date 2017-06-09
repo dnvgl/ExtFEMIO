@@ -48,7 +48,7 @@ TEST_CASE("BDF PSHELL definitions (Small Field Format).", "[bdf_pshell]") {
         CHECK(long(probe.MID1) == 4);
         CHECK(double(probe.T) == 23.);
         CHECK(long(probe.MID2) == 4);
-        CHECK(double(probe.x12I_T__3) == 1.);
+        CHECK_FALSE(bool(probe.x12I_T__3));
         CHECK(long(probe.MID3) == 4);
     }
 }
@@ -67,7 +67,7 @@ TEST_CASE("BDF PSHELL definitions (reuse) (Small Field Format).", "[bdf_pshell]"
         CHECK(long(probe.MID1) == 4);
         CHECK(double(probe.T) == 23.);
         CHECK(long(probe.MID2) == 4);
-        CHECK(double(probe.x12I_T__3) == 1.);
+        CHECK_FALSE(bool(probe.x12I_T__3));
         CHECK(long(probe.MID3) == 4);
     }
 }
@@ -88,7 +88,7 @@ TEST_CASE("BDF PSHELL definitions (Large Field Format).", "[bdf_pshell]") {
         CHECK(long(probe.MID1) == 4);
         CHECK(double(probe.T) == 23.);
         CHECK(long(probe.MID2) == 4);
-        CHECK(double(probe.x12I_T__3) == 1.);
+        CHECK_FALSE(probe.x12I_T__3);
         CHECK(long(probe.MID3) == 4);
     }
 }
@@ -109,7 +109,7 @@ TEST_CASE("BDF PSHELL definitions (reuse) (Large Field Format).", "[bdf_pshell]"
         CHECK(long(probe.MID1) == 4);
         CHECK(double(probe.T) == 23.);
         CHECK(long(probe.MID2) == 4);
-        CHECK(double(probe.x12I_T__3) == 1.);
+        CHECK_FALSE(probe.x12I_T__3);
         CHECK(long(probe.MID3) == 4);
     }
 }
@@ -127,7 +127,7 @@ TEST_CASE("BDF PSHELL definitions (Free Field Format).", "[bdf_pshell]") {
         CHECK(long(probe.MID1) == 4);
         CHECK(double(probe.T) == 23.);
         CHECK(long(probe.MID2) == 4);
-        CHECK(double(probe.x12I_T__3) == 1.);
+        CHECK_FALSE(probe.x12I_T__3);
         CHECK(long(probe.MID3) == 4);
     }
 }
@@ -145,7 +145,7 @@ TEST_CASE("BDF PSHELL definitions (reuse) (Free Field Format).", "[bdf_pshell]")
         CHECK(long(probe.MID1) == 4);
         CHECK(double(probe.T) == 23.);
         CHECK(long(probe.MID2) == 4);
-        CHECK(double(probe.x12I_T__3) == 1.);
+        CHECK_FALSE(probe.x12I_T__3);
         CHECK(long(probe.MID3) == 4);
     }
 }
@@ -199,6 +199,56 @@ TEST_CASE("BDF PSHELL roundtrip test", "[bdf_pshell]") {
         CHECK(double(probe_l.Z1) == 12.);
         CHECK(double(probe_l.Z2) == 22.);
         CHECK(long(probe_l.MID4) == 5);
+    }
+}
+
+TEST_CASE("BDF PSHELL roundtrip test (check default PSE)", "[bdf_pshell]") {
+    pshell::reset();
+    std::ostringstream test;
+
+    long PID{1};
+    long MID1{6};
+    double T{5.};
+
+    pshell probe(&PID, &MID1, &T);
+    test << probe;
+
+    SECTION("check output") {
+        CHECK(test.str() ==
+              "PSHELL         1       65.000+00\n");
+        CHECK_FALSE(bool(probe.MID2));
+        CHECK_FALSE(probe.x12I_T__3);
+        CHECK_FALSE(probe.TS_T);
+        CHECK_FALSE(bool(probe.MID3));
+        CHECK_FALSE(bool(probe.NSM));
+        CHECK_FALSE(bool(probe.Z1));
+        CHECK_FALSE(bool(probe.Z2));
+        CHECK_FALSE(bool(probe.MID4));
+    }
+
+    SECTION("check reading") {
+        pshell::reset();
+        std::list<std::string> data;
+        std::list<std::string> lines;
+        std::string tmp;
+        std::istringstream raw(test.str());
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        __base::card::card_split(data, lines);
+        pshell probe_l(lines);
+
+        CHECK(long(probe_l.PID) == 1);
+        CHECK(long(probe_l.MID1) == 6);
+        CHECK(double(probe_l.T) == 5.);
+        CHECK_FALSE(bool(probe_l.MID2));
+        CHECK_FALSE(probe_l.x12I_T__3);
+        CHECK_FALSE(probe_l.TS_T);
+        CHECK_FALSE(bool(probe_l.MID3));
+        CHECK_FALSE(bool(probe_l.NSM));
+        CHECK_FALSE(bool(probe_l.Z1));
+        CHECK_FALSE(bool(probe_l.Z2));
+        CHECK_FALSE(bool(probe_l.MID4));
     }
 }
 

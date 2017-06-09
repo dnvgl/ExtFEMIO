@@ -931,7 +931,7 @@ namespace dnvgl {
                     static bdf::types::entry_type<std::complex<double> > form_CPLXVAL;
                 public:
                     enum class value_type {is_CHAR, is_INT, is_REAL, is_CPLX};
-                    value_type value_type;
+                    value_type ValueType = value_type::is_CHAR;
                     /** Parameter name (one to eight alphanumeric
                         characters, the first of which is alphabetic).
                     */
@@ -1005,7 +1005,7 @@ namespace dnvgl {
 // mode: c++
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&
+// compile-command: "make -C ../../cbuild -j7 &&
 //    (make -C ../../cbuild test;
 //     ../../cbuild/tests/test_bdf_cards --use-colour no)"
 // coding: utf-8
