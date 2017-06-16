@@ -35,7 +35,7 @@ TEST_CASE("Process Grouping information from NAPA CSV.",
 
     SECTION("initial") {
 
-        elem_info *probe = new elem_info;
+        CElemInfo *probe = new CElemInfo;
         testCSV::process_line("1;4;BOTTOM;G1;A;  235.0", probe);
 
         CHECK(probe->id == 1);
@@ -50,7 +50,7 @@ TEST_CASE("Process Grouping information from NAPA CSV.",
 
     SECTION("faulty") {
 
-        elem_info *probe = new elem_info;
+        CElemInfo *probe = new CElemInfo;
         CHECK_THROWS(
             testCSV::process_line(
                 "Test format for Poseidon grouping information", probe));

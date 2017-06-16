@@ -32,10 +32,10 @@ using namespace std;
 using namespace dnvgl::extfem;
 using namespace bdf;
 using namespace cards;
-using namespace type_bounds;
 using type_bounds::bound;
-using bdf::types::entry_type;
+using types::entry_type;
 
+/// Constant values used in bound definitions.
 namespace {
     auto const cl1_ = make_shared<long>(1);
     auto const cd0_ = make_shared<double>(0.);
@@ -45,6 +45,7 @@ namespace {
 
 bdf::types::card prod::head = bdf::types::card("PROD");
 
+// PID is defined in parent class.
 // const entry_type<long> prod::form_PID(
 //     "PID", bound<long>(cl1));
 namespace {

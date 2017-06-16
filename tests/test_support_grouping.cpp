@@ -37,7 +37,7 @@ using namespace dnvgl::extfem::support::GroupInfo;
 TEST_CASE("Process Grouping information.", "[support_grouping]") {
 
     SECTION("simple") {
-        elem_info probe(1, 2, "AA", "TEST", "HIGH", {230});
+        CElemInfo probe(1, 2, "AA", "TEST", "HIGH", {230});
 
         CHECK(probe.id == 1);
         CHECK(probe.nnodes == 2);
@@ -49,9 +49,9 @@ TEST_CASE("Process Grouping information.", "[support_grouping]") {
 }
 
 TEST_CASE("Testing element comparison", "[support_grouping]") {
-    elem_info probe_1(1, 2, "AA", "TEST", "HIGH", {230});
-    elem_info probe_2(2, 2, "AA", "TEST", "HIGH", {230});
-    elem_info probe_3(1, 2, "AA", "TEST", "HIGH", {230});
+    CElemInfo probe_1(1, 2, "AA", "TEST", "HIGH", {230});
+    CElemInfo probe_2(2, 2, "AA", "TEST", "HIGH", {230});
+    CElemInfo probe_3(1, 2, "AA", "TEST", "HIGH", {230});
 
     SECTION("eq") {
         CHECK(probe_1 == probe_3);
