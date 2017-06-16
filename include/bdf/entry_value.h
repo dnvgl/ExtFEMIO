@@ -26,7 +26,7 @@ namespace dnvgl {
                     bool is_value = false;
                     entry_value() = default;
                     ~entry_value() = default;
-                    explicit entry_value(const _Ty value, const bool is_value=true);
+                    explicit entry_value(const _Ty, const bool=true);
                     explicit entry_value(const _Ty *value);
                     entry_value(entry_value<_Ty> const&) = default;
                     entry_value<_Ty> &operator= (const _Ty &other);
@@ -105,7 +105,7 @@ namespace dnvgl {
                 // ReSharper disable CppPossiblyUninitializedMember
                 template <> inline
                 entry_value<std::vector<int> >::entry_value(
-                    const entry_value<std::vector<int> > &val) :
+                    const entry_value<std::vector<int>> &val) :
                         value(val.value), is_value(val.is_value) {}
 
                 template <> inline

@@ -25,7 +25,7 @@ namespace dnvgl {
             namespace GroupInfo {
 
                 /// Store extra information on elements.
-                class elem_info {
+                class CElemInfo {
                 public:
                     long id;
                     long nnodes;
@@ -35,26 +35,26 @@ namespace dnvgl {
                     std::string grade;
                     double yield;
 
-                    elem_info();
-                    elem_info(
+                    CElemInfo();
+                    CElemInfo(
                         long const &id, long const &nnodes,
                         std::string const &napa_obj,
                         std::string const &func_name,
                         std::string const &grade,
                         double const &yield);
-                    elem_info(long const &id);
+                    explicit CElemInfo(long const &id);
 
-                    inline bool operator== (const elem_info &other) const {
+                    bool operator== (const CElemInfo &other) const {
                         return (id == other.id);
                     };
 
-                    inline bool operator< (const elem_info &other) const {
+                    bool operator< (const CElemInfo &other) const {
                         return (id < other.id);
                     };
                 };
 
                 /// Process additional information for FE file import.
-                class grp_info : public std::map<long, elem_info> {
+                class grp_info : public std::map<long, CElemInfo> {
 
                 protected:
 
@@ -73,12 +73,12 @@ namespace dnvgl {
                         std::string const &func_name,
                         std::string const &grade,
                         double const &yield) {
-                        (*this)[id] = elem_info(
+                        (*this)[id] = CElemInfo(
                             id, nnodes, napa_obj, func_name, grade, yield);
                     };
 
                     void add_elem(long const &id) {
-                        (*this)[id] = elem_info(id);
+                        (*this)[id] = CElemInfo(id);
                     };
                 };
 
@@ -92,7 +92,7 @@ namespace dnvgl {
 
                     CSV() {};
 
-                    static void process_line(std::string const &, elem_info *);
+                    static void process_line(std::string const &, CElemInfo *);
                 };
 
                 class Session : public grp_info {
@@ -111,6 +111,14 @@ namespace dnvgl {
     }
 }
 
+namespace std {
+    template <>
+    struct hash<dnvgl::extfem::support::GroupInfo::CElemInfo> {
+        size_t operator()(const dnvgl::extfem::support::GroupInfo::CElemInfo& k) const {
+            return hash<long>()(k.id);
+        }
+    };
+}
 #endif // _SUPPORT_GROUPING_H_
 
 // Local Variables:

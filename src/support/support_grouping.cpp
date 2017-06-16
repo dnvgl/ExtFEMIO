@@ -25,13 +25,13 @@ using namespace std;
 using namespace dnvgl::extfem::support;
 using namespace dnvgl::extfem::support::GroupInfo;
 
-elem_info::elem_info() :
-        elem_info(-1, 0, "", "", "", 0.) {}
+CElemInfo::CElemInfo() :
+        CElemInfo(-1, 0, "", "", "", 0.) {}
 
-elem_info::elem_info(long const &id) :
-        elem_info(id, 0, "", "", "", 0.) {}
+CElemInfo::CElemInfo(long const &id) :
+        CElemInfo(id, 0, "", "", "", 0.) {}
 
-elem_info::elem_info(long const &id, long const &nnodes,
+CElemInfo::CElemInfo(long const &id, long const &nnodes,
                      std::string const &napa_obj, std::string const &func_name,
                      std::string const &grade, double const &yield) :
         id(id), nnodes(nnodes), napa_obj(napa_obj), func_name(func_name),

@@ -26,7 +26,7 @@ using namespace dnvgl::extfem::support::GroupInfo;
 
 CSV::CSV(istream &inp) {
     std::string line;
-    elem_info info;
+    CElemInfo info;
 
     while (getline(inp, line)) {
         try {
@@ -38,7 +38,7 @@ CSV::CSV(istream &inp) {
 }
 
 void CSV::process_line(std::string const &line,
-                       dnvgl::extfem::support::GroupInfo::elem_info *data) {
+                       dnvgl::extfem::support::GroupInfo::CElemInfo *data) {
     istringstream inp(line);
     istringstream proc;
     std::string segment;
