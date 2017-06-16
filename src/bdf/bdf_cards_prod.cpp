@@ -33,7 +33,7 @@ using namespace dnvgl::extfem;
 using namespace bdf;
 using namespace cards;
 using type_bounds::bound;
-using types::entry_type;
+using bdf::types::entry_type;
 
 /// Constant values used in bound definitions.
 namespace {
