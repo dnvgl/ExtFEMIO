@@ -33,14 +33,14 @@ namespace dnvgl {
    force to be given in the *i*’th d.o.f. to get a unit displacement in
    the *j*’th d.o.f.
 */
-                class mgsprng : public __base::card {
+                class mgsprng : public __base::material {
 
                 private:
 
                     fem::types::card static const head;
 
-                    fem::types::entry_type<long>
-                    static const _form_MATNO;
+                    // fem::types::entry_type<long>
+                    // static const _form_MATNO;
                     fem::types::entry_type<long>
                     static const _form_NDOF;
                     fem::types::entry_type<double>
@@ -48,10 +48,10 @@ namespace dnvgl {
 
                 public:
 
-/** Material number, i.e. reference number referenced to by the
-    element specification.
-*/
-                    long MATNO;
+// /** Material number, i.e. reference number referenced to by the
+//     element specification.
+// */
+//                     long MATNO;
 /** Number of degrees of freedom of the node.
  */
                     long NDOF;
@@ -362,6 +362,8 @@ namespace dnvgl {
 // mode: c++
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test""
+// compile-command: "make -C ../../cbuild -j7 &&
+//   (make -C ../../cbuild test;
+//    ../../cbuild/tests/test_fem_cards --use-colour no)"
 // coding: utf-8
 // End:

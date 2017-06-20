@@ -34,7 +34,7 @@ using namespace cards;
 
 card const mgsprng::head("MGSPRNG");
 
-entry_type<long> const mgsprng::_form_MATNO("MATNO");
+// entry_type<long> const mgsprng::_form_MATNO("MATNO");
 entry_type<long> const mgsprng::_form_NDOF("NDOF");
 entry_type<double> const mgsprng::_form_K("K");
 
@@ -66,10 +66,10 @@ mgsprng::mgsprng() : mgsprng(-1, 0, {}) {}
 
 mgsprng::mgsprng(long const MATNO, long const NDOF,
                  vector<vector<double> > const &K) :
-        card(), MATNO(MATNO), NDOF(NDOF), K(K) {}
+        material(MATNO), NDOF(NDOF), K(K) {}
 
 mgsprng::mgsprng(long const MATNO, vector<vector<double> > const &K) :
-        card(), MATNO(MATNO), NDOF(long(K.size())), K(K) {}
+        material(MATNO), NDOF(long(K.size())), K(K) {}
 
 cards::types mgsprng::card_type() const {
     return types::MGSPRNG;

@@ -206,7 +206,6 @@ void cards::__base::material::read(
     if (len < 2)
         throw errors::parse_error(
             "material", "Illegal number of entries.");
-
     MATNO = _form_MATNO(inp.at(1));
 }
 
