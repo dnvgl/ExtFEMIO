@@ -220,7 +220,7 @@ beam_prop(inp) {
     this->pbeam::read(inp);
 }
 
-pbeam::pbeam(long const *EID, long const *PID,
+pbeam::pbeam(long const *PID, long const *MID,
              vector<double> const *A,
              vector<double> const *I1,
              vector<double> const *I2,
@@ -245,7 +245,7 @@ pbeam::pbeam(long const *EID, long const *PID,
              double const *M1_B, double const *M2_B,
              double const *N1_A, double const *N2_A,
              double const *N1_B, double const *N2_B) :
-        beam_prop(EID, PID),
+        beam_prop(PID, MID),
         A(*A), I1(*I1), I2(*I2),
         K1(K1), K2(K2), S1(S1), S2(S2), NSI_A(NSI_A), NSI_B(NSI_B),
         CW_A(CW_A), CW_B(CW_B),

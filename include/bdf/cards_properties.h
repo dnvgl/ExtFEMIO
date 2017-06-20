@@ -434,7 +434,7 @@ namespace dnvgl {
                     pbeam() = default;
                     ~pbeam() = default;
                     explicit pbeam(std::list<std::string> const&);
-                    pbeam(long const *EID, long const *PID,
+                    pbeam(long const *PID, long const *MID,
                           std::vector<double> const *A,
                           std::vector<double> const *I1,
                           std::vector<double> const *I2,

@@ -236,7 +236,7 @@ TEST_CASE("BDF PBEAM roundtrip test", "[bdf_pbeam]") {
     pbeam::reset();
     std::ostringstream test;
 
-    long EID{7869}, PID{104010};
+    long PID{7869}, MID{104010};
     std::vector<double> A{1., 2.};
     std::vector<double> I1{2., 3.};
     std::vector<double> I2{3., 4.};
@@ -270,7 +270,7 @@ TEST_CASE("BDF PBEAM roundtrip test", "[bdf_pbeam]") {
     double N1_B{31.};
     double N2_B{32.};
 
-    pbeam probe(&EID, &PID, &A, &I1, &I2, &I12, &J, &NSM,
+    pbeam probe(&PID, &MID, &A, &I1, &I2, &I12, &J, &NSM,
                 &C1, &C2, &D1, &D2, &E1, &E2, &F1, &F2,
                 &SO, &X_XB,
                 &K1, &K2, &S1, &S2, &NSI_A, &NSI_B, &CW_A, &CW_B,
@@ -343,7 +343,7 @@ TEST_CASE("BDF PBEAM roundtrip test (reuse)", "[bdf_pbeam]") {
 
     std::ostringstream test;
 
-    long EID{7869}, PID{104010};
+    long PID{7869}, MID{104010};
     std::vector<double> A{1., 2.};
     std::vector<double> I1{2., 3.};
     std::vector<double> I2{3., 4.};
@@ -379,7 +379,7 @@ TEST_CASE("BDF PBEAM roundtrip test (reuse)", "[bdf_pbeam]") {
 
     pbeam probe;
     test << probe;
-    test << probe(&EID, &PID, &A, &I1, &I2, &I12, &J, &NSM,
+    test << probe(&PID, &MID, &A, &I1, &I2, &I12, &J, &NSM,
                   &C1, &C2, &D1, &D2, &E1, &E2, &F1, &F2,
                   &SO, &X_XB,
                   &K1, &K2, &S1, &S2, &NSI_A, &NSI_B, &CW_A, &CW_B,
@@ -451,7 +451,7 @@ TEST_CASE("BDF PBEAM roundtrip test (no taper)", "[bdf_pbeam]") {
     pbeam::reset();
     std::ostringstream test;
 
-    long EID{7869}, PID{104010};
+    long PID{7869}, MID{104010};
     std::vector<double> A{1.};
     std::vector<double> I1{2.};
     std::vector<double> I2{3.};
@@ -483,7 +483,7 @@ TEST_CASE("BDF PBEAM roundtrip test (no taper)", "[bdf_pbeam]") {
     double N1_B{31.};
     double N2_B{32.};
 
-    pbeam probe(&EID, &PID, &A, &I1, &I2, &I12, &J, &NSM,
+    pbeam probe(&PID, &MID, &A, &I1, &I2, &I12, &J, &NSM,
                 &C1, &C2, &D1, &D2, &E1, &E2, &F1, &F2,
                 nullptr, nullptr,
                 &K1, &K2, &S1, &S2, &NSI_A, &NSI_B, &CW_A, &CW_B,
@@ -552,7 +552,7 @@ TEST_CASE("BDF PBEAM roundtrip test (no taper) (reuse)", "[bdf_pbeam]") {
 
     std::ostringstream test;
 
-    long EID{7869}, PID{104010};
+    long PID{7869}, MID{104010};
     std::vector<double> A{1.};
     std::vector<double> I1{2.};
     std::vector<double> I2{3.};
@@ -586,7 +586,7 @@ TEST_CASE("BDF PBEAM roundtrip test (no taper) (reuse)", "[bdf_pbeam]") {
 
     pbeam probe;
     test << probe;
-    test << probe(&EID, &PID, &A, &I1, &I2, &I12, &J, &NSM,
+    test << probe(&PID, &MID, &A, &I1, &I2, &I12, &J, &NSM,
                   &C1, &C2, &D1, &D2, &E1, &E2, &F1, &F2,
                   nullptr, nullptr,
                   &K1, &K2, &S1, &S2, &NSI_A, &NSI_B, &CW_A, &CW_B,
@@ -653,13 +653,13 @@ TEST_CASE("BDF PBEAM roundtrip test (minimal)", "[bdf_pbeam]") {
     pbeam::reset();
     std::ostringstream test;
 
-    long EID{7869}, PID{104010};
+    long PID{7869}, MID{104010};
     std::vector<double> A{1.};
     std::vector<double> I1{2.};
     std::vector<double> I2{3.};
     std::vector<double> I12{4.};
 
-    pbeam probe(&EID, &PID, &A, &I1, &I2);
+    pbeam probe(&PID, &MID, &A, &I1, &I2);
     test << probe;
 
     SECTION("check output") {
@@ -721,7 +721,7 @@ TEST_CASE("BDF PBEAM roundtrip test (minimal) (reuse)", "[bdf_pbeam]") {
 
     std::ostringstream test;
 
-    long EID{7869}, PID{104010};
+    long PID{7869}, MID{104010};
     std::vector<double> A{1.};
     std::vector<double> I1{2.};
     std::vector<double> I2{3.};
@@ -729,7 +729,7 @@ TEST_CASE("BDF PBEAM roundtrip test (minimal) (reuse)", "[bdf_pbeam]") {
 
     pbeam probe;
     test << probe;
-    test << probe(&EID, &PID, &A, &I1, &I2);
+    test << probe(&PID, &MID, &A, &I1, &I2);
 
     SECTION("check output") {
         CHECK(test.str() ==
@@ -789,13 +789,13 @@ TEST_CASE("BDF PBEAM roundtrip test (N2_B only)", "[bdf_pbeam]") {
     pbeam::reset();
     std::ostringstream test;
 
-    long EID{7869}, PID{104010};
+    long PID{7869}, MID{104010};
     std::vector<double> A{1.};
     std::vector<double> I1{2.};
     std::vector<double> I2{3.};
     double N2_B{32.};
 
-    pbeam probe(&EID, &PID, &A, &I1, &I2, nullptr, nullptr, nullptr,
+    pbeam probe(&PID, &MID, &A, &I1, &I2, nullptr, nullptr, nullptr,
                 nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
                 nullptr, nullptr,
                 nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
@@ -864,7 +864,7 @@ TEST_CASE("BDF PBEAM roundtrip test (N2_B only) (reuse)", "[bdf_pbeam]") {
 
     std::ostringstream test;
 
-    long EID{7869}, PID{104010};
+    long PID{7869}, MID{104010};
     std::vector<double> A{1.};
     std::vector<double> I1{2.};
     std::vector<double> I2{3.};
@@ -873,7 +873,7 @@ TEST_CASE("BDF PBEAM roundtrip test (N2_B only) (reuse)", "[bdf_pbeam]") {
     pbeam probe;
     test << probe;
     test << probe(
-        &EID, &PID, &A, &I1, &I2, nullptr, nullptr, nullptr,
+        &PID, &MID, &A, &I1, &I2, nullptr, nullptr, nullptr,
         nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
         nullptr, nullptr,
         nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
