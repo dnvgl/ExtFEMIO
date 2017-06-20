@@ -104,12 +104,12 @@ namespace dnvgl {
 
                 // ReSharper disable CppPossiblyUninitializedMember
                 template <> inline
-                entry_value<std::vector<int> >::entry_value(
+                entry_value<std::vector<int>>::entry_value(
                     const entry_value<std::vector<int>> &val) :
                         value(val.value), is_value(val.is_value) {}
 
                 template <> inline
-                entry_value<std::vector<int> >::entry_value(
+                entry_value<std::vector<int>>::entry_value(
                     const std::vector<int> value, const bool is_value) :
                         value(value), is_value(is_value) {}
 
