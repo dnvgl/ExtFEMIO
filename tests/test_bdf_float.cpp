@@ -164,7 +164,7 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]") {
         auto const bound_probe_l = make_shared<bound<double>>(
             nullptr, nullptr, nullptr, true);
         entry_type<double> probe_l("probe", bound_probe_l.get());
-        CHECK_FALSE(probe_l("        "));
+        CHECK_FALSE(probe_l("        ").value);
     }
 }
 

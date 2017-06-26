@@ -54,7 +54,7 @@ TEST_CASE("BDF CBAR definitions. (Small Field Format)", "[bdf_cbar]" ) {
         CHECK((double)probe.X1 == 0.);
         CHECK((double)probe.X2 == 66.5206);
         CHECK((double)probe.X3 == 997.785);
-        CHECK_FALSE(probe.G0);
+        CHECK_FALSE(bool(probe.G0));
         CHECK(probe.choose_dir_code == cbar::CHOOSE_DIR_CODE::has_DVEC);
         CHECK(probe.OFFT == "GGG");
         std::vector<int> p_ref;

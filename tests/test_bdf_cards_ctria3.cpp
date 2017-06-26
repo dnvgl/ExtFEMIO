@@ -54,7 +54,7 @@ TEST_CASE("BDF CTRIA3 definitions. (Small Field Format)",
         CHECK(long(probe.G2) == 200);
         CHECK(long(probe.G3) == 141);
         CHECK(probe.choose_mcid_theta == ctria3::CHOOSE_MCID_THETA::has_THETA);
-        CHECK_FALSE(probe.MCID);
+        CHECK_FALSE(bool(probe.MCID));
         CHECK(double(probe.THETA) == 0.0);
     }
 }
@@ -76,13 +76,13 @@ TEST_CASE("BDF CTRIA3 definitions. (Small Field Format, default values)",
         CHECK(long(probe.G2) == 200);
         CHECK(long(probe.G3) == 141);
         CHECK(probe.choose_mcid_theta == ctria3::CHOOSE_MCID_THETA::has_THETA);
-        CHECK_FALSE(probe.MCID);
+        CHECK_FALSE(bool(probe.MCID));
         CHECK(double(probe.THETA) == 0.0);
-        CHECK_FALSE(probe.ZOFFS);
-        CHECK_FALSE(probe.TFLAG);
-        CHECK_FALSE(probe.T1);
-        CHECK_FALSE(probe.T2);
-        CHECK_FALSE(probe.T3);
+        CHECK_FALSE(bool(probe.ZOFFS));
+        CHECK_FALSE(bool(probe.TFLAG));
+        CHECK_FALSE(bool(probe.T1));
+        CHECK_FALSE(bool(probe.T2));
+        CHECK_FALSE(bool(probe.T3));
     }
 }
 
@@ -104,9 +104,9 @@ TEST_CASE("BDF CTRIA3 definitions. (Small Field Format, default values 2)",
         CHECK(long(probe.G2) == 200);
         CHECK(long(probe.G3) == 141);
         CHECK(probe.choose_mcid_theta == ctria3::CHOOSE_MCID_THETA::has_THETA);
-        CHECK_FALSE(probe.MCID);
+        CHECK_FALSE(bool(probe.MCID));
         CHECK(double(probe.THETA) == 0.0);
-        CHECK_FALSE(probe.ZOFFS);
+        CHECK_FALSE(bool(probe.ZOFFS));
         CHECK(long(probe.TFLAG) == 1);
         CHECK(double(probe.T1) == 1.);
         CHECK(double(probe.T2) == 1.);
@@ -131,7 +131,7 @@ TEST_CASE("BDF CTRIA3 definitions. (Large Field Format)",
         CHECK(long(probe.G1) == 16);
         CHECK(long(probe.G2) == 200);
         CHECK(long(probe.G3) == 141);
-        CHECK_FALSE(probe.MCID);
+        CHECK_FALSE(bool(probe.MCID));
         CHECK(double(probe.THETA) == 0.0);
     }
 }

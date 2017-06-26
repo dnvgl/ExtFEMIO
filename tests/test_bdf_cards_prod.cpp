@@ -77,7 +77,7 @@ TEST_CASE("BDF PROD definitions; Free Field Format 2.", "[bdf_prod]") {
     CHECK((double)probe.A == 3.);
     CHECK((double)probe.J == 4.);
     CHECK((double)probe.C == 5.);
-    CHECK_FALSE(probe.NSM);
+    CHECK_FALSE(bool(probe.NSM));
 }
 
 TEST_CASE("BDF PROD definitions; Free Field Format 3.", "[bdf_prod]") {
@@ -97,7 +97,7 @@ TEST_CASE("BDF PROD definitions; Free Field Format 3.", "[bdf_prod]") {
     CHECK((double)probe.A == 3.);
     CHECK((double)probe.J == 4.);
     CHECK((double)probe.C == 0.);
-    CHECK_FALSE(probe.NSM);
+    CHECK_FALSE(bool(probe.NSM));
 }
 
 TEST_CASE("BDF PROD definitions; Small Field Format.", "[bdf_prod]") {
@@ -135,9 +135,9 @@ TEST_CASE("BDF PROD definitions; Small Field Format 2.", "[bdf_prod]") {
     CHECK((long)probe.PID == 6000001);
     CHECK((long)probe.MID == 1);
     CHECK((double)probe.A == 3000);
-    CHECK_FALSE(probe.J);
+    CHECK_FALSE(bool(probe.J));
     CHECK((double)probe.C == 0.);
-    CHECK_FALSE(probe.NSM);
+    CHECK_FALSE(bool(probe.NSM));
 }
 
 TEST_CASE("BDF PROD roundtrip test", "[bdf_prod]") {
@@ -292,9 +292,9 @@ TEST_CASE("BDF PROD roundtrip test (A only)", "[bdf_prod]") {
         CHECK(long(probe_l.PID) == 17);
         CHECK(long(probe_l.MID) == 23);
         CHECK(double(probe_l.A) == 42.6);
-        CHECK_FALSE(probe_l.J);
+        CHECK_FALSE(bool(probe_l.J));
         CHECK(double(probe_l.C) == 0.);
-        CHECK_FALSE(probe_l.NSM);
+        CHECK_FALSE(bool(probe_l.NSM));
     }
 }
 
@@ -331,9 +331,9 @@ TEST_CASE("BDF PROD roundtrip test (A only) (reuse)", "[bdf_prod]") {
         CHECK(long(probe_l.PID) == 17);
         CHECK(long(probe_l.MID) == 23);
         CHECK(double(probe_l.A) == 42.6);
-        CHECK_FALSE(probe_l.J);
+        CHECK_FALSE(bool(probe_l.J));
         CHECK(double(probe_l.C) == 0.);
-        CHECK_FALSE(probe_l.NSM);
+        CHECK_FALSE(bool(probe_l.NSM));
     }
 }
 

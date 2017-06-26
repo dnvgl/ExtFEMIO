@@ -297,7 +297,7 @@ TEST_CASE("BDF PBARL roundtrip test (use default)", "[bdf_pbarl]") {
         CHECK(vector<double>(probe.DIM.begin(), probe.DIM.end()) ==
               vector<double>({1., 2., 3., 4., 5., 6.}));
 
-        CHECK_FALSE(probe.NSM);
+        CHECK_FALSE(bool(probe.NSM));
     }
 }
 
@@ -337,7 +337,7 @@ TEST_CASE("BDF PBARL roundtrip test (use default) (reuse)", "[bdf_pbarl]") {
         CHECK(probe.DIM.size() == 6);
         CHECK(vector<double>(probe.DIM.begin(), probe.DIM.end()) ==
               vector<double>({1., 2., 3., 4., 5., 6.}));
-        CHECK_FALSE(probe.NSM);
+        CHECK_FALSE(bool(probe.NSM));
     }
 }
 

@@ -74,13 +74,13 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format) mat1 with missing entries",
         CHECK((double)probe.G == 8e4);
         CHECK((double)probe.NU == .3);
         CHECK((double)probe.RHO == 7.85e-6);
-        CHECK_FALSE(probe.A);
-        CHECK_FALSE(probe.TREF);
-        CHECK_FALSE(probe.GE);
-        CHECK_FALSE(probe.ST);
-        CHECK_FALSE(probe.SC);
-        CHECK_FALSE(probe.SS);
-        CHECK_FALSE(probe.MCSID);
+        CHECK_FALSE(bool(probe.A));
+        CHECK_FALSE(bool(probe.TREF));
+        CHECK_FALSE(bool(probe.GE));
+        CHECK_FALSE(bool(probe.ST));
+        CHECK_FALSE(bool(probe.SC));
+        CHECK_FALSE(bool(probe.SS));
+        CHECK_FALSE(bool(probe.MCSID));
     }
 }
 
@@ -97,14 +97,14 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format) mat1 default values 1",
         CHECK((double)probe.E == 2.070e5);
         CHECK((double)probe.G == 0.);
         CHECK((double)probe.NU == 0.);
-        CHECK_FALSE(probe.RHO);
-        CHECK_FALSE(probe.A);
-        CHECK_FALSE(probe.TREF);
-        CHECK_FALSE(probe.GE);
-        CHECK_FALSE(probe.ST);
-        CHECK_FALSE(probe.SC);
-        CHECK_FALSE(probe.SS);
-        CHECK_FALSE(probe.MCSID);
+        CHECK_FALSE(bool(probe.RHO));
+        CHECK_FALSE(bool(probe.A));
+        CHECK_FALSE(bool(probe.TREF));
+        CHECK_FALSE(bool(probe.GE));
+        CHECK_FALSE(bool(probe.ST));
+        CHECK_FALSE(bool(probe.SC));
+        CHECK_FALSE(bool(probe.SS));
+        CHECK_FALSE(bool(probe.MCSID));
     }
 }
 
@@ -121,14 +121,14 @@ TEST_CASE("BDF MAT1 definitions.  mat1 default values 2",
         CHECK((double)probe.E == 2.070e5);
         CHECK((double)probe.G == 8e4);
         CHECK((double)probe.NU == Approx(0.29375));
-        CHECK_FALSE(probe.RHO);
-        CHECK_FALSE(probe.A);
-        CHECK_FALSE(probe.TREF);
-        CHECK_FALSE(probe.GE);
-        CHECK_FALSE(probe.ST);
-        CHECK_FALSE(probe.SC);
-        CHECK_FALSE(probe.SS);
-        CHECK_FALSE(probe.MCSID);
+        CHECK_FALSE(bool(probe.RHO));
+        CHECK_FALSE(bool(probe.A));
+        CHECK_FALSE(bool(probe.TREF));
+        CHECK_FALSE(bool(probe.GE));
+        CHECK_FALSE(bool(probe.ST));
+        CHECK_FALSE(bool(probe.SC));
+        CHECK_FALSE(bool(probe.SS));
+        CHECK_FALSE(bool(probe.MCSID));
     }
 
 }
@@ -146,14 +146,14 @@ TEST_CASE("BDF MAT1 definitions. mat1 default values 3",
         CHECK((double)probe.E == 2.070e5);
         CHECK((double)probe.G == Approx(79615.));
         CHECK((double)probe.NU == 0.3);
-        CHECK_FALSE(probe.RHO);
-        CHECK_FALSE(probe.A);
-        CHECK_FALSE(probe.TREF);
-        CHECK_FALSE(probe.GE);
-        CHECK_FALSE(probe.ST);
-        CHECK_FALSE(probe.SC);
-        CHECK_FALSE(probe.SS);
-        CHECK_FALSE(probe.MCSID);
+        CHECK_FALSE(bool(probe.RHO));
+        CHECK_FALSE(bool(probe.A));
+        CHECK_FALSE(bool(probe.TREF));
+        CHECK_FALSE(bool(probe.GE));
+        CHECK_FALSE(bool(probe.ST));
+        CHECK_FALSE(bool(probe.SC));
+        CHECK_FALSE(bool(probe.SS));
+        CHECK_FALSE(bool(probe.MCSID));
     }
 }
 
@@ -200,13 +200,13 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format) mat1 with missing entries (
         CHECK((double)probe.G == 8e4);
         CHECK((double)probe.NU == .3);
         CHECK((double)probe.RHO == 7.85e-6);
-        CHECK_FALSE(probe.A);
-        CHECK_FALSE(probe.TREF);
-        CHECK_FALSE(probe.GE);
-        CHECK_FALSE(probe.ST);
-        CHECK_FALSE(probe.SC);
-        CHECK_FALSE(probe.SS);
-        CHECK_FALSE(probe.MCSID);
+        CHECK_FALSE(bool(probe.A));
+        CHECK_FALSE(bool(probe.TREF));
+        CHECK_FALSE(bool(probe.GE));
+        CHECK_FALSE(bool(probe.ST));
+        CHECK_FALSE(bool(probe.SC));
+        CHECK_FALSE(bool(probe.SS));
+        CHECK_FALSE(bool(probe.MCSID));
     }
 }
 
@@ -285,17 +285,17 @@ TEST_CASE("BDF MAT1 roundtrio test (min data).", "[bdf_mat1_roundtrip_2_reuse]")
         probe_l(lines);
 
         CHECK(probe_l.MID.value == 17);
-        CHECK_FALSE(probe_l.MCSID);
+        CHECK_FALSE(bool(probe_l.MCSID));
         CHECK(probe_l.E.value == 30000000.);
         CHECK(probe_l.G.value == 0.);
         CHECK(probe_l.NU.value == 0.);
         CHECK(probe_l.RHO.value == 4.28);
         CHECK(probe_l.A.value == 6.5e-6);
-        CHECK_FALSE(probe_l.TREF);
+        CHECK_FALSE(bool(probe_l.TREF));
         CHECK(probe_l.GE.value == .23);
-        CHECK_FALSE(probe_l.ST);
-        CHECK_FALSE(probe_l.SC);
-        CHECK_FALSE(probe_l.SS);
+        CHECK_FALSE(bool(probe_l.ST));
+        CHECK_FALSE(bool(probe_l.SC));
+        CHECK_FALSE(bool(probe_l.SS));
     }
 }
 

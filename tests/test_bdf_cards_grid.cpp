@@ -48,11 +48,11 @@ TEST_CASE("BDF GRID definitions. (default values)",
 
     SECTION("first grid") {
         CHECK(long(probe.ID) == 1);
-        CHECK_FALSE(probe.CP);
+        CHECK_FALSE(bool(probe.CP));
         CHECK(double(probe.X1) == 0.);
         CHECK(double(probe.X2) == 0.);
         CHECK(double(probe.X3) == 0.);
-        CHECK_FALSE(probe.CD);
+        CHECK_FALSE(bool(probe.CD));
         CHECK(probe.PS.value == ps_ref);
         CHECK(long(probe.SEID) == 0);
     }
@@ -71,11 +71,11 @@ TEST_CASE("BDF GRID definitions. (default values 2)",
 
     SECTION("first grid") {
         CHECK(long(probe.ID) == 1);
-        CHECK_FALSE(probe.CP);
+        CHECK_FALSE(bool(probe.CP));
         CHECK(double(probe.X1) == 0.);
         CHECK(double(probe.X2) == 0.);
         CHECK(double(probe.X3) == 0.);
-        CHECK_FALSE(probe.CD);
+        CHECK_FALSE(bool(probe.CD));
         CHECK(probe.PS == ps_ref);
         CHECK(long(probe.SEID) == 0);
     }
@@ -280,7 +280,7 @@ TEST_CASE("FEMIO-43: BDF import failed") {
         grid probe(lines);
 
         CHECK((long)probe.ID == 1);
-        CHECK_FALSE(probe.CP);
+        CHECK_FALSE(bool(probe.CP));
         CHECK((double)probe.X1 == -9550.);
         CHECK((double)probe.X2 == 0.);
         CHECK((double)probe.X3 == 5700.);
@@ -408,7 +408,7 @@ TEST_CASE("BDF GRID types roundtrip test 2.", "[bdf_grid]") {
         CHECK(probe_l.X1.value == 1.);
         CHECK(probe_l.X2.value == -2.);
         CHECK(probe_l.X3.value == 3.);
-        CHECK_FALSE(probe_l.CD);
+        CHECK_FALSE(bool(probe_l.CD));
         CHECK(probe_l.PS.value == vector<int>({3, 1, 6}));
         CHECK(probe_l.SEID.value == 0);
     }
@@ -449,7 +449,7 @@ TEST_CASE("BDF GRID types roundtrip test 2 (reuse).", "[bdf_grid]") {
         CHECK(probe_l.X1.value == 1.);
         CHECK(probe_l.X2.value == -2.);
         CHECK(probe_l.X3.value == 3.);
-        CHECK_FALSE(probe_l.CD);
+        CHECK_FALSE(bool(probe_l.CD));
         CHECK(probe_l.PS.value == vector<int>({3, 1, 6}));
         CHECK(probe_l.SEID.value == 0);
     }
@@ -482,7 +482,7 @@ TEST_CASE("BDF GRID types roundtrip test 3.", "[bdf_grid]") {
         CHECK(probe_l.X1.value == 3.);
         CHECK(probe_l.X2.value == 4.);
         CHECK(probe_l.X3.value == 5.);
-        CHECK_FALSE(probe_l.CD);
+        CHECK_FALSE(bool(probe_l.CD));
         CHECK(probe_l.PS.value == vector<int>({}));
         CHECK(probe_l.SEID.value == 0);
     }
@@ -517,7 +517,7 @@ TEST_CASE("BDF GRID types roundtrip test 3 (reuse).", "[bdf_grid_reuse]") {
         CHECK(probe_l.X1.value == 3.);
         CHECK(probe_l.X2.value == 4.);
         CHECK(probe_l.X3.value == 5.);
-        CHECK_FALSE(probe_l.CD);
+        CHECK_FALSE(bool(probe_l.CD));
         CHECK(probe_l.PS.value == vector<int>({}));
         CHECK(probe_l.SEID.value == 0);
     }
@@ -555,7 +555,7 @@ TEST_CASE("BDF GRID types roundtrip test 4.", "[bdf_grid]") {
         CHECK(probe_l.X1.value == 1.);
         CHECK(probe_l.X2.value == -2.);
         CHECK(probe_l.X3.value == 3.);
-        CHECK_FALSE(probe_l.CD);
+        CHECK_FALSE(bool(probe_l.CD));
         CHECK(probe_l.PS.value == vector<int>({3, 1, 6}));
         CHECK(probe_l.SEID.value == 0);
     }
@@ -595,7 +595,7 @@ TEST_CASE("BDF GRID types roundtrip test 4 (reuse).", "[bdf_grid]") {
         CHECK(probe_l.X1.value == 1.);
         CHECK(probe_l.X2.value == -2.);
         CHECK(probe_l.X3.value == 3.);
-        CHECK_FALSE(probe_l.CD);
+        CHECK_FALSE(bool(probe_l.CD));
         CHECK(probe_l.PS.value == vector<int>({3, 1, 6}));
         CHECK(probe_l.SEID.value == 0);
     }
@@ -632,7 +632,7 @@ TEST_CASE("BDF GRID types roundtrip test (minimum args).", "[bdf_grid]") {
         CHECK(probe_l.X1.value == 1.);
         CHECK(probe_l.X2.value == -2.);
         CHECK(probe_l.X3.value == 3.);
-        CHECK_FALSE(probe_l.CD);
+        CHECK_FALSE(bool(probe_l.CD));
         CHECK(probe_l.PS.value == vector<int>({}));
         CHECK(probe_l.SEID.value == 0);
     }
@@ -672,7 +672,7 @@ TEST_CASE("BDF GRID types roundtrip test (minimum args) (reuse).",
         CHECK(probe_l.X1.value == 1.);
         CHECK(probe_l.X2.value == -2.);
         CHECK(probe_l.X3.value == 3.);
-        CHECK_FALSE(probe_l.CD);
+        CHECK_FALSE(bool(probe_l.CD));
         CHECK(probe_l.PS.value == vector<int>({}));
         CHECK(probe_l.SEID.value == 0);
     }

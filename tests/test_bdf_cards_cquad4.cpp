@@ -53,7 +53,7 @@ TEST_CASE("BDF CQUAD4 definitions. (Small Field Format)", "[bdf_cquad4]") {
         CHECK((long)probe.G3.value == 141);
         CHECK((long)probe.G4.value == 17);
         CHECK(probe.choose_mcid_theta == cquad4::CHOOSE_MCID_THETA::has_THETA);
-        CHECK_FALSE(probe.MCID);
+        CHECK_FALSE(bool(probe.MCID));
         CHECK((double)probe.THETA == 0.0);
     }
 }
@@ -75,7 +75,7 @@ TEST_CASE("BDF CQUAD4 definitions. (Large Field Format)", "[bdf_cquad4]") {
         CHECK((long)probe.G2 == 200);
         CHECK((long)probe.G3 == 141);
         CHECK((long)probe.G4 == 17);
-        CHECK_FALSE(probe.MCID);
+        CHECK_FALSE(bool(probe.MCID));
         CHECK((double)probe.THETA == 0.0);
     }
 }

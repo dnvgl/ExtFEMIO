@@ -50,7 +50,7 @@ TEST_CASE("BDF CMASS2 definitions. (Small Field Format)", "[bdf_cmass2]" ) {
         CHECK((double)probe.M == 3.);
         CHECK((long)probe.G1 == 32);
         CHECK(probe.C1 == std::vector<int>(1, 8));
-        CHECK_FALSE(probe.G2);
+        CHECK_FALSE(bool(probe.G2));
         CHECK(probe.C2 == std::vector<int>());
     }
 
@@ -80,7 +80,7 @@ TEST_CASE("BDF CMASS2 definitions. (Small Field Format)", "[bdf_cmass2]" ) {
 
         CHECK((long)probe.EID == 1);
         CHECK((double)probe.M == 3.);
-        CHECK_FALSE(probe.G1);
+        CHECK_FALSE(bool(probe.G1));
         CHECK(probe.C1 == std::vector<int>());
         CHECK((long)probe.G2 == 32);
         CHECK(probe.C2 == std::vector<int>({1, 2}));

@@ -968,13 +968,13 @@ TEST_CASE("BDF_Dispatch", "[cards]") {
     CHECK(static_cast<mat1*>(current.get())->G.value == 8e4);
     CHECK(static_cast<mat1*>(current.get())->NU.value == .3);
     CHECK(static_cast<mat1*>(current.get())->RHO.value == 7.85e-6);
-    CHECK_FALSE(static_cast<mat1*>(current.get())->A);
-    CHECK_FALSE(static_cast<mat1*>(current.get())->TREF);
-    CHECK_FALSE(static_cast<mat1*>(current.get())->GE);
-    CHECK_FALSE(static_cast<mat1*>(current.get())->ST);
-    CHECK_FALSE(static_cast<mat1*>(current.get())->SC);
-    CHECK_FALSE(static_cast<mat1*>(current.get())->SS);
-    CHECK_FALSE(static_cast<mat1*>(current.get())->MCSID);
+    CHECK_FALSE(bool(static_cast<mat1*>(current.get())->A));
+    CHECK_FALSE(bool(static_cast<mat1*>(current.get())->TREF));
+    CHECK_FALSE(bool(static_cast<mat1*>(current.get())->GE));
+    CHECK_FALSE(bool(static_cast<mat1*>(current.get())->ST));
+    CHECK_FALSE(bool(static_cast<mat1*>(current.get())->SC));
+    CHECK_FALSE(bool(static_cast<mat1*>(current.get())->SS));
+    CHECK_FALSE(bool(static_cast<mat1*>(current.get())->MCSID));
     current.reset();
 
     probe.get(l);
@@ -996,13 +996,13 @@ TEST_CASE("BDF_Dispatch", "[cards]") {
     CHECK(static_cast<mat1*>(current.get())->G.value == 8e4);
     CHECK(static_cast<mat1*>(current.get())->NU.value == .3);
     CHECK(static_cast<mat1*>(current.get())->RHO.value == 7.85e-6);
-    CHECK_FALSE(static_cast<mat1*>(current.get())->A);
-    CHECK_FALSE(static_cast<mat1*>(current.get())->TREF);
-    CHECK_FALSE(static_cast<mat1*>(current.get())->GE);
-    CHECK_FALSE(static_cast<mat1*>(current.get())->ST);
-    CHECK_FALSE(static_cast<mat1*>(current.get())->SC);
-    CHECK_FALSE(static_cast<mat1*>(current.get())->SS);
-    CHECK_FALSE(static_cast<mat1*>(current.get())->MCSID);
+    CHECK_FALSE(bool(static_cast<mat1*>(current.get())->A));
+    CHECK_FALSE(bool(static_cast<mat1*>(current.get())->TREF));
+    CHECK_FALSE(bool(static_cast<mat1*>(current.get())->GE));
+    CHECK_FALSE(bool(static_cast<mat1*>(current.get())->ST));
+    CHECK_FALSE(bool(static_cast<mat1*>(current.get())->SC));
+    CHECK_FALSE(bool(static_cast<mat1*>(current.get())->SS));
+    CHECK_FALSE(bool(static_cast<mat1*>(current.get())->MCSID));
     current.reset();
 
     probe.get(l);
@@ -1060,9 +1060,9 @@ TEST_CASE("BDF_Dispatch", "[cards]") {
     CHECK(static_cast<prod*>(current.get())->PID.value == 6000001);
     CHECK(static_cast<prod*>(current.get())->MID.value == 1);
     CHECK(static_cast<prod*>(current.get())->A.value == 3000);
-    CHECK_FALSE(static_cast<prod*>(current.get())->J);
+    CHECK_FALSE(bool(static_cast<prod*>(current.get())->J));
     CHECK(static_cast<prod*>(current.get())->C.value == 0.);
-    CHECK_FALSE(static_cast<prod*>(current.get())->NSM);
+    CHECK_FALSE(bool(static_cast<prod*>(current.get())->NSM));
     current.reset();
 
     probe.get(l);

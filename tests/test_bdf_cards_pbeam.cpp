@@ -219,17 +219,17 @@ TEST_CASE("BDF PBEAM definitions (Tapered Beam).", "[bdf_pbeam]") {
     CHECK(double(probe.S1) == 1.1);
     CHECK(double(probe.S2) == 0.);
     CHECK(double(probe.NSI_A) == 2.1);
-    CHECK_FALSE(probe.NSI_B);
+    CHECK_FALSE(bool(probe.NSI_B));
     CHECK(double(probe.CW_A) == 0.21);
-    CHECK_FALSE(probe.CW_B);
+    CHECK_FALSE(bool(probe.CW_B));
     CHECK(double(probe.M1_A) == 0.);
     CHECK(double(probe.M2_A) == 0.);
-    CHECK_FALSE(probe.M1_B);
-    CHECK_FALSE(probe.M2_B);
+    CHECK_FALSE(bool(probe.M1_B));
+    CHECK_FALSE(bool(probe.M2_B));
     CHECK(double(probe.N1_A) == 0.5);
     CHECK(double(probe.N2_A) == 0.);
     CHECK(double(probe.N1_B) == 0.0);
-    CHECK_FALSE(probe.N2_B);
+    CHECK_FALSE(bool(probe.N2_B));
 }
 
 TEST_CASE("BDF PBEAM roundtrip test", "[bdf_pbeam]") {
@@ -697,22 +697,22 @@ TEST_CASE("BDF PBEAM roundtrip test (minimal)", "[bdf_pbeam]") {
         CHECK(probe.F2.size() == 0);
         CHECK(probe.SO.size() == 0);
         CHECK(probe.X_XB.size() == 0);
-        CHECK_FALSE(probe.K1);
-        CHECK_FALSE(probe.K2);
-        CHECK_FALSE(probe.S1);
-        CHECK_FALSE(probe.S2);
-        CHECK_FALSE(probe.NSI_A);
-        CHECK_FALSE(probe.NSI_B);
-        CHECK_FALSE(probe.CW_A);
-        CHECK_FALSE(probe.CW_B);
-        CHECK_FALSE(probe.M1_A);
-        CHECK_FALSE(probe.M2_A);
-        CHECK_FALSE(probe.M1_B);
-        CHECK_FALSE(probe.M2_B);
-        CHECK_FALSE(probe.N1_A);
-        CHECK_FALSE(probe.N2_A);
-        CHECK_FALSE(probe.N1_B);
-        CHECK_FALSE(probe.N2_B);
+        CHECK_FALSE(bool(probe.K1));
+        CHECK_FALSE(bool(probe.K2));
+        CHECK_FALSE(bool(probe.S1));
+        CHECK_FALSE(bool(probe.S2));
+        CHECK_FALSE(bool(probe.NSI_A));
+        CHECK_FALSE(bool(probe.NSI_B));
+        CHECK_FALSE(bool(probe.CW_A));
+        CHECK_FALSE(bool(probe.CW_B));
+        CHECK_FALSE(bool(probe.M1_A));
+        CHECK_FALSE(bool(probe.M2_A));
+        CHECK_FALSE(bool(probe.M1_B));
+        CHECK_FALSE(bool(probe.M2_B));
+        CHECK_FALSE(bool(probe.N1_A));
+        CHECK_FALSE(bool(probe.N2_A));
+        CHECK_FALSE(bool(probe.N1_B));
+        CHECK_FALSE(bool(probe.N2_B));
     }
 }
 
@@ -766,22 +766,22 @@ TEST_CASE("BDF PBEAM roundtrip test (minimal) (reuse)", "[bdf_pbeam]") {
         CHECK(probe.F2.size() == 0);
         CHECK(probe.SO.size() == 0);
         CHECK(probe.X_XB.size() == 0);
-        CHECK_FALSE(probe.K1);
-        CHECK_FALSE(probe.K2);
-        CHECK_FALSE(probe.S1);
-        CHECK_FALSE(probe.S2);
-        CHECK_FALSE(probe.NSI_A);
-        CHECK_FALSE(probe.NSI_B);
-        CHECK_FALSE(probe.CW_A);
-        CHECK_FALSE(probe.CW_B);
-        CHECK_FALSE(probe.M1_A);
-        CHECK_FALSE(probe.M2_A);
-        CHECK_FALSE(probe.M1_B);
-        CHECK_FALSE(probe.M2_B);
-        CHECK_FALSE(probe.N1_A);
-        CHECK_FALSE(probe.N2_A);
-        CHECK_FALSE(probe.N1_B);
-        CHECK_FALSE(probe.N2_B);
+        CHECK_FALSE(bool(probe.K1));
+        CHECK_FALSE(bool(probe.K2));
+        CHECK_FALSE(bool(probe.S1));
+        CHECK_FALSE(bool(probe.S2));
+        CHECK_FALSE(bool(probe.NSI_A));
+        CHECK_FALSE(bool(probe.NSI_B));
+        CHECK_FALSE(bool(probe.CW_A));
+        CHECK_FALSE(bool(probe.CW_B));
+        CHECK_FALSE(bool(probe.M1_A));
+        CHECK_FALSE(bool(probe.M2_A));
+        CHECK_FALSE(bool(probe.M1_B));
+        CHECK_FALSE(bool(probe.M2_B));
+        CHECK_FALSE(bool(probe.N1_A));
+        CHECK_FALSE(bool(probe.N2_A));
+        CHECK_FALSE(bool(probe.N1_B));
+        CHECK_FALSE(bool(probe.N2_B));
     }
 }
 

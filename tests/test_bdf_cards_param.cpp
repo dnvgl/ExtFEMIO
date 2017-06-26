@@ -48,9 +48,9 @@ TEST_CASE("BDF PARAM definitions. (Small Field Format)",
         param probe(lines);
         CHECK(probe.N == "IRES");
         CHECK(probe.IVAL.value == 1);
-        CHECK_FALSE(probe.RVAL);
-        CHECK_FALSE(probe.CVAL);
-        CHECK_FALSE(probe.CPLXVAL);
+        CHECK_FALSE(bool(probe.RVAL));
+        CHECK_FALSE(bool(probe.CVAL));
+        CHECK_FALSE(bool(probe.CPLXVAL));
     }
 
     SECTION("param read real") {
@@ -62,10 +62,10 @@ TEST_CASE("BDF PARAM definitions. (Small Field Format)",
         __base::card::card_split(data, lines);
         param probe(lines);
         CHECK(probe.N == "ADPCON");
-        CHECK_FALSE(probe.IVAL);
+        CHECK_FALSE(bool(probe.IVAL));
         CHECK(probe.RVAL.value == 1.);
-        CHECK_FALSE(probe.CVAL);
-        CHECK_FALSE(probe.CPLXVAL);
+        CHECK_FALSE(bool(probe.CVAL));
+        CHECK_FALSE(bool(probe.CPLXVAL));
     }
 
     SECTION("param read char") {
@@ -77,10 +77,10 @@ TEST_CASE("BDF PARAM definitions. (Small Field Format)",
         __base::card::card_split(data, lines);
         param probe(lines);
         CHECK(probe.N == "ACOUT");
-        CHECK_FALSE(probe.IVAL);
-        CHECK_FALSE(probe.RVAL);
+        CHECK_FALSE(bool(probe.IVAL));
+        CHECK_FALSE(bool(probe.RVAL));
         CHECK(probe.CVAL.value == "PEAK");
-        CHECK_FALSE(probe.CPLXVAL);
+        CHECK_FALSE(bool(probe.CPLXVAL));
     }
 
     SECTION("param read complex") {
@@ -92,9 +92,9 @@ TEST_CASE("BDF PARAM definitions. (Small Field Format)",
         __base::card::card_split(data, lines);
         param probe(lines);
         CHECK(probe.N == "CP1");
-        CHECK_FALSE(probe.IVAL);
-        CHECK_FALSE(probe.RVAL);
-        CHECK_FALSE(probe.CVAL);
+        CHECK_FALSE(bool(probe.IVAL));
+        CHECK_FALSE(bool(probe.RVAL));
+        CHECK_FALSE(bool(probe.CVAL));
         CHECK(probe.CPLXVAL.value == std::complex<double>(2., 3.));
     }
 }

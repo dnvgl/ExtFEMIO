@@ -92,7 +92,7 @@ add_executable(test_bdf_cards
   test_bdf_cards_cbeam.cpp
   test_bdf_cards_cquad4.cpp
   test_bdf_cards_crod.cpp
-#  test_bdf_cards_celas1.cpp
+  # test_bdf_cards_celas1.cpp
   test_bdf_cards_ctria3.cpp
   test_bdf_cards_enddata.cpp
   test_bdf_cards_cmass2.cpp
@@ -105,7 +105,7 @@ add_executable(test_bdf_cards
   test_bdf_cards_pbarl.cpp
   test_bdf_cards_pbeam.cpp
   test_bdf_cards_pbeaml.cpp
-#  test_bdf_cards_pelas.cpp
+  # test_bdf_cards_pelas.cpp
   test_bdf_cards_prod.cpp
   test_bdf_cards_pshell.cpp
   test_bdf_cards_force.cpp

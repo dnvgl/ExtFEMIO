@@ -50,10 +50,10 @@ TEST_CASE("BDF CBEAM definitions. (Small Field Format)", "[bdf_cbeam]") {
         CHECK(double(probe.X1) == 0.);
         CHECK(double(probe.X2) == 66.5206);
         CHECK(double(probe.X3) == 997.785);
-        CHECK_FALSE(probe.G0);
+        CHECK_FALSE(bool(probe.G0));
         CHECK(probe.choose_dir_code == cbeam::CHOOSE_DIR_CODE::has_DVEC);
         CHECK(double(probe.BIT) == 2.);
-        CHECK_FALSE(probe.OFFT);
+        CHECK_FALSE(bool(probe.OFFT));
         CHECK(probe.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_BIT);
         std::vector<int> p_ref;
         CHECK(probe.PA.value == p_ref);
@@ -64,8 +64,8 @@ TEST_CASE("BDF CBEAM definitions. (Small Field Format)", "[bdf_cbeam]") {
         CHECK(double(probe.W1B) == 0.);
         CHECK(double(probe.W2B) == -22.617);
         CHECK(double(probe.W3B) == 0.);
-        CHECK_FALSE(probe.SA);
-        CHECK_FALSE(probe.SB);
+        CHECK_FALSE(bool(probe.SA));
+        CHECK_FALSE(bool(probe.SB));
     }
 }
 
@@ -86,13 +86,13 @@ TEST_CASE("BDF CBEAM definitions (OFFT default). (Small Field Format)", "[bdf_cb
         CHECK(long(probe.PID) == 103023);
         CHECK(long(probe.GA) == 7);
         CHECK(long(probe.GB) == 9);
-        CHECK_FALSE(bool(probe.G0) );
+        CHECK_FALSE(bool(probe.G0));
         CHECK(double(probe.X1) == 0.);
         CHECK(double(probe.X2) == 1000.);
         CHECK(double(probe.X3) == 0.);
         CHECK(probe.choose_dir_code == cbeam::CHOOSE_DIR_CODE::has_DVEC);
         CHECK(std::string(probe.OFFT) == "GGG");
-        CHECK_FALSE(bool(probe.BIT) );
+        CHECK_FALSE(bool(probe.BIT));
         CHECK(probe.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_OFFT);
         std::vector<int> p_ref;
         CHECK(probe.PA == p_ref);
@@ -103,8 +103,8 @@ TEST_CASE("BDF CBEAM definitions (OFFT default). (Small Field Format)", "[bdf_cb
         CHECK(double(probe.W1B) == 0.);
         CHECK(double(probe.W2B) == -240.);
         CHECK(double(probe.W3B) == 0.);
-        CHECK_FALSE(bool(probe.SA) );
-        CHECK_FALSE(bool(probe.SB) );
+        CHECK_FALSE(bool(probe.SA));
+        CHECK_FALSE(bool(probe.SB));
     }
 }
 
@@ -123,12 +123,12 @@ TEST_CASE("BDF CBEAM definitions. (Small Field Format), dircode",
         CHECK(long(probe.GA) == 76);
         CHECK(long(probe.GB) == 153);
         CHECK(long(probe.G0) == 13);
-        CHECK_FALSE(bool(probe.X1) );
-        CHECK_FALSE(bool(probe.X2) );
-        CHECK_FALSE(bool(probe.X3) );
+        CHECK_FALSE(bool(probe.X1));
+        CHECK_FALSE(bool(probe.X2));
+        CHECK_FALSE(bool(probe.X3));
         CHECK(probe.choose_dir_code == cbeam::CHOOSE_DIR_CODE::has_DCODE);
         CHECK(std::string(probe.OFFT) == "GOO");
-        CHECK_FALSE(probe.BIT);
+        CHECK_FALSE(bool(probe.BIT));
         CHECK(probe.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_OFFT);
         std::vector<int> p_ref;
         CHECK(probe.PA == p_ref);
@@ -139,8 +139,8 @@ TEST_CASE("BDF CBEAM definitions. (Small Field Format), dircode",
         CHECK(double(probe.W1B) == 0.);
         CHECK(double(probe.W2B) == 22.617);
         CHECK(double(probe.W3B) == 0.);
-        CHECK_FALSE(bool(probe.SA) );
-        CHECK_FALSE(bool(probe.SB) );
+        CHECK_FALSE(bool(probe.SA));
+        CHECK_FALSE(bool(probe.SB));
     }
 }
 
@@ -160,9 +160,9 @@ TEST_CASE("BDF CBEAM definitions (OFFT default). (Small Field Format), dircode",
         CHECK(long(probe.GA) == 76);
         CHECK(long(probe.GB) == 153);
         CHECK(long(probe.G0) == 13);
-        CHECK_FALSE(bool(probe.X1) );
-        CHECK_FALSE(bool(probe.X2) );
-        CHECK_FALSE(bool(probe.X3) );
+        CHECK_FALSE(bool(probe.X1));
+        CHECK_FALSE(bool(probe.X2));
+        CHECK_FALSE(bool(probe.X3));
         CHECK(probe.choose_dir_code == cbeam::CHOOSE_DIR_CODE::has_DCODE);
         CHECK(std::string(probe.OFFT) == "GGG");
         CHECK_FALSE(bool(probe.BIT) );
@@ -176,8 +176,8 @@ TEST_CASE("BDF CBEAM definitions (OFFT default). (Small Field Format), dircode",
         CHECK(double(probe.W1B) == 0.);
         CHECK(double(probe.W2B) == 22.617);
         CHECK(double(probe.W3B) == 0.);
-        CHECK_FALSE(probe.SA);
-        CHECK_FALSE(probe.SB);
+        CHECK_FALSE(bool(probe.SA));
+        CHECK_FALSE(bool(probe.SB));
     }
 }
 
@@ -228,7 +228,7 @@ TEST_CASE("BDF CBEAM roundtrip test (DCODE, OFFT)", "[bdf_cbeam]") {
         CHECK_FALSE(bool(probe_l.X3));
         CHECK(probe_l.choose_dir_code == cbeam::CHOOSE_DIR_CODE::has_DCODE);
         CHECK(std::string(probe_l.OFFT) == "GGG");
-        CHECK_FALSE(probe_l.BIT);
+        CHECK_FALSE(bool(probe_l.BIT));
         CHECK(probe_l.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_OFFT);
         std::vector<int> p_refA{1, 2};
         CHECK(probe_l.PA == p_refA);
@@ -294,7 +294,7 @@ TEST_CASE("BDF CBEAM roundtrip test (DCODE, OFFT) (reuse)", "[bdf_cbeam]") {
         CHECK_FALSE(bool(probe_l.X3));
         CHECK(probe_l.choose_dir_code == cbeam::CHOOSE_DIR_CODE::has_DCODE);
         CHECK(std::string(probe_l.OFFT) == "GGG");
-        CHECK_FALSE(probe_l.BIT);
+        CHECK_FALSE(bool(probe_l.BIT));
         CHECK(probe_l.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_OFFT);
         std::vector<int> p_refA{1, 2};
         CHECK(probe_l.PA == p_refA);
@@ -358,7 +358,7 @@ TEST_CASE("BDF CBEAM roundtrip test (DCODE, BIT)", "[bdf_cbeam]") {
         CHECK_FALSE(bool(probe_l.X3));
         CHECK(probe_l.choose_dir_code == cbeam::CHOOSE_DIR_CODE::has_DCODE);
         CHECK(double(probe_l.BIT) == .72);
-        CHECK_FALSE(probe_l.OFFT);
+        CHECK_FALSE(bool(probe_l.OFFT));
         CHECK(probe_l.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_BIT);
         std::vector<int> p_refA{1, 2};
         CHECK(probe_l.PA == p_refA);
@@ -424,7 +424,7 @@ TEST_CASE("BDF CBEAM roundtrip test (DCODE, BIT) (reuse)", "[bdf_cbeam]") {
         CHECK_FALSE(bool(probe_l.X3));
         CHECK(probe_l.choose_dir_code == cbeam::CHOOSE_DIR_CODE::has_DCODE);
         CHECK(double(probe_l.BIT) == .72);
-        CHECK_FALSE(probe_l.OFFT);
+        CHECK_FALSE(bool(probe_l.OFFT));
         CHECK(probe_l.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_BIT);
         std::vector<int> p_refA{1, 2};
         CHECK(probe_l.PA == p_refA);
@@ -490,7 +490,7 @@ TEST_CASE("BDF CBEAM roundtrip test (DVEC, OFFT)", "[bdf_cbeam]") {
         CHECK(double(probe_l.X3) == 333.);
         CHECK(probe_l.choose_dir_code == cbeam::CHOOSE_DIR_CODE::has_DVEC);
         CHECK(std::string(probe_l.OFFT) == "GGG");
-        CHECK_FALSE(probe_l.BIT);
+        CHECK_FALSE(bool(probe_l.BIT));
         CHECK(probe_l.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_OFFT);
         std::vector<int> p_refA{1, 2};
         CHECK(probe_l.PA == p_refA);
@@ -557,7 +557,7 @@ TEST_CASE("BDF CBEAM roundtrip test (DVEC, OFFT) (reuse)", "[bdf_cbeam]") {
         CHECK(double(probe_l.X3) == 333.);
         CHECK(probe_l.choose_dir_code == cbeam::CHOOSE_DIR_CODE::has_DVEC);
         CHECK(std::string(probe_l.OFFT) == "GGG");
-        CHECK_FALSE(probe_l.BIT);
+        CHECK_FALSE(bool(probe_l.BIT));
         CHECK(probe_l.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_OFFT);
         std::vector<int> p_refA{1, 2};
         CHECK(probe_l.PA == p_refA);
@@ -622,7 +622,7 @@ TEST_CASE("BDF CBEAM roundtrip test (DVEC, BIT)", "[bdf_cbeam]") {
         CHECK(double(probe_l.X3) == 333.);
         CHECK(probe_l.choose_dir_code == cbeam::CHOOSE_DIR_CODE::has_DVEC);
         CHECK(double(probe_l.BIT) == .72);
-        CHECK_FALSE(probe_l.OFFT);
+        CHECK_FALSE(bool(probe_l.OFFT));
         CHECK(probe_l.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_BIT);
         std::vector<int> p_refA{1, 2};
         CHECK(probe_l.PA == p_refA);
@@ -689,7 +689,7 @@ TEST_CASE("BDF CBEAM roundtrip test (DVEC, BIT) (reuse)", "[bdf_cbeam]") {
         CHECK(double(probe_l.X3) == 333.);
         CHECK(probe_l.choose_dir_code == cbeam::CHOOSE_DIR_CODE::has_DVEC);
         CHECK(double(probe_l.BIT) == .72);
-        CHECK_FALSE(probe_l.OFFT);
+        CHECK_FALSE(bool(probe_l.OFFT));
         CHECK(probe_l.choose_offt_bit == cbeam::CHOOSE_OFFT_BIT::has_BIT);
         std::vector<int> p_refA{1, 2};
         CHECK(probe_l.PA == p_refA);

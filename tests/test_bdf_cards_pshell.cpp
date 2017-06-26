@@ -88,7 +88,7 @@ TEST_CASE("BDF PSHELL definitions (Large Field Format).", "[bdf_pshell]") {
         CHECK(long(probe.MID1) == 4);
         CHECK(double(probe.T) == 23.);
         CHECK(long(probe.MID2) == 4);
-        CHECK_FALSE(probe.x12I_T__3);
+        CHECK_FALSE(bool(probe.x12I_T__3));
         CHECK(long(probe.MID3) == 4);
     }
 }
@@ -109,7 +109,7 @@ TEST_CASE("BDF PSHELL definitions (reuse) (Large Field Format).", "[bdf_pshell]"
         CHECK(long(probe.MID1) == 4);
         CHECK(double(probe.T) == 23.);
         CHECK(long(probe.MID2) == 4);
-        CHECK_FALSE(probe.x12I_T__3);
+        CHECK_FALSE(bool(probe.x12I_T__3));
         CHECK(long(probe.MID3) == 4);
     }
 }
@@ -127,7 +127,7 @@ TEST_CASE("BDF PSHELL definitions (Free Field Format).", "[bdf_pshell]") {
         CHECK(long(probe.MID1) == 4);
         CHECK(double(probe.T) == 23.);
         CHECK(long(probe.MID2) == 4);
-        CHECK_FALSE(probe.x12I_T__3);
+        CHECK_FALSE(bool(probe.x12I_T__3));
         CHECK(long(probe.MID3) == 4);
     }
 }
@@ -145,7 +145,7 @@ TEST_CASE("BDF PSHELL definitions (reuse) (Free Field Format).", "[bdf_pshell]")
         CHECK(long(probe.MID1) == 4);
         CHECK(double(probe.T) == 23.);
         CHECK(long(probe.MID2) == 4);
-        CHECK_FALSE(probe.x12I_T__3);
+        CHECK_FALSE(bool(probe.x12I_T__3));
         CHECK(long(probe.MID3) == 4);
     }
 }
@@ -217,8 +217,8 @@ TEST_CASE("BDF PSHELL roundtrip test (check default PSE)", "[bdf_pshell]") {
         CHECK(test.str() ==
               "PSHELL         1       65.000+00\n");
         CHECK_FALSE(bool(probe.MID2));
-        CHECK_FALSE(probe.x12I_T__3);
-        CHECK_FALSE(probe.TS_T);
+        CHECK_FALSE(bool(probe.x12I_T__3));
+        CHECK_FALSE(bool(probe.TS_T));
         CHECK_FALSE(bool(probe.MID3));
         CHECK_FALSE(bool(probe.NSM));
         CHECK_FALSE(bool(probe.Z1));
@@ -242,8 +242,8 @@ TEST_CASE("BDF PSHELL roundtrip test (check default PSE)", "[bdf_pshell]") {
         CHECK(long(probe_l.MID1) == 6);
         CHECK(double(probe_l.T) == 5.);
         CHECK_FALSE(bool(probe_l.MID2));
-        CHECK_FALSE(probe_l.x12I_T__3);
-        CHECK_FALSE(probe_l.TS_T);
+        CHECK_FALSE(bool(probe_l.x12I_T__3));
+        CHECK_FALSE(bool(probe_l.TS_T));
         CHECK_FALSE(bool(probe_l.MID3));
         CHECK_FALSE(bool(probe_l.NSM));
         CHECK_FALSE(bool(probe_l.Z1));

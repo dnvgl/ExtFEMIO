@@ -87,8 +87,8 @@ TEST_CASE("BDF PBAR definitions: Small Field Format 1.", "[bdf_pbar]") {
     CHECK((double)probe.E2 == 0.);
     CHECK((double)probe.F1 == 0.);
     CHECK((double)probe.F2 == 0.);
-    CHECK_FALSE(probe.K1);
-    CHECK_FALSE(probe.K2);
+    CHECK_FALSE(bool(probe.K1));
+    CHECK_FALSE(bool(probe.K2));
     CHECK((double)probe.I12 == 0.);
 }
 
@@ -119,8 +119,8 @@ TEST_CASE("BDF PBAR definitions: Small Field Format 2.", "[bdf_pbar]") {
     CHECK((double)probe.E2 == 0.);
     CHECK((double)probe.F1 == 0.);
     CHECK((double)probe.F2 == 0.);
-    CHECK_FALSE(probe.K1);
-    CHECK_FALSE(probe.K2);
+    CHECK_FALSE(bool(probe.K1));
+    CHECK_FALSE(bool(probe.K2));
     CHECK((double)probe.I12 == 0.);
 }
 
@@ -297,19 +297,19 @@ TEST_CASE("BDF PBAR roundtrip test minimal", "[bdf_pbar]") {
         CHECK(double(probe.A) == 1.);
         CHECK(double(probe.I1) == 2.);
         CHECK(double(probe.I2) == 3.);
-        CHECK_FALSE(probe.J);
-        CHECK_FALSE(probe.NSM);
-        CHECK_FALSE(probe.C1);
-        CHECK_FALSE(probe.C2);
-        CHECK_FALSE(probe.D1);
-        CHECK_FALSE(probe.D2);
-        CHECK_FALSE(probe.E1);
-        CHECK_FALSE(probe.E2);
-        CHECK_FALSE(probe.F1);
-        CHECK_FALSE(probe.F2);
-        CHECK_FALSE(probe.K1);
-        CHECK_FALSE(probe.K2);
-        CHECK_FALSE(probe.I12);
+        CHECK_FALSE(bool(probe.J));
+        CHECK_FALSE(bool(probe.NSM));
+        CHECK_FALSE(bool(probe.C1));
+        CHECK_FALSE(bool(probe.C2));
+        CHECK_FALSE(bool(probe.D1));
+        CHECK_FALSE(bool(probe.D2));
+        CHECK_FALSE(bool(probe.E1));
+        CHECK_FALSE(bool(probe.E2));
+        CHECK_FALSE(bool(probe.F1));
+        CHECK_FALSE(bool(probe.F2));
+        CHECK_FALSE(bool(probe.K1));
+        CHECK_FALSE(bool(probe.K2));
+        CHECK_FALSE(bool(probe.I12));
     }
 }
 
@@ -351,19 +351,19 @@ TEST_CASE("BDF PBAR roundtrip test minimal (reuse)", "[bdf_pbar]") {
         CHECK(double(probe.A) == 1.);
         CHECK(double(probe.I1) == 2.);
         CHECK(double(probe.I2) == 3.);
-        CHECK_FALSE(probe.J);
-        CHECK_FALSE(probe.NSM);
-        CHECK_FALSE(probe.C1);
-        CHECK_FALSE(probe.C2);
-        CHECK_FALSE(probe.D1);
-        CHECK_FALSE(probe.D2);
-        CHECK_FALSE(probe.E1);
-        CHECK_FALSE(probe.E2);
-        CHECK_FALSE(probe.F1);
-        CHECK_FALSE(probe.F2);
-        CHECK_FALSE(probe.K1);
-        CHECK_FALSE(probe.K2);
-        CHECK_FALSE(probe.I12);
+        CHECK_FALSE(bool(probe.J));
+        CHECK_FALSE(bool(probe.NSM));
+        CHECK_FALSE(bool(probe.C1));
+        CHECK_FALSE(bool(probe.C2));
+        CHECK_FALSE(bool(probe.D1));
+        CHECK_FALSE(bool(probe.D2));
+        CHECK_FALSE(bool(probe.E1));
+        CHECK_FALSE(bool(probe.E2));
+        CHECK_FALSE(bool(probe.F1));
+        CHECK_FALSE(bool(probe.F2));
+        CHECK_FALSE(bool(probe.K1));
+        CHECK_FALSE(bool(probe.K2));
+        CHECK_FALSE(bool(probe.I12));
     }
 }
 
