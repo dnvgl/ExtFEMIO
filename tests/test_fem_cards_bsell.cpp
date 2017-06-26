@@ -6,6 +6,7 @@
 
    Detailed description
    */
+#include "StdAfx.h"
 
 #include "extfem_misc.h"
 

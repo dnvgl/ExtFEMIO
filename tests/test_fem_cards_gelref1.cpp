@@ -6,6 +6,8 @@
 
    Detailed description
 */
+#include "StdAfx.h"
+
 #include "extfem_misc.h"
 
 // ID:
@@ -209,7 +211,7 @@ TEST_CASE("FEM GELREF1 definitions.", "[fem_gelref1]") {
     }
 }
 
-TEST_CASE("FEMIO-28: Failing to import GELREF1 card from SESAM GeniE FEM file") {
+TEST_CASE("FEMIO-28: Failing to import GELREF1 card from SESAM GeniE FEM file", "[fem_gelref1]") {
 
     vector<std::string> lines;
 

@@ -6,6 +6,8 @@
 
    Detailed description
 */
+#include "StdAfx.h"
+
 #include "extfem_misc.h"
 
 // ID:
@@ -247,7 +249,7 @@ TEST_CASE("BDF GRID definitions. (Free Field Format, continuation line named)",
     }
 }
 
-TEST_CASE("FEMIO-43: BDF import failed") {
+TEST_CASE("FEMIO-43: BDF import failed", "[bdf_cards]") {
 
     vector<int> ps_ref({});
 

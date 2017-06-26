@@ -6,6 +6,7 @@
 
    Detailed description
 */
+#include "StdAfx.h"
 
 #include "extfem_misc.h"
 
@@ -96,7 +97,7 @@ TEST_CASE("FEM GPIPE definitions.", "[fem_gpipe]" ) {
     }
 }
 
-TEST_CASE("FEMIO-26: Failing to import GPIPE card from SESAM GeniE FEM file") {
+TEST_CASE("FEMIO-26: Failing to import GPIPE card from SESAM GeniE FEM file", "[gpipe]") {
 
     vector<std::string> lines;
     __base::geoprop::reset_geono();

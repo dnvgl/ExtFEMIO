@@ -6,6 +6,7 @@
 
    Detailed description
 */
+#include "StdAfx.h"
 
 #include "extfem_misc.h"
 
@@ -136,7 +137,7 @@ TEST_CASE("FEM GIORH definitions.", "[fem_giorh]") {
     }
 }
 
-TEST_CASE("FEMIO-25: Failing to import GIORH card from SESAM GeniE FEM file") {
+TEST_CASE("FEMIO-25: Failing to import GIORH card from SESAM GeniE FEM file", "[fem_giorh]") {
 
     vector<std::string> lines;
     SECTION("Failing card") {

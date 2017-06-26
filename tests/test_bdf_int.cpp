@@ -6,6 +6,8 @@
 
    Detailed description
 */
+#include "StdAfx.h"
+
 #include "extfem_misc.h"
 
 // ID:
@@ -14,8 +16,10 @@ namespace {
         "@(#) $Id$";
 }
 
+#ifndef EXTFEM_POS_TEST
 // This tells Catch to provide a main() - only do this in one cpp file
 #define CATCH_CONFIG_MAIN
+#endif
 
 #include <catch.hpp>
 
@@ -25,6 +29,7 @@ namespace {
 
 #include "bdf/types.h"
 
+#include <memory>
 #include <clocale>
 
 #if defined(__AFX_H__) && defined(_DEBUG)
@@ -148,7 +153,7 @@ TEST_CASE("BDF int types output.", "[bdf_types]") {
     }
 }
 
-TEST_CASE("Locale, mkoe 2016-01-07 [FEMIO-1]") {
+TEST_CASE("Locale, mkoe 2016-01-07 [FEMIO-1]", "[bdf_types]") {
     SECTION("SHORT (>=1e3)") {
         std::locale locsave(std::locale::global(std::locale("")));
 

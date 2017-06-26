@@ -6,6 +6,8 @@
 
    Detailed description
 */
+#include "stdafx.h"
+
 #include "extfem_misc.h"
 
 // ID:

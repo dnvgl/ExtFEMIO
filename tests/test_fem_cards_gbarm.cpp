@@ -6,6 +6,8 @@
 
    Detailed description
 */
+#include "StdAfx.h"
+
 #include "extfem_misc.h"
 
 // ID:
@@ -76,7 +78,7 @@ TEST_CASE("FEM GBARM definitions.", "[fem_gbarm]" ) {
     }
 }
 
-TEST_CASE("FEMIO-37: Failing to import GBARM record from SESAM GeniE FEM file") {
+TEST_CASE("FEMIO-37: Failing to import GBARM record from SESAM GeniE FEM file", "[fem_gbarm]") {
 
     vector<std::string> lines;
     __base::geoprop::reset_geono();

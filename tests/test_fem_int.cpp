@@ -6,6 +6,8 @@
 
    Detailed description
 */
+#include "StdAfx.h"
+
 #include "extfem_misc.h"
 
 // ID:
@@ -14,8 +16,10 @@ namespace {
         "@(#) $Id$";
 }
 
+#ifndef EXTFEM_POS_TEST
 // This tells Catch to provide a main() - only do this in one cpp file
 #define CATCH_CONFIG_MAIN
+#endif
 
 #include <catch.hpp>
 

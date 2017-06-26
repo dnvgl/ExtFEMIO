@@ -19,7 +19,13 @@
    #ifdef _DEBUG
       #define NTDDI_VERSION    NTDDI_WIN7SP4
    #else
+      #ifdef NTDDI_VERSION
+         #undef NTDDI_VERSION
+      #endif
       #define NTDDI_VERSION    NTDDI_WINXPSP4
+      #ifdef _WIN32_WINNT
+         #undef _WIN32_WINNT
+      #endif
       #define _WIN32_WINNT     _WIN32_WINNT_WINXP
    #endif
 #endif

@@ -6,6 +6,8 @@
 
    Detailed description
 */
+#include "StdAfx.h"
+
 #include "extfem_misc.h"
 
 // ID:
@@ -116,7 +118,7 @@ TEST_CASE("FEM TDLOAD definitions.", "[fem_tdload]") {
     }
 }
 
-TEST_CASE("FEMIO-32: Import failed when reading TDLOAD entry") {
+TEST_CASE("FEMIO-32: Import failed when reading TDLOAD entry", "[fem_tdload]") {
 
     vector<std::string> lines;
 

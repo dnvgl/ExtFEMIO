@@ -6,6 +6,7 @@
 
    Detailed description
 */
+#include "StdAfx.h"
 
 #include "extfem_misc.h"
 
@@ -20,11 +21,14 @@ namespace {
 
 #include <limits>
 
+#ifndef EXTFEM_POS_TEST
 // This tells Catch to provide a main() - only do this in one cpp
 // file.
 #define CATCH_CONFIG_MAIN
+#endif
 
 #include <memory>
+#include <utility>
 
 #include <catch.hpp>
 
@@ -217,7 +221,7 @@ TEST_CASE("string allowed values", "[bdf_bounds]") {
     }
 }
 
-TEST_CASE("Test unique ids", "bdf_unique_id") {
+TEST_CASE("Test unique ids", "[bdf_unique_id]") {
     shared_ptr<bound_unique<long>> b = make_shared<bound_unique<long>>(
         l1, l6, nullptr, false);
     entry_type<long> form_val("val", b.get());

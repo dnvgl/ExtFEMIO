@@ -6,6 +6,8 @@
 
    Detailed description
 */
+#include "StdAfx.h"
+
 #include "extfem_misc.h"
 
 // ID:
@@ -77,7 +79,7 @@ TEST_CASE("FEM MISOSEL definitions.", "[fem_misosel]" ) {
     }
 }
 
-TEST_CASE("FEMIO-27: Failing to import MISOEL card from SESAM GeniE FEM file") {
+TEST_CASE("FEMIO-27: Failing to import MISOEL card from SESAM GeniE FEM file", "[fem_misosel]") {
 
     vector<std::string> lines;
 

@@ -6,6 +6,8 @@
 
    Detailed description
 */
+#include "StdAfx.h"
+
 #include "extfem_misc.h"
 
 // ID:
@@ -147,7 +149,7 @@ TEST_CASE("FEM GBOX definitions.", "[fem_gbox]" ) {
     }
 }
 
-TEST_CASE("FEMIO-25: Failing to import GBOX card from SESAM GeniE FEM file") {
+TEST_CASE("FEMIO-25: Failing to import GBOX card from SESAM GeniE FEM file", "[fem_gbox]") {
 
     vector<std::string> lines;
     SECTION("Failing card") {

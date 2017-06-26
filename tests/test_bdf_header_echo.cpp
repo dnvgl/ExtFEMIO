@@ -6,6 +6,8 @@
 
    Detailed description
 */
+#include "StdAfx.h"
+
 #include "extfem_misc.h"
 
 // ID:
@@ -36,7 +38,7 @@ using namespace std;
 using namespace dnvgl::extfem::bdf;
 using namespace dnvgl::extfem::bdf::header;
 
-TEST_CASE("Testing cdni_entry", "bdf_header,echo,cdni_entry") {
+TEST_CASE("Testing cdni_entry", "[bdf_header,echo,cdni_entry]") {
 
     SECTION("first") {
         case_control::echo::sort::cdni_entry probe("ABC");

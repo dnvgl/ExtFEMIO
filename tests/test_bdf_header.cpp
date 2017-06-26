@@ -6,6 +6,8 @@
 
    Detailed description
 */
+#include "StdAfx.h"
+
 #include "extfem_misc.h"
 
 // ID:
@@ -16,8 +18,10 @@ namespace {
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
 
+#ifndef EXTFEM_POS_TEST
 // This tells Catch to provide a main() - only do this in one cpp file
 #define CATCH_CONFIG_MAIN
+#endif
 
 #include <deque>
 
@@ -76,7 +80,7 @@ TEST_CASE("BDF generate 'TITLE' header entries", "[bdf_header,title]") {
 
     ostringstream test;
 
-    SECTION("") {
+    SECTION("title") {
         case_control::title probe("text");
         test << probe;
         CHECK(test.str() == "TITLE = text\n");

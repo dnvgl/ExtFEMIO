@@ -6,6 +6,8 @@
 
    Detailed description
 */
+#include "StdAfx.h"
+
 #include "extfem_misc.h"
 
 // ID:
@@ -48,7 +50,7 @@ using namespace input;
 using bdf::types::entry_type;
 using bdf::types::entry_value;
 
-TEST_CASE("BDF test card enum output", "bdf_cards") {
+TEST_CASE("BDF test card enum output", "[bdf_cards]") {
 
     std::ostringstream test;
 

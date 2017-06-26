@@ -6,6 +6,8 @@
 
    Detailed description
 */
+#include "StdAfx.h"
+
 #include "extfem_misc.h"
 
 // ID:
@@ -67,7 +69,7 @@ TEST_CASE("FEM GELTH definitions.", "[fem_gelth]" ) {
     }
 }
 
-TEST_CASE("FEMIO-24: Failing to import line from SESAM GeniE FEM file") {
+TEST_CASE("FEMIO-24: Failing to import line from SESAM GeniE FEM file", "[fem_gelth]") {
 
     vector<std::string> lines;
     __base::geoprop::reset_geono();
