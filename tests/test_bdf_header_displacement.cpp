@@ -6,7 +6,7 @@
 
    Detailed description
 */
-#include "stdafx.h"
+#include "StdAfx.h"
 
 #include "extfem_misc.h"
 
@@ -63,7 +63,7 @@ TEST_CASE("BDF generate 'DISPLACEMENT' header entries", "[bdf_header,displacemen
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&
+// compile-command: "make -C ../cbuild -j7 &&
 //    (make -C ../cbuild test;
 //     ../cbuild/tests/test_bdf_header --use-colour no)"
 // End:
