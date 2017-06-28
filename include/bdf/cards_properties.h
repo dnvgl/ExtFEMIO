@@ -279,7 +279,6 @@ namespace dnvgl {
                 public:
                     using __base::property::PID;
                     using __base::beam_base::MID;
-                    // fields that might appear more than once
                     /** Area of the beam cross section at the various
                         stations. (Real > 0.0)
                         */
