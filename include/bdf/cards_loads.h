@@ -289,6 +289,11 @@ Defines a scalar mass element without reference to a property entry.
                         long const *G1, std::vector<int> const *C1,
                         long const *G2=nullptr,
                         std::vector<int> const *C2=nullptr);
+                    card const &operator() (
+                        double const *M,
+                        long const *G1, std::vector<int> const *C1,
+                        long const *G2=nullptr,
+                        std::vector<int> const *C2=nullptr);
                     types card_type() const override;
                     void read(std::list<std::string> const &) override;
                     card const &operator() (const std::list<std::string> &) override;
@@ -379,6 +384,8 @@ reference to a property entry.
                     card const &operator() (
                         long const *EID, double const *M,
                         long const *S1, long const *S2=nullptr);
+                    card const &operator() (
+                        double const *M, long const *S1, long const *S2=nullptr);
                     types card_type() const override;
                     void read(std::list<std::string> const &) override;
                     card const &operator() (const std::list<std::string> &) override;

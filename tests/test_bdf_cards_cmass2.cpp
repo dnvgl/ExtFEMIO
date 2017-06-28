@@ -147,6 +147,22 @@ TEST_CASE("BDF CMASS2 types output.", "[bdf_cmass2,out]" ) {
                 "CMASS2         32.900+00       6     123\n"
                 "CMASS2         32.900+00       6     123\n");
     }
+
+    SECTION("multiple (default ID)") {
+        long S1(6);
+        double M(2.9);
+        std::vector<int> C1({1, 2, 3});
+        cmass2 probe;
+        test << probe;
+        test << probe(&M, &S1, &C1);
+        test << probe(&M, &S1, &C1);
+        test << probe(&M, &S1, &C1);
+        CHECK(test.str() ==
+                // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
+                "CMASS2         12.900+00       6     123\n"
+                "CMASS2         22.900+00       6     123\n"
+                "CMASS2         32.900+00       6     123\n");
+    }
 }
 
 // Local Variables:

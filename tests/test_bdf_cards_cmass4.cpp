@@ -109,6 +109,21 @@ TEST_CASE("BDF CMASS4 types output.", "[bdf_cmass4,out]" ) {
                 "CMASS4         23.000+00       2\n"
                 "CMASS4         23.000+00       2\n");
     }
+
+    SECTION("multiple (default ID)") {
+        double M(3.);
+        long S1(2);
+        cmass4 probe;
+        test << probe;
+        test << probe(&M, &S1);
+        test << probe(&M, &S1);
+        test << probe(&M, &S1);
+        CHECK(test.str() ==
+                // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
+                "CMASS4         13.000+00       2\n"
+                "CMASS4         23.000+00       2\n"
+                "CMASS4         33.000+00       2\n");
+    }
 }
 
 // Local Variables:

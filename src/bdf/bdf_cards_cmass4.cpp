@@ -71,6 +71,18 @@ cards::__base::card const &cmass4::operator() (
     return *this;
 }
 
+cards::__base::card const &cmass4::operator() (
+    double const *M,
+    long const *S1, long const *S2/*=nullptr*/) {
+    long xEID{1};
+    this->element::operator()(&xEID);
+    this->M(M);
+    this->S1(S1);
+    this->S2(S2);
+    this->cmass4::check_data();
+    return *this;
+}
+
 bdf::types::card cmass4::head = bdf::types::card("CMASS4");
 
 void cmass4::read(list<std::string> const &inp) {

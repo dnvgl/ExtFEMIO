@@ -90,6 +90,21 @@ card const &cmass2::operator() (
     return *this;
 }
 
+card const &cmass2::operator() (
+    double const *M,
+    long const *G1, vector<int> const *C1,
+    long const *G2/*=nullptr*/, vector<int> const *C2/*=nullptr*/) {
+    long xEID{1};
+    this->element::operator() (&xEID);
+    this->M(M);
+    this->G1(G1);
+    this->C1(C1);
+    this->G2(G2);
+    this->C2(C2);
+    this->cmass2::check_data();
+    return *this;
+}
+
 bdf::types::card cmass2::head = bdf::types::card("CMASS2");
 
 void cmass2::read(list<std::string> const &inp) {
