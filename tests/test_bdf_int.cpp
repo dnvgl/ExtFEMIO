@@ -50,43 +50,38 @@ namespace {
 TEST_CASE("BDF int types parsing.", "[bdf_types]") {
 
     SECTION("'   2    '") {
-        bound<long> *b;
-        b = new bound<long>(&cl1);
+        auto b = new bound<long>(&cl1);
         entry_type<long> obj("dummy", b);
         CHECK(obj("   2    ").value == 2);
         delete b;
     }
 
     SECTION("'       2'") {
-        std::shared_ptr<bound<long>> b = std::make_shared<bound<long>>(&cl1);
+        auto b = std::make_shared<bound<long>>(&cl1);
         entry_type<long> obj("dummy", b.get());
         CHECK(obj("       2").value == 2);
     }
 
     SECTION("'2       '") {
-        std::shared_ptr<bound<long>> b = std::make_shared<bound<long>>(
-            &cl0, nullptr, &cl1);
+        auto b = std::make_shared<bound<long>>(&cl0, nullptr, &cl1);
         entry_type<long> obj("dummy", b.get());
         CHECK(obj("2       ").value == 2);
     }
 
     SECTION("'    -1  '") {
-        std::shared_ptr<bound<long>> b = std::make_shared<bound<long>>(
-            &cl_1, nullptr, &cl0);
+        auto b = std::make_shared<bound<long>>(&cl_1, nullptr, &cl0);
         entry_type<long> obj("dummy", b.get());
         CHECK(obj("    -1  ").value == -1);
     }
 
     SECTION("default 1") {
-        std::shared_ptr<bound<long>> b = std::make_shared<bound<long>>(
-            &cl_1, nullptr, &cl0);
+        auto b = std::make_shared<bound<long>>(&cl_1, nullptr, &cl0);
         entry_type<long> obj("dummy", b.get());
         CHECK(obj("        ").value == 0);
     }
 
     SECTION("default 2") {
-        std::shared_ptr<bound<long>> b = std::make_shared<bound<long>>(
-            &cl_1, nullptr, &cl100);
+        auto b = std::make_shared<bound<long>>(&cl_1, nullptr, &cl100);
         entry_type<long> obj("dummy", b.get());
         CHECK(obj("        ").value == 100);
     }
@@ -141,21 +136,21 @@ TEST_CASE("BDF int types output.", "[bdf_types]") {
 
     SECTION("LONG") {
         bdf::types::base::out_form = bdf::types::out_form_type::LONG;
-        std::string res(obj.format(lval));
+        auto res(obj.format(lval));
         CHECK(obj.format(lval).size() == 16);
         CHECK(obj.format(lval) == "               1");
     }
 
     SECTION("FREE") {
         bdf::types::base::out_form = bdf::types::out_form_type::FREE;
-        std::string res(obj.format(lval));
+        auto res(obj.format(lval));
         CHECK(obj.format(lval) == "1");
     }
 }
 
 TEST_CASE("Locale, mkoe 2016-01-07 [FEMIO-1]", "[bdf_types]") {
     SECTION("SHORT (>=1e3)") {
-        std::locale locsave(std::locale::global(std::locale("")));
+        auto locsave(std::locale::global(std::locale("")));
 
         entry_type<long> obj("dummy");
         long lval(1234);

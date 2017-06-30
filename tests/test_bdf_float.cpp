@@ -74,9 +74,9 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]") {
     }
 
     SECTION("'  -1.   ', min 0.") {
-        auto const bound_dummy_ = make_shared<bound<double>>(cd0, nullptr, cd0);
-        auto const bound_dummy = bound_dummy_.get();
-        entry_type<double> probe1("dummy", bound_dummy);
+        auto const l_bound_dummy_ = make_shared<bound<double>>(cd0, nullptr, cd0);
+        auto const l_bound_dummy = l_bound_dummy_.get();
+        entry_type<double> probe1("dummy", l_bound_dummy);
         CHECK_THROWS(probe1("  -1.   "));
     }
 
@@ -120,9 +120,9 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]") {
     }
 
     SECTION("'        ', no default") {
-        auto const bound_dummy = make_shared<bound<double>>(
+        auto const l_bound_dummy = make_shared<bound<double>>(
             nullptr, nullptr, nullptr);
-        entry_type<double> probel("dummy", bound_dummy.get());
+        entry_type<double> probel("dummy", l_bound_dummy.get());
         CHECK_THROWS(probel("        "));
     }
 

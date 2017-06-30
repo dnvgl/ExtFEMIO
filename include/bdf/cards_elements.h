@@ -381,16 +381,17 @@ namespace dnvgl {
                         vector was std::set for cross section direction.
                         */
                     enum class CHOOSE_DIR_CODE {
+                        UNDEF,
                         /// Element has direction vector entry
                         has_DVEC,
                         /// Element direction defined by direction code
-                        has_DCODE,
-                        UNDEF
+                        has_DCODE
                     };
                     CHOOSE_DIR_CODE choose_dir_code;
                     /** Flag to store whether 'OFFT' or 'BIT' was std::set.
                      */
                     enum class CHOOSE_OFFT_BIT {
+                        UNDEF,
                         /// `OFFT` is std::set for element
                         has_OFFT,
                         /// `BIT` is std::set for element
@@ -663,11 +664,11 @@ namespace dnvgl {
                         vector was std::set for cross section direction.
                         */
                     enum class CHOOSE_DIR_CODE {
+                        UNDEF,
                         /// Element has direction vector entry
                         has_DVEC,
                         /// Element direction defined by direction code
-                        has_DCODE,
-                        UNDEF
+                        has_DCODE
                     };
                     CHOOSE_DIR_CODE choose_dir_code;
                     // /** Unique element identification number. (0 <

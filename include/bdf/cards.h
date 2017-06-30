@@ -377,14 +377,13 @@ namespace dnvgl {
                 };
 
                 namespace __base {
-/**
-   \brief Base class for all classes representing BDF cards.
-*/
+                    /**
+                     * \brief Base class for all classes representing BDF cards.
+                     */
                     class card : public extfem::__base::outline {
-/**
-   \brief Two character strings for continuation lines in Free Form
-   Format cards.
-*/
+                        /**
+                         * \brief Two character strings for continuation lines in Free Form Format cards.
+                         */
                         static const std::set<char> free_form_cont;
                         static const std::map<std::string, types> cardtype_map;
                     protected:
@@ -401,7 +400,7 @@ namespace dnvgl {
                     public:
                         card() = default;
                         ~card() = default;
-                        card(const std::list<std::string> &);
+                        explicit card(const std::list<std::string> &);
                         friend format_entry *::format(
                             std::unique_ptr<dnvgl::extfem::bdf::types::card>
                             const &);

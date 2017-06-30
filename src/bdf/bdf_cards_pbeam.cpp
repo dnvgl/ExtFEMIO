@@ -113,7 +113,7 @@ namespace {
     auto const bound_F2 = bound_F2_.get();
 }
 entry_type<double> pbeam::form_F2("F2", bound_F2);
-// fields that might appear more than once
+
 namespace {
     set<std::string> const SO_set({"YES", "YESA", "NO"});
     auto const bound_SO_ = make_shared<bound<std::string>>(SO_set);
@@ -125,7 +125,7 @@ namespace {
     auto const bound_X_XB = bound_X_XB_.get();
 }
 entry_type<double> pbeam::form_X_XB("X/XB", bound_X_XB);
-// fields_finish
+
 namespace {
     auto const bound_K1_ = make_shared<bound<double>>(nullptr, nullptr, cd1);
     auto const bound_K1 = bound_K1_.get();

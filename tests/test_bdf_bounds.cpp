@@ -211,9 +211,9 @@ TEST_CASE("string allowed values", "[bdf_bounds]") {
 
     SECTION("unexpected fail in cbar") {
         entry_value<std::string> val("EEG");
-        set<std::string> allowed({"GGG", "BGG", "GGO", "BGO", "GOG",
+        set<std::string> lAllowed({"GGG", "BGG", "GGO", "BGO", "GOG",
                     "BOG", "GOO", "BOO"});
-        auto const bound_OFFT_ = make_shared<bound<std::string>>(allowed,
+        auto const bound_OFFT_ = make_shared<bound<std::string>>(lAllowed,
             "GGG");
         auto const bound_OFFT = bound_OFFT_.get();
         entry_type<std::string> form_OFFT("OFFT", bound_OFFT);
@@ -235,8 +235,8 @@ TEST_CASE("Test unique ids", "[bdf_unique_id]") {
     val2 = form_val.check(val2);
     CHECK(long(val1) == 3);
     CHECK(long(val2) == 4);
-    val1 = form_val.check(0);
-    val2 = form_val.check(0);
+    val1 = form_val.check(nullptr);
+    val2 = form_val.check(nullptr);
     CHECK(long(val1) == 5);
     CHECK(long(val2) == 6);
 }
