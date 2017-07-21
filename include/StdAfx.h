@@ -17,7 +17,9 @@
    #define NTDDI_VERSION    NTDDI_WIN7SP4
 #else
    #ifdef _DEBUG
+#ifndef NTDDI_VERSION
       #define NTDDI_VERSION    NTDDI_WIN7SP4
+#endif
    #else
       #ifdef NTDDI_VERSION
          #undef NTDDI_VERSION

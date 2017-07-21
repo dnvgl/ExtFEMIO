@@ -551,10 +551,10 @@ namespace dnvgl {
                         station *j* and end `B`. (Real > 0.0 for `GROUP` =
                         `MSCBML0`)
                         */
-                    std::vector<std::vector<bdf::types::entry_value<double>>> DIM;
+                    std::vector<std::vector<bdf::types::entry_value<double>>> DIM = {};
                     /** Nonstructural mass per unit length. (Default = 0.0)
                      */
-                    std::vector<bdf::types::entry_value<double>> NSM;
+                    std::vector<bdf::types::entry_value<double>> NSM = {};
                     /** Stress output request option for intermediate
                         station *j* and end `B`. (Character; Default =
                         `YES`):
@@ -565,7 +565,7 @@ namespace dnvgl {
 
                         - `NO` --- No stresses or forces are recovered.
                         */
-                    std::vector<bdf::types::entry_value<std::string>> SO;
+                    std::vector<bdf::types::entry_value<std::string>> SO = {};
                     /** `X(j)/XB` : Distance from end `A` to intermediate
                         station *j* in the element coordinate system
                         divided by the length of the element. (Real>0.0;

@@ -371,17 +371,17 @@ TEST_CASE("BDF PBEAML roundtrip test, multiple stations", "[bdf_pbeaml]") {
         CHECK(probe_l.DIM.size() == 2);
         CHECK(probe_l.DIM[0].size() == 6);
         CHECK(vector<double>(probe_l.DIM[0].begin(), probe_l.DIM[0].end()) ==
-              vector<double>({1., 2., 3., 4., 5., 6.}));
+        vector<double>({1., 2., 3., 4., 5., 6.}));
         CHECK(probe_l.DIM[1].size() == 6);
         CHECK(vector<double>(probe_l.DIM[1].begin(), probe_l.DIM[1].end()) ==
-              vector<double>({7., 8., 9., 10., 11, 12.}));
+        vector<double>({7., 8., 9., 10., 11, 12.}));
         CHECK(vector<double>(probe_l.NSM.begin(), probe_l.NSM.end())
-              == vector<double>({77., 88.}));
+        == vector<double>({77., 88.}));
         CHECK(probe_l.SO.size() == 1);
         CHECK(std::string(probe_l.SO[0]) == "NO");
         CHECK(probe_l.X_XB.size() == 1);
         CHECK(double(probe_l.X_XB[0]) == 1.);
-    }
+   }
 }
 
 TEST_CASE("BDF PBEAML roundtrip test, multiple stations (reuse)", "[bdf_pbeaml]") {

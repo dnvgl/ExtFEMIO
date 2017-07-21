@@ -270,15 +270,15 @@ void pbeaml::collect_outdata(
 
 void pbeaml::check_data() {
     size_t base_size{DIM.size()};
-    size_t dim_num = this->l_geom::get_dim(TYPE.value);
+    size_t dim_num{this->l_geom::get_dim(TYPE.value)};
 
     if (base_size < 1)
         throw errors::form_error("PBEAML", "requires at least one station");
-    if (NSM.size() != base_size)
+    if (NSM.size() != 0 && NSM.size() != base_size)
         throw errors::form_error("PBEAML", "wrong size for NSM");
-    if (SO.size() != base_size - 1 && SO.size() != base_size)
+    if (SO.size() != 0 && SO.size() != base_size-1)
         throw errors::form_error("PBEAML", "wrong size for SO");
-    if (X_XB.size() != base_size - 1)
+    if (X_XB.size() != 0 && X_XB.size() != base_size - 1)
         throw errors::form_error("PBEAML", "wrong size for X/XB");
     if (GROUP) pbeaml::form_GROUP.check(GROUP);
     if (TYPE) pbeaml::form_TYPE.check(TYPE);
@@ -288,15 +288,12 @@ void pbeaml::check_data() {
         for (auto ppos : pos)
             pbeaml::form_DIM.check(ppos);
     }
-    if (NSM.size() > 0)
-        for (auto pos : NSM)
-            pbeaml::form_NSM.check(pos);
-    if (SO.size() > 0)
-        for (auto pos : SO)
-            pbeaml::form_SO.check(pos);
-    if (X_XB.size() > 0)
-        for (auto pos : X_XB)
-            pbeaml::form_X_XB.check(pos);
+    for (auto pos : NSM)
+        pbeaml::form_NSM.check(pos);
+    for (auto pos : SO)
+        pbeaml::form_SO.check(pos);
+    for (auto pos : X_XB)
+        pbeaml::form_X_XB.check(pos);
  }
 
 cards::__base::card const &pbeaml::operator() (list<std::string> const &inp) {
@@ -318,18 +315,34 @@ cards::__base::card const &pbeaml::operator() (
     this->DIM.resize(DIM->size());
     for (size_t i = 0; i < DIM->size(); i++) {
         this->DIM[i].resize((*DIM)[i].size(), entry_value<double>(nullptr));
-        for (size_t j = 0; j < (*DIM)[i].size(); j++)
+        for (size_t j = 0; j < (*DIM)[i].size(); j++) {
             this->DIM[i][j]((*DIM)[i][j]);
+        }
     }
-    this->NSM.resize(NSM->size(), entry_value<double>(nullptr));
-    for (size_t i = 0; i < NSM->size(); i++)
-        this->NSM[i]((*NSM)[i]);
-    this->SO.resize(SO->size(), entry_value<std::string>(nullptr));
-    for (size_t i = 0; i < SO->size(); i++)
-        this->SO[i]((*SO)[i]);
-    this->X_XB.resize(X_XB->size(), entry_value<double>(nullptr));
-    for (size_t i = 0; i < X_XB->size(); i++)
-        this->X_XB[i]((*X_XB)[i]);
+    if (NSM) {
+        this->NSM.resize(NSM->size(), entry_value<double>(nullptr));
+        for (size_t i = 0; i < NSM->size(); i++) {
+            this->NSM[i]((*NSM)[i]);
+        }
+    } else {
+        this->NSM.clear();
+    }
+    if (SO) {
+        this->SO.resize(SO->size(), entry_value<std::string>(nullptr));
+        for (size_t i{0}; i < SO->size(); i++) {
+            this->SO[i] = (*SO)[i];
+        }
+    } else {
+        this->SO.empty();
+    }
+    if (X_XB) {
+        this->X_XB.resize(X_XB->size(), entry_value<double>(nullptr));
+        for (size_t i = 0; i < X_XB->size(); i++) {
+            this->X_XB[i]((*X_XB)[i]);
+        }
+    } else {
+        this->X_XB.empty();
+    }
     this->pbeaml::check_data();
     return *this;
 }

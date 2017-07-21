@@ -61,7 +61,7 @@ card const &beam_base::operator() (long const *PID, long const *MID) {
 }
 
 beam_prop::beam_prop(const list<std::string> &inp) :
-        beam_base(inp) {}
+beam_prop() {}
 
 beam_prop::beam_prop(long const *PID, long const *MID) :
         beam_base(PID, MID) {}
