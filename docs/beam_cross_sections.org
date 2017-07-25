@@ -17,72 +17,477 @@
 #+HTML_MATHJAX: align: left indent: 5em tagside: left font: Neo-Euler
 
 #+TITLE: Cross section descriptions for FE programs
-
+* Beam direction
+** POSEIDON
+   The /x/ axis is directed along the beam, coinciding with a foot
+   point from the first node the second. The direction node defines
+   local /y/ direction. Direction nodes ``-1'', ``-2'', or ``-3'' define the
+   local /y/ direction in global /x/, /y/, or /z/ direction
+   respectively, ``-4'', ``-5'', or ``-6'' define the local /y/ direction in
+   negative global /x/, /y/, or /z/ direction respectively.
+** Sesam
+   The /x/ axis is directed along the beam, coinciding with the center
+   of gravity and pointing from node ``1'' to ``2''. The ~GUNIVEC~ record
+   defines local /z/ axis.
+** NASTRAN
+   The /x/ axis is directed along the beam, coinciding with the shear
+   center and pointing from node ``A'' to ``B''. ~G0~, or ~X1~, ~X2~, and
+   ~X3~ describe local /y/ axis.
 * Describing beam cross sections in POSEIDON, Sesam, and Patran
-
 ** Flat bar
+   #+BEGIN_SRC asymptote :file ./asy/poseidon_beam_fb.svg :exports results
+     import geometry;
+     import CAD;
+     import my_origin;
+     sCAD cad = sCAD.Create();
+
+     real H_W = 5cm;
+     real T_W = 1cm;
+
+     draw(g = box((-T_W, 0), (0, H_W)), p=cad.pVisibleEdge);
+
+     cad.MeasureParallel(L = "$H_W$",
+                         pFrom = (-T_W, 0),
+                         pTo = (-T_W, H_W),
+                         dblDistance = 5mm);
+     cad.MeasureParallel(L = "$T_W$",
+                         pFrom = (-T_W, H_W),
+                         pTo = (0, H_W),
+                         dblDistance = 5mm);
+
+     draw(my_origin((0, 0), .2cm), p = cad.pLightEdge);
+     show("", "$z_p$", "$y_p$", scale(3cm)*currentcoordsys, xpen=invisible);
+   #+END_SRC
+
    #+CAPTION: ~FB~: Cross section dimensions in an POSEIDON flat bar.
    #+NAME: fig:FB:Poseidon
-   #+ATTR_LATEX: :height 5cm :float nil
+   #+ATTR_LATEX: :float nil
    #+ATTR_HTML: align="right"
-   [[./images/poseidon_beam_fb_inks.svg]]
+   #+ATTR_ORG: :width 400
+   #+RESULTS:
+   [[file:./asy/poseidon_beam_fb.svg]]
+
+   #+BEGIN_SRC asymptote :file ./asy/gbarm.svg :exports results
+     import geometry;
+     import CAD;
+     import my_origin;
+     sCAD cad = sCAD.Create();
+
+     real BT = 4cm;
+     real HZ = 5cm;
+     real BB = 3cm;
+
+     path cs = (-BB * .5, -HZ * .5)--(BB * .5, -HZ * .5)--
+       (BT * .5, HZ * .5)--(-BT * .5, HZ * .5)--cycle;
+
+     draw(g = cs, p=cad.pVisibleEdge);
+
+     cad.MeasureParallel(L = "$BT$",
+                         pFrom = (-BT * .5, HZ * .5),
+                         pTo = (BT * .5, HZ * .5),
+                         dblDistance = 5mm);
+     cad.MeasureParallel(L = "$BB$",
+                         pFrom = (BB * .5, -HZ * .5),
+                         pTo = (-BB * .5, -HZ * .5),
+                         dblDistance = 5mm);
+     cad.MeasureParallel(L = "$HZ$",
+                         pFrom = (BT * .5, HZ * .5),
+                         pTo = (BT * .5, -HZ * .5),
+                         dblDistance = 5mm);
+
+     draw(my_origin((0, 0), .2cm), p = cad.pLightEdge);
+     show("", "$Y'$", "$Z'$", reflect((0, -1), (0, 1)) * scale(3cm)*currentcoordsys, xpen=invisible);
+   #+END_SRC
 
    #+CAPTION: ~GBARM~: Cross section dimensions in Sesam massive bar.
    #+NAME: fig:FB:Sesam
-   #+ATTR_LATEX: :height 5cm :float nil
+   #+ATTR_LATEX: :float nil
    #+ATTR_HTML: align="right"
-   [[./images/gbarm_inks.svg]]
+   #+ATTR_ORG: :width 400
+   #+RESULTS:
+   [[file:./asy/gbarm.svg]]
+
+   #+BEGIN_SRC asymptote :file ./asy/nastran_beam_fb.svg :exports results
+     import geometry;
+     import CAD;
+     import my_origin;
+     sCAD cad = sCAD.Create();
+
+     real DIM2 = 5cm;
+     real DIM1 = 1cm;
+
+     draw(g = box((-DIM1, 0), (0, DIM2)), p=cad.pVisibleEdge);
+
+     cad.MeasureParallel(L = "DIM1",
+                         pFrom = (-DIM1, DIM2),
+                         pTo = (0, DIM2),
+                         dblDistance = 5mm);
+     cad.MeasureParallel(L = "DIM2",
+                         pFrom = (-DIM1, 0),
+                         pTo = (-DIM1, DIM2),
+                         dblDistance = 5mm);
+
+     draw(my_origin((-DIM1*.5, DIM2*.5), .2cm), p = cad.pLightEdge);
+     show("", "$z_N$", "$y_N$", shift((-DIM1*.5, DIM2*.5))*scale(3cm)*currentcoordsys, xpen=invisible);
+   #+END_SRC
 
    #+CAPTION: ~FB~: Cross section dimensions in a NASTRAN flat bar.
    #+NAME: fig:FB:NASTRAN
-   #+ATTR_LATEX: :height 5cm :float nil
+   #+ATTR_LATEX: :float nil
    #+ATTR_HTML: align="right"
-   [[./images/nastran_beam_fb_inks.svg]]
-
-** HP profile
-
-   #+CAPTION: ~HP~: Cross section dimensions in a POSEIDON HP profile section.
-   #+NAME: fig:HP:Poseidon
-   #+ATTR_LATEX: :height 5cm :float nil
-   #+ATTR_HTML: align="right"
-   [[./images/poseidon_beam_hp_inks.svg]]
+   #+ATTR_ORG: :width 400
+   #+RESULTS:
+   [[file:./asy/nastran_beam_fb.svg]]
 
 ** L bar
+   #+BEGIN_SRC asymptote :file ./asy/poseidon_beam_l.svg :exports results
+     import geometry;
+     import CAD;
+     import my_origin;
+     sCAD cad = sCAD.Create();
+
+     real H_W = 5cm;
+     real T_W = .4cm;
+     real B_G = 2.5cm;
+     real T_G = .4cm;
+
+     path pL = (0, 0)--(0, H_W)--(-B_G, H_W)--(-B_G, H_W - T_G)--
+       (-T_W, H_W - T_G)--(-T_W, 0)--cycle;
+
+     draw(g = pL, p=cad.pVisibleEdge);
+
+     cad.MeasureParallel(L = "$H_W$",
+                         pFrom = (0, H_W),
+                         pTo = (0, 0),
+                         dblDistance = 5mm);
+     cad.MeasureParallel(L = "$T_W$",
+                         pFrom = (0, 0),
+                         pTo = (-T_W, 0),
+                         dblDistance = 5mm);
+     cad.MeasureParallel(L = "$T_G$",
+                         pFrom = (-B_G, H_W-T_G),
+                         pTo = (-B_G, H_W),
+                         dblDistance = 5mm);
+     cad.MeasureParallel(L = "$B_G$",
+                         pFrom = (-B_G, H_W),
+                         pTo = (0, H_W),
+                         dblDistance = 5mm);
+
+     draw(my_origin((0, 0), .2cm), p = cad.pLightEdge);
+     show("", "$z_p$", "$y_p$", scale(3cm)*currentcoordsys, xpen=invisible);
+   #+END_SRC
 
    #+CAPTION: ~L~: Cross section dimensions in a POSEIDON L profile section.
    #+NAME: fig:L:Poseidon
-   #+ATTR_LATEX: :height 5cm :float nil
+   #+ATTR_LATEX: :float nil
    #+ATTR_HTML: align="right"
-   [[./images/poseidon_beam_l_inks.svg]]
+   #+ATTR_ORG: :width 400
+   #+results:
+   [[file:./asy/poseidon_beam_l.svg]]
+
+   #+BEGIN_SRC asymptote :file ./asy/glsec.svg :exports results
+     import geometry;
+     import CAD;
+     import my_origin;
+     sCAD cad = sCAD.Create();
+
+     real HZ = 5cm;
+     real TY = .4cm;
+     real BY = 2.5cm;
+     real TZ = .4cm;
+
+     real mirror = 2.5cm;
+
+     path pL = (0, 0)--(0, HZ)--(-TY, HZ)--(-TY, TZ)--
+       (-BY, TZ)--(-BY, 0)--cycle;
+
+     draw(g = pL, p=cad.pVisibleEdge);
+
+     path pLm = reflect((mirror, 0), (mirror, HZ)) * pL;
+     draw(g = pLm, p=cad.pF);
+
+     cad.MeasureParallel(L = "$HZ$",
+                         pFrom = (0, HZ),
+                         pTo = (0, 0),
+                         dblDistance = 5mm);
+     cad.MeasureParallel(L = "$TY$",
+                         pFrom = (-TY, HZ),
+                         pTo = (0, HZ),
+                         dblDistance = 5mm);
+     cad.MeasureParallel(L = "$BY$",
+                         pFrom = (0, 0),
+                         pTo = (-BY, 0),
+                         dblDistance = 5mm);
+     cad.MeasureParallel(L = "$TZ$",
+                         pFrom = (-BY, 0),
+                         pTo = (-BY, TZ),
+                         dblDistance = 5mm);
+
+     label("K=0", (-BY * .5, HZ * .5));
+     label("K=1", (BY * .5 + 2 * mirror, HZ * .5));
+
+     pair CG = pathCG(pL, 5000);
+     pair CGm = pathCG(pLm, 5000);
+
+     draw(my_origin(CG, .2cm), p = cad.pLightEdge);
+     show("", "$Y'$", "$Z'$", shift(CG) * reflect((0, -1), (0, 1)) * scale(3cm)*currentcoordsys, xpen=invisible);
+     draw(my_origin(CGm, .2cm), p = cad.pLightEdge);
+     show("", "$Y'$", "$Z'$", shift(CGm) * reflect((0, -1), (0, 1)) * scale(3cm)*currentcoordsys, xpen=invisible);
+   #+END_SRC
 
    #+CAPTION: ~GLSEC~: Cross section dimensions in a Sesam L profile section.
    #+NAME: fig:L:Sesam
-   #+ATTR_LATEX: :height 5cm :float nil
+   #+ATTR_LATEX: :float nil
    #+ATTR_HTML: align="right"
-   [[./images/glsec_inks.svg]]
+   #+ATTR_ORG: :width 400
+   #+results:
+   [[file:./asy/glsec.svg]]
+
+   #+BEGIN_SRC asymptote :file ./asy/nastran_beam_l.svg :exports results
+     import geometry;
+     import CAD;
+     import my_origin;
+     sCAD cad = sCAD.Create();
+
+     real DIM2 = 5cm;
+     real DIM4 = .4cm;
+     real DIM1 = 2.5cm;
+     real DIM3 = .4cm;
+
+     path pL = (0, 0)--(0, DIM2)--(-DIM1, DIM2)--(-DIM1, DIM2 - DIM3)--
+       (-DIM4, DIM2 - DIM3)--(-DIM4, 0)--cycle;
+
+     draw(g = pL, p=cad.pVisibleEdge);
+
+     cad.MeasureParallel(L = "DIM1",
+                         pFrom = (-DIM1, DIM2),
+                         pTo = (0, DIM2),
+                         dblDistance = 5mm);
+     cad.MeasureParallel(L = "DIM2",
+                         pFrom = (0, DIM2),
+                         pTo = (0, 0),
+                         dblDistance = 5mm);
+     cad.MeasureParallel(L = "DIM3",
+                         pFrom = (-DIM1, DIM2 - DIM3),
+                         pTo = (-DIM1, DIM2),
+                         dblDistance = 5mm);
+     cad.MeasureParallel(L = "DIM4",
+                         pFrom = (0, 0),
+                         pTo = (-DIM4, 0),
+                         dblDistance = 5mm);
+
+     pair SM = (-DIM4 / 2, DIM2 - DIM3 / 2);
+
+     draw(my_origin(SM, .2cm), p = cad.pLightEdge);
+     show("", "$z_N$", "$y_N$",
+          shift(SM) * rotate(180) * scale(3cm) * currentcoordsys, xpen=invisible);
+   #+END_SRC
 
    #+CAPTION: ~L~: Cross section dimensions in a Nastran L profile section.
    #+NAME: fig:L:NASTRAN
-   #+ATTR_LATEX: :height 5cm :float nil
+   #+ATTR_LATEX: :float nil
    #+ATTR_HTML: align="right"
-   [[./images/nastran_beam_l_inks.svg]]
-
+   #+ATTR_ORG: :width 400
+   #+results:
+   [[file:./asy/nastran_beam_l.svg]]
 ** T beam
+   #+BEGIN_SRC asymptote :file ./asy/poseidon_beam_t.svg :exports results
+     import geometry;
+     import CAD;
+     import my_origin;
+     sCAD cad = sCAD.Create();
+
+     real H_W = 5cm;
+     real T_W = .4cm;
+     real B_G = 4cm;
+     real T_G = .4cm;
+
+     path pT = (0, 0)--(0, H_W)--(B_G / 2 - T_W / 2, H_W)--
+       (B_G / 2 - T_W / 2, H_W + T_G)--(-B_G / 2 - T_W / 2, H_W + T_G)--
+       (-B_G / 2 - T_W / 2, H_W)--(-T_W, H_W)--(-T_W, 0)--cycle;
+
+     draw(g = pT, p=cad.pVisibleEdge);
+
+     cad.MeasureParallel(L = "$H_W$",
+                         pFrom = (-B_G / 2 - T_W / 2, 0),
+                         pTo = (-B_G / 2 - T_W / 2, H_W),
+                         dblDistance = 5mm);
+     cad.MeasureParallel(L = "$T_W$",
+                         pFrom = (0, 0),
+                         pTo = (-T_W, 0),
+                         dblDistance = 5mm);
+     cad.MeasureParallel(L = "$T_G$",
+                         pFrom = (B_G / 2 - T_W / 2, H_W + T_G),
+                         pTo = (B_G / 2 - T_W / 2, H_W),
+                         dblDistance = 5mm);
+     cad.MeasureParallel(L = "$B_G$",
+                         pFrom = (-B_G / 2 - T_W / 2, H_W + T_G),
+                         pTo = (B_G / 2 - T_W / 2, H_W + T_G),
+                         dblDistance = 5mm);
+
+     draw(my_origin((0, 0), .2cm), p = cad.pLightEdge);
+     show("", "$z_p$", "$y_p$", scale(3cm)*currentcoordsys, xpen=invisible);
+   #+END_SRC
 
    #+CAPTION: ~T~: Cross section dimensions in a Poseidon T profile section.
    #+NAME: fig:T:Poseidon
-   #+ATTR_LATEX: :height 5cm :float nil
+   #+ATTR_LATEX: :float nil
    #+ATTR_HTML: align="right"
-   [[./images/poseidon_beam_t_inks.svg]]
+   #+ATTR_ORG: :width 400
+   #+results:
+   [[file:./asy/poseidon_beam_t.svg]]
+
+   #+BEGIN_SRC asymptote :file ./asy/giorh.svg :exports results
+     import geometry;
+     import CAD;
+     import my_origin;
+     sCAD cad = sCAD.Create();
+
+     real HZ = 5cm;
+     real TY = .4cm;
+     real BT = 4cm;
+     real TT = .4cm;
+     real BB = 6cm;
+     real TB = .5cm;
+
+     path pT = (BB / 2, 0)--(BB / 2, TB)--(TY / 2, TB)--(TY / 2, HZ - TT)--
+       (BT / 2, HZ - TT)--(BT / 2, HZ)--(-BT / 2, HZ)--(-BT / 2, HZ - TT)--
+       (-TY / 2, HZ - TT)--(-TY / 2, TB)--(-BB / 2, TB)--(-BB / 2, 0)--cycle;
+
+     draw(g = pT, p=cad.pVisibleEdge);
+
+     cad.MeasureParallel(L = "HZ",
+                         pFrom = (BB / 2, HZ),
+                         pTo = (BB / 2, 0),
+                         dblDistance = 5mm);
+     cad.MeasureParallel(L = "TY",
+                         pFrom = (-TY / 2, HZ * 2 / 3),
+                         pTo = (TY / 2, HZ * 2 / 3),
+                         dblDistance = 5mm,
+                         dblRight = 10mm,
+                         dblRelPosition = 2);
+     cad.MeasureParallel(L = "BT",
+                         pFrom = (-BT / 2, HZ),
+                         pTo = (BT / 2, HZ),
+                         dblDistance = 5mm);
+     cad.MeasureParallel(L = "TT",
+                         pFrom = (-BT / 2, HZ - TT),
+                         pTo = (-BT / 2, HZ),
+                         dblDistance = 5mm,
+                         dblRight = 7mm,
+                         dblRelPosition = 2.8);
+     cad.MeasureParallel(L = "BB",
+                         pFrom = (BB / 2, 0),
+                         pTo = (-BB / 2, 0),
+                         dblDistance = 5mm);
+     cad.MeasureParallel(L = "TB",
+                         pFrom = (-BB / 2, 0),
+                         pTo = (-BB / 2, TB),
+                         dblDistance = 5mm,
+                         dblRight = 7mm,
+                         dblRelPosition = 2.8);
+
+     pair CG = pathCG(pT, 50000);
+
+     draw(my_origin(CG, .2cm), p = cad.pLightEdge);
+     show("", "$Y'$", "$Z'$", shift(CG) * reflect((0, -1), (0, 1)) * scale(3cm)*currentcoordsys, xpen=invisible);
+   #+END_SRC
 
    #+CAPTION: ~GIORH~: Cross section dimensions in a Sesam GIORH profile section (used to model T sections).
    #+NAME: fig:T:Sesam
-   #+ATTR_LATEX: :height 5cm :float nil
+   #+ATTR_LATEX: :float nil
    #+ATTR_HTML: align="right"
-   [[./images/giorh_inks.svg]]
+   #+ATTR_ORG: :width 400
+   #+results:
+   [[file:./asy/giorh.svg]]
+
+   #+BEGIN_SRC asymptote :file ./asy/nastran_beam_t.svg :exports results
+     import geometry;
+     import CAD;
+     import my_origin;
+     sCAD cad = sCAD.Create();
+
+     real DIM2 = 5cm;
+     real DIM4 = .4cm;
+     real DIM1 = 4cm;
+     real DIM3 = .4cm;
+
+     path pT = (DIM4 / 2, 0)--(DIM4 / 2, DIM2 - DIM3)--(DIM1 / 2, DIM2 - DIM3)--
+       (DIM1 / 2, DIM2)--(-DIM1 / 2, DIM2)--(-DIM1 / 2, DIM2 - DIM3)--
+       (-DIM4 / 2, DIM2 - DIM3)--(-DIM4 / 2, 0)--cycle;
+
+     draw(g = pT, p=cad.pVisibleEdge);
+
+     cad.MeasureParallel(L = "DIM1",
+                         pFrom = (-DIM1 / 2, DIM2),
+                         pTo = (DIM1 / 2, DIM2),
+                         dblDistance = 5mm,
+                         dblRelPosition = .7);
+     cad.MeasureParallel(L = "DIM2",
+                         pFrom = (-DIM1 / 2, 0),
+                         pTo = (-DIM1 / 2, DIM2),
+                         dblDistance = 5mm);
+     cad.MeasureParallel(L = "DIM3",
+                         pFrom = (DIM1 / 2, DIM2),
+                         pTo = (DIM1 / 2, DIM2 - DIM3),
+                         dblDistance = 5mm);
+     cad.MeasureParallel(L = "DIM4",
+                         pFrom = (DIM4 / 2, 0),
+                         pTo = (-DIM4 / 2, 0),
+                         dblDistance = 5mm);
+
+     pair SC = (0, DIM2 - DIM3 / 2);
+
+     draw(my_origin(SC, .2cm), p = cad.pLightEdge);
+     show("", "$z_N$", "$y_N$",
+          shift(SC) * scale(3cm) * currentcoordsys,
+          xpen=invisible);
+   #+END_SRC
 
    #+CAPTION: ~T~: Cross section dimensions in a Nastran T profile section.
    #+NAME: fig:T:NASTRAN
-   #+ATTR_LATEX: :height 5cm :float nil
+   #+ATTR_LATEX: :float nil
    #+ATTR_HTML: align="right"
-   [[./images/nastran_beam_t_inks.svg]]
+   #+ATTR_ORG: :width 400
+   #+results:
+   [[file:./asy/nastran_beam_t.svg]]
+** HP profile
+   #+BEGIN_SRC asymptote :file ./asy/poseidon_beam_hp.svg :exports results
+          import geometry;
+          import CAD;
+          import my_origin;
+          sCAD cad = sCAD.Create();
+
+          real H_W = 5cm;
+          real T_W = .7cm;
+          real r = .7cm;
+
+          path pRect = (-T_W, H_W - r*2)--(-T_W, 0)--(0, 0)--(0, H_W)--(-T_W, H_W);
+          path pArc = arc((-T_W, H_W - r), r, 90., 270.);
+
+          draw(g = pArc & pRect, p=cad.pVisibleEdge);
+
+          cad.MeasureParallel(L = "$H_W$",
+                              pFrom = (0, H_W),
+                              pTo = (0, 0),
+                              dblDistance = 5mm);
+          cad.MeasureParallel(L = "$T_W$",
+                              pFrom = (0, 0),
+                              pTo = (-T_W, 0),
+                              dblDistance = 5mm);
+
+          draw(my_origin((0, 0), .2cm), p = cad.pLightEdge);
+          show("", "$z_p$", "$y_p$", scale(3cm)*currentcoordsys, xpen=invisible);
+   #+END_SRC
+
+   #+CAPTION: ~HP~: Cross section dimensions in a POSEIDON HP profile section.
+   #+NAME: fig:HP:Poseidon
+   #+ATTR_LATEX: :options scale=1 :float nil
+   #+ATTR_HTML: align="right" width=.7
+   #+ATTR_ORG: :width 400
+   #+RESULTS:
+   [[file:./asy/poseidon_beam_hp.svg]]
+
+# Local Variables:
+# org-latex-image-default-width: ""
+# End:

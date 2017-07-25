@@ -4,7 +4,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2017-07-21 Fr 16:55 -->
+<!-- 2017-07-25 Di 16:54 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Cross section descriptions for FE programs</title>
@@ -234,43 +234,86 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org3bbfe06">1. Describing beam cross sections in POSEIDON, Sesam, and Patran</a>
+<li><a href="#orgb00df4f">1. Beam direction</a>
 <ul>
-<li><a href="#orgd73856b">1.1. Flat bar</a></li>
-<li><a href="#orgfa6ca0f">1.2. HP profile</a></li>
-<li><a href="#org9616e14">1.3. L bar</a></li>
-<li><a href="#org7efa64a">1.4. T beam</a></li>
+<li><a href="#orgd8d7bb7">1.1. POSEIDON</a></li>
+<li><a href="#org90594d2">1.2. Sesam</a></li>
+<li><a href="#orga3bf2f0">1.3. NASTRAN</a></li>
+</ul>
+</li>
+<li><a href="#orga1090aa">2. Describing beam cross sections in POSEIDON, Sesam, and Patran</a>
+<ul>
+<li><a href="#org62390cb">2.1. Flat bar</a></li>
+<li><a href="#org5549f51">2.2. L bar</a></li>
+<li><a href="#orgf3319c7">2.3. T beam</a></li>
+<li><a href="#org7dbf4eb">2.4. HP profile</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-
-<div id="outline-container-org3bbfe06" class="outline-2">
-<h2 id="org3bbfe06"><span class="section-number-2">1</span> Describing beam cross sections in POSEIDON, Sesam, and Patran</h2>
+<div id="outline-container-orgb00df4f" class="outline-2">
+<h2 id="orgb00df4f"><span class="section-number-2">1</span> Beam direction</h2>
 <div class="outline-text-2" id="text-1">
-</div><div id="outline-container-orgd73856b" class="outline-3">
-<h3 id="orgd73856b"><span class="section-number-3">1.1</span> Flat bar</h3>
+</div><div id="outline-container-orgd8d7bb7" class="outline-3">
+<h3 id="orgd8d7bb7"><span class="section-number-3">1.1</span> POSEIDON</h3>
 <div class="outline-text-3" id="text-1-1">
+<p>
+The <i>x</i> axis is directed along the beam, coinciding with a foot
+point from the first node the second. The direction node defines
+local <i>y</i> direction. Direction nodes ``-1'', ``-2'', or ``-3'' define the
+local <i>y</i> direction in global <i>x</i>, <i>y</i>, or <i>z</i> direction
+respectively, ``-4'', ``-5'', or ``-6'' define the local <i>y</i> direction in
+negative global <i>x</i>, <i>y</i>, or <i>z</i> direction respectively.
+</p>
+</div>
+</div>
+<div id="outline-container-org90594d2" class="outline-3">
+<h3 id="org90594d2"><span class="section-number-3">1.2</span> Sesam</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+The <i>x</i> axis is directed along the beam, coinciding with the center
+of gravity and pointing from node ``1'' to ``2''. The <code>GUNIVEC</code> record
+defines local <i>z</i> axis.
+</p>
+</div>
+</div>
+<div id="outline-container-orga3bf2f0" class="outline-3">
+<h3 id="orga3bf2f0"><span class="section-number-3">1.3</span> NASTRAN</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+The <i>x</i> axis is directed along the beam, coinciding with the shear
+center and pointing from node ``A'' to ``B''. <code>G0</code>, or <code>X1</code>, <code>X2</code>, and
+<code>X3</code> describe local <i>y</i> axis.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orga1090aa" class="outline-2">
+<h2 id="orga1090aa"><span class="section-number-2">2</span> Describing beam cross sections in POSEIDON, Sesam, and Patran</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-org62390cb" class="outline-3">
+<h3 id="org62390cb"><span class="section-number-3">2.1</span> Flat bar</h3>
+<div class="outline-text-3" id="text-2-1">
 
-<div id="orgdf5d2c9" class="figure">
-<p><object type="image/svg+xml" data="./images/poseidon_beam_fb_inks.svg" class="org-svg">
+<div id="org0fb2c87" class="figure">
+<p><object type="image/svg+xml" data="./asy/poseidon_beam_fb.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 </p>
 <p><span class="figure-number">Figure 1: </span><code>FB</code>: Cross section dimensions in an POSEIDON flat bar.</p>
 </div>
 
 
-<div id="org62ed89d" class="figure">
-<p><object type="image/svg+xml" data="./images/gbarm_inks.svg" class="org-svg">
+<div id="org0423e66" class="figure">
+<p><object type="image/svg+xml" data="./asy/gbarm.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 </p>
 <p><span class="figure-number">Figure 2: </span><code>GBARM</code>: Cross section dimensions in Sesam massive bar.</p>
 </div>
 
 
-<div id="org61b6efa" class="figure">
-<p><object type="image/svg+xml" data="./images/nastran_beam_fb_inks.svg" class="org-svg">
+<div id="orgea64739" class="figure">
+<p><object type="image/svg+xml" data="./asy/nastran_beam_fb.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 </p>
 <p><span class="figure-number">Figure 3: </span><code>FB</code>: Cross section dimensions in a NASTRAN flat bar.</p>
@@ -278,73 +321,71 @@ Sorry, your browser does not support SVG.</object>
 </div>
 </div>
 
-<div id="outline-container-orgfa6ca0f" class="outline-3">
-<h3 id="orgfa6ca0f"><span class="section-number-3">1.2</span> HP profile</h3>
-<div class="outline-text-3" id="text-1-2">
+<div id="outline-container-org5549f51" class="outline-3">
+<h3 id="org5549f51"><span class="section-number-3">2.2</span> L bar</h3>
+<div class="outline-text-3" id="text-2-2">
 
-<div id="orgafdd81f" class="figure">
-<p><object type="image/svg+xml" data="./images/poseidon_beam_hp_inks.svg" class="org-svg">
+<div id="orgef4af97" class="figure">
+<p><object type="image/svg+xml" data="./asy/poseidon_beam_l.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 </p>
-<p><span class="figure-number">Figure 4: </span><code>HP</code>: Cross section dimensions in a POSEIDON HP profile section.</p>
-</div>
-</div>
+<p><span class="figure-number">Figure 4: </span><code>L</code>: Cross section dimensions in a POSEIDON L profile section.</p>
 </div>
 
-<div id="outline-container-org9616e14" class="outline-3">
-<h3 id="org9616e14"><span class="section-number-3">1.3</span> L bar</h3>
-<div class="outline-text-3" id="text-1-3">
 
-<div id="org2b3da42" class="figure">
-<p><object type="image/svg+xml" data="./images/poseidon_beam_l_inks.svg" class="org-svg">
+<div id="org91bfe0c" class="figure">
+<p><object type="image/svg+xml" data="./asy/glsec.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 </p>
-<p><span class="figure-number">Figure 5: </span><code>L</code>: Cross section dimensions in a POSEIDON L profile section.</p>
+<p><span class="figure-number">Figure 5: </span><code>GLSEC</code>: Cross section dimensions in a Sesam L profile section.</p>
 </div>
 
 
-<div id="org6674e27" class="figure">
-<p><object type="image/svg+xml" data="./images/glsec_inks.svg" class="org-svg">
+<div id="orga5bbdcb" class="figure">
+<p><object type="image/svg+xml" data="./asy/nastran_beam_l.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 </p>
-<p><span class="figure-number">Figure 6: </span><code>GLSEC</code>: Cross section dimensions in a Sesam L profile section.</p>
+<p><span class="figure-number">Figure 6: </span><code>L</code>: Cross section dimensions in a Nastran L profile section.</p>
 </div>
+</div>
+</div>
+<div id="outline-container-orgf3319c7" class="outline-3">
+<h3 id="orgf3319c7"><span class="section-number-3">2.3</span> T beam</h3>
+<div class="outline-text-3" id="text-2-3">
 
-
-<div id="orgafa8a5f" class="figure">
-<p><object type="image/svg+xml" data="./images/nastran_beam_l_inks.svg" class="org-svg">
+<div id="org936954a" class="figure">
+<p><object type="image/svg+xml" data="./asy/poseidon_beam_t.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 </p>
-<p><span class="figure-number">Figure 7: </span><code>L</code>: Cross section dimensions in a Nastran L profile section.</p>
-</div>
-</div>
+<p><span class="figure-number">Figure 7: </span><code>T</code>: Cross section dimensions in a Poseidon T profile section.</p>
 </div>
 
-<div id="outline-container-org7efa64a" class="outline-3">
-<h3 id="org7efa64a"><span class="section-number-3">1.4</span> T beam</h3>
-<div class="outline-text-3" id="text-1-4">
 
-<div id="org66ee91b" class="figure">
-<p><object type="image/svg+xml" data="./images/poseidon_beam_t_inks.svg" class="org-svg">
+<div id="orge0b07ad" class="figure">
+<p><object type="image/svg+xml" data="./asy/giorh.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 </p>
-<p><span class="figure-number">Figure 8: </span><code>T</code>: Cross section dimensions in a Poseidon T profile section.</p>
+<p><span class="figure-number">Figure 8: </span><code>GIORH</code>: Cross section dimensions in a Sesam GIORH profile section (used to model T sections).</p>
 </div>
 
 
-<div id="org45b6970" class="figure">
-<p><object type="image/svg+xml" data="./images/giorh_inks.svg" class="org-svg">
+<div id="orgd50d4bf" class="figure">
+<p><object type="image/svg+xml" data="./asy/nastran_beam_t.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 </p>
-<p><span class="figure-number">Figure 9: </span><code>GIORH</code>: Cross section dimensions in a Sesam GIORH profile section (used to model T sections).</p>
+<p><span class="figure-number">Figure 9: </span><code>T</code>: Cross section dimensions in a Nastran T profile section.</p>
 </div>
+</div>
+</div>
+<div id="outline-container-org7dbf4eb" class="outline-3">
+<h3 id="org7dbf4eb"><span class="section-number-3">2.4</span> HP profile</h3>
+<div class="outline-text-3" id="text-2-4">
 
-
-<div id="org71d5bcf" class="figure">
-<p><object type="image/svg+xml" data="./images/nastran_beam_t_inks.svg" class="org-svg">
+<div id="orgb68397f" class="figure">
+<p><object type="image/svg+xml" data="./asy/poseidon_beam_hp.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 </p>
-<p><span class="figure-number">Figure 10: </span><code>T</code>: Cross section dimensions in a Nastran T profile section.</p>
+<p><span class="figure-number">Figure 10: </span><code>HP</code>: Cross section dimensions in a POSEIDON HP profile section.</p>
 </div>
 </div>
 </div>
@@ -352,7 +393,7 @@ Sorry, your browser does not support SVG.</object>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Berthold Höllmann</p>
-<p class="date">Created: 2017-07-21 Fr 16:55</p>
+<p class="date">Created: 2017-07-25 Di 16:54</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
