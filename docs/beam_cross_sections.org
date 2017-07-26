@@ -19,16 +19,17 @@
 #+TITLE: Cross section descriptions for FE programs
 * Beam direction
 ** POSEIDON
-   The /x/ axis is directed along the beam, coinciding with a foot
-   point from the first node the second. The direction node defines
-   local /y/ direction. Direction nodes ``-1'', ``-2'', or ``-3'' define the
-   local /y/ direction in global /x/, /y/, or /z/ direction
-   respectively, ``-4'', ``-5'', or ``-6'' define the local /y/ direction in
-   negative global /x/, /y/, or /z/ direction respectively.
+   The /x/ axis is directed along the beam, coinciding with the center
+   of gravity (neutral axis) from the first node the second. The
+   direction node defines local /y/ direction. Direction nodes ``-1'',
+   ``-2'', or ``-3'' define the local /y/ direction in global /x/,
+   /y/, or /z/ direction respectively, ``-4'', ``-5'', or ``-6''
+   define the local /y/ direction in negative global /x/, /y/, or /z/
+   direction respectively.
 ** Sesam
    The /x/ axis is directed along the beam, coinciding with the center
-   of gravity and pointing from node ``1'' to ``2''. The ~GUNIVEC~ record
-   defines local /z/ axis.
+   of gravity (neutral axis) and pointing from node ``1'' to ``2''.
+   The ~GUNIVEC~ record defines local /z/ axis.
 ** NASTRAN
    The /x/ axis is directed along the beam, coinciding with the shear
    center and pointing from node ``A'' to ``B''. ~G0~, or ~X1~, ~X2~, and
