@@ -109,6 +109,31 @@ TEST_CASE("BDF COMMENT definitions; one line.",
     CHECK(probe.content == list<std::string>({"foo"}));
 }
 
+TEST_CASE("BDF COMMENT output; several lines.",
+          "[bdf_comment]") {
+    ostringstream test;
+
+    SECTION("several lines in one call") {
+        std::vector<std::string> content({"foo", "bar"});
+        comment probe;
+        test << probe;
+        test << probe(content);
+
+        CHECK(test.str() == "$ foo\n"
+              "$ bar\n");
+    }
+
+    SECTION("several lines in multiple calls") {
+        comment probe;
+        test << probe;
+        test << probe("foo");
+        test << probe("bar");
+
+        CHECK(test.str() == "$ foo\n"
+              "$ bar\n");
+    }
+}
+
 TEST_CASE("BDF COMMENT definitions; with yield stress (235).",
           "[bdf_comment]") {
 
@@ -320,7 +345,7 @@ TEST_CASE("BDF COMMENT roundtrip test; two lines (reuse).", "[bdf_comment]") {
 TEST_CASE("BDF COMMENT roundtrip test; two lines (2).", "[bdf_comment]") {
     ostringstream test;
 
-    std::string content{"This is a test"};
+    std::vector<std::string> content{"This is a test"};
 
     comment probe(content);
     probe("one two");
@@ -329,9 +354,7 @@ TEST_CASE("BDF COMMENT roundtrip test; two lines (2).", "[bdf_comment]") {
     reset_statics();
 
     SECTION("check output") {
-        CHECK(test.str() ==
-              "$ This is a test\n"
-              "$ one two\n");
+        CHECK(test.str() == "$ one two\n");
     }
 
     SECTION("check reading") {
@@ -345,9 +368,7 @@ TEST_CASE("BDF COMMENT roundtrip test; two lines (2).", "[bdf_comment]") {
         card::card_split(data, lines);
         comment probe_l(lines);
 
-        CHECK(probe_l.content == list<std::string>({
-                    "This is a test",
-                    "one two"}));
+        CHECK(probe_l.content == list<std::string>({"one two"}));
         CHECK(probe_l.yield == nullptr);
         CHECK(comment::yield == nullptr);
     }

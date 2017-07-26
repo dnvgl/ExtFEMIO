@@ -163,6 +163,7 @@ card const &comment::operator()(std::string const &content,
         *comment::yield = *yield;
         this->__yield = new double(*yield);
     }
+    this->content.clear();
     this->content.push_back(content);
     return *this;
 }
