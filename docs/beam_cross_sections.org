@@ -45,7 +45,8 @@
      real H_W = 5cm;
      real T_W = 1cm;
 
-     draw(g = box((-T_W, 0), (0, H_W)), p=cad.pVisibleEdge);
+     path pB = box((-T_W, 0), (0, H_W));
+     draw(g = pB, p=cad.pVisibleEdge);
 
      cad.MeasureParallel(L = "$H_W$",
                          pFrom = (-T_W, 0),
@@ -56,8 +57,10 @@
                          pTo = (0, H_W),
                          dblDistance = 5mm);
 
-     draw(my_origin((0, 0), .2cm), p = cad.pLightEdge);
-     show("", "$z_p$", "$y_p$", scale(3cm)*currentcoordsys, xpen=invisible);
+     pair CG = pathCG(pB);
+
+     draw(my_origin(CG, .2cm), p = cad.pLightEdge);
+     show("", "$z_p$", "$y_p$", shift(CG) * scale(3cm)*currentcoordsys, xpen=invisible);
    #+END_SRC
 
    #+CAPTION: ~FB~: Cross section dimensions in an POSEIDON flat bar.
@@ -78,10 +81,10 @@
      real HZ = 5cm;
      real BB = 3cm;
 
-     path cs = (-BB * .5, -HZ * .5)--(BB * .5, -HZ * .5)--
+     path pT = (-BB * .5, -HZ * .5)--(BB * .5, -HZ * .5)--
        (BT * .5, HZ * .5)--(-BT * .5, HZ * .5)--cycle;
 
-     draw(g = cs, p=cad.pVisibleEdge);
+     draw(g = pT, p=cad.pVisibleEdge);
 
      cad.MeasureParallel(L = "$BT$",
                          pFrom = (-BT * .5, HZ * .5),
@@ -96,8 +99,12 @@
                          pTo = (BT * .5, -HZ * .5),
                          dblDistance = 5mm);
 
-     draw(my_origin((0, 0), .2cm), p = cad.pLightEdge);
-     show("", "$Y'$", "$Z'$", reflect((0, -1), (0, 1)) * scale(3cm)*currentcoordsys, xpen=invisible);
+     pair CG = pathCG(pT);
+
+     draw(my_origin(CG, .2cm), p = cad.pLightEdge);
+     show("", "$Y'$", "$Z'$",
+          shift(CG) * reflect((0, -1), (0, 1)) * scale(3cm)*currentcoordsys,
+          xpen=invisible);
    #+END_SRC
 
    #+CAPTION: ~GBARM~: Cross section dimensions in Sesam massive bar.
@@ -174,8 +181,12 @@
                          pTo = (0, H_W),
                          dblDistance = 5mm);
 
-     draw(my_origin((0, 0), .2cm), p = cad.pLightEdge);
-     show("", "$z_p$", "$y_p$", scale(3cm)*currentcoordsys, xpen=invisible);
+     pair CG = pathCG(pL);
+
+     draw(my_origin(CG, .2cm), p = cad.pLightEdge);
+     show("", "$z_p$", "$y_p$",
+          shift(CG) * scale(3cm) * currentcoordsys,
+          xpen=invisible);
    #+END_SRC
 
    #+CAPTION: ~L~: Cross section dimensions in a POSEIDON L profile section.
@@ -227,13 +238,17 @@
      label("K=0", (-BY * .5, HZ * .5));
      label("K=1", (BY * .5 + 2 * mirror, HZ * .5));
 
-     pair CG = pathCG(pL, 5000);
-     pair CGm = pathCG(pLm, 5000);
+     pair CG = pathCG(pL);
+     pair CGm = pathCG(pLm);
 
      draw(my_origin(CG, .2cm), p = cad.pLightEdge);
-     show("", "$Y'$", "$Z'$", shift(CG) * reflect((0, -1), (0, 1)) * scale(3cm)*currentcoordsys, xpen=invisible);
+     show("", "$Y'$", "$Z'$",
+          shift(CG) * reflect((0, -1), (0, 1)) * scale(3cm) * currentcoordsys,
+          xpen=invisible);
      draw(my_origin(CGm, .2cm), p = cad.pLightEdge);
-     show("", "$Y'$", "$Z'$", shift(CGm) * reflect((0, -1), (0, 1)) * scale(3cm)*currentcoordsys, xpen=invisible);
+     show("", "$Y'$", "$Z'$",
+          shift(CGm) * reflect((0, -1), (0, 1)) * scale(3cm) * currentcoordsys,
+          xpen=invisible);
    #+END_SRC
 
    #+CAPTION: ~GLSEC~: Cross section dimensions in a Sesam L profile section.
@@ -281,7 +296,8 @@
 
      draw(my_origin(SM, .2cm), p = cad.pLightEdge);
      show("", "$z_N$", "$y_N$",
-          shift(SM) * rotate(180) * scale(3cm) * currentcoordsys, xpen=invisible);
+          shift(SM) * rotate(180) * scale(3cm) * currentcoordsys,
+          xpen=invisible);
    #+END_SRC
 
    #+CAPTION: ~L~: Cross section dimensions in a Nastran L profile section.
@@ -326,8 +342,12 @@
                          pTo = (B_G / 2 - T_W / 2, H_W + T_G),
                          dblDistance = 5mm);
 
-     draw(my_origin((0, 0), .2cm), p = cad.pLightEdge);
-     show("", "$z_p$", "$y_p$", scale(3cm)*currentcoordsys, xpen=invisible);
+     pair CG = pathCG(pT);
+
+     draw(my_origin(CG, .2cm), p = cad.pLightEdge);
+     show("", "$z_p$", "$y_p$",
+          shift(CG) * scale(3cm) * currentcoordsys,
+          xpen=invisible);
    #+END_SRC
 
    #+CAPTION: ~T~: Cross section dimensions in a Poseidon T profile section.
@@ -388,10 +408,12 @@
                          dblRight = 7mm,
                          dblRelPosition = 2.8);
 
-     pair CG = pathCG(pT, 50000);
+     pair CG = pathCG(pT);
 
      draw(my_origin(CG, .2cm), p = cad.pLightEdge);
-     show("", "$Y'$", "$Z'$", shift(CG) * reflect((0, -1), (0, 1)) * scale(3cm)*currentcoordsys, xpen=invisible);
+     show("", "$Y'$", "$Z'$",
+          shift(CG) * reflect((0, -1), (0, 1)) * scale(3cm) * currentcoordsys,
+          xpen=invisible);
    #+END_SRC
 
    #+CAPTION: ~GIORH~: Cross section dimensions in a Sesam GIORH profile section (used to model T sections).
@@ -454,31 +476,36 @@
    [[file:./asy/nastran_beam_t.svg]]
 ** HP profile
    #+BEGIN_SRC asymptote :file ./asy/poseidon_beam_hp.svg :exports results
-          import geometry;
-          import CAD;
-          import my_origin;
-          sCAD cad = sCAD.Create();
+     import geometry;
+     import CAD;
+     import my_origin;
+     sCAD cad = sCAD.Create();
 
-          real H_W = 5cm;
-          real T_W = .7cm;
-          real r = .7cm;
+     real H_W = 5cm;
+     real T_W = .7cm;
+     real r = .7cm;
 
-          path pRect = (-T_W, H_W - r*2)--(-T_W, 0)--(0, 0)--(0, H_W)--(-T_W, H_W);
-          path pArc = arc((-T_W, H_W - r), r, 90., 270.);
+     path pHP = (0, 0)--(0, H_W)--
+       (-T_W, H_W)..(-T_W - r, H_W - r)..(-T_W, H_W - r*2)--
+       (-T_W, 0)--cycle;
 
-          draw(g = pArc & pRect, p=cad.pVisibleEdge);
+     draw(g = pHP, p=cad.pVisibleEdge);
 
-          cad.MeasureParallel(L = "$H_W$",
-                              pFrom = (0, H_W),
-                              pTo = (0, 0),
-                              dblDistance = 5mm);
-          cad.MeasureParallel(L = "$T_W$",
-                              pFrom = (0, 0),
-                              pTo = (-T_W, 0),
-                              dblDistance = 5mm);
+     cad.MeasureParallel(L = "$H_W$",
+                         pFrom = (0, H_W),
+                         pTo = (0, 0),
+                         dblDistance = 5mm);
+     cad.MeasureParallel(L = "$T_W$",
+                         pFrom = (0, 0),
+                         pTo = (-T_W, 0),
+                         dblDistance = 5mm);
 
-          draw(my_origin((0, 0), .2cm), p = cad.pLightEdge);
-          show("", "$z_p$", "$y_p$", scale(3cm)*currentcoordsys, xpen=invisible);
+     pair CG = pathCG(pHP);
+
+     draw(my_origin(CG, .2cm), p = cad.pLightEdge);
+     show("", "$z_p$", "$y_p$",
+          shift(CG) * scale(3cm) * currentcoordsys,
+          xpen=invisible);
    #+END_SRC
 
    #+CAPTION: ~HP~: Cross section dimensions in a POSEIDON HP profile section.

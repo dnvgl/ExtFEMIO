@@ -19,7 +19,7 @@ path my_origin(pair pos, real scale = 1.)
 
 // from
 // https:tex.stackexchange.com/questions/249659/how-to-center-a-label-inside-a-closed-path-in-asymptote
-pair pathCG(path p, int numTestPoints)
+pair pathCG(path p, int numTestPoints = 50000)
 {
   int numInside = 0;
 
