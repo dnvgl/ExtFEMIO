@@ -37,6 +37,14 @@ CONFIGURE_FILE(
   ${CMAKE_SOURCE_DIR}/include/config.h)
 INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/include)
 
+if( CMAKE_SIZEOF_VOID_P EQUAL 8 )
+    MESSAGE( "64 bits compiler detected" )
+    add_definitions(-D_X64)
+else( CMAKE_SIZEOF_VOID_P EQUAL 8 ) 
+    MESSAGE( "32 bits compiler detected" )
+endif( CMAKE_SIZEOF_VOID_P EQUAL 8 )
+
+
 # Recurse into the "src", "test" and "doc" subdirectories. This does
 # not actually cause another cmake executable to run. The same process
 # will walk through the project's entire directory structure.

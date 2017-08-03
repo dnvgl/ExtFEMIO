@@ -13,6 +13,7 @@
 
 #pragma once
 
+#undef NTDDI_VERSION
 #ifdef _X64
    #define NTDDI_VERSION    NTDDI_WIN7SP4
 #else
