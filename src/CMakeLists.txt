@@ -39,7 +39,7 @@ target_include_directories (extfemio PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 if (COMMAND cotire)
   set_target_properties(extfemio
     PROPERTIES
-    COTIRE_CXX_PREFIX_HEADER_INIT "${CMAKE_SOURCE_DIR}/src/StdAfx.h")
+    COTIRE_CXX_PREFIX_HEADER_INIT "${CMAKE_SOURCE_DIR}/include/extfemio_stdafx.h")
 endif()
 
 add_subdirectory(bdf)
