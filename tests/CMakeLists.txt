@@ -15,7 +15,7 @@ FUNCTION(my_add_test inp)
   if (COMMAND cotire)
     cotire(${inp})
     set_target_properties(${inp}
-      PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "stdafx.h")
+      PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "${CMAKE_SOURCE_DIR}/include/extfemio_stdafx.h")
   endif()
   add_test(NAME ${NAME}
     COMMAND ${COMMAND} --break --reporter junit --out ${COMMAND}_junit.xml)
