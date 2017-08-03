@@ -5,9 +5,9 @@
    \brief source file that includes just the standard includes
 */
 
-#include "StdAfx.h"
+#include "extfemio_stdafx.h"
 
-// Local Variables:
+// Local Variables :
 // mode: c++
 // coding: utf-8
 // c-file-style: "dnvgl"

@@ -6,7 +6,7 @@
 
    Detailed description
 */
-#include "StdAfx.h"
+#include "extfemio_stdafx.h"
 #include "extfem_misc.h"
 
 // ID:

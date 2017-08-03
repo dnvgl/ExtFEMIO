@@ -7,7 +7,7 @@
    Detailed description
 */
 // ReSharper disable once CppUnusedIncludeDirective
-#include "StdAfx.h"
+#include "extfemio_stdafx.h"
 
 #include "extfem_misc.h"
 

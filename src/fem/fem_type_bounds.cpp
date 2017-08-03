@@ -7,7 +7,8 @@
    Detailed description
 */
 // ReSharper disable once CppUnusedIncludeDirective
-#include "StdAfx.h"
+#include "extfemio_stdafx.h"
+
 
 #include "extfem_misc.h"
 
@@ -15,6 +16,7 @@
 namespace {
     const char cID_fem_type_bounds[] _EXTFEMIO_UNUSED =
         "@(#) $Id$";
+
 }
 
 #include "fem/type_bounds.h"

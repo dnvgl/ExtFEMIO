@@ -20,7 +20,7 @@
    Detailed description
 */
 
-#include "StdAfx.h"
+#include "extfemio_stdafx.h"
 
 #line 26 "/data/tmp/berhol/ExtFEMIO/tools/templates/fem_elements.cpp"
 
