@@ -1,0 +1,26 @@
+# -*- mode: org -*-
+#+STARTUP: showall
+#+OPTIONS: H:6
+#+OPTIONS: toc:6
+#+LATEX_CLASS: dnvglartcl
+#+LATEX_HEADER: \usepackage{tabu}
+#+LATEX_HEADER: \usepackage{booktabs}
+#+LATEX_HEADER: \graphicspath{{../images/}}
+#+LATEX_HEADER: \let\strcmp\pdfstrcmp
+#+LATEX_HEADER: \setcounter{secnumdepth}{6}
+#+ATTR_LATEX: :booktabs t
+#+HTML_MATHJAX: align: left indent: 5em tagside: left font: Neo-Euler
+#+TITLE: Mapping of element types between Poseidon and FEM
+
+* Mapping information
+
+|------------------------------------+----------------------|
+| Poseidon element                   | FEM element          |
+|------------------------------------+----------------------|
+| =b_beams=                          | =BEAS= (15)          |
+| =b_plane_stress_elements= (3 Node) | =CSTA= (3)           |
+| =b_plane_stress_elements= (4 Node) | =LQUA= (9)           |
+| =b_shells= (3 Node)                | =FTRS= / =FFTR= (25) |
+| =b_shells= (4 Node)                | =FQUS= / =FFQ= (24)  |
+| =b_trusses=                        | =TESS= (10)          |
+| =b_boundaries=                     | not yet              |
