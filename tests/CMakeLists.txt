@@ -18,7 +18,7 @@ FUNCTION(my_add_test inp)
       PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "${CMAKE_SOURCE_DIR}/include/extfemio_stdafx.h")
   endif()
   add_test(NAME ${NAME}
-    COMMAND ${COMMAND} --break --reporter junit --out ${COMMAND}_junit.xml)
+    COMMAND ${COMMAND} --success --break --reporter junit --out ${COMMAND}_junit.xml)
   # Timeout after 5 seconds to catch enless loops.
   set_tests_properties(${NAME} PROPERTIES TIMEOUT 5.)
 ENDFUNCTION()
