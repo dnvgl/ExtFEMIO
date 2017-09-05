@@ -19,7 +19,6 @@
 
    Detailed description
 */
-#include "extfemio_stdafx.h"
 
 #include "extfem_misc.h"
 
@@ -31,10 +30,8 @@ namespace {
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
 
-#ifndef EXTFEM_POS_TEST
 // This tells Catch to provide a main() - only do this in one cpp file
 #define CATCH_CONFIG_MAIN
-#endif
 
 #include <deque>
 #include <memory>

@@ -19,8 +19,7 @@
 
    Detailed description
 */
-
-#include "StdAfx.h"
+#include "extfemio_stdafx.h"
 
 {% line %}
 
