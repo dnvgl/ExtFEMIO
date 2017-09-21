@@ -4,30 +4,26 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2017-07-28 Fr 11:55 -->
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Cross section descriptions for FE programs</title>
-<meta name="generator" content="Org mode" />
-<meta name="author" content="Berthold Höllmann" />
+<!-- 2017-09-21 Do 12:03 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Berthold Höllmann" />
+<meta  name="description" content="Comparing description of cross section definitions for several FE programs."
+ />
+<meta  name="keywords" content="BMF FEM BDF Poseidon GLFrame Sesam Nastran" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
+  .title  { text-align: center; }
   .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
+  .done   { color: green; }
   .tag    { background-color: #eee; font-family: monospace;
             padding: 2px; font-size: 80%; font-weight: normal; }
   .timestamp { color: #bebebe; }
   .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
   .underline { text-decoration: underline; }
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
@@ -54,110 +50,27 @@
     border: 1px solid black;
   }
   pre.src:hover:before { display: inline;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
   pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
 
   table { border-collapse:collapse; }
   caption.t-above { caption-side: top; }
   caption.t-bottom { caption-side: bottom; }
   td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
   dt { font-weight: bold; }
-  .footpara { display: inline; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
@@ -177,7 +90,6 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
 <script type="text/javascript">
@@ -185,7 +97,7 @@
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012-2017 Free Software Foundation, Inc.
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -234,29 +146,30 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orga8ce2d4">1. Beam direction</a>
+<li><a href="#sec-1">1. Beam direction</a>
 <ul>
-<li><a href="#org73016e9">1.1. POSEIDON</a></li>
-<li><a href="#org71db95a">1.2. Sesam</a></li>
-<li><a href="#org3c7693b">1.3. NASTRAN</a></li>
+<li><a href="#sec-1-1">1.1. POSEIDON</a></li>
+<li><a href="#sec-1-2">1.2. Sesam</a></li>
+<li><a href="#sec-1-3">1.3. NASTRAN</a></li>
 </ul>
 </li>
-<li><a href="#orgad5e86c">2. Describing beam cross sections in POSEIDON, Sesam, and Patran</a>
+<li><a href="#sec-2">2. Describing beam cross sections in POSEIDON, Sesam, and Patran</a>
 <ul>
-<li><a href="#org087356f">2.1. Flat bar</a></li>
-<li><a href="#orgaab86f3">2.2. L bar</a></li>
-<li><a href="#org8539365">2.3. T beam</a></li>
-<li><a href="#org47eec1e">2.4. HP profile</a></li>
+<li><a href="#sec-2-1">2.1. Flat bar</a></li>
+<li><a href="#sec-2-2">2.2. L bar</a></li>
+<li><a href="#sec-2-3">2.3. T beam</a></li>
+<li><a href="#sec-2-4">2.4. HP profile</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orga8ce2d4" class="outline-2">
-<h2 id="orga8ce2d4"><span class="section-number-2">1</span> Beam direction</h2>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Beam direction</h2>
 <div class="outline-text-2" id="text-1">
-</div><div id="outline-container-org73016e9" class="outline-3">
-<h3 id="org73016e9"><span class="section-number-3">1.1</span> POSEIDON</h3>
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> POSEIDON</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 The <i>x</i> axis is directed along the beam, coinciding with the center
@@ -269,18 +182,18 @@ direction respectively.
 </p>
 </div>
 </div>
-<div id="outline-container-org71db95a" class="outline-3">
-<h3 id="org71db95a"><span class="section-number-3">1.2</span> Sesam</h3>
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Sesam</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 The <i>x</i> axis is directed along the beam, coinciding with the center
-of gravity (neutral axis) and pointing from node ``1'' to ``2''.
+ of gravity (neutral axis) and pointing from node ``1'' to ``2''.
 The <code>GUNIVEC</code> record defines local <i>z</i> axis.
 </p>
 </div>
 </div>
-<div id="outline-container-org3c7693b" class="outline-3">
-<h3 id="org3c7693b"><span class="section-number-3">1.3</span> NASTRAN</h3>
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> NASTRAN</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 The <i>x</i> axis is directed along the beam, coinciding with the shear
@@ -290,103 +203,96 @@ center and pointing from node ``A'' to ``B''. <code>G0</code>, or <code>X1</code
 </div>
 </div>
 </div>
-<div id="outline-container-orgad5e86c" class="outline-2">
-<h2 id="orgad5e86c"><span class="section-number-2">2</span> Describing beam cross sections in POSEIDON, Sesam, and Patran</h2>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Describing beam cross sections in POSEIDON, Sesam, and Patran</h2>
 <div class="outline-text-2" id="text-2">
-</div><div id="outline-container-org087356f" class="outline-3">
-<h3 id="org087356f"><span class="section-number-3">2.1</span> Flat bar</h3>
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Flat bar</h3>
 <div class="outline-text-3" id="text-2-1">
 
-<div id="org436e9c6" class="figure">
-<p><object type="image/svg+xml" data="./asy/poseidon_beam_fb.svg" class="org-svg">
-Sorry, your browser does not support SVG.</object>
+<div id="fig:FB:Poseidon" class="figure">
+<p><img src="./asy/poseidon_beam_fb.svg" alt="poseidon_beam_fb.svg" height="200px align=&quot;right&quot;" />
 </p>
-<p><span class="figure-number">Figure 1: </span><code>FB</code>: Cross section dimensions in an POSEIDON flat bar.</p>
+<p><span class="figure-number">Figure 1:</span> <b>FB</b>: Cross section dimensions in an POSEIDON flat bar.</p>
 </div>
 
 
-<div id="org604ff61" class="figure">
-<p><object type="image/svg+xml" data="./asy/gbarm.svg" class="org-svg">
-Sorry, your browser does not support SVG.</object>
+<div id="fig:FB:Sesam" class="figure">
+<p><img src="./asy/gbarm.svg" alt="gbarm.svg" />
 </p>
-<p><span class="figure-number">Figure 2: </span><code>GBARM</code>: Cross section dimensions in Sesam massive bar.</p>
+<p><span class="figure-number">Figure 2:</span> <b>GBARM</b>: Cross section dimensions in Sesam massive bar.</p>
 </div>
 
 
-<div id="org8096282" class="figure">
-<p><object type="image/svg+xml" data="./asy/nastran_beam_fb.svg" class="org-svg">
-Sorry, your browser does not support SVG.</object>
+<div id="fig:FB:NASTRAN" class="figure">
+<p><img src="./asy/nastran_beam_fb.svg" alt="nastran_beam_fb.svg" />
 </p>
-<p><span class="figure-number">Figure 3: </span><code>FB</code>: Cross section dimensions in a NASTRAN flat bar.</p>
+<p><span class="figure-number">Figure 3:</span> <b>FB</b>: Cross section dimensions in a NASTRAN flat bar.</p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgaab86f3" class="outline-3">
-<h3 id="orgaab86f3"><span class="section-number-3">2.2</span> L bar</h3>
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> L bar</h3>
 <div class="outline-text-3" id="text-2-2">
 
-<div id="org891804d" class="figure">
-<p><object type="image/svg+xml" data="./asy/poseidon_beam_l.svg" class="org-svg">
-Sorry, your browser does not support SVG.</object>
+<div id="fig:L:Poseidon" class="figure">
+<p><img src="./asy/poseidon_beam_l.svg" alt="poseidon_beam_l.svg" />
 </p>
-<p><span class="figure-number">Figure 4: </span><code>L</code>: Cross section dimensions in a POSEIDON L profile section.</p>
+<p><span class="figure-number">Figure 4:</span> <b>L</b>: Cross section dimensions in a POSEIDON L profile section.</p>
 </div>
 
 
-<div id="orge68de9b" class="figure">
-<p><object type="image/svg+xml" data="./asy/glsec.svg" class="org-svg">
-Sorry, your browser does not support SVG.</object>
+<div id="fig:L:Sesam" class="figure">
+<p><img src="./asy/glsec.svg" alt="glsec.svg" />
 </p>
-<p><span class="figure-number">Figure 5: </span><code>GLSEC</code>: Cross section dimensions in a Sesam L profile section.</p>
+<p><span class="figure-number">Figure 5:</span> <b>GLSEC</b>: Cross section dimensions in a Sesam L profile section.</p>
 </div>
 
 
-<div id="org235e37f" class="figure">
-<p><object type="image/svg+xml" data="./asy/nastran_beam_l.svg" class="org-svg">
-Sorry, your browser does not support SVG.</object>
+<div id="fig:L:NASTRAN" class="figure">
+<p><img src="./asy/nastran_beam_l.svg" alt="nastran_beam_l.svg" />
 </p>
-<p><span class="figure-number">Figure 6: </span><code>L</code>: Cross section dimensions in a Nastran L profile section.</p>
+<p><span class="figure-number">Figure 6:</span> <b>L</b>: Cross section dimensions in a Nastran L profile section.</p>
 </div>
 </div>
 </div>
-<div id="outline-container-org8539365" class="outline-3">
-<h3 id="org8539365"><span class="section-number-3">2.3</span> T beam</h3>
+
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> T beam</h3>
 <div class="outline-text-3" id="text-2-3">
 
-<div id="org0a2f07e" class="figure">
-<p><object type="image/svg+xml" data="./asy/poseidon_beam_t.svg" class="org-svg">
-Sorry, your browser does not support SVG.</object>
+<div id="fig:T:Poseidon" class="figure">
+<p><img src="./asy/poseidon_beam_t.svg" alt="poseidon_beam_t.svg" />
 </p>
-<p><span class="figure-number">Figure 7: </span><code>T</code>: Cross section dimensions in a Poseidon T profile section.</p>
+<p><span class="figure-number">Figure 7:</span> <b>T</b>: Cross section dimensions in a Poseidon T profile section.</p>
 </div>
 
 
-<div id="orgc96e732" class="figure">
-<p><object type="image/svg+xml" data="./asy/giorh.svg" class="org-svg">
-Sorry, your browser does not support SVG.</object>
+<div id="fig:T:Sesam" class="figure">
+<p><img src="./asy/giorh.svg" alt="giorh.svg" />
 </p>
-<p><span class="figure-number">Figure 8: </span><code>GIORH</code>: Cross section dimensions in a Sesam GIORH profile section (used to model T sections).</p>
+<p><span class="figure-number">Figure 8:</span> <b>GIORH</b>: Cross section dimensions in a Sesam GIORH profile section (used to model T sections).</p>
 </div>
 
 
-<div id="org77a9a24" class="figure">
-<p><object type="image/svg+xml" data="./asy/nastran_beam_t.svg" class="org-svg">
-Sorry, your browser does not support SVG.</object>
+<div id="fig:T:NASTRAN" class="figure">
+<p><img src="./asy/nastran_beam_t.svg" alt="nastran_beam_t.svg" />
 </p>
-<p><span class="figure-number">Figure 9: </span><code>T</code>: Cross section dimensions in a Nastran T profile section.</p>
+<p><span class="figure-number">Figure 9:</span> <b>T</b>: Cross section dimensions in a Nastran T profile section.</p>
 </div>
 </div>
 </div>
-<div id="outline-container-org47eec1e" class="outline-3">
-<h3 id="org47eec1e"><span class="section-number-3">2.4</span> HP profile</h3>
+
+<div id="outline-container-sec-2-4" class="outline-3">
+<h3 id="sec-2-4"><span class="section-number-3">2.4</span> HP profile</h3>
 <div class="outline-text-3" id="text-2-4">
 
-<div id="org264356f" class="figure">
-<p><object type="image/svg+xml" data="./asy/poseidon_beam_hp.svg" class="org-svg">
-Sorry, your browser does not support SVG.</object>
+<div id="fig:HP:Poseidon" class="figure">
+<p><img src="./asy/poseidon_beam_hp.svg" alt="poseidon_beam_hp.svg" />
 </p>
-<p><span class="figure-number">Figure 10: </span><code>HP</code>: Cross section dimensions in a POSEIDON HP profile section.</p>
+<p><span class="figure-number">Figure 10:</span> <b>HP</b>: Cross section dimensions in a POSEIDON HP profile section.</p>
 </div>
 </div>
 </div>
@@ -394,7 +300,9 @@ Sorry, your browser does not support SVG.</object>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Berthold Höllmann</p>
-<p class="date">Created: 2017-07-28 Fr 11:55</p>
+<p class="email">Email: <a href="mailto:berthold.hoellmann@dnvgl.com">berthold.hoellmann@dnvgl.com</a></p>
+<p class="date">Created: 2017-09-21 Do 12:03</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.2.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
