@@ -31,6 +31,7 @@ sol::sol(
     sol_no(sol_no) {}
 
 std::ostream &sol::put(std::ostream &os) const {
+    os.imbue(std::locale::classic());
     return os << "SOL "
         << sol_no_type_conv::to_long(this->sol_no)
         << std::endl;

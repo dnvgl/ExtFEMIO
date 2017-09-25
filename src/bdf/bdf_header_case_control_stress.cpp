@@ -42,6 +42,7 @@ stress::stress(
     stress(describers, restype::n, res) {}
 
 ostream &stress::put(ostream &os) const {
+    os.imbue(std::locale::classic());
     os << "STRESS";
     if (this->describers.size() > 0) {
         bool first = true;

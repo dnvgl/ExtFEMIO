@@ -29,6 +29,7 @@ subcase::subcase(long const n) : n(n) {
 subcase::subcase() : n(++max_n) {}
 
 std::ostream &subcase::put(std::ostream &os) const {
+    os.imbue(std::locale::classic());
     return os << "SUBCASE = " << this->n << std::endl;
 }
 

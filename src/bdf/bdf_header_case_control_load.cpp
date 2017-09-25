@@ -23,6 +23,7 @@ using namespace dnvgl::extfem::bdf::header::case_control;
 load::load(long const n) : n(n) {}
 
 std::ostream &load::put(std::ostream &os) const {
+    os.imbue(std::locale::classic());
     os << "LOAD = " << this->n;
     return os << std::endl;
 }

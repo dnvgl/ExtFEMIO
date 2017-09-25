@@ -40,6 +40,7 @@ spcforces::spcforces(
     spcforces(describers, restype::n, res) {}
 
 ostream &spcforces::put(ostream &os) const {
+    os.imbue(std::locale::classic()); 
     os << "SPCFORCES";
     if (this->describers.size() > 0) {
         bool first = true;

@@ -41,6 +41,7 @@ displacement::displacement(
     displacement(describers, restype::n, res) {}
 
 ostream &displacement::put(ostream &os) const {
+    os.imbue(std::locale::classic());
     os << "DISPLACEMENT";
     if (this->describers.size() > 0) {
         auto first = true;
@@ -137,6 +138,7 @@ value(value) {}
 std::string displacement::tm::str() const {
     ostringstream res(
         "TM = ", ostringstream::ate);
+    res.imbue(std::locale::classic());
     res << value;
     return res.str();
 }
@@ -146,6 +148,7 @@ value(value) {}
 std::string displacement::t1::str() const {
     ostringstream res(
         "T1 = ", ostringstream::ate);
+    res.imbue(std::locale::classic());
     res << value;
     return res.str();
 }
@@ -155,6 +158,7 @@ value(value) {}
 std::string displacement::t2::str() const {
     ostringstream res(
         "T2 = ", ostringstream::ate);
+    res.imbue(std::locale::classic());
     res << value;
     return res.str();
 }
@@ -164,6 +168,7 @@ value(value) {}
 std::string displacement::t3::str() const {
     ostringstream res(
         "T3 = ", ostringstream::ate);
+    res.imbue(std::locale::classic());
     res << value;
     return res.str();
 }
@@ -173,6 +178,7 @@ value(value) {}
 std::string displacement::rm::str() const {
     ostringstream res(
         "RM = ", ostringstream::ate);
+    res.imbue(std::locale::classic());
     res << value;
     return res.str();
 }
@@ -182,6 +188,7 @@ value(value) {}
 std::string displacement::r1::str() const {
     ostringstream res(
         "R1 = ", ostringstream::ate);
+    res.imbue(std::locale::classic());
     res << value;
     return res.str();
 }
@@ -191,6 +198,7 @@ value(value) {}
 std::string displacement::r2::str() const {
     ostringstream res(
         "R2 = ", ostringstream::ate);
+    res.imbue(std::locale::classic());
     res << value;
     return res.str();
 }
@@ -200,6 +208,7 @@ value(value) {}
 std::string displacement::r3::str() const {
     ostringstream res(
         "R3 = ", ostringstream::ate);
+    res.imbue(std::locale::classic());
     res << value;
     return res.str();
 }
@@ -208,6 +217,7 @@ displacement::f::f(double &value) : value(value) {}
 std::string displacement::f::str() const {
     ostringstream res(
         "F = ", ostringstream::ate);
+    res.imbue(std::locale::classic());
     res << value;
     return res.str();
 }
