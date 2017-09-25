@@ -533,6 +533,9 @@ Defines acceleration vectors for gravity or other acceleration loading.
                     types card_type() const override;
                     void read(std::list<std::string> const &) override;
                     card const &operator() (const std::list<std::string> &) override;
+                    void setN1(double iN1);
+                    void setN2(double iN1);
+                    void setN3(double iN1);
 
                 private:
 

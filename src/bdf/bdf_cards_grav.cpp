@@ -10,6 +10,7 @@
 
 #include "extfem_misc.h"
 #include "bdf/cards_loads.h"
+ #include "bdf/errors.h"
 
 // ID:
 namespace {
@@ -143,6 +144,27 @@ end:;
 
 cards::types grav::card_type() const {
     return types::GRAV;
+}
+
+void grav::setN1(double iN1) {
+    if ((N1.value != 0.) && (iN1 != N1.value))
+        throw dnvgl::extfem::bdf::errors::usage_error(
+            "GRAV", "N1 alread set with different value.");
+    N1 = iN1;
+}
+
+void grav::setN2(double iN2) {
+    if ((N2.value != 0.) && (iN2 != N2.value))
+        throw dnvgl::extfem::bdf::errors::usage_error(
+            "GRAV", "N2 alread set with different value.");
+    N2 = iN2;
+}
+
+void grav::setN3(double iN3) {
+    if ((N3.value != 0.) && (iN3 != N3.value))
+        throw dnvgl::extfem::bdf::errors::usage_error(
+            "GRAV", "N3 alread set with different value.");
+    N3 = iN3;
 }
 
 void grav::collect_outdata(

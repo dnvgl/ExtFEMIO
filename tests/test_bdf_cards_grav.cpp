@@ -117,6 +117,23 @@ TEST_CASE("BDF GRAV types output.", "[bdf_grav,out]" ) {
                 "GRAV           5       37.000+008.000+009.000+001.000+01       7\n");
     }
 
+    SECTION("sequential set") {
+        grav probe;
+        test << probe;
+        probe.SID.value = 22;
+        probe.A = 10.;
+        probe.setN1(1.);
+        probe.setN2(1.);
+        probe.setN3(1.);
+        test << probe;
+        CHECK(test.str() ==
+                "GRAV          22       01.000+011.000+001.000+001.000+00\n");
+        probe.setN1(1.);
+        CHECK_THROWS(probe.setN1(2.));
+        CHECK_THROWS(probe.setN2(2.));
+        CHECK_THROWS(probe.setN3(2.));
+    }
+
 }
 
 // Local Variables:
