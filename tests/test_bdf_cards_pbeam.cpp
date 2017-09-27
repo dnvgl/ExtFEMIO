@@ -26,6 +26,8 @@ namespace {
 
 #include "bdf/cards.h"
 
+#include "catch_vector_helper.h"
+
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -42,7 +44,9 @@ TEST_CASE("BDF PBEAM definitions (Small Field Format).", "[bdf_pbeam]") {
     std::list<std::string> data({
             //       PID     MID     A       I1      I2      I12     J
             // 34567A1234567B1234567C1234567D1234567E1234567F1234567G1234567H1234567I
-            "PBEAM    4000001       3 1.046+4 9.369+7 1.694+6 6.856+6 1.316+6        \n"});
+            "PBEAM    4000001       3 1.046+4 9.369+7 1.694+6 6.856+6 1.316+6        \n",
+            "         \n",
+            "         NO       1.+0\n"});
     std::list<std::string> lines;
     __base::card::card_split(data, lines);
     pbeam probe(lines);
@@ -51,11 +55,14 @@ TEST_CASE("BDF PBEAM definitions (Small Field Format).", "[bdf_pbeam]") {
 
     CHECK(long(probe.PID) == 4000001);
     CHECK(long(probe.MID) == 3);
-    CHECK(probe.A == vector<double>({10460.}));
-    CHECK(probe.I1 == vector<double>({93690000.}));
-    CHECK(probe.I2 == vector<double>({1694000.}));
-    CHECK(probe.I12 == vector<double>({6.856e6}));
-    CHECK(probe.J == vector<double>({1.316e6}));
+    CHECK(probe.A == vector<double>({10460., 10460.}));
+    CHECK(probe.I1 == vector<double>({93690000., 93690000.}));
+    CHECK(probe.I2 == vector<double>({1694000., 1694000.}));
+    CHECK(probe.I12 == vector<double>({6.856e6, 6.856e6}));
+    CHECK(probe.J == vector<double>({1.316e6, 1.316e6}));
+    CHECK_THAT(vector<std::string>(probe.SO.begin(), probe.SO.end()),
+               IsEqual(vector<std::string>(1, "NO")));
+    CHECK(probe.X_XB == vector<double>({1.}));
 }
 
 TEST_CASE("BDF PBEAM definitions (Small Field Format 2).", "[bdf_pbeam]") {
@@ -64,7 +71,9 @@ TEST_CASE("BDF PBEAM definitions (Small Field Format 2).", "[bdf_pbeam]") {
     std::list<std::string> data({
             //       PID     MID     A       I1      I2      I12     J
             // 34567A1234567B1234567C1234567D1234567E1234567F1234567G1234567H1234567I
-            "PBEAM   4000001 3       1.046+4 9.369+7 1.694+6 6.856+6 1.316+6\n"});
+            "PBEAM   4000001 3       1.046+4 9.369+7 1.694+6 6.856+6 1.316+6\n",
+            "         \n",
+            "         NO       1.+0\n"});
     std::list<std::string> lines;
     __base::card::card_split(data, lines);
     pbeam probe(lines);
@@ -73,17 +82,21 @@ TEST_CASE("BDF PBEAM definitions (Small Field Format 2).", "[bdf_pbeam]") {
 
     CHECK(long(probe.PID) == 4000001);
     CHECK(long(probe.MID) == 3);
-    CHECK(probe.A == vector<double>({10460.}));
-    CHECK(probe.I1 == vector<double>({93690000.}));
-    CHECK(probe.I2 == vector<double>({1694000.}));
-    CHECK(probe.I12 == vector<double>({6.856e6}));
-    CHECK(probe.J == vector<double>({1.316e6}));
+    CHECK(probe.A == vector<double>({10460., 10460.}));
+    CHECK(probe.I1 == vector<double>({93690000., 93690000.}));
+    CHECK(probe.I2 == vector<double>({1694000., 1694000.}));
+    CHECK(probe.I12 == vector<double>({6.856e6, 6.856e6}));
+    CHECK(probe.J == vector<double>({1.316e6, 1.316e6}));
+    CHECK_THAT(vector<std::string>(probe.SO.begin(), probe.SO.end()),
+               IsEqual(vector<string>(1, "NO")));
+    CHECK(probe.X_XB == vector<double>({1.}));
 }
 
 TEST_CASE("BDF PBEAM definitions (Free Field Format 1).", "[bdf_pbeam]") {
 
     std::list<std::string> data({
-            "PBEAM,1,2,3.,4.,5.,6.,7.,8.,9.,10.,11.,12.,13.,14.,15.,16.\n"});
+            "PBEAM,1,2,3.,4.,5.,6.,7.,8.,9.,10.,11.,12.,13.,14.,15.,16.,\n",
+            ",NO,1.\n"});
     std::list<std::string> lines;
     __base::card::card_split(data, lines);
     pbeam probe(lines);
@@ -92,20 +105,23 @@ TEST_CASE("BDF PBEAM definitions (Free Field Format 1).", "[bdf_pbeam]") {
 
     CHECK(long(probe.PID) == 1);
     CHECK(long(probe.MID) == 2);
-    CHECK(probe.A == vector<double>({3.}));
-    CHECK(probe.I1 == vector<double>({4.}));
-    CHECK(probe.I2 == vector<double>({5.}));
-    CHECK(probe.I12 == vector<double>({6.}));
-    CHECK(probe.J == vector<double>({7.}));
-    CHECK(probe.NSM == vector<double>({8.}));
-    CHECK(probe.C1 == vector<double>({9.}));
-    CHECK(probe.C2 == vector<double>({10.}));
-    CHECK(probe.D1 == vector<double>({11.}));
-    CHECK(probe.D2 == vector<double>({12.}));
-    CHECK(probe.E1 == vector<double>({13.}));
-    CHECK(probe.E2 == vector<double>({14.}));
-    CHECK(probe.F1 == vector<double>({15.}));
-    CHECK(probe.F2 == vector<double>({16.}));
+    CHECK(probe.A == vector<double>({3., 3.}));
+    CHECK(probe.I1 == vector<double>({4., 4.}));
+    CHECK(probe.I2 == vector<double>({5., 5.}));
+    CHECK(probe.I12 == vector<double>({6., 6.}));
+    CHECK(probe.J == vector<double>({7., 7.}));
+    CHECK(probe.NSM == vector<double>({8., 8.}));
+    CHECK(probe.C1 == vector<double>({9., 0.}));
+    CHECK(probe.C2 == vector<double>({10., 0.}));
+    CHECK(probe.D1 == vector<double>({11., 0.}));
+    CHECK(probe.D2 == vector<double>({12., 0.}));
+    CHECK(probe.E1 == vector<double>({13., 0.}));
+    CHECK(probe.E2 == vector<double>({14., 0.}));
+    CHECK(probe.F1 == vector<double>({15., 0.}));
+    CHECK(probe.F2 == vector<double>({16., 0.}));
+    CHECK_THAT(vector<std::string>(probe.SO.begin(), probe.SO.end()),
+               IsEqual(vector<string>(1, "NO")));
+    CHECK(probe.X_XB == vector<double>({1.}));
 }
 
 TEST_CASE("BDF PBEAM definitions (Free Field Format 2).", "[bdf_pbeam]") {
@@ -113,8 +129,8 @@ TEST_CASE("BDF PBEAM definitions (Free Field Format 2).", "[bdf_pbeam]") {
 
     std::list<std::string> data({
             "PBEAM,1,2,3.,4.,5.,6.,7.,8.,9.,10.,11.,12.,13.,14.,15.,16.,\n",
-            ",YES,18.,19.,20.,21.,22.,23.,24.,25.,26.,27.,28.,29.,30.,31.,32.,\n",
-            ",NO,34.,35.,36.,37.,38.,39.,40.,41.,42.,43.,44.,45.,46.,47.,48.,\n",
+            ",YES,.5,19.,20.,21.,22.,23.,24.,25.,26.,27.,28.,29.,30.,31.,32.,\n",
+            ",NO,1.,35.,36.,37.,38.,39.,40.,41.,42.,43.,44.,45.,46.,47.,48.,\n",
             ",49.,50.,51.,52.,53.,54.,55.,56.,57.,58.,59.,60.,61.,62.,63.,64.\n"});
     std::list<std::string> lines;
     __base::card::card_split(data, lines);
@@ -125,13 +141,9 @@ TEST_CASE("BDF PBEAM definitions (Free Field Format 2).", "[bdf_pbeam]") {
     CAPTURE( data.front() );
 
     CHECK(long(probe.PID) == 1);
-    CHECK(long(probe.MID) == 2);
-    vector<std::string> ref({"YES", "NO"});
-    for (auto p : probe.SO) {
-        CHECK(p == ref.front());
-        ref.erase(ref.begin());
-    }
-    CHECK(probe.X_XB == vector<double>({18., 34.}));
+    CHECK_THAT(vector<std::string>(probe.SO.begin(), probe.SO.end()),
+               IsEqual(vector<string>({"YES", "NO"})));
+    CHECK(probe.X_XB == vector<double>({.5, 1.}));
     CHECK(probe.A == vector<double>({3., 19., 35.}));
     CHECK(probe.I1 == vector<double>({4., 20., 36.}));
     CHECK(probe.I2 == vector<double>({5., 21., 37.}));
@@ -213,8 +225,8 @@ TEST_CASE("BDF PBEAM definitions (Tapered Beam).", "[bdf_pbeam]") {
     CHECK(probe.E2 == vector<double>({0., 0.}));
     CHECK(probe.F1 == vector<double>({0., 0.}));
     CHECK(probe.F2 == vector<double>({0., 0.}));
-    CHECK(vector<std::string>(probe.SO.begin(), probe.SO.end()) ==
-          vector<string>(1, "YES"));
+    CHECK_THAT(vector<std::string>(probe.SO.begin(), probe.SO.end()),
+               IsEqual(vector<string>(1, "YES")));
     CHECK(probe.X_XB == vector<double>({1.}));
     CHECK(double(probe.K1) == 1.);
     CHECK(double(probe.K2) == 1.);
@@ -317,9 +329,8 @@ TEST_CASE("BDF PBEAM roundtrip test", "[bdf_pbeam]") {
         CHECK(probe.E2 == std::vector<double>({12., 13.}));
         CHECK(probe.F1 == std::vector<double>({13., 14.}));
         CHECK(probe.F2 == std::vector<double>({14., 15.}));
-        for (auto pos : probe.SO) {
-            CHECK(pos.value == "YESA");
-        }
+        CHECK_THAT(vector<std::string>(probe.SO.begin(), probe.SO.end()),
+               IsEqual(vector<string>(1, "YESA")));
         CHECK(probe.X_XB == std::vector<double> {16.});
         CHECK(double(probe.K1) == 17.);
         CHECK(double(probe.K2) == 18.);
@@ -426,9 +437,8 @@ TEST_CASE("BDF PBEAM roundtrip test (reuse)", "[bdf_pbeam]") {
         CHECK(probe.E2 == std::vector<double>({12., 13.}));
         CHECK(probe.F1 == std::vector<double>({13., 14.}));
         CHECK(probe.F2 == std::vector<double>({14., 15.}));
-        for (auto pos : probe.SO) {
-            CHECK(pos == "YESA");
-        }
+        CHECK_THAT(vector<std::string>(probe.SO.begin(), probe.SO.end()),
+               IsEqual(vector<string>(1, "YESA")));
         CHECK(probe.X_XB == std::vector<double> {16.});
         CHECK(double(probe.K1) == 17.);
         CHECK(double(probe.K2) == 18.);
@@ -454,20 +464,22 @@ TEST_CASE("BDF PBEAM roundtrip test (no taper)", "[bdf_pbeam]") {
     std::ostringstream test;
 
     long PID{7869}, MID{104010};
-    std::vector<double> A{1.};
-    std::vector<double> I1{2.};
-    std::vector<double> I2{3.};
-    std::vector<double> I12{4.};
-    std::vector<double> J{5.};
-    std::vector<double> NSM{6.};
-    std::vector<double> C1{7.};
-    std::vector<double> C2{8.};
-    std::vector<double> D1{9.};
-    std::vector<double> D2{10.};
-    std::vector<double> E1{11.};
-    std::vector<double> E2{12.};
-    std::vector<double> F1{13.};
-    std::vector<double> F2{14.};
+    std::vector<double> A{1., 1.};
+    std::vector<double> I1{2., 2.};
+    std::vector<double> I2{3., 3.};
+    std::vector<double> I12{4., 4.};
+    std::vector<double> J{5., 5.};
+    std::vector<double> NSM{6., 6.};
+    std::vector<double> C1{7., 7.};
+    std::vector<double> C2{8., 8.};
+    std::vector<double> D1{9., 9.};
+    std::vector<double> D2{10., 10.};
+    std::vector<double> E1{11., 11.};
+    std::vector<double> E2{12., 12.};
+    std::vector<double> F1{13., 13.};
+    std::vector<double> F2{14., 14.};
+    std::vector<std::string> SO(1, "YESA");
+    std::vector<double> X_XB(1, 1.);
     double K1{17.};
     double K2{18.};
     double S1{19.};
@@ -487,7 +499,7 @@ TEST_CASE("BDF PBEAM roundtrip test (no taper)", "[bdf_pbeam]") {
 
     pbeam probe(&PID, &MID, &A, &I1, &I2, &I12, &J, &NSM,
                 &C1, &C2, &D1, &D2, &E1, &E2, &F1, &F2,
-                nullptr, nullptr,
+                &SO, &X_XB,
                 &K1, &K2, &S1, &S2, &NSI_A, &NSI_B, &CW_A, &CW_B,
                 &M1_A, &M2_A, &M1_B, &M2_B, &N1_A, &N2_A, &N1_B, &N2_B);
     test << probe;
@@ -496,6 +508,8 @@ TEST_CASE("BDF PBEAM roundtrip test (no taper)", "[bdf_pbeam]") {
         CHECK(test.str() ==
               "PBEAM       7869  1040101.000+002.000+003.000+004.000+005.000+006.000+00\n"
               "        7.000+008.000+009.000+001.000+011.100+011.200+011.300+011.400+01\n"
+              "        YESA    1.000+00                                                \n"
+              "                                                                        \n"
               "        1.700+011.800+011.900+012.000+012.100+012.200+012.300+012.400+01\n"
               "        2.500+012.600+012.700+012.800+012.900+013.000+013.100+013.200+01\n");
     }
@@ -514,22 +528,23 @@ TEST_CASE("BDF PBEAM roundtrip test (no taper)", "[bdf_pbeam]") {
 
         CHECK(long(probe_l.PID) == 7869);
         CHECK(long(probe_l.MID) == 104010);
-        CHECK(probe.A == std::vector<double>({1.}));
-        CHECK(probe.I1 == std::vector<double>({2.}));
-        CHECK(probe.I2 == std::vector<double>({3.}));
-        CHECK(probe.I12 == std::vector<double>({4.}));
-        CHECK(probe.J == std::vector<double>({5.}));
-        CHECK(probe.NSM == std::vector<double>({6.}));
-        CHECK(probe.C1 == std::vector<double>({7.}));
-        CHECK(probe.C2 == std::vector<double>({8.}));
-        CHECK(probe.D1 == std::vector<double>({9.}));
-        CHECK(probe.D2 == std::vector<double>({10.}));
-        CHECK(probe.E1 == std::vector<double>({11.}));
-        CHECK(probe.E2 == std::vector<double>({12.}));
-        CHECK(probe.F1 == std::vector<double>({13.}));
-        CHECK(probe.F2 == std::vector<double>({14.}));
-        CHECK(probe.SO.size() == 0);
-        CHECK(probe.X_XB.size() == 0);
+        CHECK(probe.A == std::vector<double>({1., 1.}));
+        CHECK(probe.I1 == std::vector<double>({2., 2.}));
+        CHECK(probe.I2 == std::vector<double>({3., 3.}));
+        CHECK(probe.I12 == std::vector<double>({4., 4.}));
+        CHECK(probe.J == std::vector<double>({5., 5.}));
+        CHECK(probe.NSM == std::vector<double>({6., 6.}));
+        CHECK(probe.C1 == std::vector<double>({7., 7.}));
+        CHECK(probe.C2 == std::vector<double>({8., 8.}));
+        CHECK(probe.D1 == std::vector<double>({9., 9.}));
+        CHECK(probe.D2 == std::vector<double>({10., 10}));
+        CHECK(probe.E1 == std::vector<double>({11., 11}));
+        CHECK(probe.E2 == std::vector<double>({12., 12}));
+        CHECK(probe.F1 == std::vector<double>({13., 13}));
+        CHECK(probe.F2 == std::vector<double>({14., 14}));
+        CHECK_THAT(vector<std::string>(probe.SO.begin(), probe.SO.end()),
+               IsEqual(vector<string>(1, "YESA")));
+        CHECK(probe.X_XB == std::vector<double>({1.}));
         CHECK(double(probe.K1) == 17.);
         CHECK(double(probe.K2) == 18.);
         CHECK(double(probe.S1) == 19.);
@@ -555,20 +570,22 @@ TEST_CASE("BDF PBEAM roundtrip test (no taper) (reuse)", "[bdf_pbeam]") {
     std::ostringstream test;
 
     long PID{7869}, MID{104010};
-    std::vector<double> A{1.};
-    std::vector<double> I1{2.};
-    std::vector<double> I2{3.};
-    std::vector<double> I12{4.};
-    std::vector<double> J{5.};
-    std::vector<double> NSM{6.};
-    std::vector<double> C1{7.};
-    std::vector<double> C2{8.};
-    std::vector<double> D1{9.};
-    std::vector<double> D2{10.};
-    std::vector<double> E1{11.};
-    std::vector<double> E2{12.};
-    std::vector<double> F1{13.};
-    std::vector<double> F2{14.};
+    std::vector<double> A{1., 1.};
+    std::vector<double> I1{2., 2.};
+    std::vector<double> I2{3., 3.};
+    std::vector<double> I12{4., 4.};
+    std::vector<std::string> SO(1, "YESA");
+    std::vector<double> X_XB{1.};
+    std::vector<double> J{5., 5.};
+    std::vector<double> NSM{6., 6.};
+    std::vector<double> C1{7., 7.};
+    std::vector<double> C2{8., 8.};
+    std::vector<double> D1{9., 9.};
+    std::vector<double> D2{10., 10.};
+    std::vector<double> E1{11., 11.};
+    std::vector<double> E2{12., 12.};
+    std::vector<double> F1{13., 13.};
+    std::vector<double> F2{14., 14.};
     double K1{17.};
     double K2{18.};
     double S1{19.};
@@ -590,7 +607,7 @@ TEST_CASE("BDF PBEAM roundtrip test (no taper) (reuse)", "[bdf_pbeam]") {
     test << probe;
     test << probe(&PID, &MID, &A, &I1, &I2, &I12, &J, &NSM,
                   &C1, &C2, &D1, &D2, &E1, &E2, &F1, &F2,
-                  nullptr, nullptr,
+                  &SO, &X_XB,
                   &K1, &K2, &S1, &S2, &NSI_A, &NSI_B, &CW_A, &CW_B,
                   &M1_A, &M2_A, &M1_B, &M2_B, &N1_A, &N2_A, &N1_B, &N2_B);
 
@@ -598,6 +615,8 @@ TEST_CASE("BDF PBEAM roundtrip test (no taper) (reuse)", "[bdf_pbeam]") {
         CHECK(test.str() ==
               "PBEAM       7869  1040101.000+002.000+003.000+004.000+005.000+006.000+00\n"
               "        7.000+008.000+009.000+001.000+011.100+011.200+011.300+011.400+01\n"
+              "        YESA    1.000+00                                                \n"
+              "                                                                        \n"
               "        1.700+011.800+011.900+012.000+012.100+012.200+012.300+012.400+01\n"
               "        2.500+012.600+012.700+012.800+012.900+013.000+013.100+013.200+01\n");
     }
@@ -616,22 +635,23 @@ TEST_CASE("BDF PBEAM roundtrip test (no taper) (reuse)", "[bdf_pbeam]") {
 
         CHECK(long(probe_l.PID) == 7869);
         CHECK(long(probe_l.MID) == 104010);
-        CHECK(probe.A == std::vector<double>({1.}));
-        CHECK(probe.I1 == std::vector<double>({2.}));
-        CHECK(probe.I2 == std::vector<double>({3.}));
-        CHECK(probe.I12 == std::vector<double>({4.}));
-        CHECK(probe.J == std::vector<double>({5.}));
-        CHECK(probe.NSM == std::vector<double>({6.}));
-        CHECK(probe.C1 == std::vector<double>({7.}));
-        CHECK(probe.C2 == std::vector<double>({8.}));
-        CHECK(probe.D1 == std::vector<double>({9.}));
-        CHECK(probe.D2 == std::vector<double>({10.}));
-        CHECK(probe.E1 == std::vector<double>({11.}));
-        CHECK(probe.E2 == std::vector<double>({12.}));
-        CHECK(probe.F1 == std::vector<double>({13.}));
-        CHECK(probe.F2 == std::vector<double>({14.}));
-        CHECK(probe.SO.size() == 0);
-        CHECK(probe.X_XB.size() == 0);
+        CHECK(probe.A == std::vector<double>({1., 1.}));
+        CHECK(probe.I1 == std::vector<double>({2., 2.}));
+        CHECK(probe.I2 == std::vector<double>({3., 3.}));
+        CHECK(probe.I12 == std::vector<double>({4., 4.}));
+        CHECK(probe.J == std::vector<double>({5., 5.}));
+        CHECK(probe.NSM == std::vector<double>({6., 6.}));
+        CHECK(probe.C1 == std::vector<double>({7., 7.}));
+        CHECK(probe.C2 == std::vector<double>({8., 8.}));
+        CHECK(probe.D1 == std::vector<double>({9., 9.}));
+        CHECK(probe.D2 == std::vector<double>({10., 10.}));
+        CHECK(probe.E1 == std::vector<double>({11., 11.}));
+        CHECK(probe.E2 == std::vector<double>({12., 12.}));
+        CHECK(probe.F1 == std::vector<double>({13., 13.}));
+        CHECK(probe.F2 == std::vector<double>({14., 14.}));
+        CHECK_THAT(vector<std::string>(probe.SO.begin(), probe.SO.end()),
+               IsEqual(vector<string>(1, "YESA")));
+        CHECK(probe.X_XB == std::vector<double>({1.}));
         CHECK(double(probe.K1) == 17.);
         CHECK(double(probe.K2) == 18.);
         CHECK(double(probe.S1) == 19.);
@@ -656,17 +676,21 @@ TEST_CASE("BDF PBEAM roundtrip test (minimal)", "[bdf_pbeam]") {
     std::ostringstream test;
 
     long PID{7869}, MID{104010};
-    std::vector<double> A{1.};
-    std::vector<double> I1{2.};
-    std::vector<double> I2{3.};
-    std::vector<double> I12{4.};
+    std::vector<double> A{1., 1.};
+    std::vector<double> I1{2., 2.};
+    std::vector<double> I2{3., 3.};
+    std::vector<double> I12{4., 4.};
+    std::vector<std::string> SO(1, "YESA");
+    std::vector<double> X_XB(1, 1.);
 
-    pbeam probe(&PID, &MID, &A, &I1, &I2);
+    pbeam probe(&PID, &MID, &A, &I1, &I2, &SO, &X_XB);
     test << probe;
 
     SECTION("check output") {
         CHECK(test.str() ==
-              "PBEAM       7869  1040101.000+002.000+003.000+00\n");
+              "PBEAM       7869  1040101.000+002.000+003.000+00                        \n"
+              "                                                                        \n"
+              "        YESA    1.000+00\n");
     }
 
     SECTION("check reading") {
@@ -683,9 +707,9 @@ TEST_CASE("BDF PBEAM roundtrip test (minimal)", "[bdf_pbeam]") {
 
         CHECK(long(probe_l.PID) == 7869);
         CHECK(long(probe_l.MID) == 104010);
-        CHECK(probe.A == std::vector<double>({1.}));
-        CHECK(probe.I1 == std::vector<double>({2.}));
-        CHECK(probe.I2 == std::vector<double>({3.}));
+        CHECK(probe.A == std::vector<double>({1., 1.}));
+        CHECK(probe.I1 == std::vector<double>({2., 2.}));
+        CHECK(probe.I2 == std::vector<double>({3., 3.}));
         CHECK(probe.I12.size() == 0);
         CHECK(probe.J.size() == 0);
         CHECK(probe.NSM.size() == 0);
@@ -697,8 +721,9 @@ TEST_CASE("BDF PBEAM roundtrip test (minimal)", "[bdf_pbeam]") {
         CHECK(probe.E2.size() == 0);
         CHECK(probe.F1.size() == 0);
         CHECK(probe.F2.size() == 0);
-        CHECK(probe.SO.size() == 0);
-        CHECK(probe.X_XB.size() == 0);
+        CHECK_THAT(vector<std::string>(probe.SO.begin(), probe.SO.end()),
+               IsEqual(vector<string>(1, "YESA")));
+        CHECK(probe.X_XB == std::vector<double>(1, 1.));
         CHECK_FALSE(bool(probe.K1));
         CHECK_FALSE(bool(probe.K2));
         CHECK_FALSE(bool(probe.S1));
@@ -724,18 +749,21 @@ TEST_CASE("BDF PBEAM roundtrip test (minimal) (reuse)", "[bdf_pbeam]") {
     std::ostringstream test;
 
     long PID{7869}, MID{104010};
-    std::vector<double> A{1.};
-    std::vector<double> I1{2.};
-    std::vector<double> I2{3.};
-    std::vector<double> I12{4.};
+    std::vector<double> A{1., 1.};
+    std::vector<double> I1{2., 2.};
+    std::vector<double> I2{3., 3.};
+    std::vector<std::string> SO(1, "YESA");
+    std::vector<double> X_XB(1, 1.);
 
     pbeam probe;
     test << probe;
-    test << probe(&PID, &MID, &A, &I1, &I2);
+    test << probe(&PID, &MID, &A, &I1, &I2, &SO, &X_XB);
 
     SECTION("check output") {
         CHECK(test.str() ==
-              "PBEAM       7869  1040101.000+002.000+003.000+00\n");
+              "PBEAM       7869  1040101.000+002.000+003.000+00                        \n"
+              "                                                                        \n"
+              "        YESA    1.000+00\n");
     }
 
     SECTION("check reading") {
@@ -752,9 +780,9 @@ TEST_CASE("BDF PBEAM roundtrip test (minimal) (reuse)", "[bdf_pbeam]") {
 
         CHECK(long(probe_l.PID) == 7869);
         CHECK(long(probe_l.MID) == 104010);
-        CHECK(probe.A == std::vector<double>({1.}));
-        CHECK(probe.I1 == std::vector<double>({2.}));
-        CHECK(probe.I2 == std::vector<double>({3.}));
+        CHECK(probe.A == std::vector<double>({1., 1.}));
+        CHECK(probe.I1 == std::vector<double>({2., 2.}));
+        CHECK(probe.I2 == std::vector<double>({3., 3.}));
         CHECK(probe.I12.size() == 0);
         CHECK(probe.J.size() == 0);
         CHECK(probe.NSM.size() == 0);
@@ -766,8 +794,9 @@ TEST_CASE("BDF PBEAM roundtrip test (minimal) (reuse)", "[bdf_pbeam]") {
         CHECK(probe.E2.size() == 0);
         CHECK(probe.F1.size() == 0);
         CHECK(probe.F2.size() == 0);
-        CHECK(probe.SO.size() == 0);
-        CHECK(probe.X_XB.size() == 0);
+        CHECK_THAT(vector<std::string>(probe.SO.begin(), probe.SO.end()),
+               IsEqual(vector<string>(1, "YESA")));
+        CHECK(probe.X_XB == std::vector<double>(1, 1.));
         CHECK_FALSE(bool(probe.K1));
         CHECK_FALSE(bool(probe.K2));
         CHECK_FALSE(bool(probe.S1));
@@ -792,14 +821,16 @@ TEST_CASE("BDF PBEAM roundtrip test (N2_B only)", "[bdf_pbeam]") {
     std::ostringstream test;
 
     long PID{7869}, MID{104010};
-    std::vector<double> A{1.};
-    std::vector<double> I1{2.};
-    std::vector<double> I2{3.};
+    std::vector<double> A{1., 1.};
+    std::vector<double> I1{2., 2.};
+    std::vector<double> I2{3., 3.};
+    std::vector<std::string> SO(1, "YESA");
+    std::vector<double> X_XB(1, 1.);
     double N2_B{32.};
 
     pbeam probe(&PID, &MID, &A, &I1, &I2, nullptr, nullptr, nullptr,
                 nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
-                nullptr, nullptr,
+                &SO, &X_XB,
                 nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
                 nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, &N2_B);
     test << probe;
@@ -807,6 +838,8 @@ TEST_CASE("BDF PBEAM roundtrip test (N2_B only)", "[bdf_pbeam]") {
     SECTION("check output") {
         CHECK(test.str() ==
               "PBEAM       7869  1040101.000+002.000+003.000+00                        \n"
+              "                                                                        \n"
+              "        YESA    1.000+00                                                \n"
               "                                                                        \n"
               "                                                                        \n"
               "                                                                3.200+01\n");
@@ -826,9 +859,9 @@ TEST_CASE("BDF PBEAM roundtrip test (N2_B only)", "[bdf_pbeam]") {
 
         CHECK(long(probe_l.PID) == 7869);
         CHECK(long(probe_l.MID) == 104010);
-        CHECK(probe.A == std::vector<double>({1.}));
-        CHECK(probe.I1 == std::vector<double>({2.}));
-        CHECK(probe.I2 == std::vector<double>({3.}));
+        CHECK(probe.A == std::vector<double>({1., 1.}));
+        CHECK(probe.I1 == std::vector<double>({2., 2.}));
+        CHECK(probe.I2 == std::vector<double>({3., 3.}));
         CHECK(probe.I12.size() == 0);
         CHECK(probe.J.size() == 0);
         CHECK(probe.NSM.size() == 0);
@@ -840,8 +873,9 @@ TEST_CASE("BDF PBEAM roundtrip test (N2_B only)", "[bdf_pbeam]") {
         CHECK(probe.E2.size() == 0);
         CHECK(probe.F1.size() == 0);
         CHECK(probe.F2.size() == 0);
-        CHECK(probe.SO.size() == 0);
-        CHECK(probe.X_XB.size() == 0);
+        CHECK_THAT(vector<std::string>(probe.SO.begin(), probe.SO.end()),
+               IsEqual(vector<string>(1, "YESA")));
+        CHECK(probe.X_XB == std::vector<double>(1, 1.));
         CHECK_FALSE(bool(probe.K1));
         CHECK_FALSE(bool(probe.K2));
         CHECK_FALSE(bool(probe.S1));
@@ -867,9 +901,11 @@ TEST_CASE("BDF PBEAM roundtrip test (N2_B only) (reuse)", "[bdf_pbeam]") {
     std::ostringstream test;
 
     long PID{7869}, MID{104010};
-    std::vector<double> A{1.};
-    std::vector<double> I1{2.};
-    std::vector<double> I2{3.};
+    std::vector<double> A{1., 1.};
+    std::vector<double> I1{2., 2.};
+    std::vector<double> I2{3., 3.};
+    std::vector<std::string> SO(1, "YESA");
+    std::vector<double> X_XB(1, 1.);
     double N2_B{32.};
 
     pbeam probe;
@@ -877,13 +913,15 @@ TEST_CASE("BDF PBEAM roundtrip test (N2_B only) (reuse)", "[bdf_pbeam]") {
     test << probe(
         &PID, &MID, &A, &I1, &I2, nullptr, nullptr, nullptr,
         nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
-        nullptr, nullptr,
+        &SO, &X_XB,
         nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
         nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, &N2_B);
 
     SECTION("check output") {
         CHECK(test.str() ==
               "PBEAM       7869  1040101.000+002.000+003.000+00                        \n"
+              "                                                                        \n"
+              "        YESA    1.000+00                                                \n"
               "                                                                        \n"
               "                                                                        \n"
               "                                                                3.200+01\n");
@@ -903,9 +941,9 @@ TEST_CASE("BDF PBEAM roundtrip test (N2_B only) (reuse)", "[bdf_pbeam]") {
 
         CHECK(long(probe_l.PID) == 7869);
         CHECK(long(probe_l.MID) == 104010);
-        CHECK(probe.A == std::vector<double>({1.}));
-        CHECK(probe.I1 == std::vector<double>({2.}));
-        CHECK(probe.I2 == std::vector<double>({3.}));
+        CHECK(probe.A == std::vector<double>( {1., 1.}));
+        CHECK(probe.I1 == std::vector<double>({2., 2.}));
+        CHECK(probe.I2 == std::vector<double>({3., 3.}));
         CHECK(probe.I12.size() == 0);
         CHECK(probe.J.size() == 0);
         CHECK(probe.NSM.size() == 0);
@@ -917,8 +955,9 @@ TEST_CASE("BDF PBEAM roundtrip test (N2_B only) (reuse)", "[bdf_pbeam]") {
         CHECK(probe.E2.size() == 0);
         CHECK(probe.F1.size() == 0);
         CHECK(probe.F2.size() == 0);
-        CHECK(probe.SO.size() == 0);
-        CHECK(probe.X_XB.size() == 0);
+        CHECK_THAT(vector<std::string>(probe.SO.begin(), probe.SO.end()),
+               IsEqual(vector<string>(1, "YESA")));
+        CHECK(probe.X_XB == std::vector<double>(1, 1.));
         CHECK_FALSE(bool(probe.K1));
         CHECK_FALSE(bool(probe.K2));
         CHECK_FALSE(bool(probe.S1));

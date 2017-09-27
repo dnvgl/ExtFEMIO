@@ -328,33 +328,41 @@ std::string cards::__base::card::format_outlist(
     list<unique_ptr<format_entry> > const &en) {
 
     unsigned long i = 0;
+    unsigned long lines = 0;
     ostringstream res("");
 
+    bool long_format = false;
+
+    list<std::string> res_list;
+
     try {
-        for (auto &p : en) {
-            if (++i > 9) {
-                i = 2;
-                res << endl << bdf::types::card("").format(nullptr);
-            }
-            res << p->first->format(p->second);
-        }
+        for (auto &p : en)
+            res_list.push_back(p->first->format(p->second));
     } catch (errors::form_error) {
-        unsigned long lines = 0;
-        res.seekp(0);
-        i = 0;
+        res_list.clear();
+        long_format = true;
         bdf::types::base::out_form = bdf::types::out_form_type::LONG;
-        for (auto &p : en) {
-            if (++i > 5) {
-                lines += 1;
-                i = 2;
-                res << endl << bdf::types::card("").format(nullptr);
-            }
-            res << p->first->format(p->second);
-        }
-        if (!(lines%2))
-            res << endl << bdf::types::card("").format(nullptr);
-        bdf::types::base::out_form = bdf::types::out_form_type::SHORT;
+        for (auto &p : en)
+            res_list.push_back(p->first->format(p->second));
+        bdf::types::base::out_form = bdf::types::out_form_type::LONG;
     }
+
+    while (res_list.back() == (long_format ? "                " : "        "))
+        res_list.pop_back();
+
+    for (auto &p : res_list) {
+        if (++i > (long_format ? 5 : 9)) {
+            lines += 1;
+            i = 2;
+            res << endl << bdf::types::card("").format(nullptr);
+        }
+        res << p;
+    }
+    if (long_format && !(lines%2))
+        res << endl << bdf::types::card("").format(nullptr);
+
+    bdf::types::base::out_form = bdf::types::out_form_type::SHORT;
+
     return res.str();
 }
 

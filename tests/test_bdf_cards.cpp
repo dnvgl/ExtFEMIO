@@ -33,6 +33,8 @@ namespace {
 #include "bdf/file.h"
 #include "bdf/cards_elements.h"
 
+#include "catch_list_helper.h"
+
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -882,6 +884,20 @@ TEST_CASE("Split Free Field Cards, Sample 11", "[bdf_cards]") {
     CHECK(probe == ref);
 }
 
+TEST_CASE("Split Free Field Cards, Sample 12", "[bdf_cards]") {
+    std::list<std::string> data({
+            "PBEAM,1,2,3.,4.,.5,6.,7.,8.,9.,10.,11.,12.,13.,14.,15.,16.,\n",
+            ",NO,1.\n"});
+    std::list<std::string> probe;
+    card::card_split(data, probe);
+    std::list<std::string> ref({
+            "PBEAM", "1", "2", "3.", "4.", ".5", "6.", "7.",
+            "8.", "9.", "10.", "11.", "12.", "13.", "14.", "15.", "16.",
+            "NO", "1."});
+    CHECK(probe.size() == ref.size());
+    CHECK_THAT(probe, IsEqual(ref));
+}
+
 // Test data as found in the BDF documentation.
 TEST_CASE("Split Small Field Cards", "[cards]") {
     std::list<std::string> data;
@@ -920,8 +936,10 @@ TEST_CASE("BDF_Dispatch", "[cards]") {
         "$ YIELD: 355\n"
         "MAT1    4       2.305+6 80000.0 0.3     7.850-6\n"
         "PBEAML  104010  4               L     \n"
-        "           63.0   340.0    35.0    14.0\n"
+        "           63.0   340.0    35.0    14.0         YESA    1.+0\n"
         "PBEAM   4000001 3       1.046+4 9.369+7 1.694+6 6.856+6 1.316+6\n"
+        "                                                               \n"
+        "        NO      1.+0\n"
         "PROD    6000001 1       3000.00\n"
         "PSHELL  1       4         23.00 4               4\n"
         "GRID           1        111525. 18000.  21000.\n"
@@ -1042,15 +1060,15 @@ TEST_CASE("BDF_Dispatch", "[cards]") {
     CHECK(static_cast<pbeam*>(current.get())->PID.value == 4000001);
     CHECK(static_cast<pbeam*>(current.get())->MID.value == 3);
     CHECK(static_cast<pbeam*>(current.get())->A ==
-          vector<double>({10460.}));
+          vector<double>({10460., 10460.}));
     CHECK(static_cast<pbeam*>(current.get())->I1 ==
-          vector<double>({93690000.}));
+          vector<double>({93690000., 93690000.}));
     CHECK(static_cast<pbeam*>(current.get())->I2 ==
-          vector<double>({1694000.}));
+          vector<double>({1694000., 1694000.}));
     CHECK(static_cast<pbeam*>(current.get())->I12 ==
-          vector<double>({6.856e6}));
+          vector<double>({6.856e6, 6.856e6}));
     CHECK(static_cast<pbeam*>(current.get())->J ==
-          vector<double>({1.316e6}));
+          vector<double>({1.316e6, 1.316e6}));
     current.reset();
 
     probe.get(l);

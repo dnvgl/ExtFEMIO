@@ -15,6 +15,12 @@
 
 #include <type_traits>
 
+#ifdef HAVE_BOOST_REGEX_HPP
+#include <boost/regex.hpp>
+#else
+#include <regex>
+#endif
+
 namespace dnvgl {
     namespace extfem {
         namespace bdf {
@@ -24,12 +30,13 @@ namespace dnvgl {
                 protected:
                     dnvgl::extfem::bdf::type_bounds::bound<_Ty> *bounds;
                     static const bdf_types _type;
-                public:
+                private:
                     entry_type() = default;
+                public:
                     ~entry_type() = default;
                     explicit entry_type(const std::string& cs);
                     entry_type(const std::string &name,
-                               bdf::type_bounds::bound<_Ty> *bounds);
+                               bdf::type_bounds::bound<_Ty> *const bounds);
                     bdf_types type() const;
                     entry_value<_Ty> check(entry_value<_Ty> &val);
                     entry_value<_Ty> check(_Ty &val);
@@ -56,10 +63,8 @@ namespace dnvgl {
                 template <typename _Ty>
                 entry_type<_Ty>::entry_type(
                     const std::string &name,
-                    bdf::type_bounds::bound<_Ty> *bounds) :
-                        bdf::types::base(name) {
-                    this->bounds = bounds;
-                }
+                    bdf::type_bounds::bound<_Ty> *const bounds) :
+                        bdf::types::base(name), bounds(bounds) {}
 
                 template <typename _Ty>
                 entry_value<_Ty> entry_type<_Ty>::check(_Ty *val) {
@@ -285,11 +290,11 @@ namespace dnvgl {
                     auto sval = extfem::string::string(inp).trim().upper();
 
                     if (sval.length() == 0) {
-                        if (this->bounds->does_allow_empty()) {
+                        if (this->bounds && this->bounds->does_allow_empty()) {
                             val.is_value = false;
                             return;
                         }
-                        if (!this->bounds->has_default())
+                        if (!this->bounds || !this->bounds->has_default())
                             throw errors::float_error(
                                 name, "empty entry without default");
                         val.value = this->bounds->get_default();

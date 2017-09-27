@@ -92,6 +92,7 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]") {
         CHECK(probe("   7.E+0").value == 7.);
         CHECK(probe("   7.e+0").value == 7.);
         CHECK(probe("   70.-1").value == 7.);
+        CHECK(probe("    1.+0").value == 1.);
         CHECK(probe("  -7.0  ").value == -7.);
         CHECK(probe("  -7.   ").value == -7.);
         CHECK(probe("  -.7   ").value == -.7);

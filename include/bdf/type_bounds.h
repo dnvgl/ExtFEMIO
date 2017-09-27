@@ -51,6 +51,8 @@ namespace dnvgl {
                     bool allow_empty = false;
                 public:
                     bound() = default;
+                    bound(const bound &) = default;
+                    bound(const bound *const in) : bound(*in) {};
                     virtual ~bound() = default;
                     explicit bound(
                         const _Ty *_min, const _Ty *_max=nullptr,
@@ -82,19 +84,20 @@ namespace dnvgl {
                     if (_default) set_default(*_default);
                 }
 
+                /*
                 template <typename _Ty>
                 bound<_Ty>::bound(std::set<std::string> const&) :
                         allowed() {
-                    static_assert(true, "Not applicable.");
+                    static_assert(false, "Not applicable.");
                 }
 
                 template <typename _Ty>
                 bound<_Ty>::bound(
                     std::set<std::string> const&, std::string const&) :
                         allowed() {
-                    static_assert(true, "Not applicable.");
+                    static_assert(false, "Not applicable.");
                 }
-
+                */
 
                 template <typename _Ty>
                 void bound<_Ty>::set_min(const _Ty inp) {

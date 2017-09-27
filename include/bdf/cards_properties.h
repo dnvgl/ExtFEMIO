@@ -245,8 +245,11 @@ namespace dnvgl {
                     using __base::property::form_PID;
                     using __base::beam_base::form_MID;
                     bdf::types::entry_type<double> static form_A;
+                    bdf::types::entry_type<double> static form_A_cont;
                     bdf::types::entry_type<double> static form_I1;
+                    bdf::types::entry_type<double> static form_I1_cont;
                     bdf::types::entry_type<double> static form_I2;
+                    bdf::types::entry_type<double> static form_I2_cont;
                     bdf::types::entry_type<double> static form_I12;
                     bdf::types::entry_type<double> static form_J;
                     bdf::types::entry_type<double> static form_NSM;
@@ -437,19 +440,19 @@ namespace dnvgl {
                           std::vector<double> const *A,
                           std::vector<double> const *I1,
                           std::vector<double> const *I2,
-                          std::vector<double> const *I12=nullptr,
-                          std::vector<double> const *J=nullptr,
-                          std::vector<double> const *NSM=nullptr,
-                          std::vector<double> const *C1=nullptr,
-                          std::vector<double> const *C2=nullptr,
-                          std::vector<double> const *D1=nullptr,
-                          std::vector<double> const *D2=nullptr,
-                          std::vector<double> const *E1=nullptr,
-                          std::vector<double> const *E2=nullptr,
-                          std::vector<double> const *F1=nullptr,
-                          std::vector<double> const *F2=nullptr,
-                          std::vector<std::string> const *SO=nullptr,
-                          std::vector<double> const *X_XB=nullptr,
+                          std::vector<double> const *I12,
+                          std::vector<double> const *J,
+                          std::vector<double> const *NSM,
+                          std::vector<double> const *C1,
+                          std::vector<double> const *C2,
+                          std::vector<double> const *D1,
+                          std::vector<double> const *D2,
+                          std::vector<double> const *E1,
+                          std::vector<double> const *E2,
+                          std::vector<double> const *F1,
+                          std::vector<double> const *F2,
+                          std::vector<std::string> const *SO,
+                          std::vector<double> const *X_XB,
                           double const *K1=nullptr, double const *K2=nullptr,
                           double const *S1=nullptr, double const *S2=nullptr,
                           double const *NSI_A=nullptr, double const *NSI_B=nullptr,
@@ -458,6 +461,12 @@ namespace dnvgl {
                           double const *M1_B=nullptr, double const *M2_B=nullptr,
                           double const *N1_A=nullptr, double const *N2_A=nullptr,
                           double const *N1_B=nullptr, double const *N2_B=nullptr);
+                    pbeam(long const *PID, long const *MID,
+                          std::vector<double> const *A,
+                          std::vector<double> const *I1,
+                          std::vector<double> const *I2,
+                          std::vector<std::string> const *SO,
+                          std::vector<double> const *X_XB);
                     types card_type() const override;
                     void read(std::list<std::string> const &) override;
                     card const &operator() (const std::list<std::string> &) override;
@@ -466,19 +475,19 @@ namespace dnvgl {
                         std::vector<double> const *A,
                         std::vector<double> const *I1,
                         std::vector<double> const *I2,
-                        std::vector<double> const *I12=nullptr,
-                        std::vector<double> const *J=nullptr,
-                        std::vector<double> const *NSM=nullptr,
-                        std::vector<double> const *C1=nullptr,
-                        std::vector<double> const *C2=nullptr,
-                        std::vector<double> const *D1=nullptr,
-                        std::vector<double> const *D2=nullptr,
-                        std::vector<double> const *E1=nullptr,
-                        std::vector<double> const *E2=nullptr,
-                        std::vector<double> const *F1=nullptr,
-                        std::vector<double> const *F2=nullptr,
-                        std::vector<std::string> const *SO=nullptr,
-                        std::vector<double> const *X_XB=nullptr,
+                        std::vector<double> const *I12,
+                        std::vector<double> const *J,
+                        std::vector<double> const *NSM,
+                        std::vector<double> const *C1,
+                        std::vector<double> const *C2,
+                        std::vector<double> const *D1,
+                        std::vector<double> const *D2,
+                        std::vector<double> const *E1,
+                        std::vector<double> const *E2,
+                        std::vector<double> const *F1,
+                        std::vector<double> const *F2,
+                        std::vector<std::string> const *SO,
+                        std::vector<double> const *X_XB,
                         double const *K1=nullptr, double const *K2=nullptr,
                         double const *S1=nullptr, double const *S2=nullptr,
                         double const *NSI_A=nullptr, double const *NSI_B=nullptr,
@@ -487,6 +496,13 @@ namespace dnvgl {
                         double const *M1_B=nullptr, double const *M2_B=nullptr,
                         double const *N1_A=nullptr, double const *N2_A=nullptr,
                         double const *N1_B=nullptr, double const *N2_B=nullptr);
+                    card const &operator() (
+                        long const *PID, long const *MID,
+                        std::vector<double> const *A,
+                        std::vector<double> const *I1,
+                        std::vector<double> const *I2,
+                        std::vector<std::string> const *SO,
+                        std::vector<double> const *X_XB);
                 private:
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> > &res) const override;
