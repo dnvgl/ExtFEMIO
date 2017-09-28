@@ -246,7 +246,48 @@ TEST_CASE("BDF PBEAM definitions (Tapered Beam).", "[bdf_pbeam]") {
     CHECK_FALSE(bool(probe.N2_B));
 }
 
-TEST_CASE("BDF PBEAM roundtrip test", "[bdf_pbeam]") {
+TEST_CASE("BDF PBEAM definitions (Patran import error 20170925 1).", "[bdf_pbeam]") {
+
+    std::list<std::string> data({
+            // 34567A1234567B1234567C1234567D1234567E1234567F1234567G1234567H1234567I
+        "PBEAM  *              41               51.84282217136-051.25369392769+02 +003SS3\n",
+        "*+003SS31.25369392769+021.25369392769+02                1.25369392769+01 +003SS4\n",
+        "*+003SS41.25369392769+011.25369392769+011.25369392769+01                 +003SS5\n",
+        "*+003SS5                                                                 +003SS6\n"});
+    
+    std::list<std::string> lines;
+    __base::card::card_split(data, lines);
+    pbeam probe(lines);
+
+    CAPTURE( data.front() );
+
+    CHECK(long(probe.PID) == 41);
+    CHECK(long(probe.MID) == 5);
+}
+
+TEST_CASE("BDF PBEAM definitions (Patran import error 20170925 2).", "[bdf_pbeam]") {
+
+    std::list<std::string> data({
+        // 34567A1234567B1234567C1234567D1234567E1234567F1234567G1234567H1234567I
+        //                    PID             MID            A(A)           I1(A)
+        "PBEAM  *              42               51.86736295278-051.27836735889+02 +003UPT\n",
+        //                  I2(A)          I12(A)            J(A)          NSM(A)
+        "*+003UPT1.27836735889+021.27836735889+02                1.27836735889+01 +003UPU\n",
+        //                  C1(A)           C2(A)           D1(A)           D2(A)
+        "*+003UPU1.27836735889+011.27836735889+011.27836735889+01                 +003UPV\n",
+        //                  E1(A)           E2(A)           F1(A)           F2(A)
+        "*+003UPV                                                                 +003UPW\n"});
+   std::list<std::string> lines;
+    __base::card::card_split(data, lines);
+    pbeam probe(lines);
+
+    CAPTURE( data.front() );
+
+    CHECK(long(probe.PID) == 42);
+    CHECK(long(probe.MID) == 5);
+}
+
+    TEST_CASE("BDF PBEAM roundtrip test", "[bdf_pbeam]") {
     pbeam::reset();
     std::ostringstream test;
 

@@ -78,13 +78,13 @@ entry_type<double> pbeam::form_I2("I2");
 entry_type<double> pbeam::form_I2_cont("I2_cont", bound_I2);
 namespace {
     auto const bound_I12_ = make_shared<bound<double>>(
-        nullptr, nullptr, nullptr, true);
+        cd0, nullptr, nullptr, true);
     auto const bound_I12 = bound_I12_.get();
 }
 entry_type<double> pbeam::form_I12("I12", bound_I12);
 namespace {
     auto const bound_J_ = make_shared<bound<double>>(
-        nullptr, nullptr, nullptr, true);
+        cd0, nullptr, nullptr, true);
     auto const bound_J = bound_J_.get();
 }
 entry_type<double> pbeam::form_J("J", bound_J);

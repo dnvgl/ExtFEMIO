@@ -415,7 +415,8 @@ void cards::__base::card::card_split(
         } else {
             if (first)
                 res.push_back(string::string(head).trim("\t\n*"));
-            if (head.length() > 0 && head.back() == '*') {
+            if ((head.length() > 0 && head.back() == '*') ||
+                (!first && head.length() > 0 && head.front() == '*')) {
                 std::string tmp(pos->length() > 8 ? pos->substr(8) : "");
                 tmp.resize(64, ' ');
                 if (++pos != inp.end()) {
