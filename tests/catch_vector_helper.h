@@ -16,6 +16,10 @@
 #ifndef _CATCH_VECTOR_HELPER_H_
 #define _CATCH_VECTOR_HELPER_H_
 
+#ifdef min
+#undef min
+#endif
+
 namespace std {
     template<typename _Ty>
     std::ostream &operator<<(std::ostream &os, std::vector<_Ty> const &in) {

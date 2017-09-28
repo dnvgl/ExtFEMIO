@@ -351,7 +351,7 @@ std::string cards::__base::card::format_outlist(
         res_list.pop_back();
 
     for (auto &p : res_list) {
-        if (++i > (long_format ? 5 : 9)) {
+        if (++i > (long_format ? 5ul : 9ul)) {
             lines += 1;
             i = 2;
             res << endl << bdf::types::card("").format(nullptr);
