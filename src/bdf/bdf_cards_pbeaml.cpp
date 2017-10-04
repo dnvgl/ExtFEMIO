@@ -97,18 +97,27 @@ pbeaml::pbeaml(long const *PID, long const *MID,
                vector<std::string> const *SO,
                vector<double> const *X_XB) :
         beam_prop(PID, MID), GROUP(*GROUP), TYPE(*TYPE) {
-    this->DIM.resize(DIM->size());
+    this->DIM.resize(std::max(DIM->size(), 2ul));
     for (size_t i = 0; i < DIM->size(); i++) {
         this->DIM[i].resize((*DIM)[i].size(), entry_value<double>(nullptr));
         for (size_t j = 0; j < (*DIM)[i].size(); j++)
             this->DIM[i][j]((*DIM)[i][j]);
     }
-    this->NSM.resize(NSM->size(), entry_value<double>(nullptr));
+    if (DIM->size() == 1) {
+        this->DIM[1].resize((*DIM)[0].size(), entry_value<double>(nullptr));
+        for (size_t j = 0; j < (*DIM)[0].size(); j++)
+            this->DIM[1][j]((*DIM)[0][j]);
+    }
+    this->NSM.resize(std::max(NSM->size(), 2ul), entry_value<double>(nullptr));
     for (size_t i = 0; i < NSM->size(); i++)
         this->NSM[i]((*NSM)[i]);
+    if (NSM->size() == 1)
+        this->NSM[1]((*NSM)[0]);
+    assert(SO->size() > 0);
     this->SO.resize(SO->size(), entry_value<std::string>(nullptr));
     for (size_t i = 0; i < SO->size(); i++)
         this->SO[i]((*SO)[i]);
+    assert(X_XB->size() > 0);
     this->X_XB.resize(X_XB->size(), entry_value<double>(nullptr));
     for (size_t i = 0; i < X_XB->size(); i++)
         this->X_XB[i]((*X_XB)[i]);
@@ -169,23 +178,24 @@ void pbeaml::read(list<std::string> const & inp) {
         if (pos == inp.end()) goto end;
         j++;
         // DIM.push_back(new vector<dnvgl::extfem::bdf::types::entry_value<double> >);
-        DIM.push_back(vector<bdf::types::entry_value<double>>());
+        DIM.push_back(vector<bdf::types::entry_value<double >> ());
         try {
             SO.push_back(form_SO(*(pos++)));
         } catch (errors::error) {
-            goto clean_SO;
+
+            goto end;
         };
-        if (pos == inp.end()) goto clean_X_XB;
+        if (pos == inp.end()) goto end;
         try {
             X_XB.push_back(form_X_XB(*(pos++)));
         } catch (errors::error) {
-            goto clean_X_XB;
+            goto end;
         }
-        if (pos == inp.end()) goto clean;
+        if (pos == inp.end()) goto end;
         try {
             DIM.back().push_back(form_DIM(*(pos++)));
         } catch (errors::error) {
-            goto clean;
+            goto end;
         }
         for (i = 1; i < dim_num; i++) {
             if (pos == inp.end()) goto invalid;
@@ -195,17 +205,17 @@ void pbeaml::read(list<std::string> const & inp) {
         NSM.push_back(form_NSM(*(pos++)));
     }
 
-    goto end;
-
+end:;
+    if (DIM.back().size() == 0) {
+        auto &ref = DIM.front();
+        for (auto &p : ref)
+            DIM.back().push_back(bdf::types::entry_value<double>(p.value));
+    }
+    if (NSM.size() == 1)
+        NSM.push_back(bdf::types::entry_value<double>(NSM[0].value));
+    return;
 invalid:
     throw errors::parse_error("PBEAML", "Illegal number of entries.");
-clean:
-    X_XB.pop_back();
-clean_X_XB:
-    SO.pop_back();
-clean_SO:
-    DIM.pop_back();
-end:;
 }
 
 cards::types pbeaml::card_type() const {
@@ -231,7 +241,7 @@ void pbeaml::collect_outdata(
                       format<std::string>(form_GROUP, GROUP) :
                       format(empty)));
     res.push_back(unique_ptr<format_entry>(format<std::string>(form_TYPE, TYPE)));
-    for (auto i = 0;i<4;i++ )
+    for (auto i = 0; i < 4; i++ )
         res.push_back(unique_ptr<format_entry>(format(empty)));
 
     for (size_t i{0}; i < pos_DIM->size(); i++)
@@ -251,6 +261,7 @@ void pbeaml::collect_outdata(
                               format<std::string>(form_SO, (*(pos_SO++))) :
                               format(empty)));
         }
+        bool last{pos_SO == SO.end()};
         if (pos_X_XB != X_XB.end()) {
             res.push_back(unique_ptr<format_entry>(
                               pos_X_XB != X_XB.end() ?
@@ -259,12 +270,13 @@ void pbeaml::collect_outdata(
         }
         for (size_t i{0}; i < pos_DIM->size(); i++)
             res.push_back(unique_ptr<format_entry>(
+                              (last && (*pos_DIM)[i] == DIM[0][i]) ?
+                              format(empty) :
                               format<double>(form_DIM, (*pos_DIM)[i])));
         ++pos_DIM;
-        res.push_back(unique_ptr<format_entry>(
-                          pos_NSM != NSM.end() ?
-                          format<double>(form_NSM, (*(pos_NSM++))) :
-                          format(empty)));
+        if (pos_NSM != NSM.end() && !(last && *pos_NSM == NSM[0]))
+            res.push_back(unique_ptr<format_entry>(
+                              format<double>(form_NSM, (*(pos_NSM++)))));
     }
 }
 
@@ -276,9 +288,9 @@ void pbeaml::check_data() {
         throw errors::form_error("PBEAML", "requires at least one station");
     if (NSM.size() != 0 && NSM.size() != base_size)
         throw errors::form_error("PBEAML", "wrong size for NSM");
-    if (SO.size() != 0 && SO.size() != base_size-1)
+    if (SO.size() == 0 || SO.size() != base_size-1)
         throw errors::form_error("PBEAML", "wrong size for SO");
-    if (X_XB.size() != 0 && X_XB.size() != base_size - 1)
+    if (X_XB.size() == 0 || X_XB.size() != base_size - 1)
         throw errors::form_error("PBEAML", "wrong size for X/XB");
     if (GROUP) pbeaml::form_GROUP.check(GROUP);
     if (TYPE) pbeaml::form_TYPE.check(TYPE);

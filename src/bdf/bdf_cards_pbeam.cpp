@@ -269,11 +269,13 @@ pbeam::pbeam(long const *PID, long const *MID,
              double const *N1_A, double const *N2_A,
              double const *N1_B, double const *N2_B) :
         beam_prop(PID, MID),
-        A(*A), I1(*I1), I2(*I2),
         K1(K1), K2(K2), S1(S1), S2(S2), NSI_A(NSI_A), NSI_B(NSI_B),
         CW_A(CW_A), CW_B(CW_B),
         M1_A(M1_A), M2_A(M2_A), M1_B(M1_B), M2_B(M2_B),
         N1_A(N1_A), N2_A(N2_A), N1_B(N1_B), N2_B(N2_B) {
+    this->A.assign((*A).begin(), (*A).end());
+    this->I1.assign((*I1).begin(), (*I1).end());
+    this->I2.assign((*I2).begin(), (*I2).end());
     if (I12 != nullptr) this->I12.assign((*I12).begin(), (*I12).end());
     if (J != nullptr)  this->J.assign((*J).begin(), (*J).end());
     if (NSM != nullptr) this->NSM.assign(NSM->begin(), NSM->end());
@@ -557,121 +559,121 @@ void pbeam::collect_outdata(
     auto pos_SO (SO.begin());
     auto pos_X_XB (X_XB.begin());
 
-    res.push_back(unique_ptr<format_entry>(format<double>(form_A, &(*pos_A++))));
-    res.push_back(unique_ptr<format_entry>(format<double>(form_I1, &(*pos_I1++))));
-    res.push_back(unique_ptr<format_entry>(format<double>(form_I2, &(*pos_I2++))));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_A, (*pos_A++))));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_I1, (*pos_I1++))));
+    res.push_back(unique_ptr<format_entry>(format<double>(form_I2, (*pos_I2++))));
     res.push_back(unique_ptr<format_entry>(
                       I12.size()>0 ?
-                      format<double>(form_I12, &(*pos_I12++)) :
+                      format<double>(form_I12, (*pos_I12++)) :
                       format(empty)));
     res.push_back(unique_ptr<format_entry>(
                       J.size()>0 ?
-                      format<double>(form_J, &(*pos_J++)) :
+                      format<double>(form_J, (*pos_J++)) :
                       format(empty)));
     res.push_back(unique_ptr<format_entry>(
                       NSM.size()>0 ?
-                      format<double>(form_NSM, &(*pos_NSM++)) :
+                      format<double>(form_NSM, (*pos_NSM++)) :
                       format(empty)));
     res.push_back(unique_ptr<format_entry>(
                       C1.size()>0 ?
-                      format<double>(form_C1, &(*pos_C1++)) :
+                      format<double>(form_C1, (*pos_C1++)) :
                       format(empty)));
     res.push_back(unique_ptr<format_entry>(
                       C2.size()>0 ?
-                      format<double>(form_C2, &(*pos_C2++)) :
+                      format<double>(form_C2, (*pos_C2++)) :
                       format(empty)));
     res.push_back(unique_ptr<format_entry>(
                       D1.size()>0 ?
-                      format<double>(form_D1, &(*pos_D1++)) :
+                      format<double>(form_D1, (*pos_D1++)) :
                       format(empty)));
     res.push_back(unique_ptr<format_entry>(
                       D2.size()>0 ?
-                      format<double>(form_D2, &(*pos_D2++)) :
+                      format<double>(form_D2, (*pos_D2++)) :
                       format(empty)));
     res.push_back(unique_ptr<format_entry>(
                       E1.size()>0 ?
-                      format<double>(form_E1, &(*pos_E1++)) :
+                      format<double>(form_E1, (*pos_E1++)) :
                       format(empty)));
     res.push_back(unique_ptr<format_entry>(
                       E2.size()>0 ?
-                      format<double>(form_E2, &(*pos_E2++)) :
+                      format<double>(form_E2, (*pos_E2++)) :
                       format(empty)));
     res.push_back(unique_ptr<format_entry>(
                       F1.size()>0 ?
-                      format<double>(form_F1, &(*pos_F1++)) :
+                      format<double>(form_F1, (*pos_F1++)) :
                       format(empty)));
     res.push_back(unique_ptr<format_entry>(
                       F2.size()>0 ?
-                      format<double>(form_F2, &(*pos_F2++)) :
+                      format<double>(form_F2, (*pos_F2++)) :
                       format(empty)));
 
     while (pos_A != A.end()) {
         res.push_back(unique_ptr<format_entry>(
                           format<std::string>(form_SO, (*pos_SO++))));
         res.push_back(unique_ptr<format_entry>(
-                          format<double>(form_X_XB, &(*pos_X_XB++))));
+                          format<double>(form_X_XB, (*pos_X_XB++))));
         bool last{pos_SO == SO.end()};
         if (last && (*pos_A == *A.begin())){
             res.push_back(unique_ptr<format_entry>(format(empty)));
             pos_A++;
         } else
             res.push_back(unique_ptr<format_entry>(
-                              format<double>(form_A, &(*pos_A++))));
+                              format<double>(form_A, (*pos_A++))));
         if (last && (*pos_I1 == *I1.begin())){
             res.push_back(unique_ptr<format_entry>(format(empty)));
             pos_I1++;
         } else
             res.push_back(unique_ptr<format_entry>(
-                              format<double>(form_I1, &(*pos_I1++))));
+                              format<double>(form_I1, (*pos_I1++))));
         if (last && (*pos_I2 == *I2.begin())){
             res.push_back(unique_ptr<format_entry>(format(empty)));
             pos_I2++;
         } else
             res.push_back(unique_ptr<format_entry>(
-                              format<double>(form_I2, &(*pos_I2++))));
+                              format<double>(form_I2, (*pos_I2++))));
         res.push_back(unique_ptr<format_entry>(
                           pos_I12 != I12.end() && !(last && (*pos_I12 == *I12.begin())) ?
-                          format<double>(form_I12, &(*pos_I12++)) :
+                          format<double>(form_I12, (*pos_I12++)) :
                           format(empty)));
         res.push_back(unique_ptr<format_entry>(
                           pos_J != J.end() && !(last && (*pos_J == *J.begin())) ?
-                          format<double>(form_J, &(*pos_J++)) :
+                          format<double>(form_J, (*pos_J++)) :
                           format(empty)));
         res.push_back(unique_ptr<format_entry>(
                           pos_NSM != NSM.end() && !(last && (*pos_NSM == *NSM.begin())) ?
-                          format<double>(form_NSM, &(*pos_NSM++)) :
+                          format<double>(form_NSM, (*pos_NSM++)) :
                           format(empty)));
         res.push_back(unique_ptr<format_entry>(
                           pos_C1 != C1.end() && !(last && (*pos_C1 == *C1.begin())) ?
-                          format<double>(form_C1, &(*pos_C1++)) :
+                          format<double>(form_C1, (*pos_C1++)) :
                           format(empty)));
         res.push_back(unique_ptr<format_entry>(
                           pos_C2 != C2.end() && !(last && (*pos_C2 == *C2.begin())) ?
-                          format<double>(form_C2, &(*pos_C2++)) :
+                          format<double>(form_C2, (*pos_C2++)) :
                           format(empty)));
         res.push_back(unique_ptr<format_entry>(
                           pos_D1 != D1.end() && !(last && (*pos_D1 == *D1.begin())) ?
-                          format<double>(form_D1, &(*pos_D1++)) :
+                          format<double>(form_D1, (*pos_D1++)) :
                           format(empty)));
         res.push_back(unique_ptr<format_entry>(
                           pos_D2 != D2.end() && !(last && (*pos_D2 == *D2.begin())) ?
-                          format<double>(form_D2, &(*pos_D2++)) :
+                          format<double>(form_D2, (*pos_D2++)) :
                           format(empty)));
         res.push_back(unique_ptr<format_entry>(
                           pos_E1 != E1.end() && !(last && (*pos_E1 == *E1.begin())) ?
-                          format<double>(form_E1, &(*pos_E1++)) :
+                          format<double>(form_E1, (*pos_E1++)) :
                           format(empty)));
         res.push_back(unique_ptr<format_entry>(
                           pos_E2 != E2.end() && !(last && (*pos_E2 == *E2.begin())) ?
-                          format<double>(form_E2, &(*pos_E2++)) :
+                          format<double>(form_E2, (*pos_E2++)) :
                           format(empty)));
         res.push_back(unique_ptr<format_entry>(
                           pos_F1 != F1.end() && !(last && (*pos_F1 == *F1.begin())) ?
-                          format<double>(form_F1, &(*pos_F1++)) :
+                          format<double>(form_F1, (*pos_F1++)) :
                           format(empty)));
         res.push_back(unique_ptr<format_entry>(
                           pos_F2 != F2.end() && !(last && (*pos_F2 == *F2.begin())) ?
-                          format<double>(form_F2, &(*pos_F2++)) :
+                          format<double>(form_F2, (*pos_F2++)) :
                           format(empty)));
     }
 
@@ -858,13 +860,8 @@ bdf::cards::__base::card const &pbeam::operator() (
     if (E2 != nullptr) this->E2.assign(E2->begin(), E2->end());
     if (F1 != nullptr) this->F1.assign(F1->begin(), F1->end());
     if (F2 != nullptr) this->F2.assign(F2->begin(), F2->end());
-    if ((*A).size()>1) {
-        this->SO.assign(SO->begin(), SO->end());
-        this->X_XB.assign(X_XB->begin(), X_XB->end());
-    } else {
-        this->SO.assign(1, bdf::types::entry_value<std::string>("YESA"));
-        this->X_XB.assign(1, 1.);
-    }
+    this->SO.assign(SO->begin(), SO->end());
+    this->X_XB.assign(X_XB->begin(), X_XB->end());
     this->K1(K1);
     this->K2(K2);
     this->S1(S1);

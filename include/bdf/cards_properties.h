@@ -285,69 +285,69 @@ namespace dnvgl {
                     /** Area of the beam cross section at the various
                         stations. (Real > 0.0)
                         */
-                    std::vector<double> A;
+                    std::vector<bdf::types::entry_value<double>> A;
                     /** Area moment of inertia at the various stations for
                         bending in plane 1 about the neutral axis. (Real >
                         0.0)
                         */
-                    std::vector<double> I1;
+                    std::vector<bdf::types::entry_value<double>> I1;
                     /** Area moment of inertia at the various stations for
                         bending in plane 2 about the neutral axis. (Real >
                         0.0)
                         */
-                    std::vector<double> I2;
+                    std::vector<bdf::types::entry_value<double>> I2;
                     /** Area product of inertia at the various stations. (Real)
                      */
-                    std::vector<double> I12;
+                    std::vector<bdf::types::entry_value<double>> I12;
                     /** Torsional stiffness parameter at the various
                         stations. (Real >= 0.0 but > 0.0 if warping is
                         present)
                         */
-                    std::vector<double> J;
+                    std::vector<bdf::types::entry_value<double>> J;
                     /** Nonstructural mass per unit length at the various
                         stations. (Real, Default=0.0)
                         */
-                    std::vector<double> NSM;
+                    std::vector<bdf::types::entry_value<double>> NSM;
                     /** *y* coordinate for location of first stress
                         recovery point at the various stations. (Real;
                         Default: 0)
                         */
-                    std::vector<double> C1;
+                    std::vector<bdf::types::entry_value<double>> C1;
                     /** *z* coordinate for location of first stress
                         recovery point at the various stations. (Real;
                         Default: 0)
                         */
-                    std::vector<double> C2;
+                    std::vector<bdf::types::entry_value<double>> C2;
                     /** *y* coordinate for location of second stress
                         recovery point at the various stations. (Real;
                         Default: 0)
                         */
-                    std::vector<double> D1;
+                    std::vector<bdf::types::entry_value<double>> D1;
                     /** *z* coordinate for location of second stress
                         recovery point at the various stations. (Real;
                         Default: 0)
                         */
-                    std::vector<double> D2;
+                    std::vector<bdf::types::entry_value<double>> D2;
                     /** *y* coordinate for location of third stress
                         recovery point at the various stations. (Real;
                         Default: 0)
                         */
-                    std::vector<double> E1;
+                    std::vector<bdf::types::entry_value<double>> E1;
                     /** *z* coordinate for location of third stress
                         recovery point at the various stations. (Real;
                         Default: 0)
                         */
-                    std::vector<double> E2;
+                    std::vector<bdf::types::entry_value<double>> E2;
                     /** *y* coordinate for location of fourth stress
                         recovery point at the various stations. (Real;
                         Default: 0)
                         */
-                    std::vector<double> F1;
+                    std::vector<bdf::types::entry_value<double>> F1;
                     /** *z* coordinate for location of fourth stress
                         recovery point at the various stations. (Real;
                         Default: 0)
                         */
-                    std::vector<double> F2;
+                    std::vector<bdf::types::entry_value<double>> F2;
                     /** Stress output request option at the various
                         stations. (Character)
 
@@ -364,7 +364,7 @@ namespace dnvgl {
                         coordinate system divided by the length of the
                         element. (Real > 0.0)
                         */
-                    std::vector<double> X_XB;
+                    std::vector<bdf::types::entry_value<double>> X_XB;
                     /** Shear stiffness factor *K* in *KxAxG* for plane 1.
                         (Real, Default = 1.0)
                         */

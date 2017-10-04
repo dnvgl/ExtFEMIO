@@ -121,7 +121,7 @@ void cmass4::collect_outdata(
     res.push_back(unique_ptr<format_entry>(format<double>(form_M, M)));
     if (S1 || S2)
         res.push_back(unique_ptr<format_entry>(format<long>(form_S1, S1)));
-    if (S2) 
+    if (S2)
         res.push_back(unique_ptr<format_entry>(format<long>(form_S2, S2)));
 
     return;

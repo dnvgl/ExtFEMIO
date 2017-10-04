@@ -34,6 +34,7 @@ namespace {
 #include "bdf/cards_elements.h"
 
 #include "catch_list_helper.h"
+#include "catch_vector_helper.h"
 
 #if defined(__AFX_H__) && defined(_DEBUG)
 #define new DEBUG_NEW
@@ -693,8 +694,7 @@ TEST_CASE("BDF file reader.", "[bdf_cards]" ) {
 
 
     {
-        std::list<std::string> ref1({
-                "$Only a comment"});
+        std::list<std::string> ref1({"$Only a comment"});
         probe.get(l);
         CAPTURE(l.front());
         CHECK(l == ref1);
@@ -719,7 +719,7 @@ TEST_CASE("BDF file reader.", "[bdf_cards]" ) {
     {
         std::list<std::string> ref1({
                 "PBEAML  104010  4               L     ",
-                    "           63.0   340.0    35.0    14.0"});
+                "           63.0   340.0    35.0    14.0"});
         probe.get(l);
         CAPTURE(l.front());
         CHECK(l == ref1);
@@ -801,8 +801,7 @@ TEST_CASE("Split Free Field Cards, Sample 5", "[bdf_cards]") {
     std::list<std::string> ref({
             "SPC1", "100", "12456", "1", "2", "3", "4", "5", "6", "7",
             "8", "9", "10"});
-    CHECK(probe.size() == ref.size());
-    CHECK(probe == ref);
+    CHECK_THAT(probe, IsEqual(ref));
 }
 
 TEST_CASE("Split Free Field Cards, Sample 6", "[bdf_cards]") {
@@ -814,8 +813,7 @@ TEST_CASE("Split Free Field Cards, Sample 6", "[bdf_cards]") {
     std::list<std::string> ref({
             "MATT9", "1151", "2", "3", "4", "", "", "", "8", "9", "",
             "", "", "13"});
-    CHECK(probe.size() == ref.size());
-    CHECK(probe == ref);
+    CHECK_THAT(probe, IsEqual(ref));
 }
 
 TEST_CASE("Split Free Field Cards, Sample 7", "[bdf_cards]") {
@@ -828,7 +826,7 @@ TEST_CASE("Split Free Field Cards, Sample 7", "[bdf_cards]") {
             "MATT9", "1151", "2", "3", "4", "", "", "", "8", "9", "",
             "", "", "13"});
     CHECK(probe.size() == ref.size());
-    CHECK(probe == ref);
+    CHECK_THAT(probe, IsEqual(ref));
 }
 
 TEST_CASE("Split Free Field Cards, Sample 8", "[bdf_cards]") {
@@ -839,8 +837,7 @@ TEST_CASE("Split Free Field Cards, Sample 8", "[bdf_cards]") {
     card::card_split(data, probe);
     std::list<std::string> ref({
             "MATT9", "1302", "2", "", "4", "", "", "", "", "", "13"});
-    CHECK(probe.size() == ref.size());
-    CHECK(probe == ref);
+    CHECK_THAT(probe, IsEqual(ref));
 }
 
 TEST_CASE("Split Free Field Cards, Sample 9", "[bdf_cards]") {
@@ -853,8 +850,7 @@ TEST_CASE("Split Free Field Cards, Sample 9", "[bdf_cards]") {
     std::list<std::string> ref({
             "MATT9", "1303", "2", "3", "4", "", "", "", "8", "9", "",
             "", "", "13"});
-    CHECK(probe.size() == ref.size());
-    CHECK(probe == ref);
+    CHECK_THAT(probe, IsEqual(ref));
 }
 
 TEST_CASE("Split Free Field Cards, Sample 10", "[bdf_cards]") {
@@ -867,8 +863,7 @@ TEST_CASE("Split Free Field Cards, Sample 10", "[bdf_cards]") {
     std::list<std::string> ref({
             "MATT9", "1355", "2", "3", "", "5", "", "", "8", "", "10",
             "", "", "17"});
-    CHECK(probe.size() == ref.size());
-    CHECK(probe == ref);
+    CHECK_THAT(probe, IsEqual(ref));
 }
 
 TEST_CASE("Split Free Field Cards, Sample 11", "[bdf_cards]") {
@@ -880,8 +875,7 @@ TEST_CASE("Split Free Field Cards, Sample 11", "[bdf_cards]") {
             "CHEXA", "200", "200", "1", "2", "3", "4", "5", "6", "7",
             "8", "9", "10", "11", "12", "13", "14", "15", "16",
             "17", "18", "19", "20"});
-    CHECK(probe.size() == ref.size());
-    CHECK(probe == ref);
+    CHECK_THAT(probe, IsEqual(ref));
 }
 
 TEST_CASE("Split Free Field Cards, Sample 12", "[bdf_cards]") {
@@ -894,7 +888,6 @@ TEST_CASE("Split Free Field Cards, Sample 12", "[bdf_cards]") {
             "PBEAM", "1", "2", "3.", "4.", ".5", "6.", "7.",
             "8.", "9.", "10.", "11.", "12.", "13.", "14.", "15.", "16.",
             "NO", "1."});
-    CHECK(probe.size() == ref.size());
     CHECK_THAT(probe, IsEqual(ref));
 }
 
@@ -908,8 +901,7 @@ TEST_CASE("Split Small Field Cards", "[cards]") {
     card::card_split(data, probe);
     std::list<std::string> ref({
             "GRID", "2", "", "1.0", "-2.0", "3.0", "", "136", ""});
-    CHECK(probe.size() == ref.size());
-    CHECK(probe == ref);
+    CHECK_THAT(probe, IsEqual(ref));
 }
 
 // Test data as found in the BDF documentation.
@@ -923,8 +915,7 @@ TEST_CASE("Split Large Field Cards", "[cards]") {
     card::card_split(data, probe);
     std::list<std::string> ref({
             "GRID", "2", "", "1.0", "-2.0", "3.0", "", "136", ""});
-    CHECK(probe.size() == ref.size());
-    CHECK(probe == ref);
+    CHECK_THAT(probe, IsEqual(ref));
 }
 
 TEST_CASE("BDF_Dispatch", "[cards]") {
@@ -1031,23 +1022,28 @@ TEST_CASE("BDF_Dispatch", "[cards]") {
     cards::dispatch(data, current);
     // 12345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
     // PBEAML  104010  4               L
-    //           63.0   340.0    35.0    14.0
+    //           63.0   340.0    35.0    14.0  YESA    1.
     {
         CHECK(current->card_type() == cards::types::PBEAML);
-        CHECK(static_cast<pbeaml*>(current.get())->PID.value == 104010);
-        CHECK(static_cast<pbeaml*>(current.get())->MID.value == 4);
-        CHECK(static_cast<pbeaml*>(current.get())->GROUP.value == "MSCBML0");
-        CHECK(static_cast<pbeaml*>(current.get())->TYPE.value == "L");
-        auto DIM = static_cast<pbeaml*>(current.get())->DIM;
-        CHECK(DIM.size() == 1);
-        CHECK(DIM[0].size() == 4);
-        for (size_t i{0}; i < DIM[0].size(); i++)
-            CHECK(double(static_cast<pbeaml*>(current.get())->DIM[0][i]) ==
-                  vector<double>({63., 340., 35., 14.})[i]);
-        CHECK(static_cast<pbeaml*>(current.get())->NSM.size() == 1);
-        CHECK(double(static_cast<pbeaml*>(current.get())->NSM[0]) == 0.);
-        CHECK(static_cast<pbeaml*>(current.get())->SO.size() == 0);
-        CHECK(static_cast<pbeaml*>(current.get())->X_XB.size() == 0);
+        auto probe = *static_cast<pbeaml*>(current.get());
+        CHECK(probe.PID.value == 104010);
+        CHECK(probe.MID.value == 4);
+        CHECK(probe.GROUP.value == "MSCBML0");
+        CHECK(probe.TYPE.value == "L");
+        auto DIM = probe.DIM;
+        CHECK(DIM.size() == 2);
+        for (size_t i{0}; i < DIM.size(); i++)
+            CHECK_THAT(std::vector<double>(
+                           probe.DIM[i].begin(), probe.DIM[i].end()),
+                       IsEqual(vector<double>({63., 340., 35., 14.})));
+        CHECK_THAT(std::vector<double>(probe.NSM.begin(), probe.NSM.end()),
+                       IsEqual(std::vector<double>(2, 0.)));
+        CHECK_THAT(std::vector<std::string>(probe.SO.begin(), probe.SO.end()),
+                   IsEqual(std::vector<std::string>(1, "YESA")));
+        CHECK_THAT(std::vector<double>(probe.X_XB.begin(), probe.X_XB.end()),
+                       IsEqual(std::vector<double>(1, 1.)));
+        CHECK_THAT(std::vector<double>(probe.NSM.begin(), probe.NSM.end()),
+                      IsEqual(std::vector<double>(2, 0.)));
         current.reset();
     }
 
@@ -1057,20 +1053,22 @@ TEST_CASE("BDF_Dispatch", "[cards]") {
     cards::dispatch(data, current);
     // PBEAM   4000001 3       1.046+4 9.369+7 1.694+6 6.856+6 1.316+6
     CHECK(current->card_type() == cards::types::PBEAM);
-    CHECK(static_cast<pbeam*>(current.get())->PID.value == 4000001);
-    CHECK(static_cast<pbeam*>(current.get())->MID.value == 3);
-    CHECK(static_cast<pbeam*>(current.get())->A ==
-          vector<double>({10460., 10460.}));
-    CHECK(static_cast<pbeam*>(current.get())->I1 ==
-          vector<double>({93690000., 93690000.}));
-    CHECK(static_cast<pbeam*>(current.get())->I2 ==
-          vector<double>({1694000., 1694000.}));
-    CHECK(static_cast<pbeam*>(current.get())->I12 ==
-          vector<double>({6.856e6, 6.856e6}));
-    CHECK(static_cast<pbeam*>(current.get())->J ==
-          vector<double>({1.316e6, 1.316e6}));
-    current.reset();
-
+    {
+        auto probe = static_cast<pbeam*>(current.get());
+        CHECK(probe->PID.value == 4000001);
+        CHECK(probe->MID.value == 3);
+        CHECK_THAT(vector<double>(probe->A.begin(), probe->A.end()),
+                   IsEqual(vector<double>(2, 10460.)));
+        CHECK_THAT(vector<double>(probe->I1.begin(), probe->I1.end()),
+                   IsEqual(vector<double>(2, 93690000.)));
+        CHECK_THAT(vector<double>(probe->I2.begin(), probe->I2.end()),
+                   IsEqual(vector<double>(2, 1694000.)));
+        CHECK_THAT(vector<double>(probe->I12.begin(), probe->I12.end()),
+                   IsEqual(vector<double>(2, 6.856e6)));
+        CHECK_THAT(vector<double>(probe->J.begin(), probe->J.end()),
+                   IsEqual(vector<double>(2, 1.316e6)));
+        current.reset();
+    }
     probe.get(l);
     CAPTURE(l.front());
     card::card_split(l, data);

@@ -11,10 +11,13 @@
  */
 
 #include <vector>
+#include <valarray>
 #include <iostream>
 
 #ifndef _CATCH_VECTOR_HELPER_H_
 #define _CATCH_VECTOR_HELPER_H_
+
+using dnvgl::extfem::bdf::types::entry_value;
 
 #ifdef min
 #undef min
@@ -37,6 +40,22 @@ namespace std {
         return os;
     }
 
+    template<>
+    inline std::ostream &operator<<(
+        std::ostream &os, std::vector<entry_value<double>> const &in) {
+        os << "[" << endl;
+        size_t i{0};
+        for (auto pos : in) {
+            os << static_cast<double>(pos);
+            if (++i != in.size()) {
+                os << ", ";
+                if (i % 3 == 0)                    os << endl;
+            }
+        }
+        os << endl << "]";
+        return os;
+    }
+
     template<typename _Ty>
     inline std::string toString(std::vector<_Ty> &in) {
         std::ostringstream ss;
@@ -48,15 +67,17 @@ namespace std {
     template<typename _Ty>
     class MatchVector : public Catch::MatcherBase<std::vector<_Ty>> {
         std::vector<_Ty> ref;
-        _Ty const static eps;
+        _Ty static const eps (void);
     public:
-        explicit MatchVector(std::vector<_Ty> const &ref) : ref(ref) {}
+        explicit MatchVector(std::vector<_Ty> const &ref) :
+                ref(ref.begin(), ref.end()) {}
 
         // Performs the test for this matcher
         virtual bool match(std::vector<_Ty> const &in) const override {
-            return (abs(ref - in) < eps).min();
+            std::valarray<_Ty> const tmp_in(in.data(), in.size());
+            std::valarray<_Ty> const tmp_ref(ref.data(), ref.size());
+            return (abs(tmp_ref - tmp_in) < eps()).min();
         }
-
         // Produces a string describing what this matcher does. It should
         // include any provided data (the begin/ end in this case) and
         // be written as if it were stating a fact (in the output it will be
@@ -69,13 +90,17 @@ namespace std {
     };
 
     template<typename _Ty>
-    const _Ty MatchVector<_Ty>::eps = _Ty(1e-8);
+    inline const _Ty MatchVector<_Ty>::eps(void) {
+        return _Ty(1e-8);
+    }
 
     template<>
-    const std::string MatchVector<std::string>::eps = "";
+    inline const std::string MatchVector<std::string>::eps(void) {
+        return "";
+    }
 
     template<>
-    bool MatchVector<std::string>::match(std::vector<std::string> const &in) const {
+    inline bool MatchVector<std::string>::match(std::vector<std::string> const &in) const {
         return ref == in;
     }
 
