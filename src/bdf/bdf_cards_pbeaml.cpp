@@ -27,6 +27,10 @@ namespace {
 static char THIS_FILE[] = __FILE__;
 #endif
 
+#ifdef max
+#undef max
+#endif
+
 using namespace std;
 
 using namespace dnvgl::extfem;
@@ -97,7 +101,7 @@ pbeaml::pbeaml(long const *PID, long const *MID,
                vector<std::string> const *SO,
                vector<double> const *X_XB) :
         beam_prop(PID, MID), GROUP(*GROUP), TYPE(*TYPE) {
-    this->DIM.resize(std::max(DIM->size(), 2ul));
+    this->DIM.resize(max(DIM->size(), size_t(2)));
     for (size_t i = 0; i < DIM->size(); i++) {
         this->DIM[i].resize((*DIM)[i].size(), entry_value<double>(nullptr));
         for (size_t j = 0; j < (*DIM)[i].size(); j++)
@@ -108,7 +112,7 @@ pbeaml::pbeaml(long const *PID, long const *MID,
         for (size_t j = 0; j < (*DIM)[0].size(); j++)
             this->DIM[1][j]((*DIM)[0][j]);
     }
-    this->NSM.resize(std::max(NSM->size(), 2ul), entry_value<double>(nullptr));
+    this->NSM.resize(std::max(NSM->size(), size_t(2)), entry_value<double>(nullptr));
     for (size_t i = 0; i < NSM->size(); i++)
         this->NSM[i]((*NSM)[i]);
     if (NSM->size() == 1)
