@@ -6,6 +6,9 @@
 
    Detailed description
 */
+#include "extfemio_stdafx.h"
+
+#include "extfem_misc.h"
 
 // ID:
 namespace {

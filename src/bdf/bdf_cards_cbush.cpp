@@ -6,6 +6,10 @@
 
    Detailed description
 */
+#include "extfemio_stdafx.h"
+
+#include "extfem_misc.h"
+#include "bdf/cards_elements.h"
 
 // ID:
 namespace {
