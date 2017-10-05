@@ -139,6 +139,17 @@ namespace dnvgl {
                     bdf_types type() const override;
                     std::string format(const void*) const override;
                 };
+
+                //! Raw string.
+                class rstring : public base {
+                    rstring() = default;
+                    std::string cont;
+                public:
+                    explicit rstring(const std::string &name);
+                    ~rstring() = default;
+                    bdf_types type() const override;
+                    std::string format(const void*) const override;
+                };
             }
         }
     }

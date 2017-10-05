@@ -55,6 +55,9 @@ dnvgl::extfem::bdf::cards::format_entry
 *format(const std::unique_ptr<dnvgl::extfem::bdf::types::card> &);
 
 dnvgl::extfem::bdf::cards::format_entry
+*format(std::string const &);
+
+dnvgl::extfem::bdf::cards::format_entry
 *format(const std::unique_ptr<dnvgl::extfem::bdf::types::empty>&);
 
 template <typename _Ty>
@@ -133,12 +136,15 @@ namespace dnvgl {
                     CTETRA, //!< Defines the connections of the four-sided
                     //!< solid element with four to ten grid points.
                     CBUSH, //!< ## Scalar and Bushing Elements
-                    //!< Defines a generalized spring-and-damper
-                    //!< structural element that may be nonlinear or
-                    //!< frequency dependent.
+                           //!< Defines a generalized spring-and-damper
+                           //!< structural element that may be
+                           //!< nonlinear or < frequency dependent.
                     CBUSH1D, //!< Defines the connectivity of a
                     //!< one-dimensional spring and viscous damper
                     //!< element.
+                    PBUSH,//!< Defines the nominal property values for
+                          //!< a generalized spring-and-damper
+                          //!< structural element.
                     CELAS1, //!< Scalar Spring Connection
                     CELAS2, //!< Defines a scalar spring element without
                     //!< reference to a property entry.
@@ -404,6 +410,7 @@ namespace dnvgl {
                         friend format_entry *::format(
                             std::unique_ptr<dnvgl::extfem::bdf::types::card>
                             const &);
+                        friend format_entry *::format(std::string const &);
                         friend format_entry *::format(
                             std::unique_ptr<
                             dnvgl::extfem::bdf::types::empty> const&);
@@ -512,6 +519,12 @@ inline dnvgl::extfem::bdf::cards::format_entry
 *format(dnvgl::extfem::bdf::types::card const &formatter) {
     return new dnvgl::extfem::bdf::cards::format_entry(
         const_cast<dnvgl::extfem::bdf::types::card*>(&formatter), nullptr);
+}
+
+inline dnvgl::extfem::bdf::cards::format_entry
+*format(std::string const &val) {
+    return new dnvgl::extfem::bdf::cards::format_entry(
+        new dnvgl::extfem::bdf::types::rstring(val), nullptr);
 }
 
 inline dnvgl::extfem::bdf::cards::format_entry

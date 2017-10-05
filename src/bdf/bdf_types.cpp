@@ -104,6 +104,28 @@ std::string empty::format(const void* d) const {
     return outp.str();
 }
 
+rstring::rstring(const std::string &name) :
+        cont(name) {}
+
+bdf_types rstring::type() const {
+    return bdf_types::None;
+}
+
+std::string rstring::format(const void*) const {
+    ostringstream outp;
+
+    switch (out_form) {
+    case out_form_type::LONG:
+    case out_form_type::SHORT:
+        outp << setfill(' ') << setw(long(out_form)) << std::left << cont;
+        break;
+    case out_form_type::FREE:
+        outp << cont;
+        break;
+    }
+    return outp.str();
+}
+
 // Local Variables:
 // mode: c++
 // c-file-style: "dnvgl"

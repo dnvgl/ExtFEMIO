@@ -25,6 +25,7 @@ set(LIBEXTFEMIO_BDF_SOURCES
   bdf_cards_beam_prop.cpp
   bdf_cards_cbar.cpp
   bdf_cards_cbeam.cpp
+  bdf_cards_cbush.cpp
   bdf_cards_cquad4.cpp
   bdf_cards_crod.cpp
   bdf_cards_ctria3.cpp
@@ -43,6 +44,7 @@ set(LIBEXTFEMIO_BDF_SOURCES
   bdf_cards_pbarl.cpp
   bdf_cards_pbeam.cpp
   bdf_cards_pbeaml.cpp
+  bdf_cards_pbush.cpp
   bdf_cards_prod.cpp
   bdf_cards_pshell.cpp
 #  bdf_cards_pelas.cpp

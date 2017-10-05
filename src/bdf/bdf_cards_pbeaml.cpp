@@ -52,9 +52,8 @@ bdf::types::card pbeaml::head = bdf::types::card("PBEAML");
 
 namespace {
     std::string name{"MSCBML0"};
-    auto const bound_GROUP_ = make_shared<bound<std::string>>(
+    auto const bound_GROUP = new bound<std::string>(
         nullptr, nullptr, &name);
-    auto const bound_GROUP = bound_GROUP_.get();
 }
 entry_type<std::string> pbeaml::form_GROUP("GROUP", bound_GROUP);
 namespace {
@@ -62,29 +61,24 @@ namespace {
                 "TUBE", "CHAN", "BOX", "BAR", "CROSS", "H", "T1",
                 "I1", "CHAN1", "Z", "CHAN2", "T2", "BOX1", "HEXA",
                 "HAT", "HAT1", "DBOX"});
-    auto const bound_TYPE_ = make_shared<bound<std::string>>(allowed);
-    auto const bound_TYPE = bound_TYPE_.get();
+    auto const bound_TYPE = new bound<std::string>(allowed);
 }
 entry_type<std::string> pbeaml::form_TYPE("TYPE", bound_TYPE);
 namespace {
-    auto const bound_DIM_ = make_shared<bound<double>>(cd0);
-    auto const bound_DIM = bound_DIM_.get();
+    auto const bound_DIM = new bound<double>(cd0);
 }
 entry_type<double> pbeaml::form_DIM("DIM", bound_DIM);
 namespace {
-    auto const bound_NSM_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
-    auto const bound_NSM = bound_NSM_.get();
+    auto const bound_NSM = new bound<double>(nullptr, nullptr, cd0);
 }
 entry_type<double> pbeaml::form_NSM("NSM", bound_NSM);
 namespace {
     set<std::string> const SO_set({"YES", "YESA", "NO"});
-    auto const bound_SO_ = make_shared<bound<std::string>>(SO_set);
-    auto const bound_SO = bound_SO_.get();
+    auto const bound_SO = new bound<std::string>(SO_set);
 }
 entry_type<std::string> pbeaml::form_SO("SO", bound_SO);
 namespace {
-    auto const bound_X_XB_ = make_shared<bound<double>>(cd0, nullptr, cd1);
-    auto const bound_X_XB = bound_X_XB_.get();
+    auto const bound_X_XB = new bound<double>(cd0, nullptr, cd1);
 }
 entry_type<double> pbeaml::form_X_XB("X/XB", bound_X_XB);
 

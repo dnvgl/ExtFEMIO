@@ -193,6 +193,7 @@ std::ostream &operator<< (ostream& os, cards::types const cardtype) {
     case cards::types::CTETRA: return os << "CTETRA";
     case cards::types::CBUSH: return os << "CBUSH";
     case cards::types::CBUSH1D: return os << "CBUSH1D";
+    case cards::types::PBUSH: return os << "PBUSH";
     case cards::types::CELAS1: return os << "CELAS1";
     case cards::types::CELAS2: return os << "CELAS2";
     case cards::types::CELAS3: return os << "CELAS3";
@@ -545,6 +546,12 @@ void cards::dispatch(
         case types::PARAM:
             res = make_unique<param>(inp);
             break;
+        case types::CBUSH:
+             res = make_unique<cbush>(inp);
+            break;
+        case types::PBUSH:
+            res = make_unique<pbush>(inp);
+            break;
             /// Elements only supported to allow counting.
         case types::CAABSF:
         case types::CAERO1:
@@ -557,7 +564,6 @@ void cards::dispatch(
         case types::CAXIF4:
         case types::CBEND:
         case types::CBUSH1D:
-        case types::CBUSH:
         case types::CBUTT:
         case types::CCONEAX:
         case types::CCRSFIL:

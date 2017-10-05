@@ -171,28 +171,17 @@ void cbar::read(list<std::string> const &inp) {
 
 
     switch (inp.size() - 1) {
-    case 16:
-        form_W3B.set_value(W3B, *(pos++));
-    case 15:
-        form_W2B.set_value(W2B, *(pos++));
-    case 14:
-        form_W1B.set_value(W1B, *(pos++));
-    case 13:
-        form_W3A.set_value(W3A, *(pos++));
-    case 12:
-        form_W2A.set_value(W2A, *(pos++));
-    case 11:
-        form_W1A.set_value(W1A, *(pos++));
-    case 10:
-        form_PB.set_value(PB, *(pos++));
-    case 9:
-        form_PA.set_value(PA, *(pos++));
-    case 8:
-        form_OFFT.set_value(OFFT, *(pos++));
-    case 7:
-        form_X3.set_value(X3, *(pos++));
-    case 6:
-        form_X2.set_value(X2, *(pos++));
+    case 16: form_W3B.set_value(W3B, *(pos++));
+    case 15: form_W2B.set_value(W2B, *(pos++));
+    case 14: form_W1B.set_value(W1B, *(pos++));
+    case 13: form_W3A.set_value(W3A, *(pos++));
+    case 12: form_W2A.set_value(W2A, *(pos++));
+    case 11: form_W1A.set_value(W1A, *(pos++));
+    case 10: form_PB.set_value(PB, *(pos++));
+    case 9: form_PA.set_value(PA, *(pos++));
+    case 8: form_OFFT.set_value(OFFT, *(pos++));
+    case 7: form_X3.set_value(X3, *(pos++));
+    case 6: form_X2.set_value(X2, *(pos++));
     case 5:
         try {
             form_X1.set_value(X1, *pos);
@@ -300,52 +289,36 @@ void cbar::collect_outdata(
     res.push_back(unique_ptr<format_entry>(format<long>(form_GB, GB)));
     if (choose_dir_code == CHOOSE_DIR_CODE::has_DCODE) {
         res.push_back(unique_ptr<format_entry>(format<long>(form_G0, G0)));
-        if (bool(OFFT) || bool(PA) || bool(PB) || bool(W1A) || bool(W2A) ||
-            bool(W3A) || bool(W1B) || bool(W2B) || bool(W3B)) {
-            res.push_back(unique_ptr<format_entry>(format(empty)));
-            res.push_back(unique_ptr<format_entry>(format(empty)));
-        }
+        res.push_back(unique_ptr<format_entry>(format(empty)));
+        res.push_back(unique_ptr<format_entry>(format(empty)));
     } else {
         res.push_back(unique_ptr<format_entry>(format<double>(form_X1, X1)));
         res.push_back(unique_ptr<format_entry>(format<double>(form_X2, X2)));
         res.push_back(unique_ptr<format_entry>(format<double>(form_X3, X3)));
     }
 
-    if (bool(OFFT) || bool(PA) || bool(PB) || bool(W1A) || bool(W2A) ||
-        bool(W3A) || bool(W1B) || bool(W2B) || bool(W3B))
-        res.push_back(
-            unique_ptr<format_entry>(format<std::string>(form_OFFT, OFFT)));
-    else goto cont;
-
-    if (bool(PA) || bool(PB) || bool(W1A) || bool(W2A) || bool(W3A) ||
-        bool(W1B) || bool(W2B) || bool(W3B))
-        res.push_back(
-            unique_ptr<format_entry>(format<vector<int> >(form_PA, PA)));
-    else goto cont;
-    if (bool(PB) || bool(W1A) || bool(W2A) || bool(W3A) || bool(W1B) ||
-        bool(W2B) || bool(W3B))
-        res.push_back(
-            unique_ptr<format_entry>(format<vector<int> >(form_PB, PB)));
-    else goto cont;
-    if (bool(W1A) || bool(W2A) || bool(W3A) || bool(W1B) || bool(W2B) ||
-        bool(W3B))
-        res.push_back(unique_ptr<format_entry>(format<double>(form_W1A, W1A)));
-    else goto cont;
-    if (bool(W2A) || bool(W3A) || bool(W1B) || bool(W2B) || bool(W3B))
-        res.push_back(unique_ptr<format_entry>(format<double>(form_W2A, W2A)));
-    else goto cont;
-    if (bool(W3A) || bool(W1B) || bool(W2B) || bool(W3B))
-        res.push_back(unique_ptr<format_entry>(format<double>(form_W3A, W3A)));
-    else goto cont;
-    if (bool(W1B) || bool(W2B) || bool(W3B))
-        res.push_back(unique_ptr<format_entry>(format<double>(form_W1B, W1B)));
-    else goto cont;
-    if (bool(W2B) || bool(W3B))
-        res.push_back(unique_ptr<format_entry>(format<double>(form_W2B, W2B)));
-    else goto cont;
-    if (bool(W3B))
-        res.push_back(unique_ptr<format_entry>(format<double>(form_W3B, W3B)));
-cont:
+    res.push_back(
+        unique_ptr<format_entry>(format<std::string>(form_OFFT, OFFT)));
+    res.push_back(unique_ptr<format_entry>(format<vector<int> >(form_PA, PA)));
+    res.push_back(unique_ptr<format_entry>(format<vector<int> >(form_PB, PB)));
+    res.push_back(
+        unique_ptr<format_entry>(
+            bool(W1A) ? format<double>(form_W1A, W1A) : format(empty)));
+    res.push_back(
+        unique_ptr<format_entry>(
+            bool(W2A) ? format<double>(form_W2A, W2A) : format(empty)));
+    res.push_back(
+        unique_ptr<format_entry>(
+            bool(W3A) ? format<double>(form_W3A, W3A) : format(empty)));
+    res.push_back(
+        unique_ptr<format_entry>(
+            bool(W1B) ? format<double>(form_W1B, W1B) : format(empty)));
+    res.push_back(
+        unique_ptr<format_entry>(
+            bool(W2B) ? format<double>(form_W2B, W2B) : format(empty)));
+    res.push_back(
+        unique_ptr<format_entry>(
+            bool(W3B) ? format<double>(form_W3B, W3B) : format(empty)));
     return;
 }
 

@@ -878,6 +878,155 @@ namespace dnvgl {
                     void check_data() override;
                 };
                 //         pelas
+
+                /// Handle Nastran Bulk `PBUSH` entries.
+                /** # Generalize Spring-and-Damper Property
+
+                Defines the nominal property values for a generalized
+                spring-and-damper structural element.
+
+                #Format:
+
+                | 1       | 2     | 3       | 4     | 5     | 6     | 7     | 8     | 9     | 10 |
+                | ------- | ----- | ------- | ----- | ----- | ----- | ----- | ----- | ----- | -- |
+                | `PBUSH` | `PID` | `“K”`   | `K1`  | `K2`  | `K3`  | `K4`  | `K5`  | `K6`  |    |
+                |         |       | `“B”`   | `B1`  | `B2`  | `B3`  | `B4`  | `B5`  | `B6`  |    |
+                |         |       | `“GE”`  | `GE1` | `GE2` | `GE3` | `GE4` | `GE5` | `GE6` |    |
+                |         |       | `“RCV”` | `SA`  | `ST ` | `EA`  | `ET`  |       |       |    |
+
+                #Example 1:
+
+                Stiffness and structural damping are specified.
+
+                | 1       | 2  | 3     | 4    | 5   | 6 | 7 | 8 | 9   | 10 |
+                | ------- | -- | ----- | ---- | --- | - | - | - | --- | -- |
+                | `PBUSH` | 35 | `K`   | 4.35 | 2.4 |   |   |   | 3.1 |    |
+                |         |    | `GE`  | .06  |     |   |   |   |     |    |
+                |         |    | `RCV` | 7.3  | 3.3 |   |   |   |     |    |
+
+                #Example 2:
+
+                Damping force per unit velocity are specified.
+
+                | 1       | 2  | 3   | 4   | 5 | 6 | 7 | 8 | 9 | 10 |
+                | ------- | -- | --- | --- | - | - | - | - | - | -- |
+                | `PBUSH` | 35 | `B` | 2.3 |   |   |   |   |   |    |
+
+                */
+
+                class pbush : public __base::property {
+                    bdf::types::card static head;
+                    using __base::card::format_outlist;
+                    using __base::property::form_PID;
+                    bdf::types::entry_type<double> static form_K;
+                    bdf::types::entry_type<double> static form_B;
+                    bdf::types::entry_type<double> static form_GE;
+                    bdf::types::entry_type<double> static form_SA;
+                    bdf::types::entry_type<double> static form_ST;
+                    bdf::types::entry_type<double> static form_EA;
+                    bdf::types::entry_type<double> static form_ET;
+
+                public:
+                    /** Property identification number. (Integer > 0)
+                     */
+                    using __base::property::PID;
+                    /**
+                       “K”
+
+                       Flag indicating that the next 1 to 6 fields are
+                       stiffness values in the element coordinate
+                       system. (Character)
+                    */
+                    /**
+                       Nominal stiffness values in directions 1
+                       through 6. See Remarks 2. and 3. (Real; Default
+                       = 0.0)
+                    */
+                    std::vector<bdf::types::entry_value<double>> K = {};
+                    /**
+                       “B”
+
+                       Flag indicating that the next 1 to 6 fields are
+                       force-per-velocity damping. (Character)
+
+                    */
+                    /**
+                       Nominal damping coefficients in direction 1
+                       through 6 in units of force per unit velocity.
+                       See Remarks 2., 3., and 9. (Real; Default =
+                       0.0)
+                    */
+                    std::vector<bdf::types::entry_value<double>> B = {};
+                    /**
+                       “GE”
+
+                       Flag indicating that the next fields, 1 through
+                       6 are structural damping constants. See Remark
+                       7. (Character)
+                    */
+                    /**
+                       Nominal structural damping constant in
+                       directions 1 through 6. See Remarks 2. and 3.
+                       (Real; Default = 0.0)
+                    */
+                    std::vector<bdf::types::entry_value<double>> GE = {};
+                    /**
+                       “RCV”
+
+                       Flag indicating that the next 1 to 4 fields are
+                       stress or strain coefficients. (Character)
+                    */
+                    bool RCV = false;
+                    /**
+                       Stress recovery coefficient in the
+                       translational component numbers 1 through 3.
+                       (Real; Default = 1.0)
+                    */
+                    bdf::types::entry_value<double> SA;
+                    /**
+                       Stress recovery coefficient in the rotational
+                       component numbers 4 through 6. (Real; Default =
+                       1.0)
+                    */
+                    bdf::types::entry_value<double> ST;
+                    /**
+                       Strain recovery coefficient in the
+                       translational component numbers 1 through 3.
+                       (Real; Default = 1.0)
+                    */
+                    bdf::types::entry_value<double> EA;
+                    /**
+                       Strain recovery coefficient in the rotational
+                       component numbers 4 through 6. (Real; Default =
+                       1.0)
+                    */
+                    bdf::types::entry_value<double> ET;
+
+                    pbush() = default;
+                    ~pbush() = default;
+                    explicit pbush(std::list<std::string> const&);
+                    pbush(long *PID,
+                          std::vector<double> *K=nullptr,
+                          std::vector<double> *B=nullptr,
+                          std::vector<double> *GE=nullptr,
+                          double *SA=nullptr, double *ST=nullptr,
+                          double *EA=nullptr, double *ET=nullptr);
+                    types card_type() const override;
+                    void read(std::list<std::string> const &) override;
+                    card const &operator() (const std::list<std::string> &) override;
+                    card const &operator() (
+                        long *PID,
+                        std::vector<double> *K=nullptr,
+                        std::vector<double> *B=nullptr,
+                        std::vector<double> *GE=nullptr,
+                        double *SA=nullptr, double *ST=nullptr,
+                        double *EA=nullptr, double *ET=nullptr);
+                private:
+                    void collect_outdata(
+                        std::list<std::unique_ptr<format_entry> > &res) const override;
+                    void check_data() override;
+                };
+
             }
         }
     }

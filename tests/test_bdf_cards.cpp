@@ -1360,7 +1360,7 @@ TEST_CASE("Test partial supported element cards, CBUSH (1).", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CBUSH);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 39);
 }
 
@@ -1374,7 +1374,7 @@ TEST_CASE("Test partial supported element cards, CBUSH (2).", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CBUSH);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 39);
 }
 
@@ -1388,7 +1388,7 @@ TEST_CASE("Test partial supported element cards, CBUSH (3).", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CBUSH);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 39);
 }
 
@@ -1397,12 +1397,12 @@ TEST_CASE("Test partial supported element cards, CBUSH (4).", "[bdf_cards]") {
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
-            "CBUSH,39,6,1,600,0.25,10,0.,10.,10."});
+            "CBUSH,39,6,1,600,,,,,0.25,10,0.,10.,10."});
     std::list<std::string> l;
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CBUSH);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 39);
 }
 

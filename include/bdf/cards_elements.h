@@ -560,7 +560,7 @@ namespace dnvgl {
                           double *W3A=nullptr, double *W1B=nullptr,
                           double *W2B=nullptr, double *W3B=nullptr,
                           long *SA=nullptr, long *SB=nullptr);
-                    types card_type() const override;;
+                    types card_type() const override;
                     void read(std::list<std::string> const&) override;
                     card const &operator() (const std::list<std::string> &) override;
                     card const &operator() (
@@ -665,10 +665,8 @@ namespace dnvgl {
                         */
                     enum class CHOOSE_DIR_CODE {
                         UNDEF,
-                        /// Element has direction vector entry
-                        has_DVEC,
-                        /// Element direction defined by direction code
-                        has_DCODE
+                        has_DVEC, //!< Element has direction vector entry
+                        has_DCODE //!< Element direction defined by direction code
                     };
                     CHOOSE_DIR_CODE choose_dir_code;
                     // /** Unique element identification number. (0 <
@@ -923,7 +921,7 @@ namespace dnvgl {
                      * \brief Card type indicator.
                      * \return
                      */
-                    types card_type() const override;;
+                    types card_type() const override;
                     void read(std::list<std::string> const &) override;
                     card const &operator() (const std::list<std::string> &) override;
                     /**
@@ -942,7 +940,191 @@ namespace dnvgl {
                         std::list<std::unique_ptr<format_entry>>&) const override;
                     void check_data() override;
                 };
-                // celas
+
+                /// Handle Nastran Bulk `CBUSH` entries.
+                /** # Generalized Spring-and-Damper Connection.
+
+                    Defines a generalized spring-and-damper structural
+                    element that may be nonlinear or frequency
+                    dependent.
+
+                    # Format
+
+                    | 1       | 2     | 3      | 4    | 5    | 6         | 7    | 8    | 9     | 10 |
+                    | ------- | ----- | ------ | ---- | ---- | --------- | ---- | ---- | ----- | -- |
+                    | `CBUSH` | `EID` | `PID`  | `GA` | `GB` | `GO`/`X1` | `X2` | `X3` | `CID` |    |
+                    |         | `S`   | `OCID` | `S1` | `S2` | `S3`      |      |      |       |    |
+
+                    # Example 1
+
+                    Noncoincident grid points.
+
+                    | 1       | 2  | 3 | 4 | 5   | 6  | 7 | 8 | 9 | 10 |
+                    | ------- | -- | - | - | --- | -- | - | - | - | -- |
+                    | `CBUSH` | 39 | 6 | 1 | 100 | 57 |   |   |   |    |
+
+                    # Example 2:
+
+                    `GB` not specified.
+
+                    | 1       | 2  | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+                    | ------- | -- | - | - | - | - | - | - | - | -- |
+                    | `CBUSH` | 39 | 6 | 1 |   |   |   |   | 0 |    |
+
+                    # Example 3:
+
+                    Coincident grid points (GA=GB).
+
+                    | 1       | 2  | 3 | 4 | 5   | 6 | 7 | 8 | 9 | 10 |
+                    | ------- | -- | - | - | --- | - | - | - | - | -- |
+                    | `CBUSH` | 39 | 6 | 1 | 100 | 7 |   |   | 6 |    |
+
+                    # Example 4:
+
+                    Noncoincident grid points with fields 6 through 9
+                    blank and a spring-damper offset.
+
+                    | 1       | 2    | 3  | 4  | 5   | 6   | 7 | 8 | 9 | 10 |
+                    | ------- | ---- | -- | -- | --- | --- | - | - | - | -- |
+                    | `CBUSH` | 39   | 6  | 1  | 600 |     |   |   |   |    |
+                    |         | 0.25 | 10 | 0. | 10. | 10. |   |   |   |    |
+                */
+                class cbush : public __base::element {
+                    static bdf::types::card head;
+                    using __base::element::form_EID;
+                    using __base::card::format_outlist;
+                    // bdf::types::entry_type<long> static form_EID;
+                    bdf::types::entry_type<long> static form_PID;
+                    bdf::types::entry_type<long> static form_GA;
+                    bdf::types::entry_type<long> static form_GB;
+                    bdf::types::entry_type<long> static form_GO;
+                    bdf::types::entry_type<double> static form_X1;
+                    bdf::types::entry_type<double> static form_X2;
+                    bdf::types::entry_type<double> static form_X3;
+                    bdf::types::entry_type<long> static form_CID;
+                    bdf::types::entry_type<double> static form_S;
+                    bdf::types::entry_type<long> static form_OCID;
+                    bdf::types::entry_type<double> static form_S1;
+                    bdf::types::entry_type<double> static form_S2;
+                    bdf::types::entry_type<double> static form_S3;
+                public:
+                    /**
+                     * \brief Card type indicator.
+                     * \return
+                     */
+                    types card_type() const override;
+                    /** Flag to store whether orientation vector is
+                        given at all , and if given whether they are
+                        defined by means of an extra node (`GO`), or
+                        via means of a direction vector
+                        (`X1`,`X2`,`X3`).
+                    */
+                    enum class CHOOSE_DIR_CODE {
+                        UNDEF,
+                        has_DVEC, //!< Element has direction vector entry
+                        has_DNODE //!< Element direction defined by direction node
+                    };
+                    CHOOSE_DIR_CODE choose_dir_code;
+                    // /** Element identification number.
+                    //      (0 < Integer < 100,000,000)
+                    //  */
+                    // bdf::types::entry_value<long> EID;
+                    using __base::element::EID;
+                    /** Property identification number of a `PBUSH`
+                        entry. (Integer > 0; Default = `EID`)
+                    */
+                    bdf::types::entry_value<long> PID;
+                    /** Grid point identification number of first
+                        connection point. See Remark 6. (Integer > 0)
+                    */
+                    bdf::types::entry_value<long> GA;
+                    /** Grid point identification number of second
+                        connection point. See Remark 6. (Integer > 0)
+                    */
+                    bdf::types::entry_value<long> GB;
+                    /** First component of orientation vector v, from
+                        `GA`, in the displacement coordinate system at
+                        `GA`. (Real)
+                    */
+                    bdf::types::entry_value<double> X1;
+                    /** Second component of orientation vector v, from
+                        `GA`, in the displacement coordinate system at
+                        `GA`. (Real)
+                    */
+                    bdf::types::entry_value<double> X2;
+                    /** Third component of orientation vector v, from
+                        `GA`, in the displacement coordinate system at
+                        `GA`. (Real)
+                    */
+                    bdf::types::entry_value<double> X3;
+                    /** Alternate method to supply vector v using grid
+                        point GO. Direction of v is from `GA` to `GO`.
+                        v is then transferred to End `A`. See Remark
+                        3. (Integer > 0)
+                    */
+                    bdf::types::entry_value<long> GO;
+                    /** Element coordinate system identification. A 0
+                        means the basic coordinate system. If `CID` is
+                        blank, then the element coordinate system is
+                        determined from `GO` or `Xi`. See Figure 8-17
+                        and Remark 3. (Integer > 0 or blank)
+                    */
+                    bdf::types::entry_value<long> CID;
+                    /** Location of spring damper. See Figure 8-17.
+                        (0.0 < Real < 1.0; Default = 0.5)
+                    */
+                    bdf::types::entry_value<double> S;
+                    /** Coordinate system identification of
+                        spring-damper offset. See Remark 9. (Integer >
+                        -1; Default = -1, which means the offset point
+                        lies on the line between `GA` and `GB`
+                        according to Figure 8-17)
+                    */
+                    bdf::types::entry_value<long> OCID;
+                    /** First components of spring-damper offset in
+                        the `OCID` coordinate system if `OCID` > 0.
+                        See Figure 8-18 and Remark 9. (Real)
+                    */
+                    bdf::types::entry_value<double> S1;
+                    /** Second components of spring-damper offset in
+                        the `OCID` coordinate system if `OCID` > 0.
+                        See Figure 8-18 and Remark 9. (Real)
+                    */
+                    bdf::types::entry_value<double> S2;
+                    /** Third components of spring-damper offset in
+                        the `OCID` coordinate system if `OCID` > 0.
+                        See Figure 8-18 and Remark 9. (Real)
+                    */
+                    bdf::types::entry_value<double> S3;
+
+                    cbush() = default;
+                    ~cbush() = default;
+                    explicit cbush(std::list<std::string> const &inp);
+                    cbush(long *EID, long *PID, long *GA, long *GB=nullptr,
+                          double *X1=nullptr, double *X2=nullptr, double *X3=nullptr,
+                          long *GO=nullptr,
+                          long *CID=nullptr,
+                          double *S=nullptr, long *OCID=nullptr,
+                          double *S1=nullptr, double *S2=nullptr,
+                          double *S3=nullptr);
+                    void read(std::list<std::string> const &) override;
+                    card const &operator() (const std::list<std::string> &) override;
+                    /**
+                     * \brief Return instance with changed values.
+                     */
+                    card const &operator() (
+                        long *EID, long *PID, long *GA, long *GB=nullptr,
+                        double *X1=nullptr, double *X2=nullptr, double *X3=nullptr,
+                        long *GO=nullptr,
+                        long *CID=nullptr,
+                        double *S=nullptr, long *OCID=nullptr,
+                        double *S1=nullptr, double *S2=nullptr,
+                        double *S3=nullptr);
+                private:
+                    void collect_outdata(
+                        std::list<std::unique_ptr<format_entry>>&) const override;
+                    void check_data() override;
+                };
             }
         }
     }

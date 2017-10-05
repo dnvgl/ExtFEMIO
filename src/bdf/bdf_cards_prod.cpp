@@ -109,7 +109,7 @@ void prod::read(list<std::string> const &inp) {
         break;
     default:
         throw errors::parse_error(
-            "CBAR.", "Illegal number of entries.");
+            "PROD.", "Illegal number of entries.");
     }
 
     if (!C.is_value) form_C.set_value(C, "");
@@ -128,17 +128,12 @@ void prod::collect_outdata(
     res.push_back(unique_ptr<format_entry>(format<long>(form_PID, PID)));
     res.push_back(unique_ptr<format_entry>(format<long>(form_MID, MID)));
     res.push_back(unique_ptr<format_entry>(format<double>(form_A, A)));
-    if(bool(J) || bool(C) || bool(NSM))
-    res.push_back(unique_ptr<format_entry>(
-                      bool(J) ?
-                      format<double>(form_J, J) :
-                      format(empty)));
-    if(bool(C) || bool(NSM))
-        res.push_back(
-            unique_ptr<format_entry>(
-                bool(C) ?
-                format<double>(form_C, C) :
-                format(empty)));
+    res.push_back(
+        unique_ptr<format_entry>(
+            bool(J) ? format<double>(form_J, J) : format(empty)));
+    res.push_back(
+        unique_ptr<format_entry>(
+            bool(C) ? format<double>(form_C, C) : format(empty)));
     if(bool(NSM))
         res.push_back(unique_ptr<format_entry>(format<double>(form_NSM, NSM)));
 }
