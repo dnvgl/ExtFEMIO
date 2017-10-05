@@ -34,11 +34,12 @@ static char THIS_FILE[] = __FILE__;
 
 using namespace std;
 
-using namespace dnvgl::extfem::bdf;
+using namespace dnvgl::extfem;
+using namespace bdf;
 using namespace cards;
 
-using types::entry_type;
-using types::entry_value;
+using bdf::types::entry_type;
+using bdf::types::entry_value;
 
 TEST_CASE("BDF CBUSH definitions.", "[bdf_cbush]") {
     cbush::reset();
@@ -46,7 +47,7 @@ TEST_CASE("BDF CBUSH definitions.", "[bdf_cbush]") {
     SECTION("QR Guide, Example 1") {
         list<std::string> data({"CBUSH,39,6,1,100,75"});
         list<std::string> lines;
-        __base::card::card_split(data, lines);
+        cards::__base::card::card_split(data, lines);
         cbush probe(lines);
 
         CHECK(long(probe.EID) == 39);
@@ -68,7 +69,7 @@ TEST_CASE("BDF CBUSH definitions.", "[bdf_cbush]") {
     SECTION("QR Guide, Example 2") {
         list<std::string> data({"CBUSH,39,6,1,,,,,0"});
         std::list<std::string> lines;
-        __base::card::card_split(data, lines);
+        cards::__base::card::card_split(data, lines);
         cbush probe(lines);
 
         CHECK(long(probe.EID) == 39);
@@ -90,7 +91,7 @@ TEST_CASE("BDF CBUSH definitions.", "[bdf_cbush]") {
     SECTION("QR Guide, Example 3.") {
         list<std::string> data({"CBUSH,39,6,1,100,,,,6"});
         std::list<std::string> lines;
-        __base::card::card_split(data, lines);
+        cards::__base::card::card_split(data, lines);
         cbush probe(lines);
 
         CHECK(long(probe.EID) == 39);
@@ -113,7 +114,7 @@ TEST_CASE("BDF CBUSH definitions.", "[bdf_cbush]") {
         std::list<std::string> data({
                 "CBUSH,39,6,1,600,,,,,0.25,10,0.,10.,10."});
         std::list<std::string> lines;
-        __base::card::card_split(data, lines);
+        cards::__base::card::card_split(data, lines);
         cbush probe(lines);
 
         CHECK(long(probe.EID) == 39);
@@ -158,7 +159,7 @@ TEST_CASE("CBUSH Roundtrip test 1 (dir code).", "[bdf_cbush_roundtrip_1]") {
 
         while (getline(raw, tmp))
             data.push_back(tmp);
-        __base::card::card_split(data, lines);
+        cards::__base::card::card_split(data, lines);
         cbush probe_l(lines);
 
         CHECK(probe_l.EID.value == 1);
@@ -196,7 +197,7 @@ TEST_CASE("CBUSH Roundtrip test 1 (dir code) (reuse).", "[bdf_cbush_roundtrip_1_
 
         while (getline(raw, tmp))
             data.push_back(tmp);
-        __base::card::card_split(data, lines);
+        cards::__base::card::card_split(data, lines);
         probe_l(lines);
 
         CHECK(probe_l.EID.value == 1);
@@ -233,7 +234,7 @@ TEST_CASE("CBUSH Roundtrip test (QRG sample 1)", "[bdf_cbush_roundtrip_2]"){
 
         while (getline(raw, tmp))
             data.push_back(tmp);
-        __base::card::card_split(data, lines);
+        cards::__base::card::card_split(data, lines);
         cbush probe_l(lines);
 
         CHECK(probe_l.EID.value == 2);
@@ -275,7 +276,7 @@ TEST_CASE("CBUSH Roundtrip test (QRG sample 1) (reuse)", "[bdf_cbush_roundtrip_2
 
         while (getline(raw, tmp))
             data.push_back(tmp);
-        __base::card::card_split(data, lines);
+        cards::__base::card::card_split(data, lines);
         probe_l(lines);
 
         CHECK(probe_l.EID.value == 2);
@@ -317,7 +318,7 @@ TEST_CASE("CBUSH Roundtrip test (QRG sample 1 (long))", "[bdf_cbush_roundtrip_3]
 
         while (getline(raw, tmp))
             data.push_back(tmp);
-        __base::card::card_split(data, lines);
+        cards::__base::card::card_split(data, lines);
         cbush probe_l(lines);
 
         CHECK(probe_l.EID.value == 2);
@@ -362,7 +363,7 @@ TEST_CASE("CBUSH Roundtrip test (QRG sample 1 (long)) (reuse)",
 
         while (getline(raw, tmp))
             data.push_back(tmp);
-        __base::card::card_split(data, lines);
+        cards::__base::card::card_split(data, lines);
         probe_l(lines);
 
         CHECK(probe_l.EID.value == 2);
@@ -403,7 +404,7 @@ TEST_CASE("CBUSH Roundtrip test (dir code all elements)", "[bdf_cbush_roundtrip_
 
         while (getline(raw, tmp))
             data.push_back(tmp);
-        __base::card::card_split(data, lines);
+        cards::__base::card::card_split(data, lines);
         cbush probe_l(lines);
 
         CHECK(probe_l.EID.value == 1);
@@ -444,7 +445,7 @@ TEST_CASE("CBUSH Roundtrip test (dir code all elements) (reuse)",
 
         while (getline(raw, tmp))
             data.push_back(tmp);
-        __base::card::card_split(data, lines);
+        cards::__base::card::card_split(data, lines);
         cbush probe_l(lines);
 
         CHECK(probe_l.EID.value == 1);
@@ -487,7 +488,7 @@ TEST_CASE("CBUSH Roundtrip test (dir code all elements) (large)",
 
         while (getline(raw, tmp))
             data.push_back(tmp);
-        __base::card::card_split(data, lines);
+        cards::__base::card::card_split(data, lines);
         cbush probe_l(lines);
 
         CHECK(probe_l.EID.value == 123456789);
@@ -531,7 +532,7 @@ TEST_CASE("CBUSH Roundtrip test (dir code all elements) (large) (reuse)",
 
         while (getline(raw, tmp))
             data.push_back(tmp);
-        __base::card::card_split(data, lines);
+        cards::__base::card::card_split(data, lines);
         cbush probe_l;
         probe_l(lines);
 
@@ -553,7 +554,7 @@ TEST_CASE("CBUSH Roundtrip test dir code all large (ptr)", "[bdf_cbush_roundtrip
     long EID{123456789}, PID{2}, GA{3}, GB{4}, GO{5};
     double S{.2};
 
-    __base::card *probe = new cbush(
+    cards::__base::card *probe = new cbush(
         &EID, &PID, &GA, &GB,
         nullptr, nullptr, nullptr, &GO, nullptr,
         &S);
@@ -578,8 +579,8 @@ TEST_CASE("CBUSH Roundtrip test dir code all large (ptr)", "[bdf_cbush_roundtrip
 
         while (getline(raw, tmp))
             data.push_back(tmp);
-        __base::card::card_split(data, lines);
-        __base::card *probe_l = new cbush(lines);
+        cards::__base::card::card_split(data, lines);
+        cards::__base::card *probe_l = new cbush(lines);
 
         CHECK(static_cast<cbush*>(probe_l)->EID.value == 123456789);
         CHECK(static_cast<cbush*>(probe_l)->PID.value == 2);
@@ -601,7 +602,7 @@ TEST_CASE("CBUSH Roundtrip test dir code all large (ptr) (reuse)",
     long EID{123456789}, PID{2}, GA{3}, GB{4}, GO{5};
     double S{.5};
 
-    __base::card *probe = new cbush;
+    cards::__base::card *probe = new cbush;
     test << *probe;
     (*static_cast<cbush*>(probe))(
         &EID, &PID, &GA, &GB,
@@ -628,8 +629,8 @@ TEST_CASE("CBUSH Roundtrip test dir code all large (ptr) (reuse)",
 
         while (getline(raw, tmp))
             data.push_back(tmp);
-        __base::card::card_split(data, lines);
-        __base::card *probe_l = new cbush;
+        cards::__base::card::card_split(data, lines);
+        cards::__base::card *probe_l = new cbush;
         (*static_cast<cbush*>(probe_l))(lines);
 
         CHECK(static_cast<cbush*>(probe_l)->EID.value == 123456789);

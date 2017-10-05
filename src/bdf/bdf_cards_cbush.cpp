@@ -163,9 +163,9 @@ cbush::cbush(
         S1(S1), S2(S2), S3(S3)
 {
     choose_dir_code = CHOOSE_DIR_CODE::UNDEF;
-    if (bool(GB)) choose_dir_code = CHOOSE_DIR_CODE::has_DNODE;
-    if (bool(X1)) {
-        if (!bool(X2) || !bool(X3))
+    if (bool(this->GB)) choose_dir_code = CHOOSE_DIR_CODE::has_DNODE;
+    if (bool(this->X1)) {
+        if (!bool(this->X2) || !bool(this->X3))
             throw errors::usage_error(
                 "CBUSH", "Give either GO or X1, X2, X3.");
         else
