@@ -14,8 +14,8 @@
 
 // ID:
 namespace {
-    const char cID_bdf_l_geom[] _EXTFEMIO_UNUSED
-        = "@(#) $Id$";
+    const char _EXTFEMIO_UNUSED(cID_bdf_l_geom[]) =
+        "@(#) $Id$";
 }
 
 #include "bdf/cards.h"

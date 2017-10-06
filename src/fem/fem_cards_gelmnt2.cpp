@@ -13,8 +13,8 @@
 
 // ID:
 namespace {
-    const char cID_fem_cards_gelmnt2[] _EXTFEMIO_UNUSED
-        = "@(#) $Id$";
+    const char _EXTFEMIO_UNUSED(cID_fem_cards_gelmnt2[]) =
+        "@(#) $Id$";
 }
 
 #include "fem/cards.h"

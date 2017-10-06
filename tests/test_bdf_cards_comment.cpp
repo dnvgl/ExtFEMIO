@@ -8,13 +8,12 @@
 */
 #include "extfemio_stdafx.h"
 
+#include "extfem_misc.h"
+
 // ID:
 namespace {
-   char const cID_test_bdf_cards_comment[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    char const _EXTFEMIO_UNUSED(cID_test_bdf_cards_comment[]) =
+        "@(#) $Id$";
 }
 
 #define NOMINMAX // To avoid problems with "numeric_limits"
@@ -27,6 +26,12 @@ namespace {
 
 #include "bdf/cards.h"
 #include "bdf/file.h"
+
+#if defined(__AFX_H__) && defined(_DEBUG)
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
 
 using namespace std;
 
@@ -501,7 +506,7 @@ TEST_CASE("BDF COMMENT roundtrip test; only yield stress (reuse).",
     test << probe;
     test << probe(content, yield);
 
-    reset_statics();
+    // reset_statics();
 
     SECTION("check output") {
         CHECK(test.str() ==
@@ -562,8 +567,9 @@ TEST_CASE("BDF COMMENT roundtrip test; yield stress and comment.",
         comment probe_l(lines);
 
         CHECK(probe_l.content == list<std::string>({
-                    "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean "
-                    "commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus",
+                    "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. "
+                    "Aenean commodo ligula eget dolor. Aenean massa. Cum "
+                    "sociis natoque penatibus",
                     "YIELD: 315"}));
         CHECK(*probe_l.yield == 315.);
         CHECK(*comment::yield == 315.);

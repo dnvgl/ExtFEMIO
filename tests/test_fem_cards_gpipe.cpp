@@ -12,7 +12,7 @@
 
 // ID:
 namespace {
-    const char cID[] _EXTFEMIO_UNUSED =
+    const char _EXTFEMIO_UNUSED(cID_test_fem_cards_gpipe[]) =
         "@(#) $Id$";
 }
 
@@ -79,7 +79,7 @@ TEST_CASE("FEM GPIPE definitions.", "[fem_gpipe]" ) {
     }
 
     SECTION("GPIPE (3)") {
-        gbeamg _EXTFEMIO_UNUSED dummy(654357, 100.);
+        gbeamg _EXTFEMIO_UNUSED(dummy)(654357, 100.);
         vector<std::string> data(
             {"GPIPE    6.54357000e+05  0.000000000e+00 5.90218891e-02  2.95109446e-02 \n",
              "         1.000000000e+00 1.000000000e+00 0.000000000e+00 0.000000000e+00\n"});

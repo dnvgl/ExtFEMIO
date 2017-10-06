@@ -11,9 +11,15 @@
 
 #include "extfem_misc.h"
 
+#if defined(__AFX_H__) && defined(_DEBUG)
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
 // ID:
 namespace {
-    char const cID_support_grouping_ses[] _EXTFEMIO_UNUSED =
+    char const _EXTFEMIO_UNUSED(cID_support_grouping_ses[]) =
         "@(#) $Id$";
 }
 

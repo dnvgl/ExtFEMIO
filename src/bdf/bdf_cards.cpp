@@ -14,7 +14,7 @@
 
 // ID:
 namespace {
-    char const cID_bdf_cards[] _EXTFEMIO_UNUSED =
+    char const _EXTFEMIO_UNUSED(cID_bdf_cards[]) =
         "@(#) $Id$";
 }
 
@@ -299,8 +299,7 @@ std::ostream &operator<< (ostream& os, cards::types const cardtype) {
 
 
 void dnvgl::extfem::bdf::reset_statics() {
-    if (cards::comment::yield) {
-        delete cards::comment::yield;
+    if (cards::comment::yield != nullptr) {
         cards::comment::yield = nullptr;
     }
 }

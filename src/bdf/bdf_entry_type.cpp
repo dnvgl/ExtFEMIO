@@ -9,16 +9,27 @@
 
 #include "extfemio_stdafx.h"
 
+#include "extfem_misc.h"
+
 // ID:
 namespace {
-   char const cID_bdf_entry_type[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    char const _EXTFEMIO_UNUSED(cID_bdf_entry_type[]) =
+        "@(#) $Id$";
 }
 
 #include "bdf/types.h"
+
+#if defined(__AFX_H__) && defined(_DEBUG)
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
+#if defined(__AFX_H__) && defined(_DEBUG)
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
 
 using namespace std;
 

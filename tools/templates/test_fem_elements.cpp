@@ -25,7 +25,7 @@
 
 // ID:
 namespace {
-   const char cID_test_fem_elements[]  _EXTFEMIO_UNUSED =
+    const char _EXTFEMIO_UNUSED(cID_test_fem_elements[]) =
        "@(#) $Id$";
 }
 
@@ -112,9 +112,8 @@ TEST_CASE("FEM {{ elem|upper() }} element definitions.", "[fem_element_{{ elem }
     long const ELTYAD = 2;
     vector<long> const NODIN ({{ list_init_form(100, 100+vals.nnodes) }});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -129,10 +128,9 @@ TEST_CASE("FEM {{ elem|upper() }} element definitions.", "[fem_element_{{ elem }
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::{{ elem }} probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());

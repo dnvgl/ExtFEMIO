@@ -11,8 +11,8 @@
 
 // ID:
 namespace {
-   const char cID_bdf_cards_bar_prop[] _EXTFEMIO_UNUSED =
-       "@(#) $Id$";
+    const char _EXTFEMIO_UNUSED(cID_bdf_cards_bar_prop[]) =
+        "@(#) $Id$";
 }
 
 #include "bdf/cards.h"

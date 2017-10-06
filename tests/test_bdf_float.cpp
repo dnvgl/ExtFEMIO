@@ -12,7 +12,7 @@
 
 // ID:
 namespace {
-    const char  cID[] _EXTFEMIO_UNUSED =
+    const char _EXTFEMIO_UNUSED(cID_test_bdf_float[]) =
         "@(#) $Id$";
 }
 
@@ -213,7 +213,7 @@ TEST_CASE("BDF double types output.", "[bdf_types]") {
     }
 
     SECTION("SHORT (inexact)") {
-        double *p_lval = new double(1234.5);
+        auto p_lval = new double(1234.5);
         CHECK_THROWS(obj.format(p_lval));
         *p_lval = 1234.05;
         CHECK_THROWS(obj.format(p_lval));

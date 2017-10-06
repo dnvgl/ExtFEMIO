@@ -11,11 +11,8 @@
 
 // ID:
 namespace {
-   const char cID_my_cpp14[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    const char _EXTFEMIO_UNUSED(cID_my_cpp14[]) =
+        "@(#) $Id$";
 }
 
 #ifdef __GNUC__

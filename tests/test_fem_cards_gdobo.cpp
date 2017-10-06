@@ -12,7 +12,7 @@
 
 // ID:
 namespace {
-    char const cID_test_fem_cards_gdobo[] _EXTFEMIO_UNUSED =
+    char const _EXTFEMIO_UNUSED(cID_test_fem_cards_gdobo[]) =
         "@(#) $Id$";
 }
 
@@ -106,7 +106,7 @@ TEST_CASE("FEM GDOBO definitions.", "[fem_gdobo]" ) {
     }
 
     SECTION("GDOBO (4)") {
-        gbeamg _EXTFEMIO_UNUSED dummy;
+        gbeamg _EXTFEMIO_UNUSED(dummy);
         vector<std::string> data({
                 // 345678|234567890123456|234567890123456|234567890123456|234567890123456
                 "GDOBO   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
@@ -128,7 +128,7 @@ TEST_CASE("FEM GDOBO definitions.", "[fem_gdobo]" ) {
     }
 
     SECTION("GDOBO (5)") {
-        gbeamg _EXTFEMIO_UNUSED dummy;
+        gbeamg _EXTFEMIO_UNUSED(dummy);
         vector<std::string> data({
                 // 345678|234567890123456|234567890123456|234567890123456|234567890123456
                 "GDOBO     1.00000000E+00  1.00000001E-01  9.99999978E-03  9.99999978E-03\n",

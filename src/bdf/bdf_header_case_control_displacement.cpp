@@ -12,13 +12,19 @@
 
 // ID:
 namespace {
-    const char cID_bdf_header_case_control_displacement[] _EXTFEMIO_UNUSED =
+    const char _EXTFEMIO_UNUSED(cID_bdf_header_case_control_displacement[]) =
         "@(#) $Id$";
 }
 
 #include "bdf/header.h"
 
 using namespace std;
+
+#if defined(__AFX_H__) && defined(_DEBUG)
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
 
 using namespace dnvgl::extfem::bdf::header::case_control;
 

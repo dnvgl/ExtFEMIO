@@ -12,7 +12,7 @@
 
 // ID:
 namespace {
-    char const cID_test_support_grouping_csv[] _EXTFEMIO_UNUSED =
+    char const _EXTFEMIO_UNUSED(cID_test_support_grouping_csv[])  =
         "@(#) $Id$";
 }
 
@@ -21,6 +21,12 @@ namespace {
 #include "support/grouping.h"
 
 #include <iostream>
+
+#if defined(__AFX_H__) && defined(_DEBUG)
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
 
 using namespace std;
 

@@ -13,7 +13,7 @@
 
 // ID:
 namespace {
-    char const cID_test_fem_cards_gtonp[] _EXTFEMIO_UNUSED =
+    char const _EXTFEMIO_UNUSED(cID_test_fem_cards_gtonp[]) =
         "@(#) $Id$";
 }
 
@@ -110,7 +110,7 @@ TEST_CASE("FEM GTONP definitions.", "[fem_gtonp]" ) {
     }
 
     SECTION("GTONP (4)") {
-        gbeamg _EXTFEMIO_UNUSED dummy;
+        gbeamg _EXTFEMIO_UNUSED(dummy);
         vector<std::string> data({
                 // 345678|234567890123456|234567890123456|234567890123456|234567890123456
                 "GTONP   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
@@ -134,7 +134,7 @@ TEST_CASE("FEM GTONP definitions.", "[fem_gtonp]" ) {
     }
 
     SECTION("GTONP (5)") {
-        gbeamg _EXTFEMIO_UNUSED dummy;
+        gbeamg _EXTFEMIO_UNUSED(dummy);
         vector<std::string> data({
                 // 345678|234567890123456|234567890123456|234567890123456|234567890123456
                 "GTONP     1.00000000E+00  1.00000001E-01  9.99999978E-03  9.99999978E-03\n",

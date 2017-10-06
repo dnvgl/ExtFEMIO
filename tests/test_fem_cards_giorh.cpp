@@ -12,7 +12,7 @@
 
 // ID:
 namespace {
-    const char cID[] _EXTFEMIO_UNUSED =
+    const char _EXTFEMIO_UNUSED(cID_test_fem_cards_giorh[]) =
         "@(#) $Id$";
 }
 
@@ -113,7 +113,7 @@ TEST_CASE("FEM GIORH definitions.", "[fem_giorh]") {
     }
 
     SECTION("GIORH (4)") {
-        gbeamg _EXTFEMIO_UNUSED dummy(1, 100.);
+        gbeamg _EXTFEMIO_UNUSED(dummy)(1, 100.);
         vector<std::string> data({
             // 345678|234567890123456|234567890123456|234567890123456|234567890123456
             "GIORH   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",

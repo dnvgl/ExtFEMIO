@@ -12,11 +12,8 @@
 
 // ID:
 namespace {
-   char const cID_bdf_cards_pbush[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    char const _EXTFEMIO_UNUSED(cID_bdf_cards_pbush[]) =
+        "@(#) $Id$";
 }
 
 #include "bdf/cards.h"

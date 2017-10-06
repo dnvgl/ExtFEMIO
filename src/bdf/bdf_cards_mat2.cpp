@@ -12,7 +12,7 @@
 
 // ID:
 namespace {
-    char const cID_bdf_cards_mat2[] _EXTFEMIO_UNUSED =
+    char const _EXTFEMIO_UNUSED(cID_bdf_cards_mat2[]) =
         "@(#) $Id$";
 }
 

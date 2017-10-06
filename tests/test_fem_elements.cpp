@@ -25,7 +25,7 @@
 
 // ID:
 namespace {
-   const char cID_test_fem_elements[]  _EXTFEMIO_UNUSED =
+    const char _EXTFEMIO_UNUSED(cID_test_fem_elements[]) =
        "@(#) $Id$";
 }
 
@@ -108,9 +108,8 @@ TEST_CASE("FEM BEPS element definitions.", "[fem_element_beps]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -125,10 +124,9 @@ TEST_CASE("FEM BEPS element definitions.", "[fem_element_beps]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::beps probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -322,9 +320,8 @@ TEST_CASE("FEM CSTA element definitions.", "[fem_element_csta]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -339,10 +336,9 @@ TEST_CASE("FEM CSTA element definitions.", "[fem_element_csta]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::csta probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -536,9 +532,8 @@ TEST_CASE("FEM RPBQ element definitions.", "[fem_element_rpbq]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -553,10 +548,9 @@ TEST_CASE("FEM RPBQ element definitions.", "[fem_element_rpbq]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::rpbq probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -750,9 +744,8 @@ TEST_CASE("FEM ILST element definitions.", "[fem_element_ilst]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -767,10 +760,9 @@ TEST_CASE("FEM ILST element definitions.", "[fem_element_ilst]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ilst probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -970,9 +962,8 @@ TEST_CASE("FEM IQQE element definitions.", "[fem_element_iqqe]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -987,10 +978,9 @@ TEST_CASE("FEM IQQE element definitions.", "[fem_element_iqqe]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::iqqe probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -1190,9 +1180,8 @@ TEST_CASE("FEM LQUA element definitions.", "[fem_element_lqua]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -1207,10 +1196,9 @@ TEST_CASE("FEM LQUA element definitions.", "[fem_element_lqua]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::lqua probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -1404,9 +1392,8 @@ TEST_CASE("FEM TESS element definitions.", "[fem_element_tess]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -1421,10 +1408,9 @@ TEST_CASE("FEM TESS element definitions.", "[fem_element_tess]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::tess probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -1618,9 +1604,8 @@ TEST_CASE("FEM GMAS element definitions.", "[fem_element_gmas]") {
     long const ELTYAD = 2;
     vector<long> const NODIN (1, 100);
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -1635,10 +1620,9 @@ TEST_CASE("FEM GMAS element definitions.", "[fem_element_gmas]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::gmas probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -1832,9 +1816,8 @@ TEST_CASE("FEM GLMA element definitions.", "[fem_element_glma]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -1849,10 +1832,9 @@ TEST_CASE("FEM GLMA element definitions.", "[fem_element_glma]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::glma probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -2046,9 +2028,8 @@ TEST_CASE("FEM GLDA element definitions.", "[fem_element_glda]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -2063,10 +2044,9 @@ TEST_CASE("FEM GLDA element definitions.", "[fem_element_glda]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::glda probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -2260,9 +2240,8 @@ TEST_CASE("FEM BEAS element definitions.", "[fem_element_beas]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -2277,10 +2256,9 @@ TEST_CASE("FEM BEAS element definitions.", "[fem_element_beas]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::beas probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -2474,9 +2452,8 @@ TEST_CASE("FEM AXIS element definitions.", "[fem_element_axis]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -2491,10 +2468,9 @@ TEST_CASE("FEM AXIS element definitions.", "[fem_element_axis]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::axis probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -2688,9 +2664,8 @@ TEST_CASE("FEM AXDA element definitions.", "[fem_element_axda]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -2705,10 +2680,9 @@ TEST_CASE("FEM AXDA element definitions.", "[fem_element_axda]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::axda probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -2902,9 +2876,8 @@ TEST_CASE("FEM GSPR element definitions.", "[fem_element_gspr]") {
     long const ELTYAD = 2;
     vector<long> const NODIN (1, 100);
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -2919,10 +2892,9 @@ TEST_CASE("FEM GSPR element definitions.", "[fem_element_gspr]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::gspr probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -3116,9 +3088,8 @@ TEST_CASE("FEM GDAM element definitions.", "[fem_element_gdam]") {
     long const ELTYAD = 2;
     vector<long> const NODIN (1, 100);
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -3133,10 +3104,9 @@ TEST_CASE("FEM GDAM element definitions.", "[fem_element_gdam]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::gdam probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -3330,9 +3300,8 @@ TEST_CASE("FEM IHEX element definitions.", "[fem_element_ihex]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -3347,10 +3316,9 @@ TEST_CASE("FEM IHEX element definitions.", "[fem_element_ihex]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ihex probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -3568,9 +3536,8 @@ TEST_CASE("FEM LHEX element definitions.", "[fem_element_lhex]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -3585,10 +3552,9 @@ TEST_CASE("FEM LHEX element definitions.", "[fem_element_lhex]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::lhex probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -3788,9 +3754,8 @@ TEST_CASE("FEM SECB element definitions.", "[fem_element_secb]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -3805,10 +3770,9 @@ TEST_CASE("FEM SECB element definitions.", "[fem_element_secb]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::secb probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -4002,9 +3966,8 @@ TEST_CASE("FEM BTSS element definitions.", "[fem_element_btss]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -4019,10 +3982,9 @@ TEST_CASE("FEM BTSS element definitions.", "[fem_element_btss]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::btss probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -4216,9 +4178,8 @@ TEST_CASE("FEM FQUS_FFQ element definitions.", "[fem_element_fqus_ffq]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -4233,10 +4194,9 @@ TEST_CASE("FEM FQUS_FFQ element definitions.", "[fem_element_fqus_ffq]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::fqus_ffq probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -4430,9 +4390,8 @@ TEST_CASE("FEM FTRS_FFTR element definitions.", "[fem_element_ftrs_fftr]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -4447,10 +4406,9 @@ TEST_CASE("FEM FTRS_FFTR element definitions.", "[fem_element_ftrs_fftr]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ftrs_fftr probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -4644,9 +4602,8 @@ TEST_CASE("FEM SCTS element definitions.", "[fem_element_scts]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -4661,10 +4618,9 @@ TEST_CASE("FEM SCTS element definitions.", "[fem_element_scts]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::scts probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -4864,9 +4820,8 @@ TEST_CASE("FEM MCTS element definitions.", "[fem_element_mcts]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -4881,10 +4836,9 @@ TEST_CASE("FEM MCTS element definitions.", "[fem_element_mcts]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::mcts probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -5084,9 +5038,8 @@ TEST_CASE("FEM SCQS element definitions.", "[fem_element_scqs]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -5101,10 +5054,9 @@ TEST_CASE("FEM SCQS element definitions.", "[fem_element_scqs]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::scqs probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -5304,9 +5256,8 @@ TEST_CASE("FEM MCQS element definitions.", "[fem_element_mcqs]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -5321,10 +5272,9 @@ TEST_CASE("FEM MCQS element definitions.", "[fem_element_mcqs]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::mcqs probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -5524,9 +5474,8 @@ TEST_CASE("FEM IPRI element definitions.", "[fem_element_ipri]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -5541,10 +5490,9 @@ TEST_CASE("FEM IPRI element definitions.", "[fem_element_ipri]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ipri probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -5756,9 +5704,8 @@ TEST_CASE("FEM ITET element definitions.", "[fem_element_itet]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -5773,10 +5720,9 @@ TEST_CASE("FEM ITET element definitions.", "[fem_element_itet]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::itet probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -5982,9 +5928,8 @@ TEST_CASE("FEM TPRI element definitions.", "[fem_element_tpri]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -5999,10 +5944,9 @@ TEST_CASE("FEM TPRI element definitions.", "[fem_element_tpri]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::tpri probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -6202,9 +6146,8 @@ TEST_CASE("FEM TETR element definitions.", "[fem_element_tetr]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -6219,10 +6162,9 @@ TEST_CASE("FEM TETR element definitions.", "[fem_element_tetr]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::tetr probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -6416,9 +6358,8 @@ TEST_CASE("FEM LCTS element definitions.", "[fem_element_lcts]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -6433,10 +6374,9 @@ TEST_CASE("FEM LCTS element definitions.", "[fem_element_lcts]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::lcts probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -6636,9 +6576,8 @@ TEST_CASE("FEM LCQS element definitions.", "[fem_element_lcqs]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -6653,10 +6592,9 @@ TEST_CASE("FEM LCQS element definitions.", "[fem_element_lcqs]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::lcqs probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -6856,9 +6794,8 @@ TEST_CASE("FEM TRS1 element definitions.", "[fem_element_trs1]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -6873,10 +6810,9 @@ TEST_CASE("FEM TRS1 element definitions.", "[fem_element_trs1]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::trs1 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -7094,9 +7030,8 @@ TEST_CASE("FEM TRS2 element definitions.", "[fem_element_trs2]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -7111,10 +7046,9 @@ TEST_CASE("FEM TRS2 element definitions.", "[fem_element_trs2]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::trs2 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -7326,9 +7260,8 @@ TEST_CASE("FEM TRS3 element definitions.", "[fem_element_trs3]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -7343,10 +7276,9 @@ TEST_CASE("FEM TRS3 element definitions.", "[fem_element_trs3]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::trs3 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -7552,9 +7484,8 @@ TEST_CASE("FEM GLSH element definitions.", "[fem_element_glsh]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -7569,10 +7500,9 @@ TEST_CASE("FEM GLSH element definitions.", "[fem_element_glsh]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::glsh probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -7766,9 +7696,8 @@ TEST_CASE("FEM AXCS element definitions.", "[fem_element_axcs]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -7783,10 +7712,9 @@ TEST_CASE("FEM AXCS element definitions.", "[fem_element_axcs]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::axcs probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -7980,9 +7908,8 @@ TEST_CASE("FEM AXLQ element definitions.", "[fem_element_axlq]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -7997,10 +7924,9 @@ TEST_CASE("FEM AXLQ element definitions.", "[fem_element_axlq]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::axlq probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -8194,9 +8120,8 @@ TEST_CASE("FEM AXLS element definitions.", "[fem_element_axls]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -8211,10 +8136,9 @@ TEST_CASE("FEM AXLS element definitions.", "[fem_element_axls]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::axls probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -8414,9 +8338,8 @@ TEST_CASE("FEM AXQQ element definitions.", "[fem_element_axqq]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -8431,10 +8354,9 @@ TEST_CASE("FEM AXQQ element definitions.", "[fem_element_axqq]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::axqq probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -8634,9 +8556,8 @@ TEST_CASE("FEM PILS element definitions.", "[fem_element_pils]") {
     long const ELTYAD = 2;
     vector<long> const NODIN (1, 100);
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -8651,10 +8572,9 @@ TEST_CASE("FEM PILS element definitions.", "[fem_element_pils]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::pils probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -8848,9 +8768,8 @@ TEST_CASE("FEM PCAB element definitions.", "[fem_element_pcab]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -8865,10 +8784,9 @@ TEST_CASE("FEM PCAB element definitions.", "[fem_element_pcab]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::pcab probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -9062,9 +8980,8 @@ TEST_CASE("FEM PSPR element definitions.", "[fem_element_pspr]") {
     long const ELTYAD = 2;
     vector<long> const NODIN (1, 100);
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -9079,10 +8996,9 @@ TEST_CASE("FEM PSPR element definitions.", "[fem_element_pspr]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::pspr probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -9276,9 +9192,8 @@ TEST_CASE("FEM ADVA_4 element definitions.", "[fem_element_adva_4]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -9293,10 +9208,9 @@ TEST_CASE("FEM ADVA_4 element definitions.", "[fem_element_adva_4]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::adva_4 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -9490,9 +9404,8 @@ TEST_CASE("FEM ADVA_2 element definitions.", "[fem_element_adva_2]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -9507,10 +9420,9 @@ TEST_CASE("FEM ADVA_2 element definitions.", "[fem_element_adva_2]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::adva_2 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -9704,9 +9616,8 @@ TEST_CASE("FEM CTCP element definitions.", "[fem_element_ctcp]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -9721,10 +9632,9 @@ TEST_CASE("FEM CTCP element definitions.", "[fem_element_ctcp]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ctcp probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -9918,9 +9828,8 @@ TEST_CASE("FEM CTCL element definitions.", "[fem_element_ctcl]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -9935,10 +9844,9 @@ TEST_CASE("FEM CTCL element definitions.", "[fem_element_ctcl]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ctcl probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -10132,9 +10040,8 @@ TEST_CASE("FEM CTAL element definitions.", "[fem_element_ctal]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -10149,10 +10056,9 @@ TEST_CASE("FEM CTAL element definitions.", "[fem_element_ctal]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ctal probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -10346,9 +10252,8 @@ TEST_CASE("FEM CTCC element definitions.", "[fem_element_ctcc]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -10363,10 +10268,9 @@ TEST_CASE("FEM CTCC element definitions.", "[fem_element_ctcc]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ctcc probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -10566,9 +10470,8 @@ TEST_CASE("FEM CTAQ element definitions.", "[fem_element_ctaq]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -10583,10 +10486,9 @@ TEST_CASE("FEM CTAQ element definitions.", "[fem_element_ctaq]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ctaq probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -10786,9 +10688,8 @@ TEST_CASE("FEM CTLQ element definitions.", "[fem_element_ctlq]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -10803,10 +10704,9 @@ TEST_CASE("FEM CTLQ element definitions.", "[fem_element_ctlq]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ctlq probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -11006,9 +10906,8 @@ TEST_CASE("FEM CTCQ element definitions.", "[fem_element_ctcq]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -11023,10 +10922,9 @@ TEST_CASE("FEM CTCQ element definitions.", "[fem_element_ctcq]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ctcq probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -11238,9 +11136,8 @@ TEST_CASE("FEM CTMQ element definitions.", "[fem_element_ctmq]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -11255,10 +11152,9 @@ TEST_CASE("FEM CTMQ element definitions.", "[fem_element_ctmq]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ctmq probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -11476,9 +11372,8 @@ TEST_CASE("FEM HCQS element definitions.", "[fem_element_hcqs]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -11493,10 +11388,9 @@ TEST_CASE("FEM HCQS element definitions.", "[fem_element_hcqs]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::hcqs probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -11702,9 +11596,8 @@ TEST_CASE("FEM SLQS element definitions.", "[fem_element_slqs]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -11719,10 +11612,9 @@ TEST_CASE("FEM SLQS element definitions.", "[fem_element_slqs]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::slqs probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -11922,9 +11814,8 @@ TEST_CASE("FEM SLTS element definitions.", "[fem_element_slts]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -11939,10 +11830,9 @@ TEST_CASE("FEM SLTS element definitions.", "[fem_element_slts]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::slts probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -12142,9 +12032,8 @@ TEST_CASE("FEM SLCB element definitions.", "[fem_element_slcb]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -12159,10 +12048,9 @@ TEST_CASE("FEM SLCB element definitions.", "[fem_element_slcb]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::slcb probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -12356,9 +12244,8 @@ TEST_CASE("FEM MATR element definitions.", "[fem_element_matr]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -12373,10 +12260,9 @@ TEST_CASE("FEM MATR element definitions.", "[fem_element_matr]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::matr probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -12672,9 +12558,8 @@ TEST_CASE("FEM GHEX100 element definitions.", "[fem_element_ghex100]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -12689,10 +12574,9 @@ TEST_CASE("FEM GHEX100 element definitions.", "[fem_element_ghex100]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex100 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -12916,9 +12800,8 @@ TEST_CASE("FEM GHEX101 element definitions.", "[fem_element_ghex101]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -12933,10 +12816,9 @@ TEST_CASE("FEM GHEX101 element definitions.", "[fem_element_ghex101]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex101 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -13160,9 +13042,8 @@ TEST_CASE("FEM GHEX102 element definitions.", "[fem_element_ghex102]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -13177,10 +13058,9 @@ TEST_CASE("FEM GHEX102 element definitions.", "[fem_element_ghex102]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex102 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -13404,9 +13284,8 @@ TEST_CASE("FEM GHEX103 element definitions.", "[fem_element_ghex103]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -13421,10 +13300,9 @@ TEST_CASE("FEM GHEX103 element definitions.", "[fem_element_ghex103]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex103 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -13648,9 +13526,8 @@ TEST_CASE("FEM GHEX104 element definitions.", "[fem_element_ghex104]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -13665,10 +13542,9 @@ TEST_CASE("FEM GHEX104 element definitions.", "[fem_element_ghex104]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex104 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -13892,9 +13768,8 @@ TEST_CASE("FEM GHEX105 element definitions.", "[fem_element_ghex105]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -13909,10 +13784,9 @@ TEST_CASE("FEM GHEX105 element definitions.", "[fem_element_ghex105]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex105 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -14136,9 +14010,8 @@ TEST_CASE("FEM GHEX106 element definitions.", "[fem_element_ghex106]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -14153,10 +14026,9 @@ TEST_CASE("FEM GHEX106 element definitions.", "[fem_element_ghex106]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex106 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -14380,9 +14252,8 @@ TEST_CASE("FEM GHEX107 element definitions.", "[fem_element_ghex107]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -14397,10 +14268,9 @@ TEST_CASE("FEM GHEX107 element definitions.", "[fem_element_ghex107]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex107 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -14624,9 +14494,8 @@ TEST_CASE("FEM GHEX108 element definitions.", "[fem_element_ghex108]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -14641,10 +14510,9 @@ TEST_CASE("FEM GHEX108 element definitions.", "[fem_element_ghex108]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex108 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -14868,9 +14736,8 @@ TEST_CASE("FEM GHEX109 element definitions.", "[fem_element_ghex109]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -14885,10 +14752,9 @@ TEST_CASE("FEM GHEX109 element definitions.", "[fem_element_ghex109]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex109 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -15112,9 +14978,8 @@ TEST_CASE("FEM GHEX110 element definitions.", "[fem_element_ghex110]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -15129,10 +14994,9 @@ TEST_CASE("FEM GHEX110 element definitions.", "[fem_element_ghex110]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex110 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -15356,9 +15220,8 @@ TEST_CASE("FEM GHEX111 element definitions.", "[fem_element_ghex111]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -15373,10 +15236,9 @@ TEST_CASE("FEM GHEX111 element definitions.", "[fem_element_ghex111]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex111 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -15600,9 +15462,8 @@ TEST_CASE("FEM GHEX112 element definitions.", "[fem_element_ghex112]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -15617,10 +15478,9 @@ TEST_CASE("FEM GHEX112 element definitions.", "[fem_element_ghex112]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex112 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -15844,9 +15704,8 @@ TEST_CASE("FEM GHEX113 element definitions.", "[fem_element_ghex113]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -15861,10 +15720,9 @@ TEST_CASE("FEM GHEX113 element definitions.", "[fem_element_ghex113]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex113 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -16088,9 +15946,8 @@ TEST_CASE("FEM GHEX114 element definitions.", "[fem_element_ghex114]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -16105,10 +15962,9 @@ TEST_CASE("FEM GHEX114 element definitions.", "[fem_element_ghex114]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex114 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -16332,9 +16188,8 @@ TEST_CASE("FEM GHEX115 element definitions.", "[fem_element_ghex115]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -16349,10 +16204,9 @@ TEST_CASE("FEM GHEX115 element definitions.", "[fem_element_ghex115]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex115 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -16582,9 +16436,8 @@ TEST_CASE("FEM GHEX116 element definitions.", "[fem_element_ghex116]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -16599,10 +16452,9 @@ TEST_CASE("FEM GHEX116 element definitions.", "[fem_element_ghex116]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex116 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -16826,9 +16678,8 @@ TEST_CASE("FEM GHEX117 element definitions.", "[fem_element_ghex117]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -16843,10 +16694,9 @@ TEST_CASE("FEM GHEX117 element definitions.", "[fem_element_ghex117]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex117 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -17070,9 +16920,8 @@ TEST_CASE("FEM GHEX118 element definitions.", "[fem_element_ghex118]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -17087,10 +16936,9 @@ TEST_CASE("FEM GHEX118 element definitions.", "[fem_element_ghex118]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex118 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -17314,9 +17162,8 @@ TEST_CASE("FEM GHEX119 element definitions.", "[fem_element_ghex119]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -17331,10 +17178,9 @@ TEST_CASE("FEM GHEX119 element definitions.", "[fem_element_ghex119]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex119 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -17558,9 +17404,8 @@ TEST_CASE("FEM GHEX120 element definitions.", "[fem_element_ghex120]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -17575,10 +17420,9 @@ TEST_CASE("FEM GHEX120 element definitions.", "[fem_element_ghex120]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex120 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -17802,9 +17646,8 @@ TEST_CASE("FEM GHEX121 element definitions.", "[fem_element_ghex121]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -17819,10 +17662,9 @@ TEST_CASE("FEM GHEX121 element definitions.", "[fem_element_ghex121]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex121 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -18046,9 +17888,8 @@ TEST_CASE("FEM GHEX122 element definitions.", "[fem_element_ghex122]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -18063,10 +17904,9 @@ TEST_CASE("FEM GHEX122 element definitions.", "[fem_element_ghex122]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex122 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -18290,9 +18130,8 @@ TEST_CASE("FEM GHEX123 element definitions.", "[fem_element_ghex123]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -18307,10 +18146,9 @@ TEST_CASE("FEM GHEX123 element definitions.", "[fem_element_ghex123]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex123 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -18540,9 +18378,8 @@ TEST_CASE("FEM GHEX124 element definitions.", "[fem_element_ghex124]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -18557,10 +18394,9 @@ TEST_CASE("FEM GHEX124 element definitions.", "[fem_element_ghex124]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex124 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -18784,9 +18620,8 @@ TEST_CASE("FEM GHEX125 element definitions.", "[fem_element_ghex125]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -18801,10 +18636,9 @@ TEST_CASE("FEM GHEX125 element definitions.", "[fem_element_ghex125]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex125 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -19028,9 +18862,8 @@ TEST_CASE("FEM GHEX126 element definitions.", "[fem_element_ghex126]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -19045,10 +18878,9 @@ TEST_CASE("FEM GHEX126 element definitions.", "[fem_element_ghex126]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex126 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -19272,9 +19104,8 @@ TEST_CASE("FEM GHEX127 element definitions.", "[fem_element_ghex127]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -19289,10 +19120,9 @@ TEST_CASE("FEM GHEX127 element definitions.", "[fem_element_ghex127]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex127 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -19522,9 +19352,8 @@ TEST_CASE("FEM GHEX128 element definitions.", "[fem_element_ghex128]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -19539,10 +19368,9 @@ TEST_CASE("FEM GHEX128 element definitions.", "[fem_element_ghex128]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex128 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -19766,9 +19594,8 @@ TEST_CASE("FEM GHEX129 element definitions.", "[fem_element_ghex129]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -19783,10 +19610,9 @@ TEST_CASE("FEM GHEX129 element definitions.", "[fem_element_ghex129]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex129 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -20016,9 +19842,8 @@ TEST_CASE("FEM GHEX130 element definitions.", "[fem_element_ghex130]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -20033,10 +19858,9 @@ TEST_CASE("FEM GHEX130 element definitions.", "[fem_element_ghex130]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex130 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -20266,9 +20090,8 @@ TEST_CASE("FEM GHEX131 element definitions.", "[fem_element_ghex131]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -20283,10 +20106,9 @@ TEST_CASE("FEM GHEX131 element definitions.", "[fem_element_ghex131]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex131 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -20516,9 +20338,8 @@ TEST_CASE("FEM GHEX132 element definitions.", "[fem_element_ghex132]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -20533,10 +20354,9 @@ TEST_CASE("FEM GHEX132 element definitions.", "[fem_element_ghex132]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex132 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -20760,9 +20580,8 @@ TEST_CASE("FEM GHEX133 element definitions.", "[fem_element_ghex133]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -20777,10 +20596,9 @@ TEST_CASE("FEM GHEX133 element definitions.", "[fem_element_ghex133]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex133 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -21004,9 +20822,8 @@ TEST_CASE("FEM GHEX134 element definitions.", "[fem_element_ghex134]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -21021,10 +20838,9 @@ TEST_CASE("FEM GHEX134 element definitions.", "[fem_element_ghex134]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex134 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -21248,9 +21064,8 @@ TEST_CASE("FEM GHEX135 element definitions.", "[fem_element_ghex135]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -21265,10 +21080,9 @@ TEST_CASE("FEM GHEX135 element definitions.", "[fem_element_ghex135]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex135 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -21492,9 +21306,8 @@ TEST_CASE("FEM GHEX136 element definitions.", "[fem_element_ghex136]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -21509,10 +21322,9 @@ TEST_CASE("FEM GHEX136 element definitions.", "[fem_element_ghex136]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex136 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -21736,9 +21548,8 @@ TEST_CASE("FEM GHEX137 element definitions.", "[fem_element_ghex137]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -21753,10 +21564,9 @@ TEST_CASE("FEM GHEX137 element definitions.", "[fem_element_ghex137]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex137 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -21980,9 +21790,8 @@ TEST_CASE("FEM GHEX138 element definitions.", "[fem_element_ghex138]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -21997,10 +21806,9 @@ TEST_CASE("FEM GHEX138 element definitions.", "[fem_element_ghex138]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex138 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -22224,9 +22032,8 @@ TEST_CASE("FEM GHEX139 element definitions.", "[fem_element_ghex139]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -22241,10 +22048,9 @@ TEST_CASE("FEM GHEX139 element definitions.", "[fem_element_ghex139]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex139 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -22474,9 +22280,8 @@ TEST_CASE("FEM GHEX140 element definitions.", "[fem_element_ghex140]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -22491,10 +22296,9 @@ TEST_CASE("FEM GHEX140 element definitions.", "[fem_element_ghex140]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex140 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -22718,9 +22522,8 @@ TEST_CASE("FEM GHEX141 element definitions.", "[fem_element_ghex141]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -22735,10 +22538,9 @@ TEST_CASE("FEM GHEX141 element definitions.", "[fem_element_ghex141]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex141 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -22962,9 +22764,8 @@ TEST_CASE("FEM GHEX142 element definitions.", "[fem_element_ghex142]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -22979,10 +22780,9 @@ TEST_CASE("FEM GHEX142 element definitions.", "[fem_element_ghex142]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex142 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -23206,9 +23006,8 @@ TEST_CASE("FEM GHEX143 element definitions.", "[fem_element_ghex143]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -23223,10 +23022,9 @@ TEST_CASE("FEM GHEX143 element definitions.", "[fem_element_ghex143]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex143 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -23456,9 +23254,8 @@ TEST_CASE("FEM GHEX144 element definitions.", "[fem_element_ghex144]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -23473,10 +23270,9 @@ TEST_CASE("FEM GHEX144 element definitions.", "[fem_element_ghex144]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex144 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -23700,9 +23496,8 @@ TEST_CASE("FEM GHEX145 element definitions.", "[fem_element_ghex145]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -23717,10 +23512,9 @@ TEST_CASE("FEM GHEX145 element definitions.", "[fem_element_ghex145]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex145 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -23950,9 +23744,8 @@ TEST_CASE("FEM GHEX146 element definitions.", "[fem_element_ghex146]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -23967,10 +23760,9 @@ TEST_CASE("FEM GHEX146 element definitions.", "[fem_element_ghex146]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex146 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -24200,9 +23992,8 @@ TEST_CASE("FEM GHEX147 element definitions.", "[fem_element_ghex147]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -24217,10 +24008,9 @@ TEST_CASE("FEM GHEX147 element definitions.", "[fem_element_ghex147]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex147 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -24450,9 +24240,8 @@ TEST_CASE("FEM GHEX148 element definitions.", "[fem_element_ghex148]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -24467,10 +24256,9 @@ TEST_CASE("FEM GHEX148 element definitions.", "[fem_element_ghex148]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex148 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -24694,9 +24482,8 @@ TEST_CASE("FEM GHEX149 element definitions.", "[fem_element_ghex149]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -24711,10 +24498,9 @@ TEST_CASE("FEM GHEX149 element definitions.", "[fem_element_ghex149]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex149 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -24938,9 +24724,8 @@ TEST_CASE("FEM GHEX150 element definitions.", "[fem_element_ghex150]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -24955,10 +24740,9 @@ TEST_CASE("FEM GHEX150 element definitions.", "[fem_element_ghex150]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex150 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -25182,9 +24966,8 @@ TEST_CASE("FEM GHEX151 element definitions.", "[fem_element_ghex151]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -25199,10 +24982,9 @@ TEST_CASE("FEM GHEX151 element definitions.", "[fem_element_ghex151]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex151 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -25432,9 +25214,8 @@ TEST_CASE("FEM GHEX152 element definitions.", "[fem_element_ghex152]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -25449,10 +25230,9 @@ TEST_CASE("FEM GHEX152 element definitions.", "[fem_element_ghex152]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex152 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -25676,9 +25456,8 @@ TEST_CASE("FEM GHEX153 element definitions.", "[fem_element_ghex153]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -25693,10 +25472,9 @@ TEST_CASE("FEM GHEX153 element definitions.", "[fem_element_ghex153]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex153 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -25926,9 +25704,8 @@ TEST_CASE("FEM GHEX154 element definitions.", "[fem_element_ghex154]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -25943,10 +25720,9 @@ TEST_CASE("FEM GHEX154 element definitions.", "[fem_element_ghex154]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex154 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -26176,9 +25952,8 @@ TEST_CASE("FEM GHEX155 element definitions.", "[fem_element_ghex155]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -26193,10 +25968,9 @@ TEST_CASE("FEM GHEX155 element definitions.", "[fem_element_ghex155]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex155 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -26426,9 +26200,8 @@ TEST_CASE("FEM GHEX156 element definitions.", "[fem_element_ghex156]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -26443,10 +26216,9 @@ TEST_CASE("FEM GHEX156 element definitions.", "[fem_element_ghex156]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex156 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -26670,9 +26442,8 @@ TEST_CASE("FEM GHEX157 element definitions.", "[fem_element_ghex157]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -26687,10 +26458,9 @@ TEST_CASE("FEM GHEX157 element definitions.", "[fem_element_ghex157]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex157 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -26920,9 +26690,8 @@ TEST_CASE("FEM GHEX158 element definitions.", "[fem_element_ghex158]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -26937,10 +26706,9 @@ TEST_CASE("FEM GHEX158 element definitions.", "[fem_element_ghex158]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex158 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -27170,9 +26938,8 @@ TEST_CASE("FEM GHEX159 element definitions.", "[fem_element_ghex159]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -27187,10 +26954,9 @@ TEST_CASE("FEM GHEX159 element definitions.", "[fem_element_ghex159]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex159 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -27420,9 +27186,8 @@ TEST_CASE("FEM GHEX160 element definitions.", "[fem_element_ghex160]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -27437,10 +27202,9 @@ TEST_CASE("FEM GHEX160 element definitions.", "[fem_element_ghex160]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex160 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -27670,9 +27434,8 @@ TEST_CASE("FEM GHEX161 element definitions.", "[fem_element_ghex161]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -27687,10 +27450,9 @@ TEST_CASE("FEM GHEX161 element definitions.", "[fem_element_ghex161]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex161 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -27920,9 +27682,8 @@ TEST_CASE("FEM GHEX162 element definitions.", "[fem_element_ghex162]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -27937,10 +27698,9 @@ TEST_CASE("FEM GHEX162 element definitions.", "[fem_element_ghex162]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex162 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());
@@ -28170,9 +27930,8 @@ TEST_CASE("FEM GHEX163 element definitions.", "[fem_element_ghex163]") {
     long const ELTYAD = 2;
     vector<long> const NODIN ({100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126});
     elements::__base::elem::reset();
-    unique_ptr<cards::gelmnt1> gelmnt1_data(
-        new cards::gelmnt1(
-            ELNOX, ELNO, ELTYP, ELTYAD, NODIN));
+    auto gelmnt1_data = make_unique<cards::gelmnt1>(
+        ELNOX, ELNO, ELTYP, ELTYAD, NODIN);
 
 
     long const MATNO = 3;
@@ -28187,10 +27946,9 @@ TEST_CASE("FEM GHEX163 element definitions.", "[fem_element_ghex163]") {
     long const ECCNO_OPT = 12;
     long const TRANSNO_OPT = 13;
 
-    unique_ptr<cards::gelref1> gelref1_data(
-        new cards::gelref1(ELNO, MATNO, ADDNO, INTNO, MINTNO,
-                           STRANO, STRENO, STREPONO, GEONO_OPT,
-                           FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT));
+    auto gelref1_data = make_unique<cards::gelref1>(
+        ELNO, MATNO, ADDNO, INTNO, MINTNO, STRANO, STRENO, STREPONO, GEONO_OPT,
+        FIXNO_OPT, ECCNO_OPT, TRANSNO_OPT);
 
     elements::ghex163 probe(gelmnt1_data.get());
     probe.add(gelref1_data.get());

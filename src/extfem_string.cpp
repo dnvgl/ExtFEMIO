@@ -15,8 +15,8 @@
 
 // ID:
 namespace {
-    const char cID_extfem_string[] _EXTFEMIO_UNUSED
-        = "@(#) $Id$";
+    const char _EXTFEMIO_UNUSED(cID_extfem_string[]) =
+                     "@(#) $Id$";
 }
 
 #if defined(__AFX_H__) && defined(_DEBUG)

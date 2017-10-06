@@ -9,11 +9,8 @@
 
 // ID:
 namespace {
-   const char cID_bdf2bdf[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    const char _EXTFEMIO_UNUSED(cID_bdf2bdf[]) =
+        "@(#) $Id$";
 }
 
 #ifdef HAVE_CONFIG_H
@@ -26,6 +23,12 @@ namespace {
 #include "bdf2bdf_args.h"
 
 #include "bdf/cards.h"
+
+#if defined(__AFX_H__) && defined(_DEBUG)
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
 
 using std::cout;
 using std::endl;

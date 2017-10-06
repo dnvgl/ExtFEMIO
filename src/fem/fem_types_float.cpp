@@ -13,7 +13,7 @@
 
 // ID:
 namespace {
-    const char cID_fem_types_float[] _EXTFEMIO_UNUSED =
+    const char _EXTFEMIO_UNUSED(cID_fem_types_float[]) =
         "@(#) $Id$";
 }
 

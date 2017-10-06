@@ -12,7 +12,7 @@
 
 // ID:
 namespace {
-    const char cID_bdf_header_exec_control_sol[] _EXTFEMIO_UNUSED =
+    const char _EXTFEMIO_UNUSED(cID_bdf_header_exec_control_sol[]) =
         "@(#) $Id$";
 }
 
@@ -20,6 +20,12 @@ namespace {
 
 #include "bdf/header.h"
 #include "bdf/errors.h"
+
+#if defined(__AFX_H__) && defined(_DEBUG)
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
 
 using namespace dnvgl::extfem::bdf::header::executive_control;
 

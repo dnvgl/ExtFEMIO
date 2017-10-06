@@ -458,7 +458,7 @@ namespace dnvgl {
                       appears in a comment the value shall be used as
                       yield stress for the next material definition.
                     */
-                    static double *yield;
+                    static std::shared_ptr<double> yield;
                     comment() = default;
                     ~comment();
                     explicit comment(std::list<std::string> const &inp);
@@ -489,7 +489,7 @@ namespace dnvgl {
                       Store yield stress on a per comment base to
                       allow correct output.
                     */
-                    double *__yield = nullptr;
+                    std::shared_ptr<double> __yield = nullptr;
                     std::ostream &put(std::ostream&) const override;
                     void read(std::list<std::string> const &inp) override;
                     void collect_outdata(

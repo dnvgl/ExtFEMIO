@@ -12,11 +12,17 @@
 
 // ID:
 namespace {
-    char const cID_fem_cards_helper_beam_prop[] _EXTFEMIO_UNUSED =
+    char const _EXTFEMIO_UNUSED(cID_fem_cards_helper_beam_prop[]) =
         "@(#) $Id$";
 }
 
 #include "fem/cards.h"
+
+#if defined(__AFX_H__) && defined(_DEBUG)
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
 
 using namespace std;
 

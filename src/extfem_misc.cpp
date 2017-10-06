@@ -14,12 +14,18 @@
 
 // ID:
 namespace {
-    const char cID_extfem_misc[] _EXTFEMIO_UNUSED =
+    const char _EXTFEMIO_UNUSED(cID_extfem_misc[]) =
         "@(#) $Id$";
 }
 
 // ReSharper disable once CppUnusedIncludeDirective
 #include "config.h"
+
+#if defined(__AFX_H__) && defined(_DEBUG)
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
 
 using namespace dnvgl::extfem;
 using namespace dnvgl::extfem::__base;

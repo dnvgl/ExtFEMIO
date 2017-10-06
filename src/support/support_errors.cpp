@@ -13,7 +13,7 @@
 
 // ID:
 namespace {
-    const char cID_support_errors[] _EXTFEMIO_UNUSED =
+    const char _EXTFEMIO_UNUSED(cID_support_errors[]) =
         "@(#) $Id$";
 }
 

@@ -12,7 +12,7 @@
 
 // ID:
 namespace {
-    const char cID[] _EXTFEMIO_UNUSED =
+    const char _EXTFEMIO_UNUSED(cID_test_fem_cards_glsec[])  =
         "@(#) $Id$";
 }
 
@@ -217,7 +217,7 @@ TEST_CASE("FEM GLSEC conversion from own output.", "[fem_glsec,in/out]") {
     }
 
     SECTION("GLSEC (2)") {
-        gbeamg _EXTFEMIO_UNUSED dummy(1, 100.);
+        gbeamg _EXTFEMIO_UNUSED(dummy)(1, 100.);
         vector<std::string> data({
                 // 345678|234567890123456|234567890123456|234567890123456|234567890123456
                 "GLSEC   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",

@@ -13,7 +13,7 @@
 
 // ID:
 namespace {
-    char const cID_fem_cards_gdobo[] _EXTFEMIO_UNUSED =
+    char const _EXTFEMIO_UNUSED(cID_fem_cards_gdobo[]) =
         "@(#) $Id$";
 }
 

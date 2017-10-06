@@ -13,11 +13,17 @@
 
 // ID:
 namespace {
-    const char cID_bdf_type_bounds[] _EXTFEMIO_UNUSED =
+    const char _EXTFEMIO_UNUSED(cID_bdf_type_bounds[]) =
         "@(#) $Id$";
 }
 
 #include "bdf/types.h"
+
+#if defined(__AFX_H__) && defined(_DEBUG)
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
 
 using namespace dnvgl::extfem::bdf::type_bounds;
 

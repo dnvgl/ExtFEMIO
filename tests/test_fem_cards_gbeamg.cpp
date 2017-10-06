@@ -12,7 +12,7 @@
 
 // ID:
 namespace {
-    const char cID[] _EXTFEMIO_UNUSED =
+    const char _EXTFEMIO_UNUSED(cID_test_fem_cards_gbeamg[]) =
         "@(#) $Id$";
 }
 
@@ -98,7 +98,7 @@ TEST_CASE("FEM GBEAMG definitions.", "[fem_gbeamg]" ) {
     }
 
     SECTION("GBEAMG (area only)") {
-        gpipe _EXTFEMIO_UNUSED dummy(1685, 200., 300., 10, 1., 1.);
+        gpipe _EXTFEMIO_UNUSED(dummy)(1685, 200., 300., 10, 1., 1.);
         vector<std::string> data(
             // 2345678|234567890123456|234567890123456|234567890123456|234567890123456
             {"GBEAMG   1.68500000e+03  0.000000000e+00 1.11500000e+04  0.00000000e-00 \n"});

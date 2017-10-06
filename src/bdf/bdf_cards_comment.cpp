@@ -8,13 +8,12 @@
 */
 #include "extfemio_stdafx.h"
 
+#include "extfem_misc.h"
+
 // ID:
 namespace {
-   char const cID_bdf_cards_comment[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-      = "@(#) $Id$";
+    char const _EXTFEMIO_UNUSED(cID_bdf_cards_comment[]) =
+        "@(#) $Id$";
 }
 
 #ifdef HAVE_BOOST_REGEX_HPP
@@ -27,6 +26,12 @@ namespace {
 
 #include "bdf/cards.h"
 
+#if defined(__AFX_H__) && defined(_DEBUG)
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
 using namespace std;
 
 using namespace dnvgl::extfem;
@@ -37,7 +42,7 @@ using namespace cards::__base;
 
 using bdf::types::entry_type;
 
-double *comment::yield{nullptr};
+shared_ptr<double> comment::yield = nullptr;
 
 #ifdef HAVE_BOOST_REGEX_HPP
 boost::regex
@@ -65,26 +70,17 @@ void comment::to_yield(std::string const inp) {
 #endif
         m;
     if (regex_search(inp, m, comment::find_yield)) {
-        if (comment::yield != nullptr) {
-            delete comment::yield;
-            comment::yield = nullptr;
-        }
-        if (m[1] == "235")
-            comment::yield = new double(235.);
-        else if (m[1] == "315")
-            comment::yield = new double(315.);
-        else if (m[1] == "355")
-            comment::yield = new double(355.);
-        else if (m[1] == "390")
-            comment::yield = new double(390.);
-        else if (m[1] == "460")
-            comment::yield = new double(460.);
+        if (m[1] == "235")      comment::yield = make_shared<double>(235.);
+        else if (m[1] == "315") comment::yield = make_shared<double>(315.);
+        else if (m[1] == "355") comment::yield = make_shared<double>(355.);
+        else if (m[1] == "390") comment::yield = make_shared<double>(390.);
+        else if (m[1] == "460") comment::yield = make_shared<double>(460.);
+        else                    comment::yield = nullptr;
     }
 }
 
 comment::~comment() {
- if (yield != nullptr)
-     delete this->__yield;
+    this->__yield = nullptr;
 }
 
 comment::comment(std::list<std::string> const &inp) :
@@ -95,43 +91,26 @@ comment::comment(std::list<std::string> const &inp) :
 comment::comment(std::vector<std::string> const &content,
                  double *yield/*=nullptr*/) :
         card(), content(content.begin(), content.end()), __yield(nullptr) {
-    if (yield != nullptr) {
-        if (comment::yield == nullptr)
-            comment::yield = new double();
-        *comment::yield = *yield;
-        this->__yield = new double(*yield);
-    }
+    if (yield) {
+        comment::yield = make_shared<double>(*yield);
+        this->__yield = make_shared<double>(*yield);
+    } else
+        this->__yield = nullptr;
 }
 
 comment::comment(std::string const *content,
                  double *yield/*=nullptr*/) :
-        card(), content({*content}), __yield(nullptr) {
-    if (yield != nullptr) {
-        if (comment::yield == nullptr)
-            comment::yield = new double();
-        *comment::yield = *yield;
-        this->__yield = new double(*yield);
-    }
-}
+        comment(std::vector<std::string>({*content}), yield) {}
 
 comment::comment(std::string const &content,
                  double *yield/*=nullptr*/) :
-        card(), content({content}), __yield(nullptr) {
-    if (yield != nullptr) {
-        if (comment::yield == nullptr)
-            comment::yield = new double();
-        *comment::yield = *yield;
-        this->__yield = new double(*yield);
-    }
-}
+        comment(std::vector<std::string>({content}), yield) {}
 
 cards::types comment::card_type() const {
     return cards::types::COMMENT;
 }
 
 card const &comment::operator() (std::list<std::string> const &inp) {
-    if (this->__yield != nullptr)
-        delete this->__yield;
     this->__yield = nullptr;
     this->read(inp);
     return *this;
@@ -139,14 +118,12 @@ card const &comment::operator() (std::list<std::string> const &inp) {
 
 card const &comment::operator() (std::vector<std::string> const &content,
                  double *yield/*=nullptr*/) {
-    if (this->__yield != nullptr)
-        delete this->__yield;
-    this->__yield = nullptr;
     if (yield != nullptr) {
-        if (comment::yield == nullptr)
-            comment::yield = new double();
-        *comment::yield = *yield;
-        this->__yield = new double(*yield);
+        comment::yield = make_shared<double>(*yield);
+        this->__yield = make_shared<double>(*yield);
+    } else {
+        comment::yield = nullptr;
+        this->__yield = nullptr;
     }
     this->content.assign(content.begin(), content.end());
     return *this;
@@ -154,33 +131,12 @@ card const &comment::operator() (std::vector<std::string> const &content,
 
 card const &comment::operator()(std::string const &content,
                  double *yield/*=nullptr*/) {
-    if (this->__yield != nullptr)
-        delete this->__yield;
-    this->__yield = nullptr;
-    if (yield != nullptr) {
-        if (comment::yield == nullptr)
-            comment::yield = new double();
-        *comment::yield = *yield;
-        this->__yield = new double(*yield);
-    }
-    this->content.clear();
-    this->content.push_back(content);
-    return *this;
+    return this->comment::operator() (vector<std::string>({content}), yield);
 }
 
 card const &comment::operator()(std::string const *content,
                  double *yield/*=nullptr*/) {
-    if (this->__yield != nullptr)
-        delete this->__yield;
-    this->__yield = nullptr;
-    if (yield != nullptr) {
-        if (comment::yield == nullptr)
-            comment::yield = new double();
-        *comment::yield = *yield;
-        this->__yield = new double(*yield);
-    }
-    this->content.push_back(*content);
-    return *this;
+    return this->comment::operator() (vector<std::string>({*content}), yield);
 }
 
 void comment::read(std::list<std::string> const &inp) {
@@ -228,9 +184,7 @@ ostream &comment::put(ostream &os) const {
 }
 
 void comment::clear_yield() {
-    if (comment::yield != nullptr)
-        delete comment::yield;
-    comment::yield = nullptr;
+     comment::yield = nullptr;
 }
 
 void comment::check_data() {}

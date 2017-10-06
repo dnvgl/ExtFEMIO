@@ -27,10 +27,17 @@
 #define _EXTFEMIO_NOEXCEPT noexcept
 #endif
 
-#ifdef __GNUC__
-#define _EXTFEMIO_UNUSED __attribute__((__unused__))
+#ifdef _EXTFEMIO_UNUSED
+#elif defined(__GNUC__)
+#define _EXTFEMIO_UNUSED(x) x __attribute__((__unused__))
+#elif defined(_MSC_VER)
+#define _EXTFEMIO_UNUSED(x) __pragma(warning(suppress: 4100 4101)) x
+#elif defined(__LCLINT__)
+#define _EXTFEMIO_UNUSED(x) /*@unused@*/ x
+#elif defined(__cplusplus)
+#define _EXTFEMIO_UNUSED(x)
 #else
-#define _EXTFEMIO_UNUSED
+#define _EXTFEMIO_UNUSED(x) x
 #endif
 
 /// Shortcut to throw not_implemented with appropriate information.

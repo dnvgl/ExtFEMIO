@@ -8,13 +8,12 @@
 */
 #include "extfemio_stdafx.h"
 
+#include "extfem_misc.h"
+
 // ID:
 namespace {
-    char const cID_test_bdf_cards_elements[]
-#ifdef __GNUC__
-   __attribute__ ((__unused__))
-#endif
-       = "@(#) $Id$";
+    char const _EXTFEMIO_UNUSED(cID_test_bdf_cards_elements[]) =
+        "@(#) $Id$";
 }
 
 #define NOMINMAX // To avoid problems with "numeric_limits"

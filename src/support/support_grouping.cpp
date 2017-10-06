@@ -14,11 +14,17 @@
 
 // ID:
 namespace {
-    char const cID_support_grouping[] _EXTFEMIO_UNUSED =
+    char const _EXTFEMIO_UNUSED(cID_support_grouping[]) =
         "@(#) $Id$";
 }
 
 #include "support/grouping.h"
+
+#if defined(__AFX_H__) && defined(_DEBUG)
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
 
 using namespace std;
 
