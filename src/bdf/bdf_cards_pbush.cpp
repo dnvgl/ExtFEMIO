@@ -41,8 +41,8 @@ using bdf::types::entry_value;
 
 /// Constant values used in bound definitions.
 namespace {
-    auto const cd0 = new double(0);
-    auto const cd1 = new double(1);
+    auto const cd0 = make_shared<double>(0.);
+    auto const cd1 = make_shared<double>(1.);
 }
 
 bdf::types::card pbush::head = bdf::types::card("PBUSH");
@@ -51,36 +51,37 @@ bdf::types::card pbush::head = bdf::types::card("PBUSH");
 // const entry_type<long> pbush::form_PID(
 //     "PID", bound<long>(cl1));
 namespace {
-    auto const bound_K = new bound<double>(nullptr, nullptr, cd0, true);
+    auto const bound_K = make_shared<bound<double>>(
+        nullptr, nullptr, cd0, true);
 }
 entry_type<double> pbush::form_K("K", bound_K);
 namespace {
-    auto const bound_B = new bound<double>(
+    auto const bound_B = make_shared<bound<double>>(
         nullptr, nullptr, cd0, true);
 }
 entry_type<double> pbush::form_B("B", bound_B);
 namespace {
-    auto const bound_GE = new bound<double>(
+    auto const bound_GE = make_shared<bound<double>>(
         nullptr, nullptr, cd0, true);
 }
 entry_type<double> pbush::form_GE("GE", bound_GE);
 namespace {
-    auto const bound_SA = new bound<double>(
+    auto const bound_SA = make_shared<bound<double>>(
         nullptr, nullptr, cd1);
 }
 entry_type<double> pbush::form_SA("SA", bound_SA);
 namespace {
-    auto const bound_ST = new bound<double>(
+    auto const bound_ST = make_shared<bound<double>>(
         nullptr, nullptr, cd1);
 }
 entry_type<double> pbush::form_ST("ST", bound_ST);
 namespace {
-    auto const bound_EA = new bound<double>(
+    auto const bound_EA = make_shared<bound<double>>(
         nullptr, nullptr, cd1);
 }
 entry_type<double> pbush::form_EA("EA", bound_EA);
 namespace {
-    auto const bound_ET = new bound<double>(
+    auto const bound_ET = make_shared<bound<double>>(
         nullptr, nullptr, cd1);
 }
 entry_type<double> pbush::form_ET("ET", bound_ET);

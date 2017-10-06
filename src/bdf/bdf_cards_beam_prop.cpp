@@ -36,11 +36,9 @@ using namespace type_bounds;
 using namespace cards::__base;
 
 namespace {
-    auto const cl1_ = make_shared<long>(1);
-    auto const cl1 = cl1_.get();
+    auto const cl1 = make_shared<long>(1);
 
-    auto const MID_bound_ = make_shared<bound<long>>(cl1, nullptr, nullptr, true);
-    auto const MID_bound = MID_bound_.get();
+    auto const MID_bound = make_shared<bound<long>>(cl1, nullptr, nullptr, true);
 }
 entry_type<long> beam_base::form_MID("MID", MID_bound);
 

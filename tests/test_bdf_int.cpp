@@ -44,45 +44,47 @@ using namespace dnvgl::extfem::bdf::types;
 using bdf::type_bounds::bound;
 
 namespace {
-    const long cl1 = 1, cl100 = 100, cl_1 = -1, cl0 = 0;
+    auto const cl1 = std::make_shared<long>(1);
+    auto const cl100 = std::make_shared<long>(100);
+    auto const cl_1 = std::make_shared<long>(-1);
+    auto const cl0 = std::make_shared<long>(0);
 }
 
 TEST_CASE("BDF int types parsing.", "[bdf_types]") {
 
     SECTION("'   2    '") {
-        auto b = new bound<long>(&cl1);
+        auto const b = std::make_shared<bound<long>>(cl1);
         entry_type<long> obj("dummy", b);
         CHECK(obj("   2    ").value == 2);
-        delete b;
     }
 
     SECTION("'       2'") {
-        auto b = std::make_shared<bound<long>>(&cl1);
-        entry_type<long> obj("dummy", b.get());
+        auto const b = std::make_shared<bound<long>>(cl1);
+        entry_type<long> obj("dummy", b);
         CHECK(obj("       2").value == 2);
     }
 
     SECTION("'2       '") {
-        auto b = std::make_shared<bound<long>>(&cl0, nullptr, &cl1);
-        entry_type<long> obj("dummy", b.get());
+        auto const b = std::make_shared<bound<long>>(cl0, nullptr, cl1);
+        entry_type<long> obj("dummy", b);
         CHECK(obj("2       ").value == 2);
     }
 
     SECTION("'    -1  '") {
-        auto b = std::make_shared<bound<long>>(&cl_1, nullptr, &cl0);
-        entry_type<long> obj("dummy", b.get());
+        auto const b = std::make_shared<bound<long>>(cl_1, nullptr, cl0);
+        entry_type<long> obj("dummy", b);
         CHECK(obj("    -1  ").value == -1);
     }
 
     SECTION("default 1") {
-        auto b = std::make_shared<bound<long>>(&cl_1, nullptr, &cl0);
-        entry_type<long> obj("dummy", b.get());
+        auto const b = std::make_shared<bound<long>>(cl_1, nullptr, cl0);
+        entry_type<long> obj("dummy", b);
         CHECK(obj("        ").value == 0);
     }
 
     SECTION("default 2") {
-        auto b = std::make_shared<bound<long>>(&cl_1, nullptr, &cl100);
-        entry_type<long> obj("dummy", b.get());
+        auto const b = std::make_shared<bound<long>>(cl_1, nullptr, cl100);
+        entry_type<long> obj("dummy", b);
         CHECK(obj("        ").value == 100);
     }
 

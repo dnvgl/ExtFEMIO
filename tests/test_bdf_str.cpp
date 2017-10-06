@@ -46,8 +46,10 @@ using namespace dnvgl::extfem::bdf::types;
 TEST_CASE("BDF str types parsing.", "[bdf_types]") {
 
     set<std::string> const allowed({"ONE", "TWO", "THREE"});
-    type_bounds::bound<std::string> str_allowed(allowed);
-    type_bounds::bound<std::string> str_allowed_default(allowed, "ONE");
+    auto const str_allowed = make_shared<type_bounds::bound<std::string>>(allowed);
+    auto const one = make_shared<std::string>("ONE");
+    auto const str_allowed_default = make_shared<type_bounds::bound<std::string>>(
+        allowed, one);
 
     SECTION("'TEST    '") {
         entry_type<std::string> obj("dummy");
@@ -55,22 +57,22 @@ TEST_CASE("BDF str types parsing.", "[bdf_types]") {
     }
 
     SECTION("'ONE     '") {
-        entry_type<std::string> obj("dummy", &str_allowed);
+        entry_type<std::string> obj("dummy", str_allowed);
         CHECK(obj("ONE     ") == "ONE");
     }
 
     SECTION("'FOUR        '") {
-        entry_type<std::string> obj("dummy", &str_allowed);
+        entry_type<std::string> obj("dummy", str_allowed);
         CHECK_THROWS(obj("FOUR    "));
     }
 
     SECTION("'            '") {
-        entry_type<std::string> obj("dummy", &str_allowed);
+        entry_type<std::string> obj("dummy", str_allowed);
         CHECK_THROWS(obj("        "));
     }
 
     SECTION("'            ', 1") {
-        entry_type<std::string> obj("dummy", &str_allowed_default);
+        entry_type<std::string> obj("dummy", str_allowed_default);
         CHECK(obj("        ") == "ONE");
     }
 }

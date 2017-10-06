@@ -38,67 +38,51 @@ using namespace type_bounds;
 using namespace cards::__base;
 
 namespace {
-    auto const cl0_ = make_shared<long>(0);
-    auto const cl1_ = make_shared<long>(1);
-    auto const cd0_ = make_shared<double>(0.);
-    auto const cd05_ = make_shared<double>(0.5);
-    auto const cd_1_ = make_shared<double>(-1.);
+    auto const cl0 = make_shared<long>(0);
+    auto const cl1 = make_shared<long>(1);
+    auto const cd0 = make_shared<double>(0.);
+    auto const cd05 = make_shared<double>(0.5);
+    auto const cd_1 = make_shared<double>(-1.);
 
-    auto const cl0 = cl0_.get();
-    auto const cl1 = cl1_.get();
-    auto const cd0 = cd0_.get();
-    auto const cd05 = cd05_.get();
-    auto const cd_1 = cd_1_.get();
-
-    auto const bound_MID_ = make_shared<bound<long>>(cl1);
-    auto const bound_MID = bound_MID_.get();
+    auto const bound_MID = make_shared<bound<long>>(cl1);
 }
 entry_type<long> mat::form_MID("MID", bound_MID);
 namespace {
-    auto const bound_G_ = make_shared<bound<double>>(cd0, nullptr, nullptr, true);
-    auto const bound_G = bound_G_.get();
+    auto const bound_G = make_shared<bound<double>>(cd0, nullptr, nullptr, true);
 }
 entry_type<double> mat::form_G("G", bound_G);
 namespace {
-    auto const bound_RHO_ = make_shared<bound<double>>(cd0, nullptr, nullptr, true);
-    auto const bound_RHO = bound_RHO_.get();
+    auto const bound_RHO = make_shared<bound<double>>(cd0, nullptr, nullptr, true);
 }
 entry_type<double> mat::form_RHO("RHO", bound_RHO);
 namespace {
-    auto const bound_A_ = make_shared<bound<double>>(cd0, nullptr, nullptr, true);
-    auto const bound_A = bound_A_.get();
+    auto const bound_A = make_shared<bound<double>>(cd0, nullptr, nullptr, true);
 }
 entry_type<double> mat::form_A("A", bound_A);
 namespace {
-    auto const bound_TREF_ = make_shared<bound<double>>(
+    auto const bound_TREF = make_shared<bound<double>>(
         cd0, nullptr, nullptr, true);
-    auto const bound_TREF = bound_TREF_.get();
 }
 entry_type<double> mat::form_TREF("TREF", bound_TREF);
 namespace {
-    auto const bound_GE_ = make_shared<bound<double>>(cd0, nullptr, nullptr, true);
-    auto const bound_GE = bound_GE_.get();
+    auto const bound_GE = make_shared<bound<double>>(cd0, nullptr, nullptr, true);
 }
 entry_type<double> mat::form_GE("GE", bound_GE);
 namespace {
-    auto const bound_ST_ = make_shared<bound<double>>(cd0, nullptr, nullptr, true);
-    auto const bound_ST = bound_ST_.get();
+    auto const bound_ST = make_shared<bound<double>>(cd0, nullptr, nullptr, true);
 }
 entry_type<double> mat::form_ST("ST", bound_ST);
 namespace {
-    auto const bound_SC_ = make_shared<bound<double>>(cd0, nullptr, nullptr, true);
-    auto const bound_SC = bound_SC_.get();
+    auto const bound_SC = make_shared<bound<double>>(cd0, nullptr, nullptr, true);
 }
 entry_type<double> mat::form_SC("SC", bound_SC);
 namespace {
-    auto const bound_SS_ = make_shared<bound<double>>(cd0, nullptr, nullptr, true);
-    auto const bound_SS = bound_SS_.get();
+    auto const bound_SS = make_shared<bound<double>>(cd0, nullptr, nullptr, true);
 }
 entry_type<double> mat::form_SS("SS", bound_SS);
 namespace {
-    auto const bound_MCSID_ = make_shared<bound<long>>(
+    auto const bound_MCSID = make_shared<bound<long>>(
         cl0, nullptr, nullptr, true);
-    auto const bound_MCSID = bound_MCSID_.get();
 }
 entry_type<long> mat::form_MCSID("MCSID", bound_MCSID);
 

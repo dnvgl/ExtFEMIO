@@ -39,25 +39,20 @@ using namespace cards;
 using bdf::types::entry_type;
 
 namespace {
-    auto const cd0_ = make_shared<double>(0.);
-    auto const cd0 = cd0_.get();
-    auto const cd05_ = make_shared<double>(0.5);
-    auto const cd05 = cd05_.get();
-    auto const cd_1_ = make_shared<double>(-1.);
-    auto const cd_1 = cd_1_.get();
+    auto const cd0 = make_shared<double>(0.);
+    auto const cd05 = make_shared<double>(0.5);
+    auto const cd_1 = make_shared<double>(-1.);
 }
 
 bdf::types::card mat1::head = bdf::types::card("MAT1");
 
 namespace {
-    auto const bound_E_ = make_shared<bound<double>>(
+    auto const bound_E = make_shared<bound<double>>(
         cd0, nullptr, nullptr, true);
-    auto const bound_E = bound_E_.get();
 }
 entry_type<double> mat1::form_E("E", bound_E);
 namespace {
-    auto const bound_NU_ = make_shared<bound<double>>(cd_1, cd05, nullptr, true);
-    auto const bound_NU = bound_NU_.get();
+    auto const bound_NU = make_shared<bound<double>>(cd_1, cd05, nullptr, true);
 }
 entry_type<double> mat1::form_NU("NU", bound_NU);
 

@@ -28,7 +28,7 @@ namespace dnvgl {
                 template <typename _Ty>
                 class entry_type : public base {
                 protected:
-                    dnvgl::extfem::bdf::type_bounds::bound<_Ty> *bounds;
+                    std::shared_ptr<dnvgl::extfem::bdf::type_bounds::bound<_Ty>> const bounds;
                     static const bdf_types _type;
                 private:
                     entry_type() = default;
@@ -36,7 +36,7 @@ namespace dnvgl {
                     ~entry_type() = default;
                     explicit entry_type(const std::string& cs);
                     entry_type(const std::string &name,
-                               bdf::type_bounds::bound<_Ty> *const bounds);
+                               std::shared_ptr<bdf::type_bounds::bound<_Ty>> const &bounds);
                     bdf_types type() const;
                     entry_value<_Ty> check(entry_value<_Ty> &val);
                     entry_value<_Ty> check(_Ty &val);
@@ -63,7 +63,7 @@ namespace dnvgl {
                 template <typename _Ty>
                 entry_type<_Ty>::entry_type(
                     const std::string &name,
-                    bdf::type_bounds::bound<_Ty> *const bounds) :
+                    std::shared_ptr<bdf::type_bounds::bound<_Ty>> const &bounds) :
                         bdf::types::base(name), bounds(bounds) {}
 
                 template <typename _Ty>

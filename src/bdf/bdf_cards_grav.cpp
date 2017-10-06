@@ -41,25 +41,20 @@ using namespace cards;
 using namespace type_bounds;
 
 namespace {
-    auto const cl0_ = make_shared<long>(0);
-    auto const cl1_ = make_shared<long>(1);
-    auto const cl0 = cl0_.get();
-    auto const cl1 = cl1_.get();
+    auto const cl0 = make_shared<long>(0);
+    auto const cl1 = make_shared<long>(1);
 
-    auto const bound_SID_ = make_shared<bound<long>>(cl1);
-    auto const bound_SID = bound_SID_.get();
+    auto const bound_SID = make_shared<bound<long>>(cl1);
 }
 entry_type<long> grav::form_SID("SID", bound_SID);
 namespace {
-    auto const bound_CID_ = make_shared<bound<long>>(cl0);
-    auto const bound_CID = bound_CID_.get();
+    auto const bound_CID = make_shared<bound<long>>(cl0);
 }
 entry_type<long> grav::form_CID("CID", bound_CID);
 entry_type<double> grav::form_A("A");
 entry_type<double> grav::form_Ni("Ni");
 namespace {
-    auto const bound_MB_ = make_shared<bound<long>>(nullptr, nullptr, cl0);
-    auto const bound_MB = bound_MB_.get();
+    auto const bound_MB = make_shared<bound<long>>(nullptr, nullptr, cl0);
 }
 entry_type<long> grav::form_MB("MB", bound_MB);
 

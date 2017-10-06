@@ -38,43 +38,34 @@ using bdf::types::entry_type;
 using type_bounds::bound;
 
 namespace {
-    auto const cl0_ = make_shared<long>(0);
-    auto const cl1_ = make_shared<long>(1);
-    auto const cd0_ = make_shared<double>(0.);
-    auto const cl0 = cl0_.get();
-    auto const cl1 = cl1_.get();
-    auto const cd0 = cd0_.get();
+    auto const cl0 = make_shared<long>(0);
+    auto const cl1 = make_shared<long>(1);
+    auto const cd0 = make_shared<double>(0.);
 }
 
 namespace {
-    auto const bound_SID_ = make_shared<bound<long>>(cl1);
-    auto const bound_SID = bound_SID_.get();
+    auto const bound_SID = make_shared<bound<long>>(cl1);
 }
 entry_type<long> momforce::form_SID("SID", bound_SID);
 namespace {
-    auto const bound_G_ = make_shared<bound<long>>(cl1);
-    auto const bound_G = bound_G_.get();
+    auto const bound_G = make_shared<bound<long>>(cl1);
 }
 entry_type<long> momforce::form_G("G", bound_G);
 namespace {
-    auto const bound_CID_ = make_shared<bound<long>>(cl0, nullptr, cl0);
-    auto const bound_CID = bound_CID_.get();
+    auto const bound_CID = make_shared<bound<long>>(cl0, nullptr, cl0);
 }
 entry_type<long> momforce::form_CID("CID", bound_CID);
 entry_type<double> momforce::form_F("F");
 namespace {
-    auto const bound_N1_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
-    auto const bound_N1 = bound_N1_.get();
+    auto const bound_N1 = make_shared<bound<double>>(nullptr, nullptr, cd0);
 }
 entry_type<double> momforce::form_N1("N1", bound_N1);
 namespace {
-    auto const bound_N2_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
-    auto const bound_N2 = bound_N2_.get();
+    auto const bound_N2 = make_shared<bound<double>>(nullptr, nullptr, cd0);
 }
 entry_type<double> momforce::form_N2("N2", bound_N2);
 namespace {
-    auto const bound_N3_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
-    auto const bound_N3 = bound_N3_.get();
+    auto const bound_N3 = make_shared<bound<double>>(nullptr, nullptr, cd0);
 }
 entry_type<double> momforce::form_N3("N3", bound_N3);
 

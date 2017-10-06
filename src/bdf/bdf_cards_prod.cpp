@@ -37,10 +37,8 @@ using bdf::types::entry_type;
 
 /// Constant values used in bound definitions.
 namespace {
-    auto const cl1_ = make_shared<long>(1);
-    auto const cd0_ = make_shared<double>(0.);
-    auto const cl1 = cl1_.get();
-    auto const cd0 = cd0_.get();
+    auto const cl1 = make_shared<long>(1);
+    auto const cd0 = make_shared<double>(0.);
 }
 
 bdf::types::card prod::head = bdf::types::card("PROD");
@@ -49,26 +47,22 @@ bdf::types::card prod::head = bdf::types::card("PROD");
 // const entry_type<long> prod::form_PID(
 //     "PID", bound<long>(cl1));
 namespace {
-    auto const bound_MID_ = make_shared<bound<long>>(cl1);
-    auto const bound_MID = bound_MID_.get();
+    auto const bound_MID = make_shared<bound<long>>(cl1);
 }
 entry_type<long> prod::form_MID("MID", bound_MID);
 entry_type<double> prod::form_A("A");
 namespace {
-    auto const bound_J_ = make_shared<bound<double>>(
+    auto const bound_J = make_shared<bound<double>>(
         nullptr, nullptr, nullptr, true);
-    auto const bound_J = bound_J_.get();
-    }
+}
 entry_type<double> prod::form_J("J", bound_J);
 namespace {
-    auto const bound_C_ = make_shared<bound<double>>(nullptr, nullptr, cd0, true);
-    auto const bound_C = bound_C_.get();
+    auto const bound_C = make_shared<bound<double>>(nullptr, nullptr, cd0, true);
 }
 entry_type<double> prod::form_C("C", bound_C);
 namespace {
-    auto const bound_NSM_ = make_shared<bound<double>>(
+    auto const bound_NSM = make_shared<bound<double>>(
         nullptr, nullptr, nullptr, true);
-    auto const bound_NSM = bound_NSM_.get();
 }
 entry_type<double> prod::form_NSM("NSM", bound_NSM);
 

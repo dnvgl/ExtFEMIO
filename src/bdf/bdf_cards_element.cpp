@@ -40,15 +40,12 @@ using namespace cards::__base;
 using bdf::types::entry_type;
 
 namespace {
-    auto const cl0_ = make_shared<long>(0);
-    auto const cl1_ = make_shared<long>(1);
-    auto const cl0 = cl0_.get();
-    auto const cl1 = cl1_.get();
+    auto const cl0 = make_shared<long>(0);
+    auto const cl1 = make_shared<long>(1);
 }
 
 namespace {
-    auto const bound_EID_ = make_shared<bound_unique<long>>(cl1, nullptr, cl0);
-    auto const bound_EID = bound_EID_.get();
+    auto const bound_EID = make_shared<bound_unique<long>>(cl1, nullptr, cl0);
 }
 
 entry_type<long> element::form_EID("EID", bound_EID);

@@ -54,19 +54,12 @@ using type_bounds::bound;
 using type_bounds::bound_unique;
 
 namespace {
-    auto const l0_ = make_shared<long>(0);
-    auto const l1_ = make_shared<long>(1);
-    auto const l6_ = make_shared<long>(6);
-    auto const l12_ = make_shared<long>(12);
-    auto const l_12_ = make_shared<long>(-12);
-    auto const d1_ = make_shared<double>(1.);
-
-    auto const l0 = l0_.get();
-    auto const l1 = l1_.get();
-    auto const l6 = l6_.get();
-    auto const l12 = l12_.get();
-    auto const l_12 = l_12_.get();
-    auto const d1 = d1_.get();
+    auto const l0 = make_shared<long>(0);
+    auto const l1 = make_shared<long>(1);
+    auto const l6 = make_shared<long>(6);
+    auto const l12 = make_shared<long>(12);
+    auto const l_12 = make_shared<long>(-12);
+    auto const d1 = make_shared<double>(1.);
 }
 
 TEST_CASE("BDF boundary definitions (long).", "[bdf_bounds]") {
@@ -192,9 +185,8 @@ TEST_CASE("BDF boundary definitions (double).", "[bdf_bounds]") {
 
 TEST_CASE("string allowed values", "[bdf_bounds]") {
     set<std::string> const allowed({"A", "B", "C", "D"});
-    std::string const std_val("A");
-    auto const bound_tst_ = make_shared<bound<std::string>>(allowed, std_val);
-    auto const bound_tst = bound_tst_.get();
+    auto const std_val = make_shared<std::string>("A");
+    auto const bound_tst = make_shared<bound<std::string>>(allowed, std_val);
     entry_type<std::string> form_tst("tst", bound_tst);
 
     SECTION("set default") {
@@ -213,9 +205,8 @@ TEST_CASE("string allowed values", "[bdf_bounds]") {
         entry_value<std::string> val("EEG");
         set<std::string> lAllowed({"GGG", "BGG", "GGO", "BGO", "GOG",
                     "BOG", "GOO", "BOO"});
-        auto const bound_OFFT_ = make_shared<bound<std::string>>(lAllowed,
-            "GGG");
-        auto const bound_OFFT = bound_OFFT_.get();
+        auto const ggg = std::make_shared<std::string>("GGG");
+        auto const bound_OFFT = make_shared<bound<std::string>>(lAllowed, ggg);
         entry_type<std::string> form_OFFT("OFFT", bound_OFFT);
         CHECK_THROWS_AS(form_OFFT.check(val), errors::str_error);
     }
@@ -224,7 +215,7 @@ TEST_CASE("string allowed values", "[bdf_bounds]") {
 TEST_CASE("Test unique ids", "[bdf_unique_id]") {
     shared_ptr<bound_unique<long>> b = make_shared<bound_unique<long>>(
         l1, l6, nullptr, false);
-    entry_type<long> form_val("val", b.get());
+    entry_type<long> form_val("val", b);
     entry_value<long> val1;
     entry_value<long> val2;
     val1 = form_val.check(val1);

@@ -39,19 +39,12 @@ using bdf::types::entry_type;
 using type_bounds::bound;
 
 namespace {
-    auto const cl0_ = make_shared<long>(0);
-    auto const cl1_ = make_shared<long>(1);
-    auto const cl_1_ = make_shared<long>(-1);
-    auto const cd0_ = make_shared<double>(0.);
-    auto const cd1_ = make_shared<double>(1.);
-    auto const cd833_ = make_shared<double>(.833333);
-
-    auto const cl0 = cl0_.get();
-    auto const cl1 = cl1_.get();
-    auto const cl_1 = cl_1_.get();
-    auto const cd0 = cd0_.get();
-    auto const cd1 = cd1_.get();
-    auto const cd833 = cd833_.get();
+    auto const cl0 = make_shared<long>(0);
+    auto const cl1 = make_shared<long>(1);
+    auto const cl_1 = make_shared<long>(-1);
+    auto const cd0 = make_shared<double>(0.);
+    auto const cd1 = make_shared<double>(1.);
+    auto const cd833 = make_shared<double>(.833333);
 }
 
 bdf::types::card pshell::head = bdf::types::card("PSHELL");
@@ -59,63 +52,53 @@ bdf::types::card pshell::head = bdf::types::card("PSHELL");
 // entry_type<long> pshell::form_PID(
 //     "PID", bound<long>(cl1));
 namespace {
-    auto const bound_MID1_ = make_shared<bound<long>>(
+    auto const bound_MID1 = make_shared<bound<long>>(
         cl0, nullptr, nullptr, true);
-    auto const bound_MID1 = bound_MID1_.get();
 }
 entry_type<long> pshell::form_MID1("MID1", bound_MID1);
 namespace {
-    auto const bound_T_ = make_shared<bound<double>>(
+    auto const bound_T = make_shared<bound<double>>(
         cd0, nullptr, nullptr, true);
-    auto const bound_T = bound_T_.get();
 }
 entry_type<double> pshell::form_T("T", bound_T);
 namespace {
-    auto const bound_MID2_ = make_shared<bound<long>>(
+    auto const bound_MID2 = make_shared<bound<long>>(
         cl_1, nullptr, nullptr, true);
-    auto const bound_MID2 = bound_MID2_.get();
 }
 entry_type<long> pshell::form_MID2("MID2", bound_MID2);
 namespace {
-    auto const bound_12I_T__3_ = make_shared<bound<double>>(
+    auto const bound_12I_T__3 = make_shared<bound<double>>(
         cd0, nullptr, cd1, true);
-    auto const bound_12I_T__3 = bound_12I_T__3_.get();
 }
 entry_type<double> pshell::form_12I_T__3("12I/T**3", bound_12I_T__3);
 namespace {
-    auto const bound_MID3_ = make_shared<bound<long>>(
+    auto const bound_MID3 = make_shared<bound<long>>(
         cl1, nullptr, nullptr, true);
-    auto const bound_MID3 = bound_MID3_.get();
 }
 entry_type<long> pshell::form_MID3("MID3", bound_MID3);
 namespace {
-    auto const bound_TS_T_ = make_shared<bound<double>>(
+    auto const bound_TS_T = make_shared<bound<double>>(
         cd0, nullptr, cd833, true);
-    auto const bound_TS_T = bound_TS_T_.get();
 }
 entry_type<double> pshell::form_TS_T("TS/T", bound_TS_T);
 namespace {
-    auto const bound_NSM_ = make_shared<bound<double>>(
+    auto const bound_NSM = make_shared<bound<double>>(
         nullptr, nullptr, nullptr, true);
-    auto const bound_NSM = bound_NSM_.get();
 }
 entry_type<double> pshell::form_NSM("NSM", bound_NSM);
 namespace {
-    auto const bound_Z1_ = make_shared<bound<double>>(
+    auto const bound_Z1 = make_shared<bound<double>>(
         nullptr, nullptr, nullptr, true);
-    auto const bound_Z1 = bound_Z1_.get();
 }
 entry_type<double> pshell::form_Z1("Z1", bound_Z1);
 namespace {
-    auto const bound_Z2_ = make_shared<bound<double>>(
+    auto const bound_Z2 = make_shared<bound<double>>(
         nullptr, nullptr, nullptr, true);
-    auto const bound_Z2 = bound_Z2_.get();
 }
 entry_type<double> pshell::form_Z2("Z2", bound_Z2);
 namespace {
-    auto const bound_MID4_ = make_shared<bound<long>>(
+    auto const bound_MID4 = make_shared<bound<long>>(
         cl1, nullptr, nullptr, true);
-    auto const bound_MID4 = bound_MID4_.get();
 }
 entry_type<long> pshell::form_MID4("MID4", bound_MID4);
 

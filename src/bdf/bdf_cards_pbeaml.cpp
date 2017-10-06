@@ -42,18 +42,16 @@ using bdf::types::entry_value;
 using bdf::type_bounds::bound;
 
 namespace {
-    auto const cd0_ = make_shared<double>(0.);
-    auto const cd1_ = make_shared<double>(1.);
-    auto const cd0 = cd0_.get();
-    auto const cd1 = cd1_.get();
+    auto const cd0 = make_shared<double>(0.);
+    auto const cd1 = make_shared<double>(1.);
 }
 
 bdf::types::card pbeaml::head = bdf::types::card("PBEAML");
 
 namespace {
-    std::string name{"MSCBML0"};
-    auto const bound_GROUP = new bound<std::string>(
-        nullptr, nullptr, &name);
+    auto const name = make_shared<std::string>("MSCBML0");
+    auto const bound_GROUP = make_shared<bound<std::string>>(
+        nullptr, nullptr, name);
 }
 entry_type<std::string> pbeaml::form_GROUP("GROUP", bound_GROUP);
 namespace {
@@ -61,24 +59,24 @@ namespace {
                 "TUBE", "CHAN", "BOX", "BAR", "CROSS", "H", "T1",
                 "I1", "CHAN1", "Z", "CHAN2", "T2", "BOX1", "HEXA",
                 "HAT", "HAT1", "DBOX"});
-    auto const bound_TYPE = new bound<std::string>(allowed);
+    auto const bound_TYPE = make_shared<bound<std::string>>(allowed);
 }
 entry_type<std::string> pbeaml::form_TYPE("TYPE", bound_TYPE);
 namespace {
-    auto const bound_DIM = new bound<double>(cd0);
+    auto const bound_DIM = make_shared<bound<double>>(cd0);
 }
 entry_type<double> pbeaml::form_DIM("DIM", bound_DIM);
 namespace {
-    auto const bound_NSM = new bound<double>(nullptr, nullptr, cd0);
+    auto const bound_NSM = make_shared<bound<double>>(nullptr, nullptr, cd0);
 }
 entry_type<double> pbeaml::form_NSM("NSM", bound_NSM);
 namespace {
     set<std::string> const SO_set({"YES", "YESA", "NO"});
-    auto const bound_SO = new bound<std::string>(SO_set);
+    auto const bound_SO = make_shared<bound<std::string>>(SO_set);
 }
 entry_type<std::string> pbeaml::form_SO("SO", bound_SO);
 namespace {
-    auto const bound_X_XB = new bound<double>(cd0, nullptr, cd1);
+    auto const bound_X_XB = make_shared<bound<double>>(cd0, nullptr, cd1);
 }
 entry_type<double> pbeaml::form_X_XB("X/XB", bound_X_XB);
 

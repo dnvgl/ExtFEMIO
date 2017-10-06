@@ -33,13 +33,9 @@ using type_bounds::bound;
 using types::entry_type;
 
 namespace {
-    auto const cl0_ = make_shared<long>(0);
-    auto const cl1_ = make_shared<long>(1);
-    auto const cd0_ = make_shared<double>(0.);
-
-    auto const cl0 = cl0_.get();
-    auto const cl1 = cl1_.get();
-    auto const cd0 = cd0_.get();
+    auto const cl0 = make_shared<long>(0);
+    auto const cl1 = make_shared<long>(1);
+    auto const cd0 = make_shared<double>(0.);
 }
 
 using namespace cards::__base;
@@ -47,74 +43,61 @@ using namespace cards::__base;
 // entry_type<long> shell::form_EID(
 //    "EID", bound<long>(cl1));
 namespace {
-    auto const bound_PID_ = make_shared<bound<long>>(
+    auto const bound_PID = make_shared<bound<long>>(
         cl1, nullptr, nullptr, true);
-    auto const bound_PID = bound_PID_.get();
 }
 entry_type<long> shell::form_PID("PID", bound_PID);
 namespace {
-    auto const bound_G1_ = make_shared<bound<long>>(cl1);
-    auto const bound_G1 = bound_G1_.get();
+    auto const bound_G1 = make_shared<bound<long>>(cl1);
 }
 entry_type<long> shell::form_G1("G1", bound_G1);
 namespace {
-    auto const bound_G2_ = make_shared<bound<long>>(cl1);
-    auto const bound_G2 = bound_G2_.get();
+    auto const bound_G2 = make_shared<bound<long>>(cl1);
 }
 entry_type<long> shell::form_G2("G2", bound_G2);
 namespace {
-    auto const bound_G3_ = make_shared<bound<long>>(cl1);
-    auto const bound_G3 = bound_G3_.get();
+    auto const bound_G3 = make_shared<bound<long>>(cl1);
 }
 entry_type<long> shell::form_G3("G3", bound_G3);
 namespace {
-    auto const bound_G4_ = make_shared<bound<long>>(cl1);
-    auto const bound_G4 = bound_G4_.get();
+    auto const bound_G4 = make_shared<bound<long>>(cl1);
 }
 entry_type<long> shell::form_G4("G4", bound_G4);
 namespace {
-    auto const bound_MCID_ = make_shared<bound<long>>(cl0);
-    auto const bound_MCID = bound_MCID_.get();
+    auto const bound_MCID = make_shared<bound<long>>(cl0);
 }
 entry_type<long> shell::form_MCID("MCID", bound_MCID);
 namespace {
-    auto const bound_THETA_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
-    auto const bound_THETA = bound_THETA_.get();
+    auto const bound_THETA = make_shared<bound<double>>(nullptr, nullptr, cd0);
 }
 entry_type<double> shell::form_THETA("MCID", bound_THETA);
 namespace {
-    auto const bound_ZOFFS_ = make_shared<bound<double>>(
+    auto const bound_ZOFFS = make_shared<bound<double>>(
         nullptr, nullptr, nullptr, true);
-    auto const bound_ZOFFS = bound_ZOFFS_.get();
 }
 entry_type<double> shell::form_ZOFFS("ZOFFS", bound_ZOFFS);
 namespace {
-    auto const bound_TFLAG_ = make_shared<bound<long>>(cl0, cl1, nullptr, true);
-    auto const bound_TFLAG = bound_TFLAG_.get();
+    auto const bound_TFLAG = make_shared<bound<long>>(cl0, cl1, nullptr, true);
 }
 entry_type<long> shell::form_TFLAG("TFLAG", bound_TFLAG);
 namespace {
-    auto const bound_T1_ = make_shared<bound<double>>(
+    auto const bound_T1 = make_shared<bound<double>>(
         cd0, nullptr, nullptr, true);
-    auto const bound_T1 = bound_T1_.get();
 }
 entry_type<double> shell::form_T1("T1", bound_T1);
 namespace {
-    auto const bound_T2_ = make_shared<bound<double>>(
+    auto const bound_T2 = make_shared<bound<double>>(
         cd0, nullptr, nullptr, true);
-    auto const bound_T2 = bound_T2_.get();
 }
 entry_type<double> shell::form_T2("T2", bound_T2);
 namespace {
-    auto const bound_T3_ = make_shared<bound<double>>(
+    auto const bound_T3 = make_shared<bound<double>>(
         cd0, nullptr, nullptr, true);
-    auto const bound_T3 = bound_T3_.get();
 }
 entry_type<double> shell::form_T3("T3", bound_T3);
 namespace {
-    auto const bound_T4_ = make_shared<bound<double>>(
+    auto const bound_T4 = make_shared<bound<double>>(
         cd0, nullptr, nullptr, true);
-    auto const bound_T4 = bound_T4_.get();
 }
 entry_type<double> shell::form_T4("T4", bound_T4);
 

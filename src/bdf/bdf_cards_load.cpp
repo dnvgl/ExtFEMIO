@@ -34,8 +34,7 @@ using namespace std;
 using namespace rel_ops;
 
 namespace {
-    auto const cl1_ = make_shared<long>(1);
-    auto const cl1 = cl1_.get();
+    auto const cl1 = make_shared<long>(1);
 }
 
 using namespace dnvgl::extfem;
@@ -47,15 +46,13 @@ using bdf::types::entry_value;
 using type_bounds::bound;
 
 namespace {
-    auto const bound_SID_ = make_shared<bound<long>>(cl1);
-    auto const bound_SID = bound_SID_.get();
+    auto const bound_SID = make_shared<bound<long>>(cl1);
 }
 entry_type<long> load::form_SID("SID", bound_SID);
 entry_type<double> load::form_S("S");
 entry_type<double> load::form_Si("Si");
 namespace {
-    auto const bound_Li_ = make_shared<bound<long>>(cl1);
-    auto const bound_Li = bound_Li_.get();
+    auto const bound_Li = make_shared<bound<long>>(cl1);
 }
 entry_type<long> load::form_Li("Li", bound_Li);
 

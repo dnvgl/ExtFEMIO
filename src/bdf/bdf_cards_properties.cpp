@@ -30,13 +30,11 @@ using types::entry_type;
 using cards::format_entry;
 
 namespace {
-    auto const cl1_ = make_shared<long>(1);
-    auto const cl1 = cl1_.get();
+    auto const cl1 = make_shared<long>(1);
 }
 
 namespace {
-    auto const bound_PID_ = make_shared<bound_unique<long>>(cl1);
-    auto const bound_PID = bound_PID_.get();
+    auto const bound_PID = make_shared<bound_unique<long>>(cl1);
 }
 entry_type<long> property::form_PID("PID", bound_PID);
 

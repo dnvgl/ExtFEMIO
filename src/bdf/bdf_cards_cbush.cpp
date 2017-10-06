@@ -41,38 +41,76 @@ using bdf::types::entry_type;
 
 /// Constant values used in bound definitions.
 namespace {
-    auto const cl_1 = new long(-1);
-    auto const cl0 = new long(0);
-    auto const cd0 = new double(0.);
-    auto const cd05 = new double(.5);
-    auto const cl1 = new long(1);
-    auto const cd1 = new double(1.);
-    auto const clinf = new long(100000000 - 1);
+    auto const cl_1 = make_shared<long>(-1);
+    auto const cl0 = make_shared<long>(0);
+    auto const cd0 = make_shared<double>(0.);
+    auto const cd05 = make_shared<double>(.5);
+    auto const cl1 = make_shared<long>(1);
+    auto const cd1 = make_shared<double>(1.);
+    auto const clinf = make_shared<long>(100000000 - 1);
 }
 
-entry_type<long> cbush::form_PID("PID", new bound<long>(cl1, clinf));
-entry_type<long> cbush::form_GA("GA", new bound<long>(cl1));
-entry_type<long> cbush::form_GB(
-    "GB", new bound<long>(cl1, nullptr, nullptr, true));
-entry_type<long> cbush::form_GO(
-    "GO", new bound<long>(cl1, nullptr, nullptr, true));
-entry_type<double> cbush::form_X1(
-    "X1", new bound<double>(nullptr, nullptr, nullptr, true));
-entry_type<double> cbush::form_X2(
-    "X2", new bound<double>(nullptr, nullptr, nullptr, true));
-entry_type<double> cbush::form_X3(
-    "X3", new bound<double>(nullptr, nullptr, nullptr, true));
-entry_type<long> cbush::form_CID(
-    "CID", new bound<long>(cl0, nullptr, nullptr, true));
-entry_type<double> cbush::form_S("S", new bound<double>(cd0, cd1, cd05, true));
-entry_type<long> cbush::form_OCID(
-    "OCID", new bound<long>(cl_1, nullptr, nullptr, true));
-entry_type<double> cbush::form_S1(
-    "S1", new bound<double>(cd0, nullptr, nullptr, true));
-entry_type<double> cbush::form_S2(
-    "S2", new bound<double>(cd0, nullptr, nullptr, true));
+namespace {
+    auto const bound_PID = make_shared<bound<long>>(cl1, clinf);
+}
+entry_type<long> cbush::form_PID("PID", bound_PID);
+namespace {
+    auto const bound_GA = make_shared<bound<long>>(cl1);
+}
+entry_type<long> cbush::form_GA("GA", bound_GA);
+namespace {
+    auto const bound_GB = make_shared<bound<long>>(cl1, nullptr, nullptr, true);
+}
+entry_type<long> cbush::form_GB("GB", bound_GB);
+namespace {
+    auto const bound_GO = make_shared<bound<long>>(cl1, nullptr, nullptr, true);
+}
+entry_type<long> cbush::form_GO("GO", bound_GO);
+namespace {
+    auto const bound_X1 = make_shared<bound<double>>(
+        nullptr, nullptr, nullptr, true);
+}
+entry_type<double> cbush::form_X1("X1", bound_X1);
+namespace {
+    auto const bound_X2 = make_shared<bound<double>>(
+        nullptr, nullptr, nullptr, true);
+}
+entry_type<double> cbush::form_X2("X2", bound_X2);
+namespace {
+    auto const bound_X3 = make_shared<bound<double>>(
+        nullptr, nullptr, nullptr, true);
+}
+entry_type<double> cbush::form_X3("X3", bound_X3);
+namespace {
+    auto const bound_CID = make_shared<bound<long>>(
+        cl0, nullptr, nullptr, true);
+}
+entry_type<long> cbush::form_CID("CID", bound_CID);
+namespace {
+    auto const bound_S = make_shared<bound<double>>(cd0, cd1, cd05, true);
+}
+entry_type<double> cbush::form_S("S", bound_S);
+namespace {
+    auto const bound_OCID = make_shared<bound<long>>(
+        cl_1, nullptr, nullptr, true);
+}
+entry_type<long> cbush::form_OCID("OCID", bound_OCID);
+namespace {
+    auto const bound_S1 = make_shared<bound<double>>(
+        cd0, nullptr, nullptr, true);
+}
+entry_type<double> cbush::form_S1("S1", bound_S1);
+namespace {
+    auto const bound_S2 = make_shared<bound<double>>(
+        cd0, nullptr, nullptr, true);
+}
+entry_type<double> cbush::form_S2("S2", bound_S2);
+namespace {
+    auto const bound_S3 = make_shared<bound<double>>(
+        cd0, nullptr, nullptr, true);
+}
 entry_type<double> cbush::form_S3(
-    "S3", new bound<double>(cd0, nullptr, nullptr, true));
+    "S3", bound_S3);
 
 bdf::types::card cbush::head = bdf::types::card("CBUSH");
 

@@ -47,14 +47,12 @@ using namespace dnvgl::extfem::bdf::types;
 using namespace dnvgl::extfem::bdf::type_bounds;
 
 namespace {
-    auto const cd0_ = make_shared<double>(0.);
-    auto const cd0 = cd0_.get();
+    auto const cd0 = make_shared<double>(0.);
 }
 
 TEST_CASE("BDF float types parsing.", "[bdf_types]") {
 
-    auto const bound_dummy_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
-    auto const bound_dummy = bound_dummy_.get();
+    auto const bound_dummy = make_shared<bound<double>>(nullptr, nullptr, cd0);
     entry_type<double> probe("dummy", bound_dummy);
 
     SECTION("'   1.   '") {
@@ -74,8 +72,7 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]") {
     }
 
     SECTION("'  -1.   ', min 0.") {
-        auto const l_bound_dummy_ = make_shared<bound<double>>(cd0, nullptr, cd0);
-        auto const l_bound_dummy = l_bound_dummy_.get();
+        auto const l_bound_dummy = make_shared<bound<double>>(cd0, nullptr, cd0);
         entry_type<double> probe1("dummy", l_bound_dummy);
         CHECK_THROWS(probe1("  -1.   "));
     }
@@ -123,7 +120,7 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]") {
     SECTION("'        ', no default") {
         auto const l_bound_dummy = make_shared<bound<double>>(
             nullptr, nullptr, nullptr);
-        entry_type<double> probel("dummy", l_bound_dummy.get());
+        entry_type<double> probel("dummy", l_bound_dummy);
         CHECK_THROWS(probel("        "));
     }
 
@@ -166,7 +163,7 @@ TEST_CASE("BDF float types parsing.", "[bdf_types]") {
     SECTION("'        '") {
         auto const bound_probe_l = make_shared<bound<double>>(
             nullptr, nullptr, nullptr, true);
-        entry_type<double> probe_l("probe", bound_probe_l.get());
+        entry_type<double> probe_l("probe", bound_probe_l);
         CHECK_FALSE(probe_l("        ").value);
     }
 }

@@ -30,9 +30,12 @@ static char THIS_FILE[] = __FILE__;
 
 
 namespace {
-   const long cl0 = 0, cl1 = 1, cl_1 = -1, cl_2 = -2;
-   const long cl1e8 = 100000000 - 1;
-   const double cd0 = 0.;
+    auto const cl0  = std::make_shared<long>(0);
+    auto const cl1  = std::make_shared<long>(1);
+    auto const cl_1 = std::make_shared<long>(-1);
+    auto const cl_2 = std::make_shared<long>(-2);
+    auto const cl1e8 = std::make_shared<long>(100000000 - 1);
+    auto const cd0 = std::make_shared<double>(0.);
 }
 
 using namespace std;
@@ -47,39 +50,32 @@ using bdf::types::entry_type;
 bdf::types::card grid::head = bdf::types::card("GRID");
 
 namespace {
-    auto const bound_ID_ = make_shared<bound<long>>(&cl1, &cl1e8);
-    auto const bound_ID = bound_ID_.get();
+    auto const bound_ID = make_shared<bound<long>>(cl1, cl1e8);
 }
 entry_type<long> grid::form_ID("ID", bound_ID);
 namespace {
-    auto const bound_CP_ = make_shared<bound<long>>(&cl0, nullptr, nullptr, true);
-    auto const bound_CP = bound_CP_.get();
+    auto const bound_CP = make_shared<bound<long>>(cl0, nullptr, nullptr, true);
 }
 entry_type<long> grid::form_CP("CP", bound_CP);
 namespace {
-    auto const bound_X1_ = make_shared<bound<double>>(nullptr, nullptr, &cd0);
-    auto const bound_X1 = bound_X1_.get();
+    auto const bound_X1 = make_shared<bound<double>>(nullptr, nullptr, cd0);
 }
 entry_type<double> grid::form_X1("X1", bound_X1);
 namespace {
-    auto const bound_X2_ = make_shared<bound<double>>(nullptr, nullptr, &cd0);
-    auto const bound_X2 = bound_X2_.get();
+    auto const bound_X2 = make_shared<bound<double>>(nullptr, nullptr, cd0);
 }
 entry_type<double> grid::form_X2("X2", bound_X2);
 namespace {
-    auto const bound_X3_ = make_shared<bound<double>>(nullptr, nullptr, &cd0);
-    auto const bound_X3 = bound_X3_.get();
+    auto const bound_X3 = make_shared<bound<double>>(nullptr, nullptr, cd0);
 }
 entry_type<double> grid::form_X3("X3", bound_X3);
 namespace {
-    auto const bound_CD_ = make_shared<bound<long>>(&cl_1, nullptr, nullptr, true);
-    auto const bound_CD = bound_CD_.get();
+    auto const bound_CD = make_shared<bound<long>>(cl_1, nullptr, nullptr, true);
 }
 entry_type<long> grid::form_CD("CD", bound_CD);
 entry_type<vector<int>> grid::form_PS("PS");
 namespace {
-    auto const bound_SEID_ = make_shared<bound<long>>(&cl_1, nullptr, &cl0);
-    auto const bound_SEID = bound_SEID_.get();
+    auto const bound_SEID = make_shared<bound<long>>(cl_1, nullptr, cl0);
 }
 entry_type<long> grid::form_SEID("SEID", bound_SEID);
 

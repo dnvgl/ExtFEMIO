@@ -38,10 +38,8 @@ using namespace cards;
 using bdf::types::entry_type;
 
 namespace {
-    auto const cl1_ = make_shared<long>(1);
-    auto const cd0_ = make_shared<double>(0.);
-    auto const cl1 = cl1_.get();
-    auto const cd0 = cd0_.get();
+    auto const cl1 = make_shared<long>(1);
+    auto const cd0 = make_shared<double>(0.);
 }
 
 bdf::types::card cbeam::head = bdf::types::card("CBEAM");
@@ -53,87 +51,65 @@ entry_type<long> cbeam::form_GA("GA");
 entry_type<long> cbeam::form_GB("GB");
 entry_type<double> cbeam::form_X1("X1");
 namespace {
-    auto const bound_G0_ =
-        make_shared<bound<long>>(cl1);
-    auto const bound_G0 = bound_G0_.get();
+    auto const bound_G0 = make_shared<bound<long>>(cl1);
 }
 entry_type<long> cbeam::form_G0("G0", bound_G0);
 namespace {
-    auto const bound_X2_ = make_shared<bound<double>>(
+    auto const bound_X2 = make_shared<bound<double>>(
         nullptr, nullptr, nullptr, true);
-    auto const bound_X2 = bound_X2_.get();
 }
 entry_type<double> cbeam::form_X2("X2", bound_X2);
 namespace {
-    auto const bound_X3_ = make_shared<bound<double>>(
+    auto const bound_X3 = make_shared<bound<double>>(
         nullptr, nullptr, nullptr, true);
-    auto const bound_X3 = bound_X3_.get();
 }
 entry_type<double> cbeam::form_X3("X3", bound_X3);
 namespace {
-    auto const bound_BIT_ = make_shared<bound<double>>();
-    auto const bound_BIT = bound_BIT_.get();
+    auto const bound_BIT = make_shared<bound<double>>();
 }
 entry_type<double> cbeam::form_BIT("BIT", bound_BIT);
 namespace {
     std::set<std::string> allowed{
         "GGG", "BGG", "GGO", "BGO", "GOG", "BOG", "GOO", "BOO"};
-    std::string std_val("GGG");
-    auto const bound_OFFT_ = make_shared<bound<std::string>>(allowed, std_val);
-    auto const bound_OFFT = bound_OFFT_.get();
+    auto std_val = make_shared<std::string>("GGG");
+    auto const bound_OFFT = make_shared<bound<std::string>>(allowed, std_val);
 }
 entry_type<std::string> cbeam::form_OFFT("OFFT", bound_OFFT);
 entry_type<vector<int>> cbeam::form_PA("PA"); // maxelem=5, minval=1, maxval=6, uniq=True);
 entry_type<vector<int>> cbeam::form_PB("PB"); // maxelem=5, minval=1, maxval=6, uniq=True);
 namespace {
-    auto const bound_W1A_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
-    // default=0.
-    auto const bound_W1A = bound_W1A_.get();
+    auto const bound_W1A = make_shared<bound<double>>(nullptr, nullptr, cd0);
 }
 entry_type<double> cbeam::form_W1A("W1A", bound_W1A);
 namespace {
-    auto const bound_W2A_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
-    // default=0.
-    auto const bound_W2A = bound_W2A_.get();
+    auto const bound_W2A = make_shared<bound<double>>(nullptr, nullptr, cd0);
 }
 entry_type<double> cbeam::form_W2A("W2A", bound_W2A);
 namespace {
-    auto const bound_W3A_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
-    // default=0.
-    auto const bound_W3A = bound_W3A_.get();
+    auto const bound_W3A = make_shared<bound<double>>(nullptr, nullptr, cd0);
 }
 entry_type<double> cbeam::form_W3A("W3A", bound_W3A);
 namespace {
-    auto const bound_W1B_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
-    // default=0.
-    auto const bound_W1B = bound_W1B_.get();
+    auto const bound_W1B = make_shared<bound<double>>(nullptr, nullptr, cd0);
 }
 entry_type<double> cbeam::form_W1B("W1B", bound_W1B);
 namespace {
-    auto const bound_W2B_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
-    // default=0.
-    auto const bound_W2B = bound_W2B_.get();
+    auto const bound_W2B = make_shared<bound<double>>(nullptr, nullptr, cd0);
 }
 entry_type<double> cbeam::form_W2B("W2B", bound_W2B);
 namespace {
-    auto const bound_W3B_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
-    // default=0.
-    auto const bound_W3B = bound_W3B_.get();
+    auto const bound_W3B = make_shared<bound<double>>(nullptr, nullptr, cd0);
 }
 entry_type<double> cbeam::form_W3B("W3B", bound_W3B);
 namespace {
-    auto const bound_SA_ = make_shared<bound<long>>(
+    auto const bound_SA = make_shared<bound<long>>(
         cl1, nullptr, nullptr, true);
-    // default=0.
-    auto const bound_SA = bound_SA_.get();
 }
 entry_type<long> cbeam::form_SA(
     "SA", bound_SA); // minval=1, default=None)
 namespace {
-    auto const bound_SB_ = make_shared<bound<long>>(
+    auto const bound_SB = make_shared<bound<long>>(
         cl1, nullptr, nullptr, true);
-    // default=0.
-    auto const bound_SB = bound_SB_.get();
 }
 entry_type<long> cbeam::form_SB(
     "SB", bound_SB); // minval=1, default=None)

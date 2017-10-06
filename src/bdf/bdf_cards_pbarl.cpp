@@ -36,17 +36,15 @@ using bdf::types::entry_type;
 using bdf::type_bounds::bound;
 
 namespace {
-    auto const cd0_ = make_shared<double>(0.);
-    auto const cd0 = cd0_.get();
+    auto const cd0 = make_shared<double>(0.);
 }
 
 bdf::types::card pbarl::head = bdf::types::card("PBARL");
 
 namespace {
-    std::string name{"MSCBML0"};
-    auto const bound_GROUP_ = make_shared<bound<std::string>>(
-        nullptr, nullptr, &name);
-    auto const bound_GROUP = bound_GROUP_.get();
+    auto const name = make_shared<std::string>("MSCBML0");
+    auto const bound_GROUP = make_shared<bound<std::string>>(
+        nullptr, nullptr, name);
 }
 entry_type<std::string> pbarl::form_GROUP("GROUP", bound_GROUP);
 namespace {
@@ -54,18 +52,15 @@ namespace {
                 "CHAN", "BOX", "BAR", "CROSS", "H", "T1", "I1",
                 "CHAN1", "Z", "CHAN2", "T2", "BOX1", "HEXA", "HAT",
                 "HAT1", "DBOX"});
-    auto const bound_TYPE_ = make_shared<bound<std::string>>(allowed);
-    auto const bound_TYPE = bound_TYPE_.get();
+    auto const bound_TYPE = make_shared<bound<std::string>>(allowed);
 }
 entry_type<std::string> pbarl::form_TYPE("TYPE", bound_TYPE);
 namespace {
-    auto const bound_DIM_ = make_shared<bound<double>>(cd0);
-    auto const bound_DIM = bound_DIM_.get();
+    auto const bound_DIM = make_shared<bound<double>>(cd0);
 }
 entry_type<double> pbarl::form_DIM("DIM", bound_DIM);
 namespace {
-    auto const bound_NSM_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
-    auto const bound_NSM = bound_NSM_.get();
+    auto const bound_NSM = make_shared<bound<double>>(nullptr, nullptr, cd0);
 }
 entry_type<double> pbarl::form_NSM("NSM", bound_NSM);
 

@@ -42,10 +42,8 @@ using namespace cards;
 using bdf::types::entry_type;
 
 namespace {
-    auto const cl1_ = make_shared<long>(1);
-    auto const cd0_ = make_shared<double>(0.);
-    auto const cl1 = cl1_.get();
-    auto const cd0 = cd0_.get();
+    auto const cl1 = make_shared<long>(1);
+    auto const cd0 = make_shared<double>(0.);
 }
 
 bdf::types::card cbar::head = bdf::types::card("CBAR");
@@ -57,67 +55,51 @@ entry_type<long> cbar::form_GA("GA");
 entry_type<long> cbar::form_GB("GB");
 entry_type<double> cbar::form_X1("X1");
 namespace {
-    auto const bound_G0_ = make_shared<bound<long>>(cl1);
-    auto const bound_G0 = bound_G0_.get();
+    auto const bound_G0 = make_shared<bound<long>>(cl1);
 }
 entry_type<long> cbar::form_G0("G0", bound_G0);
 namespace {
-    auto const bound_X2_ = make_shared<bound<double>>(
+    auto const bound_X2 = make_shared<bound<double>>(
         nullptr, nullptr, nullptr, true);
-    auto const bound_X2 = bound_X2_.get();
 }
 entry_type<double> cbar::form_X2("X2", bound_X2);
 namespace {
-    auto const bound_X3_ = make_shared<bound<double>>(
+    auto const bound_X3 = make_shared<bound<double>>(
         nullptr, nullptr, nullptr, true);
-    auto const bound_X3 = bound_X3_.get();
 }
 entry_type<double> cbar::form_X3("X3", bound_X3);
 namespace {
     set<std::string> allowed{
         "GGG", "BGG", "GGO", "BGO", "GOG", "BOG", "GOO", "BOO"};
-    std::string default_val("GGG");
-    auto const bound_OFFT_ = make_shared<bound<std::string>>(
+    auto const default_val = make_shared<std::string>("GGG");
+    auto const bound_OFFT = make_shared<bound<std::string>>(
         allowed, default_val);
-    auto const bound_OFFT = bound_OFFT_.get();
 }
 entry_type<std::string> cbar::form_OFFT("OFFT", bound_OFFT);
 entry_type<vector<int>> cbar::form_PA("PA");
 entry_type<vector<int>> cbar::form_PB("PB");
 namespace {
-    auto const bound_W1A_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
-    // default=0.
-    auto const bound_W1A = bound_W1A_.get();
+    auto const bound_W1A = make_shared<bound<double>>(nullptr, nullptr, cd0);
 }
 entry_type<double> cbar::form_W1A("W1A", bound_W1A);
 namespace {
-    auto const bound_W2A_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
-    // default=0.
-    auto const bound_W2A = bound_W2A_.get();
+    auto const bound_W2A = make_shared<bound<double>>(nullptr, nullptr, cd0);
 }
 entry_type<double> cbar::form_W2A("W2A", bound_W2A);
 namespace {
-    auto const bound_W3A_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
-    // default=0.
-    auto const bound_W3A = bound_W3A_.get();
+    auto const bound_W3A = make_shared<bound<double>>(nullptr, nullptr, cd0);
 }
 entry_type<double> cbar::form_W3A("W3A", bound_W3A);
 namespace {
-    auto const bound_W1B_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
-    // default=0.
-    auto const bound_W1B = bound_W1B_.get();
+    auto const bound_W1B = make_shared<bound<double>>(nullptr, nullptr, cd0);
 }
 entry_type<double> cbar::form_W1B("W1B", bound_W1B);
 namespace {
-    auto const bound_W2B_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
-    // default=0.
-    auto const bound_W2B = bound_W2B_.get();
+    auto const bound_W2B = make_shared<bound<double>>(nullptr, nullptr, cd0);
 }
 entry_type<double> cbar::form_W2B("W2B", bound_W2B);
 namespace {
-    auto const bound_W3B_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
-    // default=0.
-    auto const bound_W3B = bound_W3B_.get();
+    auto const bound_W3B = make_shared<bound<double>>(nullptr, nullptr, cd0);
 }
 entry_type<double> cbar::form_W3B("W3B", bound_W3B);
 

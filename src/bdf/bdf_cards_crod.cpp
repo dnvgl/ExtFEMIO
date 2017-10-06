@@ -38,8 +38,7 @@ using namespace cards::__base;
 using bdf::types::entry_type;
 
 namespace {
-    auto const cl1_ = make_shared<long>(1);
-    auto const cl1 = cl1_.get();
+    auto const cl1 = make_shared<long>(1);
 }
 
 bdf::types::card crod::head = bdf::types::card("CROD");
@@ -47,19 +46,16 @@ bdf::types::card crod::head = bdf::types::card("CROD");
 // entry_type<long> crod::form_EID(
 //    "EID", bdf::type_bounds::bound_unique<long>(&cl1));
 namespace{
-    auto const bound_PID_ = make_shared<bound<long>>(
+    auto const bound_PID = make_shared<bound<long>>(
         cl1, nullptr, nullptr, true);
-    auto const bound_PID = bound_PID_.get();
 }
 entry_type<long> crod::form_PID("PID", bound_PID);
 namespace{
-    auto const bound_G1_ = make_shared<bound<long>>(cl1);
-    auto const bound_G1 = bound_G1_.get();
+    auto const bound_G1 = make_shared<bound<long>>(cl1);
 }
 entry_type<long> crod::form_G1("G1", bound_G1);
 namespace{
-    auto const bound_G2_ = make_shared<bound<long>>(cl1);
-    auto const bound_G2 = bound_G2_.get();
+    auto const bound_G2 = make_shared<bound<long>>(cl1);
 }
 entry_type<long> crod::form_G2("G2", bound_G2);
 

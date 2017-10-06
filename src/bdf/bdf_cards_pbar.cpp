@@ -36,93 +36,76 @@ using bdf::types::entry_type;
 using bdf::type_bounds::bound;
 
 namespace {
-    auto const cd0_ = make_shared<double>(0.);
-    auto const cd0 = cd0_.get();
+    auto const cd0 = make_shared<double>(0.);
 }
 
 bdf::types::card pbar::head = bdf::types::card("PBAR");
 
 namespace {
-    auto const bound_A_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
-    auto const bound_A = bound_A_.get();
+    auto const bound_A = make_shared<bound<double>>(nullptr, nullptr, cd0);
 }
 entry_type<double> pbar::form_A(
     "A", bound_A);
 namespace {
-    auto const bound_I1_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
-    auto const bound_I1 = bound_I1_.get();
+    auto const bound_I1 = make_shared<bound<double>>(nullptr, nullptr, cd0);
 }
 entry_type<double> pbar::form_I1("I1", bound_I1);
 namespace {
-    auto const bound_I2_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
-    auto const bound_I2 = bound_I2_.get();
+    auto const bound_I2 = make_shared<bound<double>>(nullptr, nullptr, cd0);
 }
 entry_type<double> pbar::form_I2("I2", bound_I2);
 namespace {
-    auto const bound_J_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
-    auto const bound_J = bound_J_.get();
+    auto const bound_J = make_shared<bound<double>>(nullptr, nullptr, cd0);
 }
 entry_type<double> pbar::form_J("J", bound_J);
 namespace {
-    auto const bound_NSM_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
-    auto const bound_NSM = bound_NSM_.get();
+    auto const bound_NSM = make_shared<bound<double>>(nullptr, nullptr, cd0);
 }
 entry_type<double> pbar::form_NSM("NSM", bound_NSM);
 namespace {
-    auto const bound_C1_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
-    auto const bound_C1 = bound_C1_.get();
+    auto const bound_C1 = make_shared<bound<double>>(nullptr, nullptr, cd0);
 }
 entry_type<double> pbar::form_C1("C1", bound_C1);
 namespace {
-    auto const bound_C2_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
-    auto const bound_C2 = bound_C2_.get();
+    auto const bound_C2 = make_shared<bound<double>>(nullptr, nullptr, cd0);
 }
 entry_type<double> pbar::form_C2("C2", bound_C2);
 namespace {
-    auto const bound_D1_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
-    auto const bound_D1 = bound_D1_.get();
+    auto const bound_D1 = make_shared<bound<double>>(nullptr, nullptr, cd0);
 }
 entry_type<double> pbar::form_D1("D1", bound_D1);
 namespace {
-    auto const bound_D2_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
-    auto const bound_D2 = bound_D2_.get();
+    auto const bound_D2 = make_shared<bound<double>>(nullptr, nullptr, cd0);
 }
 entry_type<double> pbar::form_D2("D2", bound_D2);
 namespace {
-    auto const bound_E1_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
-    auto const bound_E1 = bound_E1_.get();
+    auto const bound_E1 = make_shared<bound<double>>(nullptr, nullptr, cd0);
 }
 entry_type<double> pbar::form_E1("E1", bound_E1);
 namespace {
-    auto const bound_E2_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
-    auto const bound_E2 = bound_E2_.get();
+    auto const bound_E2 = make_shared<bound<double>>(nullptr, nullptr, cd0);
 }
 entry_type<double> pbar::form_E2("E2", bound_E2);
 namespace {
-    auto const bound_F1_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
-    auto const bound_F1 = bound_F1_.get();
+    auto const bound_F1 = make_shared<bound<double>>(nullptr, nullptr, cd0);
 }
 entry_type<double> pbar::form_F1("F1", bound_F1);
 namespace {
-    auto const bound_F2_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
-    auto const bound_F2 = bound_F2_.get();
+    auto const bound_F2 = make_shared<bound<double>>(nullptr, nullptr, cd0);
 }
 entry_type<double> pbar::form_F2("F2", bound_F2);
 namespace {
-    auto const bound_K1_ = make_shared<bound<double>>(
+    auto const bound_K1 = make_shared<bound<double>>(
         nullptr, nullptr, nullptr, true);
-    auto const bound_K1 = bound_K1_.get();
 }
 entry_type<double> pbar::form_K1("K1", bound_K1);
 namespace {
-    auto const bound_K2_ = make_shared<bound<double>>(
+    auto const bound_K2 = make_shared<bound<double>>(
         nullptr, nullptr, nullptr, true);
-    auto const bound_K2 = bound_K2_.get();
 }
 entry_type<double> pbar::form_K2("K2", bound_K2);
 namespace {
-    auto const bound_I12_ = make_shared<bound<double>>(nullptr, nullptr, cd0);
-    auto const bound_I12 = bound_I12_.get();
+    auto const bound_I12 = make_shared<bound<double>>(nullptr, nullptr, cd0);
 }
 entry_type<double> pbar::form_I12("I12", bound_I12);
 

@@ -44,16 +44,14 @@ using bdf::types::entry_type;
 //    "EID", bdf::type_bounds::bound<long>(&cl1));
 entry_type<double> cmass2::form_M("M");
 namespace {
-    auto const bound_G1_ = make_shared<bound<long>>(
+    auto const bound_G1 = make_shared<bound<long>>(
         nullptr, nullptr, nullptr, true);
-    auto const bound_G1 = bound_G1_.get();
 }
 entry_type<long> cmass2::form_G1("G1", bound_G1);
 entry_type<vector<int>> cmass2::form_C1("C1");
 namespace {
-    auto const bound_G2_ = make_shared<bound<long>>(
+    auto const bound_G2 = make_shared<bound<long>>(
         nullptr, nullptr, nullptr, true);
-    auto const bound_G2 = bound_G2_.get();
 }
 entry_type<long> cmass2::form_G2("G2", bound_G2);
 entry_type<vector<int> > cmass2::form_C2("C2");
