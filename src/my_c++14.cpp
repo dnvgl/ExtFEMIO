@@ -6,11 +6,12 @@
 
    Detailed description
 */
-
 #include "extfemio_stdafx.h"
+#include "extfem_misc.h"
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_my_cpp14[]) =
         "@(#) $Id$";
 }

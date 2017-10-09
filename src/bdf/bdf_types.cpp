@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_bdf_types[]) =
         "@(#) $Id$";
 }
@@ -46,15 +47,15 @@ base::base(const std::string &name) : name(name) {};
 
 out_form_type base::out_form = out_form_type::SHORT;
 
-imbue_helper::imbue_helper(const locale &loc) : base("") {
+ImbueHelper::ImbueHelper(const locale &loc) : base("") {
     conv.imbue(loc);
 }
 
-bdf_types imbue_helper::type() const {
+bdf_types ImbueHelper::type() const {
     return bdf_types::None;
 }
 
-std::string imbue_helper::format(const void*) const {
+std::string ImbueHelper::format(const void*) const {
     return "";
 }
 
@@ -65,7 +66,7 @@ bdf_types card::type() const {
 }
 
 /// set input and output locale for conv and outp
-static imbue_helper _imbue_helper(locale::classic());
+static ImbueHelper imbue_helper(locale::classic());
 
 std::string card::format(const void* d) const {
     ostringstream outp;

@@ -14,10 +14,12 @@
 #if !defined _BDF_TYPES_H_
 #define _BDF_TYPES_H_
 
+// ReSharper disable CppUnusedIncludeDirective
 #include <cmath>
 #include <complex>
 #include <iomanip>
 #include <vector>
+// ReSharper restore CppUnusedIncludeDirective
 #include <sstream>
 #include <string>
 
@@ -30,7 +32,9 @@
 #include "my_c++14.h"
 #endif
 
+// ReSharper disable CppUnusedIncludeDirective
 #include "extfem_string.h"
+// ReSharper restore CppUnusedIncludeDirective
 
 namespace dnvgl {
     namespace extfem {
@@ -42,7 +46,9 @@ namespace dnvgl {
     }
 }
 
+// ReSharper disable CppUnusedIncludeDirective
 #include "bdf/type_bounds.h"
+// ReSharper restore CppUnusedIncludeDirective
 
 /// Forward declaration of less than comparison.
 template <typename _Ty1, typename _Ty2>
@@ -112,11 +118,11 @@ namespace dnvgl {
                 /*! Helper class to std::set outp and conv locale for
                     all classes derived from base.
                 */
-                class imbue_helper : public base {
-                    imbue_helper() = default;
+                class ImbueHelper : public base {
+                    ImbueHelper() = default;
                 public:
-                    explicit imbue_helper(const std::locale &loc);
-                    ~imbue_helper() = default;
+                    explicit ImbueHelper(const std::locale &loc);
+                    ~ImbueHelper() = default;
                     bdf_types type() const override;
                     std::string format(const void*) const override;
                 };
@@ -155,8 +161,10 @@ namespace dnvgl {
     }
 }
 
+// ReSharper disable CppUnusedIncludeDirective
 #include "entry_value.h"
 #include "entry_type.h"
+// ReSharper restore CppUnusedIncludeDirective
 
 #endif // _BDF_TYPES_H_
 
