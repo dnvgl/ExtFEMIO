@@ -13,8 +13,10 @@
 
 // ID:
 namespace {
+    // ReSharper disable CppDeclaratorNeverUsed
     char const _EXTFEMIO_UNUSED(cID_bdf_cards_cbush[]) =
-        "@(#) $Id$";
+       "@(#) $Id$";
+    // ReSharper restore CppDeclaratorNeverUsed
 }
 
 #include "bdf/cards.h"
@@ -132,9 +134,9 @@ void cbush::read(list<std::string> const &inp) {
     choose_dir_code = CHOOSE_DIR_CODE::UNDEF;
 
     switch (inp.size() - 1) {
-    case 16: pos++;
-    case 15: pos++;
-    case 14: pos++;
+    case 16: ++pos;
+    case 15: ++pos;
+    case 14: ++pos;
     case 13: form_S3.set_value(S3, *(pos++));
     case 12: form_S2.set_value(S2, *(pos++));
     case 11: form_S1.set_value(S1, *(pos++));
@@ -174,7 +176,7 @@ void cbush::read(list<std::string> const &inp) {
     case 4: form_GB.set_value(GB, *(pos++));
     case 3:
         form_GA.set_value(GA, *(pos++));
-        form_PID.set_value(PID, *(pos++));
+        form_PID.set_value(PID, *pos);
         break;
     default:
         std::cerr << "PARSE ERROR" << std::endl;
