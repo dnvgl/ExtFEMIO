@@ -648,6 +648,31 @@ TEST_CASE("CBUSH Roundtrip test dir code all large (ptr) (reuse)",
     }
 }
 
+TEST_CASE("Multiple cbush lines.", "[bdf_cbush]") {
+    cbush probe;
+
+    std::ostringstream test;
+
+    long EID{1};
+    long PID{999};
+    long GA{5};
+    double X{1.}, Y{0.}, Z{0.};
+    long CID{0};
+
+    test << probe(&EID, &PID, &GA, nullptr, &X, &Y, &Z, nullptr, &CID); GA++;
+    test << probe(&EID, &PID, &GA, nullptr, &X, &Y, &Z, nullptr, &CID); GA++;
+    test << probe(&EID, &PID, &GA, nullptr, &X, &Y, &Z, nullptr, &CID); GA++;
+    test << probe(&EID, &PID, &GA, nullptr, &X, &Y, &Z, nullptr, &CID); GA++;
+    test << probe(&EID, &PID, &GA, nullptr, &X, &Y, &Z, nullptr, &CID);
+
+        CHECK(test.str() ==
+              "CBUSH          1     999       5        1.000+00 0.00+00 0.00+00       0\n"
+              "CBUSH          2     999       6        1.000+00 0.00+00 0.00+00       0\n"
+              "CBUSH          3     999       7        1.000+00 0.00+00 0.00+00       0\n"
+              "CBUSH          4     999       8        1.000+00 0.00+00 0.00+00       0\n"
+              "CBUSH          5     999       9        1.000+00 0.00+00 0.00+00       0\n");
+}
+
 // Local Variables:
 // mode: c++
 // coding: utf-8
