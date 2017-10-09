@@ -19,6 +19,7 @@
   |          | =CBAR=     | Simple beams                                                                                | ✓      | ✓       |
   |          | =CROD=     | Trusses                                                                                     | ✓      | ✓       |
   |          | =CELAS1=   | Scalar Spring Connection                                                                    | ✗      | ✗       |
+  |          | =CBUSH=    | Generalized Spring-and-Damper Connection                                                    | ✗      | ✓       |
   |----------+------------+---------------------------------------------------------------------------------------------+--------+---------|
   | Element  | properties |                                                                                             |        |         |
   |          | =PSHELL=   | Properties for =CTRIA3=, and =CQUAD4=                                                       | ✓      | ✓       |
@@ -28,6 +29,7 @@
   |          | =PBARL=    | Properties for =CBAR= describing cross section                                              | ✓      | ✓       |
   |          | =PROD=     | Properties for =CROD=                                                                       | ✓      | ✓       |
   |          | =PELAS=    | Properties for =CELAS*=                                                                     | ✗      | ✗       |
+  |          | =PBUSH=    | Generalized Spring-and-Damper Property                                                      | ✗      | ✓       |
   |----------+------------+---------------------------------------------------------------------------------------------+--------+---------|
   | Load     |            |                                                                                             |        |         |
   |          | =LOAD=     | Load case combination                                                                       | ✓      | ✓       |

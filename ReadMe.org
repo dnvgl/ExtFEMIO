@@ -8,9 +8,10 @@
 #+LATEX_HEADER: \usepackage{booktabs}
 #+LATEX_HEADER: \usepackage{newunicodechar}
 #+LATEX_HEADER: \usepackage{arevmath}
-#+LATEX_HEADER: \newunicodechar{✓}{{\(\green\ballotcheck\)}}
-#+LATEX_HEADER: \newunicodechar{✗}{{\(\red\ballotx\)}}
-#+LATEX_HEADER: \newunicodechar{—}{{\red—}}
+#+LATEX_HEADER: \usepackage{color}
+#+LATEX_HEADER: \newunicodechar{✓}{{\(\color{green}\ballotcheck\)}}
+#+LATEX_HEADER: \newunicodechar{✗}{{\(\color{red}\ballotx\)}}
+#+LATEX_HEADER: \newunicodechar{—}{{\color{red}—}}
 #+LATEX_HEADER: \graphicspath{{./docs/images/}}
 #+LATEX_HEADER: \let\strcmp\pdfstrcmp
 #+LATEX_HEADER: \setcounter{secnumdepth}{6}

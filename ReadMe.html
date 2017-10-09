@@ -4,7 +4,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2017-05-02 Di 09:47 -->
+<!-- 2017-10-09 Mo 17:06 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>C++ IO support for various FEM exchange file formats</title>
@@ -69,6 +69,7 @@
   pre.src-fortran:before { content: 'Fortran'; }
   pre.src-gnuplot:before { content: 'gnuplot'; }
   pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
   pre.src-java:before { content: 'Java'; }
   pre.src-js:before { content: 'Javascript'; }
   pre.src-latex:before { content: 'LaTeX'; }
@@ -185,7 +186,7 @@
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012-2013 Free Software Foundation, Inc.
+Copyright (C) 2012-2017 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -234,22 +235,22 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org4224201">1. Supported FEM file formats</a>
+<li><a href="#org6548fc3">1. Supported FEM file formats</a>
 <ul>
-<li><a href="#org3394638">1.1. NASTRAN Bulk Data Format (BDF)</a>
+<li><a href="#orgde0bf66">1.1. NASTRAN Bulk Data Format (BDF)</a>
 <ul>
-<li><a href="#org8e5b318">1.1.1. BDF Cards supported</a>
+<li><a href="#orgb0defaa">1.1.1. BDF Cards supported</a>
 <ul>
-<li><a href="#orgbe7ae1e">1.1.1.1. Bulk Data</a></li>
-<li><a href="#orgc3890f1">1.1.1.2. Header Data</a></li>
+<li><a href="#orgb73cd54">1.1.1.1. Bulk Data</a></li>
+<li><a href="#org348cc24">1.1.1.2. Header Data</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgc975022">1.2. DNV GL Seasam Input Interface File (FEM)</a>
+<li><a href="#orgf086d4f">1.2. DNV GL Seasam Input Interface File (FEM)</a>
 <ul>
-<li><a href="#org1109e88">1.2.1. FEM Cards supported</a></li>
-<li><a href="#orge33c437">1.2.2. Element Types in SESAM</a></li>
+<li><a href="#org931ebe9">1.2.1. FEM Cards supported</a></li>
+<li><a href="#org9701614">1.2.2. Element Types in SESAM</a></li>
 </ul>
 </li>
 </ul>
@@ -258,8 +259,8 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-org4224201" class="outline-2">
-<h2 id="org4224201"><span class="section-number-2">1</span> Supported FEM file formats</h2>
+<div id="outline-container-org6548fc3" class="outline-2">
+<h2 id="org6548fc3"><span class="section-number-2">1</span> Supported FEM file formats</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Not all functionality defined for the exchange file formats is
@@ -273,16 +274,17 @@ the according directories in the <code>docs</code> subdirectory.
 </p>
 </div>
 
-<div id="outline-container-org3394638" class="outline-3">
-<h3 id="org3394638"><span class="section-number-3">1.1</span> NASTRAN Bulk Data Format (BDF)</h3>
+<div id="outline-container-orgde0bf66" class="outline-3">
+<h3 id="orgde0bf66"><span class="section-number-3">1.1</span> NASTRAN Bulk Data Format (BDF)</h3>
 <div class="outline-text-3" id="text-1-1">
 </div>
 
-<div id="outline-container-org8e5b318" class="outline-4">
-<h4 id="org8e5b318"><span class="section-number-4">1.1.1</span> BDF Cards supported</h4>
+<div id="outline-container-orgb0defaa" class="outline-4">
+<h4 id="orgb0defaa"><span class="section-number-4">1.1.1</span> BDF Cards supported</h4>
 <div class="outline-text-4" id="text-1-1-1">
-</div><div id="outline-container-orgbe7ae1e" class="outline-5">
-<h5 id="orgbe7ae1e"><span class="section-number-5">1.1.1.1</span> Bulk Data</h5>
+</div>
+<div id="outline-container-orgb73cd54" class="outline-5">
+<h5 id="orgb73cd54"><span class="section-number-5">1.1.1.1</span> Bulk Data</h5>
 <div class="outline-text-5" id="text-1-1-1-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -396,6 +398,14 @@ the according directories in the <code>docs</code> subdirectory.
 <td class="org-left">✗</td>
 <td class="org-left">✗</td>
 </tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><code>CBUSH</code></td>
+<td class="org-left">Generalized Spring-and-Damper Connection</td>
+<td class="org-left">✗</td>
+<td class="org-left">✓</td>
+</tr>
 </tbody>
 <tbody>
 <tr>
@@ -460,6 +470,14 @@ the according directories in the <code>docs</code> subdirectory.
 <td class="org-left">Properties for <code>CELAS*</code></td>
 <td class="org-left">✗</td>
 <td class="org-left">✗</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left"><code>PBUSH</code></td>
+<td class="org-left">Generalized Spring-and-Damper Property</td>
+<td class="org-left">✗</td>
+<td class="org-left">✓</td>
 </tr>
 </tbody>
 <tbody>
@@ -548,8 +566,8 @@ the according directories in the <code>docs</code> subdirectory.
 </div>
 </div>
 
-<div id="outline-container-orgc3890f1" class="outline-5">
-<h5 id="orgc3890f1"><span class="section-number-5">1.1.1.2</span> Header Data</h5>
+<div id="outline-container-org348cc24" class="outline-5">
+<h5 id="org348cc24"><span class="section-number-5">1.1.1.2</span> Header Data</h5>
 <div class="outline-text-5" id="text-1-1-1-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -648,13 +666,6 @@ the according directories in the <code>docs</code> subdirectory.
 <td class="org-left">✗</td>
 <td class="org-left">✓</td>
 </tr>
-
-<tr>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -662,13 +673,13 @@ the according directories in the <code>docs</code> subdirectory.
 </div>
 </div>
 
-<div id="outline-container-orgc975022" class="outline-3">
-<h3 id="orgc975022"><span class="section-number-3">1.2</span> DNV GL Seasam Input Interface File (FEM)</h3>
+<div id="outline-container-orgf086d4f" class="outline-3">
+<h3 id="orgf086d4f"><span class="section-number-3">1.2</span> DNV GL Seasam Input Interface File (FEM)</h3>
 <div class="outline-text-3" id="text-1-2">
 </div>
 
-<div id="outline-container-org1109e88" class="outline-4">
-<h4 id="org1109e88"><span class="section-number-4">1.2.1</span> FEM Cards supported</h4>
+<div id="outline-container-org931ebe9" class="outline-4">
+<h4 id="org931ebe9"><span class="section-number-4">1.2.1</span> FEM Cards supported</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -1079,8 +1090,8 @@ the according directories in the <code>docs</code> subdirectory.
 </div>
 </div>
 
-<div id="outline-container-orge33c437" class="outline-4">
-<h4 id="orge33c437"><span class="section-number-4">1.2.2</span> Element Types in SESAM</h4>
+<div id="outline-container-org9701614" class="outline-4">
+<h4 id="org9701614"><span class="section-number-4">1.2.2</span> Element Types in SESAM</h4>
 <div class="outline-text-4" id="text-1-2-2">
 <p>
 Conventions for use of the interface file for the elements in SESAM
@@ -1100,7 +1111,7 @@ element types.
 </p>
 
 
-<table id="orgf48fadd" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org8d0eec1" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption class="t-above"><span class="table-number">Table 1:</span> List of existing Element Types</caption>
 
 <colgroup>
@@ -2292,7 +2303,7 @@ springs are treated exactly in the same manner.
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Berthold Höllmann</p>
-<p class="date">Created: 2017-05-02 Di 09:47</p>
+<p class="date">Created: 2017-10-09 Mo 17:06</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
