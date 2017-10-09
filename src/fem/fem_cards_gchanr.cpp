@@ -21,10 +21,14 @@ namespace {
 
 #include "fem/types.h"
 
-#if defined(__AFX_H__) && defined(_DEBUG)
+#if defined(_DEBUG) && defined(DEBUG_NEW)
 #define new DEBUG_NEW
+#ifdef THIS_FILE
 #undef THIS_FILE
-static char THIS_FILE[] = __FILE__;
+#endif // THIS_FILE
+namespace {
+    char THIS_FILE[] = __FILE__;
+}
 #endif
 
 using namespace std;

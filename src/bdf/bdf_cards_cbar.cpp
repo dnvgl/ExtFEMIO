@@ -22,14 +22,18 @@ namespace {
 #include "bdf/types.h"
 #include "bdf/errors.h"
 
-#ifdef W2A
-#undef W2A
+#if defined(_DEBUG) && defined(DEBUG_NEW)
+#define new DEBUG_NEW
+#ifdef THIS_FILE
+#undef THIS_FILE
+#endif // THIS_FILE
+namespace {
+    char THIS_FILE[] = __FILE__;
+}
 #endif
 
-#if defined(__AFX_H__) && defined(_DEBUG)
-#define new DEBUG_NEW
-#undef THIS_FILE
-static char THIS_FILE[] = __FILE__;
+#ifdef W2A
+#undef W2A
 #endif
 
 using namespace std;
