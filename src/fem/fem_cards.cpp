@@ -96,7 +96,74 @@ unordered_map<std::string, cards::types> const cardtype_map({
         {"HSUPSTAT", cards::types::HSUPSTAT},
         {"HSUPTRAN", cards::types::HSUPTRAN},
         {"HIERARCH", cards::types::HIERARCH},
-        {"BEUSLO", cards::types::BEUSLO}});
+        {"BEUSLO", cards::types::BEUSLO},
+        {"TDMATER", cards::types::TDMATER},
+        {"TDSECT", cards::types::TDSECT},
+        {"TSLAYER", cards::types::TSLAYER},
+        {"ACFD", cards::types::ACFD},
+        {"ADDATA", cards::types::ADDATA},
+        {"BEISTE", cards::types::BEISTE},
+        {"BELLAX", cards::types::BELLAX},
+        {"BELLO2", cards::types::BELLO2},
+        {"BELOAD1", cards::types::BELOAD1},
+        {"BEDRAG1", cards::types::BEDRAG1},
+        {"BEMASS1", cards::types::BEMASS1},
+        {"BEUVLO", cards::types::BEUVLO},
+        {"BEWAKIN", cards::types::BEWAKIN},
+        {"BEWALO1", cards::types::BEWALO1},
+        {"BGRAV", cards::types::BGRAV},
+        {"BNACCLO", cards::types::BNACCLO},
+        {"BNDOF", cards::types::BNDOF},
+        {"BNINCO", cards::types::BNINCO},
+        {"BNLOAX", cards::types::BNLOAX},
+        {"BNMASS", cards::types::BNMASS},
+        {"BNTEMP", cards::types::BNTEMP},
+        {"BNTRCOS", cards::types::BNTRCOS},
+        {"BNWALO", cards::types::BNWALO},
+        {"BRIGAC", cards::types::BRIGAC},
+        {"BRIGDI", cards::types::BRIGDI},
+        {"BRIGVE", cards::types::BRIGVE},
+        {"BQDP", cards::types::BQDP},
+        {"GCROINT", cards::types::GCROINT},
+        {"GELINT", cards::types::GELINT},
+        {"GELSTRP", cards::types::GELSTRP},
+        {"GLMASS", cards::types::GLMASS},
+        {"GSEPxxxx", cards::types::GSEPxxxx},
+        {"GSEPSPEC", cards::types::GSEPSPEC},
+        {"GSLAYER", cards::types::GSLAYER},
+        {"GSLxxxxx", cards::types::GSLxxxxx},
+        {"GSLPLATE", cards::types::GSLPLATE},
+        {"GSLSTIFF", cards::types::GSLSTIFF},
+        {"MAXDMP", cards::types::MAXDMP},
+        {"MAXSPR", cards::types::MAXSPR},
+        {"MCNT", cards::types::MCNT},
+        {"MGDAMP", cards::types::MGDAMP},
+        {"MGLDAMP", cards::types::MGLDAMP},
+        {"MGLMASS", cards::types::MGLMASS},
+        {"MGMASS", cards::types::MGMASS},
+        {"MISOAL", cards::types::MISOAL},
+        {"MISOEML", cards::types::MISOEML},
+        {"MISOHL", cards::types::MISOHL},
+        {"MISOHNL", cards::types::MISOHNL},
+        {"MISOPL", cards::types::MISOPL},
+        {"MISTEL", cards::types::MISTEL},
+        {"MORSSEL", cards::types::MORSSEL},
+        {"MORSSOL", cards::types::MORSSOL},
+        {"MSHGLSP", cards::types::MSHGLSP},
+        {"MTEMP", cards::types::MTEMP},
+        {"MTENONL", cards::types::MTENONL},
+        {"MTRMEL", cards::types::MTRMEL},
+        {"MTRSEL", cards::types::MTRSEL},
+        {"MTRSOL", cards::types::MTRSOL},
+        {"AMATRIX", cards::types::AMATRIX},
+        {"AMDACCL", cards::types::AMDACCL},
+        {"AMDDAMP", cards::types::AMDDAMP},
+        {"AMDDISP", cards::types::AMDDISP},
+        {"AMDFREQ", cards::types::AMDFREQ},
+        {"AMDLOAD", cards::types::AMDLOAD},
+        {"AMDMASS", cards::types::AMDMASS},
+        {"AMDSTIFF", cards::types::AMDSTIFF},
+        {"AMDVELO", cards::types::AMDVELO}});
 
 std::ostream &operator<< (ostream &os, cards::types const cardtype) {
     switch (cardtype) {
@@ -144,6 +211,74 @@ std::ostream &operator<< (ostream &os, cards::types const cardtype) {
     case cards::types::HSUPTRAN: return os << "HSUPTRAN";
     case cards::types::HIERARCH: return os << "HIERARCH";
     case cards::types::BEUSLO: return os << "BEUSLO";
+    case cards::types::TDMATER: return os << "TDMATER";
+    case cards::types::TDSECT: return os << "TDSECT";
+    case cards::types::TSLAYER: return os << "TSLAYER";
+    case cards::types::ACFD: return os << "ACFD";
+    case cards::types::ADDATA: return os << "ADDATA";
+    case cards::types::BEISTE: return os << "BEISTE";
+    case cards::types::BELLAX: return os << "BELLAX";
+    case cards::types::BELLO2: return os << "BELLO2";
+    case cards::types::BELOAD1: return os << "BELOAD1";
+    case cards::types::BEDRAG1: return os << "BEDRAG1";
+    case cards::types::BEMASS1: return os << "BEMASS1";
+    case cards::types::BEUVLO: return os << "BEUVLO";
+    case cards::types::BEWAKIN: return os << "BEWAKIN";
+    case cards::types::BEWALO1: return os << "BEWALO1";
+    case cards::types::BGRAV: return os << "BGRAV";
+    case cards::types::BNACCLO: return os << "BNACCLO";
+    case cards::types::BNDOF: return os << "BNDOF";
+    case cards::types::BNINCO: return os << "BNINCO";
+    case cards::types::BNLOAX: return os << "BNLOAX";
+    case cards::types::BNMASS: return os << "BNMASS";
+    case cards::types::BNTEMP: return os << "BNTEMP";
+    case cards::types::BNTRCOS: return os << "BNTRCOS";
+    case cards::types::BNWALO: return os << "BNWALO";
+    case cards::types::BRIGAC: return os << "BRIGAC";
+    case cards::types::BRIGDI: return os << "BRIGDI";
+    case cards::types::BRIGVE: return os << "BRIGVE";
+    case cards::types::BQDP: return os << "BQDP";
+    case cards::types::GCROINT: return os << "GCROINT";
+    case cards::types::GELINT: return os << "GELINT";
+    case cards::types::GELSTRP: return os << "GELSTRP";
+    case cards::types::GLMASS: return os << "GLMASS";
+    case cards::types::GSEPxxxx: return os << "GSEPxxxx";
+    case cards::types::GSEPSPEC: return os << "GSEPSPEC";
+    case cards::types::GSLAYER: return os << "GSLAYER";
+    case cards::types::GSLxxxxx: return os << "GSLxxxxx";
+    case cards::types::GSLPLATE: return os << "GSLPLATE";
+    case cards::types::GSLSTIFF: return os << "GSLSTIFF";
+    case cards::types::MAXDMP: return os << "MAXDMP";
+    case cards::types::MAXSPR: return os << "MAXSPR";
+    case cards::types::MCNT: return os << "MCNT";
+    case cards::types::MGDAMP: return os << "MGDAMP";
+    case cards::types::MGLDAMP: return os << "MGLDAMP";
+    case cards::types::MGLMASS: return os << "MGLMASS";
+    case cards::types::MGMASS: return os << "MGMASS";
+    case cards::types::MISOAL: return os << "MISOAL";
+    case cards::types::MISOEML: return os << "MISOEML";
+    case cards::types::MISOHL: return os << "MISOHL";
+    case cards::types::MISOHNL: return os << "MISOHNL";
+    case cards::types::MISOPL: return os << "MISOPL";
+    case cards::types::MISTEL: return os << "MISTEL";
+    case cards::types::MORSSEL: return os << "MORSSEL";
+    case cards::types::MORSSOL: return os << "MORSSOL";
+    case cards::types::MSHGLSP: return os << "MSHGLSP";
+    case cards::types::MTEMP: return os << "MTEMP";
+    case cards::types::MTENONL: return os << "MTENONL";
+    case cards::types::MTRMEL: return os << "MTRMEL";
+    case cards::types::MTRSEL: return os << "MTRSEL";
+    case cards::types::MTRSOL: return os << "MTRSOL";
+    case cards::types::AMATRIX: return os << "AMATRIX";
+    case cards::types::AMDACCL: return os << "AMDACCL";
+    case cards::types::AMDDAMP: return os << "AMDDAMP";
+    case cards::types::AMDDISP: return os << "AMDDISP";
+    case cards::types::AMDFREQ: return os << "AMDFREQ";
+    case cards::types::AMDLOAD: return os << "AMDLOAD";
+    case cards::types::AMDMASS: return os << "AMDMASS";
+    case cards::types::AMDSTIFF: return os << "AMDSTIFF";
+    case cards::types::AMDVELO: return os << "AMDVELO";
+
     // omit default case to trigger compiler warning for missing cases
     }
     return os << static_cast<size_t>(cardtype);
@@ -358,6 +493,73 @@ cards::dispatch(vector<std::string> const &inp, size_t const len,
             res = make_unique<beuslo>(inp, len);
             break;
             // These are not real card types, they can't be returned
+        case types::TDMATER:
+        case types::TDSECT:
+        case types::TSLAYER:
+        case types::ACFD:
+        case types::ADDATA:
+        case types::BEISTE:
+        case types::BELLAX:
+        case types::BELLO2:
+        case types::BELOAD1:
+        case types::BEDRAG1:
+        case types::BEMASS1:
+        case types::BEUVLO:
+        case types::BEWAKIN:
+        case types::BEWALO1:
+        case types::BGRAV:
+        case types::BNACCLO:
+        case types::BNDOF:
+        case types::BNINCO:
+        case types::BNLOAX:
+        case types::BNMASS:
+        case types::BNTEMP:
+        case types::BNTRCOS:
+        case types::BNWALO:
+        case types::BRIGAC:
+        case types::BRIGDI:
+        case types::BRIGVE:
+        case types::BQDP:
+        case types::GCROINT:
+        case types::GELINT:
+        case types::GELSTRP:
+        case types::GLMASS:
+        case types::GSEPxxxx:
+        case types::GSEPSPEC:
+        case types::GSLAYER:
+        case types::GSLxxxxx:
+        case types::GSLPLATE:
+        case types::GSLSTIFF:
+        case types::MAXDMP:
+        case types::MAXSPR:
+        case types::MCNT:
+        case types::MGDAMP:
+        case types::MGLDAMP:
+        case types::MGLMASS:
+        case types::MGMASS:
+        case types::MISOAL:
+        case types::MISOEML:
+        case types::MISOHL:
+        case types::MISOHNL:
+        case types::MISOPL:
+        case types::MISTEL:
+        case types::MORSSEL:
+        case types::MORSSOL:
+        case types::MSHGLSP:
+        case types::MTEMP:
+        case types::MTENONL:
+        case types::MTRMEL:
+        case types::MTRSEL:
+        case types::MTRSOL:
+        case types::AMATRIX:
+        case types::AMDACCL:
+        case types::AMDDAMP:
+        case types::AMDDISP:
+        case types::AMDFREQ:
+        case types::AMDLOAD:
+        case types::AMDMASS:
+        case types::AMDSTIFF:
+        case types::AMDVELO:
         case types::UNKNOWN:
             res = make_unique<unknown>(inp, len);
         }

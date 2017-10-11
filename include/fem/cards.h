@@ -61,95 +61,160 @@ namespace dnvgl {
 //! \brief Name the different cards.
                 enum class types {
                     UNKNOWN,
-//! Date and Program Information
-                    DATE,
-//! Nodal Coordinates
-                    GCOORD,
-//! Correspondence between External and Internal Node Numbering, and
-//! Number of Degrees of Freedom of Each Node
-                    GNODE,
-//! Identification of Superelements
-                    IDENT,
-//! End of a Superelement
-                    IEND,
-//! Element Data Definition
-                    GELMNT1,
-//! Reference to Element Data
-                    GELREF1,
-//! Cross Section Type Massive Bar
-                    GBARM,
-//! General Beam Element Data
-                    GBEAMG,
-//! Local Eccentricities
-                    GECC,
-//! Eccentricities
-                    GECCEN,
-//! Thickness of Two-dimensional Elements
-                    GELTH,
-//! Cross Section Type Box Beam
-                    GBOX,
-//! Cross Section Type Channel Beam
-                    GCHAN,
-//! Cross Section Type Channel Beam
-                    GCHANR,
-//! Section Type Double Bottom
-                    GDOBO,
-//! Cross Section Type I or H Beam
-                    GIORH,
-//! Cross Section Type I or H Beam with Inside Curvature
-                    GIORHR,
-//! Cross Section Type L-Section
-                    GLSEC,
-//! Cross Section Type L-Section with Inside Curvature
-                    GLSECR,
-//! Cross Section Type Tube
-                    GPIPE,
-//! Cross Section T on Plate
-                    GTONP,
-//! Cross Section Type Unsymmetrical I-Beam
-                    GUSYI,
-//! Flexible Joint/Hinge
-                    BELFIX,
-//! Nodes with Linear Dependence
-                    BLDEP,
-//! Nodes with Boundary Conditions
-                    BNBCD,
-//! Nodes with Prescribed Displacements and Accelerations
-                    BNDISPL,
-//! Nodes with Loads
-                    BNLOAD,
-//! Element to Ground
-                    MGSPRNG,
-//! set(group) of Nodes or Elements(Members)
-                    GSETMEMB,
-//! Specification of Local Element Coordinate System
-                    GUNIVEC,
-//! Isotropy, Linear Elastic Structural Analysis
-                    MISOSEL,
-//! Anisotropy, Linear Elastic Structural Analysis, 2-D Membrane
-//! Elements and 2-D Thin Shell Elements
-                    MORSMEL,
-//! Name and Description of a set(group)
-                    TDSETNAM,
-//! Name and Description of a Super-Element.
-                    TDSUPNAM,
-//! User supplied Text
-                    TEXT,
-//! Name of Load
-                    TDLOAD,
-//! Subelement Load Description
-                    BSELL,
-//! Subelement Description with Simple Correspondence between Degrees
-//! of Freedom of Subelement and Relevant Assembly
-                    GELMNT2,
-//! Superelement Statistical Information
-                    HSUPSTAT,
-//! Superelement Transformations
-                    HSUPTRAN,
-//! Superelement Hierarchy Description
-                    HIERARCH,
-//! Elements with Surface Loads
-                    BEUSLO
+                    DATE, //< # Identification Data for Superelements and Text Data
+                          //< Date and Program Information
+                    IDENT, //< Identification of Superelements
+                    IEND, //< End of a Superelement
+                    TDMATER,//< Name of a Material Type
+                    TDSECT,//< Name of a General Eccentric Sandwich Section
+                    TDSETNAM, //< Name and Description of a set(group)
+                    TDSUPNAM, //< Name and Description of a Super-Element.
+                    TDLOAD, //< Name of Load
+                    TEXT, //< User supplied Text
+                    TSLAYER, //< Name of a General Eccentric Sandwich Type
+                    ACFD, //< # Additional Element Data
+                          //< General Crack Data
+                    ADDATA, //< Additional User defined Basic Element Data
+                    BEISTE, //< # Boundary Conditions, Loads and Point Masses
+                            //< Elements with Initial Strain Due to
+                            //< Thermal Expansion
+                    BELFIX, //< Flexible Joint/Hinge
+                    BELLAX, //< Surface Load on Axisymmetric Solids
+                    BELLO2, //< Elements with Line Loads, Solid, 3-D
+                            //< Shell, 2-D Shell-, Membrane and Curved
+                            //< Beam Elements
+                    BELOAD1, //< Beams with Line Loads
+                    BEDRAG1, //< Hydrodynamic Drag and Damping from
+                             //< Wave Load Program
+                    BEMASS1, //< Hydrodynamic added Mass from Wave Load Program
+                    BEUSLO, //< Elements with Surface Loads
+                    BEUVLO, //< Elements with Volume Forces, 3-D
+                            //< Solid, 2-D Shell and Membrane Elements
+                    BEWAKIN, //< Wave Kinematics
+                    BEWALO1, //< Element Loads from Wave Load Program
+                    BGRAV, //< Gravitational Load (Constant of Gravity)
+                    BLDEP, //< Nodes with Linear Dependence
+                    BNACCLO, //< Nodes with Acceleration Load
+                    BNBCD, //< Nodes with Boundary Conditions
+                    BNDISPL, //< Nodes with Prescribed Displacements
+                             //< and Accelerations
+                    BNDOF, //< Nodes with Transformation
+                    BNINCO, //< Nodes with Initial Conditions If
+                            //< Arbitrary Time Dependent Loading
+                    BNLOAD, //< Nodes with Loads
+                    BNLOAX, //< Nodes with Loads (Line Load) for
+                            //< Axisymmetric Solids
+                    BNMASS, //< Nodes with Point Masses
+                    BNTEMP, //< Nodes with Temperatures and
+                            //< Derivatives for Temperatures
+                    BNTRCOS, //< Transformation from Global to Local
+                             //< Coordinate System, Direction Cosines
+                    BNWALO, //< Node Loads from Wave Load Program
+                    BRIGAC, //< Rigid Body Acceleration
+                    BRIGDI, //< Rigid Body Displacement
+                    BRIGVE, //< Rigid Body Velocity
+                    BQDP, //< Nodes with Simple Quadratic Dependence
+                    GBARM, //< # Nodal Data and Element Geometry Definition
+                           //< Cross Section Type Massive Bar
+                    GBEAMG, //< General Beam Element Data
+                    GBOX, //< Cross Section Type Box Beam
+                    GCHAN, //< Cross Section Type Channel Beam
+                    GCHANR, //< Cross Section Type Channel Beam
+                    GCOORD, //< Nodal Coordinates
+                    GCROINT, //< Specification of Integration Points
+                    GDOBO, //< Section Type Double Bottom
+                    GECC, //< Local Eccentricities
+                    GECCEN, //< Eccentricities
+                    GELINT, //< Specification of Integration Stations
+                    GELMNT1, //< Element Data Definition
+                    GELREF1, //< Reference to Element Data
+                    GELSTRP, //< Specification of Stress Points
+                    GELTH, //< Thickness of Two-dimensional Elements
+                    GIORH, //< Cross Section Type I or H Beam
+                    GIORHR, //< Cross Section Type I or H Beam with
+                            //< Inside Curvature
+                    GLMASS, //< Modification of Diagonal Mass Matrices
+                    GLSEC, //< Cross Section Type L-Section
+                    GLSECR, //< Cross Section Type L-Section with
+                            //< Inside Curvature
+                    GNODE, //< Correspondence between External and
+                           //< Internal Node Numbering, and Number of
+                           //< Degrees of Freedom of Each Node
+                    GPIPE, //< Cross Section Type Tube
+                    GSEPxxxx, //< Separation Description
+                    GSEPSPEC, //< Specified Separation Description
+                    GSETMEMB, //< Set (group) of Nodes or Elements (Members)
+                    GSLAYER, //< General Eccentric Sandwich Element
+                    GSLxxxxx, //< Layer Description
+                    GSLPLATE, //< Plate Layer Description
+                    GSLSTIFF, //< Stiffener Layer Description
+                    GTONP, //< Cross Section T on Plate
+                    GUNIVEC, //< Specification of Local Element
+                             //< Coordinate System
+                    GUSYI, //< Cross Section Type Unsymmetrical I-Beam
+                    MAXDMP, //< # Material Data
+                            //< Axial Damper Between Two Nodal Points
+                    MAXSPR, //< Axial Spring Between Two Nodal Points
+                    MCNT, //< Material for Non-linear Contact Element
+                    MGDAMP, //< Damping Element to Ground
+                    MGLDAMP, //< General 2-noded Damping Element
+                    MGLMASS, //< General 2-noded Mass Element
+                    MGMASS, //< 1-Noded Mass element
+                    MGSPRNG, //< Element to Ground
+                    MISOAL, //< Isotropy, Linear Acoustic Field Problem
+                    MISOEML, //< Isotropy, Linear Electro-magnetic Field Problem
+                    MISOHL, //< Isotropy, Linear Heat Conduction Analysis
+                    MISOHNL, //< Isotropy, Non-linear Heat Conduction Analysis
+                    MISOPL, //< Non-linear Isotropic Material,
+                            //< Material Types 1-4
+                    MISOSEL, //< Isotropy, Linear Elastic Structural Analysis
+                    MISTEL, //< Temperature Dependent Isotropic,
+                            //< Linear Elastic Material
+                    MORSMEL, //< Anisotropy, Linear Elastic Structural
+                             //< Analysis, 2-D Membrane Elements and
+                             //< 2-D Thin Shell Elements
+                    MORSSEL, //< Anisotropy, Linear Elastic Structural
+                             //< Analysis, 3-D One- and Multilayered
+                             //< Thick Shell Elements
+                    MORSSOL, //< Anisotropy, Linear Elastic Structural
+                             //< Analysis, Solid Elements
+                    MSHGLSP, //< General 2-noded Spring/Shim Element
+                    MTEMP, //< Scaling Curve for Temperature Variation
+                    MTENONL, //< Non-linear Material with Temperature Dependency
+                    MTRMEL, //< Local Transformation of the Axes of
+                            //< Anisotropy, 2-D Membrane Elements and
+                            //< 2-D Thin Shell Elements
+                    MTRSEL, //< Local Transformation of the Axes of
+                            //< Anisotropy, 3-D Multilayered Thick Shell
+                            //< Element
+                    MTRSOL, //< Local Transformation of the Axes of
+                            //< Anisotropy, Solid Elements
+                    AMATRIX, //< # Higher Level Data
+                             //< ## Additional Subelement Data
+                             //< Matrix control Data for Stiffness,
+                             //< Mass, Damping, Load and Resulting
+                             //< Displacement Matrix / Vector
+                    AMDACCL, //< Vector Data for Matrix Element
+                             //< Acceleration Vector
+                    AMDDAMP, //< Matrix Data for Matrix Element Damping Matrix
+                    AMDDISP, //< Vector Data for Matrix Element
+                             //< Displacement Vector
+                    AMDFREQ, //< Frequency Definition for AMATRIX Records
+                    AMDLOAD, //< Vector Data for Matrix Element Load Vector
+                    AMDMASS, //< Matrix Data for Matrix Element Mass Matrix
+                    AMDSTIFF, //< Matrix Data for Matrix Element
+                              //< Stiffness Matrix
+                    AMDVELO, //< Vector Data for Matrix Element Velocity Vector
+                    BSELL, //< # Boundary Conditions, Loads and Point Masses
+                           //< Subelement Load Description
+                    GELMNT2, //< Subelement Description with Simple
+                             //< Correspondence between Degrees of
+                             //< Freedom of Subelement and Relevant
+                             //< Assembly
+                    HIERARCH, //< #Super-Element Hierarchy Information in Highest Level T-File
+                              //< Superelement Hierarchy Description
+                    HSUPSTAT, //< Superelement Statistical Information
+                    HSUPTRAN, //< Superelement Transformations
                 };
 
                 namespace __base {
