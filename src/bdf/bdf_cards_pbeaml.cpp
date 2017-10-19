@@ -93,11 +93,12 @@ pbeaml::pbeaml(long const *PID, long const *MID,
                std::string const *GROUP,
                std::string const *TYPE,
                vector<vector<double>> const *DIM,
-               vector<double> const *NSM,
-               vector<std::string> const *SO,
-               vector<double> const *X_XB) :
+               vector<double> const *NSM/*=nullptr*/,
+               vector<std::string> const *SO/*=nullptr*/,
+               vector<double> const *X_XB/*=nullptr*/) :
         beam_prop(PID, MID), GROUP(*GROUP), TYPE(*TYPE) {
-    this->DIM.resize(max(DIM->size(), size_t(2)));
+    size_t base_size{max(DIM->size(), size_t(2))};
+    this->DIM.resize(base_size);
     for (size_t i = 0; i < DIM->size(); i++) {
         this->DIM[i].resize((*DIM)[i].size(), entry_value<double>(nullptr));
         for (size_t j = 0; j < (*DIM)[i].size(); j++)
@@ -108,19 +109,29 @@ pbeaml::pbeaml(long const *PID, long const *MID,
         for (size_t j = 0; j < (*DIM)[0].size(); j++)
             this->DIM[1][j]((*DIM)[0][j]);
     }
-    this->NSM.resize(std::max(NSM->size(), size_t(2)), entry_value<double>(nullptr));
-    for (size_t i = 0; i < NSM->size(); i++)
-        this->NSM[i]((*NSM)[i]);
-    if (NSM->size() == 1)
-        this->NSM[1]((*NSM)[0]);
-    assert(SO->size() > 0);
-    this->SO.resize(SO->size(), entry_value<std::string>(nullptr));
-    for (size_t i = 0; i < SO->size(); i++)
-        this->SO[i]((*SO)[i]);
-    assert(X_XB->size() > 0);
-    this->X_XB.resize(X_XB->size(), entry_value<double>(nullptr));
-    for (size_t i = 0; i < X_XB->size(); i++)
-        this->X_XB[i]((*X_XB)[i]);
+
+    if (NSM != nullptr && NSM->size() > 0) {
+        this->NSM.resize(NSM->size(), entry_value<double>(nullptr));
+        for (size_t i = 0; i < NSM->size(); i++)
+            this->NSM[i]((*NSM)[i]);
+    } else
+        this->NSM.clear();
+
+    this->SO.resize(base_size - 1, entry_value<std::string>(nullptr));
+    if (SO != nullptr && SO->size() > 0) {
+        for (size_t i = 0; i < SO->size(); i++)
+            this->SO[i]((*SO)[i]);
+    } else {
+        this->SO.assign(base_size - 1, entry_value<std::string>("YESA"));
+    }
+
+    this->X_XB.resize(base_size - 1, entry_value<double>(nullptr));
+    if (X_XB != nullptr && X_XB->size()>1) {
+        for (size_t i = 0; i < X_XB->size(); i++)
+            this->X_XB[i]((*X_XB)[i]);
+    } else {
+        this->X_XB.assign(base_size - 1, entry_value<double>(1.));
+    }
     this->pbeaml::check_data();
 }
 
@@ -284,9 +295,9 @@ void pbeaml::check_data() {
     size_t base_size{DIM.size()};
     size_t dim_num{this->l_geom::get_dim(TYPE.value)};
 
-    if (base_size < 1)
-        throw errors::form_error("PBEAML", "requires at least one station");
-    if (NSM.size() != 0 && NSM.size() != base_size)
+    if (base_size < 2)
+        throw errors::form_error("PBEAML", "requires at least two stations");
+    if (NSM.size() != 0 && NSM.size() > base_size)
         throw errors::form_error("PBEAML", "wrong size for NSM");
     if (SO.size() == 0 || SO.size() != base_size-1)
         throw errors::form_error("PBEAML", "wrong size for SO");
@@ -318,42 +329,46 @@ cards::__base::card const &pbeaml::operator() (
     std::string const *GROUP,
     std::string const *TYPE,
     vector<vector<double>> const *DIM,
-    vector<double> const *NSM,
-    vector<std::string> const *SO,
-    vector<double> const *X_XB) {
+    vector<double> const *NSM/*=nullptr*/,
+    vector<std::string> const *SO/*=nullptr*/,
+    vector<double> const *X_XB/*=nullptr*/) {
     this->beam_prop::operator() (PID, MID);
     this->GROUP(GROUP);
     this->TYPE(TYPE);
-    this->DIM.resize(DIM->size());
+    size_t base_size{max(DIM->size(), size_t(2))};
+    this->DIM.resize(base_size);
     for (size_t i = 0; i < DIM->size(); i++) {
         this->DIM[i].resize((*DIM)[i].size(), entry_value<double>(nullptr));
         for (size_t j = 0; j < (*DIM)[i].size(); j++) {
             this->DIM[i][j]((*DIM)[i][j]);
         }
     }
-    if (NSM) {
+    if (DIM->size() == 1) {
+        this->DIM[1].resize((*DIM)[0].size(), entry_value<double>(nullptr));
+        for (size_t j = 0; j < (*DIM)[0].size(); j++)
+            this->DIM[1][j]((*DIM)[0][j]);
+    }
+
+    if (NSM != nullptr && NSM->size() > 0) {
         this->NSM.resize(NSM->size(), entry_value<double>(nullptr));
-        for (size_t i = 0; i < NSM->size(); i++) {
+        for (size_t i = 0; i < NSM->size(); i++)
             this->NSM[i]((*NSM)[i]);
-        }
-    } else {
+    } else
         this->NSM.clear();
-    }
-    if (SO) {
-        this->SO.resize(SO->size(), entry_value<std::string>(nullptr));
-        for (size_t i{0}; i < SO->size(); i++) {
-            this->SO[i] = (*SO)[i];
-        }
+    this->SO.resize(base_size - 1, entry_value<std::string>(nullptr));
+    if (SO != nullptr&& SO->size() > 0) {
+        for (size_t i = 0; i < SO->size(); i++)
+            this->SO[i]((*SO)[i]);
     } else {
-        this->SO.empty();
+        this->SO.assign(base_size - 1, entry_value<std::string>("YESA"));
     }
-    if (X_XB) {
-        this->X_XB.resize(X_XB->size(), entry_value<double>(nullptr));
-        for (size_t i = 0; i < X_XB->size(); i++) {
+
+    this->X_XB.resize(base_size - 1, entry_value<double>(nullptr));
+    if (X_XB != nullptr && X_XB->size()>1) {
+        for (size_t i = 0; i < X_XB->size(); i++)
             this->X_XB[i]((*X_XB)[i]);
-        }
     } else {
-        this->X_XB.empty();
+        this->X_XB.assign(base_size - 1, entry_value<double>(1.));
     }
     this->pbeaml::check_data();
     return *this;

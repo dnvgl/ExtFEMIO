@@ -346,6 +346,105 @@ TEST_CASE("BDF PBEAML roundtrip test (reuse)", "[bdf_pbeaml]") {
     }
 }
 
+TEST_CASE("BDF PBEAML roundtrip test (SO, X/XB: default)", "[bdf_pbeaml]") {
+    pbeaml::reset();
+    ostringstream test;
+
+    long PID{7869}, MID{104010};
+    std::string GROUP("MSCBML0");
+    std::string TYPE("I");
+    vector<vector<double>> DIM{{1., 2., 3., 4., 5., 6.}};
+
+    pbeaml probe(&PID, &MID, &GROUP, &TYPE,
+                 &DIM);
+    test << probe;
+
+    SECTION("check output") {
+        CHECK(test.str() ==
+              // 34567A1234567B1234567C1234567D1234567E1234567F1234567G1234567H1234567I
+              "PBEAML      7869  104010MSCBML0 I                                       \n"
+              "        1.000+002.000+003.000+004.000+005.000+006.000+00        YESA    \n"
+              "        1.000+00\n");
+    }
+
+    SECTION("check reading") {
+        pbeaml::reset();
+        list<std::string> data;
+        list<std::string> lines;
+        std::string tmp;
+
+        istringstream raw(test.str());
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        card::card_split(data, lines);
+        pbeaml probe_l(lines);
+
+        CHECK(long(probe_l.PID) == 7869);
+        CHECK(long(probe_l.MID) == 104010);
+        CHECK(probe_l.DIM.size() == 2);
+        for (size_t i{0}; i < 2; i++)
+            CHECK_THAT(vector<double>(probe.DIM[i].begin(), probe.DIM[i].end()),
+                       IsEqual(vector<double>({1., 2., 3., 4., 5., 6.})));
+        CHECK(vector<double>(probe_l.NSM.begin(), probe_l.NSM.end()) ==
+            vector<double>({0., 0.}));
+        CHECK(vector<std::string>(probe_l.SO.begin(), probe_l.SO.end()) ==
+              vector<std::string>(1, "YESA"));
+        CHECK(vector<double>(probe_l.X_XB.begin(), probe_l.X_XB.end()) ==
+              vector<double>(1, 1.));
+    }
+}
+
+TEST_CASE("BDF PBEAML roundtrip test (reuse) (SO, X/XB: default)",
+          "[bdf_pbeaml]") {
+    pbarl::reset();
+
+    ostringstream test;
+
+    long PID{7869}, MID{104010};
+    std::string GROUP("MSCBML0");
+    std::string TYPE("I");
+    vector<vector<double>> DIM{{1., 2., 3., 4., 5., 6.}};
+
+    pbeaml probe;
+    test << probe;
+    test << probe(&PID, &MID, &GROUP, &TYPE,
+                  &DIM);
+
+    SECTION("check output") {
+        CHECK(test.str() ==
+              "PBEAML      7869  104010MSCBML0 I                                       \n"
+              "        1.000+002.000+003.000+004.000+005.000+006.000+00        YESA    \n"
+              "        1.000+00\n");
+    }
+
+    SECTION("check reading") {
+        list<std::string> data;
+        list<std::string> lines;
+        std::string tmp;
+        istringstream raw(test.str());
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        card::card_split(data, lines);
+        pbeaml probe_l;
+        probe_l(lines);
+
+        CHECK(long(probe_l.PID) == 7869);
+        CHECK(long(probe_l.MID) == 104010);
+        CHECK(probe_l.DIM.size() == 2);
+        for (size_t i{0}; i < 2; i++)
+            CHECK_THAT(vector<double>(probe.DIM[i].begin(), probe.DIM[i].end()),
+                       IsEqual(vector<double>({1., 2., 3., 4., 5., 6.})));
+        CHECK(vector<double>(probe_l.NSM.begin(), probe_l.NSM.end()) ==
+              vector<double>({0., 0.}));
+        CHECK(vector<std::string>(probe_l.SO.begin(), probe_l.SO.end()) ==
+              vector<std::string>(1, "YESA"));
+        CHECK(vector<double>(probe_l.X_XB.begin(), probe_l.X_XB.end()) ==
+              vector<double>(1, 1.));
+    }
+}
+
 TEST_CASE("BDF PBEAML roundtrip test, multiple stations", "[bdf_pbeaml]") {
     pbeaml::reset();
     ostringstream test;
