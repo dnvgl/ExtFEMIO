@@ -991,6 +991,155 @@ TEST_CASE("BDF PBEAM roundtrip test (minimal) (reuse)", "[bdf_pbeam]") {
     }
 }
 
+TEST_CASE("BDF PBEAM roundtrip test (minimal) (SO, X/XB: default)", "[bdf_pbeam]") {
+    pbeam::reset();
+    std::ostringstream test;
+
+    long PID{7869}, MID{104010};
+    std::vector<double> A{1., 1.};
+    std::vector<double> I1{2., 2.};
+    std::vector<double> I2{3., 3.};
+    std::vector<double> I12{4., 4.};
+
+    pbeam probe(&PID, &MID, &A, &I1, &I2);
+    test << probe;
+
+    SECTION("check output") {
+        CHECK(test.str() ==
+              "PBEAM       7869  1040101.000+002.000+003.000+00                        \n"
+              "                                                                        \n"
+              "        YESA    1.000+00\n");
+    }
+
+    SECTION("check reading") {
+        pbeam::reset();
+        std::list<std::string> data;
+        std::list<std::string> lines;
+        std::string tmp;
+        std::istringstream raw(test.str());
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        __base::card::card_split(data, lines);
+        pbeam probe_l(lines);
+
+        CHECK(long(probe_l.PID) == 7869);
+        CHECK(long(probe_l.MID) == 104010);
+        CHECK_THAT(vector<double>(probe.A.begin(), probe.A.end()),
+ IsEqual(std::vector<double>({1., 1.})));
+        CHECK_THAT(vector<double>(probe.I1.begin(), probe.I1.end()),
+ IsEqual(std::vector<double>({2., 2.})));
+        CHECK_THAT(vector<double>(probe.I2.begin(), probe.I2.end()),
+ IsEqual(std::vector<double>({3., 3.})));
+        CHECK(probe.I12.size() == 0);
+        CHECK(probe.J.size() == 0);
+        CHECK(probe.NSM.size() == 0);
+        CHECK(probe.C1.size() == 0);
+        CHECK(probe.C2.size() == 0);
+        CHECK(probe.D1.size() == 0);
+        CHECK(probe.D2.size() == 0);
+        CHECK(probe.E1.size() == 0);
+        CHECK(probe.E2.size() == 0);
+        CHECK(probe.F1.size() == 0);
+        CHECK(probe.F2.size() == 0);
+        CHECK_THAT(vector<std::string>(probe.SO.begin(), probe.SO.end()),
+               IsEqual(vector<string>(1, "YESA")));
+        CHECK_THAT(vector<double>(probe.X_XB.begin(), probe.X_XB.end()),
+                   IsEqual(std::vector<double>(1, 1.)));
+        CHECK_FALSE(bool(probe.K1));
+        CHECK_FALSE(bool(probe.K2));
+        CHECK_FALSE(bool(probe.S1));
+        CHECK_FALSE(bool(probe.S2));
+        CHECK_FALSE(bool(probe.NSI_A));
+        CHECK_FALSE(bool(probe.NSI_B));
+        CHECK_FALSE(bool(probe.CW_A));
+        CHECK_FALSE(bool(probe.CW_B));
+        CHECK_FALSE(bool(probe.M1_A));
+        CHECK_FALSE(bool(probe.M2_A));
+        CHECK_FALSE(bool(probe.M1_B));
+        CHECK_FALSE(bool(probe.M2_B));
+        CHECK_FALSE(bool(probe.N1_A));
+        CHECK_FALSE(bool(probe.N2_A));
+        CHECK_FALSE(bool(probe.N1_B));
+        CHECK_FALSE(bool(probe.N2_B));
+    }
+}
+
+TEST_CASE("BDF PBEAM roundtrip test (minimal) (SO, X/XB: default) (reuse)", "[bdf_pbeam]") {
+    pbarl::reset();
+
+    std::ostringstream test;
+
+    long PID{7869}, MID{104010};
+    std::vector<double> A{1., 1.};
+    std::vector<double> I1{2., 2.};
+    std::vector<double> I2{3., 3.};
+
+    pbeam probe;
+    test << probe;
+    test << probe(&PID, &MID, &A, &I1, &I2);
+
+    SECTION("check output") {
+        CHECK(test.str() ==
+              "PBEAM       7869  1040101.000+002.000+003.000+00                        \n"
+              "                                                                        \n"
+              "        YESA    1.000+00\n");
+    }
+
+    SECTION("check reading") {
+        std::list<std::string> data;
+        std::list<std::string> lines;
+        std::string tmp;
+        std::istringstream raw(test.str());
+
+        while (getline(raw, tmp))
+            data.push_back(tmp);
+        __base::card::card_split(data, lines);
+        pbeam probe_l;
+        probe_l(lines);
+
+        CHECK(long(probe_l.PID) == 7869);
+        CHECK(long(probe_l.MID) == 104010);
+        CHECK_THAT(vector<double>(probe.A.begin(), probe.A.end()),
+                   IsEqual(std::vector<double>(2, 1.)));
+        CHECK_THAT(vector<double>(probe.I1.begin(), probe.I1.end()),
+                   IsEqual(std::vector<double>(2, 2.)));
+        CHECK_THAT(vector<double>(probe.I2.begin(), probe.I2.end()),
+                   IsEqual(std::vector<double>(2, 3.)));
+        CHECK(probe.I12.size() == 0);
+        CHECK(probe.J.size() == 0);
+        CHECK(probe.NSM.size() == 0);
+        CHECK(probe.C1.size() == 0);
+        CHECK(probe.C2.size() == 0);
+        CHECK(probe.D1.size() == 0);
+        CHECK(probe.D2.size() == 0);
+        CHECK(probe.E1.size() == 0);
+        CHECK(probe.E2.size() == 0);
+        CHECK(probe.F1.size() == 0);
+        CHECK(probe.F2.size() == 0);
+        CHECK_THAT(vector<std::string>(probe.SO.begin(), probe.SO.end()),
+                   IsEqual(vector<string>(1, "YESA")));
+        CHECK_THAT(vector<double>(probe.X_XB.begin(), probe.X_XB.end()),
+                   IsEqual(std::vector<double>(1, 1.)));
+        CHECK_FALSE(bool(probe.K1));
+        CHECK_FALSE(bool(probe.K2));
+        CHECK_FALSE(bool(probe.S1));
+        CHECK_FALSE(bool(probe.S2));
+        CHECK_FALSE(bool(probe.NSI_A));
+        CHECK_FALSE(bool(probe.NSI_B));
+        CHECK_FALSE(bool(probe.CW_A));
+        CHECK_FALSE(bool(probe.CW_B));
+        CHECK_FALSE(bool(probe.M1_A));
+        CHECK_FALSE(bool(probe.M2_A));
+        CHECK_FALSE(bool(probe.M1_B));
+        CHECK_FALSE(bool(probe.M2_B));
+        CHECK_FALSE(bool(probe.N1_A));
+        CHECK_FALSE(bool(probe.N2_A));
+        CHECK_FALSE(bool(probe.N1_B));
+        CHECK_FALSE(bool(probe.N2_B));
+    }
+}
+
 TEST_CASE("BDF PBEAM roundtrip test (N2_B only)", "[bdf_pbeam]") {
     pbeam::reset();
     std::ostringstream test;

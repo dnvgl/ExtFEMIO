@@ -232,14 +232,14 @@ pbeam::pbeam(long const *PID, long const *MID,
              vector<double> const *F2,
              vector<std::string> const *SO,
              vector<double> const *X_XB,
-             double const *K1, double const *K2,
-             double const *S1, double const *S2,
-             double const *NSI_A, double const *NSI_B,
-             double const *CW_A, double const *CW_B,
-             double const *M1_A, double const *M2_A,
-             double const *M1_B, double const *M2_B,
-             double const *N1_A, double const *N2_A,
-             double const *N1_B, double const *N2_B) :
+             double const *K1/*=nullptr*/, double const *K2/*=nullptr*/,
+             double const *S1/*=nullptr*/, double const *S2/*=nullptr*/,
+             double const *NSI_A/*=nullptr*/, double const *NSI_B/*=nullptr*/,
+             double const *CW_A/*=nullptr*/, double const *CW_B/*=nullptr*/,
+             double const *M1_A/*=nullptr*/, double const *M2_A/*=nullptr*/,
+             double const *M1_B/*=nullptr*/, double const *M2_B/*=nullptr*/,
+             double const *N1_A/*=nullptr*/, double const *N2_A/*=nullptr*/,
+             double const *N1_B/*=nullptr*/, double const *N2_B/*=nullptr*/) :
         beam_prop(PID, MID),
         K1(K1), K2(K2), S1(S1), S2(S2), NSI_A(NSI_A), NSI_B(NSI_B),
         CW_A(CW_A), CW_B(CW_B),
@@ -260,10 +260,16 @@ pbeam::pbeam(long const *PID, long const *MID,
     if (F1 != nullptr) this->F1.assign((*F1).begin(), (*F1).end());
     if (F2 != nullptr) this->F2.assign((*F2).begin(), (*F2).end());
 
-    if (SO)
-        this->SO.assign((*SO).begin(), (*SO).end());
-    if (X_XB)
-        this->X_XB.assign((*X_XB).begin(), (*X_XB).end());
+    if (SO != nullptr && SO->size() > 0)
+        this->SO.assign(SO->begin(), SO->end());
+    else
+        this->SO.resize(
+            A->size() - 1, bdf::types::entry_value<std::string>("YESA"));
+
+    if (X_XB != nullptr && X_XB->size() > 0)
+        this->X_XB.assign(X_XB->begin(), X_XB->end());
+    else
+        this->X_XB.resize(A->size() - 1, bdf::types::entry_value<double>(1));
      // }  else {
     //     this->SO.clear();
     //     this->X_XB.clear();
@@ -275,8 +281,8 @@ pbeam::pbeam(long const *PID, long const *MID,
              std::vector<double> const *A,
              std::vector<double> const *I1,
              std::vector<double> const *I2,
-             std::vector<std::string> const *SO,
-             std::vector<double> const *X_XB) :
+             std::vector<std::string> const *SO/*=nullptr*/,
+             std::vector<double> const *X_XB/*=nullptr*/) :
 pbeam(PID, MID, A, I1, I2, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
       nullptr, nullptr, nullptr, nullptr, nullptr, SO, X_XB) {};
 
@@ -809,14 +815,14 @@ bdf::cards::__base::card const &pbeam::operator() (
     vector<double> const *F2,
     vector<std::string> const *SO,
     vector<double> const *X_XB,
-    double const *K1, double const *K2,
-    double const *S1, double const *S2,
-    double const *NSI_A, double const *NSI_B,
-    double const *CW_A, double const *CW_B,
-    double const *M1_A, double const *M2_A,
-    double const *M1_B, double const *M2_B,
-    double const *N1_A, double const *N2_A,
-    double const *N1_B, double const *N2_B) {
+    double const *K1/*=nullptr*/, double const *K2/*=nullptr*/,
+    double const *S1/*=nullptr*/, double const *S2/*=nullptr*/,
+    double const *NSI_A/*=nullptr*/, double const *NSI_B/*=nullptr*/,
+    double const *CW_A/*=nullptr*/, double const *CW_B/*=nullptr*/,
+    double const *M1_A/*=nullptr*/, double const *M2_A/*=nullptr*/,
+    double const *M1_B/*=nullptr*/, double const *M2_B/*=nullptr*/,
+    double const *N1_A/*=nullptr*/, double const *N2_A/*=nullptr*/,
+    double const *N1_B/*=nullptr*/, double const *N2_B/*=nullptr*/) {
     this->beam_prop::operator() (PID, MID);
     this->A.assign(A->begin(), A->end());
     this->I1.assign(I1->begin(), I1->end());
@@ -832,8 +838,16 @@ bdf::cards::__base::card const &pbeam::operator() (
     if (E2 != nullptr) this->E2.assign(E2->begin(), E2->end());
     if (F1 != nullptr) this->F1.assign(F1->begin(), F1->end());
     if (F2 != nullptr) this->F2.assign(F2->begin(), F2->end());
-    this->SO.assign(SO->begin(), SO->end());
-    this->X_XB.assign(X_XB->begin(), X_XB->end());
+    if (SO != nullptr && SO->size() > 0)
+        this->SO.assign(SO->begin(), SO->end());
+    else
+        this->SO.resize(
+            A->size() - 1, bdf::types::entry_value<std::string>("YESA"));
+
+    if (X_XB != nullptr && X_XB->size() > 0)
+        this->X_XB.assign(X_XB->begin(), X_XB->end());
+    else
+        this->X_XB.resize(A->size() - 1, bdf::types::entry_value<double>(1));
     this->K1(K1);
     this->K2(K2);
     this->S1(S1);
@@ -859,8 +873,8 @@ bdf::cards::__base::card const &pbeam::operator() (
     std::vector<double> const *A,
     std::vector<double> const *I1,
     std::vector<double> const *I2,
-    std::vector<std::string> const *SO,
-    std::vector<double> const *X_XB) {
+    std::vector<std::string> const *SO/*=nullptr*/,
+    std::vector<double> const *X_XB/*=nullptr*/) {
     this->pbeam::operator () (
         PID, MID, A, I1, I2,
         nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,

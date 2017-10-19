@@ -465,8 +465,8 @@ namespace dnvgl {
                           std::vector<double> const *A,
                           std::vector<double> const *I1,
                           std::vector<double> const *I2,
-                          std::vector<std::string> const *SO,
-                          std::vector<double> const *X_XB);
+                          std::vector<std::string> const *SO=nullptr,
+                          std::vector<double> const *X_XB=nullptr);
                     types card_type() const override;
                     void read(std::list<std::string> const &) override;
                     card const &operator() (const std::list<std::string> &) override;
@@ -501,8 +501,8 @@ namespace dnvgl {
                         std::vector<double> const *A,
                         std::vector<double> const *I1,
                         std::vector<double> const *I2,
-                        std::vector<std::string> const *SO,
-                        std::vector<double> const *X_XB);
+                        std::vector<std::string> const *SO=nullptr,
+                        std::vector<double> const *X_XB=nullptr);
                 private:
                     void collect_outdata(
                         std::list<std::unique_ptr<format_entry> > &res) const override;
