@@ -36,13 +36,20 @@ error::error(
         msg(msg), name(name), err_class(err_class) {};
 
 std::string error::get_msg() const {
+    std::string res;
     if (name.length())
-        return err_class + ":" + name + ":" + msg;
-    return err_class + ":" + msg;
+        res = err_class + ":" + name + ":" + msg;
+    else
+        res = err_class + ":" + msg;
+    return res;
 }
 
 char const *error::what() const _EXTFEMIO_NOEXCEPT{
-    return (this->get_msg() + "\n").c_str();
+    std::string xSMsg(this->get_msg() + "\n");
+    char *xMsg = new char[xSMsg.length() + 1];
+    std::copy(xSMsg.begin(), xSMsg.end(), xMsg);
+    xMsg[xSMsg.size()] = '\0';
+    return xMsg;
 }
 
 types_error::types_error(const std::string &msg) :
