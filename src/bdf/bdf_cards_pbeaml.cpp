@@ -97,7 +97,7 @@ pbeaml::pbeaml(long const *PID, long const *MID,
                vector<std::string> const *SO/*=nullptr*/,
                vector<double> const *X_XB/*=nullptr*/) :
         beam_prop(PID, MID), GROUP(*GROUP), TYPE(*TYPE) {
-    size_t base_size{max(DIM->size(), size_t(2))};
+    size_t const base_size{max(DIM->size(), size_t(2))};
     this->DIM.resize(base_size);
     for (size_t i = 0; i < DIM->size(); i++) {
         this->DIM[i].resize((*DIM)[i].size(), entry_value<double>(nullptr));
@@ -138,7 +138,6 @@ pbeaml::pbeaml(long const *PID, long const *MID,
 void pbeaml::read(list<std::string> const & inp) {
 
     size_t i, j{0};
-    size_t dim_num{0};
 
     auto pos = inp.begin();
 
@@ -156,7 +155,7 @@ void pbeaml::read(list<std::string> const & inp) {
     if (pos == inp.end()) goto invalid;
     form_TYPE.set_value(TYPE, *(pos++));
     if (pos == inp.end()) goto invalid;
-    dim_num = this->l_geom::get_dim(TYPE.value);
+    size_t const dim_num = this->l_geom::get_dim(TYPE.value);
     if (dim_num < 1)
         throw errors::parse_error(
             "PBEAML", "Unknown beam type " + TYPE.value + ".");
@@ -272,7 +271,7 @@ void pbeaml::collect_outdata(
                               format<std::string>(form_SO, (*(pos_SO++))) :
                               format(empty)));
         }
-        bool last{pos_SO == SO.end()};
+        bool const last{pos_SO == SO.end()};
         if (pos_X_XB != X_XB.end()) {
             res.push_back(unique_ptr<format_entry>(
                               pos_X_XB != X_XB.end() ?
@@ -292,8 +291,8 @@ void pbeaml::collect_outdata(
 }
 
 void pbeaml::check_data() {
-    size_t base_size{DIM.size()};
-    size_t dim_num{this->l_geom::get_dim(TYPE.value)};
+    size_t const base_size{DIM.size()};
+    size_t const dim_num{this->l_geom::get_dim(TYPE.value)};
 
     if (base_size < 2)
         throw errors::form_error("PBEAML", "requires at least two stations");
@@ -335,7 +334,7 @@ cards::__base::card const &pbeaml::operator() (
     this->beam_prop::operator() (PID, MID);
     this->GROUP(GROUP);
     this->TYPE(TYPE);
-    size_t base_size{max(DIM->size(), size_t(2))};
+    size_t const base_size{max(DIM->size(), size_t(2))};
     this->DIM.resize(base_size);
     for (size_t i = 0; i < DIM->size(); i++) {
         this->DIM[i].resize((*DIM)[i].size(), entry_value<double>(nullptr));
