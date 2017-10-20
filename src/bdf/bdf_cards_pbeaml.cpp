@@ -75,7 +75,7 @@ namespace {
 }
 entry_type<double> pbeaml::form_NSM("NSM", bound_NSM);
 namespace {
-    set<std::string> const SO_set({"YES", "YESA", "NO"});
+    set<std::string> const SO_set({"YES", "NO"});
     auto const bound_SO = make_shared<bound<std::string>>(SO_set);
 }
 entry_type<std::string> pbeaml::form_SO("SO", bound_SO);
@@ -122,7 +122,7 @@ pbeaml::pbeaml(long const *PID, long const *MID,
         for (size_t i = 0; i < SO->size(); i++)
             this->SO[i]((*SO)[i]);
     } else {
-        this->SO.assign(base_size - 1, entry_value<std::string>("YESA"));
+        this->SO.assign(base_size - 1, entry_value<std::string>("YES"));
     }
 
     this->X_XB.resize(base_size - 1, entry_value<double>(nullptr));
@@ -360,7 +360,7 @@ cards::__base::card const &pbeaml::operator() (
         for (size_t i = 0; i < SO->size(); i++)
             this->SO[i]((*SO)[i]);
     } else {
-        this->SO.assign(base_size - 1, entry_value<std::string>("YESA"));
+        this->SO.assign(base_size - 1, entry_value<std::string>("YES"));
     }
 
     this->X_XB.resize(base_size - 1, entry_value<double>(nullptr));

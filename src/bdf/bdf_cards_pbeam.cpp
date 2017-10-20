@@ -220,18 +220,18 @@ pbeam::pbeam(long const *PID, long const *MID,
              vector<double> const *I1,
              vector<double> const *I2,
              vector<double> const *I12,
-             vector<double> const *J,
-             vector<double> const *NSM,
-             vector<double> const *C1,
-             vector<double> const *C2,
-             vector<double> const *D1,
-             vector<double> const *D2,
-             vector<double> const *E1,
-             vector<double> const *E2,
-             vector<double> const *F1,
-             vector<double> const *F2,
-             vector<std::string> const *SO,
-             vector<double> const *X_XB,
+             vector<double> const *J/*=nullptr*/,
+             vector<double> const *NSM/*=nullptr*/,
+             vector<double> const *C1/*=nullptr*/,
+             vector<double> const *C2/*=nullptr*/,
+             vector<double> const *D1/*=nullptr*/,
+             vector<double> const *D2/*=nullptr*/,
+             vector<double> const *E1/*=nullptr*/,
+             vector<double> const *E2/*=nullptr*/,
+             vector<double> const *F1/*=nullptr*/,
+             vector<double> const *F2/*=nullptr*/,
+             vector<std::string> const *SO/*=nullptr*/,
+             vector<double> const *X_XB/*=nullptr*/,
              double const *K1/*=nullptr*/, double const *K2/*=nullptr*/,
              double const *S1/*=nullptr*/, double const *S2/*=nullptr*/,
              double const *NSI_A/*=nullptr*/, double const *NSI_B/*=nullptr*/,
@@ -258,13 +258,21 @@ pbeam::pbeam(long const *PID, long const *MID,
     if (NSM != nullptr) this->NSM.assign(NSM->begin(), NSM->end());
     if (this->NSM.size() == 1) this->NSM.resize(2, this->NSM.at(0));
     if (C1 != nullptr) this->C1.assign(C1->begin(), C1->end());
+    if (this->C1.size() == 1) this->C1.resize(2, this->C1.at(0));
     if (C2 != nullptr) this->C2.assign(C2->begin(), C2->end());
+    if (this->C2.size() == 1) this->C2.resize(2, this->C2.at(0));
     if (D1 != nullptr) this->D1.assign(D1->begin(), D1->end());
+    if (this->D1.size() == 1) this->D1.resize(2, this->D1.at(0));
     if (D2 != nullptr) this->D2.assign(D2->begin(), D2->end());
+    if (this->D2.size() == 1) this->D2.resize(2, this->D2.at(0));
     if (E1 != nullptr) this->E1.assign(E1->begin(), E1->end());
+    if (this->E1.size() == 1) this->E1.resize(2, this->E1.at(0));
     if (E2 != nullptr) this->E2.assign(E2->begin(), E2->end());
+    if (this->E2.size() == 1) this->E2.resize(2, this->E2.at(0));
     if (F1 != nullptr) this->F1.assign(F1->begin(), F1->end());
+    if (this->F1.size() == 1) this->F1.resize(2, this->F1.at(0));
     if (F2 != nullptr) this->F2.assign(F2->begin(), F2->end());
+    if (this->F2.size() == 1) this->F2.resize(2, this->F2.at(0));
 
     if (SO != nullptr && SO->size() > 0)
         this->SO.assign(SO->begin(), SO->end());
@@ -298,7 +306,7 @@ void pbeam::read(list<std::string> const &inp) {
 
     auto pos = inp.rbegin();
 
-    auto div_val = ldiv(static_cast<long>(inp.size()) - 1, 16);
+    auto const xDivVal = ldiv(static_cast<long>(inp.size()) - 1, 16);
 
     if (inp.size() < 18) {
         ostringstream msg(ostringstream::ate);
@@ -306,8 +314,8 @@ void pbeam::read(list<std::string> const &inp) {
         throw errors::parse_error("PBEAM", msg.str());
     }
 
-    auto block_cnt = div_val.quot;
-    auto block_rem = div_val.rem;
+    auto block_cnt = xDivVal.quot;
+    auto block_rem = xDivVal.rem;
 
     std::deque<std::string> _SO;
     std::deque<double> _X_XB;
@@ -527,22 +535,22 @@ void pbeam::collect_outdata(
     res.push_back(unique_ptr<format_entry>(format<long>(form_PID, PID)));
     res.push_back(unique_ptr<format_entry>(format<long>(form_MID, MID)));
 
-    auto pos_A  (A.begin());
-    auto pos_I1 (I1.begin());
-    auto pos_I2 (I2.begin());
+    auto pos_A(A.begin());
+    auto pos_I1(I1.begin());
+    auto pos_I2(I2.begin());
     auto pos_I12(I12.begin());
-    auto pos_J  (J.begin());
+    auto pos_J(J.begin());
     auto pos_NSM(NSM.begin());
-    auto pos_C1 (C1.begin());
-    auto pos_C2 (C2.begin());
-    auto pos_D1 (D1.begin());
-    auto pos_D2 (D2.begin());
-    auto pos_E1 (E1.begin());
-    auto pos_E2 (E2.begin());
-    auto pos_F1 (F1.begin());
-    auto pos_F2 (F2.begin());
-    auto pos_SO (SO.begin());
-    auto pos_X_XB (X_XB.begin());
+    auto pos_C1(C1.begin());
+    auto pos_C2(C2.begin());
+    auto pos_D1(D1.begin());
+    auto pos_D2(D2.begin());
+    auto pos_E1(E1.begin());
+    auto pos_E2(E2.begin());
+    auto pos_F1(F1.begin());
+    auto pos_F2(F2.begin());
+    auto pos_SO(SO.begin());
+    auto pos_X_XB(X_XB.begin());
 
     res.push_back(unique_ptr<format_entry>(format<double>(form_A, (*pos_A++))));
     res.push_back(unique_ptr<format_entry>(format<double>(form_I1, (*pos_I1++))));
@@ -597,67 +605,67 @@ void pbeam::collect_outdata(
                           format<std::string>(form_SO, (*pos_SO++))));
         res.push_back(unique_ptr<format_entry>(
                           format<double>(form_X_XB, (*pos_X_XB++))));
-        bool last{pos_SO == SO.end()};
-        if (last && (*pos_A == *A.begin())){
+        bool const xLast{pos_SO == SO.end()};
+        if (xLast && (*pos_A == *A.begin())){
             res.push_back(unique_ptr<format_entry>(format(empty)));
-            pos_A++;
+            ++pos_A;
         } else
             res.push_back(unique_ptr<format_entry>(
                               format<double>(form_A, (*pos_A++))));
-        if (last && (*pos_I1 == *I1.begin())){
+        if (xLast && (*pos_I1 == *I1.begin())){
             res.push_back(unique_ptr<format_entry>(format(empty)));
-            pos_I1++;
+            ++pos_I1;
         } else
             res.push_back(unique_ptr<format_entry>(
                               format<double>(form_I1, (*pos_I1++))));
-        if (last && (*pos_I2 == *I2.begin())){
+        if (xLast && (*pos_I2 == *I2.begin())){
             res.push_back(unique_ptr<format_entry>(format(empty)));
-            pos_I2++;
+            ++pos_I2;
         } else
             res.push_back(unique_ptr<format_entry>(
                               format<double>(form_I2, (*pos_I2++))));
         res.push_back(unique_ptr<format_entry>(
-                          pos_I12 != I12.end() && !(last && (*pos_I12 == *I12.begin())) ?
+                          pos_I12 != I12.end() && !(xLast && (*pos_I12 == *I12.begin())) ?
                           format<double>(form_I12, (*pos_I12++)) :
                           format(empty)));
         res.push_back(unique_ptr<format_entry>(
-                          pos_J != J.end() && !(last && (*pos_J == *J.begin())) ?
+                          pos_J != J.end() && !(xLast && (*pos_J == *J.begin())) ?
                           format<double>(form_J, (*pos_J++)) :
                           format(empty)));
         res.push_back(unique_ptr<format_entry>(
-                          pos_NSM != NSM.end() && !(last && (*pos_NSM == *NSM.begin())) ?
+                          pos_NSM != NSM.end() && !(xLast && (*pos_NSM == *NSM.begin())) ?
                           format<double>(form_NSM, (*pos_NSM++)) :
                           format(empty)));
         res.push_back(unique_ptr<format_entry>(
-                          pos_C1 != C1.end() && !(last && (*pos_C1 == *C1.begin())) ?
+                          pos_C1 != C1.end() && !(xLast && (*pos_C1 == *C1.begin())) ?
                           format<double>(form_C1, (*pos_C1++)) :
                           format(empty)));
         res.push_back(unique_ptr<format_entry>(
-                          pos_C2 != C2.end() && !(last && (*pos_C2 == *C2.begin())) ?
+                          pos_C2 != C2.end() && !(xLast && (*pos_C2 == *C2.begin())) ?
                           format<double>(form_C2, (*pos_C2++)) :
                           format(empty)));
         res.push_back(unique_ptr<format_entry>(
-                          pos_D1 != D1.end() && !(last && (*pos_D1 == *D1.begin())) ?
+                          pos_D1 != D1.end() && !(xLast && (*pos_D1 == *D1.begin())) ?
                           format<double>(form_D1, (*pos_D1++)) :
                           format(empty)));
         res.push_back(unique_ptr<format_entry>(
-                          pos_D2 != D2.end() && !(last && (*pos_D2 == *D2.begin())) ?
+                          pos_D2 != D2.end() && !(xLast && (*pos_D2 == *D2.begin())) ?
                           format<double>(form_D2, (*pos_D2++)) :
                           format(empty)));
         res.push_back(unique_ptr<format_entry>(
-                          pos_E1 != E1.end() && !(last && (*pos_E1 == *E1.begin())) ?
+                          pos_E1 != E1.end() && !(xLast && (*pos_E1 == *E1.begin())) ?
                           format<double>(form_E1, (*pos_E1++)) :
                           format(empty)));
         res.push_back(unique_ptr<format_entry>(
-                          pos_E2 != E2.end() && !(last && (*pos_E2 == *E2.begin())) ?
+                          pos_E2 != E2.end() && !(xLast && (*pos_E2 == *E2.begin())) ?
                           format<double>(form_E2, (*pos_E2++)) :
                           format(empty)));
         res.push_back(unique_ptr<format_entry>(
-                          pos_F1 != F1.end() && !(last && (*pos_F1 == *F1.begin())) ?
+                          pos_F1 != F1.end() && !(xLast && (*pos_F1 == *F1.begin())) ?
                           format<double>(form_F1, (*pos_F1++)) :
                           format(empty)));
         res.push_back(unique_ptr<format_entry>(
-                          pos_F2 != F2.end() && !(last && (*pos_F2 == *F2.begin())) ?
+                          pos_F2 != F2.end() && !(xLast && (*pos_F2 == *F2.begin())) ?
                           format<double>(form_F2, (*pos_F2++)) :
                           format(empty)));
     }
@@ -731,37 +739,37 @@ void pbeam::collect_outdata(
 }
 
 void pbeam::check_data() {
-    size_t base_size{A.size()};
-    if (I1.size() != base_size)
+    size_t const xBaseSize{A.size()};
+    if (I1.size() != xBaseSize)
         throw errors::form_error("PBEAM", "wrong size for I1");
-    if (I2.size() != base_size)
+    if (I2.size() != xBaseSize)
         throw errors::form_error("PBEAM", "wrong size for I2");
-    if (I12.size() && I12.size() != base_size)
+    if (I12.size() && I12.size() != xBaseSize)
         throw errors::form_error("PBEAM", "wrong size for I12");
-    if (J.size() && J.size() != base_size)
+    if (J.size() && J.size() != xBaseSize)
         throw errors::form_error("PBEAM", "wrong size for J");
-    if (NSM.size() && NSM.size() != base_size)
+    if (NSM.size() && NSM.size() != xBaseSize)
         throw errors::form_error("PBEAM", "wrong size for NSM");
-    if (C1.size() && C1.size() != base_size)
+    if (C1.size() && C1.size() != xBaseSize)
         throw errors::form_error("PBEAM", "wrong size for C1");
-    if (C2.size() && C2.size() != base_size)
+    if (C2.size() && C2.size() != xBaseSize)
         throw errors::form_error("PBEAM", "wrong size for C2");
-    if (D1.size() && D1.size() != base_size)
+    if (D1.size() && D1.size() != xBaseSize)
         throw errors::form_error("PBEAM", "wrong size for D1");
-    if (D2.size() && D2.size() != base_size)
+    if (D2.size() && D2.size() != xBaseSize)
         throw errors::form_error("PBEAM", "wrong size for D2");
-    if (E1.size() && E1.size() != base_size)
+    if (E1.size() && E1.size() != xBaseSize)
         throw errors::form_error("PBEAM", "wrong size for E1");
-    if (E2.size() && E2.size() != base_size)
+    if (E2.size() && E2.size() != xBaseSize)
         throw errors::form_error("PBEAM", "wrong size for E2");
-    if (F1.size() && F1.size() != base_size)
+    if (F1.size() && F1.size() != xBaseSize)
         throw errors::form_error("PBEAM", "wrong size for F1");
-    if (F2.size() && F2.size() != base_size)
+    if (F2.size() && F2.size() != xBaseSize)
         throw errors::form_error("PBEAM", "wrong size for F2");
 
-    if (base_size && SO.size() != base_size-1)
+    if (xBaseSize && SO.size() != xBaseSize-1)
         throw errors::form_error("PBEAM", "wrong size for SO");
-    if (base_size && X_XB.size() != base_size-1)
+    if (xBaseSize && X_XB.size() != xBaseSize-1)
         throw errors::form_error("PBEAM", "wrong size for X_XB");
 
     if (A.size()>0) for (auto pos : A) pbeam::form_A.check(pos);
@@ -807,21 +815,14 @@ bdf::cards::__base::card const &pbeam::operator() (
 bdf::cards::__base::card const &pbeam::operator() (
     long const *PID, long const *MID,
     vector<double> const *A,
-    vector<double> const *I1,
-    vector<double> const *I2,
-    vector<double> const *I12,
-    vector<double> const *J,
-    vector<double> const *NSM,
-    vector<double> const *C1,
-    vector<double> const *C2,
-    vector<double> const *D1,
-    vector<double> const *D2,
-    vector<double> const *E1,
-    vector<double> const *E2,
-    vector<double> const *F1,
-    vector<double> const *F2,
-    vector<std::string> const *SO,
-    vector<double> const *X_XB,
+    vector<double> const *I1, vector<double> const *I2, vector<double> const *I12,
+    vector<double> const *J/*=nullptr*/, vector<double> const *NSM/*=nullptr*/,
+    vector<double> const *C1/*=nullptr*/, vector<double> const *C2/*=nullptr*/,
+    vector<double> const *D1/*=nullptr*/, vector<double> const *D2/*=nullptr*/,
+    vector<double> const *E1/*=nullptr*/, vector<double> const *E2/*=nullptr*/,
+    vector<double> const *F1/*=nullptr*/, vector<double> const *F2/*=nullptr*/,
+    vector<std::string> const *SO/*=nullptr*/,
+    vector<double> const *X_XB/*=nullptr*/,
     double const *K1/*=nullptr*/, double const *K2/*=nullptr*/,
     double const *S1/*=nullptr*/, double const *S2/*=nullptr*/,
     double const *NSI_A/*=nullptr*/, double const *NSI_B/*=nullptr*/,
@@ -844,13 +845,21 @@ bdf::cards::__base::card const &pbeam::operator() (
     if (NSM != nullptr) this->NSM.assign(NSM->begin(), NSM->end());
     if (this->NSM.size() == 1) this->NSM.resize(2, this->NSM.at(0));
     if (C1 != nullptr) this->C1.assign(C1->begin(), C1->end());
+    if (this->C1.size() == 1) this->C1.resize(2, this->C1.at(0));
     if (C2 != nullptr) this->C2.assign(C2->begin(), C2->end());
+    if (this->C2.size() == 1) this->C2.resize(2, this->C2.at(0));
     if (D1 != nullptr) this->D1.assign(D1->begin(), D1->end());
+    if (this->D1.size() == 1) this->D1.resize(2, this->D1.at(0));
     if (D2 != nullptr) this->D2.assign(D2->begin(), D2->end());
+    if (this->D2.size() == 1) this->D2.resize(2, this->D2.at(0));
     if (E1 != nullptr) this->E1.assign(E1->begin(), E1->end());
+    if (this->E1.size() == 1) this->E1.resize(2, this->E1.at(0));
     if (E2 != nullptr) this->E2.assign(E2->begin(), E2->end());
+    if (this->E2.size() == 1) this->E2.resize(2, this->E2.at(0));
     if (F1 != nullptr) this->F1.assign(F1->begin(), F1->end());
+    if (this->F1.size() == 1) this->F1.resize(2, this->F1.at(0));
     if (F2 != nullptr) this->F2.assign(F2->begin(), F2->end());
+    if (this->F2.size() == 1) this->F2.resize(2, this->F2.at(0));
     if (SO != nullptr && SO->size() > 0)
         this->SO.assign(SO->begin(), SO->end());
     else
