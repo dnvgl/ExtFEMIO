@@ -55,7 +55,7 @@ TEST_CASE("BDF PBEAML definitions: Small Field Format (BAR).", "[bdf_pbeaml]") {
     list<std::string> data({
             // 34567A1234567B1234567C1234567D1234567E1234567F
             "PBEAML  104018  4               BAR\n",
-            "           25.0   600.0         YESA    1.\n"});
+            "           25.0   600.0         YES     1.\n"});
     list<std::string> lines;
     card::card_split(data, lines);
     pbeaml probe(lines);
@@ -69,7 +69,7 @@ TEST_CASE("BDF PBEAML definitions: Small Field Format (BAR).", "[bdf_pbeaml]") {
         CHECK_THAT(vector<double>(probe.DIM[i].begin(), probe.DIM[i].end()),
                    IsEqual(vector<double>({25., 600.})));
     CHECK_THAT(vector<std::string>(probe.SO.begin(), probe.SO.end()),
-               IsEqual(vector<std::string>(1, "YESA")));
+               IsEqual(vector<std::string>(1, "YES")));
     CHECK_THAT(vector<double>(probe.X_XB.begin(), probe.X_XB.end()),
                IsEqual(vector<double>(1, 1.)));
     CHECK_THAT(vector<double>(probe.NSM.begin(), probe.NSM.end()),
@@ -80,7 +80,7 @@ TEST_CASE("BDF PBEAML definitions: Small Field Format (BAR 2).", "[bdf_pbeaml]")
 
     list<std::string> data({
             "PBEAML       134       8            BAR\n",
-            "            55.0   500.0        YESA    1.\n"});
+            "            55.0   500.0        YES     1.\n"});
     list<std::string> lines;
     card::card_split(data, lines);
     pbeaml probe(lines);
@@ -96,7 +96,7 @@ TEST_CASE("BDF PBEAML definitions: Small Field Format (BAR 2).", "[bdf_pbeaml]")
     CHECK_THAT(vector<double>(probe.NSM.begin(), probe.NSM.end()),
                IsEqual(vector<double>(2, 0.)));
     CHECK_THAT(vector<std::string>(probe.SO.begin(), probe.SO.end()),
-               IsEqual(vector<std::string>(1, "YESA")));
+               IsEqual(vector<std::string>(1, "YES")));
     CHECK_THAT(vector<double>(probe.X_XB.begin(), probe.X_XB.end()),
                IsEqual(vector<double>(1, 1.)));
 }
@@ -363,7 +363,7 @@ TEST_CASE("BDF PBEAML roundtrip test (SO, X/XB: default)", "[bdf_pbeaml]") {
         CHECK(test.str() ==
               // 34567A1234567B1234567C1234567D1234567E1234567F1234567G1234567H1234567I
               "PBEAML      7869  104010MSCBML0 I                                       \n"
-              "        1.000+002.000+003.000+004.000+005.000+006.000+00        YESA    \n"
+              "        1.000+002.000+003.000+004.000+005.000+006.000+00        YES     \n"
               "        1.000+00\n");
     }
 
@@ -389,7 +389,7 @@ TEST_CASE("BDF PBEAML roundtrip test (SO, X/XB: default)", "[bdf_pbeaml]") {
         CHECK(vector<double>(probe_l.NSM.begin(), probe_l.NSM.end()) ==
             vector<double>({0., 0.}));
         CHECK(vector<std::string>(probe_l.SO.begin(), probe_l.SO.end()) ==
-              vector<std::string>(1, "YESA"));
+              vector<std::string>(1, "YES"));
         CHECK(vector<double>(probe_l.X_XB.begin(), probe_l.X_XB.end()) ==
               vector<double>(1, 1.));
     }
@@ -414,7 +414,7 @@ TEST_CASE("BDF PBEAML roundtrip test (reuse) (SO, X/XB: default)",
     SECTION("check output") {
         CHECK(test.str() ==
               "PBEAML      7869  104010MSCBML0 I                                       \n"
-              "        1.000+002.000+003.000+004.000+005.000+006.000+00        YESA    \n"
+              "        1.000+002.000+003.000+004.000+005.000+006.000+00        YES     \n"
               "        1.000+00\n");
     }
 
@@ -439,7 +439,7 @@ TEST_CASE("BDF PBEAML roundtrip test (reuse) (SO, X/XB: default)",
         CHECK(vector<double>(probe_l.NSM.begin(), probe_l.NSM.end()) ==
               vector<double>({0., 0.}));
         CHECK(vector<std::string>(probe_l.SO.begin(), probe_l.SO.end()) ==
-              vector<std::string>(1, "YESA"));
+              vector<std::string>(1, "YES"));
         CHECK(vector<double>(probe_l.X_XB.begin(), probe_l.X_XB.end()) ==
               vector<double>(1, 1.));
     }

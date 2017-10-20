@@ -931,7 +931,7 @@ TEST_CASE("BDF_Dispatch", "[cards]") {
         "$ YIELD: 355\n"
         "MAT1    4       2.305+6 80000.0 0.3     7.850-6\n"
         "PBEAML  104010  4               L     \n"
-        "           63.0   340.0    35.0    14.0         YESA    1.+0\n"
+        "           63.0   340.0    35.0    14.0         YES     1.+0\n"
         "PBEAM   4000001 3       1.046+4 9.369+7 1.694+6 6.856+6 1.316+6\n"
         "                                                               \n"
         "        NO      1.+0\n"
@@ -1026,7 +1026,7 @@ TEST_CASE("BDF_Dispatch", "[cards]") {
     cards::dispatch(data, current);
     // 12345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
     // PBEAML  104010  4               L
-    //           63.0   340.0    35.0    14.0  YESA    1.
+    //           63.0   340.0    35.0    14.0  YES     1.
     {
         CHECK(current->card_type() == cards::types::PBEAML);
         auto probe = *static_cast<pbeaml*>(current.get());
@@ -1043,7 +1043,7 @@ TEST_CASE("BDF_Dispatch", "[cards]") {
         CHECK_THAT(std::vector<double>(probe.NSM.begin(), probe.NSM.end()),
                        IsEqual(std::vector<double>(2, 0.)));
         CHECK_THAT(std::vector<std::string>(probe.SO.begin(), probe.SO.end()),
-                   IsEqual(std::vector<std::string>(1, "YESA")));
+                   IsEqual(std::vector<std::string>(1, "YES")));
         CHECK_THAT(std::vector<double>(probe.X_XB.begin(), probe.X_XB.end()),
                        IsEqual(std::vector<double>(1, 1.)));
         CHECK_THAT(std::vector<double>(probe.NSM.begin(), probe.NSM.end()),
