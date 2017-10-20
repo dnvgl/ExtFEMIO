@@ -996,10 +996,10 @@ TEST_CASE("BDF PBEAM roundtrip test (minimal) (SO, X/XB: default)", "[bdf_pbeam]
     std::ostringstream test;
 
     long PID{7869}, MID{104010};
-    std::vector<double> A{1., 1.};
-    std::vector<double> I1{2., 2.};
-    std::vector<double> I2{3., 3.};
-    std::vector<double> I12{4., 4.};
+    std::vector<double> A({1.});
+    std::vector<double> I1({2.});
+    std::vector<double> I2({3.});
+    std::vector<double> I12({4.});
 
     pbeam probe(&PID, &MID, &A, &I1, &I2);
     test << probe;
@@ -1071,9 +1071,9 @@ TEST_CASE("BDF PBEAM roundtrip test (minimal) (SO, X/XB: default) (reuse)", "[bd
     std::ostringstream test;
 
     long PID{7869}, MID{104010};
-    std::vector<double> A{1., 1.};
-    std::vector<double> I1{2., 2.};
-    std::vector<double> I2{3., 3.};
+    std::vector<double> A({1.});
+    std::vector<double> I1({2.});
+    std::vector<double> I2({3.});
 
     pbeam probe;
     test << probe;
