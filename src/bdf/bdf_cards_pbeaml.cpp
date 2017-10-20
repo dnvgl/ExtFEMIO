@@ -138,6 +138,8 @@ pbeaml::pbeaml(long const *PID, long const *MID,
 void pbeaml::read(list<std::string> const & inp) {
 
     size_t i, j{0};
+    // GCC does not allow jumping over declarations.
+    // ReSharper disable once CppJoinDeclarationAndAssignment
     size_t dim_num;
 
     auto pos = inp.begin();
@@ -156,6 +158,7 @@ void pbeaml::read(list<std::string> const & inp) {
     if (pos == inp.end()) goto invalid;
     form_TYPE.set_value(TYPE, *(pos++));
     if (pos == inp.end()) goto invalid;
+    // ReSharper disable once CppJoinDeclarationAndAssignment
     dim_num = this->l_geom::get_dim(TYPE.value);
     if (dim_num < 1)
         throw errors::parse_error(
