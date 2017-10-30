@@ -272,7 +272,22 @@ Defines a 6 x 6 symmetric mass matrix at a geometric grid point.
                           double *M61=nullptr, double *M62=nullptr,
                           double *M63=nullptr, double *M64=nullptr,
                           double *M65=nullptr, double *M66=nullptr);
+                    conm1(long *G, long *CID,
+                          double *M11,
+                          double *M21=nullptr, double *M22=nullptr,
+                          double *M31=nullptr, double *M32=nullptr,
+                          double *M33=nullptr,
+                          double *M41=nullptr, double *M42=nullptr,
+                          double *M43=nullptr, double *M44=nullptr,
+                          double *M51=nullptr, double *M52=nullptr,
+                          double *M53=nullptr, double *M54=nullptr,
+                          double *M55=nullptr,
+                          double *M61=nullptr, double *M62=nullptr,
+                          double *M63=nullptr, double *M64=nullptr,
+                          double *M65=nullptr, double *M66=nullptr);
                     conm1(long *EID, long *G, long *CID,
+                          std::vector<double> *Mij);
+                    conm1(long *G, long *CID,
                           std::vector<double> *Mij);
                     card const &operator() (
                         long *EID, long *G, long *CID, double *M11,
@@ -288,7 +303,23 @@ Defines a 6 x 6 symmetric mass matrix at a geometric grid point.
                         double *M63=nullptr, double *M64=nullptr,
                         double *M65=nullptr, double *M66=nullptr);
                     card const &operator() (
+                        long *G, long *CID, double *M11,
+                        double *M21=nullptr, double *M22=nullptr,
+                        double *M31=nullptr, double *M32=nullptr,
+                        double *M33=nullptr,
+                        double *M41=nullptr, double *M42=nullptr,
+                        double *M43=nullptr, double *M44=nullptr,
+                        double *M51=nullptr, double *M52=nullptr,
+                        double *M53=nullptr, double *M54=nullptr,
+                        double *M55=nullptr,
+                        double *M61=nullptr, double *M62=nullptr,
+                        double *M63=nullptr, double *M64=nullptr,
+                        double *M65=nullptr, double *M66=nullptr);
+                    card const &operator() (
                         long *EID, long *G, long *CID,
+                        std::vector<double> *Mij);
+                    card const &operator() (
+                        long *G, long *CID,
                         std::vector<double> *Mij);
                     types card_type() const override;
                     void read(std::list<std::string> const &) override;

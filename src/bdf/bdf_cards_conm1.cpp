@@ -98,9 +98,58 @@ conm1::conm1(long *EID, long *G, long *CID, double *M11,
     this->conm1::check_data();
 }
 
+namespace {
+    long sEID{0};
+}
+
+conm1::conm1(long *G, long *CID, double *M11,
+             double *M21/*=nullptr*/, double *M22/*=nullptr*/,
+             double *M31/*=nullptr*/, double *M32/*=nullptr*/,
+             double *M33/*=nullptr*/,
+             double *M41/*=nullptr*/, double *M42/*=nullptr*/,
+             double *M43/*=nullptr*/, double *M44/*=nullptr*/,
+             double *M51/*=nullptr*/, double *M52/*=nullptr*/,
+             double *M53/*=nullptr*/, double *M54/*=nullptr*/,
+             double *M55/*=nullptr*/,
+             double *M61/*=nullptr*/, double *M62/*=nullptr*/,
+             double *M63/*=nullptr*/, double *M64/*=nullptr*/,
+             double *M65/*=nullptr*/, double *M66/*=nullptr*/) :
+    element(&sEID), G(G), CID(CID),
+    M11(M11),
+    M21(M21), M22(M22),
+    M31(M31), M32(M32), M33(M33),
+    M41(M41), M42(M42), M43(M43), M44(M44),
+    M51(M51), M52(M52), M53(M53), M54(M54), M55(M55),
+    M61(M61), M62(M62), M63(M63), M64(M64), M65(M65), M66(M66) {
+    this->conm1::check_data();
+}
+
 conm1::conm1(long *EID, long *G, long *CID,
              std::vector<double> *Mij) :
     element(EID), G(G), CID(CID),
+    M11(nullptr),
+    M21(nullptr), M22(nullptr),
+    M31(nullptr), M32(nullptr), M33(nullptr),
+    M41(nullptr), M42(nullptr), M43(nullptr), M44(nullptr),
+    M51(nullptr), M52(nullptr), M53(nullptr), M54(nullptr), M55(nullptr),
+    M61(nullptr), M62(nullptr), M63(nullptr), M64(nullptr), M65(nullptr),
+    M66(nullptr) {
+    assert(Mij->size() > 0);
+    assert(Mij->size() <= 6);
+    switch (Mij->size()) {
+    case 6:  M66 = (*Mij)[5];
+    case 5:  M55 = (*Mij)[4];
+    case 4:  M44 = (*Mij)[3];
+    case 3:  M33 = (*Mij)[2];
+    case 2:  M22 = (*Mij)[1];
+    default: M11 = (*Mij)[0];
+    }
+    this->conm1::check_data();
+}
+
+conm1::conm1(long *G, long *CID,
+             std::vector<double> *Mij) :
+    element(&sEID), G(G), CID(CID),
     M11(nullptr),
     M21(nullptr), M22(nullptr),
     M31(nullptr), M32(nullptr), M33(nullptr),
@@ -162,6 +211,46 @@ card const &conm1::operator() (
 }
 
 card const &conm1::operator() (
+    long *G, long *CID, double *M11,
+    double *M21/*=nullptr*/, double *M22/*=nullptr*/,
+    double *M31/*=nullptr*/, double *M32/*=nullptr*/, double *M33/*=nullptr*/,
+    double *M41/*=nullptr*/, double *M42/*=nullptr*/, double *M43/*=nullptr*/,
+    double *M44/*=nullptr*/,
+    double *M51/*=nullptr*/, double *M52/*=nullptr*/, double *M53/*=nullptr*/,
+    double *M54/*=nullptr*/, double *M55/*=nullptr*/,
+    double *M61/*=nullptr*/, double *M62/*=nullptr*/, double *M63/*=nullptr*/,
+    double *M64/*=nullptr*/, double *M65/*=nullptr*/, double *M66/*=nullptr*/) {
+
+    this->EID(EID);
+    this->G(G);
+    this->CID(CID);
+    this->M11(M11);
+    this->M21(M21);
+    this->M22(M22);
+    this->M31(M31);
+    this->M32(M32);
+    this->M33(M33);
+    this->M41(M41);
+    this->M42(M42);
+    this->M43(M43);
+    this->M44(M44);
+    this->M51(M51);
+    this->M52(M52);
+    this->M53(M53);
+    this->M54(M54);
+    this->M55(M55);
+    this->M61(M61);
+    this->M62(M62);
+    this->M63(M63);
+    this->M64(M64);
+    this->M65(M65);
+    this->M66(M66);
+
+    this->conm1::check_data();
+    return *this;
+}
+
+card const &conm1::operator() (
     long *EID, long *G, long *CID,
     std::vector<double> *Mij) {
 
@@ -169,6 +258,58 @@ card const &conm1::operator() (
     assert(Mij->size() <= 6);
 
     this->element::operator() (EID);
+    this->G(G);
+    this->CID(CID);
+    this->M11 = (*Mij)[0];
+    this->M21(nullptr);
+    if (Mij->size()>1)
+        this->M22 = (*Mij)[1];
+    else
+        this->M22(nullptr);
+    this->M31(nullptr);
+    this->M32(nullptr);
+    if (Mij->size()>2)
+        this->M33 = (*Mij)[2];
+    else
+        this->M33(nullptr);
+    this->M41(nullptr);
+    this->M42(nullptr);
+    this->M43(nullptr);
+    if (Mij->size()>3)
+        this->M44 = (*Mij)[3];
+    else
+        this->M44(nullptr);
+    this->M51(nullptr);
+    this->M52(nullptr);
+    this->M53(nullptr);
+    this->M54(nullptr);
+    if (Mij->size()>4)
+        this->M55 = (*Mij)[4];
+    else
+        this->M55(nullptr);
+    this->M61(nullptr);
+    this->M62(nullptr);
+    this->M63(nullptr);
+    this->M64(nullptr);
+    this->M65(nullptr);
+    if (Mij->size()>5)
+        this->M66 = (*Mij)[5];
+    else
+        this->M66(nullptr);
+
+    this->conm1::check_data();
+    return *this;
+}
+
+card const &conm1::operator() (
+    long *G, long *CID,
+    std::vector<double> *Mij) {
+
+    assert(Mij->size() > 0);
+    assert(Mij->size() <= 6);
+
+    long xEID{0};
+    this->element::operator() (&xEID);
     this->G(G);
     this->CID(CID);
     this->M11 = (*Mij)[0];

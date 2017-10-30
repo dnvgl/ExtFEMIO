@@ -165,6 +165,14 @@ TEST_CASE("BDF CONM1 types output.", "[bdf_conm1,out]" ) {
         CHECK(long(probe.EID) == 1);
     }
 
+    SECTION("auto number EID (2)") {
+        conm1::reset();
+        long G{22}, CID{2};
+        double M11{2.9};
+        conm1 probe(&G, &CID, &M11);
+        CHECK(long(probe.EID) == 1);
+    }
+
     SECTION("multiple") {
         conm1::reset();
         long EID{2}, G{6}, CID{3};
@@ -212,6 +220,47 @@ TEST_CASE("BDF CONM1 types output.", "[bdf_conm1,out]" ) {
         CHECK(test.str() ==
               // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
               "CONM1          2       6       31.000+00        2.000+00                \n"
+              "        3.000+00                        4.000+00                        \n"
+              "                5.000+00                                        6.000+00\n");
+    }
+
+    SECTION("diag M values (auto EID)") {
+        conm1::reset();
+        long G{6}, CID{3};
+        vector<double> Mij({1., 2., 3., 4., 5., 6.});
+        conm1 probe(&G, &CID, &Mij);
+        test << probe;
+        CHECK(test.str() ==
+              // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
+              "CONM1          1       6       31.000+00        2.000+00                \n"
+              "        3.000+00                        4.000+00                        \n"
+              "                5.000+00                                        6.000+00\n");
+    }
+
+    SECTION("diag M values (auto EID) called") {
+        conm1::reset();
+        long G{6}, CID{3};
+        vector<double> Mij({1., 2., 3., 4., 5., 6.});
+        conm1 probe;
+        test << probe;
+        test << probe(&G, &CID, &Mij);
+        CHECK(test.str() ==
+              // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
+              "CONM1          1       6       31.000+00        2.000+00                \n"
+              "        3.000+00                        4.000+00                        \n"
+              "                5.000+00                                        6.000+00\n");
+    }
+
+    SECTION("diag M values (auto EID) call") {
+        conm1::reset();
+        long G{6}, CID{3};
+        vector<double> Mij({1., 2., 3., 4., 5., 6.});
+        conm1 probe;
+        test << probe;
+        test << probe(&G, &CID, &Mij);
+        CHECK(test.str() ==
+              // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
+              "CONM1          1       6       31.000+00        2.000+00                \n"
               "        3.000+00                        4.000+00                        \n"
               "                5.000+00                                        6.000+00\n");
     }

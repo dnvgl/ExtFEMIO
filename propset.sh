@@ -6,10 +6,10 @@
 
 # Author: Berthold Höllmann <berthold.hoellmann@dnvgl.com>
 
-# ID: $Id: propset.sh 111 2017-09-19 09:52:38Z berhol $
-author="$Author: berhol $"
-date="$Date: 2017-09-19 11:52:38 +0200 (Di, 19 Sep 2017) $"
-version="$Revision: 111 $"
+# ID: $Id$
+author="$Author$"
+date="$Date$"
+version="$Revision$"
 
 set +f
 
