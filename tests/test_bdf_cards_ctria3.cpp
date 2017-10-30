@@ -68,6 +68,7 @@ TEST_CASE("BDF CTRIA3 definitions. (Small Field Format)",
 TEST_CASE("BDF CTRIA3 definitions. (Small Field Format, default values)",
           "[bdf_ctria3]") {
 
+    ctria3::reset();
     list<std::string> data({
         // 34567|1234567|1234567|1234567|1234567|1234567|
         "CTRIA3  1               16      200     141\n"});
@@ -95,6 +96,7 @@ TEST_CASE("BDF CTRIA3 definitions. (Small Field Format, default values)",
 TEST_CASE("BDF CTRIA3 definitions. (Small Field Format, default values 2)",
           "[bdf_ctria3]") {
 
+    ctria3::reset();
     list<std::string> data({
         // 34567|1234567|1234567|1234567|1234567|1234567|1234567|1234567|1234567|1234567|
         "CTRIA3  1               16      200     141\n",
@@ -132,6 +134,7 @@ TEST_CASE("BDF CTRIA3 definitions. (Large Field Format)",
     ctria3 probe(lines);
 
     SECTION("run test") {
+        ctria3::reset();
         CHECK(long(probe.EID) == 2);
         CHECK(long(probe.PID) == 1);
         CHECK(long(probe.G1) == 16);

@@ -31,7 +31,7 @@ namespace {
 
 #include "bdf/cards.h"
 #include "bdf/file.h"
-#include "bdf/cards_elements.h"
+#include "bdf/cards_loads.h"
 
 #include "catch_list_helper.h"
 #include "catch_vector_helper.h"
@@ -958,6 +958,7 @@ TEST_CASE("BDF_Dispatch", "[cards]") {
     std::list<std::string> l;
     std::list<std::string> ref;
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> current;
 
     std::list<std::string> data;
@@ -1203,6 +1204,7 @@ TEST_CASE("BDF_Dispatch", "[cards]") {
 
 TEST_CASE("Test partial supported element cards, CAABSF.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({ "CAABSF,44,38,1,10,20"});
@@ -1216,6 +1218,7 @@ TEST_CASE("Test partial supported element cards, CAABSF.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CAERO1.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1230,6 +1233,7 @@ TEST_CASE("Test partial supported element cards, CAERO1.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CAERO2.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1244,6 +1248,7 @@ TEST_CASE("Test partial supported element cards, CAERO2.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CAERO3.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1258,6 +1263,7 @@ TEST_CASE("Test partial supported element cards, CAERO3.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CAERO4.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1272,20 +1278,22 @@ TEST_CASE("Test partial supported element cards, CAERO4.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CAERO5.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
-            "CAERO5,6000,6001,100,,315,0,0,,0.0,0.0,0.0,1.0,0.2,1.0,0.,0.8"});
+            "CAERO5,6001,6001,100,,315,0,0,,0.0,0.0,0.0,1.0,0.2,1.0,0.,0.8"});
     std::list<std::string> l;
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
     CHECK(probe->card_type() == cards::types::ELEMENT);
-    CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 6000);
+    CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 6001);
 }
 
 TEST_CASE("Test partial supported element cards, CAXIF2.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1300,6 +1308,7 @@ TEST_CASE("Test partial supported element cards, CAXIF2.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CAXIF3.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1314,6 +1323,7 @@ TEST_CASE("Test partial supported element cards, CAXIF3.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CAXIF4.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1328,6 +1338,7 @@ TEST_CASE("Test partial supported element cards, CAXIF4.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CBEND.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1342,6 +1353,7 @@ TEST_CASE("Test partial supported element cards, CBEND.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CBEND (alt).", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1356,6 +1368,7 @@ TEST_CASE("Test partial supported element cards, CBEND (alt).", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CBUSH (1).", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1370,6 +1383,7 @@ TEST_CASE("Test partial supported element cards, CBUSH (1).", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CBUSH (2).", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1384,6 +1398,7 @@ TEST_CASE("Test partial supported element cards, CBUSH (2).", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CBUSH (3).", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1398,6 +1413,7 @@ TEST_CASE("Test partial supported element cards, CBUSH (3).", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CBUSH (4).", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1412,8 +1428,8 @@ TEST_CASE("Test partial supported element cards, CBUSH (4).", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CBUSH1D.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
-
     std::list<std::string> data({
             "CBUSH1D,35,102,108,112"});
     std::list<std::string> l;
@@ -1426,6 +1442,7 @@ TEST_CASE("Test partial supported element cards, CBUSH1D.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CBUTT.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1440,6 +1457,7 @@ TEST_CASE("Test partial supported element cards, CBUTT.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CCONEAX.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1454,6 +1472,7 @@ TEST_CASE("Test partial supported element cards, CCONEAX.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CCRSFIL.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1470,6 +1489,7 @@ TEST_CASE("Test partial supported element cards, CCRSFIL.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CDAMP1.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1484,6 +1504,7 @@ TEST_CASE("Test partial supported element cards, CDAMP1.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CDAMP1D.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1498,6 +1519,7 @@ TEST_CASE("Test partial supported element cards, CDAMP1D.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CDAMP2.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1512,6 +1534,7 @@ TEST_CASE("Test partial supported element cards, CDAMP2.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CDAMP2D.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1526,6 +1549,7 @@ TEST_CASE("Test partial supported element cards, CDAMP2D.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CDAMP3.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1540,6 +1564,7 @@ TEST_CASE("Test partial supported element cards, CDAMP3.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CDAMP4.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1554,6 +1579,7 @@ TEST_CASE("Test partial supported element cards, CDAMP4.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CDAMP5.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1568,6 +1594,7 @@ TEST_CASE("Test partial supported element cards, CDAMP5.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CDUM1.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1582,6 +1609,7 @@ TEST_CASE("Test partial supported element cards, CDUM1.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CDUM2.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1596,6 +1624,7 @@ TEST_CASE("Test partial supported element cards, CDUM2.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CDUM3.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1610,6 +1639,7 @@ TEST_CASE("Test partial supported element cards, CDUM3.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CDUM4.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1624,6 +1654,7 @@ TEST_CASE("Test partial supported element cards, CDUM4.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CDUM5.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1638,6 +1669,7 @@ TEST_CASE("Test partial supported element cards, CDUM5.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CDUM6.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1652,6 +1684,7 @@ TEST_CASE("Test partial supported element cards, CDUM6.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CDUM7.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1666,6 +1699,7 @@ TEST_CASE("Test partial supported element cards, CDUM7.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CDUM8.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1680,6 +1714,7 @@ TEST_CASE("Test partial supported element cards, CDUM8.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CDUM9.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1694,6 +1729,7 @@ TEST_CASE("Test partial supported element cards, CDUM9.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CELAS1.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1708,6 +1744,7 @@ TEST_CASE("Test partial supported element cards, CELAS1.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CELAS1D.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1722,6 +1759,7 @@ TEST_CASE("Test partial supported element cards, CELAS1D.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CELAS2.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1736,6 +1774,7 @@ TEST_CASE("Test partial supported element cards, CELAS2.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CELAS2D.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1750,6 +1789,7 @@ TEST_CASE("Test partial supported element cards, CELAS2D.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CELAS3.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1764,6 +1804,7 @@ TEST_CASE("Test partial supported element cards, CELAS3.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CELAS4.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1778,6 +1819,7 @@ TEST_CASE("Test partial supported element cards, CELAS4.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CFILLET.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1792,6 +1834,7 @@ TEST_CASE("Test partial supported element cards, CFILLET.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CFLUID2.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1806,6 +1849,7 @@ TEST_CASE("Test partial supported element cards, CFLUID2.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CFLUID3.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1820,6 +1864,7 @@ TEST_CASE("Test partial supported element cards, CFLUID3.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CFLUID4.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1834,6 +1879,7 @@ TEST_CASE("Test partial supported element cards, CFLUID4.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CGAP (1).", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1848,6 +1894,7 @@ TEST_CASE("Test partial supported element cards, CGAP (1).", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CGAP (2).", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1862,6 +1909,7 @@ TEST_CASE("Test partial supported element cards, CGAP (2).", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CHACAB.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1876,6 +1924,7 @@ TEST_CASE("Test partial supported element cards, CHACAB.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CHACBR.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1890,6 +1939,7 @@ TEST_CASE("Test partial supported element cards, CHACBR.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CHBDYE.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1904,6 +1954,7 @@ TEST_CASE("Test partial supported element cards, CHBDYE.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CHBDYG.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1918,6 +1969,7 @@ TEST_CASE("Test partial supported element cards, CHBDYG.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CHBDYP.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1932,6 +1984,7 @@ TEST_CASE("Test partial supported element cards, CHBDYP.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CHEXA.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1946,6 +1999,7 @@ TEST_CASE("Test partial supported element cards, CHEXA.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CMASS1.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1960,6 +2014,7 @@ TEST_CASE("Test partial supported element cards, CMASS1.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CMASS3.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1974,6 +2029,7 @@ TEST_CASE("Test partial supported element cards, CMASS3.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, COMBWLD.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1989,8 +2045,9 @@ TEST_CASE("Test partial supported element cards, COMBWLD.", "[bdf_cards]") {
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 1002);
 }
 
-TEST_CASE("Test partial supported element cards, CONM1.", "[bdf_cards]") {
+TEST_CASE("Test element cards, CONM1.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -1999,12 +2056,39 @@ TEST_CASE("Test partial supported element cards, CONM1.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
-    CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 2);
+    CHECK(probe->card_type() == cards::types::CONM1);
+
+    auto probe_ = dynamic_cast<cards::conm1*>(probe.get());
+
+    CHECK(long(probe_->EID) == 2);
+    CHECK(long(probe_->G) == 22);
+    CHECK(long(probe_->CID) == 2);
+    CHECK(double(probe_->M11) == 2.9);
+    CHECK(double(probe_->M21) == 6.3);
+    CHECK_FALSE(bool(probe_->M22));
+    CHECK_FALSE(bool(probe_->M31));
+    CHECK_FALSE(bool(probe_->M32));
+    CHECK(double(probe_->M33) == 4.8);
+    CHECK(double(probe_->M41) == 28.6);
+    CHECK_FALSE(bool(probe_->M42));
+    CHECK_FALSE(bool(probe_->M43));
+    CHECK_FALSE(bool(probe_->M44));
+    CHECK_FALSE(bool(probe_->M51));
+    CHECK_FALSE(bool(probe_->M52));
+    CHECK_FALSE(bool(probe_->M53));
+    CHECK_FALSE(bool(probe_->M54));
+    CHECK(double(probe_->M55) == 28.6);
+    CHECK_FALSE(bool(probe_->M61));
+    CHECK_FALSE(bool(probe_->M62));
+    CHECK_FALSE(bool(probe_->M63));
+    CHECK_FALSE(bool(probe_->M64));
+    CHECK_FALSE(bool(probe_->M65));
+    CHECK(double(probe_->M66) == 28.6);
 }
 
 TEST_CASE("Test partial supported element cards, CONM2.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2019,6 +2103,7 @@ TEST_CASE("Test partial supported element cards, CONM2.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CONROD.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2033,6 +2118,7 @@ TEST_CASE("Test partial supported element cards, CONROD.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CPENTA.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2047,6 +2133,7 @@ TEST_CASE("Test partial supported element cards, CPENTA.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CQUAD.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2061,6 +2148,7 @@ TEST_CASE("Test partial supported element cards, CQUAD.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CQUAD8.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2076,6 +2164,7 @@ TEST_CASE("Test partial supported element cards, CQUAD8.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CQUADR.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2090,6 +2179,7 @@ TEST_CASE("Test partial supported element cards, CQUADR.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CQUADX.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2104,6 +2194,7 @@ TEST_CASE("Test partial supported element cards, CQUADX.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CRAC2D.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2118,6 +2209,7 @@ TEST_CASE("Test partial supported element cards, CRAC2D.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CRAC3D.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2135,6 +2227,7 @@ TEST_CASE("Test partial supported element cards, CRAC3D.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CSHEAR.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2149,6 +2242,7 @@ TEST_CASE("Test partial supported element cards, CSHEAR.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CSLOT3.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2163,6 +2257,7 @@ TEST_CASE("Test partial supported element cards, CSLOT3.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CSLOT4.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2177,6 +2272,7 @@ TEST_CASE("Test partial supported element cards, CSLOT4.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CSPOT.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2191,6 +2287,7 @@ TEST_CASE("Test partial supported element cards, CSPOT.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CTETRA.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2205,6 +2302,7 @@ TEST_CASE("Test partial supported element cards, CTETRA.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CTRIA6.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2219,6 +2317,7 @@ TEST_CASE("Test partial supported element cards, CTRIA6.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CTRIAR.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2233,6 +2332,7 @@ TEST_CASE("Test partial supported element cards, CTRIAR.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CTRIAX.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2247,6 +2347,7 @@ TEST_CASE("Test partial supported element cards, CTRIAX.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CTRIAX6.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2261,6 +2362,7 @@ TEST_CASE("Test partial supported element cards, CTRIAX6.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CTUBE.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2275,6 +2377,7 @@ TEST_CASE("Test partial supported element cards, CTUBE.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, CVISC.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2289,6 +2392,7 @@ TEST_CASE("Test partial supported element cards, CVISC.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, GENEL.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2309,6 +2413,7 @@ TEST_CASE("Test partial supported element cards, GENEL.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, GMINTC.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2323,6 +2428,7 @@ TEST_CASE("Test partial supported element cards, GMINTC.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, GMINTS.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2337,6 +2443,7 @@ TEST_CASE("Test partial supported element cards, GMINTS.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, PLOTEL.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2351,6 +2458,7 @@ TEST_CASE("Test partial supported element cards, PLOTEL.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, RBAR.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2365,6 +2473,7 @@ TEST_CASE("Test partial supported element cards, RBAR.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, RBAR1.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2379,6 +2488,7 @@ TEST_CASE("Test partial supported element cards, RBAR1.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, RBE1.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2394,6 +2504,7 @@ TEST_CASE("Test partial supported element cards, RBE1.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, RBE2.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2409,6 +2520,7 @@ TEST_CASE("Test partial supported element cards, RBE2.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, RBE3.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2427,6 +2539,7 @@ TEST_CASE("Test partial supported element cards, RBE3.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, RBE3D (1).", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2443,6 +2556,7 @@ TEST_CASE("Test partial supported element cards, RBE3D (1).", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, RBE3D (2).", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2459,6 +2573,7 @@ TEST_CASE("Test partial supported element cards, RBE3D (2).", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, RBE3D.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2477,6 +2592,7 @@ TEST_CASE("Test partial supported element cards, RBE3D.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, RJOINT.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2491,6 +2607,7 @@ TEST_CASE("Test partial supported element cards, RJOINT.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, RROD.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2505,6 +2622,7 @@ TEST_CASE("Test partial supported element cards, RROD.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, RSPLINE.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2520,6 +2638,7 @@ TEST_CASE("Test partial supported element cards, RSPLINE.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, RSSCON (1).", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2534,6 +2653,7 @@ TEST_CASE("Test partial supported element cards, RSSCON (1).", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, RSSCON (2).", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2548,6 +2668,7 @@ TEST_CASE("Test partial supported element cards, RSSCON (2).", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, RSSCON (3).", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2562,6 +2683,7 @@ TEST_CASE("Test partial supported element cards, RSSCON (3).", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, RTRPLT.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2576,6 +2698,7 @@ TEST_CASE("Test partial supported element cards, RTRPLT.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, RTRPLT1.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2590,6 +2713,7 @@ TEST_CASE("Test partial supported element cards, RTRPLT1.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, SPLINE1.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2604,6 +2728,7 @@ TEST_CASE("Test partial supported element cards, SPLINE1.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, SPLINE2.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2619,6 +2744,7 @@ TEST_CASE("Test partial supported element cards, SPLINE2.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, SPLINE3.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2634,6 +2760,7 @@ TEST_CASE("Test partial supported element cards, SPLINE3.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, SPLINE4.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({
@@ -2648,6 +2775,7 @@ TEST_CASE("Test partial supported element cards, SPLINE4.", "[bdf_cards]") {
 
 TEST_CASE("Test partial supported element cards, SPLINE5.", "[bdf_cards]") {
 
+    cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
     std::list<std::string> data({

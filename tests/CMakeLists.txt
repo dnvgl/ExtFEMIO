@@ -91,6 +91,7 @@ add_executable(test_bdf_cards
   test_bdf_cards_cbar.cpp
   test_bdf_cards_cbeam.cpp
   test_bdf_cards_cbush.cpp
+  test_bdf_cards_conm1.cpp
   test_bdf_cards_cquad4.cpp
   test_bdf_cards_crod.cpp
   # test_bdf_cards_celas1.cpp

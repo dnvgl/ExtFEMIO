@@ -178,6 +178,7 @@ void cmass2::check_data() {
     if(G2) form_G2.check(G2);
     if(C2) form_C2.check(C2);
 }
+
 // Local Variables:
 // mode: c++
 // coding: utf-8

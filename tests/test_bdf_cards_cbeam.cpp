@@ -116,6 +116,7 @@ TEST_CASE("BDF CBEAM definitions (OFFT default). (Small Field Format)", "[bdf_cb
 
 TEST_CASE("BDF CBEAM definitions. (Small Field Format), dircode",
           "[bdf_cbeam,dcode]") {
+    cbeam::reset();
     std::list<std::string> data({
         "CBEAM   7869    104010  76      153      13                     GOO     \n",
         "                        0.0     -22.617 -339.25 0.0     22.617 "});
@@ -152,6 +153,7 @@ TEST_CASE("BDF CBEAM definitions. (Small Field Format), dircode",
 
 TEST_CASE("BDF CBEAM definitions (OFFT default). (Small Field Format), dircode",
           "[bdf_cbeam,dcode]") {
+    cbeam::reset();
     std::list<std::string> data({
         "CBEAM   7869    104010  76      153      13\n",
         "                        0.0     -22.617 -339.25 0.0     22.617 "});

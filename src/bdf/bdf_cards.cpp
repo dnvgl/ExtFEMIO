@@ -316,6 +316,10 @@ void (*cards::warn_report)(std::string const &) = &_stderr_report;
 
 void (*cards::error_report)(std::string const &) = &_stderr_report;
 
+bool const cards::__base::card::keep_all_entries() const {
+    return false;
+}
+
 cards::__base::card::card(list<std::string> const &inp) {}
 
 bdf::types::empty cards::__base::card::empty = bdf::types::empty();
@@ -329,7 +333,8 @@ cards::__base::card const &cards::__base::card::operator() (
 }
 
 std::string cards::__base::card::format_outlist(
-    list<unique_ptr<format_entry> > const &en) {
+    list<unique_ptr<format_entry> > const &en,
+    bool keep_all_entries/*=false*/) {
 
     unsigned long i = 0;
     unsigned long lines = 0;
@@ -351,7 +356,8 @@ std::string cards::__base::card::format_outlist(
         bdf::types::base::out_form = bdf::types::out_form_type::LONG;
     }
 
-    while (res_list.back() == (long_format ? "                " : "        "))
+    while (!keep_all_entries &&
+           res_list.back() == (long_format ? "                " : "        "))
         res_list.pop_back();
 
     for (auto &p : res_list) {
@@ -460,7 +466,7 @@ ostream &cards::__base::card::put(ostream &os) const {
     this->collect_outdata(entries);
 
     if (entries.size()>0)
-        os << this->format_outlist(entries) << endl;
+        os << this->format_outlist(entries, this->keep_all_entries()) << endl;
 
     return os;
 }
@@ -555,6 +561,9 @@ void cards::dispatch(
         case types::PBUSH:
             res = make_unique<pbush>(inp);
             break;
+        case types::CONM1:
+            res = make_unique<conm1>(inp);
+            break;
             /// Elements only supported to allow counting.
         case types::CAABSF:
         case types::CAERO1:
@@ -606,7 +615,6 @@ void cards::dispatch(
         case types::CMASS1:
         case types::CMASS3:
         case types::COMBWLD:
-        case types::CONM1:
         case types::CONM2:
         case types::CONROD:
         case types::CPENTA:

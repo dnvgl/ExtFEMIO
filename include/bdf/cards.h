@@ -390,13 +390,15 @@ namespace dnvgl {
                         /**
                          * \brief Two character strings for continuation lines in Free Form Format cards.
                          */
+                        virtual bool const keep_all_entries(void) const;
                         static const std::set<char> free_form_cont;
                         static const std::map<std::string, types> cardtype_map;
                     protected:
                         static dnvgl::extfem::bdf::types::empty empty;
                         static bdf::types::card head;
                         static std::string format_outlist(
-                            const std::list<std::unique_ptr<format_entry> >&);
+                            const std::list<std::unique_ptr<format_entry> >&,
+                            bool keep_all_entries=false);
                         std::ostream &put(std::ostream&) const override;
                         virtual void collect_outdata(
                             std::list<std::unique_ptr<format_entry> >&) const = 0;

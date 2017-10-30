@@ -56,6 +56,7 @@ entry_type<long> element::form_EID("EID", bound_EID);
 
 element::element(list<std::string> const &inp) : card(inp) {
     this->element::read(inp);
+    this->element::check_data();
 }
 
 element::element(long *EID) : card(), EID(EID) {
@@ -107,7 +108,7 @@ void element::reset() {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&
+// compile-command: "make -C ../../cbuild -j7 &&
 //    (make -C ../../cbuild test;
 //     ../../cbuild/tests/test_bdf_cards --use-colour no)"
 // End:

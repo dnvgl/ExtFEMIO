@@ -53,6 +53,7 @@ TEST_CASE("BDF CROD default EID.", "[bdf_crod]") {
 
 TEST_CASE("BDF CROD definitions. (Free Field Format)", "[bdf_crod]") {
 
+    crod::reset();
     std::list<std::string> data({"CROD,222,13,14,15\n"});
     std::list<std::string> lines;
     __base::card::card_split(data, lines);
@@ -69,6 +70,7 @@ TEST_CASE("BDF CROD definitions. (Free Field Format)", "[bdf_crod]") {
 TEST_CASE("BDF CROD definitions. (Free Field Format) (default PID)",
           "[bdf_crod]") {
 
+    crod::reset();
     std::list<std::string> data({"CROD,222,,14,15\n"});
     std::list<std::string> lines;
     __base::card::card_split(data, lines);
@@ -83,6 +85,8 @@ TEST_CASE("BDF CROD definitions. (Free Field Format) (default PID)",
 }
 
 TEST_CASE("BDF CROD definitions. (Small Field Format)", "[bdf_crod]") {
+
+    crod::reset();
 
     std::list<std::string> data({
             "CROD        7869     234      76     153\n"});
@@ -100,6 +104,8 @@ TEST_CASE("BDF CROD definitions. (Small Field Format)", "[bdf_crod]") {
 
 TEST_CASE("BDF CROD definitions. (Small Field Format) (default PID)",
           "[bdf_crod]") {
+
+    crod::reset();
 
     std::list<std::string> data({
             "CROD        7869              76     153\n"});
@@ -130,6 +136,7 @@ TEST_CASE("BDF CROD roundtrip test.", "[bdf_crod]") {
     }
 
     SECTION("check reading") {
+        crod::reset();
         std::list<std::string> data;
         std::list<std::string> lines;
         std::string tmp;
@@ -163,6 +170,7 @@ TEST_CASE("BDF CROD roundtrip test (reuse).", "[bdf_crod]") {
     }
 
     SECTION("check reading") {
+        crod::reset();
         std::list<std::string> data;
         std::list<std::string> lines;
         std::string tmp;
@@ -196,6 +204,7 @@ TEST_CASE("BDF CROD roundtrip test. (default PID)", "[bdf_crod]") {
     }
 
     SECTION("check reading") {
+        crod::reset();
         std::list<std::string> data;
         std::list<std::string> lines;
         std::string tmp;
@@ -229,6 +238,7 @@ TEST_CASE("BDF CROD roundtrip test (reuse) (default PID).", "[bdf_crod]") {
     }
 
     SECTION("check reading") {
+        crod::reset();
         std::list<std::string> data;
         std::list<std::string> lines;
         std::string tmp;

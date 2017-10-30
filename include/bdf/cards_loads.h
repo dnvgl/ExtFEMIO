@@ -172,6 +172,135 @@ vector.
                     using momforce::collect_outdata;
                 };
 
+/// Handle Nastran Bulk CONM1 entries.
+/** # Parameter
+Concentrated Mass Element Connection, General Form
+
+Defines a 6 x 6 symmetric mass matrix at a geometric grid point.
+
+# Format:
+
+
+| 1       | 2     | 3     | 4     | 5     | 6     | 7     | 8     | 9     | 10 |
+| ------- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | -- |
+| `CONM1` | `EID` | `G`   | `CID` | `M11` | `M21` | `M22` | `M31` | `M32` |    |
+|         | `M33` | `M41` | `M42` | `M43` | `M44` | `M51` | `M52` | `M53` |    |
+|         | `M54` | `M55` | `M61` | `M62` | `M63` | `M64` | `M65` | `M66` |    |
+
+# Example:
+
+| 1       | 2   | 3    | 4 | 5   | 6   | 7 | 8 | 9    | 10 |
+| ------- | --- | ---- | - | --- | --- | - | - | ---- | -- |
+| `CONM1` | 2   | 22   | 2 | 2.9 | 6.3 |   |   |      |    |
+|         | 4.8 | 28.6 |   |     |     |   |   |      |    |
+|         |     | 28.6 |   |     |     |   |   | 28.6 |    |
+
+# Remarks:
+
+1. For a less general means of defining concentrated mass at grid
+   points, see the CONM2 entry description.
+
+2. Element identification numbers should be unique with respect to all
+   other element identification numbers.
+*/
+
+                class conm1 : public __base::element {
+
+                    bdf::types::card static head;
+                    virtual bool const keep_all_entries(void) const  override;
+                    using __base::card::format_outlist;
+                    using __base::element::form_EID;
+                    // bdf::types::entry_type<long> static form_EID;
+                    bdf::types::entry_type<long> static form_G;
+                    bdf::types::entry_type<long> static form_CID;
+                    bdf::types::entry_type<double> static form_Mij;
+
+                public:
+                    // /** Unique element identification number. (Integer > 0)
+                    //  */
+                    // dnvgl::extfem::bdf::types::bdf::types::entry_value<long> EID;
+                    using __base::element::EID;
+/** Grid point identification number. (Integer > 0)
+*/
+                    bdf::types::entry_value<long> G;
+/** Coordinate system identification number for the mass matrix.
+    (Integer > 0)
+*/
+                    bdf::types::entry_value<long> CID;
+ /** Mass matrix values. (Real)
+ */
+                    bdf::types::entry_value<double> M11;
+                    bdf::types::entry_value<double> M21;
+                    bdf::types::entry_value<double> M22;
+                    bdf::types::entry_value<double> M31;
+                    bdf::types::entry_value<double> M32;
+                    bdf::types::entry_value<double> M33;
+                    bdf::types::entry_value<double> M41;
+                    bdf::types::entry_value<double> M42;
+                    bdf::types::entry_value<double> M43;
+                    bdf::types::entry_value<double> M44;
+                    bdf::types::entry_value<double> M51;
+                    bdf::types::entry_value<double> M52;
+                    bdf::types::entry_value<double> M53;
+                    bdf::types::entry_value<double> M54;
+                    bdf::types::entry_value<double> M55;
+                    bdf::types::entry_value<double> M61;
+                    bdf::types::entry_value<double> M62;
+                    bdf::types::entry_value<double> M63;
+                    bdf::types::entry_value<double> M64;
+                    bdf::types::entry_value<double> M65;
+                    bdf::types::entry_value<double> M66;
+
+                private:
+                    explicit conm1(std::string const&) = delete;
+
+                public:
+
+                    conm1() = default;
+                    ~conm1() = default;
+                    explicit conm1(std::list<std::string> const&);
+                    conm1(long *EID, long *G, long *CID,
+                          double *M11,
+                          double *M21=nullptr, double *M22=nullptr,
+                          double *M31=nullptr, double *M32=nullptr,
+                          double *M33=nullptr,
+                          double *M41=nullptr, double *M42=nullptr,
+                          double *M43=nullptr, double *M44=nullptr,
+                          double *M51=nullptr, double *M52=nullptr,
+                          double *M53=nullptr, double *M54=nullptr,
+                          double *M55=nullptr,
+                          double *M61=nullptr, double *M62=nullptr,
+                          double *M63=nullptr, double *M64=nullptr,
+                          double *M65=nullptr, double *M66=nullptr);
+                    conm1(long *EID, long *G, long *CID,
+                          std::vector<double> *Mij);
+                    card const &operator() (
+                        long *EID, long *G, long *CID, double *M11,
+                        double *M21=nullptr, double *M22=nullptr,
+                        double *M31=nullptr, double *M32=nullptr,
+                        double *M33=nullptr,
+                        double *M41=nullptr, double *M42=nullptr,
+                        double *M43=nullptr, double *M44=nullptr,
+                        double *M51=nullptr, double *M52=nullptr,
+                        double *M53=nullptr, double *M54=nullptr,
+                        double *M55=nullptr,
+                        double *M61=nullptr, double *M62=nullptr,
+                        double *M63=nullptr, double *M64=nullptr,
+                        double *M65=nullptr, double *M66=nullptr);
+                    card const &operator() (
+                        long *EID, long *G, long *CID,
+                        std::vector<double> *Mij);
+                    types card_type() const override;
+                    void read(std::list<std::string> const &) override;
+                    card const &operator() (const std::list<std::string> &) override;
+
+                private:
+
+                    void collect_outdata(
+                        std::list<std::unique_ptr<format_entry> >&) const override;
+                    void check_data() override;
+                };
+
 /// Handle Nastran Bulk CMASS2 entries.
 /** # Parameter
 

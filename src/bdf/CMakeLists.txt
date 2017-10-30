@@ -32,6 +32,7 @@ set(LIBEXTFEMIO_BDF_SOURCES
 #  bdf_cards_celas1.cpp
   bdf_cards_enddata.cpp
   bdf_cards_grid.cpp
+  bdf_cards_conm1.cpp
   bdf_cards_cmass2.cpp
   bdf_cards_cmass4.cpp
   bdf_cards_comment.cpp
