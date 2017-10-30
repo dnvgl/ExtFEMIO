@@ -264,6 +264,20 @@ TEST_CASE("BDF CONM1 types output.", "[bdf_conm1,out]" ) {
               "        3.000+00                        4.000+00                        \n"
               "                5.000+00                                        6.000+00\n");
     }
+
+    SECTION("diag M values (auto EID) call, null values") {
+        conm1::reset();
+        long G{6}, CID{3};
+        vector<double> Mij({1., 0., 0., 0., 0., 0.});
+        conm1 probe;
+        test << probe;
+        test << probe(&G, &CID, &Mij);
+        CHECK(test.str() ==
+              // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
+              "CONM1          1       6       31.000+00                                \n"
+              "                                                                        \n"
+              "                                                                        \n");
+    }
 }
 
 // Local Variables:

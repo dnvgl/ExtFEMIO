@@ -52,6 +52,7 @@ bool const conm1::keep_all_entries() const {
 namespace {
     auto const c_l0 = make_shared<long>(0);
     auto const c_l1 = make_shared<long>(1);
+    auto const c_d0 = make_shared<double>(0);
 }
 
 // entry_type<long> conm1::form_EID(
@@ -66,7 +67,7 @@ namespace {
 entry_type<long> conm1::form_CID("CID", bound_CID);
 namespace {
     auto const bound_Mij = make_shared<bound<double>>(
-        nullptr, nullptr, nullptr, true);
+        nullptr, nullptr, c_d0, true);
 }
 entry_type<double> conm1::form_Mij("Mij", bound_Mij);
 
@@ -418,67 +419,67 @@ void conm1::collect_outdata(
     res.push_back(unique_ptr<format_entry>(format<long>(form_G  , G  )));
     res.push_back(unique_ptr<format_entry>(format<long>(form_CID, CID)));
     res.push_back(unique_ptr<format_entry>(
-                      bool(M11) ?
+                      bool(M11) && !form_Mij.is_default(&M11) ?
                       format<double>(form_Mij, M11) : format(empty)));
     res.push_back(unique_ptr<format_entry>(
-                      bool(M21) ?
+                      bool(M21) && !form_Mij.is_default(&M21) ?
                       format<double>(form_Mij, M21) : format(empty)));
     res.push_back(unique_ptr<format_entry>(
-                      bool(M22) ?
+                      bool(M22) && !form_Mij.is_default(&M22) ?
                       format<double>(form_Mij, M22) : format(empty)));
     res.push_back(unique_ptr<format_entry>(
-                      bool(M31) ?
+                      bool(M31) && !form_Mij.is_default(&M31) ?
                       format<double>(form_Mij, M31) : format(empty)));
     res.push_back(unique_ptr<format_entry>(
-                      bool(M32) ?
+                      bool(M32) && !form_Mij.is_default(&M32) ?
                       format<double>(form_Mij, M32) : format(empty)));
     res.push_back(unique_ptr<format_entry>(
-                      bool(M33) ?
+                      bool(M33) && !form_Mij.is_default(&M33) ?
                       format<double>(form_Mij, M33) : format(empty)));
     res.push_back(unique_ptr<format_entry>(
-                      bool(M41) ?
+                      bool(M41) && !form_Mij.is_default(&M41) ?
                       format<double>(form_Mij, M41) : format(empty)));
     res.push_back(unique_ptr<format_entry>(
-                      bool(M42) ?
+                      bool(M42) && !form_Mij.is_default(&M42) ?
                       format<double>(form_Mij, M42) : format(empty)));
     res.push_back(unique_ptr<format_entry>(
-                      bool(M43) ?
+                      bool(M43) && !form_Mij.is_default(&M43) ?
                       format<double>(form_Mij, M43) : format(empty)));
     res.push_back(unique_ptr<format_entry>(
-                      bool(M44) ?
+                      bool(M44) && !form_Mij.is_default(&M44) ?
                       format<double>(form_Mij, M44) : format(empty)));
     res.push_back(unique_ptr<format_entry>(
-                      bool(M51) ?
+                      bool(M51) && !form_Mij.is_default(&M51) ?
                       format<double>(form_Mij, M51) : format(empty)));
     res.push_back(unique_ptr<format_entry>(
-                      bool(M52) ?
+                      bool(M52) && !form_Mij.is_default(&M62) ?
                       format<double>(form_Mij, M52) : format(empty)));
     res.push_back(unique_ptr<format_entry>(
-                      bool(M53) ?
+                      bool(M53) && !form_Mij.is_default(&M63) ?
                       format<double>(form_Mij, M53) : format(empty)));
     res.push_back(unique_ptr<format_entry>(
-                      bool(M54) ?
+                      bool(M54) && !form_Mij.is_default(&M54) ?
                       format<double>(form_Mij, M54) : format(empty)));
     res.push_back(unique_ptr<format_entry>(
-                      bool(M55) ?
+                      bool(M55) && !form_Mij.is_default(&M55) ?
                       format<double>(form_Mij, M55) : format(empty)));
     res.push_back(unique_ptr<format_entry>(
-                      bool(M61) ?
+                      bool(M61) && !form_Mij.is_default(&M61) ?
                       format<double>(form_Mij, M61) : format(empty)));
     res.push_back(unique_ptr<format_entry>(
-                      bool(M62) ?
+                      bool(M62) && !form_Mij.is_default(&M62) ?
                       format<double>(form_Mij, M62) : format(empty)));
     res.push_back(unique_ptr<format_entry>(
-                      bool(M63) ?
+                      bool(M63) && !form_Mij.is_default(&M63) ?
                       format<double>(form_Mij, M63) : format(empty)));
     res.push_back(unique_ptr<format_entry>(
-                      bool(M64) ?
+                      bool(M64) && !form_Mij.is_default(&M64) ?
                       format<double>(form_Mij, M64) : format(empty)));
     res.push_back(unique_ptr<format_entry>(
-                      bool(M65) ?
+                      bool(M65) && !form_Mij.is_default(&M65) ?
                       format<double>(form_Mij, M65) : format(empty)));
     res.push_back(unique_ptr<format_entry>(
-                      bool(M66) ?
+                      bool(M66) && !form_Mij.is_default(&M66) ?
                       format<double>(form_Mij, M66) : format(empty)));
 
 }

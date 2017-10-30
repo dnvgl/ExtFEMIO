@@ -54,6 +54,10 @@ namespace dnvgl {
                     entry_value<_Ty> operator() (std::string const &inp);
                     entry_value<_Ty> operator() (
                         std::string const &, std::string const &);
+                    bool is_default(entry_value<_Ty> const *val) const {
+                        return this->bounds->has_default() &&
+                            this->bounds->get_default() == val->value;
+                    }
                 };
 
                 template <typename _Ty>
