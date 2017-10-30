@@ -46,8 +46,12 @@ std::string error::get_msg() const {
 
 char const *error::what() const _EXTFEMIO_NOEXCEPT{
     std::string xSMsg(this->get_msg() + "\n");
-    char *xMsg = new char[xSMsg.length() + 1];
-    std::copy(xSMsg.begin(), xSMsg.end(), xMsg);
+    char* xMsg = new char[xSMsg.length() + 1];
+#ifdef _MSC_VER
+    strncpy_s(xMsg, xSMsg.length() + 1, xSMsg.c_str(), xSMsg.length());
+#else
+    std::strncpy(xMsg, xSMsg.c_str(), xSMsg.length());
+#endif
     xMsg[xSMsg.size()] = '\0';
     return xMsg;
 }
