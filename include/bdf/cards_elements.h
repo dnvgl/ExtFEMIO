@@ -34,7 +34,7 @@ namespace dnvgl {
                         void static reset();
                     protected:
                         element() = default;
-                        explicit element(long *EID);
+                        explicit element(long const *EID);
                         virtual card const &operator() (long const *EID);
                         card const &operator() (
                             const std::list<std::string>&) override;

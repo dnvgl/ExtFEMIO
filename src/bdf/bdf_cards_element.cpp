@@ -59,7 +59,7 @@ element::element(list<std::string> const &inp) : card(inp) {
     this->element::check_data();
 }
 
-element::element(long *EID) : card(), EID(EID) {
+element::element(long const *EID) : card(), EID(EID) {
     this->element::check_data();
 }
 
