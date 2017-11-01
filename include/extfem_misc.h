@@ -54,6 +54,15 @@
  * * \b BDF : NASTRAN \c BDF files.
  *
  * * \b FEM : DNV GL \b Sestra text \c FEM files.
+ *
+ * The library provides a class for each supported data sets in BDF
+ * and FEM. For each field in the dataset an attribute is provided.
+ * Regarding the naming conventions, the classes and attributes are
+ * named as described in the respective documentation. Class names are
+ * in minuskels, attribute names in majuskels.
+ *
+ * Some constraints are enforced, i.e. the reuse of element, or
+ * property ids is prohibited, but the next free id is used instead.
  */
 
 /*! @defgroup exceptions Various exceptions

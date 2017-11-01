@@ -28,6 +28,20 @@ functionality supported in GLFrame rspt. the BMF file format.
 More detailed information on supported functionality can be found in
 the according directories in the =docs= subdirectory.
 
+** Unit system considerations
+
+Unit systems used by the different systems are:
+
+| Dimension \ System | Poseidon                   | Nastran | Sesam / GeniE |
+|--------------------+----------------------------+---------+---------------|
+| L (Length Unit)    | [m] for nodes              | [m]     | [m]           |
+|                    | [mm] for plate thicknesses |         |               |
+| M (Mass Unit)      | [t]                        | [t]     | [t]           |
+| ML/T² Force Unit)  | [kN]                       | [kN]    | [kN]          |
+
+Yield stress is stored in [kN/m²] in Sesam / GeniE, but [N/mm²] in POSEIDON.
+
+
 ** NASTRAN Bulk Data Format (BDF)
 
    #+INCLUDE: "docs/bdf/ReadMe.org"

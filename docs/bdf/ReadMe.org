@@ -33,8 +33,9 @@
   |          | =LOAD=     | Load case combination                                                                       | ✓      | ✓       |
   |          | =FORCE=    | Forces on Nodes                                                                             | ✓      | ✓       |
   |          | =MOMENT=   | Moments on Nodes                                                                            | ✓      | ✓       |
-  |          | =CMASS2=   | Scalar Mass Property and Connection                                                         | ✓      | ✓       |
-  |          | =CMASS4=   | Scalar Mass Property and Connection to Scalar Points Only                                   | ✓      | ✓       |
+  |          | =CONM1=    | Concentrated Mass Element Connection, General Form                                          | ✗      | ✓       |
+  |          | =CMASS2=   | Scalar Mass Property and Connection                                                         | ✓      | ✗       |
+  |          | =CMASS4=   | Scalar Mass Property and Connection to Scalar Points Only                                   | ✓      | ✗       |
   |          | =GRAV=     | Acceleration or Gravity Load                                                                | ✓      | ✓       |
   |----------+------------+---------------------------------------------------------------------------------------------+--------+---------|
   | Misc     |            |                                                                                             |        |         |
