@@ -13,8 +13,6 @@
 #ifndef _BDF_ENTRY_TYPE_H
 #define _BDF_ENTRY_TYPE_H
 
-#include <type_traits>
-
 #ifdef HAVE_BOOST_REGEX_HPP
 #include <boost/regex.hpp>
 #else
@@ -37,20 +35,19 @@ namespace dnvgl {
                     explicit entry_type(const std::string& cs);
                     entry_type(const std::string &name,
                                std::shared_ptr<bdf::type_bounds::bound<_Ty>> const &bounds);
-                    bdf_types type() const;
+                    bdf_types type() const override;
                     entry_value<_Ty> check(entry_value<_Ty> &val);
                     entry_value<_Ty> check(_Ty &val);
                     entry_value<_Ty> check(_Ty *val);
-                    void reset();
-                    void set_value(
-                        entry_value<_Ty> &val, const std::string &inp);
+                    void reset() const;
+                    void set_value(entry_value<_Ty> &val, const std::string &inp);
                     void set_value(
                         entry_value<_Ty> &,
                         const std::string &, const std::string &);
 
                     std::string format(const entry_value<_Ty> &inp) const;
                     std::string format(const _Ty &val) const;
-                    std::string format(const void *v) const;
+                    std::string format(const void *v) const override;
                     entry_value<_Ty> operator() (std::string const &inp);
                     entry_value<_Ty> operator() (
                         std::string const &, std::string const &);
@@ -100,17 +97,19 @@ namespace dnvgl {
                 }
 
                 template <typename _Ty>
-                void entry_type<_Ty>::reset() {
+                void entry_type<_Ty>::reset() const {
                     bounds->reset();
                 }
 
                 template <typename _Ty>
+                // ReSharper disable once CppMemberFunctionMayBeStatic
                 void entry_type<_Ty>::set_value(
                     entry_value<_Ty> &val, const std::string &inp) {
                     NOT_IMPLEMENTED("entry_type<_Ty>::set_value" + inp);
                 }
 
                 template <typename _Ty>
+                // ReSharper disable once CppMemberFunctionMayBeStatic
                 void entry_type<_Ty>::set_value(
                     entry_value<_Ty> &,
                     const std::string &inp1, const std::string &inp2) {
@@ -147,6 +146,7 @@ namespace dnvgl {
                 };
 
                 template <> inline
+                // ReSharper disable once CppMemberFunctionMayBeConst
                 entry_value<long> entry_type<long>::check(
                     entry_value<long> &val) {
                     if (this->bounds != nullptr &&
@@ -160,6 +160,7 @@ namespace dnvgl {
                 }
 
                 template <> inline
+                // ReSharper disable once CppMemberFunctionMayBeConst
                 void entry_type<long>::set_value(
                     dnvgl::extfem::bdf::types::entry_value<long> &val,
                     const std::string &inp) {
@@ -232,18 +233,17 @@ namespace dnvgl {
                 }
 
                 template <> inline
-                std::string entry_type<long>::format(const void *v) const {
+                    std::string entry_type<long>::format(const void *v) const {
                     if (!v)
                         return empty().format(nullptr);
-                    else {
-                        entry_value<long> val(static_cast<long const*>(v));
-                        return this->format(val);
-                    }
+
+                    entry_value<long> const val(static_cast<long const*>(v));
+                    return this->format(val);
                 }
 
                 template <> inline
                 std::string entry_type<long>::format(const long &val) const {
-                    entry_value<long> tmp(val);
+                    entry_value<long> const tmp(val);
                     return format(tmp);
                 }
 ///@}
@@ -262,7 +262,9 @@ namespace dnvgl {
 
                 template <> inline
                 entry_value<double>
+                // ReSharper disable CppMemberFunctionMayBeConst
                 entry_type<double>::check(entry_value<double> &val) {
+                    // ReSharper restore CppMemberFunctionMayBeConst
                     std::ostringstream msg("!", std::ostringstream::ate);
                     if (bounds && !bounds->in_bounds(val.value)) {
                         msg << val.value
@@ -274,8 +276,8 @@ namespace dnvgl {
 
                 template <> inline
                 entry_value<double>
+                // ReSharper disable once CppMemberFunctionMayBeConst
                 entry_type<double>::check(double &val) {
-                    std::ostringstream msg("!", std::ostringstream::ate);
                     if (bounds && !bounds->in_bounds(val)) {
                         std::ostringstream msg("!", std::ostringstream::ate);
                         msg << val
@@ -287,6 +289,7 @@ namespace dnvgl {
 
                 // Convert string to float
                 template <> inline
+                // ReSharper disable once CppMemberFunctionMayBeConst
                 void entry_type<double>::set_value(
                     entry_value<double> &val,
                     const std::string &inp) {
@@ -305,7 +308,7 @@ namespace dnvgl {
                     }
                     else {
                         if (!regex_match(sval, float_re)) {
-                            std::string msg("illegal input, no float");
+                            std::string const msg("illegal input, no float");
                             throw errors::float_error(
                                 name, msg + "; !" + sval + "!");
                         }
@@ -320,7 +323,7 @@ namespace dnvgl {
                             sval = string::string(m[1].str() + "E" + m[2].str());
 
                         if (regex_match(sval, float_lead_dot)) {
-                            auto pos = sval.find('.');
+                            auto const pos = sval.find('.');
                             sval.insert(pos, 1, '0');
                         }
                         // val.value = std::atol(sval.c_str());
@@ -349,7 +352,7 @@ namespace dnvgl {
 
 #ifdef _MSC_VER
                     // std::set output to two digit exponetial format.
-                    unsigned int ext_exp_format = _set_output_format(
+                    unsigned int const ext_exp_format = _set_output_format(
                         _TWO_DIGIT_EXPONENT);
 #endif
                     switch (out_form) {
@@ -368,7 +371,7 @@ namespace dnvgl {
                         // precision is list raise exception which
                         // causes calling routine to switch to
                         // LONG format.
-                        double order(
+                        double const order(
                             pow(10.,
                                 -floor(std::log10(fabs(inp.value))) + 3.));
                         if (fabs(fabs(std::round(inp.value * order) /
@@ -424,7 +427,7 @@ namespace dnvgl {
 
                 template <> inline
                 std::string entry_type<double>::format(const double &val) const {
-                    entry_value<double> tmp(val);
+                    entry_value<double> const tmp(val);
                     return format(tmp);
                 }
 
@@ -434,7 +437,7 @@ namespace dnvgl {
                         return dnvgl::extfem::bdf::types::
                             empty().format(nullptr);
                     else {
-                        double val(*(static_cast<entry_value<double> const*>(v)));
+                        double const val(*(static_cast<entry_value<double> const*>(v)));
                         return this->format(val);
                     }
                 }
@@ -443,6 +446,7 @@ namespace dnvgl {
 ///@{
 /// String value.
                 template <> inline
+                // ReSharper disable once CppMemberFunctionMayBeConst
                 entry_value<std::string> entry_type<std::string>::check(
                     entry_value<std::string> &val) {
                     if (bounds && !bounds->is_allowed(val.value)) {
@@ -518,14 +522,14 @@ namespace dnvgl {
                         return dnvgl::extfem::bdf::types::
                             empty().format(nullptr);
                     else {
-                        entry_value<std::string> val(static_cast<std::string const*>(v));
+                        entry_value<std::string> const val(static_cast<std::string const*>(v));
                         return this->format(val);
                     }
                 }
 
                 template <> inline
                 std::string entry_type<std::string>::format(const std::string &val) const {
-                    entry_value<std::string> tmp(val);
+                    entry_value<std::string> const tmp(val);
                     return format(tmp);
                 }
 ///@}
@@ -540,6 +544,8 @@ namespace dnvgl {
 
                 template <> inline
                 entry_value<std::vector<int>>
+                // ReSharper disable once CppMemberFunctionMayBeConst
+                // ReSharper disable once CppMemberFunctionMayBeStatic
                 entry_type<std::vector<int>>::check(
                     entry_value<std::vector<int>> &val) {
                     std::ostringstream msg("!", std::ostringstream::ate);
@@ -553,12 +559,13 @@ namespace dnvgl {
                 }
 
                 template <> inline
+                // ReSharper disable once CppMemberFunctionMayBeConst
                 void entry_type<std::vector<int>>::set_value(
                     entry_value<std::vector<int>> &val,
                     const std::string &inp) {
                     auto sval = extfem::string::string(inp).trim();
                     if (! regex_match(sval, list_int_re)) {
-                        std::string msg(name + ":illegal input (""");
+                        std::string const msg(name + ":illegal input (""");
                         throw errors::types_error(
                             msg + sval + """), no integer in list");
                     }
@@ -578,7 +585,7 @@ namespace dnvgl {
 
                     for (const auto &p : inp.value) res1 << p;
 
-                    std::string inp_proc(res1.str());
+                    std::string const inp_proc(res1.str());
 
                     switch (out_form) {
                     case out_form_type::LONG:
@@ -620,7 +627,7 @@ namespace dnvgl {
                         return dnvgl::extfem::bdf::types::
                             empty().format(nullptr);
                     else {
-                        entry_value<std::vector<int> > val(
+                        entry_value<std::vector<int> > const val(
                             static_cast<std::vector<int> const*>(inp));
                         return this->format(val);
                     }
@@ -628,6 +635,7 @@ namespace dnvgl {
 
                 // Convert string to float
                 template <> inline
+                // ReSharper disable once CppMemberFunctionMayBeConst
                 void entry_type<std::complex<double>>::set_value(
                     entry_value<std::complex<double>> &val,
                     const std::string &inp1,
@@ -647,13 +655,13 @@ namespace dnvgl {
                             name, "empty entry without default");
                     } else {
                         if (!regex_match(sval1, float_re)) {
-                            std::string msg("illegal input, no float");
+                            std::string const msg("illegal input, no float");
                             throw errors::float_error(
                                 name, msg + "; !" + sval1 + "!");
                         }
                         if (sval2.length() > 0 &&
                             !regex_match(sval2, float_re)) {
-                            std::string msg("illegal input, no float");
+                            std::string const msg("illegal input, no float");
                             throw errors::float_error(
                                 name, msg + "; !" + sval2 + "!");
                         }
@@ -666,7 +674,7 @@ namespace dnvgl {
                         if (regex_search(sval1, m, float_exp_re))
                             sval1 = string::string(m[1].str() + "E" + m[2].str());
                         if (regex_match(sval1, float_lead_dot)) {
-                            auto pos = sval1.find('.');
+                            auto const pos = sval1.find('.');
                             sval1.insert(pos, 1, '0');
                         }
                         conv.str(sval1);
@@ -677,7 +685,7 @@ namespace dnvgl {
                             if (regex_search(sval2, m, float_exp_re))
                                 sval2 = string::string(m[1].str() + "E" + m[2].str());
                             if (regex_match(sval2, float_lead_dot)) {
-                                auto pos = sval2.find('.');
+                                auto const pos = sval2.find('.');
                                 sval2.insert(pos, 1, '0');
                             }
                             conv.str(sval2);
@@ -711,13 +719,13 @@ namespace dnvgl {
 
                 template <> inline
                 entry_value<std::complex<double>>
+                // ReSharper disable once CppMemberFunctionMayBeConst
                 entry_type<std::complex<double>>::check(
                     entry_value<std::complex<double>> &val) {
-                    std::ostringstream msg("!", std::ostringstream::ate);
                     if (bounds && !bounds->in_bounds(val.value)) {
                         std::ostringstream msg("!", std::ostringstream::ate);
                         msg << val.value
-                            << "! Value not in list of allowed range.";
+                             << "! Value not in list of allowed range.";
                         throw errors::complex_error(name, msg.str());
                     }
                     return val;
@@ -735,7 +743,7 @@ namespace dnvgl {
                     outp << std::setiosflags(std::ios::scientific);
 #ifdef _MSC_VER
                     // std::set output to two digit exponetial format.
-                    unsigned int ext_exp_format = _set_output_format(
+                    unsigned int const ext_exp_format = _set_output_format(
                         _TWO_DIGIT_EXPONENT);
 #endif
                     switch (out_form) {
@@ -758,12 +766,12 @@ namespace dnvgl {
                         // using SHORT format. If too much precision
                         // is list raise exception which causes
                         // calling routine to switch to LONG format.
-                        double order_r{
+                        double const order_r{
                             pow(10.,
                                 -floor(
                                     std::log10(
                                         fabs(inp.value.real()))) + 3.)};
-                        double order_i{
+                        double const order_i{
                             pow(10.,
                                 -floor(
                                     std::log10(
@@ -838,7 +846,7 @@ namespace dnvgl {
                         return (bdf::types::empty().format(nullptr) +
                                 bdf::types::empty().format(nullptr));
                     else {
-                        entry_value<std::complex<double>> val(
+                        entry_value<std::complex<double>> const val(
                             *static_cast<std::complex<double> const*>(v));
                         return this->format(val);
                     }
@@ -848,7 +856,7 @@ namespace dnvgl {
                 std::string
                 entry_type<std::complex<double>>::format(
                     const std::complex<double> &val) const {
-                    entry_value<std::complex<double> > tmp(val);
+                    entry_value<std::complex<double> > const tmp(val);
                     return format(tmp);
                 }
 ///@}

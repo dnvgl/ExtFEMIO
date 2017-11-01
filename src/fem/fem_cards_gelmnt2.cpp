@@ -13,6 +13,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_fem_cards_gelmnt2[]) =
         "@(#) $Id$";
 }
@@ -26,7 +27,7 @@ namespace {
 #undef THIS_FILE
 #endif // THIS_FILE
 namespace {
-    char THIS_FILE[] = __FILE__;
+    char const THIS_FILE[] = __FILE__;
 }
 #endif
 

@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     char const _EXTFEMIO_UNUSED(cID_test_bdf_cards_cbush[]) =
         "@(#) $Id$";
 }
@@ -32,7 +33,7 @@ namespace {
 #undef THIS_FILE
 #endif // THIS_FILE
 namespace {
-    char THIS_FILE[] = __FILE__;
+    char const THIS_FILE[] = __FILE__;
 }
 #endif
 
@@ -49,7 +50,7 @@ TEST_CASE("BDF CBUSH definitions.", "[bdf_cbush]") {
     cbush::reset();
 
     SECTION("QR Guide, Example 1") {
-        list<std::string> data({"CBUSH,39,6,1,100,75"});
+        list<std::string> const data({"CBUSH,39,6,1,100,75"});
         list<std::string> lines;
         cards::__base::card::card_split(data, lines);
         cbush probe(lines);
@@ -71,7 +72,7 @@ TEST_CASE("BDF CBUSH definitions.", "[bdf_cbush]") {
     }
 
     SECTION("QR Guide, Example 2") {
-        list<std::string> data({"CBUSH,39,6,1,,,,,0"});
+        list<std::string> const data({"CBUSH,39,6,1,,,,,0"});
         std::list<std::string> lines;
         cards::__base::card::card_split(data, lines);
         cbush probe(lines);
@@ -93,7 +94,7 @@ TEST_CASE("BDF CBUSH definitions.", "[bdf_cbush]") {
     }
 
     SECTION("QR Guide, Example 3.") {
-        list<std::string> data({"CBUSH,39,6,1,100,,,,6"});
+        list<std::string> const data({"CBUSH,39,6,1,100,,,,6"});
         std::list<std::string> lines;
         cards::__base::card::card_split(data, lines);
         cbush probe(lines);
@@ -115,7 +116,7 @@ TEST_CASE("BDF CBUSH definitions.", "[bdf_cbush]") {
     }
 
     SECTION("QR Guide, Example 3.") {
-        std::list<std::string> data({
+        std::list<std::string> const data({
                 "CBUSH,39,6,1,600,,,,,0.25,10,0.,10.,10."});
         std::list<std::string> lines;
         cards::__base::card::card_split(data, lines);
@@ -146,7 +147,7 @@ TEST_CASE("CBUSH Roundtrip test 1 (dir code).", "[bdf_cbush_roundtrip_1]") {
 
     long EID{1}, PID{2}, GA{3}, GB{4}, GO{5};
 
-    cbush probe(&EID, &PID, &GA, &GB, nullptr, nullptr, nullptr, &GO);
+    cbush const probe(&EID, &PID, &GA, &GB, nullptr, nullptr, nullptr, &GO);
     test << probe;
 
     SECTION("check output") {
@@ -221,7 +222,7 @@ TEST_CASE("CBUSH Roundtrip test (QRG sample 1)", "[bdf_cbush_roundtrip_2]"){
     double X1{.6}, X2{18.}, X3{26.};
     long CID{0};
 
-    cbush probe(&EID, &PID, &GA, &GB, &X1, &X2, &X3, nullptr, &CID);
+    cbush const probe(&EID, &PID, &GA, &GB, &X1, &X2, &X3, nullptr, &CID);
     test << probe;
 
     SECTION("check output") {
@@ -303,7 +304,7 @@ TEST_CASE("CBUSH Roundtrip test (QRG sample 1 (long))", "[bdf_cbush_roundtrip_3]
     double X1{.6}, X2{18}, X3{1234.5};
     long CID{0};
 
-    cbush probe(&EID, &PID, &GA, &GB, &X1, &X2, &X3, nullptr, &CID);
+    cbush const probe(&EID, &PID, &GA, &GB, &X1, &X2, &X3, nullptr, &CID);
 
     test << probe;
 
@@ -389,7 +390,7 @@ TEST_CASE("CBUSH Roundtrip test (dir code all elements)", "[bdf_cbush_roundtrip_
     long EID{1}, PID{2}, GA{3}, GB{4}, GO{5};
     double S{.8};
 
-    cbush probe(&EID, &PID, &GA, &GB,
+    cbush const probe(&EID, &PID, &GA, &GB,
                 nullptr, nullptr, nullptr, &GO, nullptr, &S);
     test << probe;
 
@@ -429,7 +430,7 @@ TEST_CASE("CBUSH Roundtrip test (dir code all elements) (reuse)",
     long EID{1}, PID{2}, GA{3}, GB{4}, GO{5};
     double S{.7};
 
-    cbush probe(&EID, &PID, &GA, &GB,
+    cbush const probe(&EID, &PID, &GA, &GB,
                 nullptr, nullptr, nullptr, &GO, nullptr,
                 &S);
     test << probe;
@@ -469,7 +470,7 @@ TEST_CASE("CBUSH Roundtrip test (dir code all elements) (large)",
     long EID{123456789}, PID{2}, GA{3}, GB{4}, GO{5};
     double S{.6};
 
-    cbush probe(&EID, &PID, &GA, &GB,
+    cbush const probe(&EID, &PID, &GA, &GB,
                 nullptr, nullptr, nullptr, &GO, nullptr,
                 &S);
     test << probe;

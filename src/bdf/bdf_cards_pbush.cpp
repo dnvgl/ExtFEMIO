@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     char const _EXTFEMIO_UNUSED(cID_bdf_cards_pbush[]) =
         "@(#) $Id$";
 }
@@ -27,7 +28,7 @@ namespace {
 #undef THIS_FILE
 #endif // THIS_FILE
 namespace {
-    char THIS_FILE[] = __FILE__;
+    char const THIS_FILE[] = __FILE__;
 }
 #endif
 
@@ -133,8 +134,8 @@ void pbush::read(list<std::string> const &inp) {
     form_EA.set_value(EA, "");
     form_ET.set_value(ET, "");
 
-    pos++;
-    pos++;
+    ++pos;
+    ++pos;
     // if (pos == inp.end())
     //     throw errors::parse_error(
     //         "PBUSH", "Illegal number of entries (no PID).");
@@ -152,7 +153,7 @@ void pbush::read(list<std::string> const &inp) {
             while (pos != inp.end() && i < 6) {
                 form_K.set_value(K[i++], *(pos++));
             }
-            if (pos != inp.end()) pos++;
+            if (pos != inp.end()) ++pos;
         } else if (*pos == "B") {
             B.assign(6, entry_value<double>(0.));
             if (++pos == inp.end())
@@ -162,7 +163,7 @@ void pbush::read(list<std::string> const &inp) {
             while (pos != inp.end() && i < 6) {
                 form_B.set_value(B[i++], *(pos++));
             }
-            if (pos != inp.end()) pos++;
+            if (pos != inp.end()) ++pos;
         } else if (*pos == "GE") {
             GE.assign(6, entry_value<double>(0.));
             if (++pos == inp.end())
@@ -172,7 +173,7 @@ void pbush::read(list<std::string> const &inp) {
             while (pos != inp.end() && i < 6) {
                 form_GE.set_value(GE[i++], *(pos++));
             }
-            if (pos != inp.end()) pos++;
+            if (pos != inp.end()) ++pos;
         } else if (*pos == "RCV") {
             RCV = true;
             if (++pos == inp.end())
@@ -182,8 +183,8 @@ void pbush::read(list<std::string> const &inp) {
             if (pos != inp.end()) form_ST.set_value(ST, *(pos++));
             if (pos != inp.end()) form_EA.set_value(EA, *(pos++));
             if (pos != inp.end()) form_ET.set_value(ET, *(pos++));
-            if (pos != inp.end()) pos++;
-            if (pos != inp.end()) pos++;
+            if (pos != inp.end()) ++pos;
+            if (pos != inp.end()) ++pos;
         } else {
             ostringstream msg("Invalid property flag: ", ostringstream::ate);
             msg << *pos << "." << std::endl;

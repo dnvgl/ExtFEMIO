@@ -207,7 +207,7 @@ Defines a 6 x 6 symmetric mass matrix at a geometric grid point.
                 class conm1 : public __base::element {
 
                     bdf::types::card static head;
-                    virtual bool const keep_all_entries(void) const  override;
+                    virtual bool keep_all_entries() const override;
                     using __base::card::format_outlist;
                     using __base::element::form_EID;
                     // bdf::types::entry_type<long> static form_EID;

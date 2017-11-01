@@ -14,6 +14,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     char const _EXTFEMIO_UNUSED(cID_bdf_cards[]) =
         "@(#) $Id$";
 }
@@ -31,7 +32,7 @@ namespace {
 #undef THIS_FILE
 #endif // THIS_FILE
 namespace {
-    char THIS_FILE[] = __FILE__;
+    char const THIS_FILE[] = __FILE__;
 }
 #endif
 
@@ -316,7 +317,7 @@ void (*cards::warn_report)(std::string const &) = &_stderr_report;
 
 void (*cards::error_report)(std::string const &) = &_stderr_report;
 
-bool const cards::__base::card::keep_all_entries() const {
+bool cards::__base::card::keep_all_entries() const {
     return false;
 }
 
@@ -437,7 +438,7 @@ void cards::__base::card::card_split(
                     ostringstream msg(
                         "Long Field Format: Missing continuation line for record:\n",
                         ostringstream::ate);
-                    for (auto l : inp) msg << "--> " << l << endl;
+                    for (auto const l : inp) msg << "--> " << l << endl;
                     (*warn_report)(msg.str());
                 }
                 tmp.resize(128, ' ');

@@ -390,7 +390,7 @@ namespace dnvgl {
                         /**
                          * \brief Two character strings for continuation lines in Free Form Format cards.
                          */
-                        virtual bool const keep_all_entries(void) const;
+                        virtual bool keep_all_entries() const;
                         static const std::set<char> free_form_cont;
                         static const std::map<std::string, types> cardtype_map;
                     protected:
@@ -996,9 +996,10 @@ namespace dnvgl {
     }
 }
 
-// ReSharper disable once CppUnusedIncludeDirective
+// ReSharper disable CppUnusedIncludeDirective
 #include "bdf/cards_properties.h"
 #include "bdf/cards_elements.h"
+// ReSharper restore CppUnusedIncludeDirective
 
 namespace dnvgl {
     namespace extfem {

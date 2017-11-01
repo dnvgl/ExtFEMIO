@@ -14,6 +14,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_bdf_cards_cmass4[]) =
         "@(#) $Id$";
 }
@@ -30,14 +31,9 @@ namespace {
 #undef THIS_FILE
 #endif // THIS_FILE
 namespace {
-    char THIS_FILE[] = __FILE__;
+    char const THIS_FILE[] = __FILE__;
 }
 #endif
-
-namespace {
-    long const cl0 = 0;
-    long const cl1 = 1;
-}
 
 using namespace std;
 

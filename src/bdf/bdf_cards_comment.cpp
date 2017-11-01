@@ -32,7 +32,7 @@ namespace {
 #undef THIS_FILE
 #endif
 namespace {
-    char THIS_FILE[] = __FILE__;
+    char const THIS_FILE[] = __FILE__;
 }
 #endif
 

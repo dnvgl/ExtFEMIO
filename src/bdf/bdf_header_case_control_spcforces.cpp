@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_bdf_header_case_control_spcforces[]) =
         "@(#) $Id$";
 }
@@ -24,7 +25,7 @@ namespace {
 #undef THIS_FILE
 #endif // THIS_FILE
 namespace {
-    char THIS_FILE[] = __FILE__;
+    char const THIS_FILE[] = __FILE__;
 }
 #endif
 
@@ -36,7 +37,7 @@ spcforces::spcforces(
     vector<shared_ptr<describer>> const &describers,
     restype const res, long const n) :
     res(res), res_n(n) {
-    for (auto p : describers)
+    for (auto const p : describers)
         this->describers.push_back(shared_ptr<describer>(p));
 }
 

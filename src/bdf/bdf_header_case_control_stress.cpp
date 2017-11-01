@@ -13,6 +13,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     char const _EXTFEMIO_UNUSED(cID_bdf_header_case_control_stress[]) =
         "@(#) $Id$";
 }
@@ -25,7 +26,7 @@ namespace {
 #undef THIS_FILE
 #endif // THIS_FILE
 namespace {
-    char THIS_FILE[] = __FILE__;
+    char const THIS_FILE[] = __FILE__;
 }
 #endif
 
@@ -37,7 +38,7 @@ using namespace dnvgl::extfem::bdf::header::case_control;
     vector<shared_ptr<describer>> const &_describers,
     restype const res, long const res_n) :
     res(res), res_n(res_n) {
-    for (auto p : _describers)
+    for (auto const p : _describers)
         describers.push_back(shared_ptr<describer>(p));
 }
 

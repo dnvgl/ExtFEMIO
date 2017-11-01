@@ -32,7 +32,7 @@ namespace {
 #undef THIS_FILE
 #endif // THIS_FILE
 namespace {
-    char THIS_FILE[] = __FILE__;
+    char const THIS_FILE[] = __FILE__;
 }
 #endif
 
@@ -64,9 +64,6 @@ card::card(const std::string &name) : base(name) {}
 bdf_types card::type() const {
     return bdf_types::None;
 }
-
-/// set input and output locale for conv and outp
-static ImbueHelper imbue_helper(locale::classic());
 
 std::string card::format(const void* d) const {
     ostringstream outp;

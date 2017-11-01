@@ -13,6 +13,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     char const _EXTFEMIO_UNUSED(cID_bdf_cards_cmass2[]) =
         "@(#) $Id$";
 }
@@ -29,7 +30,7 @@ namespace {
 #undef THIS_FILE
 #endif // THIS_FILE
 namespace {
-    char THIS_FILE[] = __FILE__;
+    char const THIS_FILE[] = __FILE__;
 }
 #endif
 
@@ -45,7 +46,7 @@ using bdf::types::entry_type;
 
 bdf::types::card conm1::head = bdf::types::card("CONM1");
 
-bool const conm1::keep_all_entries() const {
+bool conm1::keep_all_entries() const {
     return true;
 }
 
@@ -399,7 +400,7 @@ void conm1::read(list<std::string> const &inp) {
     form_Mij.set_value(M63, *(pos++));
     form_Mij.set_value(M64, *(pos++));
     form_Mij.set_value(M65, *(pos++));
-    form_Mij.set_value(M66, *(pos++));
+    form_Mij.set_value(M66, *pos);
     this->conm1::check_data();
 }
 

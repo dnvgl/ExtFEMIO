@@ -14,8 +14,6 @@
 
 #include <string>
 
-#include "extfem_misc.h"
-
 namespace dnvgl {
    namespace extfem {
       namespace support {

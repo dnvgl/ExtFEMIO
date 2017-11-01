@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_fem_cards_gelref1[]) =
         "@(#) $Id$";
 }
@@ -26,7 +27,7 @@ namespace {
 #undef THIS_FILE
 #endif // THIS_FILE
 namespace {
-    char THIS_FILE[] = __FILE__;
+    char const THIS_FILE[] = __FILE__;
 }
 #endif
 
@@ -92,7 +93,7 @@ void gelref1::read(const vector<std::string> &inp, size_t const len) {
     size_t i{12};
     size_t num_vals{0};
     while (++i < len && inp.at(i) != empty) {
-        long tmp{lval(inp[i])};
+        long const tmp{lval(inp[i])};
         if (tmp == 0) break;
         try {
             node_vals.at(num_vals).assign(inp[i]);
@@ -103,7 +104,7 @@ void gelref1::read(const vector<std::string> &inp, size_t const len) {
     };
 
     if (num_vals > 0) {
-        auto divmod = ldiv(static_cast<long>(num_vals), static_cast<long>(nvals));
+        auto const divmod = ldiv(static_cast<long>(num_vals), static_cast<long>(nvals));
         if (divmod.rem != 0)
             throw errors::parse_error(
                 "GELREF1", "Number of node values is not "

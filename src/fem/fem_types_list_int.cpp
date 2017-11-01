@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_fem_types_list_int[]) =
         "@(#) $Id$";
 }
@@ -35,7 +36,7 @@ namespace {
 #undef THIS_FILE
 #endif // THIS_FILE
 namespace {
-    char THIS_FILE[] = __FILE__;
+    char const THIS_FILE[] = __FILE__;
 }
 #endif
 
@@ -68,7 +69,7 @@ void entry_type<std::vector<int> >::operator() (
     std::vector<int> tmp_l;
 
     if (! regex_match(inp, list_int_re)) {
-        std::string msg("illegal input (""");
+        std::string const msg("illegal input (""");
         throw errors::int_error(
             name, msg + inp + """), no integer list!");
     }
@@ -79,7 +80,7 @@ void entry_type<std::vector<int> >::operator() (
     long tmp{static_cast<long>(tmp_d)};
 
     while (tmp) {
-        ldiv_t divmod = std::div(tmp, static_cast<long>(10));
+        ldiv_t const divmod = std::div(tmp, static_cast<long>(10));
         value.push_back(divmod.rem);
         tmp /= 10;
     }
@@ -107,7 +108,7 @@ std::string entry_type<std::vector<int> >::format(
 
 #ifdef _MSC_VER
     // std::set output to two digit exponential format.
-    unsigned int ext_exp_format = _set_output_format(_TWO_DIGIT_EXPONENT);
+    unsigned int const ext_exp_format = _set_output_format(_TWO_DIGIT_EXPONENT);
 #endif
 
     res.setf(std::ios_base::scientific, std::ios::floatfield);

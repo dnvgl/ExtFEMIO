@@ -13,6 +13,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_bdf_header_case_control_echo[]) =
         "@(#) $Id$";
 }
@@ -30,7 +31,7 @@ namespace {
 #undef THIS_FILE
 #endif // THIS_FILE
 namespace {
-    char THIS_FILE[] = __FILE__;
+    char const THIS_FILE[] = __FILE__;
 }
 #endif
 
@@ -77,7 +78,7 @@ string echo::sort::str() const {
         "SORT(", ostringstream::ate);
     res << l_cdni.front()->str();
     l_cdni.erase(l_cdni.begin());
-    for (auto p : l_cdni)
+    for (auto const p : l_cdni)
         res << ", " << p->str();
     res << ")";
     return res.str();

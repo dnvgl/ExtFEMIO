@@ -16,7 +16,6 @@
 #include <memory>
 #include <list>
 #include <vector>
-#include <unordered_set>
 
 // ReSharper disable once CppUnusedIncludeDirective
 #include "bdf/cards.h"

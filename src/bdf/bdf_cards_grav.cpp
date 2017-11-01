@@ -14,6 +14,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     char const _EXTFEMIO_UNUSED(cID_bdf_cards_grav[]) =
         "@(#) $Id$";
 }
@@ -22,7 +23,6 @@ namespace {
 
 #include "bdf/cards.h"
 #include "bdf/types.h"
-#include "bdf/errors.h"
 
 #if defined(_DEBUG) && defined(DEBUG_NEW)
 #define new DEBUG_NEW
@@ -30,7 +30,7 @@ namespace {
 #undef THIS_FILE
 #endif // THIS_FILE
 namespace {
-    char THIS_FILE[] = __FILE__;
+    char const THIS_FILE[] = __FILE__;
 }
 #endif
 
