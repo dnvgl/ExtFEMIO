@@ -14,6 +14,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_fem_file[]) =
         "@(#) $Id$";
 }
@@ -65,12 +66,12 @@ size_t fem_file::get(vector<std::string> &res) {
  */
 streampos fem_file::size() const {
     // save current position in file
-    auto cur_pos = data.tellg();
+    auto const cur_pos = data.tellg();
 
     // jump to end of file
     data.seekg(0, ios::end);
     // determine position if file as file size
-    auto fileSize = data.tellg();
+    auto const fileSize = data.tellg();
 
     // jump back to original position if file
     data.seekg(cur_pos);

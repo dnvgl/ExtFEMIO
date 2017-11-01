@@ -15,8 +15,6 @@
 #include <unordered_set>
 #include <memory>
 
-#include "extfem_misc.h"
-
 #include "bdf/errors.h"
 
 namespace dnvgl {

@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_bdf_cards_grid[]) =
         "@(#) $Id$";
 }
@@ -37,7 +38,6 @@ namespace {
     auto const cl0  = std::make_shared<long>(0);
     auto const cl1  = std::make_shared<long>(1);
     auto const cl_1 = std::make_shared<long>(-1);
-    auto const cl_2 = std::make_shared<long>(-2);
     auto const cl1e8 = std::make_shared<long>(100000000 - 1);
     auto const cd0 = std::make_shared<double>(0.);
 }

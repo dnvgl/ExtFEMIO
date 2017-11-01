@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_bdf_file[]) =
         "@(#) $Id$";
 }
@@ -78,12 +79,12 @@ bool bdf_file::eof() const {
 // Return size of input BDF file.
 streampos bdf_file::size() const {
     // save current position in file
-    auto cur_pos = data.tellg();
+    auto const cur_pos = data.tellg();
 
     // jump to end of file
     data.seekg(0, ios::end);
     // determine position if file as file size
-    auto fileSize = data.tellg();
+    auto const fileSize = data.tellg();
 
     // jump back to original position if file
     data.seekg(cur_pos);

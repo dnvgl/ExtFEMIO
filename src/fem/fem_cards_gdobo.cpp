@@ -13,7 +13,8 @@
 
 // ID:
 namespace {
-    char const _EXTFEMIO_UNUSED(cID_fem_cards_gdobo[]) =
+    // ReSharper disable once CppDeclaratorNeverUsed
+    char const _EXTFEMIO_UNUSED(c_id_fem_cards_gdobo[]) =
         "@(#) $Id$";
 }
 

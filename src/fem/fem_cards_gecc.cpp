@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_fem_cards_gecc[]) =
         "@(#) $Id$";
 }
@@ -60,7 +61,7 @@ void gecc::read(const vector<std::string> &inp, size_t const len) {
             "GECC", "Illegal number of entries.");
 
     // ECCNO = _form_ECCNO(inp.at(1));
-    long tmp = _form_IOPT(inp.at(2));
+    long const tmp = _form_IOPT(inp.at(2));
     switch (tmp) {
     case 1: IOPT = ecc_opt::Z_ONLY; break;
     case 2: IOPT = ecc_opt::XYZ; break;

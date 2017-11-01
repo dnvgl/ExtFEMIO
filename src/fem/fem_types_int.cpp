@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_fem_types_int[]) =
         "@(#) $Id$";
 }
@@ -73,7 +74,7 @@ long entry_type<long>::operator() (std::string const &inp) const {
         return this->bounds.get_default();
     } else {
         if (! regex_match(inp, int_re)) {
-            std::string msg("illegal input (""");
+            std::string const msg("illegal input (""");
             throw errors::int_error(name, msg + inp + """), no integer!");
         }
 
@@ -82,7 +83,7 @@ long entry_type<long>::operator() (std::string const &inp) const {
         conv >> value;
     }
     if (!this->bounds.in_bounds(long(value))) {
-        std::string msg("boundary condition violated (");
+        std::string const msg("boundary condition violated (");
         throw errors::int_error(
             name, msg + name + ")\n(""" + inp + """)");
     }
@@ -98,7 +99,7 @@ std::string entry_type<long>::format(long const &inp) const {
 
 #ifdef _MSC_VER
     // std::set output to two digit exponential format.
-    unsigned int ext_exp_format = _set_output_format(_TWO_DIGIT_EXPONENT);
+    unsigned int const ext_exp_format = _set_output_format(_TWO_DIGIT_EXPONENT);
 #endif
 
     res.setf(std::ios_base::showpos);

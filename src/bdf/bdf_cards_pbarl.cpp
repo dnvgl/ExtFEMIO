@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_bdf_cards_pbarl[]) =
         "@(#) $Id$";
 }
@@ -85,7 +86,6 @@ pbarl::pbarl(long const *PID, long const *MID,
 void pbarl::read(list<std::string> const &inp) {
 
     size_t i;
-    size_t dim_num{0};
 
     auto pos = inp.begin();
 
@@ -103,7 +103,7 @@ void pbarl::read(list<std::string> const &inp) {
     if (pos == inp.end()) goto invalid;
     form_TYPE.set_value(TYPE, *(pos++));
     if (pos == inp.end()) goto invalid;
-    dim_num = this->l_geom::get_dim(TYPE.value);
+    size_t const dim_num = this->l_geom::get_dim(TYPE.value);
     if (dim_num < 1)
         throw errors::parse_error(
             "PBARL", "Unknown beam type " + TYPE.value + ".");

@@ -13,6 +13,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     char const _EXTFEMIO_UNUSED(cID_fem_cards_tdload[]) =
         "@(#) $Id$";
 }
@@ -186,7 +187,7 @@ ostream &tdload::put(ostream& os) const {
     if (nlnam)
         os << fem::types::card().format()
            << _form_SET_NAME.format(SET_NAME, ncnam+8) << endl;
-    for (auto p : CONT)
+    for (auto const p : CONT)
         os << fem::types::card().format()
            << _form_CONT.format(p, nctxt+8) << endl;
     return os;

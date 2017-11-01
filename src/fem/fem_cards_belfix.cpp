@@ -13,6 +13,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_fem_cards_belfix[]) =
         "@(#) $Id$";
 }
@@ -64,7 +65,7 @@ void belfix::read(const std::vector<std::string> &inp, size_t const len) {
         "BELFIX", "Illegal number of entries.");
 
     FIXNO = _form_FIXNO(inp.at(1));
-    long tmp(_form_OPT(inp.at(2)));
+    long const tmp(_form_OPT(inp.at(2)));
     if (tmp == 1)
         OPT = n_opt::FIXATION;
     else if (tmp == 2)

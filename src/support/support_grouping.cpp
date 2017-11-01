@@ -14,6 +14,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     char const _EXTFEMIO_UNUSED(cID_support_grouping[]) =
         "@(#) $Id$";
 }

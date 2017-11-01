@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     char const _EXTFEMIO_UNUSED(cID_bdf_cards_comment[]) =
         "@(#) $Id$";
 }
@@ -173,9 +174,8 @@ void comment::collect_outdata(
 }
 
 ostream &comment::put(ostream &os) const {
-    std::string marker;
     for (auto pos : content) {
-        marker = "$ ";
+        std::string marker{"$ "};
         std::string tmp(pos.begin(), pos.end());
         do {
             os << marker << tmp.substr(0, 78) << endl;

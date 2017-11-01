@@ -13,6 +13,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     char const _EXTFEMIO_UNUSED(cID_fem_cards_text[]) =
         "@(#) $Id$";
 }
@@ -132,7 +133,7 @@ ostream &text::put(ostream& os) const {
     os << head.format()
        << _form_TYPE.format(TYPE) << _form_SUBTYPE.format(SUBTYPE)
        << _form_NRECS.format(NRECS) << _form_NBYTE.format(NBYTE) << endl;
-    for (auto p : CONT)
+    for (auto const p : CONT)
         os << fem::types::card().format()
            << _form_CONT.format(p, NBYTE) << endl;
     return os;

@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     char const _EXTFEMIO_UNUSED(cID_bdf_cards_mat2[]) =
         "@(#) $Id$";
 }
@@ -40,11 +41,6 @@ using namespace type_bounds;
 using namespace cards;
 
 using bdf::types::entry_type;
-
-namespace {
-    const long cl0 = 0, cl1 = 1;
-    const double cd0 = 0., cd05 = 0.5, cd_1 = -1.;
-}
 
 bdf::types::card mat2::head = bdf::types::card("MAT2");
 

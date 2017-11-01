@@ -13,6 +13,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     char const _EXTFEMIO_UNUSED(cID_fem_cards_tdsupnam[]) =
         "@(#) $Id$";
 }
@@ -130,7 +131,7 @@ tdsupnam::tdsupnam(long const NFIELD, long const IHREF, long const CODNAM,
         card() , NFIELD(NFIELD), IHREF(IHREF),
         CODNAM(CODNAM), CODTXT(0),
         SUP_NAME(SUP_NAME), CONT() {
-    auto div_val = ldiv(CODNAM, 100);
+    auto const div_val = ldiv(CODNAM, 100);
     nlnam = div_val.quot != 0;
     ncnam = div_val.rem;
     nltxt = 0;
@@ -160,7 +161,7 @@ ostream &tdsupnam::put(ostream& os) const {
     if (nlnam)
         os << fem::types::card().format()
            << _form_SUP_NAME.format(SUP_NAME, ncnam+8) <<endl;
-    for (auto p : CONT)
+    for (auto const p : CONT)
         os << fem::types::card().format()
            << _form_CONT.format(p, nctxt+8) << endl;
     return os;

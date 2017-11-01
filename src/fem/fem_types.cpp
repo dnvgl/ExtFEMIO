@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_fem_types[]) =
         "@(#) $Id$";
 }
@@ -33,9 +34,6 @@ using namespace dnvgl::extfem::fem::types;
 __base::b_type::b_type(const std::string &name) : name(name) {}
 
 std::istringstream __base::b_type::conv;
-
-//! std::set input and output locale for conv
-static __base::imbue_helper _imbue_helper(std::locale::classic());
 
 __base::imbue_helper::imbue_helper(std::locale const &loc) : b_type("") {
     conv.imbue(loc);

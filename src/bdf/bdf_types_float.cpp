@@ -13,7 +13,9 @@
 
 // ID:
 namespace {
+    // ReSharper disable CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_bdf_types_float[]) =
+            // ReSharper restore CppDeclaratorNeverUsed
         "@(#) $Id$";
 }
 

@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_fem_types_bool[]) =
         "@(#) $Id$";
 }
@@ -56,7 +57,7 @@ bool entry_type<bool>::operator() (std::string const &inp) const {
     }
     else {
         if (!regex_match(inp, bool_re)) {
-            std::string msg("illegal input (""");
+            std::string const msg("illegal input (""");
             throw errors::bool_error(name, msg + inp + """), no bool!");
         }
 
@@ -67,7 +68,7 @@ bool entry_type<bool>::operator() (std::string const &inp) const {
     if (value == 1.) return true;
     else if (value == 0.) return false;
     else {
-        std::string msg("boundary condition violated (");
+        std::string const msg("boundary condition violated (");
         throw errors::bool_error(
             name, msg + name + ")\n(""" + inp + """)");
     }
