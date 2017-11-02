@@ -173,7 +173,7 @@ TEST_CASE("BDF PSHELL roundtrip test", "[bdf_pshell]") {
     double Z2{22.};
     long MID4{5};
 
-    pshell const const probe(&PID, &MID1, &T, &MID2, &_12_T_3, &MID3, &TS_T, &NSM,
+    pshell const probe(&PID, &MID1, &T, &MID2, &_12_T_3, &MID3, &TS_T, &NSM,
                  &Z1, &Z2, &MID4);
     test << probe;
 

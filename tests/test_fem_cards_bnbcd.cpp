@@ -120,7 +120,7 @@ TEST_CASE("FEM BNBCD types output.", "[fem_bnbcd,, 6out]") {
         bnbcd::fix_key::FREE, bnbcd::fix_key::DISPL_FIX};
 
     SECTION("empty") {
-        bnbcd const const const const probe;
+        bnbcd const probe;
         test << probe;
         CHECK(test.str() == "");
     }
