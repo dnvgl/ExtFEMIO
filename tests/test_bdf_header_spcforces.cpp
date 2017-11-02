@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_test_bdf_header_spcforces[]) =
         "@(#) $Id$";
 }
@@ -46,19 +47,19 @@ TEST_CASE("BDF generate 'SPCFORCES' header entries", "[bdf_header,spcforces]") {
     ostringstream test;
 
     SECTION("default") {
-        case_control::spcforces probe({});
+        case_control::spcforces const probe({});
         test << probe;
         CHECK(test.str() == "SPCFORCES = NONE\n");
     }
 
     SECTION("first") {
-        case_control::spcforces probe({}, case_control::spcforces::restype::ALL);
+        case_control::spcforces const probe({}, case_control::spcforces::restype::ALL);
         test << probe;
         CHECK(test.str() == "SPCFORCES = ALL\n");
     }
 
     SECTION("NOZPRINT") {
-        case_control::spcforces probe({
+        case_control::spcforces const probe({
                 make_shared<case_control::spcforces::print>(),
                 make_shared<case_control::spcforces::nozprint>()
         }, case_control::spcforces::restype::ALL);
@@ -67,13 +68,13 @@ TEST_CASE("BDF generate 'SPCFORCES' header entries", "[bdf_header,spcforces]") {
     }
 
     SECTION("num") {
-        case_control::spcforces probe({}, 5);
+        case_control::spcforces const probe({}, 5);
         test << probe;
         CHECK(test.str() == "SPCFORCES = 5\n");
     }
 
     SECTION("IMAG") {
-        case_control::spcforces probe({
+        case_control::spcforces const probe({
             make_shared<case_control::spcforces::sort2>(),
             make_shared<case_control::spcforces::punch>(),
             make_shared<case_control::spcforces::print>(),
@@ -84,7 +85,7 @@ TEST_CASE("BDF generate 'SPCFORCES' header entries", "[bdf_header,spcforces]") {
     }
 
     SECTION("PHASE") {
-        case_control::spcforces probe({
+        case_control::spcforces const probe({
             make_shared<case_control::spcforces::phase>()
         }, case_control::spcforces::restype::NONE);
         test << probe;
@@ -92,7 +93,7 @@ TEST_CASE("BDF generate 'SPCFORCES' header entries", "[bdf_header,spcforces]") {
     }
 
     SECTION("SORT2") {
-        case_control::spcforces probe({
+        case_control::spcforces const probe({
             make_shared<case_control::spcforces::sort2>(),
             make_shared<case_control::spcforces::print>(),
             make_shared<case_control::spcforces::psdf>(),
@@ -104,7 +105,7 @@ TEST_CASE("BDF generate 'SPCFORCES' header entries", "[bdf_header,spcforces]") {
     }
 
     SECTION("PRINT") {
-        case_control::spcforces probe({
+        case_control::spcforces const probe({
             make_shared<case_control::spcforces::print>(),
             make_shared<case_control::spcforces::rall>(),
             make_shared<case_control::spcforces::norprint>()

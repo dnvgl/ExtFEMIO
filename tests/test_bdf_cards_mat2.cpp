@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_test_bdf_cards_mat2[]) =
         "@(#) $Id$";
 }
@@ -43,7 +44,7 @@ TEST_CASE("BDF MAT2 definitions. (Free Field Format) first",
           "[bdf_mat2]") {
 
     SECTION("first mat2") {
-        std::list<std::string> data({
+        std::list<std::string> const data({
             "MAT2,1,2.,3.,4.,5.,6.,7.,8.,9.,10.,11.,12.,"
             "13.,14.,15.,16.,17\n"});
 
@@ -85,7 +86,7 @@ TEST_CASE("BDF MAT2 definitions. (FEMIO-3)",
     warn_report = &_warn_res;
 
     SECTION("FEMIO-3") {
-        std::list<std::string> data({
+        std::list<std::string> const data({
             "MAT2*    10              7.01670932+10   2.78474977+10   0.",
             "*        1.35642948+11   0.              1.26610002+10   0.",
             "*        .000012         .000012         .000012         0.",
@@ -145,7 +146,7 @@ TEST_CASE("BDF MAT2 roundtrio test 1.", "[bdf_mat2_roundtrip_1]") {
     double SS{16.};
     long MCSID{17};
 
-    mat2 probe(&MID, &G11, &G12, &G13, &G22, &G23, &G33, &RHO,
+    mat2 const probe(&MID, &G11, &G12, &G13, &G22, &G23, &G33, &RHO,
                &A1, &A2, &A3, &TREF, &GE, &ST, &SC, &SS,
                &MCSID);
     test << probe;

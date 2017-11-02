@@ -13,6 +13,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(test_bdf_cards_cbar_cID[]) =
         "@(#) $Id$";
 }
@@ -45,7 +46,7 @@ using namespace cards;
 
 TEST_CASE("BDF CBAR definitions. (Small Field Format)", "[bdf_cbar]" ) {
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
          "CBAR    7869    104010  76      153     0.0     66.5206 997.785 \n",
          "                        0.0     -22.617 -339.25 0.0     -22.617 \n"});
     std::list<std::string> lines;
@@ -82,7 +83,7 @@ TEST_CASE("CBAR Roundtrip test 1 (dir code).", "[bdf_cbar_roundtrip_1]") {
 
     long EID(1), PID(2), GA(3), GB(4), G0(5);
 
-    cbar probe(&EID, &PID, &GA, &GB, &G0);
+    cbar const probe(&EID, &PID, &GA, &GB, &G0);
     test << probe;
 
     SECTION("check output") {
@@ -246,7 +247,7 @@ TEST_CASE("CBAR Roundtrip test (QRG sample 1 (long))", "[bdf_cbar_roundtrip_3]")
     std::string OFFT("GGO");
     vector<int> PB{5, 1, 3};
 
-    cbar probe(&EID, &PID, &GA, &GB, &X1, &X2, &X3, &OFFT, nullptr, &PB);
+    cbar const probe(&EID, &PID, &GA, &GB, &X1, &X2, &X3, &OFFT, nullptr, &PB);
 
     test << probe;
 
@@ -339,7 +340,7 @@ TEST_CASE("CBAR Roundtrip test (dir code all elements)", "[bdf_cbar_roundtrip_4]
     long EID(1), PID(2), GA(3), GB(4), G0(5);
     double W3B{2.};
 
-    cbar probe(&EID, &PID, &GA, &GB, &G0,
+    cbar const probe(&EID, &PID, &GA, &GB, &G0,
                nullptr, nullptr, nullptr, nullptr,
                nullptr, nullptr, nullptr, nullptr,
                 &W3B);
@@ -381,7 +382,7 @@ TEST_CASE("CBAR Roundtrip test (dir code all elements) (reuse)",
     long EID(1), PID(2), GA(3), GB(4), G0(5);
     double W3B{2.};
 
-    cbar probe(&EID, &PID, &GA, &GB, &G0,
+    cbar const probe(&EID, &PID, &GA, &GB, &G0,
                nullptr, nullptr, nullptr, nullptr,
                nullptr, nullptr, nullptr, nullptr,
                &W3B);
@@ -422,7 +423,7 @@ TEST_CASE("CBAR Roundtrip test (dir code all elements) (large)",
     long EID(123456789), PID(2), GA(3), GB(4), G0(5);
     double W3B{2.};
 
-    cbar probe(&EID, &PID, &GA, &GB, &G0,
+    cbar const probe(&EID, &PID, &GA, &GB, &G0,
                nullptr, nullptr, nullptr, nullptr,
                nullptr, nullptr, nullptr, nullptr,
                &W3B);

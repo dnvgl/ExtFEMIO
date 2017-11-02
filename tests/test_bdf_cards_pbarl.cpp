@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_test_bdf_cards_pbarl[]) =
         "@(#) $Id$";
 }
@@ -48,7 +49,7 @@ using bdf::types::entry_value;
 
 TEST_CASE("BDF PBARL definitions; Small Field Format (BAR).", "[bdf_pbarl]") {
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
             "PBARL   104018  4               BAR\n",
                 "           25.0   600.0\n"});
@@ -69,7 +70,7 @@ TEST_CASE("BDF PBARL definitions; Small Field Format (BAR).", "[bdf_pbarl]") {
 
 TEST_CASE("BDF PBARL definitions; Small Field Format (BAR) (alt.).", "[bdf_pbarl]") {
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
             "PBARL        134       8            BAR\n",
                 "            55.0   500.0"});
@@ -88,7 +89,7 @@ TEST_CASE("BDF PBARL definitions; Small Field Format (BAR) (alt.).", "[bdf_pbarl
 
 TEST_CASE("BDF PBARL definitions; Small Field Format (L).", "[bdf_pbarl]") {
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
             "PBARL   104010  4               L\n",
                 "           63.0   340.0    35.0    14.0\n"});
@@ -107,7 +108,7 @@ TEST_CASE("BDF PBARL definitions; Small Field Format (L).", "[bdf_pbarl]") {
 
 TEST_CASE("BDF PBARL definitions; Small Field Format (T).", "[bdf_pbarl]") {
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
             "PBARL   101031  1               T\n",
                 "          150.0   400.0    12.0    10.0\n"});
@@ -127,7 +128,7 @@ TEST_CASE("BDF PBARL definitions; Small Field Format (T).", "[bdf_pbarl]") {
 TEST_CASE("BDF PBARL definitions; Small Field Format (I).", "[bdf_pbarl]") {
     pbarl::reset();
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
             "PBARL   104018  4               I\n",
                 "           600.0   200.0   200.0    12.0    10.0    10.0\n"});
@@ -147,7 +148,7 @@ TEST_CASE("BDF PBARL definitions; Small Field Format (I).", "[bdf_pbarl]") {
 
 TEST_CASE("BDF PBARL definitions; Small Field Format (I) (alt).", "[bdf_pbarl]") {
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
             "PBARL         39       6               I\n",
                 "             14.      6.      .5      .5      .5      .5\n"});
@@ -166,7 +167,7 @@ TEST_CASE("BDF PBARL definitions; Small Field Format (I) (alt).", "[bdf_pbarl]")
 
 TEST_CASE("BDF PBARL definitions; Small Field Format (TUBE).", "[bdf_pbarl]") {
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
             "PBARL   104019  5               TUBE\n",
                 "           600.0   500.0\n"});

@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_test_bdf_cards_param[]) =
         "@(#) $Id$";
 }
@@ -45,7 +46,7 @@ TEST_CASE("BDF PARAM definitions. (Small Field Format)",
           "[bdf_PARAM]") {
 
     SECTION("param read int") {
-        std::list<std::string> data({
+        std::list<std::string> const data({
             // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
             "PARAM   IRES     1                                                      \n"});
 
@@ -60,7 +61,7 @@ TEST_CASE("BDF PARAM definitions. (Small Field Format)",
     }
 
     SECTION("param read real") {
-        std::list<std::string> data({
+        std::list<std::string> const data({
             // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
             "PARAM   ADPCON   1.                                                     \n"});
 
@@ -75,7 +76,7 @@ TEST_CASE("BDF PARAM definitions. (Small Field Format)",
     }
 
     SECTION("param read char") {
-        std::list<std::string> data({
+        std::list<std::string> const data({
             // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
             "PARAM   ACOUT    PEAK                                                   \n"});
 
@@ -90,7 +91,7 @@ TEST_CASE("BDF PARAM definitions. (Small Field Format)",
     }
 
     SECTION("param read complex") {
-        std::list<std::string> data({
+        std::list<std::string> const data({
             // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
             "PARAM   CP1      2.      3.                                             \n"});
 
@@ -111,31 +112,31 @@ TEST_CASE("BDF PARAM types output.", "[bdf_param,out]") {
 
     SECTION("output int") {
         std::string name{"int"};
-        long val{123};
-        param probe(name, val);
+        long const val{123};
+        param const probe(name, val);
         test << probe;
         CHECK(test.str() == "PARAM   INT          123\n");
     }
 
     SECTION("output char") {
         std::string name{"chr"}, val{"123"};
-        param probe(name, val);
+        param const probe(name, val);
         test << probe;
         CHECK(test.str() == "PARAM   CHR     123     \n");
     }
 
     SECTION("output double") {
         std::string name{"dble"};
-        double val{123e1};
-        param probe(name, val);
+        double const val{123e1};
+        param const probe(name, val);
         test << probe;
         CHECK(test.str() == "PARAM   DBLE    1.230+03\n");
     }
 
     SECTION("output complex 1") {
         std::string name{"cmplx"};
-        double val1{1e1}, val2{1e1};
-        param probe(name, val1, val2);
+        double const val1{1e1}, val2{1e1};
+        param const probe(name, val1, val2);
         test << probe;
         CHECK(test.str() == "PARAM   CMPLX   1.000+011.000+01\n");
     }
@@ -143,7 +144,7 @@ TEST_CASE("BDF PARAM types output.", "[bdf_param,out]") {
     SECTION("output complex 2") {
         std::string name{"cmplx"};
         std::complex<double> val(1e1, 1e1);
-        param probe(name, val);
+        param const probe(name, val);
         test << probe;
         CHECK(test.str() == "PARAM   CMPLX   1.000+011.000+01\n");
     }

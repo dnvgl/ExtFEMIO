@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_test_fem_cards_gbarm[]) =
         "@(#) $Id$";
 }
@@ -91,7 +92,7 @@ TEST_CASE("FEMIO-37: Failing to import GBARM record from SESAM GeniE FEM file", 
         vector<std::string> data({
                 "GBARM     2.80000000E+01  1.50000006E-01  1.20000001E-02  1.20000001E-02\n",
                     "          1.00000000E+00  1.00000000E+00\n"});
-        size_t len{__base::card::card_split(data, data.size(), lines)};
+        size_t const len{__base::card::card_split(data, data.size(), lines)};
         gbarm probe(lines, len);
 
         CHECK(probe.GEONO == 28);
@@ -112,13 +113,13 @@ TEST_CASE("FEM GBARM types output.", "[fem_gbarm,out]" ) {
     __base::geoprop::reset_geono();
 
     SECTION("empty") {
-        gbarm probe;
+        gbarm const probe;
         test << probe;
         CHECK(test.str() == "");
     }
 
     SECTION("simple") {
-        gbarm probe(1, 2., 3., 4., 5., 6., 7, 8);
+        gbarm const probe(1, 2., 3., 4., 5., 6., 7, 8);
         test << probe;
         CHECK(test.str() ==
               "GBARM   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
@@ -126,7 +127,7 @@ TEST_CASE("FEM GBARM types output.", "[fem_gbarm,out]" ) {
     }
 
     SECTION("simple (default N*)") {
-        gbarm probe(1, 2., 3., 4., 5., 6.);
+        gbarm const probe(1, 2., 3., 4., 5., 6.);
         test << probe;
         CHECK(test.str() ==
               "GBARM   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
@@ -134,7 +135,7 @@ TEST_CASE("FEM GBARM types output.", "[fem_gbarm,out]" ) {
     }
 
     SECTION("simple (default SF* and N*)") {
-        gbarm probe(1, 2., 3., 4.);
+        gbarm const probe(1, 2., 3., 4.);
         test << probe;
         CHECK(test.str() ==
               "GBARM   +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"

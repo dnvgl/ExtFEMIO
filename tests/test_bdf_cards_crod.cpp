@@ -13,6 +13,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_test_bdf_cards_crod[]) =
         "@(#) $Id$";
 }
@@ -54,7 +55,7 @@ TEST_CASE("BDF CROD default EID.", "[bdf_crod]") {
 TEST_CASE("BDF CROD definitions. (Free Field Format)", "[bdf_crod]") {
 
     crod::reset();
-    std::list<std::string> data({"CROD,222,13,14,15\n"});
+    std::list<std::string> const data({"CROD,222,13,14,15\n"});
     std::list<std::string> lines;
     __base::card::card_split(data, lines);
     crod probe(lines);
@@ -71,7 +72,7 @@ TEST_CASE("BDF CROD definitions. (Free Field Format) (default PID)",
           "[bdf_crod]") {
 
     crod::reset();
-    std::list<std::string> data({"CROD,222,,14,15\n"});
+    std::list<std::string> const data({"CROD,222,,14,15\n"});
     std::list<std::string> lines;
     __base::card::card_split(data, lines);
     crod probe(lines);
@@ -88,7 +89,7 @@ TEST_CASE("BDF CROD definitions. (Small Field Format)", "[bdf_crod]") {
 
     crod::reset();
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CROD        7869     234      76     153\n"});
     std::list<std::string> lines;
     __base::card::card_split(data, lines);
@@ -107,7 +108,7 @@ TEST_CASE("BDF CROD definitions. (Small Field Format) (default PID)",
 
     crod::reset();
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CROD        7869              76     153\n"});
     std::list<std::string> lines;
     __base::card::card_split(data, lines);
@@ -127,7 +128,7 @@ TEST_CASE("BDF CROD roundtrip test.", "[bdf_crod]") {
 
     long EID{7869}, PID{104010}, G1{76}, G2{153};
 
-    crod probe(&EID, &PID, &G1, &G2);
+    crod const probe(&EID, &PID, &G1, &G2);
     test << probe;
 
     SECTION("check output") {
@@ -195,7 +196,7 @@ TEST_CASE("BDF CROD roundtrip test. (default PID)", "[bdf_crod]") {
 
     long EID{7869}, G1{76}, G2{153};
 
-    crod probe(&EID, nullptr, &G1, &G2);
+    crod const probe(&EID, nullptr, &G1, &G2);
     test << probe;
 
     SECTION("check output") {

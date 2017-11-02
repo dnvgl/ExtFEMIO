@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_test_fem_cards_beuslo[]) =
         "@(#) $Id$";
 }
@@ -50,7 +51,7 @@ TEST_CASE("FEM BEUSLO definitions. (Small Field Format)", "[fem_beuslo]" ) {
                 "         1.000000000e+00 4.000000000e+00 0.000000000e+00 2.00000000E+00 \n",
                 "         1.66046816E+04  3.86669189E+03  3.86368091E+03  1.62054932E+04 \n"});
         vector<std::string> lines;
-        size_t len{__base::card::card_split(data, data.size(), lines)};
+        size_t const len{__base::card::card_split(data, data.size(), lines)};
         beuslo probe(lines, len);
 
         CHECK(probe.LLC == 1);
@@ -94,21 +95,21 @@ TEST_CASE("FEM BEUSLO types output.", "[fem_beuslo,out]" ) {
         "        +1.500000000e+01+1.600000000e+01\n");
 
     SECTION("write (empty)") {
-        beuslo probe;
+        beuslo const probe;
 
         test << probe;
         CHECK(test.str() == "");
     }
 
     SECTION("write (fixed, verbose)") {
-        beuslo probe(1,  2, false, 3, 4, 5, 6, 2, {7., 8., 9., 10., 11.});
+        beuslo const probe(1, 2, false, 3, 4, 5, 6, 2, {7., 8., 9., 10., 11.});
 
         test << probe;
         CHECK(test.str() == ref_r);
     }
 
     SECTION("write (real, verbose)") {
-        beuslo probe(LLC,  LOTYP, COMPLX, LAYER, ELNO, NDOF, INTNO,
+        beuslo const probe(LLC, LOTYP, COMPLX, LAYER, ELNO, NDOF, INTNO,
                      SIDE, RLOADi);
 
         test << probe;
@@ -129,7 +130,7 @@ TEST_CASE("FEM BEUSLO types output.", "[fem_beuslo,out]" ) {
     }
 
     SECTION("write (real, impl. COMPLX)") {
-        beuslo probe(LLC,  LOTYP, LAYER, ELNO, NDOF, INTNO,
+        beuslo const probe(LLC, LOTYP, LAYER, ELNO, NDOF, INTNO,
                      SIDE, RLOADi);
         test << probe;
         CHECK(test.str() == ref_r);
@@ -142,7 +143,7 @@ TEST_CASE("FEM BEUSLO types output.", "[fem_beuslo,out]" ) {
     }
 
     SECTION("write (real, impl. NDOF)") {
-        beuslo probe(LLC,  LOTYP, COMPLX, LAYER, ELNO, INTNO,
+        beuslo const probe(LLC, LOTYP, COMPLX, LAYER, ELNO, INTNO,
                      SIDE, RLOADi);
         test << probe;
         CHECK(test.str() == ref_r);
@@ -156,7 +157,7 @@ TEST_CASE("FEM BEUSLO types output.", "[fem_beuslo,out]" ) {
     }
 
     SECTION("write (real, impl. NDOF, COMPLX)") {
-        beuslo probe(LLC,  LOTYP, LAYER, ELNO, INTNO,
+        beuslo const probe(LLC, LOTYP, LAYER, ELNO, INTNO,
                      SIDE, RLOADi);
         test << probe;
         CHECK(test.str() == ref_r);
@@ -164,7 +165,7 @@ TEST_CASE("FEM BEUSLO types output.", "[fem_beuslo,out]" ) {
 
     SECTION("write (complex, verbose)") {
         COMPLX = true;
-        beuslo probe(LLC,  LOTYP, COMPLX, LAYER, ELNO, NDOF, INTNO,
+        beuslo const probe(LLC, LOTYP, COMPLX, LAYER, ELNO, NDOF, INTNO,
                      SIDE, RLOADi, ILOADi);
         test << probe;
         CHECK(test.str() == ref_c);
@@ -192,7 +193,7 @@ TEST_CASE("FEM BEUSLO types output.", "[fem_beuslo,out]" ) {
     }
 
     SECTION("write (complex, impl. COMPLX)") {
-        beuslo probe(LLC,  LOTYP, LAYER, ELNO, NDOF, INTNO,
+        beuslo const probe(LLC, LOTYP, LAYER, ELNO, NDOF, INTNO,
                      SIDE, RLOADi, ILOADi);
         test << probe;
         CHECK(test.str() == ref_c);
@@ -214,7 +215,7 @@ TEST_CASE("FEM BEUSLO types output.", "[fem_beuslo,out]" ) {
 
     SECTION("write (complex, impl. NDOF)") {
         COMPLX = true;
-        beuslo probe(LLC,  LOTYP, COMPLX, LAYER, ELNO, INTNO,
+        beuslo const probe(LLC, LOTYP, COMPLX, LAYER, ELNO, INTNO,
                      SIDE, RLOADi, ILOADi);
 
         test << probe;
@@ -236,7 +237,7 @@ TEST_CASE("FEM BEUSLO types output.", "[fem_beuslo,out]" ) {
     }
 
     SECTION("write (complex, impl. NDOF, COMPLX)") {
-        beuslo probe(LLC,  LOTYP, LAYER, ELNO, INTNO,
+        beuslo const probe(LLC, LOTYP, LAYER, ELNO, INTNO,
                      SIDE, RLOADi, ILOADi);
         test << probe;
         CHECK(test.str() == ref_c);

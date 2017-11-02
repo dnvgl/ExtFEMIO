@@ -10,9 +10,10 @@
 /* ID: $Id$
  */
 
+#pragma once
 #include <vector>
 #include <valarray>
-#include <iostream>
+#include <ostream>
 
 #ifndef _CATCH_VECTOR_HELPER_H_
 #define _CATCH_VECTOR_HELPER_H_
@@ -45,7 +46,7 @@ namespace std {
         std::ostream &os, std::vector<entry_value<double>> const &in) {
         os << "[" << endl;
         size_t i{0};
-        for (auto pos : in) {
+        for (auto const pos : in) {
             os << static_cast<double>(pos);
             if (++i != in.size()) {
                 os << ", ";
@@ -67,7 +68,7 @@ namespace std {
     template<typename _Ty>
     class MatchVector : public Catch::MatcherBase<std::vector<_Ty>> {
         std::vector<_Ty> ref;
-        _Ty static const eps (void);
+        _Ty static eps ();
     public:
         explicit MatchVector(std::vector<_Ty> const &ref) :
                 ref(ref.begin(), ref.end()) {}
@@ -90,12 +91,12 @@ namespace std {
     };
 
     template<typename _Ty>
-    inline const _Ty MatchVector<_Ty>::eps(void) {
+    inline _Ty MatchVector<_Ty>::eps() {
         return _Ty(1e-8);
     }
 
     template<>
-    inline const std::string MatchVector<std::string>::eps(void) {
+    inline std::string MatchVector<std::string>::eps() {
         return "";
     }
 

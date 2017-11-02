@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_test_fem_cards_bndispl[]) =
         "@(#) $Id$";
 }
@@ -87,13 +88,13 @@ TEST_CASE("FEM BNDISPL types output.", "[fem_bndispl,out]") {
     std::ostringstream test;
 
     SECTION("empty") {
-        bndispl probe;
+        bndispl const probe;
         test << probe;
         CHECK(test.str() == "");
     }
 
     SECTION("simple") {
-        bndispl probe(1, 1, false, 4, 6, {1., 2., 3., 4., 5., 6.});
+        bndispl const probe(1, 1, false, 4, 6, {1., 2., 3., 4., 5., 6.});
         test << probe;
         CHECK(test.str() ==
               "BNDISPL +1.000000000e+00+1.000000000e+00           +0.00            0.00\n"
@@ -102,7 +103,7 @@ TEST_CASE("FEM BNDISPL types output.", "[fem_bndispl,out]") {
     }
 
     SECTION("simple (with IDISP)") {
-        bndispl probe(1, 1, true, 4, 6,
+        bndispl const probe(1, 1, true, 4, 6,
         {1., 2., 3., 4., 5., 6.}, {1., 2., 3., 4., 5., 6.});
         test << probe;
         CHECK(test.str() ==
@@ -114,7 +115,7 @@ TEST_CASE("FEM BNDISPL types output.", "[fem_bndispl,out]") {
     }
 
     SECTION("simple (calc COMPLX)") {
-        bndispl probe(1, 1, long(4), 6,
+        bndispl const probe(1, 1, long(4), 6,
         {1., 2., 3., 4., 5., 6.});
         test << probe;
         CHECK(test.str() ==
@@ -124,7 +125,7 @@ TEST_CASE("FEM BNDISPL types output.", "[fem_bndispl,out]") {
     }
 
     SECTION("simple (with IDISP, calc COMPLX)") {
-        bndispl probe(1, 1, long(4), 6,
+        bndispl const probe(1, 1, long(4), 6,
         {1., 2., 3., 4., 5., 6.}, {1., 2., 3., 4., 5., 6.});
         test << probe;
         CHECK(test.str() ==
@@ -136,7 +137,7 @@ TEST_CASE("FEM BNDISPL types output.", "[fem_bndispl,out]") {
     }
 
     SECTION("calc ndof") {
-        bndispl probe(1, 1, false, 4, {1., 2., 3., 4., 5., 6.});
+        bndispl const probe(1, 1, false, 4, {1., 2., 3., 4., 5., 6.});
         test << probe;
         CHECK(test.str() ==
               "BNDISPL +1.000000000e+00+1.000000000e+00           +0.00            0.00\n"
@@ -144,7 +145,7 @@ TEST_CASE("FEM BNDISPL types output.", "[fem_bndispl,out]") {
               "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n");
     }
     SECTION("calc NDOF (calc COMPLX)") {
-        bndispl probe(1, 1, 4, {1., 2., 3., 4., 5., 6.});
+        bndispl const probe(1, 1, 4, {1., 2., 3., 4., 5., 6.});
         test << probe;
         CHECK(test.str() ==
               "BNDISPL +1.000000000e+00+1.000000000e+00           +0.00            0.00\n"
@@ -153,7 +154,7 @@ TEST_CASE("FEM BNDISPL types output.", "[fem_bndispl,out]") {
     }
 
     SECTION("calc NDOF (with IDISP, calc COMPLX)") {
-        bndispl probe(1, 1, 4,
+        bndispl const probe(1, 1, 4,
         {1., 2., 3., 4., 5., 6.}, {1., 2., 3., 4., 5., 6.});
         test << probe;
         CHECK(test.str() ==

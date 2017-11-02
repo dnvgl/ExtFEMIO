@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_test_bdf_header_displacement[]) =
         "@(#) $Id$";
 }
@@ -46,13 +47,13 @@ TEST_CASE("BDF generate 'DISPLACEMENT' header entries", "[bdf_header,displacemen
     std::ostringstream test;
 
     SECTION("first") {
-        case_control::displacement probe({}, case_control::displacement::restype::ALL);
+        case_control::displacement const probe({}, case_control::displacement::restype::ALL);
         test << probe;
         CHECK(test.str() == "DISPLACEMENT = ALL\n");
     }
 
     SECTION("bdf sample") {
-        case_control::displacement probe({
+        case_control::displacement const probe({
             make_shared<case_control::displacement::print>(),
             make_shared<case_control::displacement::punch>(),
             make_shared<case_control::displacement::real>()},

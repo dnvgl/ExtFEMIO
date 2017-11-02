@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_test_bdf_header[]) =
         "@(#) $Id$";
 }
@@ -57,13 +58,13 @@ TEST_CASE("BDF generate 'SOL' header entries", "[bdf_header,sol]") {
     ostringstream test;
 
     SECTION("sol 101") {
-        executive_control::sol probe(101);
+        executive_control::sol const probe(101);
         test << probe;
         CHECK(test.str() == "SOL 101\n");
     }
 
     SECTION("sol sol::SESTATIC") {
-        executive_control::sol probe(executive_control::sol::sol_no_type::SESTATIC);
+        executive_control::sol const probe(executive_control::sol::sol_no_type::SESTATIC);
         test << probe;
         CHECK(test.str() == "SOL 101\n");
     }
@@ -74,7 +75,7 @@ TEST_CASE("BDF generate 'CEND' header entries", "[bdf_header,cend]") {
     ostringstream test;
 
     SECTION("cend") {
-        executive_control::cend probe;
+        executive_control::cend const probe;
         test << probe;
         CHECK(test.str() == "CEND\n");
     }
@@ -85,7 +86,7 @@ TEST_CASE("BDF generate 'TITLE' header entries", "[bdf_header,title]") {
     ostringstream test;
 
     SECTION("title") {
-        case_control::title probe("text");
+        case_control::title const probe("text");
         test << probe;
         CHECK(test.str() == "TITLE = text\n");
     }
@@ -96,18 +97,18 @@ TEST_CASE("BDF generate 'ECHO' header entries", "[bdf_header,echo]") {
     ostringstream test;
 
     SECTION("default") {
-        case_control::echo probe;
+        case_control::echo const probe;
         test << probe;
         CHECK(test.str() == "ECHO = NONE\n");
     }
 
     SECTION("NONE") {
-        case_control::echo probe({make_shared<case_control::echo::none>()});
+        case_control::echo const probe({make_shared<case_control::echo::none>()});
         test << probe;
         CHECK(test.str() == "ECHO = NONE\n");
     }
     SECTION("BOTH") {
-        case_control::echo probe({make_shared<case_control::echo::both>()});
+        case_control::echo const probe({make_shared<case_control::echo::both>()});
         test << probe;
         CHECK(test.str() == "ECHO = BOTH\n");
     }
@@ -118,7 +119,7 @@ TEST_CASE("BDF generate 'BEGIN BULK' header entries", "[bdf_header,begin bulk]")
     ostringstream test;
 
     SECTION("1") {
-        case_control::begin_bulk probe;
+        case_control::begin_bulk const probe;
         test << probe;
         CHECK(test.str() == ("BEGIN BULK\n"));
     }
@@ -129,13 +130,13 @@ TEST_CASE("BDF generate 'SUBCASE' header entries", "[bdf_header,subcase]") {
     ostringstream test;
 
     SECTION("1") {
-        case_control::subcase probe(1);
+        case_control::subcase const probe(1);
         test << probe;
         CHECK(test.str() == ("SUBCASE = 1\n"));
     }
 
     SECTION("Title") {
-        case_control::subcase probe;
+        case_control::subcase const probe;
         test << probe;
         CHECK(test.str() == ("SUBCASE = 2\n"));
     }
@@ -146,7 +147,7 @@ TEST_CASE("BDF generate 'SUBTITLE' header entries", "[bdf_header,subtitle]") {
     ostringstream test;
 
     SECTION("1") {
-        case_control::subtitle probe("LC 1");
+        case_control::subtitle const probe("LC 1");
         test << probe;
         CHECK(test.str() == "SUBTITLE = LC 1\n");
     }
@@ -157,19 +158,19 @@ TEST_CASE("BDF generate 'LOAD' header entries", "[bdf_header,load]") {
     ostringstream test;
 
     SECTION("1") {
-        case_control::load probe(1);
+        case_control::load const probe(1);
         test << probe;
         CHECK(test.str() == "LOAD = 1\n");
     }
 
     SECTION("15") {
-        case_control::load probe(15);
+        case_control::load const probe(15);
         test << probe;
         CHECK(test.str() == "LOAD = 15\n");
     }
 
     SECTION("ptr") {
-        shared_ptr<__base::entry> probe = make_shared<case_control::load>(15);
+        shared_ptr<__base::entry> const probe = make_shared<case_control::load>(15);
         test << *probe;
         CHECK(test.str() == "LOAD = 15\n");
     }

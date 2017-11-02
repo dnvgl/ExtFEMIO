@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     char const _EXTFEMIO_UNUSED(cID_test_bdf_cards_pbush[]) =
         "@(#) $Id$";
 }
@@ -51,7 +52,7 @@ using bdf::types::entry_value;
 TEST_CASE ("BDF PBUSH definitons.", "[bdf_pbush]") {
 
     SECTION("QR Guide, Example 1") {
-        list<std::string> data({
+        list<std::string> const data({
                 // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i
                 "PBUSH     35     K       4.35    2.4                              3.1\n",
                 "                 GE     .06\n",
@@ -74,7 +75,7 @@ TEST_CASE ("BDF PBUSH definitons.", "[bdf_pbush]") {
     }
 
     SECTION("QR Guide, Example 1") {
-        list<std::string> data({
+        list<std::string> const data({
                 // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i
                 "PBUSH     35     B       2.3\n"});
         list<std::string> lines;
@@ -99,7 +100,7 @@ TEST_CASE("BDF PBUSH roundtrip test", "[bdf_pbush]") {
     vector<double> B{{11., 12., 13., 14., 15., 16.}};
     vector<double> GE{{21., 22., 23., 24., 25., 26.}};
 
-    pbush probe(&PID, &K, &B, &GE);
+    pbush const probe(&PID, &K, &B, &GE);
     test << probe;
 
     SECTION("check output") {
@@ -148,7 +149,7 @@ TEST_CASE("BDF PBUSH roundtrip test 2", "[bdf_pbush]") {
     double EA{13.};
     double ET{14.};
 
-    pbush probe(&PID, &K, nullptr, nullptr,
+    pbush const probe(&PID, &K, nullptr, nullptr,
                 &SA, &ST, &EA, &ET);
     test << probe;
 

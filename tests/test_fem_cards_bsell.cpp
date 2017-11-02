@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     char const _EXTFEMIO_UNUSED(cID_test_fem_cards_bsell[]) =
         "@(#) $Id$";
 }
@@ -49,7 +50,7 @@ TEST_CASE("FEM BSELL definitions. (Small Field Format)", "[fem_bsell]") {
             "BSELL    1.000000000e+00 1.000000000e+00 0.000000000e+00 0.00000000E+00\n",
             "         1.000000000e+00 1.000000000e+00 2.000000000e+00-1.00000000E+00\n"});
         vector<std::string> lines;
-        size_t len{__base::card::card_split(data, data.size(), lines)};
+        size_t const len{__base::card::card_split(data, data.size(), lines)};
         bsell probe(lines, len);
 
         CHECK((long)probe.LC == 1);
@@ -63,19 +64,19 @@ TEST_CASE("FEM BSELL types output.", "[fem_bsell,out]") {
 
     std::ostringstream test;
 
-    long LC(2);
-    long SUBNO(29);
-    std::vector<long> LLC({1, 2, 3, 4, 5, 6});
-    std::vector<double> FACT({1., -2., 3., -4., 5., -6.});
+    long const LC(2);
+    long const SUBNO(29);
+    std::vector<long> const LLC({1, 2, 3, 4, 5, 6});
+    std::vector<double> const FACT({1., -2., 3., -4., 5., -6.});
 
     SECTION("empty") {
-        bsell probe;
+        bsell const probe;
         test << probe;
         CHECK(test.str() == "");
     }
 
     SECTION("write (const)") {
-        bsell probe(2, 29, {1, 2, 3, 4, 5, 6},
+        bsell const probe(2, 29, {1, 2, 3, 4, 5, 6},
         {1., -2., 3., -4., 5., -6.});
         test << probe;
         CHECK(test.str() ==
@@ -86,7 +87,7 @@ TEST_CASE("FEM BSELL types output.", "[fem_bsell,out]") {
     }
 
     SECTION("write (1)") {
-        bsell probe(LC, SUBNO, LLC, FACT);
+        bsell const probe(LC, SUBNO, LLC, FACT);
         test << probe;
         CHECK(test.str() ==
               "BSELL   +2.000000000e+00+2.900000000e+01            0.00            0.00\n"
@@ -96,7 +97,7 @@ TEST_CASE("FEM BSELL types output.", "[fem_bsell,out]") {
     }
 
     SECTION("write (less)") {
-        bsell probe(2, 29, {1, 2, 3, 4, 5},
+        bsell const probe(2, 29, {1, 2, 3, 4, 5},
         {1., -2., 3., -4., 5.});
         test << probe;
         CHECK(test.str() ==

@@ -6,12 +6,14 @@
 
    Detailed description
 */
+// ReSharper disable once CppUnusedIncludeDirective
 #include "extfemio_stdafx.h"
 
 #include "extfem_misc.h"
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     char const _EXTFEMIO_UNUSED(cID_test_bdf_cards_elements[]) =
         "@(#) $Id$";
 }

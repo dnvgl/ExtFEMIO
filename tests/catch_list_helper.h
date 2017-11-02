@@ -10,8 +10,9 @@
 /* ID: $Id$
  */
 
+#pragma once
 #include <list>
-#include <iostream>
+#include <ostream>
 
 #ifndef _CATCH_LIST_HELPER_H_
 #define _CATCH_LIST_HELPER_H_
@@ -75,7 +76,7 @@ namespace std {
     const std::string MatchList<std::string>::eps = "";
 
     template<>
-    bool MatchList<std::string>::match(std::list<std::string> const &in) const {
+    inline bool MatchList<std::string>::match(std::list<std::string> const &in) const {
         return ref == in;
     }
 

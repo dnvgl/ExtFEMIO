@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_test_bdf_header_echo[]) =
         "@(#) $Id$";
 }
@@ -66,25 +67,25 @@ TEST_CASE("BDF generate more 'ECHO' header entries", "[bdf_header,echo]") {
     ostringstream test;
 
     SECTION("ECHO = NONE") {
-        case_control::echo probe({make_shared<case_control::echo::none>()});
+        case_control::echo const probe({make_shared<case_control::echo::none>()});
         test << probe;
         CHECK(test.str() == "ECHO = NONE\n");
     }
 
     SECTION("ECHO=NOSORT") {
-        case_control::echo probe({make_shared<case_control::echo::unsort>()});
+        case_control::echo const probe({make_shared<case_control::echo::unsort>()});
         test << probe;
         CHECK(test.str() == "ECHO = UNSORT\n");
     }
 
     SECTION("ECHO=BOTH") {
-        case_control::echo probe({make_shared<case_control::echo::both>()});
+        case_control::echo const probe({make_shared<case_control::echo::both>()});
         test << probe;
         CHECK(test.str() == "ECHO = BOTH\n");
     }
 
     SECTION("ECHO = PUNCH, SORT (MAT1, PARAM)") {
-        case_control::echo probe(
+        case_control::echo const probe(
             {make_shared<case_control::echo::punch>(),
              make_shared<case_control::echo::sort>(
                  vector<shared_ptr<case_control::echo::sort::cdni_entry>>(
@@ -95,7 +96,7 @@ TEST_CASE("BDF generate more 'ECHO' header entries", "[bdf_header,echo]") {
     }
 
     SECTION("ECHO = SORT (EXCEPT DMI, DMIG)") {
-        case_control::echo probe(
+        case_control::echo const probe(
             {make_shared<case_control::echo::sort>(
                  vector<shared_ptr<case_control::echo::sort::cdni_entry>>(
                      {make_shared<case_control::echo::sort::cdni_entry>("DMI", true),
@@ -105,7 +106,7 @@ TEST_CASE("BDF generate more 'ECHO' header entries", "[bdf_header,echo]") {
     }
 
     SECTION("ECHO=BOTH,PUNCH,FILE") {
-        case_control::echo probe(
+        case_control::echo const probe(
             {make_shared<case_control::echo::both>(),
              make_shared<case_control::echo::punch>(),
              make_shared<case_control::echo::file>()});

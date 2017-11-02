@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     char const _EXTFEMIO_UNUSED(cID_test_bdf_cards[]) =
         "@(#) $Id$";
 }
@@ -680,7 +681,7 @@ TEST_CASE("BDF test card enum output", "[bdf_cards]") {
 
 TEST_CASE("BDF file reader.", "[bdf_cards]" ) {
 
-    std::string s(
+    std::string const s(
         // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
         "$Only a comment\n"
         "MAT1    1       2.305+6 80000.0 0.3     7.850-6\n"
@@ -749,7 +750,7 @@ TEST_CASE("BDF file reader.", "[bdf_cards]" ) {
 
 // Test data as found in the BDF documentation.
 TEST_CASE("Split Free Field Cards, Sample 1", "[bdf_cards]") {
-    std::list<std::string> data({ "GRID,2,1.0,-2.0,3.0,,136"});
+    std::list<std::string> const data({ "GRID,2,1.0,-2.0,3.0,,136"});
     std::list<std::string> probe;
     card::card_split(data, probe);
     std::list<std::string> ref({ "GRID", "2", "1.0", "-2.0", "3.0", "", "136"});
@@ -758,7 +759,7 @@ TEST_CASE("Split Free Field Cards, Sample 1", "[bdf_cards]") {
 }
 
 TEST_CASE("Split Free Field Cards, Sample 2", "[bdf_cards]") {
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "MATT9,1101,2 ,3 ,4 ,,,,8 ,+P101\n",
             "+P101,9 ,,,,13\n"});
     std::list<std::string> probe;
@@ -771,7 +772,7 @@ TEST_CASE("Split Free Field Cards, Sample 2", "[bdf_cards]") {
 }
 
 TEST_CASE("Split Free Field Cards, Sample 3", "[bdf_cards]") {
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "GRID,100,,1.0,0.0,0.0,,456\n"});
     std::list<std::string> probe;
     card::card_split(data, probe);
@@ -782,7 +783,7 @@ TEST_CASE("Split Free Field Cards, Sample 3", "[bdf_cards]") {
 }
 
 TEST_CASE("Split Free Field Cards, Sample 4", "[bdf_cards]") {
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "SPC1,100,12456,1,2,3,4,5,6,+SPC-A+SPC-A,7,8,9,10\n"});
     std::list<std::string> probe;
     card::card_split(data, probe);
@@ -798,7 +799,7 @@ TEST_CASE("Split Free Field Cards, Sample 4", "[bdf_cards]") {
 }
 
 TEST_CASE("Split Free Field Cards, Sample 5", "[bdf_cards]") {
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "SPC1,100,12456,1,2,3,4,5,6,7,8,9,10\n"});
     std::list<std::string> probe;
     card::card_split(data, probe);
@@ -809,7 +810,7 @@ TEST_CASE("Split Free Field Cards, Sample 5", "[bdf_cards]") {
 }
 
 TEST_CASE("Split Free Field Cards, Sample 6", "[bdf_cards]") {
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "MATT9,1151,2 ,3 ,4 ,,,,8 \n",
             ",9 ,,,,13\n"});
     std::list<std::string> probe;
@@ -821,7 +822,7 @@ TEST_CASE("Split Free Field Cards, Sample 6", "[bdf_cards]") {
 }
 
 TEST_CASE("Split Free Field Cards, Sample 7", "[bdf_cards]") {
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "MATT9,1151,2 ,3 ,4 ,,,,8 ,+\n",
             "+,9 ,,,,13\n"});
     std::list<std::string> probe;
@@ -834,7 +835,7 @@ TEST_CASE("Split Free Field Cards, Sample 7", "[bdf_cards]") {
 }
 
 TEST_CASE("Split Free Field Cards, Sample 8", "[bdf_cards]") {
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "MATT9*,1302,2 ,,4 ,+\n",
             "+,,,,,,13\n"});
     std::list<std::string> probe;
@@ -845,7 +846,7 @@ TEST_CASE("Split Free Field Cards, Sample 8", "[bdf_cards]") {
 }
 
 TEST_CASE("Split Free Field Cards, Sample 9", "[bdf_cards]") {
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "MATT9,1303,2 ,3 ,4 ,,,,8 ,+\n",
             "*,9 ,,,,\n",
             "*,13\n"});
@@ -858,7 +859,7 @@ TEST_CASE("Split Free Field Cards, Sample 9", "[bdf_cards]") {
 }
 
 TEST_CASE("Split Free Field Cards, Sample 10", "[bdf_cards]") {
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "MATT9,1355,2 ,3 ,,5 ,,,8 ,+\n",
             "*,,10,,,\n",
             "*,17\n"});
@@ -871,7 +872,7 @@ TEST_CASE("Split Free Field Cards, Sample 10", "[bdf_cards]") {
 }
 
 TEST_CASE("Split Free Field Cards, Sample 11", "[bdf_cards]") {
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CHEXA,200,200,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20\n"});
     std::list<std::string> probe;
     card::card_split(data, probe);
@@ -883,7 +884,7 @@ TEST_CASE("Split Free Field Cards, Sample 11", "[bdf_cards]") {
 }
 
 TEST_CASE("Split Free Field Cards, Sample 12", "[bdf_cards]") {
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "PBEAM,1,2,3.,4.,.5,6.,7.,8.,9.,10.,11.,12.,13.,14.,15.,16.,\n",
             ",NO,1.\n"});
     std::list<std::string> probe;
@@ -924,7 +925,7 @@ TEST_CASE("Split Large Field Cards", "[cards]") {
 
 TEST_CASE("BDF_Dispatch", "[cards]") {
 
-    std::string s(
+    std::string const s(
         // 35678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
         "$ YIELD: 235\n"
         "MAT1    1       2.305+6 80000.0 0.3     7.850-6\n"
@@ -1030,24 +1031,24 @@ TEST_CASE("BDF_Dispatch", "[cards]") {
     //           63.0   340.0    35.0    14.0  YES     1.
     {
         CHECK(current->card_type() == cards::types::PBEAML);
-        auto probe = *static_cast<pbeaml*>(current.get());
-        CHECK(probe.PID.value == 104010);
-        CHECK(probe.MID.value == 4);
-        CHECK(probe.GROUP.value == "MSCBML0");
-        CHECK(probe.TYPE.value == "L");
-        auto DIM = probe.DIM;
+        auto lprobe = *static_cast<pbeaml*>(current.get());
+        CHECK(lprobe.PID.value == 104010);
+        CHECK(lprobe.MID.value == 4);
+        CHECK(lprobe.GROUP.value == "MSCBML0");
+        CHECK(lprobe.TYPE.value == "L");
+        auto DIM = lprobe.DIM;
         CHECK(DIM.size() == 2);
         for (size_t i{0}; i < DIM.size(); i++)
             CHECK_THAT(std::vector<double>(
-                           probe.DIM[i].begin(), probe.DIM[i].end()),
+                           lprobe.DIM[i].begin(), lprobe.DIM[i].end()),
                        IsEqual(vector<double>({63., 340., 35., 14.})));
-        CHECK_THAT(std::vector<double>(probe.NSM.begin(), probe.NSM.end()),
+        CHECK_THAT(std::vector<double>(lprobe.NSM.begin(), lprobe.NSM.end()),
                        IsEqual(std::vector<double>(2, 0.)));
-        CHECK_THAT(std::vector<std::string>(probe.SO.begin(), probe.SO.end()),
+        CHECK_THAT(std::vector<std::string>(lprobe.SO.begin(), lprobe.SO.end()),
                    IsEqual(std::vector<std::string>(1, "YES")));
-        CHECK_THAT(std::vector<double>(probe.X_XB.begin(), probe.X_XB.end()),
+        CHECK_THAT(std::vector<double>(lprobe.X_XB.begin(), lprobe.X_XB.end()),
                        IsEqual(std::vector<double>(1, 1.)));
-        CHECK_THAT(std::vector<double>(probe.NSM.begin(), probe.NSM.end()),
+        CHECK_THAT(std::vector<double>(lprobe.NSM.begin(), lprobe.NSM.end()),
                       IsEqual(std::vector<double>(2, 0.)));
         current.reset();
     }
@@ -1059,18 +1060,18 @@ TEST_CASE("BDF_Dispatch", "[cards]") {
     // PBEAM   4000001 3       1.046+4 9.369+7 1.694+6 6.856+6 1.316+6
     CHECK(current->card_type() == cards::types::PBEAM);
     {
-        auto probe = static_cast<pbeam*>(current.get());
-        CHECK(probe->PID.value == 4000001);
-        CHECK(probe->MID.value == 3);
-        CHECK_THAT(vector<double>(probe->A.begin(), probe->A.end()),
+        auto lprobe = static_cast<pbeam*>(current.get());
+        CHECK(lprobe->PID.value == 4000001);
+        CHECK(lprobe->MID.value == 3);
+        CHECK_THAT(vector<double>(lprobe->A.begin(), lprobe->A.end()),
                    IsEqual(vector<double>(2, 10460.)));
-        CHECK_THAT(vector<double>(probe->I1.begin(), probe->I1.end()),
+        CHECK_THAT(vector<double>(lprobe->I1.begin(), lprobe->I1.end()),
                    IsEqual(vector<double>(2, 93690000.)));
-        CHECK_THAT(vector<double>(probe->I2.begin(), probe->I2.end()),
+        CHECK_THAT(vector<double>(lprobe->I2.begin(), lprobe->I2.end()),
                    IsEqual(vector<double>(2, 1694000.)));
-        CHECK_THAT(vector<double>(probe->I12.begin(), probe->I12.end()),
+        CHECK_THAT(vector<double>(lprobe->I12.begin(), lprobe->I12.end()),
                    IsEqual(vector<double>(2, 6.856e6)));
-        CHECK_THAT(vector<double>(probe->J.begin(), probe->J.end()),
+        CHECK_THAT(vector<double>(lprobe->J.begin(), lprobe->J.end()),
                    IsEqual(vector<double>(2, 1.316e6)));
         current.reset();
     }
@@ -1207,7 +1208,7 @@ TEST_CASE("Test partial supported element cards, CAABSF.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({ "CAABSF,44,38,1,10,20"});
+    std::list<std::string> const data({ "CAABSF,44,38,1,10,20"});
     std::list<std::string> l;
     card::card_split(data, l);
     cards::dispatch(l, probe);
@@ -1221,7 +1222,7 @@ TEST_CASE("Test partial supported element cards, CAERO1.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CAERO1,1000,1,,3,,,2,1,0.,0.,0.,1.,.2,1.,0.,.8"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1236,7 +1237,7 @@ TEST_CASE("Test partial supported element cards, CAERO2.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CAERO2,1500,2,100,,4,99,,1,-1.,100.,-30.,175."});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1251,7 +1252,7 @@ TEST_CASE("Test partial supported element cards, CAERO3.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CAERO3,2000,2001,0,22,33,,,,1.,0.,0.,100.,17.130,0.,100."});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1266,7 +1267,7 @@ TEST_CASE("Test partial supported element cards, CAERO4.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CAERO4,6000,6001,100,,315,,,,0.0,0.0,0.0,1.0,0.2,1.0,0.0,0.8"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1281,7 +1282,7 @@ TEST_CASE("Test partial supported element cards, CAERO5.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CAERO5,6001,6001,100,,315,0,0,,0.0,0.0,0.0,1.0,0.2,1.0,0.,0.8"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1296,7 +1297,7 @@ TEST_CASE("Test partial supported element cards, CAXIF2.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CAXIF2,11,23,25,,,0.25E-3"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1311,7 +1312,7 @@ TEST_CASE("Test partial supported element cards, CAXIF3.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CAXIF3,105,31,32,33,,6.47E-3"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1326,7 +1327,7 @@ TEST_CASE("Test partial supported element cards, CAXIF4.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CAXIF4,524,421,425,424,422,0.5E-3,2.5+3"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1341,7 +1342,7 @@ TEST_CASE("Test partial supported element cards, CBEND.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CBEND,32,39,17,19,6.2,5.1,-1.2"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1356,7 +1357,7 @@ TEST_CASE("Test partial supported element cards, CBEND (alt).", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CBEND,32,39,17,19,106"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1371,7 +1372,7 @@ TEST_CASE("Test partial supported element cards, CBUSH (1).", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CBUSH,39,6,1,100,75"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1386,7 +1387,7 @@ TEST_CASE("Test partial supported element cards, CBUSH (2).", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CBUSH,39,6,1"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1401,7 +1402,7 @@ TEST_CASE("Test partial supported element cards, CBUSH (3).", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CBUSH,39,6,1,100"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1416,7 +1417,7 @@ TEST_CASE("Test partial supported element cards, CBUSH (4).", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CBUSH,39,6,1,600,,,,,0.25,10,0.,10.,10."});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1430,7 +1431,7 @@ TEST_CASE("Test partial supported element cards, CBUSH1D.", "[bdf_cards]") {
 
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CBUSH1D,35,102,108,112"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1445,7 +1446,7 @@ TEST_CASE("Test partial supported element cards, CBUTT.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CBUTT,1002,11,5,0,0,3,1,,0.005,.07,,2.5,4.0,2.0,1.5"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1460,7 +1461,7 @@ TEST_CASE("Test partial supported element cards, CCONEAX.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CCONEAX,1,2,3,4"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1475,7 +1476,7 @@ TEST_CASE("Test partial supported element cards, CCRSFIL.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CCRSFIL,1002,11,5,0,0,2,1,,0.005,,40000.,2.5,4.,3.,2.,"
                 "25.0,101,201,11,,,,,,0.006,,45000.,2.6,4.5,3.2,2.2,"
                 "22.0,103,203,15"});
@@ -1492,7 +1493,7 @@ TEST_CASE("Test partial supported element cards, CDAMP1.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CDAMP1,19,6,0,,23,2"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1507,7 +1508,7 @@ TEST_CASE("Test partial supported element cards, CDAMP1D.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CDAMP1D,1001,101,55,1"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1522,7 +1523,7 @@ TEST_CASE("Test partial supported element cards, CDAMP2.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CDAMP2,16,2.98,32,1"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1537,7 +1538,7 @@ TEST_CASE("Test partial supported element cards, CDAMP2D.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CDAMP2D,1001,101,55,1"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1552,7 +1553,7 @@ TEST_CASE("Test partial supported element cards, CDAMP3.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CDAMP3,16,978,24,36"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1567,7 +1568,7 @@ TEST_CASE("Test partial supported element cards, CDAMP4.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CDAMP4,16,-2.6,4,9"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1582,7 +1583,7 @@ TEST_CASE("Test partial supported element cards, CDAMP5.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CDAMP5,1,4,10,20"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1597,7 +1598,7 @@ TEST_CASE("Test partial supported element cards, CDUM1.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CDUM1,114,108,2,5,6,8,11,,2.4,,3.E4,2,,50"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1612,7 +1613,7 @@ TEST_CASE("Test partial supported element cards, CDUM2.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CDUM2,124,108,2,5,6,8,11,,2.4,,3.E4,2,,50"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1627,7 +1628,7 @@ TEST_CASE("Test partial supported element cards, CDUM3.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CDUM3,134,108,2,5,6,8,11,,2.4,,3.E4,2,,50"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1642,7 +1643,7 @@ TEST_CASE("Test partial supported element cards, CDUM4.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CDUM4,144,108,2,5,6,8,11,,2.4,,3.E4,2,,50"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1657,7 +1658,7 @@ TEST_CASE("Test partial supported element cards, CDUM5.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CDUM5,154,108,2,5,6,8,11,,2.4,,3.E4,2,,50"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1672,7 +1673,7 @@ TEST_CASE("Test partial supported element cards, CDUM6.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CDUM6,164,108,2,5,6,8,11,,2.4,,3.E4,2,,50"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1687,7 +1688,7 @@ TEST_CASE("Test partial supported element cards, CDUM7.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CDUM7,174,108,2,5,6,8,11,,2.4,,3.E4,2,,50"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1702,7 +1703,7 @@ TEST_CASE("Test partial supported element cards, CDUM8.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CDUM8,184,108,2,5,6,8,11,,2.4,,3.E4,2,,50"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1717,7 +1718,7 @@ TEST_CASE("Test partial supported element cards, CDUM9.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CDUM9,194,108,2,5,6,8,11,,2.4,,3.E4,2,,50"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1732,7 +1733,7 @@ TEST_CASE("Test partial supported element cards, CELAS1.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CELAS1,2,6,,,8,1"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1747,7 +1748,7 @@ TEST_CASE("Test partial supported element cards, CELAS1D.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CELAS1D,1001,101,55,1,8,1"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1762,7 +1763,7 @@ TEST_CASE("Test partial supported element cards, CELAS2.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CELAS2,28,6.2+3,32,,19,4"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1777,7 +1778,7 @@ TEST_CASE("Test partial supported element cards, CELAS2D.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CELAS2D,1001,101,55,1,8,1"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1792,7 +1793,7 @@ TEST_CASE("Test partial supported element cards, CELAS3.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CELAS3,19,2,14,15"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1807,7 +1808,7 @@ TEST_CASE("Test partial supported element cards, CELAS4.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CELAS4,42,6.2-3,2"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1822,7 +1823,7 @@ TEST_CASE("Test partial supported element cards, CFILLET.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CFILLET,1002,11,5,0,0,3,1,,0.005,.07,,2.5,4.0,3.0,2.0,25.0"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1837,7 +1838,7 @@ TEST_CASE("Test partial supported element cards, CFLUID2.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CFLUID2,100,11,14,,,.025,0.0"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1852,7 +1853,7 @@ TEST_CASE("Test partial supported element cards, CFLUID3.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CFLUID3,110,15,13,12,,1.2"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1867,7 +1868,7 @@ TEST_CASE("Test partial supported element cards, CFLUID4.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CFLUID4,120,11,15,12,6"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1882,7 +1883,7 @@ TEST_CASE("Test partial supported element cards, CGAP (1).", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CGAP,17,2,110,112,5.2,0.3,-6.1"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1897,7 +1898,7 @@ TEST_CASE("Test partial supported element cards, CGAP (2).", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CGAP,17,2,110,112,13"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1912,7 +1913,7 @@ TEST_CASE("Test partial supported element cards, CHACAB.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CHACAB,95,12,1,2,5,7,8,9,24,23"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1927,7 +1928,7 @@ TEST_CASE("Test partial supported element cards, CHACBR.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CHACBR,95,12,1,2,5,7,8,9,24,23"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1942,7 +1943,7 @@ TEST_CASE("Test partial supported element cards, CHBDYE.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CHBDYE,2,10,1,3,3,2,2"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1957,7 +1958,7 @@ TEST_CASE("Test partial supported element cards, CHBDYG.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CHBDYG,2,,AREA4,3,3,2,2,,100,103,102,101"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1972,7 +1973,7 @@ TEST_CASE("Test partial supported element cards, CHBDYP.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CHBDYP,2,5,POINT,2,2,101,,500,3,3,,,0.0,0.0,1.0"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -1987,7 +1988,7 @@ TEST_CASE("Test partial supported element cards, CHEXA.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CHEXA,71,4,3,4,5,6,7,8,9,10,0,0,30,31,53,54,55,56,57,58,59,60"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -2002,7 +2003,7 @@ TEST_CASE("Test partial supported element cards, CMASS1.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CMASS1,32,6,2,1"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -2017,7 +2018,7 @@ TEST_CASE("Test partial supported element cards, CMASS3.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CMASS3,13,42,62"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -2032,7 +2033,7 @@ TEST_CASE("Test partial supported element cards, COMBWLD.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "COMBWLD,1002,11,,0,0,12,1,,,,"
                 "44000.,2.5,4.0,3.0,2.0,22.5,,,,"
                 "42000.,2.5,2.0,1.25,0.75,-22.5,"
@@ -2050,7 +2051,7 @@ TEST_CASE("Test element cards, CONM1.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CONM1,2,22,2,2.9,6.3,,,,4.8,28.6,,,,,,,,28.6,,,,,,28.6"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -2091,7 +2092,7 @@ TEST_CASE("Test partial supported element cards, CONM2.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CONM2,2,15,6,49.7,,,,,16.2,,16.2,,,7.8"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -2106,7 +2107,7 @@ TEST_CASE("Test partial supported element cards, CONROD.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CONROD,2,16,17,4,2.69"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -2121,7 +2122,7 @@ TEST_CASE("Test partial supported element cards, CPENTA.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CPENTA,112,2,3,15,14,4,103,115,5,16,8,,,,120,125,130"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -2136,7 +2137,7 @@ TEST_CASE("Test partial supported element cards, CQUAD.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CQUAD,111,203,31,74,75,32"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -2151,7 +2152,7 @@ TEST_CASE("Test partial supported element cards, CQUAD8.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CQUAD8,207,3,31,33,73,71,32,51,53,72,0.125,0.025,0.030,"
                 ".025,30.,.03"});
     std::list<std::string> l;
@@ -2167,7 +2168,7 @@ TEST_CASE("Test partial supported element cards, CQUADR.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CQUADR,82,203,31,74,75,32,2.6,,,1.77,2.04,2.09,1.80"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -2182,7 +2183,7 @@ TEST_CASE("Test partial supported element cards, CQUADX.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CQUADX,111,203,31,74,75,32"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -2197,7 +2198,7 @@ TEST_CASE("Test partial supported element cards, CRAC2D.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CRAC2D,114,108,2,5,6,8,7,11,12,14,16,17,,20,22"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -2212,7 +2213,7 @@ TEST_CASE("Test partial supported element cards, CRAC3D.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CRAC3D,113,101,2,5,7,8,4,10,11,14,15,17,,3,6,9,12,,16,,"
                 "102,105,107,108,115,117,,103,104,110,111,114,115,117,,"
                 "103,106,109,112,,116,,202,205,207,208,204,210,211,"
@@ -2230,7 +2231,7 @@ TEST_CASE("Test partial supported element cards, CSHEAR.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CSHEAR,3,6,1,5,3,7"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -2245,7 +2246,7 @@ TEST_CASE("Test partial supported element cards, CSLOT3.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CSLOT3,100,1,3,2,,3.0-3,,6"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -2260,7 +2261,7 @@ TEST_CASE("Test partial supported element cards, CSLOT4.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CSLOT4,101,1,3,2,4,,6.2+4,3"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -2275,7 +2276,7 @@ TEST_CASE("Test partial supported element cards, CSPOT.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CSPOT,1001,,11,5,0,0,,1,,0.005,.07"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -2290,7 +2291,7 @@ TEST_CASE("Test partial supported element cards, CTETRA.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CTETRA,112,2,3,15,14,4,103,115,5,16,8,27"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -2305,7 +2306,7 @@ TEST_CASE("Test partial supported element cards, CTRIA6.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CTRIA6,302,3,31,33,71,32,51,52,45,.03,.020,.025,.025"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -2320,7 +2321,7 @@ TEST_CASE("Test partial supported element cards, CTRIAR.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CTRIAR,111,203,31,74,75,3.0,,,,,1.77,2.04,2.09"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -2335,7 +2336,7 @@ TEST_CASE("Test partial supported element cards, CTRIAX.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CTRIAX,111,203,31,74,75"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -2350,7 +2351,7 @@ TEST_CASE("Test partial supported element cards, CTRIAX6.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CTRIAX6,22,999,10,11,12,21,22,32,9.0"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -2365,7 +2366,7 @@ TEST_CASE("Test partial supported element cards, CTUBE.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CTUBE,12,13,21,23"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -2380,7 +2381,7 @@ TEST_CASE("Test partial supported element cards, CVISC.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "CVISC,21,6327,29,31"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -2395,7 +2396,7 @@ TEST_CASE("Test partial supported element cards, GENEL.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "GENEL,629,,1,1,13,4,42,0,"
                 "24,2,,,,,,,"
                 "UD,,6,2,33,0,,,"
@@ -2416,7 +2417,7 @@ TEST_CASE("Test partial supported element cards, GMINTC.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "GMINTC,1001,1,1,2"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -2431,7 +2432,7 @@ TEST_CASE("Test partial supported element cards, GMINTS.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "GMINTS,1001,1,1,2"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -2446,7 +2447,7 @@ TEST_CASE("Test partial supported element cards, PLOTEL.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "PLOTEL,29,35,16"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -2461,7 +2462,7 @@ TEST_CASE("Test partial supported element cards, RBAR.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "RBAR,5,1,2,123456,,,,6.5-6"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -2476,7 +2477,7 @@ TEST_CASE("Test partial supported element cards, RBAR1.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "RBAR1,5,1,2,123,6.5-6"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -2491,7 +2492,7 @@ TEST_CASE("Test partial supported element cards, RBE1.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "RBE1,59,59,123456,,,,,,"
                 "UM,61,246,6.5-6"});
     std::list<std::string> l;
@@ -2507,7 +2508,7 @@ TEST_CASE("Test partial supported element cards, RBE2.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "RBE2,9,8,12,10,12,14,15,16,"
                 "20,6.5-6"});
     std::list<std::string> l;
@@ -2523,7 +2524,7 @@ TEST_CASE("Test partial supported element cards, RBE3.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "RBE3,14,,100,1234,1.0,123,1,3,"
                 "5,4.7,1,2,4,6,5.2,2,"
                 "7,8,9,5.1,1,15,16,,"
@@ -2542,7 +2543,7 @@ TEST_CASE("Test partial supported element cards, RBE3D (1).", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "RBE3D,51,11,123,,,,,,"
                 "101,123,0.5,0.5,0.5,,,,"
                 "102,123,0.5,0.5,0.5"});
@@ -2559,7 +2560,7 @@ TEST_CASE("Test partial supported element cards, RBE3D (2).", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "RBE3D,51,11,123,4,8,,,LOCAL1,"
                 "101,123,0.5,0.5,0.5,,,,"
                 "102,123,0.5,0.5,0.5"});
@@ -2576,7 +2577,7 @@ TEST_CASE("Test partial supported element cards, RBE3D.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "RBE3D,51,11,123,4,,,,LOCAL2,"
                 "8,,,,,,,,"
                 "101,123,0.5,0.5,0.5,,,,"
@@ -2595,7 +2596,7 @@ TEST_CASE("Test partial supported element cards, RJOINT.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "RJOINT,5,1,2,12345"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -2610,7 +2611,7 @@ TEST_CASE("Test partial supported element cards, RROD.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "RROD,14,1,2,2,,6.5-6"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -2625,7 +2626,7 @@ TEST_CASE("Test partial supported element cards, RSPLINE.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "RSPLINE,73,.05,27,28,123456,29,,30,"
                 "123,75,123,71"});
     std::list<std::string> l;
@@ -2641,7 +2642,7 @@ TEST_CASE("Test partial supported element cards, RSSCON (1).", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "RSSCON,110,GRID,11,12,13,14,15,16"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -2656,7 +2657,7 @@ TEST_CASE("Test partial supported element cards, RSSCON (2).", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "RSSCON,111,GRID,31,74,75"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -2671,7 +2672,7 @@ TEST_CASE("Test partial supported element cards, RSSCON (3).", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "RSSCON,115,ELEM,311,741"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -2686,7 +2687,7 @@ TEST_CASE("Test partial supported element cards, RTRPLT.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "RTRPLT,7,1,2,3,1236,3,3"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -2701,7 +2702,7 @@ TEST_CASE("Test partial supported element cards, RTRPLT1.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "RTRPLT1,7,1,2,3,1236,3,6.0-6"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -2716,7 +2717,7 @@ TEST_CASE("Test partial supported element cards, SPLINE1.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "SPLINE1,3,111,115,122,14,0."});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -2731,7 +2732,7 @@ TEST_CASE("Test partial supported element cards, SPLINE2.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "SPLINE2,5,8,12,24,60,0.,1.0,3,"
                 "1."});
     std::list<std::string> l;
@@ -2747,7 +2748,7 @@ TEST_CASE("Test partial supported element cards, SPLINE3.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "SPLINE3,7000,107,109,6,5,3,1.0,,"
                 "43,5,-1.0"});
     std::list<std::string> l;
@@ -2763,7 +2764,7 @@ TEST_CASE("Test partial supported element cards, SPLINE4.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "SPLINE4,3,111,115,,14,0.,IPS"});
     std::list<std::string> l;
     card::card_split(data, l);
@@ -2778,7 +2779,7 @@ TEST_CASE("Test partial supported element cards, SPLINE5.", "[bdf_cards]") {
     cards::__base::element::reset();
     std::unique_ptr<cards::__base::card> probe;
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "SPLINE5,5,8,12,,60,,,3,1.,,,BOTH"});
     std::list<std::string> l;
     card::card_split(data, l);

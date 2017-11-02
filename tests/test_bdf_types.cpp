@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_test_bdf_types[]) =
         "@(#) $Id$";
 }
@@ -122,7 +123,7 @@ TEST_CASE("Testing bdf entry values: Simple integer value.", "[bdf_types]" ) {
 
 TEST_CASE("Testing bdf entry values: Simple integer value with default.",
           "[bdf_types]" ) {
-    shared_ptr<bound<long>> b = make_shared<bound<long>>(nullptr, nullptr, cl1);
+    shared_ptr<bound<long>> const const b = make_shared<bound<long>>(nullptr, nullptr, cl1);
     entry_type<long> obj_int_l( "dummy1", b);
     entry_value<long> val_int;
     obj_int_l.set_value(val_int, "");

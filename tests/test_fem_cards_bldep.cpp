@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_test_fem_cards_bldep[]) =
         "@(#) $Id$";
 }
@@ -104,7 +105,7 @@ TEST_CASE("FEM BLDEP types output.", "[fem_bldep,out]" ) {
     std::ostringstream test;
 
     SECTION("empty") {
-        bldep probe;
+        bldep const probe;
         test << probe;
         CHECK(test.str() == "");
     }
@@ -113,7 +114,7 @@ TEST_CASE("FEM BLDEP types output.", "[fem_bldep,out]" ) {
         long inp_depdof[9] = {1, 1, 1, 2, 2, 2, 3, 3, 3};
         long inp_indepdof[9] = {3, 2, 1, 3, 2, 1, 3, 2, 1};
         double inp_b[9] = { 1., 2., 3., 4., 5., 6., 7., 8., 9.};
-        bldep probe(1, 2, 6, 9,
+        bldep const probe(1, 2, 6, 9,
                     std::vector<long>(inp_depdof, inp_depdof + 9),
                     std::vector<long>(inp_indepdof, inp_indepdof + 9),
                     std::vector<double>(inp_b, inp_b + 9));
@@ -135,7 +136,7 @@ TEST_CASE("FEM BLDEP types output.", "[fem_bldep,out]" ) {
         long inp_depdof[9] = {1, 1, 1, 2, 2, 2, 3, 3, 3};
         long inp_indepdof[9] = {3, 2, 1, 3, 2, 1, 3, 2, 1};
         double inp_b[9] = { 1., 2., 3., 4., 5., 6., 7., 8., 9.};
-        bldep probe(1, 2, 6, 9,
+        bldep const probe(1, 2, 6, 9,
                     std::vector<long>(inp_depdof, inp_depdof + 9),
                     std::vector<long>(inp_indepdof, inp_indepdof + 9),
                     std::vector<double>(inp_b, inp_b + 9));
@@ -154,7 +155,7 @@ TEST_CASE("FEM BLDEP types output.", "[fem_bldep,out]" ) {
     }
 
     SECTION("simple (fixed)") {
-        bldep probe(1, 2, 6,
+        bldep const probe(1, 2, 6,
                     {1, 1, 1, 2, 2, 2, 3, 3, 3},
                     {3, 2, 1, 3, 2, 1, 3, 2, 1},
                     { 1., 2., 3., 4., 5., 6., 7., 8., 9.});
@@ -186,7 +187,7 @@ TEST_CASE("FEM BLDEP conversion from own output.", "[fem_bldep,in/out]") {
                     "        +2.000000000e+00+3.000000000e+00+4.000000000e+00            0.00\n",
                     "        +2.000000000e+00+2.000000000e+00+5.000000000e+00            0.00\n",
                     "        +2.000000000e+00+1.000000000e+00+6.000000000e+00            0.00\n",});
-        size_t len{__base::card::card_split(data, data.size(), lines)};
+        size_t const len{__base::card::card_split(data, data.size(), lines)};
         bldep probe(lines, len);
 
         CHECK(probe.NODENO == 1);

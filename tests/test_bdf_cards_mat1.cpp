@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_test_bdf_cards_mat1[]) =
         "@(#) $Id$";
 }
@@ -42,7 +43,7 @@ using namespace dnvgl::extfem::bdf::cards;
 TEST_CASE("BDF MAT1 definitions. (Free Field Format) first",
           "[bdf_mat1]") {
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "MAT1,1,2.,3.,.4,5.,6.,7.,8.,9.,10.,11.,12\n"});
 
     std::list<std::string> lines;
@@ -68,7 +69,7 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format) first",
 TEST_CASE("BDF MAT1 definitions. (Free Field Format) mat1 with missing entries",
           "[bdf_mat2]") {
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "MAT1,1,2.070+5,80000.0,0.3,7.850-6\n"});
     std::list<std::string> lines;
     __base::card::card_split(data, lines);
@@ -93,7 +94,7 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format) mat1 with missing entries",
 TEST_CASE("BDF MAT1 definitions. (Free Field Format) mat1 default values 1",
           "[bdf_mat3]") {
 
-    std::list<std::string> data({"MAT1,1,2.070+5\n"});
+    std::list<std::string> const data({"MAT1,1,2.070+5\n"});
     std::list<std::string> lines;
     __base::card::card_split(data, lines);
     mat1 probe(lines);
@@ -117,7 +118,7 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format) mat1 default values 1",
 TEST_CASE("BDF MAT1 definitions.  mat1 default values 2",
           "[bdf_mat5]") {
 
-    std::list<std::string> data({"MAT1    1       2.070+5 80000.0\n"});
+    std::list<std::string> const data({"MAT1    1       2.070+5 80000.0\n"});
     std::list<std::string> lines;
     __base::card::card_split(data, lines);
     mat1 probe(lines);
@@ -142,7 +143,7 @@ TEST_CASE("BDF MAT1 definitions.  mat1 default values 2",
 TEST_CASE("BDF MAT1 definitions. mat1 default values 3",
           "[bdf_mat4]") {
 
-    std::list<std::string> data({"MAT1,1,2.070+5,,.3\n"});
+    std::list<std::string> const data({"MAT1,1,2.070+5,,.3\n"});
     std::list<std::string> lines;
     __base::card::card_split(data, lines);
     mat1 probe(lines);
@@ -166,7 +167,7 @@ TEST_CASE("BDF MAT1 definitions. mat1 default values 3",
 TEST_CASE("BDF MAT1 definitions. (Free Field Format) first (reuse)",
           "[bdf_mat1_reuse]") {
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "MAT1,1,2.,3.,.4,5.,6.,7.,8.,9.,10.,11.,12\n"});
 
     std::list<std::string> lines;
@@ -193,7 +194,7 @@ TEST_CASE("BDF MAT1 definitions. (Free Field Format) first (reuse)",
 TEST_CASE("BDF MAT1 definitions. (Free Field Format) mat1 with missing entries (reuse)",
           "[bdf_mat2_reuse]") {
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "MAT1,1,2.070+5,80000.0,0.3,7.850-6\n"});
     std::list<std::string> lines;
     __base::card::card_split(data, lines);

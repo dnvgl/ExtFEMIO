@@ -13,6 +13,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     char const _EXTFEMIO_UNUSED(cID_test_bdf_cards_grav[]) =
         "@(#) $Id$";
 }
@@ -44,7 +45,7 @@ using namespace dnvgl::extfem::bdf::cards;
 
 TEST_CASE("BDF GRAV definitions. (Small Field Format)", "[bdf_grav]" ) {
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
             "GRAV    1       3       32.2    0.0     0.0     -1.0    0                 \n"});
     std::list<std::string> lines;
@@ -80,7 +81,7 @@ TEST_CASE("BDF GRAV types output.", "[bdf_grav,out]" ) {
         long const SID(2), CID(6);
         double const A(2.9);
         std::vector<double> const N({0., 1.8, 0.});
-        grav probe(&SID, &CID, &A, &N);
+        grav const probe(&SID, &CID, &A, &N);
         test << probe;
         CHECK(test.str() ==
                 // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2

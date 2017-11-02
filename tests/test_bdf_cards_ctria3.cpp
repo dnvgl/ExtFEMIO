@@ -13,6 +13,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_test_bdf_cards_ctria3[]) =
         "@(#) $Id$";
 }
@@ -46,7 +47,7 @@ using namespace cards;
 TEST_CASE("BDF CTRIA3 definitions. (Small Field Format)",
           "[bdf_ctria3]") {
 
-    list<std::string> data({
+    list<std::string> const data({
         // 34567|1234567|1234567|1234567|1234567|1234567|
         "CTRIA3  1       1       16      200     141\n"});
     list<std::string> lines;
@@ -69,7 +70,7 @@ TEST_CASE("BDF CTRIA3 definitions. (Small Field Format, default values)",
           "[bdf_ctria3]") {
 
     ctria3::reset();
-    list<std::string> data({
+    list<std::string> const data({
         // 34567|1234567|1234567|1234567|1234567|1234567|
         "CTRIA3  1               16      200     141\n"});
     list<std::string> lines;
@@ -97,7 +98,7 @@ TEST_CASE("BDF CTRIA3 definitions. (Small Field Format, default values 2)",
           "[bdf_ctria3]") {
 
     ctria3::reset();
-    list<std::string> data({
+    list<std::string> const data({
         // 34567|1234567|1234567|1234567|1234567|1234567|1234567|1234567|1234567|1234567|
         "CTRIA3  1               16      200     141\n",
         "                1\n"});
@@ -125,7 +126,7 @@ TEST_CASE("BDF CTRIA3 definitions. (Small Field Format, default values 2)",
 TEST_CASE("BDF CTRIA3 definitions. (Large Field Format)",
           "[bdf_ctria3]") {
 
-    list<std::string> data({
+    list<std::string> const data({
         // 34567|123456781234567|123456781234567|123456781234567|123456781234567|
         "CTRIA3* 2               1               16              200             *\n",
         "*       141\n"});
@@ -205,7 +206,7 @@ TEST_CASE("BDF CTRIA3 roundtrip 1.", "[bdf_ctria3_roundtrip]") {
     long TFLAG{1};
     double T1{9.}, T2{10.}, T3{11};
 
-    ctria3 probe(&EID, &PID, &G1, &G2, &G3, &THETA, &ZOFFS, &TFLAG,
+    ctria3 const probe(&EID, &PID, &G1, &G2, &G3, &THETA, &ZOFFS, &TFLAG,
                  &T1, &T2, &T3);
     test << probe;
 
@@ -249,7 +250,7 @@ TEST_CASE("BDF CTRIA3 types output 2.", "[bdf_ctria3,out]") {
         long TFLAG{0};
         double T1{9.}, T2{10.}, T3{11};
 
-        ctria3 probe(&EID, &PID, &G1, &G2, &G3, &MCID, &ZOFFS, &TFLAG,
+        ctria3 const probe(&EID, &PID, &G1, &G2, &G3, &MCID, &ZOFFS, &TFLAG,
                       &T1, &T2, &T3);
         test << probe;
 
@@ -274,7 +275,7 @@ TEST_CASE("BDF CTRIA3 types output 3.", "[bdf_ctria3,out]") {
         double ZOFFS{.98};
         double T1{1.77}, T2{2.04}, T3{2.09};
 
-        ctria3 probe(&EID, &PID, &G1, &G2, &G3, &MCID, &ZOFFS, nullptr,
+        ctria3 const probe(&EID, &PID, &G1, &G2, &G3, &MCID, &ZOFFS, nullptr,
                       &T1, &T2, &T3);
         test << probe;
 
@@ -299,7 +300,7 @@ TEST_CASE("BDF CTRIA3 types output 4.", "[bdf_ctria3,out]") {
         double ZOFFS{.98};
         double T1{1.77}, T2{2.04}, T3{2.09};
 
-        ctria3 probe(&EID, &PID, &G1, &G2, &G3, &THETA, &ZOFFS, nullptr,
+        ctria3 const probe(&EID, &PID, &G1, &G2, &G3, &THETA, &ZOFFS, nullptr,
                       &T1, &T2, &T3);
         test << probe;
 
@@ -323,7 +324,7 @@ TEST_CASE("BDF CTRIA3 types output 5.", "[bdf_ctria3,out]") {
         double THETA{3.};
         double ZOFFS{.98};
 
-        ctria3 probe(&EID, &PID, &G1, &G2, &G3, &THETA, &ZOFFS);
+        ctria3 const probe(&EID, &PID, &G1, &G2, &G3, &THETA, &ZOFFS);
         test << probe;
 
         CHECK(test.str() ==

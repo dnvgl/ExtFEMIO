@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_test_fem_cards_belfix[]) =
         "@(#) $Id$";
 }
@@ -47,7 +48,7 @@ TEST_CASE("FEM BELFIX definitions.", "[fem_belfix]" ) {
 
     SECTION("first") {
 
-        vector<std::string> data({
+        vector<std::string> const data({
                 // 345678|234567890123456|234567890123456|234567890123456|234567890123456
                 "BELFIX   2.30470000e+004 1.00000000e+000 0.00000000e+000 0.00000000e+000\n",
                     "         1.00000000e+000 1.00000000e+000 1.00000000e+000 1.00000000e+000\n",
@@ -64,7 +65,7 @@ TEST_CASE("FEM BELFIX definitions.", "[fem_belfix]" ) {
 
     SECTION("spring") {
 
-        vector<std::string> data({
+        vector<std::string> const data({
                 // 345678|234567890123456|234567890123456|234567890123456|234567890123456
                 "BELFIX   2.30470000e+004 2.00000000e+000 0.00000000e+000 0.00000000e+000\n",
                     "         1.00000000e+000 1.00000000e+000 1.00000000e+000 1.00000000e+000\n",
@@ -81,7 +82,7 @@ TEST_CASE("FEM BELFIX definitions.", "[fem_belfix]" ) {
 
     SECTION("fixation end") {
 
-        vector<std::string> data({
+        vector<std::string> const data({
                 // 345678|234567890123456|234567890123456|234567890123456|234567890123456
                 "BELFIX   2.30470000e+004 3.00000000e+000 0.00000000e+000 0.00000000e+000\n",
                     "         1.00000000e+000 1.00000000e+000 1.00000000e+000 1.00000000e+000\n",
@@ -98,7 +99,7 @@ TEST_CASE("FEM BELFIX definitions.", "[fem_belfix]" ) {
 
     SECTION("spring end") {
 
-        vector<std::string> data({
+        vector<std::string> const data({
                 // 345678|234567890123456|234567890123456|234567890123456|234567890123456
                 "BELFIX   2.30470000e+004 4.00000000e+000 0.00000000e+000 0.00000000e+000\n",
                     "         1.00000000e+000 1.00000000e+000 1.00000000e+000 1.00000000e+000\n",
@@ -119,7 +120,7 @@ TEST_CASE("FEM BELFIX types output.", "[fem_belfix,out]" ) {
     SECTION("write default") {
         std::ostringstream test;
 
-        belfix probe;
+        belfix const probe;
         test << probe;
 
         CHECK(test.str() == "");
@@ -128,12 +129,12 @@ TEST_CASE("FEM BELFIX types output.", "[fem_belfix,out]" ) {
     SECTION("write") {
         std::ostringstream test;
 
-        long FIXNO(1);
-        belfix::n_opt OPT(belfix::n_opt::FIXATION);
-        long TRANO(1);
-        std::vector<double> A({1., 0., .5, 1., 1., 1.});
+        long const FIXNO(1);
+        belfix::n_opt const OPT(belfix::n_opt::FIXATION);
+        long const TRANO(1);
+        std::vector<double> const A({1., 0., .5, 1., 1., 1.});
 
-        belfix probe(FIXNO, OPT, TRANO, A);
+        belfix const probe(FIXNO, OPT, TRANO, A);
         test << probe;
 
         CHECK(test.str() ==
@@ -145,7 +146,7 @@ TEST_CASE("FEM BELFIX types output.", "[fem_belfix,out]" ) {
     SECTION("write (const)") {
         std::ostringstream test;
 
-        belfix probe(1, belfix::n_opt::FIXATION, 1, {1., 0., .5, 1., 1., 1.});
+        belfix const probe(1, belfix::n_opt::FIXATION, 1, {1., 0., .5, 1., 1., 1.});
         test << probe;
 
         CHECK(test.str() ==
@@ -161,12 +162,12 @@ TEST_CASE("FEM BELFIX conversion from own output.", "[fem_belfix,in/out]") {
 
     SECTION("BELFIX (own output)") {
 
-        vector<std::string> data({
+        vector<std::string> const data({
                 // 345678|234567890123456|234567890123456|234567890123456|234567890123456
                 "BELFIX  +1.000000000e+00+1.000000000e+00+1.000000000e+00            0.00\n",
                     "        +1.000000000e+00+0.000000000e+00+5.000000000e-01+1.000000000e+00\n",
                     "        +1.000000000e+00+1.000000000e+00\n"});
-        size_t len{__base::card::card_split(data, 3, lines)};
+        size_t const len{__base::card::card_split(data, 3, lines)};
         belfix probe(lines, len);
 
         CHECK(probe.FIXNO == 1);

@@ -13,6 +13,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     char const _EXTFEMIO_UNUSED(cID_test_bdf_cards_force[]) =
         "@(#) $Id$";
 }
@@ -42,7 +43,7 @@ using namespace dnvgl::extfem::bdf::cards;
 
 TEST_CASE("BDF FORCE definitions. (Small Field Format)", "[bdf_force]") {
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
         // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
         "FORCE   2       5       6       2.9     0.0     1.9     0.0               \n"});
     std::list<std::string> lines;
@@ -67,7 +68,7 @@ TEST_CASE("BDF FORCE types output.", "[bdf_force,out]") {
     SECTION("reverse") {
         long SID{2}, G{5}, CID{6};
         double F(2.9), N1(0.), N2(1.9), N3(0.);
-        force probe(&SID, &G, &CID, &F, &N1, &N2, &N3);
+        force const probe(&SID, &G, &CID, &F, &N1, &N2, &N3);
         test << probe;
         CHECK(test.str() ==
               "FORCE          2       5       62.900+00 0.00+001.900+00 0.00+00\n");
@@ -76,7 +77,7 @@ TEST_CASE("BDF FORCE types output.", "[bdf_force,out]") {
     SECTION("reverse part") {
         long SID{2}, G{5}, CID{6};
         double F(2.9), N1(0.), N2(1.9);
-        force probe(&SID, &G, &CID, &F, &N1, &N2);
+        force const probe(&SID, &G, &CID, &F, &N1, &N2);
         test << probe;
         CHECK(test.str() ==
               "FORCE          2       5       62.900+00 0.00+001.900+00\n");
@@ -85,7 +86,7 @@ TEST_CASE("BDF FORCE types output.", "[bdf_force,out]") {
     SECTION("reverse part (2)") {
         long SID{2}, G{5}, CID{6};
         double F(2.9), N1(1.9);
-        force probe(&SID, &G, &CID, &F, &N1);
+        force const probe(&SID, &G, &CID, &F, &N1);
         test << probe;
         CHECK(test.str() ==
               "FORCE          2       5       62.900+001.900+00\n");
@@ -94,7 +95,7 @@ TEST_CASE("BDF FORCE types output.", "[bdf_force,out]") {
     SECTION("reverse part (3)") {
         long SID{2}, G{5}, CID{6};
         double F(2.9), N1(1234.5);
-        force probe(&SID, &G, &CID, &F, &N1);
+        force const probe(&SID, &G, &CID, &F, &N1);
         test << probe;
         CHECK(test.str() ==
               "FORCE*                 2               5               62.90000000000+00\n"

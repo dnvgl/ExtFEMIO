@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     char const _EXTFEMIO_UNUSED(cID_test_support_grouping_csv[])  =
         "@(#) $Id$";
 }
@@ -19,8 +20,6 @@ namespace {
 #include <catch.hpp>
 
 #include "support/grouping.h"
-
-#include <iostream>
 
 #if defined(_DEBUG) && defined(DEBUG_NEW)
 #define new DEBUG_NEW

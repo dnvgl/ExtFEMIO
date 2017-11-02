@@ -13,6 +13,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_test_bdf_cards_cquad4[]) =
         "@(#) $Id$";
 }
@@ -45,7 +46,7 @@ using namespace cards;
 TEST_CASE("BDF CQUAD4 definitions. (Small Field Format)", "[bdf_cquad4]") {
 
     cquad4::reset();
-    std::list<std::string> data({
+    std::list<std::string> const data({
         "CQUAD4  1       1       16      200     141     17\n"});
     std::list<std::string> lines;
     __base::card::card_split(data, lines);
@@ -68,7 +69,7 @@ TEST_CASE("BDF CQUAD4 definitions. (Small Field Format)", "[bdf_cquad4]") {
 TEST_CASE("BDF CQUAD4 definitions. (Large Field Format)", "[bdf_cquad4]") {
 
     cquad4::reset();
-    std::list<std::string> data({
+    std::list<std::string> const data({
         "CQUAD4* 2               1               16              200             *\n",
         "*       141             17\n"});
     std::list<std::string> lines;
@@ -104,7 +105,7 @@ TEST_CASE("BDF CQUAD4 types output.", "[bdf_cquad4,out]") {
         long TFLAG{1};
         double T1{10.}, T2{11.}, T3{12}, T4{13};
 
-        cquad4 probe(&EID, &PID, &G1, &G2, &G3, &G4, &THETA, &ZOFFS, &TFLAG,
+        cquad4 const probe(&EID, &PID, &G1, &G2, &G3, &G4, &THETA, &ZOFFS, &TFLAG,
                      &T1, &T2, &T3, &T4);
         test << probe;
 
@@ -125,7 +126,7 @@ TEST_CASE("BDF CQUAD4 types output.", "[bdf_cquad4,out]") {
         long TFLAG{1};
         double T1{910.}, T2{11.}, T3{12.}, T4{13.};
 
-        cquad4 probe(&EID, &PID, &G1, &G2, &G3, &G4, &MCID, &ZOFFS, &TFLAG,
+        cquad4 const probe(&EID, &PID, &G1, &G2, &G3, &G4, &MCID, &ZOFFS, &TFLAG,
                       &T1, &T2, &T3, &T4);
         test << probe;
 
@@ -145,7 +146,7 @@ TEST_CASE("BDF CQUAD4 types output.", "[bdf_cquad4,out]") {
         double ZOFFS{.3};
         double T1{1.77}, T2{2.04}, T3{2.09}, T4{1.8};
 
-        cquad4 probe(&EID, &PID, &G1, &G2, &G3, &G4, &MCID, &ZOFFS, nullptr,
+        cquad4 const probe(&EID, &PID, &G1, &G2, &G3, &G4, &MCID, &ZOFFS, nullptr,
                      &T1, &T2, &T3, &T4);
         test << probe;
 
@@ -165,7 +166,7 @@ TEST_CASE("BDF CQUAD4 types output.", "[bdf_cquad4,out]") {
         double ZOFFS{.98};
         double T1{1.77}, T2{2.04}, T3{2.09}, T4{1.8};
 
-        cquad4 probe(&EID, &PID, &G1, &G2, &G3, &G4, &THETA, &ZOFFS, nullptr,
+        cquad4 const probe(&EID, &PID, &G1, &G2, &G3, &G4, &THETA, &ZOFFS, nullptr,
                      &T1, &T2, &T3, &T4);
         test << probe;
 
@@ -184,7 +185,7 @@ TEST_CASE("BDF CQUAD4 types output.", "[bdf_cquad4,out]") {
         double THETA{2.6};
         double ZOFFS{.98};
 
-        cquad4 probe(&EID, &PID, &G1, &G2, &G3, &G4, &THETA, &ZOFFS);
+        cquad4 const probe(&EID, &PID, &G1, &G2, &G3, &G4, &THETA, &ZOFFS);
         test << probe;
 
         CHECK(test.str() ==

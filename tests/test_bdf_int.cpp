@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_test_bdf_int[]) =
         "@(#) $Id$";
 }
@@ -30,7 +31,6 @@ namespace {
 #include "bdf/types.h"
 
 #include <memory>
-#include <clocale>
 
 #if defined(_DEBUG) && defined(DEBUG_NEW)
 #define new DEBUG_NEW
@@ -156,7 +156,7 @@ TEST_CASE("BDF int types output.", "[bdf_types]") {
 
 TEST_CASE("Locale, mkoe 2016-01-07 [FEMIO-1]", "[bdf_types]") {
     SECTION("SHORT (>=1e3)") {
-        auto locsave(std::locale::global(std::locale("")));
+        auto const locsave(std::locale::global(std::locale("")));
 
         entry_type<long> obj("dummy");
         long lval(1234);

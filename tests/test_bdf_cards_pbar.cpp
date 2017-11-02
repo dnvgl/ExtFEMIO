@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_test_bdf_cards_pbar[]) =
         "@(#) $Id$";
 }
@@ -42,7 +43,7 @@ using namespace dnvgl::extfem::bdf::cards;
 TEST_CASE("BDF PBAR definitions: Free Field Format (generic).", "[bdf_pbar]") {
     pbar::reset();
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "PBAR,1,2,3.,4.,5.,6.,7.,,9.,10.,11.,12.,13.,14.,15.,16.,17.,18.,19.\n"});
     std::list<std::string> lines;
     __base::card::card_split(data, lines);
@@ -71,7 +72,7 @@ TEST_CASE("BDF PBAR definitions: Free Field Format (generic).", "[bdf_pbar]") {
 
 TEST_CASE("BDF PBAR definitions: Small Field Format 1.", "[bdf_pbar]") {
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "PBAR    4000001 3       1.046+4 9.369+7 1.694+6 1.316+6\n",
             "                        6.856+6\n"});
     std::list<std::string> lines;
@@ -102,7 +103,7 @@ TEST_CASE("BDF PBAR definitions: Small Field Format 2.", "[bdf_pbar]") {
 
     pbar::reset();
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             // 234567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567
             "PBAR          29       6     2.9            5.97                                \n",
                 "                             2.0     4.0                                        \n"});

@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_test_bdf_cards_enddata[]) =
         "@(#) $Id$";
 }
@@ -43,7 +44,7 @@ TEST_CASE("BDF ENDDATA definitions. (Small Field Format)",
           "[bdf_ENDDATA]") {
 
     SECTION("enddata read") {
-        std::list<std::string> data({
+        std::list<std::string> const data({
             "ENDDAT                                                                  \n"});
 
         std::list<std::string> lines;

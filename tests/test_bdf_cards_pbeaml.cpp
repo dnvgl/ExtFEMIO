@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_test_bdf_cards_pbeaml[]) =
         "@(#) $Id$";
 }
@@ -52,7 +53,7 @@ using bdf::types::entry_value;
 
 TEST_CASE("BDF PBEAML definitions: Small Field Format (BAR).", "[bdf_pbeaml]") {
 
-    list<std::string> data({
+    list<std::string> const data({
             // 34567A1234567B1234567C1234567D1234567E1234567F
             "PBEAML  104018  4               BAR\n",
             "           25.0   600.0         YES     1.\n"});
@@ -78,7 +79,7 @@ TEST_CASE("BDF PBEAML definitions: Small Field Format (BAR).", "[bdf_pbeaml]") {
 
 TEST_CASE("BDF PBEAML definitions: Small Field Format (BAR 2).", "[bdf_pbeaml]") {
 
-    list<std::string> data({
+    list<std::string> const data({
             "PBEAML       134       8            BAR\n",
             "            55.0   500.0        YES     1.\n"});
     list<std::string> lines;
@@ -103,7 +104,7 @@ TEST_CASE("BDF PBEAML definitions: Small Field Format (BAR 2).", "[bdf_pbeaml]")
 
 TEST_CASE("BDF PBEAML definitions: Small Field Format (L).", "[bdf_pbeaml]") {
 
-    list<std::string> data({
+    list<std::string> const data({
             "PBEAML  104010  4               L\n",
             "           63.0   340.0    35.0    14.0\n"});
     list<std::string> lines;
@@ -126,7 +127,7 @@ TEST_CASE("BDF PBEAML definitions: Small Field Format (L).", "[bdf_pbeaml]") {
 
 TEST_CASE("BDF PBEAML definitions: Small Field Format (T).", "[bdf_pbeaml]") {
 
-    list<std::string> data({
+    list<std::string> const data({
             "PBEAML  101031  1               T\n",
             "          150.0   400.0    12.0    10.0\n"});
     list<std::string> lines;
@@ -149,7 +150,7 @@ TEST_CASE("BDF PBEAML definitions: Small Field Format (T).", "[bdf_pbeaml]") {
 TEST_CASE("BDF PBEAML definitions: Small Field Format (I).", "[bdf_pbeaml]") {
     pbeaml::reset();
 
-    list<std::string> data({
+    list<std::string> const data({
             "PBEAML  104018  4               I\n",
             "           600.0   200.0   200.0    12.0    10.0    10.0\n"});
     list<std::string> lines;
@@ -171,7 +172,7 @@ TEST_CASE("BDF PBEAML definitions: Small Field Format (I).", "[bdf_pbeaml]") {
 
 TEST_CASE("BDF PBEAML definitions: Small Field Format (TUBE).", "[bdf_pbeaml]") {
 
-    list<std::string> data({
+    list<std::string> const data({
             "PBEAML  104019  5               TUBE\n",
             "           600.0   500.0"});
     list<std::string> lines;
@@ -192,7 +193,7 @@ TEST_CASE("BDF PBEAML definitions: Small Field Format (TUBE).", "[bdf_pbeaml]") 
 
 TEST_CASE("BDF PBEAML definitions: Small Field Format (T, tapered).", "[bdf_pbeaml]") {
 
-    list<std::string> data({
+    list<std::string> const data({
             // 34567A1234567B1234567C1234567D1234567E1234567F1234567G1234567H1234567I1234567J
             "PBEAML        99      21               T                                        \n",
             "             12.    14.8     2.5     2.6              NO     0.4      6.        \n",
@@ -458,7 +459,7 @@ TEST_CASE("BDF PBEAML roundtrip test, multiple stations", "[bdf_pbeaml]") {
     vector<std::string> SO{"NO"};
     vector<double> X_XB{1.};
 
-    pbeaml probe(&PID, &MID, &GROUP, &TYPE,
+    pbeaml const probe(&PID, &MID, &GROUP, &TYPE,
                  &DIM, &NSM, &SO, &X_XB);
     test << probe;
 

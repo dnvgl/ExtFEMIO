@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_test_fem_cards_bnbcd[]) =
         "@(#) $Id$";
 }
@@ -119,13 +120,13 @@ TEST_CASE("FEM BNBCD types output.", "[fem_bnbcd,, 6out]") {
         bnbcd::fix_key::FREE, bnbcd::fix_key::DISPL_FIX};
 
     SECTION("empty") {
-        bnbcd probe;
+        bnbcd const const const const probe;
         test << probe;
         CHECK(test.str() == "");
     }
 
     SECTION("simple") {
-        bnbcd probe(1, 6, std::vector<bnbcd::fix_key>(inp_fix, inp_fix + 6));
+        bnbcd const probe(1, 6, std::vector<bnbcd::fix_key>(inp_fix, inp_fix + 6));
         test << probe;
         CHECK(test.str() ==
               "BNBCD   +1.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n"
@@ -133,7 +134,7 @@ TEST_CASE("FEM BNBCD types output.", "[fem_bnbcd,, 6out]") {
     }
 
     SECTION("simple (const)") {
-        bnbcd probe(1, 6, {bnbcd::fix_key::DISPL_FIX, bnbcd::fix_key::PRESCRIBED,
+        bnbcd const probe(1, 6, {bnbcd::fix_key::DISPL_FIX, bnbcd::fix_key::PRESCRIBED,
                     bnbcd::fix_key::LINDEP, bnbcd::fix_key::RETAINED,
                     bnbcd::fix_key::FREE, bnbcd::fix_key::DISPL_FIX});
         test << probe;
@@ -143,7 +144,7 @@ TEST_CASE("FEM BNBCD types output.", "[fem_bnbcd,, 6out]") {
     }
 
     SECTION("simple (2)") {
-        bnbcd probe(1, 3, std::vector<bnbcd::fix_key>(inp_fix, inp_fix + 3));
+        bnbcd const probe(1, 3, std::vector<bnbcd::fix_key>(inp_fix, inp_fix + 3));
         test << probe;
         CHECK(test.str() ==
               "BNBCD   +1.000000000e+00+3.000000000e+00+1.000000000e+00+2.000000000e+00\n"
@@ -151,7 +152,7 @@ TEST_CASE("FEM BNBCD types output.", "[fem_bnbcd,, 6out]") {
     }
 
     SECTION("calc ndof") {
-        bnbcd probe(1, std::vector<bnbcd::fix_key>(inp_fix, inp_fix + 6));
+        bnbcd const probe(1, std::vector<bnbcd::fix_key>(inp_fix, inp_fix + 6));
         test << probe;
         CHECK(test.str() ==
               "BNBCD   +1.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n"
@@ -159,14 +160,14 @@ TEST_CASE("FEM BNBCD types output.", "[fem_bnbcd,, 6out]") {
     }
 
     SECTION("calc ndof (2)") {
-        bnbcd probe(1, std::vector<bnbcd::fix_key>(inp_fix, inp_fix + 3));
+        bnbcd const probe(1, std::vector<bnbcd::fix_key>(inp_fix, inp_fix + 3));
         test << probe;
         CHECK(test.str() ==
               "BNBCD   +1.000000000e+00+3.000000000e+00+1.000000000e+00+2.000000000e+00\n"
               "        +3.000000000e+00\n");
     }
     SECTION("calc ndof (2)") {
-        bnbcd probe(1, true, false, true, false, true, false);
+        bnbcd const probe(1, true, false, true, false, true, false);
         test << probe;
         CHECK(test.str() ==
               "BNBCD   +1.000000000e+00+6.000000000e+00+1.000000000e+00+0.000000000e+00\n"

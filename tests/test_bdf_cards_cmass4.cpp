@@ -13,6 +13,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     char const _EXTFEMIO_UNUSED(cID_test_bdf_cards_cmass4[]) =
         "@(#) $Id$";
 }
@@ -44,7 +45,7 @@ using namespace dnvgl::extfem::bdf::cards;
 
 TEST_CASE("BDF CMASS4 definitions. (Small Field Format)", "[bdf_cmass4]" ) {
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
             "CMASS4  1       3.      32      33 \n"});
     std::list<std::string> lines;
@@ -65,7 +66,7 @@ TEST_CASE("BDF CMASS4 types output.", "[bdf_cmass4,out]" ) {
     std::ostringstream test;
 
     SECTION("empty") {
-        cmass4 probe;
+        cmass4 const probe;
         test << probe;
         CHECK(test.str() == "");
     }
@@ -73,7 +74,7 @@ TEST_CASE("BDF CMASS4 types output.", "[bdf_cmass4,out]" ) {
     SECTION("reverse") {
         long EID(2), S1(6), S2(1);
         double M(2.9);
-        cmass4 probe(&EID, &M, &S1, &S2);
+        cmass4 const probe(&EID, &M, &S1, &S2);
         test << probe;
         CHECK(test.str() ==
                 // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
@@ -83,7 +84,7 @@ TEST_CASE("BDF CMASS4 types output.", "[bdf_cmass4,out]" ) {
     SECTION("reverse part") {
         long EID(2), S1(6);
         double M(2.9);
-        cmass4 probe(&EID, &M, &S1);
+        cmass4 const probe(&EID, &M, &S1);
         test << probe;
         CHECK(test.str() ==
                 // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2

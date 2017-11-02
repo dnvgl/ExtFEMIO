@@ -13,6 +13,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     char const _EXTFEMIO_UNUSED(cID_test_bdf_cards_cmass2[]) =
         "@(#) $Id$";
 }
@@ -45,7 +46,7 @@ using namespace dnvgl::extfem::bdf::cards;
 TEST_CASE("BDF CMASS2 definitions. (Small Field Format)", "[bdf_cmass2]" ) {
 
     SECTION("first cmass2") {
-        std::list<std::string> data({
+        std::list<std::string> const data({
                 // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
                 "CMASS2  1       3.      32      8\n"});
         std::list<std::string> lines;
@@ -61,7 +62,7 @@ TEST_CASE("BDF CMASS2 definitions. (Small Field Format)", "[bdf_cmass2]" ) {
     }
 
     SECTION("full cmass2") {
-        std::list<std::string> data({
+        std::list<std::string> const data({
                 // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
                 "CMASS2  1       3.      32      8       43      2\n"});
         std::list<std::string> lines;
@@ -77,7 +78,7 @@ TEST_CASE("BDF CMASS2 definitions. (Small Field Format)", "[bdf_cmass2]" ) {
     }
 
     SECTION("only second vals cmass2") {
-        std::list<std::string> data({
+        std::list<std::string> const data({
                 // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
                 "CMASS2  1       3.                      32      12\n"});
         std::list<std::string> lines;
@@ -99,7 +100,7 @@ TEST_CASE("BDF CMASS2 types output.", "[bdf_cmass2,out]" ) {
     std::ostringstream test;
 
     SECTION("empty") {
-        cmass2 probe;
+        cmass2 const probe;
         test << probe;
         CHECK(test.str() == "");
     }
@@ -108,7 +109,7 @@ TEST_CASE("BDF CMASS2 types output.", "[bdf_cmass2,out]" ) {
         long EID(2), S1(6), S2(1);
         std::vector<int> C1({1, 2, 3}), C2({4, 5, 6});
         double M(2.9);
-        cmass2 probe(&EID, &M, &S1, &C1, &S2, &C2);
+        cmass2 const probe(&EID, &M, &S1, &C1, &S2, &C2);
         test << probe;
         CHECK(test.str() ==
                 // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
@@ -119,7 +120,7 @@ TEST_CASE("BDF CMASS2 types output.", "[bdf_cmass2,out]" ) {
         long EID(2), S1(6);
         double M(2.9);
         std::vector<int> C1({1, 2, 3});
-        cmass2 probe(&EID, &M, &S1, &C1);
+        cmass2 const probe(&EID, &M, &S1, &C1);
         test << probe;
         CHECK(test.str() ==
                 // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2

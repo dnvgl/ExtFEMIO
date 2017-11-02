@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_test_fem_cards_bnload[]) =
         "@(#) $Id$";
 }
@@ -82,180 +83,180 @@ TEST_CASE("FEM BNLOAD definitions.", "[fem_bnload]" ) {
    }
 }
 
-TEST_CASE("FEM BNLOAD types output.", "[fem_bnload,out]" ) {
+TEST_CASE("FEM BNLOAD types output.", "[fem_bnload,out]") {
 
-   std::ostringstream test;
+    std::ostringstream test;
 
-   SECTION("empty") {
-      bnload probe;
-      test << probe;
-      CHECK(test.str() == "");
-   }
+    SECTION("empty") {
+        bnload const probe;
+        test << probe;
+        CHECK(test.str() == "");
+    }
 
-   SECTION("fixed") {
-      bnload probe(1, 1, false, 4, 6,
-                   vector<double>({1., 2., 3., 4., 5., 6.}));
-      test << probe;
-      CHECK(test.str() ==
-            "BNLOAD  +1.000000000e+00+1.000000000e+00           +0.00            0.00\n"
-            "        +4.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n"
-            "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n");
-   }
+    SECTION("fixed") {
+        bnload const probe(1, 1, false, 4, 6,
+                     vector<double>({1., 2., 3., 4., 5., 6.}));
+        test << probe;
+        CHECK(test.str() ==
+              "BNLOAD  +1.000000000e+00+1.000000000e+00           +0.00            0.00\n"
+              "        +4.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n"
+              "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n");
+    }
 
-   SECTION("simple") {
-      bnload probe(1, 1, false, 4, 6,
-                   vector<double>({1., 2., 3., 4., 5., 6.}));
-      test << probe;
-      CHECK(test.str() ==
-            "BNLOAD  +1.000000000e+00+1.000000000e+00           +0.00            0.00\n"
-            "        +4.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n"
-            "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n");
-   }
+    SECTION("simple") {
+        bnload const probe(1, 1, false, 4, 6,
+                     vector<double>({1., 2., 3., 4., 5., 6.}));
+        test << probe;
+        CHECK(test.str() ==
+              "BNLOAD  +1.000000000e+00+1.000000000e+00           +0.00            0.00\n"
+              "        +4.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n"
+              "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n");
+    }
 
-   SECTION("simple (with ILOAD)") {
-      bnload probe(1, 1, true, 4, 6,
-                   vector<double>({1., 2., 3., 4., 5., 6.}),
-                   vector<double>({1., 2., 3., 4., 5., 6.}));
-      test << probe;
-      CHECK(test.str() ==
-            "BNLOAD  +1.000000000e+00+1.000000000e+00           +1.00            0.00\n"
-            "        +4.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n"
-            "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n"
-            "        +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
-            "        +5.000000000e+00+6.000000000e+00\n");
-   }
+    SECTION("simple (with ILOAD)") {
+        bnload const probe(1, 1, true, 4, 6,
+                     vector<double>({1., 2., 3., 4., 5., 6.}),
+                     vector<double>({1., 2., 3., 4., 5., 6.}));
+        test << probe;
+        CHECK(test.str() ==
+              "BNLOAD  +1.000000000e+00+1.000000000e+00           +1.00            0.00\n"
+              "        +4.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n"
+              "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n"
+              "        +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
+              "        +5.000000000e+00+6.000000000e+00\n");
+    }
 
-   SECTION("simple (calc COMPLX)") {
-      bnload probe(1, 1, long(4), 6,
-                   vector<double>({1., 2., 3., 4., 5., 6.}));
-      test << probe;
-      CHECK(test.str() ==
-            "BNLOAD  +1.000000000e+00+1.000000000e+00           +0.00            0.00\n"
-            "        +4.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n"
-            "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n");
-   }
+    SECTION("simple (calc COMPLX)") {
+        bnload const probe(1, 1, long(4), 6,
+                     vector<double>({1., 2., 3., 4., 5., 6.}));
+        test << probe;
+        CHECK(test.str() ==
+              "BNLOAD  +1.000000000e+00+1.000000000e+00           +0.00            0.00\n"
+              "        +4.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n"
+              "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n");
+    }
 
-   SECTION("simple (with ILOAD, calc COMPLX)") {
-      bnload probe(1, 1, long(4), 6,
-                   vector<double>({1., 2., 3., 4., 5., 6.}),
-                   vector<double>({1., 2., 3., 4., 5., 6.}));
-      test << probe;
-      CHECK(test.str() ==
-            "BNLOAD  +1.000000000e+00+1.000000000e+00           +1.00            0.00\n"
-            "        +4.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n"
-            "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n"
-            "        +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
-            "        +5.000000000e+00+6.000000000e+00\n");
-   }
+    SECTION("simple (with ILOAD, calc COMPLX)") {
+        bnload const probe(1, 1, long(4), 6,
+                     vector<double>({1., 2., 3., 4., 5., 6.}),
+                     vector<double>({1., 2., 3., 4., 5., 6.}));
+        test << probe;
+        CHECK(test.str() ==
+              "BNLOAD  +1.000000000e+00+1.000000000e+00           +1.00            0.00\n"
+              "        +4.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n"
+              "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n"
+              "        +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
+              "        +5.000000000e+00+6.000000000e+00\n");
+    }
 
-   SECTION("calc ndof") {
-      bnload probe(1, 1, false, 4,
-                   vector<double>({1., 2., 3., 4., 5., 6.}));
-      test << probe;
-      CHECK(test.str() ==
-            "BNLOAD  +1.000000000e+00+1.000000000e+00           +0.00            0.00\n"
-            "        +4.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n"
-            "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n");
-   }
-   SECTION("calc NDOF (calc COMPLX)") {
-      bnload probe(1, 1, 4,
-                   vector<double>({1., 2., 3., 4., 5., 6.}));
-      test << probe;
-      CHECK(test.str() ==
-            "BNLOAD  +1.000000000e+00+1.000000000e+00           +0.00            0.00\n"
-            "        +4.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n"
-            "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n");
-   }
+    SECTION("calc ndof") {
+        bnload const probe(1, 1, false, 4,
+                     vector<double>({1., 2., 3., 4., 5., 6.}));
+        test << probe;
+        CHECK(test.str() ==
+              "BNLOAD  +1.000000000e+00+1.000000000e+00           +0.00            0.00\n"
+              "        +4.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n"
+              "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n");
+    }
+    SECTION("calc NDOF (calc COMPLX)") {
+        bnload const probe(1, 1, 4,
+                     vector<double>({1., 2., 3., 4., 5., 6.}));
+        test << probe;
+        CHECK(test.str() ==
+              "BNLOAD  +1.000000000e+00+1.000000000e+00           +0.00            0.00\n"
+              "        +4.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n"
+              "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n");
+    }
 
-   SECTION("calc NDOF (with ILOAD, calc COMPLX)") {
-      bnload probe(1, 1, 4,
-                   vector<double>({1., 2., 3., 4., 5., 6.}),
-                   vector<double>({1., 2., 3., 4., 5., 6.}));
-      test << probe;
-      CHECK(test.str() ==
-            "BNLOAD  +1.000000000e+00+1.000000000e+00           +1.00            0.00\n"
-            "        +4.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n"
-            "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n"
-            "        +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
-            "        +5.000000000e+00+6.000000000e+00\n");
-   }
+    SECTION("calc NDOF (with ILOAD, calc COMPLX)") {
+        bnload const probe(1, 1, 4,
+                     vector<double>({1., 2., 3., 4., 5., 6.}),
+                     vector<double>({1., 2., 3., 4., 5., 6.}));
+        test << probe;
+        CHECK(test.str() ==
+              "BNLOAD  +1.000000000e+00+1.000000000e+00           +1.00            0.00\n"
+              "        +4.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n"
+              "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n"
+              "        +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n"
+              "        +5.000000000e+00+6.000000000e+00\n");
+    }
 }
 
 TEST_CASE("FEM BNLOAD conversion from own output.", "[fem_bnload,in/out]") {
 
-   vector<std::string> lines;
-   size_t len;
+    vector<std::string> lines;
+    size_t len;
 
-   SECTION("BNLOAD (own output real)") {
-      vector<std::string> data({
+    SECTION("BNLOAD (own output real)") {
+        vector<std::string> data({
             "BNLOAD  +1.000000000e+00+1.000000000e+00           +0.00            0.00\n",
             "        +4.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n",
             "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n"});
-      len = __base::card::card_split(data, data.size(), lines);
-      bnload probe(lines, len);
+        len = __base::card::card_split(data, data.size(), lines);
+        bnload probe(lines, len);
 
-      CHECK(probe.LLC == 1);
-      CHECK(probe.LOTYP == 1);
-      CHECK_FALSE(probe.COMPLX);
-      CHECK(probe.NODENO == 4);
-      CHECK(probe.NDOF == 6);
-      CHECK(probe.RLOAD == vector<double>({1., 2., 3., 4., 5., 6.}));
-      CHECK(probe.ILOAD == vector<double>({}));
-   }
+        CHECK(probe.LLC == 1);
+        CHECK(probe.LOTYP == 1);
+        CHECK_FALSE(probe.COMPLX);
+        CHECK(probe.NODENO == 4);
+        CHECK(probe.NDOF == 6);
+        CHECK(probe.RLOAD == vector<double>({1., 2., 3., 4., 5., 6.}));
+        CHECK(probe.ILOAD == vector<double>({}));
+    }
 
-   SECTION("BNLOAD (own output real alt)") {
-      vector<std::string> data({
+    SECTION("BNLOAD (own output real alt)") {
+        vector<std::string> data({
             "BNLOAD  +1.000000000e+00+1.000000000e+00           +0.00            0.00\n",
             "        +4.000000000e+00+5.000000000e+00+1.000000000e+00+2.000000000e+00\n",
             "        +3.000000000e+00+4.000000000e+00+5.000000000e+00\n"});
-      len = __base::card::card_split(data, data.size(), lines);
-      bnload probe(lines, len);
+        len = __base::card::card_split(data, data.size(), lines);
+        bnload probe(lines, len);
 
-      CHECK(probe.LLC == 1);
-      CHECK(probe.LOTYP == 1);
-      CHECK_FALSE(probe.COMPLX);
-      CHECK(probe.NODENO == 4);
-      CHECK(probe.NDOF == 5);
-      CHECK(probe.RLOAD == vector<double>({1., 2., 3., 4., 5.}));
-      CHECK(probe.ILOAD == vector<double>({}));
-   }
+        CHECK(probe.LLC == 1);
+        CHECK(probe.LOTYP == 1);
+        CHECK_FALSE(probe.COMPLX);
+        CHECK(probe.NODENO == 4);
+        CHECK(probe.NDOF == 5);
+        CHECK(probe.RLOAD == vector<double>({1., 2., 3., 4., 5.}));
+        CHECK(probe.ILOAD == vector<double>({}));
+    }
 
-   SECTION("BNLOAD (own output complex)") {
-      vector<std::string> data({
+    SECTION("BNLOAD (own output complex)") {
+        vector<std::string> data({
             "BNLOAD  +1.000000000e+00+1.000000000e+00           +1.00            0.00\n",
             "        +4.000000000e+00+6.000000000e+00+1.000000000e+00+2.000000000e+00\n",
             "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+6.000000000e+00\n",
             "        +1.000000000e+00+2.000000000e+00+3.000000000e+00+4.000000000e+00\n",
             "        +5.000000000e+00+6.000000000e+00\n"});
-      len = __base::card::card_split(data, data.size(), lines);
-      bnload probe(lines, len);
+        len = __base::card::card_split(data, data.size(), lines);
+        bnload probe(lines, len);
 
-      CHECK(probe.LLC == 1);
-      CHECK(probe.LOTYP == 1);
-      CHECK(probe.COMPLX);
-      CHECK(probe.NODENO == 4);
-      CHECK(probe.NDOF == 6);
-      CHECK(probe.RLOAD == vector<double>({1., 2., 3., 4., 5., 6.}));
-      CHECK(probe.ILOAD == vector<double>({1., 2., 3., 4., 5., 6.}));
-   }
+        CHECK(probe.LLC == 1);
+        CHECK(probe.LOTYP == 1);
+        CHECK(probe.COMPLX);
+        CHECK(probe.NODENO == 4);
+        CHECK(probe.NDOF == 6);
+        CHECK(probe.RLOAD == vector<double>({1., 2., 3., 4., 5., 6.}));
+        CHECK(probe.ILOAD == vector<double>({1., 2., 3., 4., 5., 6.}));
+    }
 
-   SECTION("BNLOAD (own output complex alt)") {
-      vector<std::string> data({
+    SECTION("BNLOAD (own output complex alt)") {
+        vector<std::string> data({
             "BNLOAD  +1.000000000e+00+1.000000000e+00           +1.00            0.00\n",
             "        +4.000000000e+00+5.000000000e+00+1.000000000e+00+2.000000000e+00\n",
             "        +3.000000000e+00+4.000000000e+00+5.000000000e+00+1.000000000e+00\n",
             "        +2.000000000e+00+3.000000000e+00+4.000000000e+00+5.000000000e+00\n"});
-      len = __base::card::card_split(data, data.size(), lines);
-      bnload probe(lines, len);
+        len = __base::card::card_split(data, data.size(), lines);
+        bnload probe(lines, len);
 
-      CHECK(probe.LLC == 1);
-      CHECK(probe.LOTYP == 1);
-      CHECK(probe.COMPLX);
-      CHECK(probe.NODENO == 4);
-      CHECK(probe.NDOF == 5);
-      CHECK(probe.RLOAD == vector<double>({1., 2., 3., 4., 5.}));
-      CHECK(probe.ILOAD == vector<double>({1., 2., 3., 4., 5.}));
-   }
+        CHECK(probe.LLC == 1);
+        CHECK(probe.LOTYP == 1);
+        CHECK(probe.COMPLX);
+        CHECK(probe.NODENO == 4);
+        CHECK(probe.NDOF == 5);
+        CHECK(probe.RLOAD == vector<double>({1., 2., 3., 4., 5.}));
+        CHECK(probe.ILOAD == vector<double>({1., 2., 3., 4., 5.}));
+    }
 }
 
 // Local Variables:

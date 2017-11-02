@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_test_bdf_cards_grid[]) =
         "@(#) $Id$";
 }
@@ -44,7 +45,7 @@ using namespace dnvgl::extfem::bdf::cards;
 TEST_CASE("BDF GRID definitions. (default values)",
           "[bdf_grid]") {
 
-    list<std::string> data({
+    list<std::string> const data({
         "GRID           1                                                        \n"});
 
     list<std::string> lines;
@@ -67,7 +68,7 @@ TEST_CASE("BDF GRID definitions. (default values)",
 TEST_CASE("BDF GRID definitions. (default values 2)",
           "[bdf_grid]") {
 
-    list<std::string> data({
+    list<std::string> const data({
         "GRID           1\n"});
 
     list<std::string> lines;
@@ -90,7 +91,7 @@ TEST_CASE("BDF GRID definitions. (default values 2)",
 TEST_CASE("BDF GRID definitions. (Small Field Format)",
           "[bdf_grid]") {
 
-    list<std::string> data({
+    list<std::string> const data({
         "GRID           1      22111525. 18000.  21000.        11       6       2\n"});
 
     list<std::string> lines;
@@ -113,7 +114,7 @@ TEST_CASE("BDF GRID definitions. (Small Field Format)",
 TEST_CASE("BDF GRID definitions. (Small Field Format) (reuse instance)",
           "[bdf_grid,in,reuse]") {
 
-    list<std::string> data({
+    list<std::string> const data({
         "GRID           1      22111525. 18000.  21000.        11       6       2\n"});
 
     list<std::string> lines;
@@ -137,7 +138,7 @@ TEST_CASE("BDF GRID definitions. (Small Field Format) (reuse instance)",
 TEST_CASE("BDF GRID definitions. (Large Field Format)",
           "[bdf_grid]") {
 
-    list<std::string> data({
+    list<std::string> const data({
         "GRID*                  1              22         111525.          18000.\n",
         "                  21000.              11               6               2\n"});
 
@@ -161,7 +162,7 @@ TEST_CASE("BDF GRID definitions. (Large Field Format)",
 TEST_CASE("BDF GRID definitions. (Free Field Format)",
           "[bdf_grid]") {
 
-    list<std::string> data({
+    list<std::string> const data({
             "GRID,1,22,111525.,18000.,21000.,11,6,2\n"});
 
     list<std::string> lines;
@@ -184,7 +185,7 @@ TEST_CASE("BDF GRID definitions. (Free Field Format)",
 TEST_CASE("BDF GRID definitions. (Free Field Format, continuation line)",
           "[bdf_grid]") {
 
-    list<std::string> data({
+    list<std::string> const data({
             "GRID,1,22,111525.,\n",
             ",18000.,21000.,11,6,2\n"});
 
@@ -208,7 +209,7 @@ TEST_CASE("BDF GRID definitions. (Free Field Format, continuation line)",
 TEST_CASE("BDF GRID definitions. (Free Field Format, continuation line with +)",
           "[bdf_grid]") {
 
-    list<std::string> data({
+    list<std::string> const data({
             "GRID,1,22,111525.,+",
             "+,18000.,21000.,11,6,2\n"});
 
@@ -232,7 +233,7 @@ TEST_CASE("BDF GRID definitions. (Free Field Format, continuation line with +)",
 TEST_CASE("BDF GRID definitions. (Free Field Format, continuation line named)",
           "[bdf_grid]") {
 
-    list<std::string> data({
+    list<std::string> const data({
             "GRID,1,22,111525.,+G001\n",
                 "+G001,18000.,21000.,11,6,2\n"});
 
@@ -258,7 +259,7 @@ TEST_CASE("FEMIO-43: BDF import failed", "[bdf_cards]") {
     vector<int> ps_ref({});
 
     SECTION("report") {
-        list<std::string> data({
+        list<std::string> const data({
             // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
             "GRID    1       0       -9550.  0.      5700.   0\n"});
 
@@ -277,7 +278,7 @@ TEST_CASE("FEMIO-43: BDF import failed", "[bdf_cards]") {
     }
 
     SECTION("default CP") {
-        list<std::string> data({
+        list<std::string> const data({
             // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
             "GRID    1               -9550.  0.      5700.   0\n"});
 
@@ -307,7 +308,7 @@ TEST_CASE("BDF GRID types roundtrip test.", "[bdf_grid]") {
     vector<int> PS{4, 5, 6};
     long SEID{1};
 
-    grid probe(&ID, &CP, &X1, &X2, &X3, &CD, &PS, &SEID);
+    grid const probe(&ID, &CP, &X1, &X2, &X3, &CD, &PS, &SEID);
     test << probe;
 
     SECTION("check output") {
@@ -390,7 +391,7 @@ TEST_CASE("BDF GRID types roundtrip test 2.", "[bdf_grid]") {
     double X1{1.}, X2{ -2.}, X3{3.};
     vector<int> PS{3, 1, 6};
 
-    grid probe(&ID, &CP, &X1, &X2, &X3, nullptr, &PS, nullptr);
+    grid const probe(&ID, &CP, &X1, &X2, &X3, nullptr, &PS, nullptr);
     test << probe;
 
     SECTION("check output") {
@@ -465,7 +466,7 @@ TEST_CASE("BDF GRID types roundtrip test 3.", "[bdf_grid]") {
 
     ostringstream test;
 
-    grid probe(1, 2, 3., 4., 5.);
+    grid const probe(1, 2, 3., 4., 5.);
     test << probe;
 
     SECTION("check reading") {
@@ -537,7 +538,7 @@ TEST_CASE("BDF GRID types roundtrip test 4.", "[bdf_grid]") {
     double X1{1.}, X2{ -2.}, X3{3.};
     vector<int> PS{3, 1, 6};
 
-    grid probe(&ID, nullptr, &X1, &X2, &X3, nullptr, &PS, nullptr);
+    grid const probe(&ID, nullptr, &X1, &X2, &X3, nullptr, &PS, nullptr);
     test << probe;
 
     SECTION("check reading") {
@@ -614,7 +615,7 @@ TEST_CASE("BDF GRID types roundtrip test (minimum args).", "[bdf_grid]") {
     long ID{2};
     double X1{1.}, X2{-2.}, X3{3.};
 
-    grid probe(&ID, nullptr, &X1, &X2, &X3);
+    grid const probe(&ID, nullptr, &X1, &X2, &X3);
     test << probe;
 
     SECTION("check reading") {

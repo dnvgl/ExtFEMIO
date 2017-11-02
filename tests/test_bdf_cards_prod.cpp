@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_test_bdf_cards_prod[]) =
         "@(#) $Id$";
 }
@@ -157,7 +158,7 @@ TEST_CASE("BDF PROD roundtrip test", "[bdf_prod]") {
     double C{4.2356};
     double NSM{.5};
 
-    prod probe(&PID, &MID, &A, &J, &C, &NSM);
+    prod const probe(&PID, &MID, &A, &J, &C, &NSM);
     test << probe;
 
     SECTION("check output") {
@@ -195,7 +196,7 @@ TEST_CASE("BDF PROD roundtrip test (minimal)", "[bdf_prod]") {
     long MID{23};
     double A{42.6};
 
-    prod probe(&PID, &MID, &A);
+    prod const probe(&PID, &MID, &A);
     test << probe;
 
     SECTION("check output") {
@@ -275,7 +276,7 @@ TEST_CASE("BDF PROD roundtrip test (A only)", "[bdf_prod]") {
     long MID{23};
     double A{42.6};
 
-    prod probe(&PID, &MID, &A);
+    prod const probe(&PID, &MID, &A);
     test << probe;
 
     SECTION("check output") {

@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     char const _EXTFEMIO_UNUSED(cID_test_bdf_cards_comment[]) =
         "@(#) $Id$";
 }
@@ -69,7 +70,7 @@ TEST_CASE("BDF COMMENT yield stress definition.", "[bdf_comment]") {
 
 TEST_CASE("BDF COMMENT definitions; empty comment.", "[bdf_comment]") {
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
             "$ "});
     std::list<std::string> lines;
@@ -81,7 +82,7 @@ TEST_CASE("BDF COMMENT definitions; empty comment.", "[bdf_comment]") {
 
 TEST_CASE("BDF COMMENT definitions; long comment.", "[bdf_comment]") {
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
             "$ a",
             "$+     a"});
@@ -94,7 +95,7 @@ TEST_CASE("BDF COMMENT definitions; long comment.", "[bdf_comment]") {
 
 TEST_CASE("BDF COMMENT definitions; long comment (2).", "[bdf_comment]") {
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
             "$ a",
             "$+12345a"});
@@ -108,7 +109,7 @@ TEST_CASE("BDF COMMENT definitions; long comment (2).", "[bdf_comment]") {
 TEST_CASE("BDF COMMENT definitions; one line.",
           "[bdf_comment]") {
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
             "$foo"});
     std::list<std::string> lines;
@@ -123,7 +124,7 @@ TEST_CASE("BDF COMMENT output; several lines.",
     ostringstream test;
 
     SECTION("several lines in one call") {
-        std::vector<std::string> content({"foo", "bar"});
+        std::vector<std::string> const content({"foo", "bar"});
         comment probe;
         test << probe;
         test << probe(content);
@@ -146,7 +147,7 @@ TEST_CASE("BDF COMMENT output; several lines.",
 TEST_CASE("BDF COMMENT definitions; with yield stress (235).",
           "[bdf_comment]") {
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
             "$ 235"});
     std::list<std::string> lines;
@@ -160,7 +161,7 @@ TEST_CASE("BDF COMMENT definitions; with yield stress (235).",
 TEST_CASE("BDF COMMENT definitions; with yield stress (315).",
           "[bdf_comment]") {
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
             "$ yield stress for the following material definition:315"});
     std::list<std::string> lines;
@@ -181,7 +182,7 @@ TEST_CASE("BDF COMMENT definitions; with yield stress (315).",
 TEST_CASE("BDF COMMENT definitions; with yield stress (355).",
           "[bdf_comment]") {
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
             "$ yield stress: 355"});
     std::list<std::string> lines;
@@ -196,7 +197,7 @@ TEST_CASE("BDF COMMENT definitions; with yield stress (355).",
 TEST_CASE("BDF COMMENT definitions; with yield stress (390).",
           "[bdf_comment]") {
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
             "$ 390"});
     std::list<std::string> lines;
@@ -211,7 +212,7 @@ TEST_CASE("BDF COMMENT definitions; with yield stress (390).",
 TEST_CASE("BDF COMMENT definitions; with yield stress (460).",
           "[bdf_comment]") {
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
             "$ 460"});
     std::list<std::string> lines;
@@ -228,7 +229,7 @@ TEST_CASE("BDF COMMENT roundtrip test", "[bdf_comment]") {
 
     std::string content("");
 
-    comment probe(&content);
+    comment const probe(&content);
     test << probe;
 
     SECTION("check output") {
@@ -284,9 +285,9 @@ TEST_CASE("BDF COMMENT roundtrip test (reuse)", "[bdf_comment]") {
 TEST_CASE("BDF COMMENT roundtrip test; two lines.", "[bdf_comment]") {
     ostringstream test;
 
-    vector<std::string> content{"This is a test", "one two"};
+    vector<std::string> const content{"This is a test", "one two"};
 
-    comment probe(content);
+    comment const probe(content);
     test << probe;
 
     reset_statics();
@@ -319,7 +320,7 @@ TEST_CASE("BDF COMMENT roundtrip test; two lines.", "[bdf_comment]") {
 TEST_CASE("BDF COMMENT roundtrip test; two lines (reuse).", "[bdf_comment]") {
     ostringstream test;
 
-    vector<std::string> content{"This is a test", "one two"};
+    vector<std::string> const content{"This is a test", "one two"};
 
     comment probe;
     test << probe;
@@ -354,7 +355,7 @@ TEST_CASE("BDF COMMENT roundtrip test; two lines (reuse).", "[bdf_comment]") {
 TEST_CASE("BDF COMMENT roundtrip test; two lines (2).", "[bdf_comment]") {
     ostringstream test;
 
-    std::vector<std::string> content{"This is a test"};
+    std::vector<std::string> const content{"This is a test"};
 
     comment probe(content);
     probe("one two");
@@ -386,12 +387,12 @@ TEST_CASE("BDF COMMENT roundtrip test; two lines (2).", "[bdf_comment]") {
 TEST_CASE("BDF COMMENT roundtrip test; long line.", "[bdf_comment]") {
     ostringstream test;
 
-    vector<std::string> content{
+    vector<std::string> const content{
         // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
         "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean "
         "commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus"};
 
-    comment probe(content);
+    comment const probe(content);
     test << probe;
 
     reset_statics();
@@ -426,7 +427,7 @@ TEST_CASE("BDF COMMENT roundtrip test; long line.", "[bdf_comment]") {
 TEST_CASE("BDF COMMENT roundtrip test; long line (reuse).", "[bdf_comment]") {
     ostringstream test;
 
-    vector<std::string> content{
+    vector<std::string> const content{
         // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
         "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean "
         "commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus"};
@@ -468,10 +469,10 @@ TEST_CASE("BDF COMMENT roundtrip test; long line (reuse).", "[bdf_comment]") {
 TEST_CASE("BDF COMMENT roundtrip test; only yield stress.", "[bdf_comment]") {
     ostringstream test;
 
-    vector<std::string> content;
+    vector<std::string> const content;
     double *yield = new double(315.);
 
-    comment probe(content, yield);
+    comment const probe(content, yield);
     test << probe;
 
     reset_statics();
@@ -503,7 +504,7 @@ TEST_CASE("BDF COMMENT roundtrip test; only yield stress (reuse).",
           "[bdf_comment]") {
     ostringstream test;
 
-    vector<std::string> content;
+    vector<std::string> const content;
     double *yield = new double(315.);
 
     comment probe;
@@ -540,13 +541,13 @@ TEST_CASE("BDF COMMENT roundtrip test; yield stress and comment.",
           "[bdf_comment]") {
     ostringstream test;
 
-    vector<std::string> content{
+    vector<std::string> const content{
         // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
         "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean "
         "commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus"};
     double *yield = new double(315.);
 
-    comment probe(content, yield);
+    comment const probe(content, yield);
     test << probe;
 
     reset_statics();
@@ -584,7 +585,7 @@ TEST_CASE("BDF COMMENT roundtrip test; yield stress and comment (reuse).",
           "[bdf_comment]") {
     ostringstream test;
 
-    vector<std::string> content{
+    vector<std::string> const content{
         // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
         "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean "
         "commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus"};

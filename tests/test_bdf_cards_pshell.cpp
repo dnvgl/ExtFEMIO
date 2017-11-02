@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_test_bdf_cards_pshell[]) =
         "@(#) $Id$";
 }
@@ -42,7 +43,7 @@ using namespace dnvgl::extfem::bdf::cards;
 TEST_CASE("BDF PSHELL definitions (Small Field Format).", "[bdf_pshell]") {
     pshell::reset();
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "PSHELL  1       4         23.00 4               4\n"});
     std::list<std::string> lines;
     __base::card::card_split(data, lines);
@@ -61,7 +62,7 @@ TEST_CASE("BDF PSHELL definitions (Small Field Format).", "[bdf_pshell]") {
 
 TEST_CASE("BDF PSHELL definitions (reuse) (Small Field Format).", "[bdf_pshell]") {
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "PSHELL  1       4         23.00 4               4\n"});
     std::list<std::string> lines;
     __base::card::card_split(data, lines);
@@ -81,7 +82,7 @@ TEST_CASE("BDF PSHELL definitions (reuse) (Small Field Format).", "[bdf_pshell]"
 TEST_CASE("BDF PSHELL definitions (Large Field Format).", "[bdf_pshell]") {
     pshell::reset();
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "PSHELL* 1               4                 23.00         4               \n",
             "*                       4  \n"});
 
@@ -101,7 +102,7 @@ TEST_CASE("BDF PSHELL definitions (Large Field Format).", "[bdf_pshell]") {
 
 TEST_CASE("BDF PSHELL definitions (reuse) (Large Field Format).", "[bdf_pshell]") {
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
             "PSHELL* 1               4                 23.00         4               \n",
             "*                       4  \n"});
 
@@ -123,7 +124,7 @@ TEST_CASE("BDF PSHELL definitions (reuse) (Large Field Format).", "[bdf_pshell]"
 TEST_CASE("BDF PSHELL definitions (Free Field Format).", "[bdf_pshell]") {
     pshell::reset();
 
-    std::list<std::string> data({"PSHELL,1,4,23.00,4,,4\n"});
+    std::list<std::string> const data({"PSHELL,1,4,23.00,4,,4\n"});
     std::list<std::string> lines;
     __base::card::card_split(data, lines);
     pshell probe(lines);
@@ -140,7 +141,7 @@ TEST_CASE("BDF PSHELL definitions (Free Field Format).", "[bdf_pshell]") {
 
 TEST_CASE("BDF PSHELL definitions (reuse) (Free Field Format).", "[bdf_pshell]") {
 
-    std::list<std::string> data({"PSHELL,1,4,23.00,4,,4\n"});
+    std::list<std::string> const data({"PSHELL,1,4,23.00,4,,4\n"});
     std::list<std::string> lines;
     __base::card::card_split(data, lines);
     pshell probe;
@@ -172,7 +173,7 @@ TEST_CASE("BDF PSHELL roundtrip test", "[bdf_pshell]") {
     double Z2{22.};
     long MID4{5};
 
-    pshell probe(&PID, &MID1, &T, &MID2, &_12_T_3, &MID3, &TS_T, &NSM,
+    pshell const const probe(&PID, &MID1, &T, &MID2, &_12_T_3, &MID3, &TS_T, &NSM,
                  &Z1, &Z2, &MID4);
     test << probe;
 

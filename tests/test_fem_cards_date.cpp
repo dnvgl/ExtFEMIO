@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_test_fem_cards_date[]) =
         "@(#) $Id$";
 }
@@ -54,7 +55,7 @@ TEST_CASE("FEM DATE definitions.", "[fem_date]") {
             "        COMPUTER: HAML130185",
             "        USER: berhol"});
 
-        size_t len{__base::card::card_split(data, data.size(), lines)};
+        size_t const len{__base::card::card_split(data, data.size(), lines)};
         date probe(lines, len);
 
         CHECK(probe.TYPE == 0);
@@ -75,15 +76,15 @@ TEST_CASE("FEM DATE types output.", "[fem_date,out]") {
 
     std::ostringstream test;
 
-    long TYPE(0), SUBTYPE(0), NRECS(4), NBYTE(72);
-    std::vector<std::string> CONT({
+    long const TYPE(0), SUBTYPE(0), NRECS(4), NBYTE(72);
+    std::vector<std::string> const CONT({
         "DATE TIME:  11/03/2015 09:46:08",
         "PROGRAM: Sesam Converters  VERSION: 2.0.5  Year 2013",
         "COMPUTER: HAML130185",
         "USER: berhol"});
 
     SECTION("empty") {
-        date probe;
+        date const probe;
         test << probe;
         CHECK(test.str() == "");
     }
@@ -139,7 +140,7 @@ TEST_CASE("FEMio-7: Problems with test output.", "[fem_date,out]") {
 
     SECTION("Data set from issue.") {
         std::ostringstream test;
-        std::vector<std::string> CONT({
+        std::vector<std::string> const CONT({
             std::string("PROGRAM: GL_ShipLoad"),
             std::string("VERSION : 2.2.?")});
         date probe(1, 0, CONT);

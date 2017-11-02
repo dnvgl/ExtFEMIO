@@ -12,6 +12,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_test_bdf_bounds[]) =
         "@(#) $Id$";
 }
@@ -28,7 +29,6 @@ namespace {
 #endif
 
 #include <memory>
-#include <utility>
 
 #include <catch.hpp>
 
@@ -58,7 +58,6 @@ using type_bounds::bound;
 using type_bounds::bound_unique;
 
 namespace {
-    auto const l0 = make_shared<long>(0);
     auto const l1 = make_shared<long>(1);
     auto const l6 = make_shared<long>(6);
     auto const l12 = make_shared<long>(12);
@@ -217,7 +216,7 @@ TEST_CASE("string allowed values", "[bdf_bounds]") {
 }
 
 TEST_CASE("Test unique ids", "[bdf_unique_id]") {
-    shared_ptr<bound_unique<long>> b = make_shared<bound_unique<long>>(
+    shared_ptr<bound_unique<long>> const b = make_shared<bound_unique<long>>(
         l1, l6, nullptr, false);
     entry_type<long> form_val("val", b);
     entry_value<long> val1;

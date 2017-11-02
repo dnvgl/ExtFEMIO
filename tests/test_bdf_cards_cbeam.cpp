@@ -13,6 +13,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     const char _EXTFEMIO_UNUSED(cID_test_bdf_cards_cbeam[]) =
         "@(#) $Id$";
 }
@@ -42,7 +43,7 @@ using namespace dnvgl::extfem::bdf::cards;
 
 TEST_CASE("BDF CBEAM definitions. (Small Field Format)", "[bdf_cbeam]") {
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
         "CBEAM   7869    104010  76      153     0.0     66.5206 997.785  2.\n",
         "                        0.0     -22.617 -339.25 0.0     -22.617 \n"});
     std::list<std::string> lines;
@@ -77,7 +78,7 @@ TEST_CASE("BDF CBEAM definitions. (Small Field Format)", "[bdf_cbeam]") {
 
 TEST_CASE("BDF CBEAM definitions (OFFT default). (Small Field Format)", "[bdf_cbeam]") {
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
         "CBEAM   36      103023  7       9       0.0     1000.00 0.0\n",
         "                        0.0     -240.00 0.0     0.0     -240.00 0.0\n"});
 
@@ -117,7 +118,7 @@ TEST_CASE("BDF CBEAM definitions (OFFT default). (Small Field Format)", "[bdf_cb
 TEST_CASE("BDF CBEAM definitions. (Small Field Format), dircode",
           "[bdf_cbeam,dcode]") {
     cbeam::reset();
-    std::list<std::string> data({
+    std::list<std::string> const data({
         "CBEAM   7869    104010  76      153      13                     GOO     \n",
         "                        0.0     -22.617 -339.25 0.0     22.617 "});
     std::list<std::string> lines;
@@ -154,7 +155,7 @@ TEST_CASE("BDF CBEAM definitions. (Small Field Format), dircode",
 TEST_CASE("BDF CBEAM definitions (OFFT default). (Small Field Format), dircode",
           "[bdf_cbeam,dcode]") {
     cbeam::reset();
-    std::list<std::string> data({
+    std::list<std::string> const data({
         "CBEAM   7869    104010  76      153      13\n",
         "                        0.0     -22.617 -339.25 0.0     22.617 "});
     std::list<std::string> lines;
@@ -200,7 +201,7 @@ TEST_CASE("BDF CBEAM roundtrip test (DCODE, OFFT)", "[bdf_cbeam]") {
     double W1A{0.}, W2A{-22.617}, W3A{-339.25}, W1B{0.}, W2B{22.617}, W3B{0.};
     long SA{11}, SB{12};
 
-    cbeam probe(&EID, &PID, &GA, &GB, &G0, &OFFT, &PA, &PB,
+    cbeam const probe(&EID, &PID, &GA, &GB, &G0, &OFFT, &PA, &PB,
                 &W1A, &W2A, &W3A, &W1B, &W2B, &W3B, &SA, &SB);
     test << probe;
 
@@ -330,7 +331,7 @@ TEST_CASE("BDF CBEAM roundtrip test (DCODE, BIT)", "[bdf_cbeam]") {
     double W1A{0.}, W2A{-22.617}, W3A{-339.25}, W1B{0.}, W2B{22.617}, W3B{0.};
     long SA{11}, SB{12};
 
-    cbeam probe(&EID, &PID, &GA, &GB, &G0, &BIT, &PA, &PB,
+    cbeam const probe(&EID, &PID, &GA, &GB, &G0, &BIT, &PA, &PB,
                 &W1A, &W2A, &W3A, &W1B, &W2B, &W3B, &SA, &SB);
     test << probe;
 
@@ -462,7 +463,7 @@ TEST_CASE("BDF CBEAM roundtrip test (DVEC, OFFT)", "[bdf_cbeam]") {
     double W1A{0.}, W2A{-22.617}, W3A{-339.25}, W1B{0.}, W2B{22.617}, W3B{0.};
     long SA{11}, SB{12};
 
-    cbeam probe(&EID, &PID, &GA, &GB, &X1, &X2, &X3, &OFFT, &PA, &PB,
+    cbeam const probe(&EID, &PID, &GA, &GB, &X1, &X2, &X3, &OFFT, &PA, &PB,
                 &W1A, &W2A, &W3A, &W1B, &W2B, &W3B, &SA, &SB);
     test << probe;
 
@@ -594,7 +595,7 @@ TEST_CASE("BDF CBEAM roundtrip test (DVEC, BIT)", "[bdf_cbeam]") {
     double W1A{0.}, W2A{-22.617}, W3A{-339.25}, W1B{0.}, W2B{22.617}, W3B{0.};
     long SA{11}, SB{12};
 
-    cbeam probe(&EID, &PID, &GA, &GB, &X1, &X2, &X3, &BIT, &PA, &PB,
+    cbeam const probe(&EID, &PID, &GA, &GB, &X1, &X2, &X3, &BIT, &PA, &PB,
                 &W1A, &W2A, &W3A, &W1B, &W2B, &W3B, &SA, &SB);
     test << probe;
 

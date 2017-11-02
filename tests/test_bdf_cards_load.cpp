@@ -13,6 +13,7 @@
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     char const _EXTFEMIO_UNUSED(cID_test_bdf_cards_load[]) =
         "@(#) $Id$";
 }
@@ -42,7 +43,7 @@ using namespace dnvgl::extfem::bdf::cards;
 
 TEST_CASE("BDF LOAD definitions. (Small Field Format)", "[bdf_load]") {
 
-    std::list<std::string> data({
+    std::list<std::string> const data({
         // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
         "LOAD    101     -0.5    1.0     3       6.2     4                         \n"});
     std::list<std::string> lines;
@@ -65,7 +66,7 @@ TEST_CASE("BDF LOAD types output.", "[bdf_load,out]") {
     double S(2.9);
 
     SECTION("write (empty)") {
-        load probe;
+        load const probe;
         test << probe;
         CHECK(test.str() == "");
     }
@@ -73,7 +74,7 @@ TEST_CASE("BDF LOAD types output.", "[bdf_load,out]") {
     SECTION("write (1)") {
         std::vector<double> Si({3., 1.7});
         std::vector<long> Li({3, 4});
-        load probe(&SID, &S, &Si, &Li);
+        load const probe(&SID, &S, &Si, &Li);
         test << probe;
         CHECK(test.str() ==
               "LOAD           22.900+003.000+00       31.700+00       4\n");
@@ -83,7 +84,7 @@ TEST_CASE("BDF LOAD types output.", "[bdf_load,out]") {
         std::vector<double> Si({3.});
         std::vector<long> Li({3, 0});
         Li.resize(1);
-        load probe(&SID, &S, &Si, &Li);
+        load const probe(&SID, &S, &Si, &Li);
         test << probe;
         CHECK(test.str() ==
               "LOAD           22.900+003.000+00       3\n");
@@ -92,7 +93,7 @@ TEST_CASE("BDF LOAD types output.", "[bdf_load,out]") {
     SECTION("write (3)") {
         std::vector<double> Si({0, 1, 2, 3, 4, 5, 6, 7, 8, 9});
         std::vector<long> Li({4, 5, 6, 7, 8, 9, 10, 11, 12, 13});
-        load probe(&SID, &S, &Si, &Li);
+        load const probe(&SID, &S, &Si, &Li);
         test << probe;
         CHECK(test.str() ==
               "LOAD           22.900+00 0.00+00       41.000+00       52.000+00       6\n"

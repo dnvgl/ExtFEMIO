@@ -6,12 +6,14 @@
 
    Detailed description
 */
+// ReSharper disable once CppUnusedIncludeDirective
 #include "extfemio_stdafx.h"
 
 #include "extfem_misc.h"
 
 // ID:
 namespace {
+    // ReSharper disable once CppDeclaratorNeverUsed
     char const _EXTFEMIO_UNUSED(cID_test_bdf_cards_properties[]) =
         "@(#) $Id$";
 }
@@ -69,7 +71,7 @@ TEST_CASE("Test id generation (properties).", "[bdf_properties]") {
         PID = {1};
         MID = {2};
         A = {3.};
-        prod xProd(&PID, &MID, &A);
+        prod const xProd(&PID, &MID, &A);
         long val{xProd.PID};
         CHECK(val == 3);
     }
