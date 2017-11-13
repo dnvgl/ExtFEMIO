@@ -839,26 +839,37 @@ bdf::cards::__base::card const &pbeam::operator() (
     if (this->I1.size() == 1) this->I1.resize(2, this->I1.at(0));
     this->I2.assign(I2->begin(), I2->end());
     if (this->I2.size() == 1) this->I2.resize(2, this->I2.at(0));
+    this->I12.clear();
     if (I12 != nullptr) this->I12.assign(I12->begin(), I12->end());
     if (this->I12.size() == 1) this->I12.resize(2, this->I12.at(0));
+    this->J.clear();
     if (J != nullptr) this->J.assign(J->begin(), J->end());
     if (this->J.size() == 1) this->J.resize(2, this->J.at(0));
+    this->NSM.clear();
     if (NSM != nullptr) this->NSM.assign(NSM->begin(), NSM->end());
     if (this->NSM.size() == 1) this->NSM.resize(2, this->NSM.at(0));
+    this->C1.clear();
     if (C1 != nullptr) this->C1.assign(C1->begin(), C1->end());
     if (this->C1.size() == 1) this->C1.resize(2, this->C1.at(0));
+    this->C2.clear();
     if (C2 != nullptr) this->C2.assign(C2->begin(), C2->end());
     if (this->C2.size() == 1) this->C2.resize(2, this->C2.at(0));
+    this->D1.clear();
     if (D1 != nullptr) this->D1.assign(D1->begin(), D1->end());
     if (this->D1.size() == 1) this->D1.resize(2, this->D1.at(0));
+    this->D2.clear();
     if (D2 != nullptr) this->D2.assign(D2->begin(), D2->end());
     if (this->D2.size() == 1) this->D2.resize(2, this->D2.at(0));
+    this->E1.clear();
     if (E1 != nullptr) this->E1.assign(E1->begin(), E1->end());
     if (this->E1.size() == 1) this->E1.resize(2, this->E1.at(0));
+    this->E2.clear();
     if (E2 != nullptr) this->E2.assign(E2->begin(), E2->end());
     if (this->E2.size() == 1) this->E2.resize(2, this->E2.at(0));
+    this->F1.clear();
     if (F1 != nullptr) this->F1.assign(F1->begin(), F1->end());
     if (this->F1.size() == 1) this->F1.resize(2, this->F1.at(0));
+    this->F2.clear();
     if (F2 != nullptr) this->F2.assign(F2->begin(), F2->end());
     if (this->F2.size() == 1) this->F2.resize(2, this->F2.at(0));
     if (SO != nullptr && SO->size() > 0)
@@ -866,7 +877,6 @@ bdf::cards::__base::card const &pbeam::operator() (
     else
         this->SO.resize(
             this->A.size() - 1, bdf::types::entry_value<std::string>("YESA"));
-
     if (X_XB != nullptr && X_XB->size() > 0)
         this->X_XB.assign(X_XB->begin(), X_XB->end());
     else
