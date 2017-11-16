@@ -214,6 +214,8 @@ namespace dnvgl {
                               //< Superelement Hierarchy Description
                     HSUPSTAT, //< Superelement Statistical Information
                     HSUPTRAN, //< Superelement Transformations
+                    /// Undocumented cards (from failed imports)
+                    TDSCONC, SCONCEPT, SCONMESH
                 };
 
                 namespace __base {
