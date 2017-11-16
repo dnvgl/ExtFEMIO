@@ -135,9 +135,6 @@ namespace dnvgl {
                         long const INDSEL, long const ISLEVL, long const ITREF,
                         long const IHPREF, std::vector<long> const &IHSREF);
 
-                    types 
-                    card_type() const override;
-
                 protected:
 
                     std::ostream &put(std::ostream&) const override;
@@ -229,9 +226,6 @@ namespace dnvgl {
                         long const NRDOF, long const NBAND, long const NELT,
                         long const LINDEP, long const RELOADC,
                         long const COMPLC);
-
-                    types
-                    card_type() const override;
 
                 protected:
 
@@ -349,8 +343,6 @@ namespace dnvgl {
                     hsuptran(
                         long const NFIELD, long const ITREF,
                         double const T[4][4]);
-                    types
-                    card_type() const override;
 
                 protected:
 

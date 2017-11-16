@@ -47,7 +47,8 @@ entry_type<long> const date::_form_NRECS("NRECS");
 entry_type<long> const date::_form_NBYTE("NBYTE");
 entry_type<std::string> const date::_form_CONT("CONT");
 
-date::date(std::vector<std::string> const &inp, size_t const len) {
+date::date(std::vector<std::string> const &inp, size_t const len) :
+        card(types::DATE) {
     date::read(inp, len);
 }
 
@@ -76,6 +77,7 @@ date::date() :
 date::date(long const TYPE, long const SUBTYPE,
            long const NRECS, long const NBYTE,
            std::vector<std::string> const &CONT) :
+        card(types::DATE), 
         TYPE(TYPE), SUBTYPE(SUBTYPE), NRECS(NRECS),
         NBYTE(NBYTE), CONT(CONT) {
     for (auto &p : this->CONT)
@@ -84,7 +86,7 @@ date::date(long const TYPE, long const SUBTYPE,
 
 date::date(long const TYPE, long const SUBTYPE,
            std::vector<std::string> const &CONT) :
-        card(),
+        card(types::DATE),
         TYPE(TYPE), SUBTYPE(SUBTYPE), CONT(CONT) {
     NRECS = static_cast<long>(this->CONT.size());
     NBYTE = 0;
@@ -94,10 +96,6 @@ date::date(long const TYPE, long const SUBTYPE,
         p.resize(NBYTE, ' ');
     NBYTE += 8;
 }
-
-cards::types date::card_type() const {
-    return types::DATE;
-};
 
 std::ostream &date::put(std::ostream& os) const {
     if (TYPE == -1) return os;

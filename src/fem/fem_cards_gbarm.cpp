@@ -48,8 +48,9 @@ entry_type<double> const gbarm::_form_SFZ("SFZ");
 entry_type<long> const gbarm::_form_NLOBY("NLOBY");
 entry_type<long> const gbarm::_form_NLOBZ("NLOBZ");
 
-gbarm::gbarm(vector<std::string> const &inp, size_t const len)  :
+gbarm::gbarm(vector<std::string> const &inp, size_t const len) :
         beam_prop(inp, len, false) {
+    __base::card::this_type = types::GBARM;
     gbarm::read(inp, len);
 }
 
@@ -85,7 +86,9 @@ gbarm::gbarm(
     double const SFY, double const SFZ,
     long const NLOBY, long const NLOBZ) :
         beam_prop(GEONO), HZ(HZ), BT(BT), BB(BB),
-        SFY(SFY), SFZ(SFZ), NLOBY(NLOBY), NLOBZ(NLOBZ) {}
+        SFY(SFY), SFZ(SFZ), NLOBY(NLOBY), NLOBZ(NLOBZ) {
+    __base::card::this_type = types::GBARM;
+}
 
 cards::__base::card const &gbarm::operator() (
     long const GEONO,
@@ -101,10 +104,6 @@ cards::__base::card const &gbarm::operator() (
     this->NLOBY = NLOBY;
     this->NLOBZ = NLOBZ;
     return *this;
-}
-
-cards::types gbarm::card_type() const {
-    return types::GBARM;
 }
 
 ostream &gbarm::put(ostream& os) const {

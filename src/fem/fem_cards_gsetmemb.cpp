@@ -52,7 +52,8 @@ entry_type<long> const gsetmemb::_form_ISTYPE("ISTYPE");
 entry_type<long> const gsetmemb::_form_ISORIG("ISORIG");
 entry_type<long> const gsetmemb::_form_IRMEMB("IRMEMB");
 
-gsetmemb::gsetmemb(const vector<std::string> &inp, size_t const len) {
+gsetmemb::gsetmemb(const vector<std::string> &inp, size_t const len) :
+        card(cards::types::GSETMEMB) {
     gsetmemb::read(inp, len);
 }
 
@@ -77,7 +78,7 @@ gsetmemb::gsetmemb() :
 gsetmemb::gsetmemb(
     long const NFIELD, long const ISREF, long const INDEX, types const ISTYPE,
     origins const ISORIG, vector<long> const &IRMEMB/*={}*/) :
-        card(), NFIELD(NFIELD), ISREF(ISREF), INDEX(INDEX),
+        card(cards::types::GSETMEMB) , NFIELD(NFIELD), ISREF(ISREF), INDEX(INDEX),
         ISTYPE(ISTYPE), ISORIG(ISORIG), IRMEMB(IRMEMB) {}
 
 gsetmemb::gsetmemb(
@@ -91,10 +92,6 @@ gsetmemb::gsetmemb(
     origins const ISORIG, vector<long> const &IRMEMB/*={}*/) :
         gsetmemb(long(IRMEMB.size()) + 5, ISREF, 1,
                  ISTYPE, ISORIG, IRMEMB) {}
-
-cards::types gsetmemb::card_type() const {
-    return cards::types::GSETMEMB;
-}
 
 ostream &gsetmemb::put(ostream& os) const {
     vector<int>::size_type cnt = 0;

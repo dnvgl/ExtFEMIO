@@ -50,7 +50,8 @@ entry_type<long> const text::_form_NRECS("NRECS");
 entry_type<long> const text::_form_NBYTE("NBYTE");
 entry_type<std::string> const text::_form_CONT("CONT");
 
-text::text(vector<std::string> const &inp, size_t const len) {
+text::text(vector<std::string> const &inp, size_t const len) :
+        card(types::TEXT) {
     text::read(inp, len);
 }
 
@@ -76,7 +77,7 @@ text::text() : text(-1, 0, 0, 0, {}) {}
 
 text::text(long const TYPE, long const SUBTYPE, long const NRECS,
            long const NBYTE, vector<std::string> const &CONT) :
-        card(),
+        card(types::TEXT),
         TYPE(TYPE), SUBTYPE(SUBTYPE), NRECS(NRECS),
         NBYTE(NBYTE), CONT(CONT) {
     for (auto &p : this->CONT)
@@ -85,7 +86,7 @@ text::text(long const TYPE, long const SUBTYPE, long const NRECS,
 
 text::text(long const TYPE, long const SUBTYPE,
            vector<std::string> const &CONT) :
-        card(),
+        card(types::TEXT),
         TYPE(TYPE), SUBTYPE(SUBTYPE), CONT(CONT) {
     NRECS = static_cast<long>(this->CONT.size());
     NBYTE = 0;
@@ -122,10 +123,6 @@ cards::__base::card const &text::operator() (
         p.resize(NBYTE, ' ');
     NBYTE += 8;
     return *this;
-}
-
-cards::types text::card_type() const {
-    return types::TEXT;
 }
 
 ostream &text::put(ostream& os) const {

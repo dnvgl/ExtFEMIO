@@ -48,7 +48,8 @@ entry_type<double> const gelmnt2::_form_T("T");
 entry_type<long> const gelmnt2::_form_NNOD("NNOD");
 entry_type<long> const gelmnt2::_form_NOD("NOD");
 
-gelmnt2::gelmnt2(const vector<std::string> &inp, size_t const len) {
+gelmnt2::gelmnt2(const vector<std::string> &inp, size_t const len) :
+        card(types::GELMNT2) {
     gelmnt2::read(inp, len);
 }
 
@@ -77,7 +78,7 @@ gelmnt2::gelmnt2() : gelmnt2(-1, 0, 0, 0, nullptr, 0, {}) {}
 gelmnt2::gelmnt2(
     long const SUBNO, long const SLEVEL, long const STYPE, long const ADDNO,
     const double T[4][4], long const NNOD, const vector<long> &NOD) :
-        card(), SUBNO(SUBNO), SLEVEL(SLEVEL), STYPE(STYPE),
+        card(types::GELMNT2), SUBNO(SUBNO), SLEVEL(SLEVEL), STYPE(STYPE),
         ADDNO(ADDNO), NNOD(NNOD), NOD(NOD) {
     if (this->NOD.size() != size_t(this->NNOD))
         throw errors::usage_error(
@@ -100,7 +101,7 @@ gelmnt2::gelmnt2(
     double const T22, double const T32, double const T13, double const T23,
     double const T33, double const T14, double const T24, double const T34,
     long const NNOD, vector<long> const &NOD) :
-        card(), SUBNO(SUBNO), SLEVEL(SLEVEL), STYPE(STYPE),
+        card(types::GELMNT2), SUBNO(SUBNO), SLEVEL(SLEVEL), STYPE(STYPE),
         ADDNO(ADDNO), NNOD(NNOD), NOD(NOD) {
     if (this->NOD.size() != size_t(this->NNOD))
         throw errors::usage_error(
@@ -129,7 +130,7 @@ gelmnt2::gelmnt2(
     double const T22, double const T32, double const T13, double const T23,
     double const T33, double const T14, double const T24, double const T34,
     vector<long> const &NOD) :
-        card(), SUBNO(SUBNO), SLEVEL(SLEVEL), STYPE(STYPE),
+        card(types::GELMNT2), SUBNO(SUBNO), SLEVEL(SLEVEL), STYPE(STYPE),
         ADDNO(ADDNO), NOD(NOD) {
     NNOD = long(this->NOD.size());
     T[0][0] = T11;
@@ -148,10 +149,6 @@ gelmnt2::gelmnt2(
     T[1][3] = T24;
     T[2][3] = T34;
     T[3][3] = 1.;
-}
-
-cards::types gelmnt2::card_type() const {
-    return types::GELMNT2;
 }
 
 ostream &gelmnt2::put(ostream& os) const {

@@ -57,6 +57,7 @@ const entry_type<double> gbeamg::_form_SZ("SZ");
 
 gbeamg::gbeamg(const vector<std::string> &inp, size_t const len) :
         beam_prop(inp, len, true) {
+    __base::card::this_type = types::GBEAMG;
     gbeamg::read(inp, len);
 }
 
@@ -115,17 +116,23 @@ gbeamg::gbeamg(
         WXMIN(WXMIN), WYMIN(WYMIN), WZMIN(WZMIN),
         SHARY(SHARY), SHARZ(SHARZ),
         SHCENY(SHCENY), SHCENZ(SHCENZ), SY(SY),
-        SZ(SZ) {}
+        SZ(SZ) {
+    __base::card::this_type = types::GBEAMG;
+}
 
 gbeamg::gbeamg(long const GEONO, double const AREA) :
         beam_prop(GEONO, true), AREA(AREA), IX{0}, IY{0}, IZ{0}, IYZ{0},
     WXMIN{0}, WYMIN{0}, WZMIN{0}, SHARY{0}, SHARZ{0}, SHCENY{0}, SHCENZ{0},
-    SY{0}, SZ{0} {}
+    SY{0}, SZ{0} {
+        __base::card::this_type = types::GBEAMG;
+}
 
 gbeamg::gbeamg(double const AREA) :
     beam_prop(0), AREA(AREA), IX{0}, IY{0}, IZ{0}, IYZ{0},
     WXMIN{0}, WYMIN{0}, WZMIN{0}, SHARY{0}, SHARZ{0}, SHCENY{0}, SHCENZ{0},
-    SY{0}, SZ{0} {}
+    SY{0}, SZ{0} {
+    __base::card::this_type = types::GBEAMG;
+}
 
 // cards::__base::card const &gbeamg::operator() (
 //     vector<std::string> const &inp, size_t const len) {
@@ -201,10 +208,6 @@ cards::__base::card const &gbeamg::operator() (
 
 }
 
-cards::types gbeamg::card_type() const {
-    return types::GBEAMG;
-}
-
 ostream &gbeamg::put(ostream& os) const {
     if (GEONO == -1) return os;
     os << head.format()
@@ -234,5 +237,7 @@ ostream &gbeamg::put(ostream& os) const {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j8&&
+//     (make -C ../../cbuild test;
+//      ../../cbuild/tests/test_fem_cards --use-colour no)"
 // End:

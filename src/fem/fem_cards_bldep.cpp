@@ -53,7 +53,8 @@ const entry_type<long> bldep::_form_DEPDOF("DEPDOF");
 const entry_type<long> bldep::_form_INDEPDOF("INDEPDOF");
 const entry_type<double> bldep::_form_b("b");
 
-bldep::bldep(const vector<std::string> &inp, size_t const len) {
+bldep::bldep(const vector<std::string> &inp, size_t const len) :
+        card(types::BLDEP) {
     bldep::read(inp, len);
 }
 
@@ -82,6 +83,7 @@ bldep::bldep(
     long const NODENO, long const CNOD, long const NDDOF, long const NDEP,
     vector<long> const &DEPDOF, vector<long> const &INDEPDOF,
     vector<double> const &b) :
+        card(types::BLDEP), 
         NODENO(NODENO), CNOD(CNOD), NDDOF(NDDOF), NDEP(NDEP),
         DEPDOF(DEPDOF), INDEPDOF(INDEPDOF), b(b) {
     assert(DEPDOF.size() == INDEPDOF.size());
@@ -104,10 +106,6 @@ bldep::bldep(
               static_cast<long>(DEPDOF.size()),
               DEPDOF, INDEPDOF, b) {}
 
-cards::types bldep::card_type() const {
-    return types::BLDEP;
-}
-
 ostream &bldep::put(ostream& os) const {
     if (NODENO == -1) return os;
     os << head.format()
@@ -126,5 +124,7 @@ ostream &bldep::put(ostream& os) const {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j7 &&
+//    (make -C ../../cbuild test;
+//     ../../cbuild/tests/test_fem_cards --use-colour no)"
 // End:

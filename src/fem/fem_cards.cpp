@@ -53,118 +53,149 @@ void (*cards::info_report)(std::string const &) = &_stderr_report;
 void (*cards::warn_report)(std::string const &) = &_stderr_report;
 void (*cards::error_report)(std::string const &) = &_stderr_report;
 
-unordered_map<std::string, cards::types> const cardtype_map({
-        // UNKNOWN,
-        {"DATE", cards::types::DATE},
-        {"GCOORD", cards::types::GCOORD},
-        {"GNODE", cards::types::GNODE},
-        {"IDENT", cards::types::IDENT},
-        {"IEND", cards::types::IEND},
-        {"GELMNT1", cards::types::GELMNT1},
-        {"GELREF1", cards::types::GELREF1},
-        {"GBARM", cards::types::GBARM},
-        {"GBEAMG", cards::types::GBEAMG},
-        {"GBOX", cards::types::GBOX},
-        {"GCHAN", cards::types::GCHAN},
-        {"GCHANR", cards::types::GCHANR},
-        {"GDOBO", cards::types::GDOBO},
-        {"GECC", cards::types::GECC},
-        {"GECCEN", cards::types::GECCEN},
-        {"GELTH", cards::types::GELTH},
-        {"GIORH", cards::types::GIORH},
-        {"GIORHR", cards::types::GIORHR},
-        {"GLSEC", cards::types::GLSEC},
-        {"GLSECR", cards::types::GLSECR},
-        {"GPIPE", cards::types::GPIPE},
-        {"GTONP", cards::types::GTONP},
-        {"GUSYI", cards::types::GUSYI},
-        {"BELFIX", cards::types::BELFIX},
-        {"BLDEP", cards::types::BLDEP},
-        {"BNBCD", cards::types::BNBCD},
-        {"BNDISPL", cards::types::BNDISPL},
-        {"BNLOAD", cards::types::BNLOAD},
-        {"MGSPRNG", cards::types::MGSPRNG},
-        {"GSETMEMB", cards::types::GSETMEMB},
-        {"GUNIVEC", cards::types::GUNIVEC},
-        {"MISOSEL", cards::types::MISOSEL},
-        {"MORSMEL", cards::types::MORSMEL},
-        {"TDSETNAM", cards::types::TDSETNAM},
-        {"TDSUPNAM", cards::types::TDSUPNAM},
-        {"TEXT", cards::types::TEXT},
-        {"TDLOAD", cards::types::TDLOAD},
-        {"BSELL", cards::types::BSELL},
-        {"GELMNT2", cards::types::GELMNT2},
-        {"HSUPSTAT", cards::types::HSUPSTAT},
-        {"HSUPTRAN", cards::types::HSUPTRAN},
-        {"HIERARCH", cards::types::HIERARCH},
-        {"BEUSLO", cards::types::BEUSLO},
-        {"TDMATER", cards::types::TDMATER},
-        {"TDSECT", cards::types::TDSECT},
-        {"TSLAYER", cards::types::TSLAYER},
-        {"ACFD", cards::types::ACFD},
-        {"ADDATA", cards::types::ADDATA},
-        {"BEISTE", cards::types::BEISTE},
-        {"BELLAX", cards::types::BELLAX},
-        {"BELLO2", cards::types::BELLO2},
-        {"BELOAD1", cards::types::BELOAD1},
-        {"BEDRAG1", cards::types::BEDRAG1},
-        {"BEMASS1", cards::types::BEMASS1},
-        {"BEUVLO", cards::types::BEUVLO},
-        {"BEWAKIN", cards::types::BEWAKIN},
-        {"BEWALO1", cards::types::BEWALO1},
-        {"BGRAV", cards::types::BGRAV},
-        {"BNACCLO", cards::types::BNACCLO},
-        {"BNDOF", cards::types::BNDOF},
-        {"BNINCO", cards::types::BNINCO},
-        {"BNLOAX", cards::types::BNLOAX},
-        {"BNMASS", cards::types::BNMASS},
-        {"BNTEMP", cards::types::BNTEMP},
-        {"BNTRCOS", cards::types::BNTRCOS},
-        {"BNWALO", cards::types::BNWALO},
-        {"BRIGAC", cards::types::BRIGAC},
-        {"BRIGDI", cards::types::BRIGDI},
-        {"BRIGVE", cards::types::BRIGVE},
-        {"BQDP", cards::types::BQDP},
-        {"GCROINT", cards::types::GCROINT},
-        {"GELINT", cards::types::GELINT},
-        {"GELSTRP", cards::types::GELSTRP},
-        {"GLMASS", cards::types::GLMASS},
-        {"GSEPxxxx", cards::types::GSEPxxxx},
-        {"GSEPSPEC", cards::types::GSEPSPEC},
-        {"GSLAYER", cards::types::GSLAYER},
-        {"GSLxxxxx", cards::types::GSLxxxxx},
-        {"GSLPLATE", cards::types::GSLPLATE},
-        {"GSLSTIFF", cards::types::GSLSTIFF},
-        {"MAXDMP", cards::types::MAXDMP},
-        {"MAXSPR", cards::types::MAXSPR},
-        {"MCNT", cards::types::MCNT},
-        {"MGDAMP", cards::types::MGDAMP},
-        {"MGLDAMP", cards::types::MGLDAMP},
-        {"MGLMASS", cards::types::MGLMASS},
-        {"MGMASS", cards::types::MGMASS},
-        {"MISOAL", cards::types::MISOAL},
-        {"MISOEML", cards::types::MISOEML},
-        {"MISOHL", cards::types::MISOHL},
-        {"MISOHNL", cards::types::MISOHNL},
-        {"MISOPL", cards::types::MISOPL},
-        {"MISTEL", cards::types::MISTEL},
-        {"MORSSEL", cards::types::MORSSEL},
-        {"MORSSOL", cards::types::MORSSOL},
-        {"MSHGLSP", cards::types::MSHGLSP},
-        {"MTEMP", cards::types::MTEMP},
-        {"MTENONL", cards::types::MTENONL},
-        {"MTRMEL", cards::types::MTRMEL},
-        {"MTRSEL", cards::types::MTRSEL},
-        {"MTRSOL", cards::types::MTRSOL},
-        {"AMATRIX", cards::types::AMATRIX},
-        {"AMDACCL", cards::types::AMDACCL},
-        {"AMDDAMP", cards::types::AMDDAMP},
-        {"AMDDISP", cards::types::AMDDISP},
-        {"AMDFREQ", cards::types::AMDFREQ},
-        {"AMDLOAD", cards::types::AMDLOAD},
-        {"AMDMASS", cards::types::AMDMASS},
-        {"AMDSTIFF", cards::types::AMDSTIFF},
-        {"AMDVELO", cards::types::AMDVELO}});
+namespace {
+    unordered_map<std::string, cards::types> const cardtype_map({
+            // UNKNOWN,
+            {"DATE", cards::types::DATE},
+            {"GCOORD", cards::types::GCOORD},
+            {"GNODE", cards::types::GNODE},
+            {"IDENT", cards::types::IDENT},
+            {"IEND", cards::types::IEND},
+            {"GELMNT1", cards::types::GELMNT1},
+            {"GELREF1", cards::types::GELREF1},
+            {"GBARM", cards::types::GBARM},
+            {"GBEAMG", cards::types::GBEAMG},
+            {"GBOX", cards::types::GBOX},
+            {"GCHAN", cards::types::GCHAN},
+            {"GCHANR", cards::types::GCHANR},
+            {"GDOBO", cards::types::GDOBO},
+            {"GECC", cards::types::GECC},
+            {"GECCEN", cards::types::GECCEN},
+            {"GELTH", cards::types::GELTH},
+            {"GIORH", cards::types::GIORH},
+            {"GIORHR", cards::types::GIORHR},
+            {"GLSEC", cards::types::GLSEC},
+            {"GLSECR", cards::types::GLSECR},
+            {"GPIPE", cards::types::GPIPE},
+            {"GTONP", cards::types::GTONP},
+            {"GUSYI", cards::types::GUSYI},
+            {"BELFIX", cards::types::BELFIX},
+            {"BLDEP", cards::types::BLDEP},
+            {"BNBCD", cards::types::BNBCD},
+            {"BNDISPL", cards::types::BNDISPL},
+            {"BNLOAD", cards::types::BNLOAD},
+            {"MGSPRNG", cards::types::MGSPRNG},
+            {"GSETMEMB", cards::types::GSETMEMB},
+            {"GUNIVEC", cards::types::GUNIVEC},
+            {"MISOSEL", cards::types::MISOSEL},
+            {"MORSMEL", cards::types::MORSMEL},
+            {"TDSETNAM", cards::types::TDSETNAM},
+            {"TDSUPNAM", cards::types::TDSUPNAM},
+            {"TEXT", cards::types::TEXT},
+            {"TDLOAD", cards::types::TDLOAD},
+            {"BSELL", cards::types::BSELL},
+            {"GELMNT2", cards::types::GELMNT2},
+            {"HSUPSTAT", cards::types::HSUPSTAT},
+            {"HSUPTRAN", cards::types::HSUPTRAN},
+            {"HIERARCH", cards::types::HIERARCH},
+            {"BEUSLO", cards::types::BEUSLO},
+            {"TDMATER", cards::types::TDMATER},
+            {"TDSECT", cards::types::TDSECT},
+            {"TSLAYER", cards::types::TSLAYER},
+            {"ACFD", cards::types::ACFD},
+            {"ADDATA", cards::types::ADDATA},
+            {"BEISTE", cards::types::BEISTE},
+            {"BELLAX", cards::types::BELLAX},
+            {"BELLO2", cards::types::BELLO2},
+            {"BELOAD1", cards::types::BELOAD1},
+            {"BEDRAG1", cards::types::BEDRAG1},
+            {"BEMASS1", cards::types::BEMASS1},
+            {"BEUVLO", cards::types::BEUVLO},
+            {"BEWAKIN", cards::types::BEWAKIN},
+            {"BEWALO1", cards::types::BEWALO1},
+            {"BGRAV", cards::types::BGRAV},
+            {"BNACCLO", cards::types::BNACCLO},
+            {"BNDOF", cards::types::BNDOF},
+            {"BNINCO", cards::types::BNINCO},
+            {"BNLOAX", cards::types::BNLOAX},
+            {"BNMASS", cards::types::BNMASS},
+            {"BNTEMP", cards::types::BNTEMP},
+            {"BNTRCOS", cards::types::BNTRCOS},
+            {"BNWALO", cards::types::BNWALO},
+            {"BRIGAC", cards::types::BRIGAC},
+            {"BRIGDI", cards::types::BRIGDI},
+            {"BRIGVE", cards::types::BRIGVE},
+            {"BQDP", cards::types::BQDP},
+            {"GCROINT", cards::types::GCROINT},
+            {"GELINT", cards::types::GELINT},
+            {"GELSTRP", cards::types::GELSTRP},
+            {"GLMASS", cards::types::GLMASS},
+            {"GSEPxxxx", cards::types::GSEPxxxx},
+            {"GSEPSPEC", cards::types::GSEPSPEC},
+            {"GSLAYER", cards::types::GSLAYER},
+            {"GSLxxxxx", cards::types::GSLxxxxx},
+            {"GSLPLATE", cards::types::GSLPLATE},
+            {"GSLSTIFF", cards::types::GSLSTIFF},
+            {"MAXDMP", cards::types::MAXDMP},
+            {"MAXSPR", cards::types::MAXSPR},
+            {"MCNT", cards::types::MCNT},
+            {"MGDAMP", cards::types::MGDAMP},
+            {"MGLDAMP", cards::types::MGLDAMP},
+            {"MGLMASS", cards::types::MGLMASS},
+            {"MGMASS", cards::types::MGMASS},
+            {"MISOAL", cards::types::MISOAL},
+            {"MISOEML", cards::types::MISOEML},
+            {"MISOHL", cards::types::MISOHL},
+            {"MISOHNL", cards::types::MISOHNL},
+            {"MISOPL", cards::types::MISOPL},
+            {"MISTEL", cards::types::MISTEL},
+            {"MORSSEL", cards::types::MORSSEL},
+            {"MORSSOL", cards::types::MORSSOL},
+            {"MSHGLSP", cards::types::MSHGLSP},
+            {"MTEMP", cards::types::MTEMP},
+            {"MTENONL", cards::types::MTENONL},
+            {"MTRMEL", cards::types::MTRMEL},
+            {"MTRSEL", cards::types::MTRSEL},
+            {"MTRSOL", cards::types::MTRSOL},
+            {"AMATRIX", cards::types::AMATRIX},
+            {"AMDACCL", cards::types::AMDACCL},
+            {"AMDDAMP", cards::types::AMDDAMP},
+            {"AMDDISP", cards::types::AMDDISP},
+            {"AMDFREQ", cards::types::AMDFREQ},
+            {"AMDLOAD", cards::types::AMDLOAD},
+            {"AMDMASS", cards::types::AMDMASS},
+            {"AMDSTIFF", cards::types::AMDSTIFF},
+            {"AMDVELO", cards::types::AMDVELO}});
+}
+
+cards::__base::card::card(types const this_type) : this_type(this_type) {}
+
+cards::__base::card::card(std::vector<std::string> const &inp, size_t const len) :
+        card(types::UNKNOWN) {
+    if (len>0) {
+        std::string const name{inp[0]};
+        __base::card::this_type = cardtype_map.at(name);
+    }
+}
+
+void cards::__base::card::read(vector<std::string> const &inp, size_t const len) {
+    if (len>0) {
+        try {
+            this_type = cardtype_map.at(inp[0]);
+        } catch (out_of_range) {
+            this_type = types::UNKNOWN;
+        }
+    }
+}
+
+std::ostream &cards::__base::card::put(std::ostream &os) const {
+    ostringstream type_s(ostringstream::ate);
+    type_s << this_type;
+    fem::types::card const head(type_s.str());
+    os << head.format()
+       << "NOT YET SUPPORTED" << endl;
+    return os;
+}
 
 std::ostream &operator<< (ostream &os, cards::types const cardtype) {
     switch (cardtype) {
@@ -331,12 +362,13 @@ cards::__base::card const &cards::__base::card::operator() (
 }
 
 cards::__base::material::material(
-    vector<std::string> const &inp, size_t const len) {
+    vector<std::string> const &inp, size_t const len) :
+        card(types::UNKNOWN) {
     material::read(inp, len);
 }
 
 cards::__base::material::material(long const MATNO) :
-        card(), MATNO(MATNO) {}
+        card(types::UNKNOWN), MATNO(MATNO) {}
 
 fem::types::entry_type<long> const
 cards::__base::material::_form_MATNO("MATNO");
@@ -354,6 +386,10 @@ cards::__base::card const &cards::__base::material::operator() (
     material::read(inp, len);
     this->read(inp, len);
     return *this;
+}
+
+cards::types cards::__base::card::card_type() {
+    return this_type;
 }
 
 void
@@ -562,7 +598,7 @@ cards::dispatch(vector<std::string> const &inp, size_t const len,
         case types::AMDSTIFF:
         case types::AMDVELO:
         case types::UNKNOWN:
-            res = make_unique<unknown>(inp, len);
+            res = make_unique<__base::card>(inp, len);
         }
     } catch (out_of_range) {
         res = make_unique<unknown>(inp, len);
@@ -574,7 +610,7 @@ cards::dispatch(vector<std::string> const &inp, size_t const len,
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&
+// compile-command: "make -C ../../cbuild -j7 &&
 //   (make -C ../../cbuild test;
 //    ../../cbuild/tests/test_fem_cards --use-colour no)"
 // End:

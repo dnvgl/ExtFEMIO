@@ -56,6 +56,7 @@ gdobo::gdobo() : gdobo(-1, 0., 0., 0., 0., 0., 0., 0.) {}
 
 gdobo::gdobo(vector<std::string> const &inp, size_t const len) :
         beam_prop(inp, len, false) {
+    __base::card::this_type = types::GDOBO;
     gdobo::read(inp, len);
 }
 
@@ -66,10 +67,8 @@ gdobo::gdobo(long const GEONO,
              long const NLOBY, long const NLOBZ) :
         beam_prop(GEONO),
         HZ{HZ}, TY{TY}, BY{BY}, TT{TT}, TB{TB}, SFY{SFY}, SFZ{SFZ},
-        NLOBY{NLOBY}, NLOBZ{NLOBZ} {}
-
-cards::types gdobo::card_type() const {
-    return types::GDOBO;
+        NLOBY{NLOBY}, NLOBZ{NLOBZ} {
+    __base::card::this_type = types::GDOBO;
 }
 
 cards::__base::card const &gdobo::operator() (

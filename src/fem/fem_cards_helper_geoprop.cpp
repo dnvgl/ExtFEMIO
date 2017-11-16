@@ -65,14 +65,15 @@ void cards::__base::geoprop::set_geono(long const GEONO/*=0*/) {
     this->GEONO = GEONO;
 }
 
-cards::__base::geoprop::geoprop() : card(), GEONO(-1) {}
+cards::__base::geoprop::geoprop() : card(types::UNKNOWN), GEONO(-1) {}
 
-cards::__base::geoprop::geoprop(long const GEONO) : card() {
+cards::__base::geoprop::geoprop(long const GEONO) : card(types::UNKNOWN) {
     set_geono(GEONO);
 }
 
 cards::__base::geoprop::geoprop(
-    vector<std::string> const &inp, size_t const len) {
+    vector<std::string> const &inp, size_t const len) :
+        card(types::UNKNOWN) {
     geoprop::read(inp, len);
 }
 

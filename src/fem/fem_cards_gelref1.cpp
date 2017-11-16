@@ -58,7 +58,7 @@ entry_type<long> const gelref1::_form_ECCNO("ECCNO");
 entry_type<long> const gelref1::_form_TRANSNO("TRANSNO");
 
 gelref1::gelref1(const vector<std::string> &inp, size_t const len) :
-        GEONO(0), FIXNO(0), ECCNO(0), TRANSNO(0) {
+        card(types::GELREF1), GEONO(0), FIXNO(0), ECCNO(0), TRANSNO(0) {
     this->gelref1::read(inp, len);
 }
 
@@ -142,7 +142,7 @@ gelref1::gelref1(
     long const ECCNO_OPT, long const TRANSNO_OPT, const vector<long> &GEONO,
     const vector<long> &FIXNO, const vector<long> &ECCNO,
     const vector<long> &TRANSNO) :
-        card(),
+        card(types::GELREF1),
         ELNO(ELNO), MATNO(MATNO), ADDNO(ADDNO), INTNO(INTNO),
         MINTNO(MINTNO), STRANO(STRANO), STRENO(STRENO),
         STREPONO(STREPONO), GEONO_OPT(GEONO_OPT),
@@ -268,10 +268,6 @@ cards::__base::card const &gelref1::operator() (
             "to be of same size");
     }
     return *this;
-}
-
-cards::types gelref1::card_type() const {
-    return types::GELREF1;
 }
 
 ostream &gelref1::put(ostream& os) const {

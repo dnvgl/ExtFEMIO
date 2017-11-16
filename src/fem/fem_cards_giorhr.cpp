@@ -56,6 +56,7 @@ entry_type<long> const giorhr::_form_NLOBZ("NLOBZ");
 
 giorhr::giorhr(vector<std::string> const &inp, size_t const len) :
         beam_prop(inp, len, false) {
+    __base::card::this_type = types::GIORHR;
     giorhr::read(inp, len);
 }
 
@@ -100,7 +101,9 @@ giorhr::giorhr(long const GEONO,
         beam_prop(GEONO, false),
         HZ(HZ), TY(TY), BT(BT), TT(TT), BB(BB), TB(TB),
         SFY(SFY), SFZ(SFZ), RT(RT), RB(RB),
-        NLOBYT(NLOBYT), NLOBYB(NLOBYB), NLOBZ(NLOBZ) {}
+        NLOBYT(NLOBYT), NLOBYB(NLOBYB), NLOBZ(NLOBZ) {
+    __base::card::this_type = types::GIORHR;
+}
 
 cards::__base::card const &giorhr::operator() (
     long const GEONO,
@@ -124,10 +127,6 @@ cards::__base::card const &giorhr::operator() (
     this->NLOBYB = NLOBYB;
     this->NLOBZ = NLOBZ;
     return *this;
-}
-
-cards::types giorhr::card_type() const {
-    return types::GIORHR;
 }
 
 ostream &giorhr::put(ostream& os) const {

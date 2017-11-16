@@ -108,9 +108,6 @@ namespace dnvgl {
                     date(long const TYPE, long const SUBTYPE,
                          std::vector<std::string> const &CONT);
 
-                    types
-                    card_type() const override;
-
                 protected:
 
                     std::ostream &put(std::ostream&) const override;
@@ -169,9 +166,6 @@ namespace dnvgl {
                     ident(long const SLEVEL, long const SELTYP,
                           mod_type const SELMOD);
 
-                    types
-                    card_type() const override;
-
                 protected:
 
                     std::ostream &put(std::ostream&) const override;
@@ -217,9 +211,6 @@ namespace dnvgl {
                     iend();
 
                     explicit iend(long const CONT);
-
-                    types
-                    card_type() const override;
 
                 protected:
 
@@ -355,9 +346,6 @@ namespace dnvgl {
 
                     tdsetnam(long const ISREF,
                              std::string const &SET_NAME);
-
-                    types
-                    card_type() const override;
 
                 protected:
 
@@ -499,9 +487,6 @@ namespace dnvgl {
                     tdsupnam(long const IHREF,
                              std::string const &SUP_NAME);
 
-                    types
-                    card_type() const override;
-
                 protected:
 
                     std::ostream &put(std::ostream&) const override;
@@ -594,9 +579,6 @@ namespace dnvgl {
                     card const &operator()(
                         long const TYPE, long const SUBTYPE,
                         std::vector<std::string> const &CONT);
-
-                    types
-                    card_type() const override;
 
                 protected:
 
@@ -742,9 +724,6 @@ namespace dnvgl {
                     card const &operator() (
                         long const NFIELD, long const ILREF, long const CODNAM,
                         std::string const &SET_NAME);
-
-                    types
-                    card_type() const override;
 
                 protected:
 

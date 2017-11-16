@@ -45,7 +45,8 @@ const entry_type<double> gcoord::_form_XCOORD("XCOORD");
 const entry_type<double> gcoord::_form_YCOORD("YCOORD");
 const entry_type<double> gcoord::_form_ZCOORD("ZCOORD");
 
-gcoord::gcoord(const vector<std::string> &inp, size_t const len) {
+gcoord::gcoord(const vector<std::string> &inp, size_t const len) :
+        card(types::GCOORD) {
     this->gcoord::read(inp, len);
 }
 
@@ -65,11 +66,8 @@ gcoord::gcoord() : gcoord(-1, 0., 0., 0.) {}
 gcoord::gcoord(
     long const NODENO,
     double const XCOORD, double const YCOORD, double const ZCOORD) :
-        NODENO(NODENO),
+        card(types::GCOORD), NODENO(NODENO),
         XCOORD(XCOORD), YCOORD(YCOORD), ZCOORD(ZCOORD) {}
-
- cards::types
-gcoord::card_type() const {return types::GCOORD;}
 
 ostream &gcoord::put(ostream& os) const {
     if (NODENO == -1) return os;

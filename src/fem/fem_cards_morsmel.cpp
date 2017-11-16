@@ -60,6 +60,7 @@ entry_type<double> const morsmel::_form_ALPHA2("ALPHA2");
 
 morsmel::morsmel(vector<std::string> const &inp, size_t const len) :
         material(inp, len) {
+    __base::card::this_type = types::MORSMEL;
     morsmel::read(inp, len);
 }
 
@@ -104,17 +105,15 @@ morsmel::morsmel(long const MATNO,
     D33(D33),
     PS1(PS1), PS2(PS2),
     DAMP1(DAMP1), DAMP2(DAMP2),
-    ALPHA1(ALPHA1), ALPHA2(ALPHA2) {}
+    ALPHA1(ALPHA1), ALPHA2(ALPHA2) {
+    __base::card::this_type = types::MORSMEL;
+}
 
 cards::__base::card const &morsmel::operator() (
     vector<std::string> const &inp, size_t const len) {
     material::read(inp, len);
     read(inp, len);
     return *this;
-}
-
-cards::types morsmel::card_type() const {
-    return types::MORSMEL;
 }
 
 ostream &morsmel::put(ostream& os) const {
@@ -141,5 +140,7 @@ ostream &morsmel::put(ostream& os) const {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j7 &&
+//     (make -C ../../cbuild test;
+//      ../../cbuild/tests/test_fem_cards --use-colour no)"
 // End:

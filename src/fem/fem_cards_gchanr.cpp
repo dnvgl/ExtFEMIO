@@ -57,6 +57,7 @@ gchanr::gchanr() : gchanr(-1, 0., 0., 0., 0., 0., 0., 0, 0.) {}
 
 gchanr::gchanr(vector<std::string> const &inp, size_t const len) :
         beam_prop(inp, len, false) {
+    __base::card::this_type = types::GCHANR;
     gchanr::read(inp, len);
 }
 
@@ -67,10 +68,8 @@ gchanr::gchanr(long const GEONO,
                long const NLOBY/*=0*/, long const NLOBZ/*=0*/) :
         beam_prop(GEONO),
         HZ{HZ}, TY{TY}, BY{BY}, TZ {TZ}, SFY{SFY}, SFZ{SFZ}, K{K}, R{R},
-        NLOBY{NLOBY}, NLOBZ{NLOBZ} {}
-
-cards::types gchanr::card_type() const {
-    return types::GCHANR;
+        NLOBY{NLOBY}, NLOBZ{NLOBZ} {
+    __base::card::this_type = types::GCHANR;
 }
 
 cards::__base::card const &gchanr::operator() (

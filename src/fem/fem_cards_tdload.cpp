@@ -52,7 +52,8 @@ entry_type<std::string> const tdload::_form_SET_NAME(
     "SET_NAME", type_bounds::bound<std::string>(""));
 entry_type<std::string> const tdload::_form_CONT("CONT");
 
-tdload::tdload(vector<std::string> const &inp, size_t const len) {
+tdload::tdload(vector<std::string> const &inp, size_t const len) :
+        card(types::TDLOAD) {
     tdload::read(inp, len);
 }
 
@@ -99,7 +100,7 @@ tdload::tdload() : tdload(0, -1, 0, {}) {}
 tdload::tdload(long const NFIELD, long const ILREF, long const CODNAM,
                long const CODTXT, std::string const &SET_NAME,
                vector<std::string> const &CONT) :
-        card(), NFIELD(NFIELD), ILREF(ILREF),
+        card(types::TDLOAD), NFIELD(NFIELD), ILREF(ILREF),
         CODNAM(CODNAM), CODTXT(CODTXT),
         SET_NAME(SET_NAME), CONT(CONT) {
     auto div_val = ldiv(CODNAM, 100);
@@ -112,7 +113,7 @@ tdload::tdload(long const NFIELD, long const ILREF, long const CODNAM,
 
 tdload::tdload(long const ILREF, std::string const &SET_NAME,
                vector<std::string> const &CONT/*={}*/) :
-        card(), NFIELD(4), ILREF(ILREF),
+        card(types::TDLOAD), NFIELD(4), ILREF(ILREF),
         SET_NAME(SET_NAME), CONT(CONT) {
 
     nlnam = true;
@@ -175,10 +176,6 @@ cards::__base::card const &tdload::operator() (
     return (*this)(NFIELD, ILREF, CODNAM, 0, SET_NAME, {});
 }
 
-cards::types tdload::card_type() const {
-    return types::TDLOAD;
-};
-
 ostream &tdload::put(ostream& os) const {
     if (ILREF == -1) return os;
     os << head.format()
@@ -198,5 +195,7 @@ ostream &tdload::put(ostream& os) const {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j7 &&
+//     (make -C ../../cbuild test;
+//      ../../cbuild/tests/test_fem_cards --use-colour no)"
 // End:

@@ -55,6 +55,7 @@ entry_type<long> const gtonp::_form_NLOBZ("NLOBZ");
 
 gtonp::gtonp(const vector<std::string> &inp, size_t const len) :
         beam_prop(inp, len, false) {
+    __base::card::this_type = types::GTONP;
     gtonp::read(inp, len);
 }
 
@@ -97,7 +98,9 @@ gtonp::gtonp(
         beam_prop(GEONO, false),
         HZ(HZ), TY(TY), BT(BT), TT(TT), BP(BP), TP(TP),
         SFY(SFY), SFZ(SFZ),
-        NLOBYT(NLOBYT), NLOBYB(NLOBYB), NLOBZ(NLOBZ) {}
+        NLOBYT(NLOBYT), NLOBYB(NLOBYB), NLOBZ(NLOBZ) {
+    __base::card::this_type = types::GTONP;
+}
 
 cards::__base::card const &gtonp::operator() (
     long const GEONO,
@@ -118,11 +121,6 @@ cards::__base::card const &gtonp::operator() (
     this->NLOBYB = NLOBYB;
     this->NLOBZ = NLOBZ;
     return *this;
-}
-
-cards::types
-gtonp::card_type() const {
-    return types::GTONP;
 }
 
 ostream &gtonp::put(ostream& os) const {

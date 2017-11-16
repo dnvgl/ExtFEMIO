@@ -108,8 +108,6 @@ namespace dnvgl {
                           double const HZ, double const BT, double const BB) :
                             gbarm(GEONO, HZ, BT, BB, 1., 1., 0, 0) {};
 
-                    types card_type() const override;
-
                     using beam_prop::operator();
                     card const &operator() (
                         long const GEONO,
@@ -256,8 +254,6 @@ namespace dnvgl {
 
                     gbeamg(double const AREA);
 
-                    types card_type() const override;
-
                     using beam_prop::operator();
                     card const &operator()(
                         long const GEONO,
@@ -385,8 +381,6 @@ namespace dnvgl {
                          double const HZ, double const TY, double const TB,
                          double const TT, double const BY) :
                             gbox(GEONO, HZ, TY, TB, TT, BY, 1., 1., 0, 0) {};
-
-                    types card_type() const override;
 
                     using beam_prop::operator();
                     card const &operator() (
@@ -524,8 +518,6 @@ namespace dnvgl {
                           double const TZ, long const K) :
                             gchan(GEONO, HZ, TY, BY, TZ, 1., 1., K, 0, 0) {};
 
-                    types card_type() const override;
-
                     using beam_prop::operator();
                     card const &operator() (
                         long const GEONO,
@@ -661,8 +653,7 @@ namespace dnvgl {
                     gchanr(long const GEONO,
                            double const HZ, double const TY, double const BY,
                            double const TZ, long const K, double const R) :
-        gchanr(GEONO, HZ, TY, BY, TZ, 1., 1., K, R, 0, 0) {};
-                    types card_type() const override;
+                    gchanr(GEONO, HZ, TY, BY, TZ, 1., 1., K, R, 0, 0) {};
                     using beam_prop::operator();
                     card const &operator() (
                         long const GEONO,
@@ -735,8 +726,6 @@ namespace dnvgl {
                         long const NODENO,
                         double const XCOORD, double const YCOORD,
                         double const ZCOORD);
-
-                    types card_type() const override;
 
                     using card::operator();
                     card const &operator()(
@@ -852,8 +841,6 @@ namespace dnvgl {
                           double const TT, double const TB) :
                             gdobo(GEONO, HZ, TY, BY, TT, TB, 1., 1., 0, 0) {};
 
-                    types card_type() const override;
-
                     using beam_prop::operator();
                     card const &operator() (
                         long const GEONO,
@@ -965,8 +952,6 @@ namespace dnvgl {
                             gecc(that->ECCNO, that->IOPT,
                                  that->EX, that->EY, that->EZ) {};
 
-                    types card_type() const override;
-
                     using card::operator();
                     card const &operator() (
                         long const ECCNO, ecc_opt IOPT,
@@ -1065,8 +1050,6 @@ namespace dnvgl {
                     geccen(std::vector<double> const &pos) :
                             geccen(0, pos.at(0), pos.at(1), pos.at(2)) {};
                     geccen(geccen const*);
-
-                    types card_type() const override;
 
                     using card::operator();
                     card const &operator() (
@@ -1178,8 +1161,6 @@ namespace dnvgl {
                     gelmnt1(long const ELNOX, long const ELNO,
                             fem::elements::el_types const &ELTYP,
                             std::vector<long> const &NODIN);
-
-                    types card_type() const override;
 
                     using card::operator();
                     card const &operator()(
@@ -1376,8 +1357,6 @@ namespace dnvgl {
                             std::vector<long> const &ECCNO={},
                             std::vector<long> const &TRANSNO={});
 
-                    types card_type() const override;
-
                     using card::operator();
                     card const &operator()(
                         long const ELNO, long const MATNO,
@@ -1437,8 +1416,6 @@ namespace dnvgl {
                     gelth(long const GEONO, double const TH,
                           long const NINT=0);
                     gelth(double const TH, long const NINT=0);
-
-                    types card_type() const override;
 
                     using geoprop::operator();
                     card const &operator()(
@@ -1566,8 +1543,6 @@ namespace dnvgl {
                           double const TT, double const BB, double const TB) :
                             giorh(GEONO, HZ, TY, BT, TT, BB, TB, 1., 1.,
                                   0, 0, 0) {};
-
-                    types card_type() const override;
 
                     using beam_prop::operator();
                     card const &operator() (
@@ -1720,8 +1695,6 @@ namespace dnvgl {
                             giorhr(GEONO, HZ, TY, BT, TT, BB, TB, 1., 1.,
                                    RT, RB, 0, 0, 0) {};
 
-                    types card_type() const override;
-
                     using beam_prop::operator();
                     card const &operator() (
                         long const GEONO,
@@ -1863,8 +1836,6 @@ namespace dnvgl {
                           double const TZ,
                           bool const K) :
                             glsec(GEONO, HZ, TY, BY, TZ, 1., 1., K, 0, 0) {};
-
-                    types card_type() const override;
 
                     using beam_prop::operator();
                     card const &operator() (
@@ -2014,8 +1985,6 @@ namespace dnvgl {
                             glsecr(GEONO, HZ, TY, BY, TZ, 1., 1., K, R,
                                    0, 0) {};
 
-                    types card_type() const override;
-
                     using beam_prop::operator();
                     card const &operator() (
                         long const GEONO,
@@ -2106,8 +2075,6 @@ namespace dnvgl {
                     gnode(long const NODEX, long const NODENO,
                           std::vector<int> const &ODOF);
                     ~gnode();
-
-                    types card_type() const override;
 
                     using card::operator();
                     card const &operator()(
@@ -2210,8 +2177,6 @@ namespace dnvgl {
                     gpipe(long const GEONO,
                           double const DI, double const DY, double const T) :
                             gpipe(GEONO, DI, DY, T, 1., 1., 0, 0) {};
-
-                    types card_type() const override;
 
                     using beam_prop::operator();
                     card const &operator() (
@@ -2384,8 +2349,6 @@ namespace dnvgl {
                              origins const ISORIG,
                              std::vector<long> const &IRMEMB={});
 
-                    cards::types card_type() const override;
-
                     using card::operator();
                     card const &operator() (
                         long const NFIELD, long const ISREF, long const INDEX,
@@ -2508,8 +2471,6 @@ namespace dnvgl {
                             gtonp(GEONO, HZ, TY, BT, TT, BP, TP, 1., 1.,
                                   0, 0, 0) {};
 
-                    types card_type() const override;
-
                     using beam_prop::operator();
                     card const &operator() (
                         long GEONO,
@@ -2596,8 +2557,6 @@ namespace dnvgl {
                             double const UNIZ);
                     gunivec(double const UNIX, double const UNIY,
                             double const UNIZ);
-
-                    types card_type() const override;
 
                     using transno::operator();
                     card const &operator() (
@@ -2736,8 +2695,6 @@ namespace dnvgl {
                           double const HZ, double const TY, double const BT,
                           double const B1, double const TT, double const BB,
                           double const B2, double const TB);
-
-                    types card_type() const override;
 
                     using beam_prop::operator();
                     card const &operator() (

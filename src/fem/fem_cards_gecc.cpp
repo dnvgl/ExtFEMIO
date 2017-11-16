@@ -86,10 +86,9 @@ gecc::gecc(
     double const EX, double const EY, double const EZ) :
     eccno(ECCNO), IOPT(IOPT), EX(EX), EY(EY), EZ(EZ) {}
 
-cards::types
-gecc::card_type() const {return types::GECC;}
-
-cards::__base::card const& gecc::operator()(long const ECCNO, ecc_opt IOPT, double const EX, double const EY, double const EZ) {
+cards::__base::card const& gecc::operator()(
+    long const ECCNO, ecc_opt IOPT,
+    double const EX, double const EY, double const EZ) {
     this->ECCNO = ECCNO;
     this->IOPT = IOPT;
     this->EX = EX;

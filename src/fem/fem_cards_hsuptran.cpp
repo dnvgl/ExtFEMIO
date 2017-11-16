@@ -43,7 +43,8 @@ entry_type<long> const hsuptran::_form_NFIELD("NFIELD");
 entry_type<long> const hsuptran::_form_ITREF("ITREF");
 entry_type<double> const hsuptran::_form_T("T");
 
-hsuptran::hsuptran(const vector<std::string> &inp, size_t const len) {
+hsuptran::hsuptran(const vector<std::string> &inp, size_t const len) :
+        card(types::HSUPTRAN) {
     hsuptran::read(inp, len);
 }
 
@@ -81,7 +82,7 @@ hsuptran::hsuptran(
     double const T12, double const T22, double const T32, double const T42,
     double const T13, double const T23, double const T33, double const T43,
     double const T14, double const T24, double const T34, double const T44) :
-        card(), NFIELD(NFIELD), ITREF(ITREF) {
+        card(types::HSUPTRAN), NFIELD(NFIELD), ITREF(ITREF) {
 
     T[0][0] = T11;
     T[0][1] = T21;
@@ -103,15 +104,11 @@ hsuptran::hsuptran(
 
 hsuptran::hsuptran(
     long const NFIELD, long const ITREF, double const T[4][4]) :
-        card(), NFIELD(NFIELD), ITREF(ITREF) {
+        card(types::HSUPTRAN), NFIELD(NFIELD), ITREF(ITREF) {
     if (this->NFIELD != -1)
         for (int i=0; i<4; i++)
             for (int j=0; j<4; j++)
                 this->T[i][j] = T[i][j];
-}
-
-cards::types hsuptran::card_type() const {
-    return types::HSUPTRAN;
 }
 
 ostream &hsuptran::put(ostream& os) const {

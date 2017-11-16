@@ -44,6 +44,7 @@ entry_type<long> const mgsprng::_form_NDOF("NDOF");
 entry_type<double> const mgsprng::_form_K("K");
 
 mgsprng::mgsprng(vector<std::string> const &inp, size_t const len) {
+    __base::card::this_type = types::MGSPRNG;
     mgsprng::read(inp, len);
 }
 
@@ -71,13 +72,13 @@ mgsprng::mgsprng() : mgsprng(-1, 0, {}) {}
 
 mgsprng::mgsprng(long const MATNO, long const NDOF,
                  vector<vector<double> > const &K) :
-        material(MATNO), NDOF(NDOF), K(K) {}
+        material(MATNO), NDOF(NDOF), K(K) {
+    __base::card::this_type = types::MGSPRNG;
+}
 
 mgsprng::mgsprng(long const MATNO, vector<vector<double> > const &K) :
-        material(MATNO), NDOF(long(K.size())), K(K) {}
-
-cards::types mgsprng::card_type() const {
-    return types::MGSPRNG;
+        material(MATNO), NDOF(long(K.size())), K(K) {
+    __base::card::this_type = types::MGSPRNG;
 }
 
 ostream &mgsprng::put(ostream& os) const {

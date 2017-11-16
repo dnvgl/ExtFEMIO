@@ -158,9 +158,6 @@ namespace dnvgl {
                         double const T33, double const T14, double const T24,
                         double const T34, std::vector<long> const &NOD);
 
-                    types
-                    card_type() const override;
-
                 protected:
 
                     std::ostream &put(std::ostream&) const override;

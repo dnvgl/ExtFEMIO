@@ -56,6 +56,7 @@ entry_type<long> const gusyi::_form_NLOBZ("NLOBZ");
 
 gusyi::gusyi(const vector<std::string> &inp, size_t const len) :
         beam_prop(inp, len, false) {
+    __base::card::this_type = types::GUSYI;
     gusyi::read(inp, len);
 }
 
@@ -118,7 +119,9 @@ gusyi::gusyi(
         BT(BT), B1(B1), TT(TT),
         BB(BB), B2(B2),TB(TB),
         SFY(SFY), SFZ(SFZ),
-        NLOBYT(NLOBYT), NLOBYB(NLOBYB), NLOBZ(NLOBZ) {}
+        NLOBYT(NLOBYT), NLOBYB(NLOBYB), NLOBZ(NLOBZ) {
+    __base::card::this_type = types::GUSYI;
+}
 
 cards::__base::card const &gusyi::operator() (
     long const GEONO,
@@ -142,10 +145,6 @@ cards::__base::card const &gusyi::operator() (
     this->NLOBYB = NLOBYB;
     this->NLOBZ = NLOBZ;
     return *this;
-}
-
-cards::types gusyi::card_type() const {
-    return types::GUSYI;
 }
 
 ostream &gusyi::put(ostream& os) const {

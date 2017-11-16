@@ -52,7 +52,8 @@ entry_type<long> const beuslo::_form_SIDE("SIDE");
 entry_type<double> const beuslo::_form_RLOAD("RLOAD");
 entry_type<double> const beuslo::_form_ILOAD("ILOAD");
 
-beuslo::beuslo(vector<std::string> const &inp, size_t const len) {
+beuslo::beuslo(vector<std::string> const &inp, size_t const len) :
+        card(types::BEUSLO) {
     beuslo::read(inp, len);
 }
 
@@ -83,9 +84,9 @@ beuslo::beuslo(
     long const LLC, long const LOTYP, bool const COMPLX, long const LAYER,
     long const ELNO, long const NDOF, long const INTNO, long const SIDE,
     const vector<double> &RLOAD, const vector<double> &ILOAD) :
-    card(), LLC(LLC), LOTYP(LOTYP), COMPLX(COMPLX),
-    LAYER(LAYER), ELNO(ELNO), NDOF(NDOF), INTNO(INTNO),
-    SIDE(SIDE), RLOADi(RLOAD), ILOADi(ILOAD) {
+        card(types::BEUSLO), LLC(LLC), LOTYP(LOTYP), COMPLX(COMPLX),
+        LAYER(LAYER), ELNO(ELNO), NDOF(NDOF), INTNO(INTNO),
+        SIDE(SIDE), RLOADi(RLOAD), ILOADi(ILOAD) {
     if (!this->COMPLX && this->ILOADi.size() > 0)
         throw errors::usage_error(
         "BEUSLO", "ILOAD data given with COMPLX == false");
@@ -121,10 +122,6 @@ beuslo::beuslo(
     const vector<double> &ILOAD) :
     beuslo(LLC, LOTYP, ILOAD.size() > 0, LAYER, ELNO,
     static_cast<long>(RLOAD.size()), INTNO, SIDE, RLOAD, ILOAD) {}
-
-cards::types beuslo::card_type() const {
-    return types::BEUSLO;
-}
 
 ostream &beuslo::put(ostream &os) const {
     if (LLC == -1) return os;

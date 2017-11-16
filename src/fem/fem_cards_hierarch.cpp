@@ -50,7 +50,8 @@ entry_type<long> const hierarch::_form_IHPREF("IHPREF");
 entry_type<long> const hierarch::_form_NSUB("NSUB");
 entry_type<long> const hierarch::_form_IHSREF("IHSREF");
 
-hierarch::hierarch(vector<std::string> const &inp, size_t const len) {
+hierarch::hierarch(vector<std::string> const &inp, size_t const len) :
+        card(types::HIERARCH){
     hierarch::read(inp, len);
 }
 
@@ -77,7 +78,8 @@ hierarch::hierarch(
     long const NFIELD, long const IHREF, long const ISELTY, long const INDSEL,
     long const ISLEVL, long const ITREF, long const IHPREF, long const NSUB,
     vector<long> const &IHSREF) :
-        card(), NFIELD(NFIELD), IHREF(IHREF), ISELTY(ISELTY), INDSEL(INDSEL),
+        card(types::HIERARCH),
+        NFIELD(NFIELD), IHREF(IHREF), ISELTY(ISELTY), INDSEL(INDSEL),
         ISLEVL(ISLEVL), ITREF(ITREF), IHPREF(IHPREF), NSUB(NSUB),
         IHSREFi(IHSREF) {
     if (this->IHSREFi.size() != size_t(this->NSUB))
@@ -89,14 +91,11 @@ hierarch::hierarch(
     long const NFIELD, long const IHREF, long const ISELTY, long const INDSEL,
     long const ISLEVL, long const ITREF, long const IHPREF,
     vector<long> const &IHSREF) :
-        card(), NFIELD(NFIELD), IHREF(IHREF), ISELTY(ISELTY),
+        card(types::HIERARCH),
+        NFIELD(NFIELD), IHREF(IHREF), ISELTY(ISELTY),
         INDSEL(INDSEL), ISLEVL(ISLEVL), ITREF(ITREF),
         IHPREF(IHPREF), IHSREFi(IHSREF) {
     this->NSUB = long(this->IHSREFi.size());
-}
-
-cards::types hierarch::card_type() const {
-    return types::HIERARCH;
 }
 
 ostream &hierarch::put(ostream& os) const {

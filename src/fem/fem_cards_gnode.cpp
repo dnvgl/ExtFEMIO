@@ -47,7 +47,8 @@ entry_type<long> const gnode::_form_NODENO("NODENO");
 entry_type<long> const gnode::_form_NDOF("NDOF");
 entry_type<vector<int> > const gnode::_form_ODOF("ODOF");
 
-gnode::gnode(const vector<std::string> &inp, size_t const len) {
+gnode::gnode(const vector<std::string> &inp, size_t const len) :
+        card(types::GNODE) {
     gnode::read(inp, len);
 }
 
@@ -71,7 +72,7 @@ gnode::gnode() : gnode(-1, 0, {}) {}
 gnode::gnode(
     long const NODEX, long const NODENO, long const NDOF,
     vector<int> const &ODOF) :
-        card(),
+        card(types::GNODE),
         NODEX(NODEX), NODENO(NODENO), NDOF(NDOF),
         ODOF(ODOF.begin(), ODOF.end()) {
     sort(this->ODOF.begin(), this->ODOF.end());
@@ -80,10 +81,6 @@ gnode::gnode(
 gnode::gnode(
     long const NODEX, long const NODENO, vector<int> const &ODOF) :
         gnode(NODEX, NODENO, static_cast<long>(ODOF.size()), ODOF) {}
-
-cards::types gnode::card_type() const {
-    return types::GNODE;
-}
 
 ostream &gnode::put(ostream& os) const {
     if (NODEX == -1) return os;

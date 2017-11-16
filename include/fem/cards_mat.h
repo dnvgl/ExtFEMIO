@@ -74,9 +74,6 @@ namespace dnvgl {
                     mgsprng(long const MATNO,
                             std::vector<std::vector<double> > const &K);
 
-                    types
-                    card_type() const override;
-
                 protected:
 
                     std::ostream &put(std::ostream&) const override;
@@ -171,9 +168,6 @@ namespace dnvgl {
                         double const ALPHA,
                         double const DUMMY=0.,
                         double const YIELD=0.);
-
-                    types
-                    card_type() const override;
 
                 protected:
 
@@ -339,9 +333,6 @@ namespace dnvgl {
 
                     card const &operator() (
                         std::vector<std::string> const&, size_t const) override;
-
-                    types
-                    card_type() const override;
 
                 protected:
 

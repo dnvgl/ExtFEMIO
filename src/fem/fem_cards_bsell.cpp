@@ -44,7 +44,8 @@ entry_type<long> const bsell::_form_SUBNO("SUBNO");
 entry_type<long> const bsell::_form_LLC("LLC");
 entry_type<double> const bsell::_form_FACT("FACT");
 
-bsell::bsell(vector<std::string> const &inp, size_t const len) {
+bsell::bsell(vector<std::string> const &inp, size_t const len) :
+    card(types::BSELL) {
     bsell::read(inp, len);
 }
 
@@ -73,7 +74,7 @@ bsell::bsell() :
 bsell::bsell(
     long const LC, long const SUBNO, vector<long> const &LLC,
     vector<double> const &FACT) :
-        card(), LC(LC), SUBNO(SUBNO), LLC(LLC), FACT(FACT) {}
+        card(types::BSELL), LC(LC), SUBNO(SUBNO), LLC(LLC), FACT(FACT) {}
 
 cards::__base::card const &bsell::operator()(
     long const LC, long const SUBNO, vector<long> const &LLC,
@@ -83,10 +84,6 @@ cards::__base::card const &bsell::operator()(
     this->LLC = LLC;
     this->FACT = FACT;
     return *this;
-}
-
-cards::types bsell::card_type() const {
-    return types::BSELL;
 }
 
 ostream &bsell::put(ostream& os) const {

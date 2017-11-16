@@ -172,7 +172,8 @@ const entry_type<long> gelmnt1::_form_ELTYP("ELTYP");
 const entry_type<long> gelmnt1::_form_ELTYAD("ELTYAD");
 const entry_type<long> gelmnt1::_form_NODIN("NODIN");
 
-gelmnt1::gelmnt1(const vector<std::string> &inp, size_t const len) {
+gelmnt1::gelmnt1(const vector<std::string> &inp, size_t const len) :
+        card(types::GELMNT1) {
     gelmnt1::read(inp, len);
 }
 
@@ -208,7 +209,7 @@ gelmnt1::gelmnt1(long const ELNOX,
                  elements::el_types const &ELTYP,
                  long const ELTYAD,
                  vector<long> const &NODIN) :
-        card(),
+        card(types::GELMNT1),
         ELNOX(ELNOX), ELNO(ELNO), ELTYP(ELTYP), ELTYAD(ELTYAD),
         NODIN(NODIN) {}
 
@@ -238,10 +239,6 @@ cards::__base::card const &gelmnt1::operator() (
     elements::el_types const &ELTYP,
     vector<long> const &NODIN) {
     return (*this)(ELNOX, ELNO, ELTYP, 0, NODIN);
-}
-
-cards::types gelmnt1::card_type() const {
-    return types::GELMNT1;
 }
 
 ostream &gelmnt1::put(ostream& os) const {

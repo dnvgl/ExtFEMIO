@@ -65,14 +65,14 @@ void cards::__base::eccno::set_eccno(long const ECCNO/*=0*/) {
     this->ECCNO = ECCNO;
 }
 
-cards::__base::eccno::eccno() : card(), ECCNO(-1) {}
+cards::__base::eccno::eccno() : card(types::UNKNOWN), ECCNO(-1) {}
 
-cards::__base::eccno::eccno(long const ECCNO) : card() {
+cards::__base::eccno::eccno(long const ECCNO) : card(types::UNKNOWN) {
     set_eccno(ECCNO);
 }
 
 cards::__base::eccno::eccno(
-    vector<std::string> const &inp, size_t const len) {
+    vector<std::string> const &inp, size_t const len) : card(types::UNKNOWN) {
     eccno::read(inp, len);
 }
 

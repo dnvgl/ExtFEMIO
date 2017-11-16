@@ -41,7 +41,8 @@ card const iend::head("IEND");
 
 entry_type<long> const iend::_form_CONT("SLEVEL");
 
-iend::iend(vector<std::string> const &inp, size_t const len) {
+iend::iend(vector<std::string> const &inp, size_t const len) :
+        card(types::IEND) {
     iend::read(inp, len);
 }
 
@@ -55,11 +56,7 @@ void iend::read(vector<std::string> const &inp, size_t const len) {
 
 iend::iend() : iend(-1) {}
 
-iend::iend(long const CONT) : CONT(CONT) {}
-
-cards::types iend::card_type() const {
-    return types::IEND;
-}
+iend::iend(long const CONT) : card(types::IEND), CONT(CONT) {}
 
 ostream &iend::put(ostream& os) const {
     if (CONT == -1) return os;

@@ -57,6 +57,7 @@ gchan::gchan() :
 
 gchan::gchan(vector<std::string> const &inp, size_t const len) :
         beam_prop(inp, len, false) {
+    __base::card::this_type = types::GCHAN;
     gchan::read(inp, len);
 }
 
@@ -66,10 +67,8 @@ gchan::gchan(long const GEONO,
              long const K, long const NLOBY, long const NLOBZ) :
         beam_prop(GEONO),
         HZ{HZ}, TY{TY}, BY{BY}, TZ {TZ}, SFY{SFY}, SFZ{SFZ}, K{K},
-        NLOBY{NLOBY}, NLOBZ{NLOBZ} {}
-
-cards::types gchan::card_type() const {
-    return types::GCHAN;
+        NLOBY{NLOBY}, NLOBZ{NLOBZ} {
+    __base::card::this_type = types::GCHAN;
 }
 
 cards::__base::card const &gchan::operator() (

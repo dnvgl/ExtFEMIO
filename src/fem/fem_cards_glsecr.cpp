@@ -56,6 +56,7 @@ glsecr::glsecr() : glsecr(-1, 0., 0., 0., 0., 0., 0., 0, 0.) {}
 
 glsecr::glsecr(const vector<std::string> &inp, size_t const len) :
         beam_prop(inp, len, false) {
+    __base::card::this_type = types::GLSECR;
     glsecr::read(inp, len);
 }
 
@@ -68,10 +69,8 @@ glsecr::glsecr(
     long const NLOBY, long const NLOBZ) :
         beam_prop(GEONO, false),
         HZ{HZ}, TY{TY}, BY{BY}, TZ{TZ}, SFY{SFY}, SFZ{SFZ}, K{K}, R{R},
-        NLOBY{NLOBY}, NLOBZ{NLOBZ} {}
-
-cards::types glsecr::card_type() const {
-    return types::GLSECR;
+        NLOBY{NLOBY}, NLOBZ{NLOBZ} {
+    __base::card::this_type = types::GLSECR;
 }
 
 cards::__base::card const &glsecr::operator() (

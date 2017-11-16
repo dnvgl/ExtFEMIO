@@ -50,6 +50,7 @@ entry_type<long> const gpipe::_form_NRAD("NRAD");
 
 gpipe::gpipe(vector<std::string> const &inp, size_t const len) :
         beam_prop(inp, len, false) {
+    __base::card::this_type = types::GPIPE;
     gpipe::read(inp, len);
 }
 
@@ -85,7 +86,9 @@ gpipe::gpipe(long const GEONO,
         beam_prop(GEONO, false),
         DI(DI), DY(DY), T(T),
         SFY(SFY), SFZ(SFZ),
-        NCIR(NCIR), NRAD(NRAD) {}
+        NCIR(NCIR), NRAD(NRAD) {
+    __base::card::this_type = types::GPIPE;
+}
 
 cards::__base::card const &gpipe::operator() (
     long const GEONO,
@@ -103,9 +106,6 @@ cards::__base::card const &gpipe::operator() (
     return *this;
 }
 
-cards::types gpipe::card_type() const {
-    return types::GPIPE;
-}
 
 ostream &gpipe::put(ostream& os) const {
     if (GEONO == -1) return os;

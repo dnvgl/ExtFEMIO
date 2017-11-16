@@ -53,6 +53,7 @@ geccen::geccen(geccen const *that) :
         geccen(that->ECCNO, that->EX, that->EY, that->EZ) {}
 
 geccen::geccen(const vector<std::string> &inp, size_t const len) {
+    __base::card::this_type = types::GECCEN;
     geccen::read(inp, len);
 }
 
@@ -71,10 +72,8 @@ void geccen::read(const vector<std::string> &inp, size_t const len) {
 geccen::geccen(
     long const ECCNO,
     double const EX, double const EY, double const EZ) :
-        eccno(ECCNO), EX(EX), EY(EY), EZ(EZ) {}
-
-cards::types geccen::card_type() const {
-    return types::GECCEN;
+        eccno(ECCNO), EX(EX), EY(EY), EZ(EZ) {
+    __base::card::this_type = types::GECCEN;
 }
 
 ostream &geccen::put(ostream& os) const {

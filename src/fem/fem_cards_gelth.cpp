@@ -45,6 +45,7 @@ entry_type<long> const gelth::_form_NINT("NINT");
 
 gelth::gelth(const vector<std::string> &inp, size_t const len) :
         geoprop(inp, len) {
+    __base::card::this_type = types::GELTH;
     gelth::read(inp, len);
 }
 
@@ -67,7 +68,9 @@ gelth::gelth() : gelth(-1, 0.) {}
 gelth::gelth(
     long const GEONO,
     double const TH, long const NINT/*=0*/) :
-        geoprop(GEONO), TH(TH), NINT(NINT) {}
+        geoprop(GEONO), TH(TH), NINT(NINT) {
+    __base::card::this_type = types::GELTH;
+}
 
 gelth::gelth(
     double const TH, long const NINT/*=0*/) :
@@ -85,10 +88,6 @@ cards::__base::card const &gelth::operator() (
 cards::__base::card const &gelth::operator() (
     double const TH, long const NINT/*=0*/) {
     return (*this)(0, TH, NINT);
-}
-
-cards::types gelth::card_type() const {
-    return types::GELTH;
 }
 
 ostream &gelth::put(ostream& os) const {

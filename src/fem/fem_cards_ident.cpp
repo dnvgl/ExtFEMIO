@@ -44,7 +44,8 @@ entry_type<long> const ident::_form_SLEVEL("SLEVEL");
 entry_type<long> const ident::_form_SELTYP("SELTYP");
 entry_type<long> const ident::_form_SELMOD("SELMOD");
 
-ident::ident(const vector<std::string> &inp, size_t const len) {
+ident::ident(const vector<std::string> &inp, size_t const len) :
+        __base::card(types::IDENT) {
     ident::read(inp, len);
 }
 
@@ -73,11 +74,8 @@ ident::ident() : ident(-1, 0, mod_type::INVALID) {}
 
 ident::ident(
     long const SLEVEL, long const SELTYP, mod_type const SELMOD) :
+        __base::card(types::IDENT),
         SLEVEL(SLEVEL), SELTYP(SELTYP), SELMOD(SELMOD) {};
-
-cards::types ident::card_type() const {
-    return types::IDENT;
-}
 
 ostream &ident::put(ostream& os) const {
     if (SELMOD == mod_type::INVALID) return os;
@@ -92,5 +90,7 @@ ostream &ident::put(ostream& os) const {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j7 &&
+//    (make -C ../../cbuild test;
+//     ../../cbuild/tests/test_fem_cards --use-colour no)"
 // End:

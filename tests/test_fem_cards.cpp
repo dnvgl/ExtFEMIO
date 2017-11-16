@@ -273,6 +273,11 @@ TEST_CASE("Output card names", "[fem_cards]") {
         test << cards::types::BEUSLO;
         CHECK(test.str() == "BEUSLO");
     }
+
+    SECTION("output TDMATER") {
+        test << cards::types::TDMATER;
+        CHECK(test.str() == "TDMATER");
+    }
 }
 
 TEST_CASE("Split FEM dataset", "[datasets, split]") {
@@ -1749,6 +1754,29 @@ TEST_CASE("FEM_Dispatch", "[cards, ident]") {
     }
 }
 
+
+TEST_CASE("Reading unknown cards", "[fem_cards]") {
+
+    unique_ptr<cards::__base::card> current;
+    vector<string> entries;
+
+    SECTION("FEMIO-52: FEM import in Poseidon fails on unknown card") {
+
+        vector<string> data({
+                // 345678|234567890123456|234567890123456|234567890123456|234567890123456
+                "TDMATER  4.00000000E+00  1.00000000E+00  1.05000000E+02  0.00000000E+00 \n"
+                "        NV_NS\n"});
+        string msg;
+        size_t len{data.size()};
+        for (size_t i=0; i < len; i++)
+            msg += data.at(i) + "\n";
+        len = __base::card::card_split(data, len, entries);
+        cards::dispatch(entries, len, current);
+        CHECK(current->card_type() == cards::types::TDMATER);
+    }
+
+
+}
 // Local Variables:
 // mode: c++
 // coding: utf-8

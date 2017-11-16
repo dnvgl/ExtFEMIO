@@ -46,7 +46,8 @@ const entry_type<long> bnbcd::_form_NODENO("NODENO");
 const entry_type<long> bnbcd::_form_NDOF("NDOF");
 const entry_type<long> bnbcd::_form_FIX("FIX");
 
-bnbcd::bnbcd(std::vector<std::string> const &inp, size_t const len) {
+bnbcd::bnbcd(std::vector<std::string> const &inp, size_t const len) :
+        card(types::BNBCD) {
     bnbcd::read(inp, len);
 }
 
@@ -68,7 +69,7 @@ bnbcd::bnbcd() :
 bnbcd::bnbcd(long const NODENO,
              long const NDOF,
              std::vector<fix_key> const &FIX) :
-        card(), NODENO(NODENO), NDOF(NDOF), FIX(FIX) {}
+        card(types::BNBCD), NODENO(NODENO), NDOF(NDOF), FIX(FIX) {}
 
 bnbcd::bnbcd(
     long const NODENO,
@@ -87,10 +88,6 @@ bnbcd::bnbcd(long const NODENO,
         bnbcd(NODENO, 6, std::vector<fix_key>({
                     fix_key_conv(FIX1), fix_key_conv(FIX2), fix_key_conv(FIX3),
                     fix_key_conv(FIX4), fix_key_conv(FIX5), fix_key_conv(FIX6)})) {}
-
-cards::types bnbcd::card_type() const {
-    return types::BNBCD;
-}
 
 std::ostream &bnbcd::put(std::ostream& os) const {
     if (NODENO == -1) return os;
@@ -174,5 +171,7 @@ long bnbcd::fix_key_conv(fix_key const inp) {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j7 &&
+//    (make -C ../../cbuild test;
+//     ../../cbuild/tests/test_fem_cards --use-colour no)"
 // End:

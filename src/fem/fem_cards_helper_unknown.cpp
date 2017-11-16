@@ -36,13 +36,9 @@ using namespace fem;
 using namespace cards;
 
 unknown::unknown(vector<std::string> const &inp, size_t const len) :
-        content(inp.begin(), inp.begin()+len) {
+        card(types::UNKNOWN), content(inp.begin(), inp.begin()+len) {
     unknown::read(inp, len);
 };
-
-cards::types unknown::card_type() const {
-    return types::UNKNOWN;
-}
 
 ostream &unknown::put(ostream &os) const {
     throw errors::error("can't write UNKNOWN.");

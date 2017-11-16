@@ -55,6 +55,7 @@ gbox::gbox() :
 
 gbox::gbox(vector<std::string> const &inp, size_t const len) :
         beam_prop(inp, len, false) {
+    __base::card::this_type = types::GBOX;
     gbox::read(inp, len);
 }
 
@@ -65,10 +66,8 @@ gbox::gbox(long const GEONO,
            long const NLOBY, long const NLOBZ) :
         beam_prop(GEONO),
         HZ{HZ}, TY{TY}, TB{TB}, TT{TT}, BY{BY}, SFY{SFY}, SFZ{SFZ},
-        NLOBY{NLOBY}, NLOBZ{NLOBZ} {}
-
-cards::types gbox::card_type() const {
-    return types::GBOX;
+        NLOBY{NLOBY}, NLOBZ{NLOBZ} {
+    __base::card::this_type = types::GBOX;
 }
 
 cards::__base::card const &gbox::operator() (
@@ -139,7 +138,7 @@ void gbox::read(vector<std::string> const &inp, size_t const len) {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&
+// compile-command: "make -C ../../cbuild -j7 &&
 //   (make -C ../../cbuild test;
 //    ../../cbuild/tests/test_fem_cards --use-colour no)""
 // End:

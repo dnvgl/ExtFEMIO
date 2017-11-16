@@ -45,7 +45,8 @@ const entry_type<long> bnload::_form_NDOF("NDOF");
 const entry_type<double> bnload::_form_RLOAD("RLOAD");
 const entry_type<double> bnload::_form_ILOAD("ILOAD");
 
-bnload::bnload(const std::vector<std::string> &inp, size_t const len) {
+bnload::bnload(const std::vector<std::string> &inp, size_t const len) :
+        card(types::BNLOAD) {
     bnload::read(inp, len);
 }
 
@@ -77,7 +78,7 @@ bnload::bnload(long const LLC,
                long const NDOF,
                std::vector<double> const &RLOAD,
                std::vector<double> const &ILOAD) :
-        card(), LLC(LLC), LOTYP(LOTYP), COMPLX(COMPLX),
+        card(types::BNLOAD), LLC(LLC), LOTYP(LOTYP), COMPLX(COMPLX),
         NODENO(NODENO), NDOF(NDOF),
         RLOAD(RLOAD), ILOAD(ILOAD) {}
 
@@ -87,7 +88,7 @@ bnload::bnload(long const LLC,
                long const NODENO,
                std::vector<double> const &RLOAD,
                std::vector<double> const &ILOAD):
-        card(), LLC(LLC), LOTYP(LOTYP), COMPLX(COMPLX),
+        card(types::BNLOAD), LLC(LLC), LOTYP(LOTYP), COMPLX(COMPLX),
         NODENO(NODENO), NDOF(long(RLOAD.size())),
         RLOAD(RLOAD), ILOAD(ILOAD) {}
 
@@ -97,25 +98,20 @@ bnload::bnload(long const LLC,
                long const NDOF,
                std::vector<double> const &RLOAD,
                std::vector<double> const &ILOAD) :
-        card(), LLC(LLC), LOTYP(LOTYP),
+        card(types::BNLOAD), LLC(LLC), LOTYP(LOTYP),
         COMPLX(ILOAD.size() > 0),
         NODENO(NODENO), NDOF(NDOF),
         RLOAD(RLOAD), ILOAD(ILOAD) {}
-
 
 bnload::bnload(long const LLC,
                long const LOTYP,
                long const NODENO,
                std::vector<double> const &RLOAD,
                std::vector<double> const &ILOAD) :
-        card(), LLC(LLC), LOTYP(LOTYP),
+        card(types::BNLOAD), LLC(LLC), LOTYP(LOTYP),
         COMPLX(ILOAD.size() > 0),
         NODENO(NODENO), NDOF(long(RLOAD.size())),
         RLOAD(RLOAD), ILOAD(ILOAD) {}
-
-cards::types bnload::card_type() const {
-    return types::BNLOAD;
-}
 
 std::ostream &bnload::put(std::ostream& os) const {
     if (this->LLC == -1) return os;
@@ -148,7 +144,7 @@ std::ostream &bnload::put(std::ostream& os) const {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../cbuild -j8&&
-//    (make -C ../cbuild test;
-//     ../cbuild/tests/test_fem_cards --use-colour no)"
+// compile-command: "make -C ../../cbuild -j8&&
+//    (make -C ../../cbuild test;
+//     ../../cbuild/tests/test_fem_cards --use-colour no)"
 // End:

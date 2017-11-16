@@ -99,8 +99,6 @@ namespace dnvgl {
                     belfix();
                     belfix(long const FIXNO, n_opt const OPT, long const TRANO,
                            std::vector<double> const &A);
-                    types
-                    card_type() const override;
                     std::string pos_string() const;
                 protected:
                     std::ostream &put(std::ostream&) const override;
@@ -259,7 +257,6 @@ namespace dnvgl {
                            long const ELNO, long const INTNO, long const SIDE,
                            std::vector<double> const &RLOAD,
                            std::vector<double> const &ILOAD = {});
-                    types card_type() const override;
                 protected:
                     std::ostream &put(std::ostream&) const override;
                     void read(
@@ -354,7 +351,6 @@ namespace dnvgl {
                           std::vector<long> const &DEPDOF,
                           std::vector<long> const &INDEPDOF,
                           std::vector<double> const &b);
-                    types card_type() const override;
                 protected:
                     std::ostream &put(std::ostream&) const override;
                     void read(
@@ -457,8 +453,6 @@ namespace dnvgl {
                         bool const FIX1, bool const FIX2,
                         bool const FIX3, bool const FIX4,
                         bool const FIX5, bool const FIX6);
-                    types
-                    card_type() const override;
                 protected:
                     std::ostream &put(std::ostream&) const override;
                     void read(std::vector<std::string> const&, size_t const) override;
@@ -562,9 +556,6 @@ namespace dnvgl {
                     bndispl(long const LLC, long const DTYPE, long const NODENO,
                             std::vector<double> const &RDISP,
                             std::vector<double> const &IDISP={});
-
-                    types
-                    card_type() const override;
 
                 protected:
 
@@ -673,9 +664,6 @@ namespace dnvgl {
                            std::vector<double> const &RLOAD,
                            std::vector<double> const &ILOAD={});
 
-                    types
-                    card_type() const override;
-
                 protected:
 
                     std::ostream &put(std::ostream&) const override;
@@ -733,9 +721,6 @@ namespace dnvgl {
                         long const LC, long const SUBNO,
                         std::vector<long> const &LLC,
                         std::vector<double> const &FACT);
-
-                    types
-                    card_type() const override;
 
                 protected:
 

@@ -51,6 +51,7 @@ entry_type<double> const misosel::_form_YIELD("YIELD");
 
 misosel::misosel(vector<std::string> const &inp, size_t const len) :
         material(inp, len) {
+    __base::card::this_type = types::MISOSEL;
     misosel::read(inp, len);
 }
 
@@ -84,7 +85,9 @@ misosel::misosel(long const MATNO, double const YOUNG,
                  double const DUMMY/*=0.*/, double const YIELD/*=0.*/) :
         material(MATNO), YOUNG(YOUNG), POISS(POISS),
         RHO(RHO), DAMP(DAMP), ALPHA(ALPHA), DUMMY(DUMMY),
-        YIELD(YIELD) {}
+        YIELD(YIELD) {
+    __base::card::this_type = types::MISOSEL;
+}
 
 cards::__base::card const &misosel::operator() (
     vector<std::string> const &inp, size_t const len) {
@@ -108,10 +111,6 @@ cards::__base::card const &misosel::operator() (
     return *this;
 }
 
-cards::types misosel::card_type() const {
-    return types::MISOSEL;
-}
-
 ostream &misosel::put(ostream& os) const {
     if (MATNO == -1) return os;
     os << head.format()
@@ -130,5 +129,7 @@ ostream &misosel::put(ostream& os) const {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j7 &&
+//     (make -C ../../cbuild test;
+//      ../../cbuild/tests/test_fem_cards --use-colour no)"
 // End:

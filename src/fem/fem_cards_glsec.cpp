@@ -51,6 +51,7 @@ entry_type<long> const glsec::_form_NLOBZ("NLOBZ");
 
 glsec::glsec(vector<std::string> const &inp, size_t const len) :
         beam_prop(inp, len, false) {
+    __base::card::this_type = types::GLSEC;
     glsec::read(inp, len);
 }
 
@@ -86,7 +87,9 @@ glsec::glsec(long const GEONO, double const HZ,
         beam_prop(GEONO, false),
         HZ(HZ), TY(TY), BY(BY), TZ(TZ),
         SFY(SFY), SFZ(SFZ),
-        K(K), NLOBY(NLOBY), NLOBZ(NLOBZ) {}
+        K(K), NLOBY(NLOBY), NLOBZ(NLOBZ) {
+    __base::card::this_type = types::GLSEC;
+}
 
 cards::__base::card const &glsec::operator() (
     long const GEONO,
@@ -105,10 +108,6 @@ cards::__base::card const &glsec::operator() (
     this->NLOBY = NLOBY;
     this->NLOBZ = NLOBZ;
     return *this;
-}
-
-cards::types glsec::card_type() const {
-    return types::GLSEC;
 }
 
 ostream &glsec::put(ostream& os) const {

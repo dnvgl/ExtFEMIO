@@ -220,25 +220,24 @@ namespace dnvgl {
                 namespace __base {
 //! Base class for all BDF card representations with base functionality.
                     class card : public extfem::__base::outline {
-                    private:
-                        std::unordered_map<std::string, types>
-                        static const cardtype_map;
                     protected:
+                        types this_type;
                         fem::types::empty static const empty;
                         fem::types::card static const head;
+                        card(types const type);
                     public:
                         size_t static card_split(
                             std::vector<std::string> const&, size_t const,
                             std::vector<std::string>&);
-                        card(std::vector<std::string> const&, size_t const) {};
-                        card() = default;
+                        card() = delete;
+                        card(std::vector<std::string> const&, size_t const);
                         virtual ~card() = default;
                         virtual void read(
-                            std::vector<std::string> const&, size_t const) = 0;
+                            std::vector<std::string> const&, size_t const);
                         virtual card const &operator() (
                             std::vector<std::string> const&, size_t const);
-                        virtual types
-                        card_type() const = 0;
+                        virtual types card_type() final;
+                        virtual std::ostream &put(std::ostream&) const override;
                     };
 
 //! Base class for geometric properties. Ensure GEONO is unique across
@@ -264,8 +263,6 @@ namespace dnvgl {
 */
                         long GEONO;
                         static void reset_geono();
-                        virtual types
-                        card_type() const override = 0;
                     };
 
 /*! Base class for cards describing transformed coordinate systems
@@ -291,8 +288,6 @@ namespace dnvgl {
 */
                         long TRANSNO;
                         static void reset_transno();
-                        virtual types
-                        card_type() const override = 0;
                     };
 
 //! Base class for cards describing eccentrities (GECC, GECCEN).
@@ -314,8 +309,6 @@ namespace dnvgl {
  */
                         long ECCNO;
                         static void reset_eccno();
-                        virtual types
-                        card_type() const override = 0;
                     };
 
 //! Base class for FEM beam property describing classes.
@@ -339,15 +332,13 @@ namespace dnvgl {
                         using geoprop::operator();
                     public:
                         static void reset_geono();
-                        virtual types
-                        card_type() const override = 0;
                     };
 
 //! Base class for material cards.
                     class material : public card {
                     protected:
                         fem::types::entry_type<long> static const _form_MATNO;
-                        material() : card(), MATNO(0) {};
+                        material() : card(types::UNKNOWN), MATNO(0) {};
                         explicit material(long const MATNO);
                         material(
                             std::vector<std::string> const&, size_t const);
@@ -360,16 +351,12 @@ namespace dnvgl {
     element specification.
 */
                         long MATNO;
-                        virtual types
-                        card_type() const override = 0;
                     };
                 }
 
                 class unknown : public __base::card {
                 public:
                     unknown(std::vector<std::string> const&, size_t const);
-                    types
-                    card_type() const override;
                     std::vector<std::string> content;
                 protected:
                     std::ostream &put(std::ostream&) const override;
@@ -409,6 +396,8 @@ namespace dnvgl {
 // mode: c++
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test""
+// compile-command: "make -C ../../cbuild -j7 &&
+//    (make -C ../../cbuild test;
+//     ../../cbuild/tests/test_fem_cards --use-colour no)"
 // coding: utf-8
 // End:

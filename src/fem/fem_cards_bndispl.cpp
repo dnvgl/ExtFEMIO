@@ -48,7 +48,8 @@ const entry_type<long> bndispl::_form_NDOF("NDOF");
 const entry_type<double> bndispl::_form_RDISP("RDISP");
 const entry_type<double> bndispl::_form_IDISP("IDISP");
 
-bndispl::bndispl(const std::vector<std::string> &inp, size_t const len) {
+bndispl::bndispl(const std::vector<std::string> &inp, size_t const len) :
+        card(types::BNDISPL) {
     bndispl::read(inp, len);
 }
 
@@ -80,7 +81,7 @@ bndispl::bndispl(const long LLC,
                  const long NDOF,
                  const std::vector<double> &RDISP,
                  const std::vector<double> &IDISP) :
-        card(), LLC(LLC), DTYPE(DTYPE), COMPLX(COMPLX),
+        card(types::BNDISPL), LLC(LLC), DTYPE(DTYPE), COMPLX(COMPLX),
         NODENO(NODENO), NDOF(NDOF),
         RDISP(RDISP), IDISP(IDISP) {}
 
@@ -111,9 +112,6 @@ bndispl::bndispl(const long LLC,
                  const std::vector<double> &IDISP) :
         bndispl(LLC, DTYPE, NODENO, long(RDISP.size()),
                 RDISP, IDISP) {}
-
-cards::types
-bndispl::card_type() const {return types::BNDISPL;}
 
 std::ostream &bndispl::put(std::ostream& os) const {
     if (this->LLC == -1) return os;
@@ -148,5 +146,7 @@ std::ostream &bndispl::put(std::ostream& os) const {
 // coding: utf-8
 // c-file-style: "dnvgl"
 // indent-tabs-mode: nil
-// compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
+// compile-command: "make -C ../../cbuild -j7 &&
+//    (make -C ../../cbuild test;
+//     ../../cbuild/tests/test_fem_cards --use-colour no)"
 // End:

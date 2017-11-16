@@ -49,7 +49,8 @@ entry_type<long> const hsupstat::_form_LINDEP("LINDEP");
 entry_type<long> const hsupstat::_form_RELOADC("RELOADC");
 entry_type<long> const hsupstat::_form_COMPLC("COMPLC");
 
-hsupstat::hsupstat(const vector<std::string> &inp, size_t const len) {
+hsupstat::hsupstat(const vector<std::string> &inp, size_t const len) :
+        card(types::HSUPSTAT) {
     hsupstat::read(inp, len);
 }
 
@@ -74,13 +75,10 @@ hsupstat::hsupstat() : hsupstat(-1, 0, 0, 0, 0, 0, 0, 0, 0) {}
 hsupstat::hsupstat(long const NFIELD, long const ISELTY, long const NIDOF,
                    long const NRDOF, long const NBAND, long const NELT,
                    long const LINDEP, long const RELOADC, long const COMPLC) :
-        card(), NFIELD(NFIELD), ISELTY(ISELTY), NIDOF(NIDOF), NRDOF(NRDOF),
+        card(types::HSUPSTAT),
+        NFIELD(NFIELD), ISELTY(ISELTY), NIDOF(NIDOF), NRDOF(NRDOF),
         NBAND(NBAND), NELT(NELT), LINDEP(LINDEP), RELOADC(RELOADC),
         COMPLC(COMPLC) {}
-
-cards::types hsupstat::card_type() const {
-    return types::HSUPSTAT;
-}
 
 ostream &hsupstat::put(ostream& os) const {
     if (NFIELD == -1) return os;

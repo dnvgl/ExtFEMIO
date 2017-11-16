@@ -51,7 +51,8 @@ entry_type<long> const tdsupnam::_form_CODTXT("CODTXT");
 entry_type<std::string> const tdsupnam::_form_SUP_NAME("SUP_NAME");
 entry_type<std::string> const tdsupnam::_form_CONT("CONT");
 
-tdsupnam::tdsupnam(vector<std::string> const &inp, size_t const len) {
+tdsupnam::tdsupnam(vector<std::string> const &inp, size_t const len) :
+        card(types::TDSUPNAM) {
     tdsupnam::read(inp, len);
 }
 
@@ -98,7 +99,7 @@ tdsupnam::tdsupnam() : tdsupnam(-1, 0, 0, 0, {}, {}) {}
 tdsupnam::tdsupnam(long const NFIELD, long const IHREF, long const CODNAM,
                    long const CODTXT, std::string const &SUP_NAME,
                    vector<std::string> const &CONT) :
-        card(), NFIELD(NFIELD), IHREF(IHREF),
+        card(types::TDSUPNAM), NFIELD(NFIELD), IHREF(IHREF),
         CODNAM(CODNAM), CODTXT(CODTXT),
         SUP_NAME(SUP_NAME), CONT(CONT) {
     auto div_val = ldiv(CODNAM, 100);
@@ -111,7 +112,7 @@ tdsupnam::tdsupnam(long const NFIELD, long const IHREF, long const CODNAM,
 
 tdsupnam::tdsupnam(long const IHREF, std::string const &SUP_NAME,
                    vector<std::string> const &CONT) :
-        card(), NFIELD(4), IHREF(IHREF),
+        card(types::TDSUPNAM), NFIELD(4), IHREF(IHREF),
         SUP_NAME(SUP_NAME), CONT(CONT) {
 
     nlnam = true;
@@ -128,7 +129,7 @@ tdsupnam::tdsupnam(long const IHREF, std::string const &SUP_NAME,
 
 tdsupnam::tdsupnam(long const NFIELD, long const IHREF, long const CODNAM,
                    std::string const &SUP_NAME) :
-        card() , NFIELD(NFIELD), IHREF(IHREF),
+        card(types::TDSUPNAM) , NFIELD(NFIELD), IHREF(IHREF),
         CODNAM(CODNAM), CODTXT(0),
         SUP_NAME(SUP_NAME), CONT() {
     auto const div_val = ldiv(CODNAM, 100);
@@ -139,7 +140,7 @@ tdsupnam::tdsupnam(long const NFIELD, long const IHREF, long const CODNAM,
 }
 
 tdsupnam::tdsupnam(long const IHREF, std::string const &SUP_NAME) :
-        card() , NFIELD(4), IHREF(IHREF),
+        card(types::TDSUPNAM) , NFIELD(4), IHREF(IHREF),
         CODTXT(0),
         SUP_NAME(SUP_NAME), CONT() {
     nlnam = true;
@@ -147,10 +148,6 @@ tdsupnam::tdsupnam(long const IHREF, std::string const &SUP_NAME) :
     CODNAM = 100 + ncnam;
     nltxt = 0;
     nctxt = 0;
-}
-
-cards::types tdsupnam::card_type() const {
-    return types::TDSUPNAM;
 }
 
 ostream &tdsupnam::put(ostream& os) const {

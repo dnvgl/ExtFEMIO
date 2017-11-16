@@ -65,14 +65,14 @@ void cards::__base::transno::set_transno(long const TRANSNO/*=0*/) {
     this->TRANSNO = TRANSNO;
 }
 
-cards::__base::transno::transno() : card(), TRANSNO(-1) {}
+cards::__base::transno::transno() : card(types::UNKNOWN), TRANSNO(-1) {}
 
-cards::__base::transno::transno(long const TRANSNO) : card() {
+cards::__base::transno::transno(long const TRANSNO) : card(types::UNKNOWN) {
     set_transno(TRANSNO);
 }
 
 cards::__base::transno::transno(
-    vector<std::string> const &inp, size_t const len) {
+    vector<std::string> const &inp, size_t const len) : card(types::UNKNOWN) {
     transno::read(inp, len);
 }
 

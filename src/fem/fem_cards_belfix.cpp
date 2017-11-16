@@ -54,7 +54,8 @@ belfix::belfix() :
         belfix(-1, n_opt::INVALID, 0,
                {0., 0., 0., 0., 0., 0.}) {}
 
-belfix::belfix(const std::vector<std::string> &inp, size_t const len) {
+belfix::belfix(const std::vector<std::string> &inp, size_t const len) :
+        card(types::BELFIX) {
     belfix::read(inp, len);
 }
 
@@ -91,11 +92,7 @@ belfix::belfix(long const FIXNO,
                n_opt const OPT,
                long const TRANO,
                std::vector<double> const &A) :
-               card(), FIXNO(FIXNO), OPT(OPT), TRANO(TRANO), A(A) {}
-
-cards::types belfix::card_type() const {
-    return types::BELFIX;
-}
+        card(types::BELFIX), FIXNO(FIXNO), OPT(OPT), TRANO(TRANO), A(A) {}
 
 std::ostream &belfix::put(std::ostream &os) const {
     if (OPT == n_opt::INVALID) return os;

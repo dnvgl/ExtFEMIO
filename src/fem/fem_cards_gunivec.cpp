@@ -46,6 +46,7 @@ entry_type<double> const gunivec::_form_UNIZ("UNIZ");
 
 gunivec::gunivec(const vector<std::string> &inp, size_t const len) :
         transno(inp, len) {
+    __base::card::this_type = types::GUNIVEC;
     gunivec::read(inp, len);
 }
 
@@ -55,12 +56,16 @@ gunivec::gunivec(
     long const TRANSNO,
     double const UNIX, double const UNIY, double const UNIZ) :
         transno(TRANSNO),
-        UNIX(UNIX), UNIY(UNIY), UNIZ(UNIZ) {}
+        UNIX(UNIX), UNIY(UNIY), UNIZ(UNIZ) {
+    __base::card::this_type = types::GUNIVEC;
+}
 
 gunivec::gunivec(
     double const UNIX, double const UNIY, double const UNIZ) :
         transno(0),
-        UNIX(UNIX), UNIY(UNIY), UNIZ(UNIZ) {}
+        UNIX(UNIX), UNIY(UNIY), UNIZ(UNIZ) {
+    __base::card::this_type = types::GUNIVEC;
+}
 
 cards::__base::card const &gunivec::operator() (
     long const TRANSNO,
@@ -79,10 +84,6 @@ cards::__base::card const &gunivec::operator() (
     this->UNIY = UNIY;
     this->UNIZ = UNIZ;
     return *this;
-}
-
-cards::types gunivec::card_type() const {
-    return types::GUNIVEC;
 }
 
 void gunivec::read(const vector<std::string> &inp, size_t const len) {
