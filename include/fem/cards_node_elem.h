@@ -14,6 +14,8 @@
 #ifndef _FEM_CARDS_NODE_ELEM_H_
 #define _FEM_CARDS_NODE_ELEM_H_
 
+#include<unordered_map>
+
 #include "fem/elements.h"
 
 namespace dnvgl {
