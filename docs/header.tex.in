@@ -48,6 +48,15 @@
   \newpage{\pagestyle{empty}\cleardoublepage}%
 }
 
+% Formatting toc entries
+\newcommand{\mypnumbox}[1]{#1}
+\DeclareTOCStyleEntry[pagenumberbox=\mypnumbox]{tocline}{chapter}
+\DeclareTOCStyleEntry[numwidth=3.1em,pagenumberbox=\mypnumbox]{tocline}{section}
+\DeclareTOCStyleEntry[numwidth=4em,pagenumberbox=\mypnumbox]{tocline}{subsection}
+\DeclareTOCStyleEntry[numwidth=5.35em,pagenumberbox=\mypnumbox]{tocline}{subsubsection}
+\DeclareTOCStyleEntry[numwidth=6em,pagenumberbox=\mypnumbox]{tocline}{paragraph}
+\DeclareTOCStyleEntry[numwidth=7em,pagenumberbox=\mypnumbox]{tocline}{subparagraph}
+
 \usepackage{url}
 
 \let\tt\ttfamily
