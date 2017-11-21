@@ -24,7 +24,7 @@ if(DOXYGEN_FOUND)
   IF(LATEX_COMPILER)
     MESSAGE("LATEX FOUND")
     ADD_CUSTOM_TARGET(pdf
-      latexmk refman
+      latexmk -f refman
       WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/doxy/latex
       VERBATIM)
     ADD_DEPENDENCIES(pdf doc)
