@@ -90,6 +90,8 @@ cards::__base::card const &mat2::operator()(
 }
 
 void mat2::read(list<std::string> const &inp) {
+    this->mat::read(inp);
+
     mat::form_MCSID.set_value(MCSID, "");
     mat::form_SS.set_value(SS, "");
     mat::form_SC.set_value(SC, "");

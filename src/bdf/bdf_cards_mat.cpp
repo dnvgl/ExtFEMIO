@@ -127,6 +127,13 @@ void mat::check_data() {
     if (MCSID) mat::form_MCSID.check(MCSID);
 }
 
+void mat::read(list<std::string> const &inp) {
+    if (comment::yield != nullptr) {
+        this->extra.yield = std::make_shared<double>(*comment::yield);
+        comment::clear_yield();
+    }
+}
+
 // Local Variables:
 // mode: c++
 // coding: utf-8

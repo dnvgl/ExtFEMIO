@@ -26,6 +26,7 @@ namespace {
 #endif
 
 #include "bdf/cards.h"
+#include "bdf/file.h"
 
 #if defined(_DEBUG) && defined(DEBUG_NEW)
 #define new DEBUG_NEW
@@ -38,7 +39,8 @@ namespace {
 #endif
 
 using namespace dnvgl::extfem::bdf;
-using namespace dnvgl::extfem::bdf::cards;
+using namespace cards;
+using namespace input;
 
 TEST_CASE("BDF MAT1 definitions. (Free Field Format) first",
           "[bdf_mat1]") {
@@ -303,6 +305,170 @@ TEST_CASE("BDF MAT1 roundtrio test (min data).", "[bdf_mat1_roundtrip_2_reuse]")
         CHECK_FALSE(bool(probe_l.ST));
         CHECK_FALSE(bool(probe_l.SC));
         CHECK_FALSE(bool(probe_l.SS));
+    }
+}
+
+TEST_CASE("BDF MAT1 testing yield stress handling.", "[bdf_mat1_yield]") {
+
+    std::ostringstream test;
+
+    std::string const s(
+        // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
+        "$svd.mat 1        ""Mild""\n"
+        "$svd.yield 1        235.0 1.0\n"
+        "$ Marterial Record : Mild\n"
+        "$ Description of Material :\n"
+        "MAT1           1 206000.             0.3  7.85-9                    \n"
+        "$       \n"
+        "$svd.mat 2        ""HT32""\n"
+        "$svd.yield 2        315.0 0.78\n"
+        "$ Marterial Record : HT32\n"
+        "$ Description of Material :\n"
+        "MAT1           2 206000.             0.3  7.85-9                    \n"
+        "$       \n"
+        "$svd.mat 3        ""HT36""\n"
+        "$svd.yield 3        355.0 0.72\n"
+        "$ Marterial Record : HT36\n"
+        "$ Description of Material :\n"
+        "MAT1           3 206000.             0.3  7.85-9                    \n"
+        "$       \n"
+        "$svd.mat 4        ""HT40""\n"
+        "$svd.yield 4        390.0 0.68\n"
+        "$ Marterial Record : HT40\n"
+        "$ Description of Material :\n"
+        "MAT1           4 206000.             0.3  7.85-9                    \n"
+        "$       \n"
+        "$svd.mat 5        ""HT47""\n"
+        "$svd.yield 5        460.0 0.62\n"
+        "$ Marterial Record : HT47\n"
+        "$ Description of Material :\n"
+        "MAT1           5 206000.             0.3  7.85-9                    \n"
+        "MAT1           6 206000.             0.3  7.85-9                    \n");
+    std::istringstream ist(s);
+    bdf_file probe(ist);
+    std::list<std::string> l;
+    std::list<std::string> data;
+
+    {
+        probe.get(l);
+        CAPTURE(l.front());
+        __base::card::card_split(l, data);
+        comment card(data);
+        CHECK(*(card.yield) == 235.);
+        CHECK(*(comment::yield) == 235.);
+    }
+
+    {
+        probe.get(l);
+        CAPTURE(l.front());
+        __base::card::card_split(l, data);
+        mat1 card(data);
+        CHECK(long(card.MID) == 1);
+        CHECK(double(card.E) == 2.06e5);
+        CHECK(double(card.NU) == 3e-1);
+        CHECK(double(card.RHO) == 7.85e-9);
+        CHECK(card.extra.yield != nullptr);
+        CHECK(*(card.extra.yield) == 235.);
+    }
+
+    {
+        probe.get(l);
+        CAPTURE(l.front());
+        __base::card::card_split(l, data);
+        comment card(data);
+        CHECK(*(card.yield) == 315.);
+        CHECK(*(comment::yield) == 315.);
+    }
+
+    {
+        probe.get(l);
+        CAPTURE(l.front());
+        __base::card::card_split(l, data);
+        mat1 card(data);
+        CHECK(long(card.MID) == 2);
+        CHECK(double(card.E) == 2.06e5);
+        CHECK(double(card.NU) == 3e-1);
+        CHECK(double(card.RHO) == 7.85e-9);
+        CHECK(card.extra.yield != nullptr);
+        CHECK(*(card.extra.yield) == 315.);
+    }
+
+    {
+        probe.get(l);
+        CAPTURE(l.front());
+        __base::card::card_split(l, data);
+        comment card(data);
+        CHECK(*(card.yield) == 355.);
+        CHECK(*(comment::yield) == 355.);
+    }
+
+    {
+        probe.get(l);
+        CAPTURE(l.front());
+        __base::card::card_split(l, data);
+        mat1 card(data);
+        CHECK(long(card.MID) == 3);
+        CHECK(double(card.E) == 2.06e5);
+        CHECK(double(card.NU) == 3e-1);
+        CHECK(double(card.RHO) == 7.85e-9);
+        CHECK(card.extra.yield != nullptr);
+        CHECK(*(card.extra.yield) == 355.);
+    }
+
+    {
+        probe.get(l);
+        CAPTURE(l.front());
+        __base::card::card_split(l, data);
+        comment card(data);
+        CHECK(*(card.yield) == 390.);
+        CHECK(*(comment::yield) == 390.);
+    }
+
+    {
+        probe.get(l);
+        CAPTURE(l.front());
+        __base::card::card_split(l, data);
+        mat1 card(data);
+        CHECK(long(card.MID) == 4);
+        CHECK(double(card.E) == 2.06e5);
+        CHECK(double(card.NU) == 3e-1);
+        CHECK(double(card.RHO) == 7.85e-9);
+        CHECK(card.extra.yield != nullptr);
+        CHECK(*(card.extra.yield) == 390.);
+    }
+
+    {
+        probe.get(l);
+        CAPTURE(l.front());
+        __base::card::card_split(l, data);
+        comment card(data);
+        CHECK(*(card.yield) == 460.);
+        CHECK(*(comment::yield) == 460.);
+    }
+
+    {
+        probe.get(l);
+        CAPTURE(l.front());
+        __base::card::card_split(l, data);
+        mat1 card(data);
+        CHECK(long(card.MID) == 5);
+        CHECK(double(card.E) == 2.06e5);
+        CHECK(double(card.NU) == 3e-1);
+        CHECK(double(card.RHO) == 7.85e-9);
+        CHECK(card.extra.yield != nullptr);
+        CHECK(*(card.extra.yield) == 460.);
+    }
+
+    {
+        probe.get(l);
+        CAPTURE(l.front());
+        __base::card::card_split(l, data);
+        mat1 card(data);
+        CHECK(long(card.MID) == 6);
+        CHECK(double(card.E) == 2.06e5);
+        CHECK(double(card.NU) == 3e-1);
+        CHECK(double(card.RHO) == 7.85e-9);
+        CHECK(card.extra.yield == nullptr);
     }
 }
 

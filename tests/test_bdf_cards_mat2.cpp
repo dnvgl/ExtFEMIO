@@ -26,6 +26,7 @@ namespace {
 #endif
 
 #include "bdf/cards.h"
+#include "bdf/file.h"
 
 #if defined(_DEBUG) && defined(DEBUG_NEW)
 #define new DEBUG_NEW
@@ -38,7 +39,8 @@ namespace {
 #endif
 
 using namespace dnvgl::extfem::bdf;
-using namespace dnvgl::extfem::bdf::cards;
+using namespace cards;
+using namespace input;
 
 TEST_CASE("BDF MAT2 definitions. (Free Field Format) first",
           "[bdf_mat2]") {
@@ -255,6 +257,137 @@ TEST_CASE("BDF MAT2 roundtrio test reuse.", "[bdf_mat2_roundtrip_1_reuse]") {
         CHECK(probe_l.SS.value == 16.);
         CHECK(probe_l.MCSID.value == 17);
     }
+}
+
+TEST_CASE("BDF MAT2 testing yield stress handling.", "[bdf_mat2_yield]") {
+
+    std::ostringstream test;
+
+    std::string const s(
+        // 345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2345678|2
+        "$svd.mat 1        ""Mild""\n"
+        "$svd.yield 1        235.0 1.0\n"
+        "$ Marterial Record : Mild\n"
+        "$ Description of Material :\n"
+        "MAT2*    1               7.01670932+10   2.78474977+10   0.\n"
+        "*        1.35642948+11   0.              1.26610002+10   0.\n"
+        "*        .000012         .000012         .000012         0.\n"
+        "*        2.99999993-2    0.              0.              0.\n"
+        "*\n"
+        "*\n"
+        "$       \n"
+        "$svd.mat 2        ""HT32""\n"
+        "$svd.yield 2        315.0 0.78\n"
+        "$ Marterial Record : HT32\n"
+        "$ Description of Material :\n"
+        "MAT2*    2               7.01670932+10   2.78474977+10   0.\n"
+        "*        1.35642948+11   0.              1.26610002+10   0.\n"
+        "*        .000012         .000012         .000012         0.\n"
+        "*        2.99999993-2    0.              0.              0.\n"
+        "MAT2*    3               7.01670932+10   2.78474977+10   0.\n"
+        "*        1.35642948+11   0.              1.26610002+10   0.\n"
+        "*        .000012         .000012         .000012         0.\n"
+        "*        2.99999993-2    0.              0.              0.\n");
+    std::istringstream ist(s);
+    bdf_file probe(ist);
+    std::list<std::string> l;
+    std::list<std::string> data;
+
+    {
+        probe.get(l);
+        CAPTURE(l.front());
+        __base::card::card_split(l, data);
+        comment card(data);
+        CHECK(*(card.yield) == 235.);
+        CHECK(*(comment::yield) == 235.);
+    }
+
+    {
+        probe.get(l);
+        CAPTURE(l.front());
+        __base::card::card_split(l, data);
+        mat2 card(data);
+        CHECK(long(card.MID) == 1);
+        CHECK(double(card.G11) == 70167093200.);
+        CHECK(double(card.G12) == 27847497700.);
+        CHECK(double(card.G13) == 0.);
+        CHECK(double(card.G22) == 135642948000.);
+        CHECK(double(card.G23) == 0.);
+        CHECK(double(card.G33) == 12661000200.);
+        CHECK(double(card.RHO) == 0.);
+        CHECK(double(card.A1) == .000012);
+        CHECK(double(card.A2) == .000012);
+        CHECK(double(card.A3) == .000012);
+        CHECK(double(card.TREF) == 0.);
+        CHECK(double(card.GE) == .0299999993);
+        CHECK(double(card.ST) == 0.);
+        CHECK(double(card.SC) == 0.);
+        CHECK(double(card.SS) == 0.);
+        CHECK(long(card.MCSID) == 0);
+        CHECK(card.extra.yield != nullptr);
+        CHECK(*(card.extra.yield) == 235.);
+    }
+
+    {
+        probe.get(l);
+        CAPTURE(l.front());
+        __base::card::card_split(l, data);
+        comment card(data);
+        CHECK(*(card.yield) == 315.);
+        CHECK(*(comment::yield) == 315.);
+    }
+
+    {
+        probe.get(l);
+        CAPTURE(l.front());
+        __base::card::card_split(l, data);
+        mat2 card(data);
+        CHECK(long(card.MID) == 2);
+        CHECK(double(card.G11) == 70167093200.);
+        CHECK(double(card.G12) == 27847497700.);
+        CHECK(double(card.G13) == 0.);
+        CHECK(double(card.G22) == 135642948000.);
+        CHECK(double(card.G23) == 0.);
+        CHECK(double(card.G33) == 12661000200.);
+        CHECK(double(card.RHO) == 0.);
+        CHECK(double(card.A1) == .000012);
+        CHECK(double(card.A2) == .000012);
+        CHECK(double(card.A3) == .000012);
+        CHECK(double(card.TREF) == 0.);
+        CHECK(double(card.GE) == .0299999993);
+        CHECK(double(card.ST) == 0.);
+        CHECK(double(card.SC) == 0.);
+        CHECK(double(card.SS) == 0.);
+        CHECK(long(card.MCSID) == 0);
+        CHECK(card.extra.yield != nullptr);
+        CHECK(*(card.extra.yield) == 315.);
+    }
+
+    {
+        probe.get(l);
+        CAPTURE(l.front());
+        __base::card::card_split(l, data);
+        mat2 card(data);
+        CHECK(long(card.MID) == 3);
+        CHECK(double(card.G11) == 70167093200.);
+        CHECK(double(card.G12) == 27847497700.);
+        CHECK(double(card.G13) == 0.);
+        CHECK(double(card.G22) == 135642948000.);
+        CHECK(double(card.G23) == 0.);
+        CHECK(double(card.G33) == 12661000200.);
+        CHECK(double(card.RHO) == 0.);
+        CHECK(double(card.A1) == .000012);
+        CHECK(double(card.A2) == .000012);
+        CHECK(double(card.A3) == .000012);
+        CHECK(double(card.TREF) == 0.);
+        CHECK(double(card.GE) == .0299999993);
+        CHECK(double(card.ST) == 0.);
+        CHECK(double(card.SC) == 0.);
+        CHECK(double(card.SS) == 0.);
+        CHECK(long(card.MCSID) == 0);
+        CHECK(card.extra.yield == nullptr);
+    }
+
 }
 
 // Local Variables:

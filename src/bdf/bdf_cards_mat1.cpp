@@ -67,6 +67,7 @@ mat(inp) {
 }
 
 void mat1::read(list<std::string> const &inp) {
+    this->mat::read(inp);
 
     form_MCSID.set_value(MCSID, "");
     form_SS.set_value(SS, "");

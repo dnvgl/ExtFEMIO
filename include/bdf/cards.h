@@ -723,6 +723,12 @@ namespace dnvgl {
                             only for `PARAM,CURV` processing. (Integer > 0 or blank)
                         */
                         bdf::types::entry_value<long> MCSID;
+                        /** extra values taken from comments
+                         */
+                        struct {
+                            /// yield stress
+                            std::shared_ptr<double> yield{nullptr};
+                        } extra;
                     protected:
                         mat() = default;
                     public:
@@ -739,6 +745,7 @@ namespace dnvgl {
                             double *ST=nullptr, double *SC=nullptr,
                             double *SS=nullptr, long *MCSID=nullptr);
                         virtual void check_data() override;
+                        void read(std::list<std::string> const &);
                     };
                 }
 
