@@ -1270,43 +1270,123 @@ TEST_CASE("BDF PBEAM roundtrip test (N2_B only) (reuse)", "[bdf_pbeam]") {
 
         CHECK(long(probe_l.PID) == 7869);
         CHECK(long(probe_l.MID) == 104010);
-        CHECK_THAT(vector<double>(probe.A.begin(), probe.A.end()),
+        CHECK_THAT(vector<double>(probe_l.A.begin(), probe_l.A.end()),
                    IsEqual(std::vector<double>( {1., 1.})));
-        CHECK_THAT(vector<double>(probe.I1.begin(), probe.I1.end()),
+        CHECK_THAT(vector<double>(probe_l.I1.begin(), probe_l.I1.end()),
                    IsEqual(std::vector<double>({2., 2.})));
-        CHECK_THAT(vector<double>(probe.I2.begin(), probe.I2.end()),
+        CHECK_THAT(vector<double>(probe_l.I2.begin(), probe_l.I2.end()),
                    IsEqual(std::vector<double>({3., 3.})));
-        CHECK(probe.I12.size() == 0);
-        CHECK(probe.J.size() == 0);
-        CHECK(probe.NSM.size() == 0);
-        CHECK(probe.C1.size() == 0);
-        CHECK(probe.C2.size() == 0);
-        CHECK(probe.D1.size() == 0);
-        CHECK(probe.D2.size() == 0);
-        CHECK(probe.E1.size() == 0);
-        CHECK(probe.E2.size() == 0);
-        CHECK(probe.F1.size() == 0);
-        CHECK(probe.F2.size() == 0);
-        CHECK_THAT(vector<std::string>(probe.SO.begin(), probe.SO.end()),
+        CHECK_THAT(vector<double>(probe_l.I12.begin(), probe_l.I12.end()),
+                   IsEqual(std::vector<double>({0., 0.})));
+        CHECK_THAT(vector<double>(probe_l.J.begin(), probe_l.J.end()),
+                   IsEqual(std::vector<double>({0., 0.})));
+        CHECK_THAT(vector<double>(probe_l.NSM.begin(), probe_l.NSM.end()),
+                   IsEqual(std::vector<double>({0., 0.})));
+        CHECK_THAT(vector<double>(probe_l.C1.begin(), probe_l.C1.end()),
+                   IsEqual(std::vector<double>({0., 0.})));
+        CHECK_THAT(vector<double>(probe_l.C2.begin(), probe_l.C2.end()),
+                   IsEqual(std::vector<double>({0., 0.})));
+        CHECK_THAT(vector<double>(probe_l.D1.begin(), probe_l.D1.end()),
+                   IsEqual(std::vector<double>({0., 0.})));
+        CHECK_THAT(vector<double>(probe_l.D2.begin(), probe_l.D2.end()),
+                   IsEqual(std::vector<double>({0., 0.})));
+        CHECK_THAT(vector<double>(probe_l.E1.begin(), probe_l.E1.end()),
+                   IsEqual(std::vector<double>({0., 0.})));
+        CHECK_THAT(vector<double>(probe_l.E2.begin(), probe_l.E2.end()),
+                   IsEqual(std::vector<double>({0., 0.})));
+        CHECK_THAT(vector<double>(probe_l.F1.begin(), probe_l.F1.end()),
+                   IsEqual(std::vector<double>({0., 0.})));
+        CHECK_THAT(vector<double>(probe_l.F2.begin(), probe_l.F2.end()),
+                   IsEqual(std::vector<double>({0., 0.})));
+        CHECK_THAT(vector<std::string>(probe_l.SO.begin(), probe_l.SO.end()),
                    IsEqual(vector<string>(1, "YESA")));
-        CHECK_THAT(vector<double>(probe.X_XB.begin(), probe.X_XB.end()),
+        CHECK_THAT(vector<double>(probe_l.X_XB.begin(), probe_l.X_XB.end()),
                    IsEqual(std::vector<double>(1, 1.)));
-        CHECK_FALSE(bool(probe.K1));
-        CHECK_FALSE(bool(probe.K2));
-        CHECK_FALSE(bool(probe.S1));
-        CHECK_FALSE(bool(probe.S2));
-        CHECK_FALSE(bool(probe.NSI_A));
-        CHECK_FALSE(bool(probe.NSI_B));
-        CHECK_FALSE(bool(probe.CW_A));
-        CHECK_FALSE(bool(probe.CW_B));
-        CHECK_FALSE(bool(probe.M1_A));
-        CHECK_FALSE(bool(probe.M2_A));
-        CHECK_FALSE(bool(probe.M1_B));
-        CHECK_FALSE(bool(probe.M2_B));
-        CHECK_FALSE(bool(probe.N1_A));
-        CHECK_FALSE(bool(probe.N2_A));
-        CHECK_FALSE(bool(probe.N1_B));
-        CHECK(double(probe.N2_B) == 32.);
+        CHECK(double(probe_l.K1) == 1.);
+        CHECK(double(probe_l.K2) == 1.);
+        CHECK(double(probe_l.S1) == 0.);
+        CHECK(double(probe_l.S2) == 0.);
+        CHECK(double(probe_l.NSI_A) == 0.);
+        CHECK(double(probe_l.NSI_B) == 0.);
+        CHECK(double(probe_l.CW_A) == 0.);
+        CHECK(double(probe_l.CW_B) == 0.);
+        CHECK(double(probe_l.M1_A) == 0.);
+        CHECK(double(probe_l.M2_A) == 0.);
+        CHECK(double(probe_l.M1_B) == 0.);
+        CHECK(double(probe_l.M2_B) == 0.);
+        CHECK(double(probe_l.N1_A) == 0.);
+        CHECK(double(probe_l.N2_A) == 0.);
+        CHECK(double(probe_l.N1_B) == 0.);
+        CHECK(double(probe_l.N2_B) == 32.);
+    }
+}
+
+TEST_CASE("Error reports", "[bdf_bugs]") {
+
+    SECTION("20180514") {
+
+        std::list<std::string> data({
+           // 34567A1234567B1234567C1234567D1234567E1234567F1234567G1234567H1234567
+           "PBEAM*   8               1              1241.44         2.40798+6      \n",
+           "*       37601.           -148296.       34650.                         \n",
+           "         0.      0.      0.      0.      0.      0.      0.      0.    \n",
+           "*       .676711         .142035                                        \n",
+           "*                                       1.89246+7       1.89246+7      \n",
+           "                                        37.1607 2.55562 37.1607 2.55562\n"});
+        std::list<std::string> lines;
+        __base::card::card_split(data, lines);
+        pbeam probe(lines);
+
+        CAPTURE( data.front() );
+
+        CHECK(long(probe.PID) == 8);
+        CHECK(long(probe.MID) == 1);
+        CHECK_THAT(vector<double>(probe.A.begin(), probe.A.end()),
+                   IsEqual(std::vector<double>( {1241.44})));
+        CHECK_THAT(vector<double>(probe.I1.begin(), probe.I1.end()),
+                   IsEqual(std::vector<double>({2.40798e6})));
+        CHECK_THAT(vector<double>(probe.I2.begin(), probe.I2.end()),
+                   IsEqual(std::vector<double>({37601.})));
+        CHECK_THAT(vector<double>(probe.I12.begin(), probe.I12.end()),
+                   IsEqual(std::vector<double>({ -148296.})));
+        CHECK_THAT(vector<double>(probe.J.begin(), probe.J.end()),
+                   IsEqual(std::vector<double>({34650.})));
+        CHECK_THAT(vector<double>(probe.NSM.begin(), probe.NSM.end()),
+                   IsEqual(std::vector<double>({0., 0.})));
+        CHECK_THAT(vector<double>(probe.C1.begin(), probe.C1.end()),
+                   IsEqual(std::vector<double>({0., 0.})));
+        CHECK_THAT(vector<double>(probe.C2.begin(), probe.C2.end()),
+                   IsEqual(std::vector<double>({0., 0.})));
+        CHECK_THAT(vector<double>(probe.D1.begin(), probe.D1.end()),
+                   IsEqual(std::vector<double>({0., 0.})));
+        CHECK_THAT(vector<double>(probe.D2.begin(), probe.D2.end()),
+                   IsEqual(std::vector<double>({0., 0.})));
+        CHECK_THAT(vector<double>(probe.E1.begin(), probe.E1.end()),
+                   IsEqual(std::vector<double>({0., 0.})));
+        CHECK_THAT(vector<double>(probe.E2.begin(), probe.E2.end()),
+                   IsEqual(std::vector<double>({0., 0.})));
+        CHECK_THAT(vector<double>(probe.F1.begin(), probe.F1.end()),
+                   IsEqual(std::vector<double>({0., 0.})));
+        CHECK_THAT(vector<double>(probe.F2.begin(), probe.F2.end()),
+                   IsEqual(std::vector<double>({0., 0.})));
+        CHECK(probe.SO.size() == 0);
+        CHECK(probe.X_XB.size() == 0);
+        CHECK(double(probe.K1) == 0.676711);
+        CHECK(double(probe.K2) == 0.142035);
+        CHECK(double(probe.S1) == 0.);
+        CHECK(double(probe.S2) == 0.);
+        CHECK(double(probe.NSI_A) == 0.);
+        CHECK(double(probe.NSI_B) == 0.);
+        CHECK(double(probe.CW_A) == 18924600.);
+        CHECK(double(probe.CW_B) == 18924600.);
+        CHECK(double(probe.M1_A) == 0.);
+        CHECK(double(probe.M2_A) == 0.);
+        CHECK(double(probe.M1_B) == 0.);
+        CHECK(double(probe.M2_B) == 0.);
+        CHECK(double(probe.N1_A) == 37.1607);
+        CHECK(double(probe.N2_A) == 2.55562);
+        CHECK(double(probe.N1_B) == 37.1607);
+        CHECK(double(probe.N2_B) == 2.55562);
     }
 }
 

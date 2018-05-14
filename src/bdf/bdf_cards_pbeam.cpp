@@ -79,8 +79,8 @@ namespace {
 entry_type<double> pbeam::form_I2("I2");
 entry_type<double> pbeam::form_I2_cont("I2_cont", bound_I2);
 namespace {
-    auto const bound_I12 = make_shared<bound<double>>(
-        cd0, nullptr, nullptr, true);
+    auto const bound_I12 = make_shared<bound<double>>
+        (nullptr, nullptr, cd0, true);
 }
 entry_type<double> pbeam::form_I12("I12", bound_I12);
 namespace {
