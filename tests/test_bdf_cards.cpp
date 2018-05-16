@@ -1213,7 +1213,7 @@ TEST_CASE("Test partial supported element cards, CAABSF.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CAABSF);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 44);
 }
 
@@ -1228,7 +1228,7 @@ TEST_CASE("Test partial supported element cards, CAERO1.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CAERO1);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 1000);
 }
 
@@ -1243,7 +1243,7 @@ TEST_CASE("Test partial supported element cards, CAERO2.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CAERO2);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 1500);
 }
 
@@ -1258,7 +1258,7 @@ TEST_CASE("Test partial supported element cards, CAERO3.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CAERO3);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 2000);
 }
 
@@ -1273,7 +1273,7 @@ TEST_CASE("Test partial supported element cards, CAERO4.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CAERO4);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 6000);
 }
 
@@ -1288,7 +1288,7 @@ TEST_CASE("Test partial supported element cards, CAERO5.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CAERO5);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 6001);
 }
 
@@ -1303,7 +1303,7 @@ TEST_CASE("Test partial supported element cards, CAXIF2.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CAXIF2);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 11);
 }
 
@@ -1318,7 +1318,7 @@ TEST_CASE("Test partial supported element cards, CAXIF3.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CAXIF3);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 105);
 }
 
@@ -1333,7 +1333,7 @@ TEST_CASE("Test partial supported element cards, CAXIF4.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CAXIF4);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 524);
 }
 
@@ -1348,7 +1348,7 @@ TEST_CASE("Test partial supported element cards, CBEND.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CBEND);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 32);
 }
 
@@ -1363,7 +1363,7 @@ TEST_CASE("Test partial supported element cards, CBEND (alt).", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CBEND);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 32);
 }
 
@@ -1437,7 +1437,7 @@ TEST_CASE("Test partial supported element cards, CBUSH1D.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CBUSH1D);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 35);
 }
 
@@ -1452,7 +1452,7 @@ TEST_CASE("Test partial supported element cards, CBUTT.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CBUTT);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 1002);
 }
 
@@ -1467,7 +1467,7 @@ TEST_CASE("Test partial supported element cards, CCONEAX.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CCONEAX);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 1);
 }
 
@@ -1484,7 +1484,7 @@ TEST_CASE("Test partial supported element cards, CCRSFIL.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CCRSFIL);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 1002);
 }
 
@@ -1499,7 +1499,7 @@ TEST_CASE("Test partial supported element cards, CDAMP1.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CDAMP1);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 19);
 }
 
@@ -1514,7 +1514,7 @@ TEST_CASE("Test partial supported element cards, CDAMP1D.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CDAMP1D);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 1001);
 }
 
@@ -1529,7 +1529,7 @@ TEST_CASE("Test partial supported element cards, CDAMP2.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CDAMP2);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 16);
 }
 
@@ -1544,7 +1544,7 @@ TEST_CASE("Test partial supported element cards, CDAMP2D.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CDAMP2D);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 1001);
 }
 
@@ -1559,7 +1559,7 @@ TEST_CASE("Test partial supported element cards, CDAMP3.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CDAMP3);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 16);
 }
 
@@ -1574,7 +1574,7 @@ TEST_CASE("Test partial supported element cards, CDAMP4.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CDAMP4);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 16);
 }
 
@@ -1589,7 +1589,7 @@ TEST_CASE("Test partial supported element cards, CDAMP5.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CDAMP5);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 1);
 }
 
@@ -1604,7 +1604,7 @@ TEST_CASE("Test partial supported element cards, CDUM1.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CDUM1);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 114);
 }
 
@@ -1619,7 +1619,7 @@ TEST_CASE("Test partial supported element cards, CDUM2.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CDUM2);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 124);
 }
 
@@ -1634,7 +1634,7 @@ TEST_CASE("Test partial supported element cards, CDUM3.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CDUM3);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 134);
 }
 
@@ -1649,7 +1649,7 @@ TEST_CASE("Test partial supported element cards, CDUM4.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CDUM4);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 144);
 }
 
@@ -1664,7 +1664,7 @@ TEST_CASE("Test partial supported element cards, CDUM5.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CDUM5);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 154);
 }
 
@@ -1679,7 +1679,7 @@ TEST_CASE("Test partial supported element cards, CDUM6.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CDUM6);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 164);
 }
 
@@ -1694,7 +1694,7 @@ TEST_CASE("Test partial supported element cards, CDUM7.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CDUM7);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 174);
 }
 
@@ -1709,7 +1709,7 @@ TEST_CASE("Test partial supported element cards, CDUM8.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CDUM8);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 184);
 }
 
@@ -1724,7 +1724,7 @@ TEST_CASE("Test partial supported element cards, CDUM9.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CDUM9);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 194);
 }
 
@@ -1739,7 +1739,7 @@ TEST_CASE("Test partial supported element cards, CELAS1.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CELAS1);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 2);
 }
 
@@ -1754,7 +1754,7 @@ TEST_CASE("Test partial supported element cards, CELAS1D.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CELAS1D);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 1001);
 }
 
@@ -1769,7 +1769,7 @@ TEST_CASE("Test partial supported element cards, CELAS2.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CELAS2);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 28);
 }
 
@@ -1784,7 +1784,7 @@ TEST_CASE("Test partial supported element cards, CELAS2D.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CELAS2D);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 1001);
 }
 
@@ -1799,7 +1799,7 @@ TEST_CASE("Test partial supported element cards, CELAS3.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CELAS3);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 19);
 }
 
@@ -1814,7 +1814,7 @@ TEST_CASE("Test partial supported element cards, CELAS4.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CELAS4);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 42);
 }
 
@@ -1829,7 +1829,7 @@ TEST_CASE("Test partial supported element cards, CFILLET.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CFILLET);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 1002);
 }
 
@@ -1844,7 +1844,7 @@ TEST_CASE("Test partial supported element cards, CFLUID2.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CFLUID2);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 100);
 }
 
@@ -1859,7 +1859,7 @@ TEST_CASE("Test partial supported element cards, CFLUID3.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CFLUID3);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 110);
 }
 
@@ -1874,7 +1874,7 @@ TEST_CASE("Test partial supported element cards, CFLUID4.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CFLUID4);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 120);
 }
 
@@ -1889,7 +1889,7 @@ TEST_CASE("Test partial supported element cards, CGAP (1).", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CGAP);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 17);
 }
 
@@ -1904,7 +1904,7 @@ TEST_CASE("Test partial supported element cards, CGAP (2).", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CGAP);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 17);
 }
 
@@ -1919,7 +1919,7 @@ TEST_CASE("Test partial supported element cards, CHACAB.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CHACAB);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 95);
 }
 
@@ -1934,7 +1934,7 @@ TEST_CASE("Test partial supported element cards, CHACBR.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CHACBR);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 95);
 }
 
@@ -1949,7 +1949,7 @@ TEST_CASE("Test partial supported element cards, CHBDYE.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CHBDYE);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 2);
 }
 
@@ -1964,7 +1964,7 @@ TEST_CASE("Test partial supported element cards, CHBDYG.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CHBDYG);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 2);
 }
 
@@ -1979,7 +1979,7 @@ TEST_CASE("Test partial supported element cards, CHBDYP.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CHBDYP);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 2);
 }
 
@@ -1994,7 +1994,7 @@ TEST_CASE("Test partial supported element cards, CHEXA.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CHEXA);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 71);
 }
 
@@ -2009,7 +2009,7 @@ TEST_CASE("Test partial supported element cards, CMASS1.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CMASS1);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 32);
 }
 
@@ -2024,7 +2024,7 @@ TEST_CASE("Test partial supported element cards, CMASS3.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CMASS3);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 13);
 }
 
@@ -2042,7 +2042,7 @@ TEST_CASE("Test partial supported element cards, COMBWLD.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::COMBWLD);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 1002);
 }
 
@@ -2098,7 +2098,7 @@ TEST_CASE("Test partial supported element cards, CONM2.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CONM2);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 2);
 }
 
@@ -2113,7 +2113,7 @@ TEST_CASE("Test partial supported element cards, CONROD.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CONROD);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 2);
 }
 
@@ -2128,7 +2128,7 @@ TEST_CASE("Test partial supported element cards, CPENTA.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CPENTA);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 112);
 }
 
@@ -2143,7 +2143,7 @@ TEST_CASE("Test partial supported element cards, CQUAD.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CQUAD);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 111);
 }
 
@@ -2159,7 +2159,7 @@ TEST_CASE("Test partial supported element cards, CQUAD8.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CQUAD8);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 207);
 }
 
@@ -2174,7 +2174,7 @@ TEST_CASE("Test partial supported element cards, CQUADR.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CQUADR);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 82);
 }
 
@@ -2189,7 +2189,7 @@ TEST_CASE("Test partial supported element cards, CQUADX.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CQUADX);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 111);
 }
 
@@ -2204,7 +2204,7 @@ TEST_CASE("Test partial supported element cards, CRAC2D.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CRAC2D);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 114);
 }
 
@@ -2222,7 +2222,7 @@ TEST_CASE("Test partial supported element cards, CRAC3D.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CRAC3D);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 113);
 }
 
@@ -2237,7 +2237,7 @@ TEST_CASE("Test partial supported element cards, CSHEAR.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CSHEAR);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 3);
 }
 
@@ -2252,7 +2252,7 @@ TEST_CASE("Test partial supported element cards, CSLOT3.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CSLOT3);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 100);
 }
 
@@ -2267,7 +2267,7 @@ TEST_CASE("Test partial supported element cards, CSLOT4.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CSLOT4);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 101);
 }
 
@@ -2282,7 +2282,7 @@ TEST_CASE("Test partial supported element cards, CSPOT.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CSPOT);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 1001);
 }
 
@@ -2297,7 +2297,7 @@ TEST_CASE("Test partial supported element cards, CTETRA.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CTETRA);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 112);
 }
 
@@ -2312,7 +2312,7 @@ TEST_CASE("Test partial supported element cards, CTRIA6.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CTRIA6);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 302);
 }
 
@@ -2327,7 +2327,7 @@ TEST_CASE("Test partial supported element cards, CTRIAR.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CTRIAR);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 111);
 }
 
@@ -2342,7 +2342,7 @@ TEST_CASE("Test partial supported element cards, CTRIAX.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CTRIAX);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 111);
 }
 
@@ -2357,7 +2357,7 @@ TEST_CASE("Test partial supported element cards, CTRIAX6.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CTRIAX6);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 22);
 }
 
@@ -2372,7 +2372,7 @@ TEST_CASE("Test partial supported element cards, CTUBE.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CTUBE);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 12);
 }
 
@@ -2387,7 +2387,7 @@ TEST_CASE("Test partial supported element cards, CVISC.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::CVISC);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 21);
 }
 
@@ -2408,7 +2408,7 @@ TEST_CASE("Test partial supported element cards, GENEL.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::GENEL);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 629);
 }
 
@@ -2423,7 +2423,7 @@ TEST_CASE("Test partial supported element cards, GMINTC.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::GMINTC);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 1001);
 }
 
@@ -2438,7 +2438,7 @@ TEST_CASE("Test partial supported element cards, GMINTS.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::GMINTS);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 1001 );
 }
 
@@ -2453,7 +2453,7 @@ TEST_CASE("Test partial supported element cards, PLOTEL.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::PLOTEL);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 29);
 }
 
@@ -2468,7 +2468,7 @@ TEST_CASE("Test partial supported element cards, RBAR.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::RBAR);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 5);
 }
 
@@ -2483,7 +2483,7 @@ TEST_CASE("Test partial supported element cards, RBAR1.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::RBAR1);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 5);
 }
 
@@ -2499,7 +2499,7 @@ TEST_CASE("Test partial supported element cards, RBE1.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::RBE1);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 59);
 }
 
@@ -2515,7 +2515,7 @@ TEST_CASE("Test partial supported element cards, RBE2.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::RBE2);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 9);
 }
 
@@ -2534,7 +2534,7 @@ TEST_CASE("Test partial supported element cards, RBE3.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::RBE3);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 14);
 }
 
@@ -2551,7 +2551,7 @@ TEST_CASE("Test partial supported element cards, RBE3D (1).", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::RBE3D);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 51);
 }
 
@@ -2568,7 +2568,7 @@ TEST_CASE("Test partial supported element cards, RBE3D (2).", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::RBE3D);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 51);
 }
 
@@ -2587,7 +2587,7 @@ TEST_CASE("Test partial supported element cards, RBE3D.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::RBE3D);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 51);
 }
 
@@ -2602,7 +2602,7 @@ TEST_CASE("Test partial supported element cards, RJOINT.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::RJOINT);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 5);
 }
 
@@ -2617,7 +2617,7 @@ TEST_CASE("Test partial supported element cards, RROD.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::RROD);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 14);
 }
 
@@ -2633,7 +2633,7 @@ TEST_CASE("Test partial supported element cards, RSPLINE.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::RSPLINE);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 73);
 }
 
@@ -2648,7 +2648,7 @@ TEST_CASE("Test partial supported element cards, RSSCON (1).", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::RSSCON);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 110);
 }
 
@@ -2663,7 +2663,7 @@ TEST_CASE("Test partial supported element cards, RSSCON (2).", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::RSSCON);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 111);
 }
 
@@ -2678,7 +2678,7 @@ TEST_CASE("Test partial supported element cards, RSSCON (3).", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::RSSCON);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 115);
 }
 
@@ -2693,7 +2693,7 @@ TEST_CASE("Test partial supported element cards, RTRPLT.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::RTRPLT);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 7);
 }
 
@@ -2708,7 +2708,7 @@ TEST_CASE("Test partial supported element cards, RTRPLT1.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::RTRPLT1);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 7);
 }
 
@@ -2723,7 +2723,7 @@ TEST_CASE("Test partial supported element cards, SPLINE1.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::SPLINE1);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 3);
 }
 
@@ -2739,7 +2739,7 @@ TEST_CASE("Test partial supported element cards, SPLINE2.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::SPLINE2);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 5);
 }
 
@@ -2755,7 +2755,7 @@ TEST_CASE("Test partial supported element cards, SPLINE3.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::SPLINE3);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 7000);
 }
 
@@ -2770,7 +2770,7 @@ TEST_CASE("Test partial supported element cards, SPLINE4.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::SPLINE4);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 3);
 }
 
@@ -2785,7 +2785,7 @@ TEST_CASE("Test partial supported element cards, SPLINE5.", "[bdf_cards]") {
     card::card_split(data, l);
     cards::dispatch(l, probe);
 
-    CHECK(probe->card_type() == cards::types::ELEMENT);
+    CHECK(probe->card_type() == cards::types::SPLINE5);
     CHECK(dynamic_cast<cards::__base::element*>(probe.get())->EID.value == 5);
 }
 

@@ -16,7 +16,9 @@
 
 #include <memory>
 
-#include "bdf/cards_elements.h"
+#if !defined(_BDF_CARDS_H_)
+#error include "bdf/cards.h" instead
+#endif
 
 namespace dnvgl {
     namespace extfem {

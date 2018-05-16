@@ -9,8 +9,6 @@
 #include "extfemio_stdafx.h"
 
 #include "extfem_misc.h"
-#include "bdf/cards_loads.h"
- #include "bdf/errors.h"
 
 // ID:
 namespace {
@@ -23,6 +21,7 @@ namespace {
 
 #include "bdf/cards.h"
 #include "bdf/types.h"
+#include "bdf/errors.h"
 
 #if defined(_DEBUG) && defined(DEBUG_NEW)
 #define new DEBUG_NEW
@@ -54,7 +53,7 @@ entry_type<long> grav::form_SID("SID", bound_SID);
 namespace {
     auto const bound_CID = make_shared<bound<long>>(cl0);
 }
-entry_type<long> grav::form_CID("CID", bound_CID);
+entry_type<long> cards::grav::form_CID("CID", bound_CID);
 entry_type<double> grav::form_A("A");
 entry_type<double> grav::form_Ni("Ni");
 namespace {

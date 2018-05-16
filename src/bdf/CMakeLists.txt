@@ -20,6 +20,7 @@ set(LIBEXTFEMIO_BDF_SOURCES
   bdf_l_geom.cpp
   bdf_errors.cpp
   bdf_cards.cpp
+  bdf_cards_dummy.cpp
   bdf_cards_element.cpp
   bdf_cards_bar_prop.cpp
   bdf_cards_beam_prop.cpp
