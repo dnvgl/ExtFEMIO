@@ -64,7 +64,7 @@ TEST_CASE ("BDF PBUSH definitons.", "[bdf_pbush]") {
         CHECK((long)probe.PID == 35);
         CHECK_THAT(vector<double>(probe.K.begin(), probe.K.end()),
                    IsEqual(vector<double>({4.35, 2.4, 0., 0., 0., 3.1})));
-        CHECK(probe.B.size() == 0);
+        CHECK(probe.B.empty());
         CHECK_THAT(vector<double>(probe.GE.begin(), probe.GE.end()),
                    IsEqual(vector<double>({.06, 0., 0., 0., 0., 0.})));
         CHECK(probe.RCV);
@@ -83,10 +83,10 @@ TEST_CASE ("BDF PBUSH definitons.", "[bdf_pbush]") {
         pbush probe(lines);
 
         CHECK((long)probe.PID == 35);
-        CHECK(probe.K.size() == 0);
+        CHECK(probe.K.empty());
         CHECK_THAT(vector<double>(probe.B.begin(), probe.B.end()),
                    IsEqual(vector<double>({2.3, 0., 0., 0., 0., 0.})));
-        CHECK(probe.GE.size() == 0);
+        CHECK(probe.GE.empty());
         CHECK_FALSE(probe.RCV);
     }
 }
@@ -176,8 +176,8 @@ TEST_CASE("BDF PBUSH roundtrip test 2", "[bdf_pbush]") {
         CHECK(long(probe_l.PID) == 7869);
         CHECK(vector<double>(probe_l.K.begin(), probe_l.K.end()) ==
               vector<double>({1., 2., 3., 4., 5., 6.}));
-        CHECK(probe_l.B.size() == 0);
-        CHECK(probe_l.GE.size() == 0);
+        CHECK(probe_l.B.empty());
+        CHECK(probe_l.GE.empty());
         CHECK(probe_l.RCV);
         CHECK(double(probe_l.SA) == 11.);
         CHECK(double(probe_l.ST) == 12.);

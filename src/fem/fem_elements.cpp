@@ -718,28 +718,28 @@ cards::__base::card const &elements::__base::elem::gelref1() const {
     long eccno_opt;
     long transno_opt;
 
-    if (this->section.size() == 0) {
+    if (this->section.empty()) {
         geono_opt = 0;
     } else if (this->section.size() == 1) {
         geono_opt = this->section[0];
     } else {
         geono_opt = -1;
     }
-    if (this->fixations.size() == 0) {
+    if (this->fixations.empty()) {
         fixno_opt = 0;
     } else if (this->fixations.size() == 1) {
         fixno_opt = this->fixations[0];
     } else {
         fixno_opt = -1;
     }
-    if (this->eccentrities.size() == 0) {
+    if (this->eccentrities.empty()) {
         eccno_opt = 0;
     } else if (this->eccentrities.size() == 1) {
         eccno_opt = this->eccentrities[0];
     } else {
         eccno_opt = -1;
     }
-    if (this->csys.size() == 0) {
+    if (this->csys.empty()) {
         transno_opt = 0;
     } else if (this->csys.size() == 1) {
         transno_opt = this->csys[0];

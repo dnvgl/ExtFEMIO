@@ -129,7 +129,7 @@ namespace dnvgl {
 
                 template <typename _Ty> inline
                 bool bound<_Ty>::is_allowed(std::string probe) const {
-                    if (allowed.size() == 0)
+                    if (allowed.empty())
                         return true;
                     return (allowed.find(probe) != allowed.end());
                 }

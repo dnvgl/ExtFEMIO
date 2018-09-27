@@ -11,7 +11,7 @@
  */
 
 #ifndef _BNF_ENTRY_VALUE_H_
-#define _BDF_ENTRY_VALUE_H_
+#define _BNF_ENTRY_VALUE_H_
 
 namespace dnvgl {
     namespace extfem {
@@ -28,7 +28,7 @@ namespace dnvgl {
                     ~entry_value() = default;
                     explicit entry_value(const _Ty, const bool=true);
                     explicit entry_value(const _Ty *value);
-                    entry_value(entry_value<_Ty> const&) = default;
+                    entry_value(entry_value<_Ty> const&);
                     entry_value<_Ty> &operator= (const _Ty &other);
                     bool operator== (const _Ty &other) const;
                     bool operator< (const _Ty &other) const;
@@ -102,11 +102,14 @@ namespace dnvgl {
                     value = val;
                 }
 
-                // ReSharper disable CppPossiblyUninitializedMember
-                template <> inline
-                entry_value<std::vector<int>>::entry_value(
-                    const entry_value<std::vector<int>> &val) :
-                        value(val.value), is_value(val.is_value) {}
+				template <typename _Ty> inline
+					entry_value<_Ty>::entry_value(const entry_value <_Ty> &val) : value(val.value), is_value(val.is_value) {}
+				
+            	// ReSharper disable CppPossiblyUninitializedMember
+				template <> inline
+					entry_value<std::vector<int>>::entry_value(
+						const entry_value<std::vector<int>> &val) :
+					value(val.value.begin(), val.value.end()), is_value(val.is_value) {}
 
                 template <> inline
                 entry_value<std::vector<int>>::entry_value(

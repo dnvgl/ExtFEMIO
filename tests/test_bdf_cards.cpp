@@ -787,7 +787,7 @@ TEST_CASE("Split Free Field Cards, Sample 4", "[bdf_cards]") {
             "SPC1,100,12456,1,2,3,4,5,6,+SPC-A+SPC-A,7,8,9,10\n"});
     std::list<std::string> probe;
     card::card_split(data, probe);
-    std::list<std::string> ref({
+    const std::list<std::string> ref({
             "SPC1", "100", "12456", "1", "2", "3", "4", "5", "6", "7",
             "8", "9", "10"});
     // TODO: possible allow the above line syntax.
@@ -803,7 +803,7 @@ TEST_CASE("Split Free Field Cards, Sample 5", "[bdf_cards]") {
             "SPC1,100,12456,1,2,3,4,5,6,7,8,9,10\n"});
     std::list<std::string> probe;
     card::card_split(data, probe);
-    std::list<std::string> ref({
+	const std::list<std::string> ref({
             "SPC1", "100", "12456", "1", "2", "3", "4", "5", "6", "7",
             "8", "9", "10"});
     CHECK_THAT(probe, IsEqual(ref));
@@ -815,7 +815,7 @@ TEST_CASE("Split Free Field Cards, Sample 6", "[bdf_cards]") {
             ",9 ,,,,13\n"});
     std::list<std::string> probe;
     card::card_split(data, probe);
-    std::list<std::string> ref({
+    const std::list<std::string> ref({
             "MATT9", "1151", "2", "3", "4", "", "", "", "8", "9", "",
             "", "", "13"});
     CHECK_THAT(probe, IsEqual(ref));
@@ -827,7 +827,7 @@ TEST_CASE("Split Free Field Cards, Sample 7", "[bdf_cards]") {
             "+,9 ,,,,13\n"});
     std::list<std::string> probe;
     card::card_split(data, probe);
-    std::list<std::string> ref({
+    const std::list<std::string> ref({
             "MATT9", "1151", "2", "3", "4", "", "", "", "8", "9", "",
             "", "", "13"});
     CHECK(probe.size() == ref.size());
@@ -840,7 +840,7 @@ TEST_CASE("Split Free Field Cards, Sample 8", "[bdf_cards]") {
             "+,,,,,,13\n"});
     std::list<std::string> probe;
     card::card_split(data, probe);
-    std::list<std::string> ref({
+    const std::list<std::string> ref({
             "MATT9", "1302", "2", "", "4", "", "", "", "", "", "13"});
     CHECK_THAT(probe, IsEqual(ref));
 }

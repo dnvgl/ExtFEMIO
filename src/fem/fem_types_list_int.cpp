@@ -106,8 +106,8 @@ std::string entry_type<std::vector<int> >::format(
         value += p;
     }
 
-#ifdef _MSC_VER
-    // std::set output to two digit exponential format.
+#if defined(_MSC_VER) && _MSC_VER < 1900
+	// std::set output to two digit exponential format.
     unsigned int const ext_exp_format = _set_output_format(_TWO_DIGIT_EXPONENT);
 #endif
 
@@ -133,8 +133,8 @@ std::string entry_type<std::vector<int> >::format(
         throw errors::output_error(name, msg.str());
     }
 
-#ifdef _MSC_VER
-    // Reset exponential output format to former std::settings.
+#if defined(_MSC_VER) && _MSC_VER < 1900
+	// Reset exponential output format to former std::settings.
     _set_output_format(ext_exp_format);
 #endif
 

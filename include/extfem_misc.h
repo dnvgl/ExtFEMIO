@@ -21,7 +21,7 @@
 #include <exception>
 #include "extfem_misc.h"
 
-#if defined(_MSC_VER) & _MSC_VER < 1900
+#if defined(_MSC_VER) && _MSC_VER < 1900
 #define _EXTFEMIO_NOEXCEPT
 #else
 #define _EXTFEMIO_NOEXCEPT noexcept

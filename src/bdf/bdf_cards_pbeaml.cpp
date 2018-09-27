@@ -221,7 +221,7 @@ void pbeaml::read(list<std::string> const & inp) {
     }
 
 end:;
-    if (DIM.back().size() == 0) {
+    if (DIM.back().empty()) {
         auto &ref = DIM.front();
         for (auto &p : ref)
             DIM.back().push_back(bdf::types::entry_value<double>(p.value));
@@ -303,9 +303,9 @@ void pbeaml::check_data() {
         throw errors::form_error("PBEAML", "requires at least two stations");
     if (NSM.size() != 0 && NSM.size() > base_size)
         throw errors::form_error("PBEAML", "wrong size for NSM");
-    if (SO.size() == 0 || SO.size() != base_size-1)
+    if (SO.empty() || SO.size() != base_size-1)
         throw errors::form_error("PBEAML", "wrong size for SO");
-    if (X_XB.size() == 0 || X_XB.size() != base_size - 1)
+    if (X_XB.empty() || X_XB.size() != base_size - 1)
         throw errors::form_error("PBEAML", "wrong size for X/XB");
     if (GROUP) pbeaml::form_GROUP.check(GROUP);
     if (TYPE) pbeaml::form_TYPE.check(TYPE);

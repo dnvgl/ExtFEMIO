@@ -60,7 +60,7 @@ TEST_CASE("FEM TDLOAD definitions.", "[fem_tdload]") {
         CHECK(probe.CODNAM == 121);
         CHECK(probe.CODTXT == 0);
         CHECK(probe.SET_NAME == "PLAN_No6_STR(5445A/B)");
-        CHECK(probe.CONT.size() == 0);
+        CHECK(probe.CONT.empty());
     }
 
     SECTION("TDLOAD (2)") {
@@ -77,7 +77,7 @@ TEST_CASE("FEM TDLOAD definitions.", "[fem_tdload]") {
         CHECK(probe.CODNAM == 121);
         CHECK(probe.CODTXT == 0);
         CHECK(probe.SET_NAME == "PLAN_No6_STR(5445A/B)");
-        CHECK(probe.CONT.size() == 0);
+        CHECK(probe.CONT.empty());
     }
 
     SECTION("TDLOAD (2)") {
@@ -118,7 +118,7 @@ TEST_CASE("FEM TDLOAD definitions.", "[fem_tdload]") {
         CHECK(probe.CODNAM == 112);
         CHECK(probe.CODTXT == 0);
         CHECK(probe.SET_NAME == "            ");
-        CHECK(probe.CONT.size() == 0);
+        CHECK(probe.CONT.empty());
     }
 }
 
@@ -139,7 +139,7 @@ TEST_CASE("FEMIO-32: Import failed when reading TDLOAD entry", "[fem_tdload]") {
         CHECK(probe.CODNAM == 100);
         CHECK(probe.CODTXT == 0);
         CHECK(probe.SET_NAME == "");
-        CHECK(probe.CONT.size() == 0);
+        CHECK(probe.CONT.empty());
     }
 }
 

@@ -60,12 +60,16 @@ TEST_CASE("BDF COMMENT yield stress definition.", "[bdf_comment]") {
         std::smatch
 #endif
             m;
-        CHECK(regex_search(std::string("$ 235"), m, test_comment::find_yield));
-        CHECK(regex_search(
-                  std::string("$ Yield: 315 test"), m, test_comment::find_yield));
-        CHECK(regex_search(std::string("$ 355"), m, test_comment::find_yield));
-        CHECK(regex_search(std::string("$ 390"), m, test_comment::find_yield));
-        CHECK(regex_search(std::string("$ 460"), m, test_comment::find_yield));
+		const std::string ref_235("$ 235");
+        CHECK(regex_search(ref_235, m, test_comment::find_yield));
+		const std::string ref_315("$ Yield: 315 test");
+        CHECK(regex_search(ref_315, m, test_comment::find_yield));
+		const std::string ref_355("$ 355");
+	    CHECK(regex_search(ref_355, m, test_comment::find_yield));
+		const std::string ref_390("$ 390");
+		CHECK(regex_search(ref_390, m, test_comment::find_yield));
+		const std::string ref_460("$ 460");
+		CHECK(regex_search(ref_460, m, test_comment::find_yield));
 }
 
 TEST_CASE("BDF COMMENT definitions; empty comment.", "[bdf_comment]") {
@@ -227,7 +231,7 @@ TEST_CASE("BDF COMMENT definitions; with yield stress (460).",
 TEST_CASE("BDF COMMENT roundtrip test", "[bdf_comment]") {
     ostringstream test;
 
-    std::string content("");
+    std::string content;
 
     comment const probe(&content);
     test << probe;
@@ -255,7 +259,7 @@ TEST_CASE("BDF COMMENT roundtrip test", "[bdf_comment]") {
 TEST_CASE("BDF COMMENT roundtrip test (reuse)", "[bdf_comment]") {
     ostringstream test;
 
-    std::string content("");
+    std::string content;
 
     comment probe;
     test << probe;
@@ -470,7 +474,7 @@ TEST_CASE("BDF COMMENT roundtrip test; only yield stress.", "[bdf_comment]") {
     ostringstream test;
 
     vector<std::string> const content;
-    double *yield = new double(315.);
+    auto *yield = new double(315.);
 
     comment const probe(content, yield);
     test << probe;
@@ -505,7 +509,7 @@ TEST_CASE("BDF COMMENT roundtrip test; only yield stress (reuse).",
     ostringstream test;
 
     vector<std::string> const content;
-    double *yield = new double(315.);
+	const auto yield = new double(315.);
 
     comment probe;
     test << probe;
@@ -545,7 +549,7 @@ TEST_CASE("BDF COMMENT roundtrip test; yield stress and comment.",
         // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
         "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean "
         "commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus"};
-    double *yield = new double(315.);
+	const auto yield = new double(315.);
 
     comment const probe(content, yield);
     test << probe;
@@ -589,7 +593,7 @@ TEST_CASE("BDF COMMENT roundtrip test; yield stress and comment (reuse).",
         // 34567a1234567b1234567c1234567d1234567e1234567f1234567g1234567h1234567i1234567j
         "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean "
         "commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus"};
-    double *yield = new double(315.);
+	auto*yield = new double(315.);
 
     comment probe;
     test << probe;

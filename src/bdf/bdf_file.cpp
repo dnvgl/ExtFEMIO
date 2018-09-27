@@ -68,7 +68,7 @@ void bdf_file::get(list<std::string> &res) {
         // if not EOF, read next line
         // loop while no next card starts and file has still content.
     } while (getline(this->data, this->cur_line) &&
-             (res.size() == 0 ||
+             (res.empty() ||
               cont_chars.find(cur_line[0]) != cont_chars.end()));
 }
 

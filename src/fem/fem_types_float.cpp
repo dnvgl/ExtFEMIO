@@ -104,8 +104,8 @@ std::string entry_type<double>::format(double const &inp) const {
     std::ostringstream res;
     res.imbue(std::locale::classic());
 
-#ifdef _MSC_VER
-    // std::set output to two digit exponetial format.
+#if defined(_MSC_VER) && _MSC_VER < 1900
+	// std::set output to two digit exponetial format.
     unsigned int const ext_exp_format = _set_output_format(_TWO_DIGIT_EXPONENT);
 #endif
 
@@ -126,8 +126,8 @@ std::string entry_type<double>::format(double const &inp) const {
         throw errors::output_error(name, msg.str());
     }
 
-#ifdef _MSC_VER
-    // Reset exponetial format to former std::settings.
+#if defined(_MSC_VER) && _MSC_VER < 1900
+	// Reset exponetial format to former std::settings.
     _set_output_format(ext_exp_format);
 #endif
 

@@ -153,7 +153,7 @@ void comment::read(std::list<std::string> const &inp) {
 
         comment::to_yield(pos);
         tmp_str.assign(pos.substr(pos[1] == ' ' ? 2 : 1));
-        if (this->content.size() == 0)
+        if (this->content.empty())
             this->content.push_back(tmp_str);
         else {
             if (tmp_str[0] == '+')

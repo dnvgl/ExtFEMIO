@@ -350,12 +350,12 @@ namespace dnvgl {
 
                     outp << std::setiosflags(std::ios::scientific);
 
-#ifdef _MSC_VER
+#if defined(_MSC_VER) && _MSC_VER < 1900
                     // std::set output to two digit exponetial format.
                     unsigned int const ext_exp_format = _set_output_format(
                         _TWO_DIGIT_EXPONENT);
 #endif
-                    switch (out_form) {
+					switch (out_form) {
                     case out_form_type::LONG:
                         outp << std::setiosflags(std::ios::right)
                              << std::setfill(' ');
@@ -417,8 +417,8 @@ namespace dnvgl {
                             << static_cast<long>(out_form) << ".";
                         throw errors::float_error(name, msg.str());
                     }
-#ifdef _MSC_VER
-                    // Reset exponetial format to former std::settings.
+#if defined(_MSC_VER) && _MSC_VER < 1900
+					// Reset exponetial format to former std::settings.
                     _set_output_format(ext_exp_format);
 #endif
 
@@ -741,12 +741,12 @@ namespace dnvgl {
                     std::ostringstream outp;
                     outp.imbue(std::locale::classic());
                     outp << std::setiosflags(std::ios::scientific);
-#ifdef _MSC_VER
-                    // std::set output to two digit exponetial format.
+#if defined(_MSC_VER) && _MSC_VER < 1900
+					// std::set output to two digit exponetial format.
                     unsigned int const ext_exp_format = _set_output_format(
                         _TWO_DIGIT_EXPONENT);
 #endif
-                    switch (out_form) {
+					switch (out_form) {
                     case out_form_type::LONG:
                         outp << std::setiosflags(std::ios::right)
                              << std::setfill(' ');
@@ -832,11 +832,11 @@ namespace dnvgl {
                         throw errors::float_error(name, msg.str());
                     }
 
-#ifdef _MSC_VER
-                    // Reset exponetial format to former std::settings.
+#if defined(_MSC_VER) && _MSC_VER < 1900
+					// Reset exponetial format to former std::settings.
                     _set_output_format(ext_exp_format);
 #endif
-                    return out;
+					return out;
                 }
 
                 template <> inline

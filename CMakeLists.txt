@@ -15,6 +15,9 @@ IF(MSVC)
   INCLUDE(cotire REQUIRED)
   SET(CMAKE_CXX_FLAGS
     "${CMAKE_CXX_FLAGS} /WX")
+  SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /bigobj")
+  message(STATUS "MSVC: Enabled increased number of sections in object files")
+
 ELSEIF(CMAKE_COMPILER_IS_GNUCXX)
   SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -DDEBUG")
   SET(CMAKE_CXX_FLAGS
@@ -45,7 +48,6 @@ if( CMAKE_SIZEOF_VOID_P EQUAL 8 )
 else( CMAKE_SIZEOF_VOID_P EQUAL 8 ) 
     MESSAGE( "32 bits compiler detected" )
 endif( CMAKE_SIZEOF_VOID_P EQUAL 8 )
-
 
 # Recurse into the "src", "test" and "doc" subdirectories. This does
 # not actually cause another cmake executable to run. The same process

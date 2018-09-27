@@ -72,9 +72,9 @@ cmass2::cmass2(long *EID, double *M,
                M(M), G1(G1), C1(C1), G2(G2), C2(C2) {
     if (long(this->EID) < 1l || long(this->EID) > 100000000l)
         throw errors::error("CMASS2", "EID not in valid range");
-    if (this->G1 && this->C1.value.size() == 0)
+    if (this->G1 && this->C1.value.empty())
         throw errors::error("CMASS2", "G1 requires C1 value");
-    if (this->G2 && this->C2.value.size() == 0)
+    if (this->G2 && this->C2.value.empty())
         throw errors::error("CMASS2", "G2 requires C2 value");
 }
 

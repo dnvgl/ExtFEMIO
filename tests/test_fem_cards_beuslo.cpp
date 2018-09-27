@@ -276,7 +276,7 @@ TEST_CASE("FEM BEUSLO conversion from own output.", "[fem_beuslo,in/out]") {
         CHECK(probe.SIDE == 2);
         CHECK(probe.RLOADi.size() == 5);
         CHECK(probe.RLOADi == std::vector<double>({7., 8., 9., 10., 11.}));
-        CHECK(probe.ILOADi.size() == 0);
+        CHECK(probe.ILOADi.empty());
     }
 
     SECTION("BEUSLO (own output, r + i)") {

@@ -90,7 +90,7 @@ beuslo::beuslo(
     if (!this->COMPLX && this->ILOADi.size() > 0)
         throw errors::usage_error(
         "BEUSLO", "ILOAD data given with COMPLX == false");
-    else if (this->COMPLX  && this->ILOADi.size() == 0)
+    else if (this->COMPLX  && this->ILOADi.empty())
         throw errors::usage_error(
         "BEUSLO", "no ILOAD data given with COMPLX == True");
     if (this->RLOADi.size() != size_t(this->NDOF))

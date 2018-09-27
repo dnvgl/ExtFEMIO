@@ -33,6 +33,10 @@
 #include "config.h"
 #endif
 
+#if defined(DELETE)
+#undef DELETE
+#endif
+
 #include "bdf/types.h"
 
 namespace dnvgl {

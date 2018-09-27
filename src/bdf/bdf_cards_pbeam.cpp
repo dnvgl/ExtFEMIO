@@ -446,20 +446,20 @@ void pbeam::read(list<std::string> const &inp) {
             _X_XB.push_front(form_X_XB(*(pos++)));
             _SO.push_front(form_SO(*(pos++)));
         }
-        if (_A.size() == 0) _A.push_front(0.);
-        if (_I1.size() == 0) _I1.push_front(0.);
-        if (_I2.size() == 0) _I2.push_front(0.);
-        if (_I12.size() == 0) _I12.push_front(0.);
-        if (_J.size() == 0) _J.push_front(0.);
-        if (_NSM.size() == 0) _NSM.push_front(0.);
-        if (_C1.size() == 0) _C1.push_front(0.);
-        if (_C2.size() == 0) _C2.push_front(0.);
-        if (_D1.size() == 0) _D1.push_front(0.);
-        if (_D2.size() == 0) _D2.push_front(0.);
-        if (_E1.size() == 0) _E1.push_front(0.);
-        if (_E2.size() == 0) _E2.push_front(0.);
-        if (_F1.size() == 0) _F1.push_front(0.);
-        if (_F2.size() == 0) _F2.push_front(0.);
+        if (_A.empty()) _A.push_front(0.);
+        if (_I1.empty()) _I1.push_front(0.);
+        if (_I2.empty()) _I2.push_front(0.);
+        if (_I12.empty()) _I12.push_front(0.);
+        if (_J.empty()) _J.push_front(0.);
+        if (_NSM.empty()) _NSM.push_front(0.);
+        if (_C1.empty()) _C1.push_front(0.);
+        if (_C2.empty()) _C2.push_front(0.);
+        if (_D1.empty()) _D1.push_front(0.);
+        if (_D2.empty()) _D2.push_front(0.);
+        if (_E1.empty()) _E1.push_front(0.);
+        if (_E2.empty()) _E2.push_front(0.);
+        if (_F1.empty()) _F1.push_front(0.);
+        if (_F2.empty()) _F2.push_front(0.);
         block_rem = 16;
     }
 
@@ -487,7 +487,7 @@ void pbeam::read(list<std::string> const &inp) {
     if (_J.back() == 0.) _J.back() = _J.front();
     if (_NSM.back() == 0.) _NSM.back() = _NSM.front();
 
-    if (_J.size() == 0)
+    if (_J.empty())
         _J.push_front(bdf::types::entry_value<double>());
     SO.resize(_SO.size(), bdf::types::entry_value<std::string>(""));
     copy(_SO.begin(), _SO.end(), SO.begin());

@@ -121,8 +121,8 @@ TEST_CASE("BDF PBEAML definitions: Small Field Format (L).", "[bdf_pbeaml]") {
         CHECK_THAT(vector<double>(probe.DIM[i].begin(), probe.DIM[i].end()),
                    IsEqual(vector<double>({63., 340., 35., 14.})));
     CHECK(double(probe.NSM[0]) == 0.);
-    CHECK(probe.SO.size() == 0);
-    CHECK(probe.X_XB.size() == 0);
+    CHECK(probe.SO.empty());
+    CHECK(probe.X_XB.empty());
 }
 
 TEST_CASE("BDF PBEAML definitions: Small Field Format (T).", "[bdf_pbeaml]") {
@@ -143,8 +143,8 @@ TEST_CASE("BDF PBEAML definitions: Small Field Format (T).", "[bdf_pbeaml]") {
         CHECK_THAT(vector<double>(probe.DIM[i].begin(), probe.DIM[i].end()),
                    IsEqual(vector<double>({150., 400., 12., 10.})));
     CHECK(double(probe.NSM[0]) == 0.);
-    CHECK(probe.SO.size() == 0);
-    CHECK(probe.X_XB.size() == 0);
+    CHECK(probe.SO.empty());
+    CHECK(probe.X_XB.empty());
 }
 
 TEST_CASE("BDF PBEAML definitions: Small Field Format (I).", "[bdf_pbeaml]") {
@@ -166,8 +166,8 @@ TEST_CASE("BDF PBEAML definitions: Small Field Format (I).", "[bdf_pbeaml]") {
         CHECK_THAT(vector<double>(probe.DIM[i].begin(), probe.DIM[i].end()),
                    IsEqual(vector<double>({600., 200., 200., 12., 10., 10.})));
     CHECK(double(probe.NSM[0]) == 0.);
-    CHECK(probe.SO.size() == 0);
-    CHECK(probe.X_XB.size() == 0);
+    CHECK(probe.SO.empty());
+    CHECK(probe.X_XB.empty());
 }
 
 TEST_CASE("BDF PBEAML definitions: Small Field Format (TUBE).", "[bdf_pbeaml]") {
@@ -187,8 +187,8 @@ TEST_CASE("BDF PBEAML definitions: Small Field Format (TUBE).", "[bdf_pbeaml]") 
         CHECK_THAT(vector<double>(probe.DIM[i].begin(), probe.DIM[i].end()),
                    IsEqual(vector<double>({600., 500.})));
     CHECK(double(probe.NSM[0]) == 0.);
-    CHECK(probe.SO.size() == 0);
-    CHECK(probe.X_XB.size() == 0);
+    CHECK(probe.SO.empty());
+    CHECK(probe.X_XB.empty());
 }
 
 TEST_CASE("BDF PBEAML definitions: Small Field Format (T, tapered).", "[bdf_pbeaml]") {

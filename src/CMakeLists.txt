@@ -27,12 +27,6 @@ if (COMMAND cotire)
   cotire(extfemio)
 endif()
 
-# a custom target that is always built
-ADD_CUSTOM_TARGET(revisiontag ALL)
-
-# explicitly say that the executable depends on custom target
-add_dependencies(extfemio revisiontag)
-
 # Make sure the compiler can find include files for our Hello library
 # when other libraries or executables link to Hello
 target_include_directories (extfemio PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

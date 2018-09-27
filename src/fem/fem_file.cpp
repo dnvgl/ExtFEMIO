@@ -42,7 +42,7 @@ fem_file::fem_file(istream &inp) :
 // Return all input file lines belonging to next FEM card.
 size_t fem_file::get(vector<std::string> &res) {
     size_t i{0};
-    while (cur_line.size() == 0)
+    while (cur_line.empty())
         getline(data, cur_line);
     do {
         // if line not empty and not comment line add line to result std::set.

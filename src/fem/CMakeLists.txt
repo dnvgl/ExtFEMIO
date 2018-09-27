@@ -104,14 +104,6 @@ set (EXTFEM_SUPPORT_LIBS extfemio_support extfemio ${BOOST_LIBS})
 target_include_directories (extfemio_fem PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/include ${CMAKE_SOURCE_DIR}/src)
 
-# # a custom target that is always built
-# ADD_CUSTOM_TARGET(revisiontag ALL)
-
-# creates svnversion.h using cmake script
-ADD_CUSTOM_COMMAND(TARGET revisiontag COMMAND ${CMAKE_COMMAND}
-   -DSOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR}
-   -P ${CMAKE_SOURCE_DIR}/CMake/getsvn.cmake)
-
 # explicitly say that the executable depends on custom target
 add_dependencies(extfemio_fem revisiontag)
 

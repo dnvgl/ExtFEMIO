@@ -103,7 +103,7 @@ namespace dnvgl {
                         got_default();
                     };
                     bool is_allowed(std::string const &probe) const {
-                        if (allowed.size() == 0)
+                        if (allowed.empty())
                             return true;
                         return !(allowed.find(probe) == allowed.end());
                     };
