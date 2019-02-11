@@ -215,7 +215,7 @@ namespace dnvgl {
                     HSUPSTAT, //< Superelement Statistical Information
                     HSUPTRAN, //< Superelement Transformations
                     /// Undocumented cards (from failed imports)
-                    TDSCONC, SCONCEPT, SCONMESH
+                    TDSCONC, SCONCEPT, SCONMESH, UNITS
                 };
 
                 namespace __base {

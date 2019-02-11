@@ -166,10 +166,11 @@ namespace {
             {"AMDMASS", cards::types::AMDMASS},
             {"AMDSTIFF", cards::types::AMDSTIFF},
             {"AMDVELO", cards::types::AMDVELO},
-            /// Undocumented cards (from railed imports)
+            /// Undocumented cards (from failed imports)
             {"TDSCONC", cards::types::TDSCONC},
             {"SCONCEPT", cards::types::SCONCEPT},
-            {"SCONMESH", cards::types::SCONMESH}});
+            {"SCONMESH", cards::types::SCONMESH},
+            {"UNITS", cards::types::UNITS}});
 }
 
 cards::__base::card::card(types const this_type) : this_type(this_type) {}
@@ -317,6 +318,7 @@ std::ostream &operator<< (ostream &os, cards::types const cardtype) {
     case cards::types::TDSCONC: return os << "TDSCONC";
     case cards::types::SCONCEPT: return os << "SCONCEPT";
     case cards::types::SCONMESH: return os << "SCONMESH";
+    case cards::types::UNITS: return os << "UNITS";
 
     // omit default case to trigger compiler warning for missing cases
     }
@@ -607,6 +609,7 @@ cards::dispatch(vector<std::string> const &inp, size_t const len,
         case types::TDSCONC:
         case types::SCONCEPT:
         case types::SCONMESH:
+        case types::UNITS:
         case types::UNKNOWN:
             res = make_unique<__base::card>(inp, len);
         }
