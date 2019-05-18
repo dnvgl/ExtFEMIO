@@ -13,4 +13,4 @@ addons:
 
 before_install:
   - eval "${MATRIX_EVAL}"
-script: cmake && make && make test
+script: cmake . && make && make test
