@@ -8,14 +8,11 @@ addons:
       - g++-8
       - cmake-data
       - cmake
+      - python-py
+      - python-jinja2
     env:
       - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
 
 before_install:
   - eval "${MATRIX_EVAL}"
-install:
-  - pip install py jinja2
-  - "python -c \"import site;print('site.USER_BASE: {}'.format(site.USER_BASE))\""
-  - python -c "import py"
-  - python -c "import jinja2"
 script: cmake . && make && make test
