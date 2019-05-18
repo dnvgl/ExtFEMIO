@@ -97,7 +97,7 @@ void gelref1::read(const vector<std::string> &inp, size_t const len) {
         if (tmp == 0) break;
         try {
             node_vals.at(num_vals).assign(inp[i]);
-        } catch (out_of_range) {
+        } catch (out_of_range&) {
             node_vals.emplace_back(inp[i]);
         }
         num_vals++;

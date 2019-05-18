@@ -54,7 +54,7 @@ namespace {
 #undef THIS_FILE
 #endif // THIS_FILE
 namespace {
-    char const THIS_FILE[] = __FILE__;
+    char THIS_FILE[] = __FILE__;
 }
 #endif
 

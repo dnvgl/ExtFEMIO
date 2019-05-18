@@ -121,13 +121,13 @@ void param::read(list<std::string> const &inp) {
                 form_CPLXVAL.set_value(CPLXVAL, *pos, tmp);
             else
                 form_RVAL.set_value(RVAL, *pos);
-        } catch (errors::float_error) {
+        } catch (errors::float_error&) {
             try {
                 form_IVAL.set_value(IVAL, *pos);
                 if (tmp.length() > 0)
                     throw errors::parse_error(
                     "PARAM", "Complex from int.");
-            } catch (errors::int_error) {
+            } catch (errors::int_error&) {
                 form_CVAL.set_value(CVAL, *pos);
                 if (tmp.length() > 0)
                     throw errors::parse_error(

@@ -201,7 +201,7 @@ TEST_CASE("string allowed values", "[bdf_bounds]") {
 
     SECTION("check for valid value") {
         entry_value<std::string> val("E");
-        CHECK_THROWS_AS(form_tst.check(val), errors::str_error);
+        CHECK_THROWS_AS(form_tst.check(val), errors::str_error&);
     }
 
     SECTION("unexpected fail in cbar") {
@@ -211,7 +211,7 @@ TEST_CASE("string allowed values", "[bdf_bounds]") {
         auto const ggg = std::make_shared<std::string>("GGG");
         auto const bound_OFFT = make_shared<bound<std::string>>(lAllowed, ggg);
         entry_type<std::string> form_OFFT("OFFT", bound_OFFT);
-        CHECK_THROWS_AS(form_OFFT.check(val), errors::str_error);
+        CHECK_THROWS_AS(form_OFFT.check(val), errors::str_error&);
     }
 }
 

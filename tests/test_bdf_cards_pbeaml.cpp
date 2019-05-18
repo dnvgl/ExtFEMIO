@@ -239,7 +239,7 @@ TEST_CASE("BDF PBEAML invalid dim test", "[bdf_pbeaml]") {
     vector<double> X_XB(1, 1.);
 
     CHECK_THROWS_AS(pbeaml(&PID, &MID, &GROUP, &TYPE,
-                           &DIM, &NSM, &SO, &X_XB), errors::form_error);
+                           &DIM, &NSM, &SO, &X_XB), errors::form_error&);
 }
 
 TEST_CASE("BDF PBEAML roundtrip test", "[bdf_pbeaml]") {

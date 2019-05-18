@@ -49,7 +49,7 @@ size_t fem_file::get(vector<std::string> &res) {
         if (cur_line.length() > 0)
             try {
                 res.at(i).assign(cur_line);
-            } catch (out_of_range) {
+            } catch (out_of_range&) {
                 res.emplace_back(cur_line);
             }
         ++i;

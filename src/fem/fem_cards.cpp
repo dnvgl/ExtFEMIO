@@ -187,7 +187,7 @@ void cards::__base::card::read(vector<std::string> const &inp, size_t const len)
     if (len>0) {
         try {
             this_type = cardtype_map.at(inp[0]);
-        } catch (out_of_range) {
+        } catch (out_of_range&) {
             this_type = types::UNKNOWN;
         }
     }
@@ -344,7 +344,7 @@ size_t cards::__base::card::card_split(
             first = false;
             try {
                 res.at(olen).assign(string::string(head).trim("\t\n"));
-            } catch (out_of_range) {
+            } catch (out_of_range&) {
                 res.emplace_back(string::string(head).trim("\t\n"));
             }
             ++olen;
@@ -355,7 +355,7 @@ size_t cards::__base::card::card_split(
         for (size_t i1=0; i1<4; ++i1) {
             try {
                 res.at(olen).assign(tmp.substr(i1*16, 16));
-            } catch (out_of_range) {
+            } catch (out_of_range&) {
                 res.emplace_back(tmp.substr(i1*16, 16));
             }
             ++olen;
@@ -613,7 +613,7 @@ cards::dispatch(vector<std::string> const &inp, size_t const len,
         case types::UNKNOWN:
             res = make_unique<__base::card>(inp, len);
         }
-    } catch (out_of_range) {
+    } catch (out_of_range&) {
         res = make_unique<unknown>(inp, len);
     }
 }

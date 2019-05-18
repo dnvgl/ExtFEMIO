@@ -90,7 +90,7 @@ TEST_CASE("FEM GECCEN definitions.", "[fem_geccen]") {
         len = __base::card::card_split(data, data.size(), lines);
         geccen probe(lines, len);
 
-        CHECK_THROWS_AS(probe(lines, len), errors::usage_error);
+        CHECK_THROWS_AS(probe(lines, len), errors::usage_error&);
     }
 }
 

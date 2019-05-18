@@ -101,12 +101,12 @@ void cquad4::read(std::list<std::string> const &inp) {
             form_THETA.set_value(THETA, *pos);
             MCID.is_value = false;
             choose_mcid_theta = CHOOSE_MCID_THETA::has_THETA;
-        } catch (errors::float_error) {
+        } catch (errors::float_error&) {
             try {
                 form_MCID.set_value(MCID, *pos);
                 form_THETA.set_value(THETA, "");
                 choose_mcid_theta = CHOOSE_MCID_THETA::has_MCID;
-            } catch (errors::int_error) {
+            } catch (errors::int_error&) {
                 THETA.is_value = true;
                 THETA.value = 0.;
                 MCID.is_value = false;

@@ -170,7 +170,7 @@ void cbush::read(list<std::string> const &inp) {
             }
             GO.is_value = false;
             choose_dir_code = CHOOSE_DIR_CODE::has_DVEC;
-        } catch (errors::float_error) {
+        } catch (errors::float_error&) {
             form_GO.set_value(GO, *pos);
             X1.is_value = false;
             choose_dir_code = CHOOSE_DIR_CODE::has_DNODE;

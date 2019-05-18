@@ -18,6 +18,7 @@ namespace {
         "@(#) $Id$";
 }
 
+#include <memory>
 #include <string>
 #include <iostream>
 
@@ -1299,7 +1300,7 @@ std::string cards::__base::card::format_outlist(
     try {
         for (auto &p : en)
             res_list.push_back(p->first->format(p->second));
-    } catch (errors::form_error) {
+    } catch (errors::form_error&) {
         res_list.clear();
         long_format = true;
         bdf::types::base::out_form = bdf::types::out_form_type::LONG;
@@ -4663,7 +4664,7 @@ void cards::dispatch(
         case types::CAXIFi:
             res = make_unique<unknown>(inp);
         }
-    } catch (out_of_range) {
+    } catch (out_of_range&) {
         res = make_unique<unknown>(inp);
     }
 }

@@ -189,7 +189,7 @@ void gelmnt1::read(const vector<std::string> &inp, size_t const len) {
     long tmp{_form_ELTYP(inp.at(3))};
     try {
         ELTYP = eltyp_map.at(tmp);
-    } catch (out_of_range) {
+    } catch (out_of_range&) {
         errors::parse_error(
             "gelmnt1", "wrong element type");
     }

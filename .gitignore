@@ -1,35 +1,59 @@
+# global
+**/*.a
+**/*.sdf
+**/*.v11.suo
+**/*.vcxproj
+**/*.vcxproj.filters
+**/*.vcxproj.user
+**/*.vcxproj.vspscc
+**/.deps
+**/.dirstamp
+**/CMakeCache.txt
+**/CMakeFiles
+**/CTestTestfile.cmake
+**/Debug
+**/Debug_x64
+**/Makefile
+**/Makefile.in
+**/PosDebug_x64
+**/PosNDRel_VTune
+**/PosNDRel_VTune_x64
+**/Release_x64
+**/TAGS
+**/Win32
+**/cmake_install.cmake
+**/core
 
 # /
 /*.dvi
 /*.fdb_latexmk
 /*.fls
 /*.log
-/*.sdf
-/*.suo
 /*.tar.gz
 /.gdb_history
 /.ipynb_checkpoints
-/ExtFEMRead.sdf
-/ExtFEMRead.v11.suo
-/ExtFEMRead.vcxproj
-/ExtFEMRead.vcxproj.filters
-/ExtFEMRead.vcxproj.user
-/ExtFEMRead.vcxproj.vspscc
+/CMakeDoxyfile.in
+/CMakeDoxygenDefaults.cmake
+/CMakeFiles
+/DartConfiguration.tcl
 /GPATH
 /GRTAGS
 /GTAGS
-/PosNDRel_VTune
-/PosNDRel_VTune_x64
 /ReadMe.tex
 /ReadMe.txt
 /TAGS
+/Testing
 /Untitled.ipynb
 /Win32
 /aclocal.m4
 /auto
 /autom4te.cache
 /cbuild
+/cbuild64
+/cbuild_32
+/cbuild_64
 /compile
+/compile_commands.json
 /config.guess
 /config.h
 /config.h.in
@@ -37,7 +61,6 @@
 /config.status
 /config.sub
 /configure
-/core
 /depcomp
 /doxyfile.stamp
 /fem_sample
@@ -51,10 +74,6 @@
 /stamp-h1
 /test-driver
 /tmp.cpp
-/PosDebug_x64
-/cbuild_32
-/cbuild_64
-/cbuild64
 
 # /docs/
 /docs/*.aux
@@ -105,50 +124,31 @@
 /m4/lt~obsolete.m4
 
 # /src/
-/src/.deps
-/src/Debug_x64
-/src/Makefile
-/src/Makefile.in
-/src/Release_x64
-/src/TAGS
 /src/bdf2bdf
 /src/fem2fem
-/src/Win32
 
 # /src/bdf/
-/src/bdf/.deps
-/src/bdf/.dirstamp
-/src/bdf/Debug
-/src/bdf/Makefile
-/src/bdf/Makefile.in
-/src/bdf/TAGS
 /src/bdf/app.aps
 /src/bdf/bdf2bdf_args.ggo
-/src/bdf/bdfreadpp.vcxproj.user
 /src/bdf/x64
 
 # /src/fem/
-/src/fem/.deps
-/src/fem/.dirstamp
+/src/fem/fem2fem
 /src/fem/fem2fem_args.ggo
 
 # /tests/
 /tests/*.log
 /tests/*.trs
 /tests/*.user
-/tests/.deps
-/tests/Debug
-/tests/Makefile
-/tests/Makefile.in
-/tests/TAGS
 /tests/bdf_bounds
 /tests/bdf_cards
+/tests/bdf_complx
 /tests/bdf_float
+/tests/bdf_header
 /tests/bdf_int
 /tests/bdf_list
 /tests/bdf_str
 /tests/bdf_types
-/tests/core
 /tests/extfem_string
 /tests/fem_bool
 /tests/fem_cards
@@ -174,9 +174,11 @@
 /tests/test_fem_float
 /tests/test_fem_int
 /tests/test_fem_list
+/tests/test_support_grouping
 /tests/testing
 /tests/testing_bdf
-/tests/x64
-/tests/bdf_complx
 /tests/testing_fem
-/tests/bdf_header
+/tests/x64
+
+# /tools
+/tools/__pycache__

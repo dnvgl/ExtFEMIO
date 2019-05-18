@@ -144,7 +144,7 @@ gsetmemb::origins_map({
 gsetmemb::types gsetmemb::to_types(long const inp) {
     try {
         return types_map.at(inp);
-    } catch (out_of_range) {
+    } catch (out_of_range&) {
         ostringstream msg("");
         msg << inp << ": Illegal value for ISTYPE." << endl;
         throw errors::parse_error(
@@ -155,7 +155,7 @@ gsetmemb::types gsetmemb::to_types(long const inp) {
 gsetmemb::origins gsetmemb::to_origins(long const inp) {
     try {
         return origins_map.at(inp);
-    } catch (out_of_range) {
+    } catch (out_of_range&) {
         ostringstream msg("");
         msg << inp << ": Illegal value for ISORIG." << endl;
         throw errors::parse_error(

@@ -196,20 +196,20 @@ void pbeaml::read(list<std::string> const & inp) {
         DIM.push_back(vector<bdf::types::entry_value<double >> ());
         try {
             SO.push_back(form_SO(*(pos++)));
-        } catch (errors::error) {
+        } catch (errors::error&) {
 
             goto end;
         };
         if (pos == inp.end()) goto end;
         try {
             X_XB.push_back(form_X_XB(*(pos++)));
-        } catch (errors::error) {
+        } catch (errors::error&) {
             goto end;
         }
         if (pos == inp.end()) goto end;
         try {
             DIM.back().push_back(form_DIM(*(pos++)));
-        } catch (errors::error) {
+        } catch (errors::error&) {
             goto end;
         }
         for (i = 1; i < dim_num; i++) {

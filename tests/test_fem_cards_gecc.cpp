@@ -114,7 +114,7 @@ TEST_CASE("FEM GECC definitions.", "[fem_gecc]") {
         len = __base::card::card_split(data, data.size(), lines);
         gecc probe(lines, len);
 
-        CHECK_THROWS_AS(probe(lines, len), errors::usage_error);
+        CHECK_THROWS_AS(probe(lines, len), errors::usage_error&);
     }
 }
 

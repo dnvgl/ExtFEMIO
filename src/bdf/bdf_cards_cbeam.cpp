@@ -258,7 +258,7 @@ void cbeam::read(list<std::string> const &inp) {
             form_BIT.set_value(BIT, *pos);
             OFFT.is_value = false;
             choose_offt_bit = CHOOSE_OFFT_BIT::has_BIT;
-        } catch (errors::float_error) {
+        } catch (errors::float_error&) {
             form_OFFT.set_value(OFFT, *pos);
             BIT.is_value = false;
             choose_offt_bit = CHOOSE_OFFT_BIT::has_OFFT;
@@ -277,7 +277,7 @@ void cbeam::read(list<std::string> const &inp) {
             }
             G0.is_value = false;
             choose_dir_code = CHOOSE_DIR_CODE::has_DVEC;
-        } catch (errors::float_error) {
+        } catch (errors::float_error&) {
             form_G0.set_value(G0, *pos);
             X1.is_value = false;
             choose_dir_code = CHOOSE_DIR_CODE::has_DCODE;

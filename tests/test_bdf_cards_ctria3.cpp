@@ -163,7 +163,7 @@ TEST_CASE("BDF CTRIA3 check limits.", "[bdf_ctria3]") {
         CHECK_THROWS_AS(
             ctria3(&EID, &PID, &G1, &G2, &G3, &THETA, &ZOFFS, &TFLAG,
                    &T1, &T2, &T3),
-            errors::int_error);
+            errors::int_error&);
     }
 }
 
@@ -186,7 +186,7 @@ TEST_CASE("BDF CTRIA3 check limits reuse.", "[bdf_ctria3]") {
         CHECK_THROWS_AS(
             probe(&EID, &PID, &G1, &G2, &G3, &THETA, &ZOFFS, &TFLAG,
                   &T1, &T2, &T3),
-            errors::int_error);
+            errors::int_error&);
     }
 }
 
