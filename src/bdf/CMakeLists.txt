@@ -96,7 +96,7 @@ target_include_directories (extfemio_bdf PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/include ${CMAKE_SOURCE_DIR}/src)
 
 # explicitly say that the executable depends on custom target
-add_dependencies(extfemio_bdf revisiontag)
+add_dependencies(extfemio_bdf)
 
 # Local Variables:
 # mode: cmake
