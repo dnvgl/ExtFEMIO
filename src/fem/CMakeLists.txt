@@ -104,9 +104,6 @@ set (EXTFEM_SUPPORT_LIBS extfemio_support extfemio ${BOOST_LIBS})
 target_include_directories (extfemio_fem PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/include ${CMAKE_SOURCE_DIR}/src)
 
-# explicitly say that the executable depends on custom target
-add_dependencies(extfemio_fem)
-
 IF(NOT MSVC)
   add_executable(fem2fem
     fem2fem.cpp fem2fem_args.c)

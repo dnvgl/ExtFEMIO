@@ -34,9 +34,6 @@ endif()
 target_include_directories (extfemio_support PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/include ${CMAKE_SOURCE_DIR}/src)
 
-# explicitly say that the executable depends on custom target
-add_dependencies(extfemio_support)
-
 # Local Variables:
 # mode: cmake
 # compile-command: "make -C ../../cbuild -j8&&make -C ../../cbuild test"
