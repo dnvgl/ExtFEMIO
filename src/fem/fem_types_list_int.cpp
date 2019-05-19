@@ -17,7 +17,7 @@ namespace {
         "@(#) $Id$";
 }
 
-#ifdef __GNUC__
+#ifdef HAVE_BOOST_REGEX_HPP
 #include <boost/regex.hpp>
 #else
 #include <regex>
