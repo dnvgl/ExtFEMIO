@@ -9,6 +9,7 @@ addons:
       - "cmake-data"
       - "cmake"
       - "python3-pip"
+      - "gengetopt"
     env:
       - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
 before_install:
