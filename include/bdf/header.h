@@ -353,7 +353,7 @@ namespace dnvgl {
                             enum class option_type{
                                 SORT,
                                 BOTH,
-/** In `SOL 200`, a comlete unsorted Bulk Data file is written to the
+/** In `SOL 200`, a complete unsorted Bulk Data file is written to the
     punch file with updated design model entries.
 */
                                 NEWBULK};
