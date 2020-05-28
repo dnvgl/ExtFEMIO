@@ -182,3 +182,5 @@
 
 # /tools
 /tools/__pycache__
+/build/
+/*.tmp

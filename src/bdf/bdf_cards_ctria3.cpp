@@ -198,21 +198,20 @@ void ctria3::collect_outdata(
                           bool(TFLAG) ?
                           format<long>(form_TFLAG, TFLAG) :
                           format(empty)));
-    } else goto finish;
-    res.push_back(unique_ptr<format_entry>(
-                      bool(T1) ?
-                      format<double>(form_T1, T1) :
-                      format(empty)));
-    res.push_back(unique_ptr<format_entry>(
-                      bool(T2) ?
-                      format<double>(form_T2, T2) :
-                      format(empty)));
-    res.push_back(unique_ptr<format_entry>(
-                      bool(T3) ?
-                      format<double>(form_T3, T3) :
-                      format(empty)));
-
-finish:return;
+        res.push_back(unique_ptr<format_entry>(
+                          bool(T1) ?
+                          format<double>(form_T1, T1) :
+                          format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          bool(T2) ?
+                          format<double>(form_T2, T2) :
+                          format(empty)));
+        res.push_back(unique_ptr<format_entry>(
+                          bool(T3) ?
+                          format<double>(form_T3, T3) :
+                          format(empty)));
+    }
+    return;
 }
 
 // Local Variables:
